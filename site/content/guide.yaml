@@ -85,16 +85,16 @@ upcoming:
           Watchtower übergeben. Heute muss jeder Käufer Node und Wallet für den ganzen Swap
           online halten; erst damit werden Swaps ohne Verwahrer für die meisten praktikabel.
       source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes-htlc-presign.md
-    - title: { en: Modelnet, de: Modelnet }
+    - title: { en: The model network moves into the node, de: Das Modell-Netz zieht in den Node }
       text:
         en: >-
-          A network for AI models inside the node: offer, find, fetch and run models locally,
-          with signed identities and git over BTX. On by default, off with -modelnet=0. It does
-          not spend coins.
+          The network for AI models has run beside the node since v0.34.9 (btx-modeld). In 0.35
+          it runs inside btxd, and a research lab joins it: identities with recovery keys, git
+          workspaces for models, evaluations. Off with -modelnet=0; it does not spend coins.
         de: >-
-          Ein Netz für KI-Modelle im Node: Modelle anbieten, finden, laden und lokal ausführen,
-          mit signierten Identitäten und Git über BTX. Standardmäßig an, aus mit -modelnet=0.
-          Es gibt keine Coins aus.
+          Das Netz für KI-Modelle läuft seit v0.34.9 neben dem Node (btx-modeld). In 0.35 läuft
+          es in btxd, dazu kommt ein Forschungs-Lab: Identitäten mit Wiederherstellungsschlüssel,
+          Git-Arbeitsbereiche für Modelle, Evaluationen. Aus mit -modelnet=0; es gibt keine Coins aus.
       source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/modelnet/swarm/00_THIS_TREE.md
     - title: { en: Safer auto-update, de: Sichereres Auto-Update }
       text:

@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{{ ui['meta_description'] }}">
-  <meta name="robots" content="noindex">
   <meta name="color-scheme" content="dark">
   <title>{{ ui["title"] }}</title>
   {% for code, name, href in alternates %}
@@ -31,7 +30,6 @@
         <p class="c-kicker">{{ ui["kicker"] }}</p>
         <h1 class="c-hero__title">BTX<span class="c-hero__accent">.</span>community</h1>
         <p class="c-hero__lead">{{ ui["lead"] }}</p>
-        <p class="c-preview">{{ ui["preview"] }}</p>
       </section>
 
       <section class="c-live c-live--unknown" aria-labelledby="live-title" id="live" data-api="{{ status_api }}" data-lang="{{ lang }}"

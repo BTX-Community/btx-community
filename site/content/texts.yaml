@@ -12,7 +12,6 @@ en:
   lead: >-
     A community page for everyone interested in BTX: what it is, how to mine it, how to run a
     node, and where to find help. Run by community members, not by a company.
-  preview: Preview - this page is still being built.
   live.title: Network right now
   live.status: Status
   live.height: Block height
@@ -84,7 +83,6 @@ de:
     Eine Community-Seite für alle, die sich für BTX interessieren: was es ist, wie man es mint,
     wie man einen Node betreibt und wo es Hilfe gibt. Betrieben von Community-Mitgliedern,
     nicht von einer Firma.
-  preview: Vorschau - diese Seite ist noch im Aufbau.
   live.title: Das Netz gerade
   live.status: Status
   live.height: Blockhöhe
