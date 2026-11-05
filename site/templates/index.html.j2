@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ ui['meta_description'] }}">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark">
+  <title>{{ ui["title"] }}</title>
+  {% for code, name, href in alternates %}
+  <link rel="alternate" hreflang="{{ code }}" href="{{ href }}">
+  {% endfor %}
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/community.css">
+  <script src="/static/js/community.js" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#start">{{ ui["start.title"] }}</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <span class="c-logo"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</span>
+      <nav class="c-lang" aria-label="{{ ui['title'] }}">
+        {% for code, name, href in alternates %}
+        <a class="c-chip{% if code == lang %} c-chip--active{% endif %}" href="{{ href }}" hreflang="{{ code }}" lang="{{ code }}" title="{{ name }}"{% if code == lang %} aria-current="page"{% endif %}>{{ code | upper }}</a>
+        {% endfor %}
+      </nav>
+    </header>
+
+    <main>
+      <section class="c-hero">
+        <p class="c-kicker">{{ ui["kicker"] }}</p>
+        <h1 class="c-hero__title">BTX<span class="c-hero__accent">.</span>community</h1>
+        <p class="c-hero__lead">{{ ui["lead"] }}</p>
+        <p class="c-preview">{{ ui["preview"] }}</p>
+      </section>
+
+      <section class="c-live c-live--unknown" aria-labelledby="live-title" id="live" data-api="{{ status_api }}" data-lang="{{ lang }}"
+               data-level-green="{{ ui['level.green'] }}" data-level-yellow="{{ ui['level.yellow'] }}"
+               data-level-red="{{ ui['level.red'] }}" data-level-unknown="{{ ui['level.unknown'] }}">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="live-title"><span class="c-pulse" aria-hidden="true"></span>{{ ui["live.title"] }}</h2>
+          <a class="c-link" href="{{ status_page }}">{{ ui["live.details"] }} →</a>
+        </div>
+        <p class="c-warning" role="alert" data-live="stale" hidden>{{ ui["live.stale"] }}</p>
+        <dl class="c-tiles">
+          <div class="c-tile c-tile--status">
+            <dt>{{ ui["live.status"] }}</dt>
+            <dd data-live="overall"
+                data-label-normal="{{ ui['overall.normal'] }}"
+                data-label-degraded="{{ ui['overall.degraded'] }}"
+                data-label-incident="{{ ui['overall.incident'] }}">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["live.height"] }}</dt>
+            <dd data-live="height">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["live.release"] }}</dt>
+            <dd data-live="release">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["live.on_release"] }}</dt>
+            <dd data-live="on-release" data-template="{{ ui['on_release'] }}">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["live.interval"] }}</dt>
+            <dd data-live="interval">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["live.signers"] }}</dt>
+            <dd data-live="signers">–</dd>
+          </div>
+        </dl>
+        <ul class="c-verdicts">
+          {% for id, title in verdicts %}
+          <li class="c-verdict c-verdict--unknown" data-verdict="{{ id }}">
+            <span class="c-dot" aria-hidden="true"></span>{{ title }}: <span data-verdict-label>{{ ui["level.unknown"] }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        <p class="c-updated" data-live="updated" data-template="{{ ui['live.updated'] }}">{{ ui["live.loading"] }}</p>
+      </section>
+
+      <section class="c-start" id="start" aria-labelledby="start-title">
+        <h2 class="c-section-title" id="start-title">{{ ui["start.title"] }}</h2>
+        <div class="c-audiences">
+          {% for audience in audiences %}
+          <article class="c-audience c-audience--{{ audience.id }}" id="{{ audience.id }}">
+            <h3 class="c-audience__title">{{ audience.title }}</h3>
+            <p class="c-audience__text">{{ audience.text }}</p>
+            <ol class="c-steps">
+              {% for step in audience.steps %}
+              <li>
+                {% if step.href and step.external %}
+                <a href="{{ step.href }}" rel="noopener noreferrer">{{ step.text }} <span aria-hidden="true">↗</span></a>
+                {% elif step.href %}
+                <a href="{{ step.href }}">{{ step.text }} <span aria-hidden="true">↓</span></a>
+                {% else %}
+                <strong>{{ step.text }}</strong>
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ol>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="c-directory" id="links" aria-labelledby="links-title">
+        <h2 class="c-section-title" id="links-title">{{ ui["directory.title"] }}</h2>
+        <p class="c-muted">{{ ui["directory.lead"].format(count=entry_count, date=checked) }}</p>
+        <nav class="c-jump" aria-label="{{ ui['jump'] }}">
+          {% for category in categories %}
+          <a class="c-chip c-chip--{{ category.id }}" href="#cat-{{ category.id }}">{{ category.title }}</a>
+          {% endfor %}
+        </nav>
+
+        {% for category in categories %}
+        <section class="c-category c-category--{{ category.id }}" id="cat-{{ category.id }}" aria-labelledby="cat-{{ category.id }}-title">
+          <h3 class="c-category__title" id="cat-{{ category.id }}-title">{{ category.title }} <span class="c-count">{{ category.entries | length }}</span></h3>
+          {% if category.risk %}
+          <p class="c-risk"><strong>{{ ui["risk"] }}:</strong> {{ category.risk }}</p>
+          {% endif %}
+          <ul class="c-cards">
+            {% for entry in category.entries %}
+            <li class="c-card" id="{{ entry.id }}">
+              <a class="c-card__link" href="{{ entry.url }}" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">{{ entry.number }}</span>
+                <span class="c-card__name">{{ entry.name }} <span aria-hidden="true">↗</span></span>
+                {% if entry.tags %}
+                <span class="c-tags">{% for tag in entry.tags %}<span class="c-tag">{{ tag }}</span>{% endfor %}</span>
+                {% endif %}
+                <span class="c-card__text">{{ entry.description }}</span>
+                {% if entry.note %}
+                <span class="c-card__note"><strong>{{ ui["note"] }}:</strong> {{ entry.note }}</span>
+                {% endif %}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endfor %}
+
+        {% if removed %}
+        <section class="c-removed" aria-labelledby="removed-title">
+          <h3 class="c-category__title" id="removed-title">{{ ui["removed.title"] }}</h3>
+          <p class="c-muted">{{ ui["removed.lead"] }}</p>
+          <ul>
+            {% for name, reason in removed %}
+            <li><strong>{{ name }}</strong> - {{ reason }}</li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+      </section>
+    </main>
+
+    <footer class="c-footer">
+      <p>{{ ui["disclaimer"] }}</p>
+      <p>
+        <a class="c-link" href="https://github.com/vanities/btxlinks" rel="noopener noreferrer">{{ ui["credit"] }} ↗</a>
+        <a class="c-link" href="{{ repo_url }}" rel="noopener noreferrer">{{ ui["repo"] }} ↗</a>
+      </p>
+      <p class="c-muted">{{ version }}</p>
+    </footer>
+  </div>
+</body>
+</html>

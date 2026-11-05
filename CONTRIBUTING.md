@@ -19,6 +19,20 @@ Nobody should be locked out of this because of tooling.
   one approving review before merging, including from maintainers. This is not
   bureaucracy; it is the reason the figures can be trusted.
 
+## Changing the website
+
+The content of btx-community.com is in two files:
+
+- [`site/content/community.yaml`](site/content/community.yaml): the cards at the top and
+  the link directory
+- [`site/content/texts.yaml`](site/content/texts.yaml): the fixed texts of the page
+
+Every text exists in English and German; add both. Links must be plain `https://` URLs. The
+pull request checks the files and builds the page; if something does not fit, the check
+fails and says why. Once the change is merged, the site updates itself within a few minutes.
+Nobody needs access to the server for that. How it works is in
+[`deploy/README.md`](deploy/README.md).
+
 ## Correcting a figure
 
 Documents under `research/` carry a **Corrections** section. A correction is recorded

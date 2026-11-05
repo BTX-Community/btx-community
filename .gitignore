@@ -1,0 +1,8 @@
+# Local build output of site/build.py
+site/_build/
+_site/
+.venv/
+__pycache__/
+
+# Server secrets (see deploy/env.example)
+deploy/.env

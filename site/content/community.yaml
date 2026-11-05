@@ -1,0 +1,418 @@
+# Start page of btx-community.com: cards for newcomers, miners and node operators, plus a link
+# directory. The directory continues the community list btxlinks.com
+# (github.com/vanities/btxlinks, MIT licence) with every entry re-checked.
+#
+# Edit this file to change the page; site/build.py checks it on every pull request and
+# refuses anything that does not fit the rules below.
+#
+# checked:  date on which every link below was opened and found alive.
+# risk:     category with services we have not audited (wallets, bridges, exchanges); the page
+#           shows its warning above the entries.
+# url:      plain https URL; a short query (e.g. "?type=basic") is allowed, nothing else.
+# Texts: English (default) and German. Keep them factual; no claims we cannot back up.
+
+schema_version: 1
+checked: 2026-11-03
+
+audiences:
+  - id: newcomers
+    title: { en: New to BTX, de: Neu bei BTX }
+    text:
+      en: >-
+        BTX is a post-quantum fork of Bitcoin with a fixed maximum supply and its own
+        proof-of-work (MatMul). It is run by an open community, not by a company.
+      de: >-
+        BTX ist ein Post-Quanten-Fork von Bitcoin mit fester Höchstmenge und eigenem
+        Proof-of-Work (MatMul). Getragen wird es von einer offenen Community, nicht von einer Firma.
+    steps:
+      - text:
+          en: Read the official introduction and documentation.
+          de: Die offizielle Einführung und Dokumentation lesen.
+        url: https://btx.dev/
+      - text:
+          en: See how the network is doing right now, in plain terms.
+          de: Nachsehen, wie es dem Netz gerade geht, verständlich erklärt.
+        url: https://network.btx-monitoring.com/
+      - text:
+          en: Ask questions in the community chats (Discord, Telegram).
+          de: Fragen in den Community-Chats stellen (Discord, Telegram).
+        anchor: community
+      - text:
+          en: >-
+            Never share your seed or private key. Nobody from the community will ever ask for
+            it; direct messages offering help or "support" are scams.
+          de: >-
+            Seed oder privaten Schlüssel nie weitergeben. Niemand aus der Community fragt danach;
+            Direktnachrichten mit "Hilfe" oder "Support" sind Betrug.
+
+  - id: miners
+    title: { en: Mining, de: Mining }
+    text:
+      en: >-
+        Mining needs a GPU. You can mine alone against your own node and keep every block, or
+        join a pool for steadier payouts.
+      de: >-
+        Zum Minen braucht man eine Grafikkarte. Man kann allein gegen den eigenen Node minen und
+        jeden Block behalten oder einem Pool beitreten und regelmäßiger ausgezahlt werden.
+    steps:
+      - text:
+          en: Pick a miner - easyBTX (one app for Mac, Windows, Linux) or matador (open source).
+          de: Einen Miner wählen - easyBTX (eine App für Mac, Windows, Linux) oder matador (Open Source).
+        anchor: miners
+      - text:
+          en: >-
+            Prefer a smaller pool. When one pool finds most blocks, the network depends on it;
+            the status page shows the current shares.
+          de: >-
+            Lieber einen kleineren Pool wählen. Findet ein Pool die meisten Blöcke, hängt das Netz
+            an ihm; die Statusseite zeigt die aktuellen Anteile.
+        url: https://network.btx-monitoring.com/
+      - text:
+          en: >-
+            matador's examples still name the minebtx pool, which is offline. Use a pool from
+            the list below instead.
+          de: >-
+            Die Beispiele von matador nennen noch den Pool minebtx, der nicht mehr erreichbar ist.
+            Stattdessen einen Pool aus der Liste unten nehmen.
+        anchor: pools
+      - text:
+          en: Problems with an NVIDIA card? The official CUDA troubleshooting guide helps.
+          de: Probleme mit einer NVIDIA-Karte? Die offizielle CUDA-Fehlersuche hilft.
+        url: https://github.com/btxchain/btx/blob/main/doc/btx-cuda-mining-troubleshooting.md
+
+  - id: nodes
+    title: { en: Running a node, de: Einen Node betreiben }
+    text:
+      en: >-
+        Every node checks the chain for itself and makes the network harder to fool. A home
+        computer is enough; signers have much higher requirements.
+      de: >-
+        Jeder Node prüft die Kette selbst und macht das Netz schwerer zu täuschen. Ein
+        Heimrechner genügt; Signer haben deutlich höhere Anforderungen.
+    steps:
+      - text:
+          en: Easiest start at home - easynode installs and supervises btxd for you.
+          de: Einfachster Start zu Hause - easynode installiert und überwacht btxd für dich.
+        url: https://github.com/MendeMatthias/easynode
+      - text:
+          en: >-
+            On a server - the official release for Linux needs glibc 2.38 or newer
+            (Ubuntu 24.04, Debian 13).
+          de: >-
+            Auf einem Server - das offizielle Linux-Release braucht glibc 2.38 oder neuer
+            (Ubuntu 24.04, Debian 13).
+        url: https://github.com/btxchain/btx/releases
+      - text:
+          en: Catch up in minutes with a daily signed snapshot instead of syncing from genesis.
+          de: In Minuten aufholen mit einem täglich signierten Snapshot statt Sync ab Genesis.
+        url: https://github.com/dr-chambre/btx-snapshots
+      - text:
+          en: Node stuck at a height? The node help explains each known case and its fix.
+          de: Node hängt bei einer Höhe? Die Node-Hilfe erklärt jeden bekannten Fall und die Lösung.
+        url: https://network.btx-monitoring.com/help/
+      - text:
+          en: >-
+            Signers (GPU attestors) need an NVIDIA Blackwell card (sm_120) and must follow the
+            developers' operator runbook.
+          de: >-
+            Signer (GPU-Attestoren) brauchen eine NVIDIA-Blackwell-Karte (sm_120) und müssen sich
+            an das Betreiber-Runbook der Entwickler halten.
+        url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md
+
+categories:
+  - id: community
+    title: { en: Community, de: Community }
+    entries:
+      - id: discord
+        name: BTX Discord
+        url: https://discord.gg/btx
+        tags: [discord, chat]
+        description:
+          en: Main community server, including mining help.
+          de: Haupt-Server der Community, auch mit Mining-Hilfe.
+      - id: telegram
+        name: BTX Community Chat
+        url: https://t.me/btx_ecosystem
+        tags: [telegram, chat]
+        description:
+          en: Telegram group of the community.
+          de: Telegram-Gruppe der Community.
+      - id: x-community
+        name: BTX on X
+        url: https://x.com/btxcommunity
+        tags: [x, news]
+        description:
+          en: Community account on X.
+          de: Community-Konto auf X.
+      - id: x-chain
+        name: BTX Chain on X
+        url: https://x.com/thebtxchain
+        tags: [x, news]
+        description:
+          en: Chain account on X.
+          de: Konto der Chain auf X.
+      - id: mining-hub
+        name: BTX Mining Hub
+        url: https://t.me/Pr0_Crypto_Mining_chat/59061
+        tags: [telegram, russian]
+        description:
+          en: Russian-speaking mining chat with a BTX topic.
+          de: Russischsprachiger Mining-Chat mit einem BTX-Thema.
+      - id: matador-chat
+        name: matador chat
+        url: https://t.me/+wy07HLBwE4kwNTkx
+        tags: [telegram, miner]
+        description:
+          en: Telegram chat of the matador miner.
+          de: Telegram-Chat des matador-Miners.
+      - id: btx-best
+        name: BTX.best
+        url: https://btx.best/
+        tags: [portal, news]
+        description:
+          en: Portal of the easyBTX team - explorer, wallet, mining and news in one place.
+          de: Portal des easyBTX-Teams - Explorer, Wallet, Mining und News an einem Ort.
+
+  - id: official
+    title: { en: Official, de: Offiziell }
+    entries:
+      - id: btx-dev
+        name: btx.dev
+        url: https://btx.dev/
+        tags: [docs]
+        description:
+          en: Official website and documentation of BTX.
+          de: Offizielle Website und Dokumentation von BTX.
+      - id: btx-node
+        name: BTX Node
+        url: https://github.com/btxchain/btx
+        tags: [source, node]
+        description:
+          en: Source code and releases of the reference node (btxd).
+          de: Quellcode und Releases des Referenz-Nodes (btxd).
+
+  - id: network
+    title: { en: Network and explorers, de: Netz und Explorer }
+    entries:
+      - id: status
+        name: BTX Network Status
+        url: https://network.btx-monitoring.com/
+        tags: [status, open source]
+        description:
+          en: Community status page - is the network healthy, with history and node help.
+          de: Community-Statusseite - ist das Netz gesund, mit Verlauf und Node-Hilfe.
+      - id: btxscan
+        name: BTXScan
+        url: https://btxscan.io/
+        tags: [explorer, halving]
+        description:
+          en: Block explorer for blocks, transactions and addresses.
+          de: Block-Explorer für Blöcke, Transaktionen und Adressen.
+      - id: first-light
+        name: first light
+        url: https://explorer.btxbyronbay.com/
+        tags: [explorer, stats]
+        description:
+          en: Explorer of the Byron Bay team, with a 24 h mining view.
+          de: Explorer des Byron-Bay-Teams, mit einer 24-h-Mining-Ansicht.
+      - id: easybtx-census
+        name: easyBTX network
+        url: https://easybtx.com/
+        tags: [census, signers]
+        description:
+          en: Node census and signer witness of the easyBTX team.
+          de: Node-Zählung und Signer-Witness des easyBTX-Teams.
+      - id: btxinfo
+        name: btxinfo
+        url: https://btxinfo.com
+        tags: [analytics, rich list]
+        description:
+          en: Supply, holders and rich list.
+          de: Umlaufmenge, Halter und Rich-List.
+        note:
+          en: Its own node showed height 184,999 (a known stuck height) on 2026-11-02; check the date of its data.
+          de: Der eigene Node zeigte am 2026-11-02 Höhe 184.999 (eine bekannte Hänge-Höhe); Datenstand prüfen.
+
+  - id: pools
+    title: { en: Pools, de: Pools }
+    entries:
+      - id: ninjaraider
+        name: ninjaraider
+        url: https://ninjaraider.com
+        tags: [pool, multi-coin]
+        description:
+          en: Multi-coin pool with BTX. Check its fee on the pool page.
+          de: Multi-Coin-Pool mit BTX. Gebühr auf der Pool-Seite prüfen.
+      - id: btx-pool
+        name: BTX Pool
+        url: https://btx-pool.com
+        tags: [pool]
+        description:
+          en: Pool dedicated to BTX. Check its fee on the pool page.
+          de: Pool nur für BTX. Gebühr auf der Pool-Seite prüfen.
+      - id: byron-pool
+        name: Byron Pool
+        url: https://btxbyronbay.com
+        tags: [pool, pplns, au]
+        description:
+          en: PPLNS pool of the Byron Bay team (Australia).
+          de: PPLNS-Pool des Byron-Bay-Teams (Australien).
+        note:
+          en: The website answered "503 unavailable" on 2026-11-03.
+          de: Die Website antwortete am 2026-11-03 mit "503 nicht verfügbar".
+
+  - id: miners
+    title: { en: Miners, de: Miner }
+    entries:
+      - id: easybtx
+        name: easyBTX
+        url: https://easybtx.com/
+        tags: [gpu, mac, windows, linux]
+        description:
+          en: One-click miner app with a self-custodial wallet built in.
+          de: Miner-App mit einem Klick und eingebauter selbstverwahrter Wallet.
+      - id: matador
+        name: matador
+        url: https://github.com/vanities/matador-miner
+        tags: [gpu, nvidia, open source]
+        description:
+          en: Open-source GPU miner (NVIDIA, CUDA), solo against your own node or in a pool.
+          de: Open-Source-GPU-Miner (NVIDIA, CUDA), solo gegen den eigenen Node oder im Pool.
+        note:
+          en: Last change 2026-08-21; its pool examples still name the offline minebtx pool.
+          de: Letzte Änderung 2026-08-21; die Pool-Beispiele nennen noch den nicht erreichbaren Pool minebtx.
+
+  - id: node-tools
+    title: { en: Node tools, de: Node-Werkzeuge }
+    entries:
+      - id: easynode
+        name: easynode
+        url: https://github.com/MendeMatthias/easynode
+        tags: [desktop, open source]
+        description:
+          en: Desktop app that installs and supervises btxd on the machine you already own.
+          de: Desktop-App, die btxd auf dem eigenen Rechner installiert und überwacht.
+      - id: guardian
+        name: BTX Node Guardian
+        url: https://easybtx.com/guardian
+        tags: [script, watchdog]
+        description:
+          en: Free script that tells a waiting network from a stuck node and dials helpful peers. It never restarts the node.
+          de: Kostenloses Skript, das ein wartendes Netz von einem hängenden Node unterscheidet und hilfreiche Peers anwählt. Es startet den Node nie neu.
+      - id: snapshots
+        name: BTX snapshots
+        url: https://github.com/dr-chambre/btx-snapshots
+        tags: [snapshot, signed]
+        description:
+          en: Daily datadir snapshot, checked and signed by a second node.
+          de: Täglicher Datadir-Snapshot, von einem zweiten Node geprüft und signiert.
+      - id: node-help
+        name: Node help
+        url: https://network.btx-monitoring.com/help/
+        tags: [help, stuck heights]
+        description:
+          en: Known stuck heights with their cause and fix.
+          de: Bekannte Hänge-Höhen mit Ursache und Lösung.
+
+  - id: wallets
+    title: { en: Wallets, de: Wallets }
+    risk:
+      en: >-
+        Not audited by us. Only install wallets from the link here, keep your seed offline and
+        never type it into a website.
+      de: >-
+        Von uns nicht geprüft. Wallets nur über den Link hier installieren, den Seed offline
+        aufbewahren und nie auf einer Website eingeben.
+    entries:
+      - id: btx-wallet
+        name: BTX Wallet
+        url: https://btx.dev/wallet/
+        tags: [official, browser, pq]
+        description:
+          en: Official post-quantum wallet in the browser.
+          de: Offizielle Post-Quanten-Wallet im Browser.
+      - id: pq-wallet
+        name: BTX PQ Wallet
+        url: https://easybtx.com/wallet
+        tags: [desktop, pq]
+        description:
+          en: Desktop wallet of the easyBTX team.
+          de: Desktop-Wallet des easyBTX-Teams.
+      - id: bonuz
+        name: Bonuz
+        url: https://www.bonuz.xyz
+        tags: [ios, seedless]
+        description:
+          en: Seedless iOS wallet with BTX support.
+          de: iOS-Wallet ohne Seed, mit BTX-Unterstützung.
+
+  - id: bridges
+    title: { en: Bridges and testnets, de: Bridges und Testnetze }
+    risk:
+      en: >-
+        Experimental and not audited by us. Bridges can lose funds; do not send more than you
+        can afford to lose.
+      de: >-
+        Experimentell und von uns nicht geprüft. Bridges können Guthaben verlieren; nicht mehr
+        schicken, als man verlieren kann.
+    entries:
+      - id: wbtx
+        name: WBTX (wbtx-eth)
+        url: https://github.com/evxdev/wbtx-eth
+        tags: [ethereum, wrapped, wip]
+        description:
+          en: Wrapped BTX on Ethereum - contracts and validator tools, work in progress.
+          de: Wrapped BTX auf Ethereum - Verträge und Validator-Werkzeuge, in Arbeit.
+        note:
+          en: Last change 2026-07-09.
+          de: Letzte Änderung 2026-07-09.
+      - id: btx-supply
+        name: btx.supply
+        url: https://btx.supply/
+        tags: [testnet, bridge, wip]
+        description:
+          en: Bridge on a testnet.
+          de: Bridge in einem Testnetz.
+      - id: robinhood
+        name: Robinhood Chain testnet
+        url: https://robinhood.btx.supply/
+        tags: [testnet, bridge, wip]
+        description:
+          en: Bridge to the Robinhood Chain testnet.
+          de: Bridge zum Testnetz der Robinhood Chain.
+
+  - id: exchanges
+    title: { en: Exchanges, de: Börsen }
+    risk:
+      en: >-
+        Not audited by us. Trading carries risk; check the exchange yourself and do not leave
+        coins there longer than needed.
+      de: >-
+        Von uns nicht geprüft. Handel ist riskant; die Börse selbst prüfen und Coins dort nicht
+        länger als nötig liegen lassen.
+    entries:
+      - id: safetrade
+        name: SafeTrade
+        url: https://safetrade.com/exchange/BTX-USDT?type=basic
+        tags: [cex, btx/usdt]
+        description:
+          en: Centralised exchange with a BTX/USDT market.
+          de: Zentrale Börse mit einem BTX/USDT-Markt.
+
+removed:
+  - name: minebtx (pool and explorer)
+    reason:
+      en: Website not reachable, explorer answered 503 (2026-11-03).
+      de: Website nicht erreichbar, Explorer antwortete mit 503 (2026-11-03).
+  - name: BTX Price (btxprice.com)
+    reason:
+      en: Website not reachable (2026-11-03).
+      de: Website nicht erreichbar (2026-11-03).
+  - name: btx.trade (OTC)
+    reason:
+      en: Website answered with an error (520, 2026-11-03).
+      de: Website antwortete mit einem Fehler (520, 2026-11-03).
+  - name: CoinPaprika
+    reason:
+      en: The BTX page no longer exists (404, 2026-11-03).
+      de: Die BTX-Seite gibt es nicht mehr (404, 2026-11-03).

@@ -1,0 +1,71 @@
+# btx-community.com on one server: see deploy/README.md.
+#
+#   sync    pulls the built site from GitHub (branch site-build) every two minutes
+#   web     Caddy, serves the site read-only; no published ports
+#   tunnel  cloudflared, the only way in: an outgoing connection to Cloudflare
+#
+# Images are pinned by version and digest. Content changes never need a new image.
+
+name: btx-community
+
+x-hardening: &hardening
+  restart: unless-stopped
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  logging:
+    driver: json-file
+    options: { max-size: 10m, max-file: "3" }
+
+services:
+  sync:
+    <<: *hardening
+    image: alpine/git:2.54.0@sha256:ac6c828f15d82775d204d3d75112e1d34af8945da80ccf922713c9891ba68e7a
+    entrypoint: ["/bin/sh", "/sync.sh"]
+    environment:
+      REPO_URL: https://github.com/BTX-Community/btx-community.git
+      BRANCH: site-build
+      INTERVAL: "120"
+      HOME: /tmp
+    tmpfs: ["/tmp"]
+    volumes:
+      - ./sync.sh:/sync.sh:ro
+      - site:/srv/site
+    networks: [egress]
+    deploy:
+      resources:
+        limits: { cpus: "0.25", memory: 128M }
+
+  web:
+    <<: *hardening
+    image: caddy:2.11.8-alpine@sha256:f6228111e5fafa1a5238258d0858e103f10599b8d1659a146e7726681a002bb9
+    user: "10002:10002"
+    command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+    tmpfs: ["/config:uid=10002,gid=10002", "/data:uid=10002,gid=10002", "/tmp:uid=10002,gid=10002"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - site:/srv/site:ro
+    networks: [internal]
+    deploy:
+      resources:
+        limits: { cpus: "0.50", memory: 128M }
+
+  tunnel:
+    <<: *hardening
+    image: cloudflare/cloudflared:2026.10.7@sha256:4955524aeaa379e154023d5a027c250f7b35041a2e7e950cf13f144bc9b9c5ba
+    command: ["tunnel", "--no-autoupdate", "run"]
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN:?set TUNNEL_TOKEN in .env}
+    networks: [internal, egress]
+    depends_on: [web]
+    deploy:
+      resources:
+        limits: { cpus: "0.25", memory: 128M }
+
+volumes:
+  site:
+
+networks:
+  internal:
+    internal: true
+  egress:

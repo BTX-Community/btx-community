@@ -1,0 +1,86 @@
+# Builds btx-community.com and publishes it.
+#
+# Pull request: check the content and build the site, so a broken link or a missing
+# translation shows up in the review, not on the live page.
+# Merge to main: build again and force-push the result as a single commit to the branch
+# "site-build". The server pulls that branch itself every two minutes (deploy/sync.sh);
+# GitHub holds no credentials to the server.
+#
+# Only first-party actions are used, pinned to a commit SHA (version in the comment).
+
+name: Website
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: Check and build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install the build dependencies
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install --quiet --disable-pip-version-check -r site/requirements.txt
+
+      - name: Run the tests
+        run: |
+          .venv/bin/python -m unittest discover -s site/tests
+          node --test site/tests/*.test.js
+
+      - name: Build the site
+        run: .venv/bin/python site/build.py --out _site
+
+  publish:
+    name: Publish to site-build
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    concurrency:
+      group: website-publish
+      cancel-in-progress: false
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build the site
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install --quiet --disable-pip-version-check -r site/requirements.txt
+          .venv/bin/python site/build.py --out _site
+
+      - name: Push the build to site-build
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          cd _site
+          git init -q -b site-build
+          git add -A
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -q -m "Build of ${GITHUB_SHA}"
+          auth=$(printf 'x-access-token:%s' "$TOKEN" | base64 -w0)
+          git -c http.extraheader="AUTHORIZATION: basic $auth" \
+              push --force "https://github.com/${GITHUB_REPOSITORY}.git" HEAD:site-build
