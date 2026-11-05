@@ -26,6 +26,7 @@ So this is the attempt to do it in the open, with two rules that follow from the
 
 | Path | What it is |
 |---|---|
+| [`ROADMAP.md`](ROADMAP.md) | What we can do ourselves and what depends on the core team, with a column to put your name against a lane. Open for edits. |
 | `research/deployment-reward.md` | The 50,000-block bootstrap window and the 1,000,000 BTX deployment reward. Chain-verified, bilingual (EN leading, DE translation). **Draft — under review.** |
 
 The link directory pages live alongside this, rebuilt from the original

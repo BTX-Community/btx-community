@@ -215,6 +215,8 @@ It records that disbursement occurred, in 346 transactions on specific dates. It
 **7.3 The published circulating supply is materially understated.**
 btx.dev states a circulating supply of **3,647,340**. Measured issuance on 4 November 2026 is **5,356,878.75**. The site understates it by 1,709,538.75 BTX, about 32 %. The same page still presents the project at version **v0.33.2**, while the current release line is 0.34.15. This appears to be staleness rather than anything else, but a public supply figure that is a third too low is a serious item in any assessment.
 
+*Reported to the project on 5 November 2026. The reply was that the figure is not relevant to liquidity. As of that date the page is unchanged.*
+
 **7.4 No separate operating policy exists.**
 As of 4 November 2026: `btx.dev/whitepaper` returns HTTP 404. The documentation index links one specification PDF, dated 5 August 2026. The `btxchain/btx` repository (7,233 files) contains no whitepaper, no tokenomics document, and no file describing the deployment reward's governance. The document the specification itself calls for has not been published.
 
@@ -298,7 +300,7 @@ Corrections are listed here with their date, rather than folded silently into th
 
 | Date | Section | What changed |
 |---|---|---|
-| — | — | No corrections to date. |
+| 2026-11-05 | §7.3 | Added that the circulating supply figure was reported to the project on 5 November 2026, and that the page is unchanged as of that date. No figure changed. |
 
 If you find an error, open an issue or send a pull request. That applies to everyone, and most of all to the people who hold the units.
 
@@ -527,6 +529,8 @@ Aufgezeichnet ist, *dass* ein Abfluss stattfand, in 346 Transaktionen an bestimm
 **7.3 Die veröffentlichte Umlaufmenge ist erheblich zu niedrig.**
 btx.dev nennt eine Umlaufmenge von **3.647.340**. Die gemessene Ausgabe am 4. November 2026 beträgt **5.356.878,75**. Die Seite weist damit 1.709.538,75 BTX zu wenig aus, rund 32 %. Dieselbe Seite führt das Projekt weiterhin als Version **v0.33.2**, während die aktuelle Release-Linie 0.34.15 ist. Das wirkt wie Veralterung und nicht wie etwas anderes – eine öffentliche Supply-Angabe, die um ein Drittel zu niedrig liegt, ist in jeder Bewertung dennoch ein gravierender Punkt.
 
+*Am 5. November 2026 an das Projekt gemeldet. Die Antwort lautete, die Zahl sei für Liquidität nicht relevant. Zu diesem Datum ist die Seite unverändert.*
+
 **7.4 Es existiert keine gesonderte Handhabungsrichtlinie.**
 Stand 4. November 2026: `btx.dev/whitepaper` liefert HTTP 404. Der Dokumentationsindex verlinkt ein Spezifikations-PDF vom 5. August 2026. Das Repository `btxchain/btx` (7.233 Dateien) enthält kein Whitepaper, kein Tokenomics-Dokument und keine Datei zur Governance der Deployment Reward. Das Dokument, das die Spezifikation selbst einfordert, wurde nicht veröffentlicht.
 
@@ -578,6 +582,6 @@ Korrekturen stehen hier mit Datum, statt still im Text zu verschwinden. Jede Än
 
 | Datum | Abschnitt | Änderung |
 |---|---|---|
-| — | — | Bisher keine Korrekturen. |
+| 2026-11-05 | §7.3 | Ergänzt, dass die Umlaufmengen-Angabe am 5. November 2026 an das Projekt gemeldet wurde und die Seite zu diesem Datum unverändert ist. Keine Zahl geändert. |
 
 Wer einen Fehler findet, öffnet ein Issue oder schickt einen Pull Request.
