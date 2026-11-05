@@ -36,7 +36,7 @@ column B should not be scheduled until it lands.
 |---|---|---|---|---|
 | A1 | **One trading venue.** Agree on a single implementation between the people already building one, instead of four in parallel | Named as the highest-leverage missing piece in the Growth debate. Four to six finished or near-finished implementations exist and none is live | Several candidates built, none released | |
 | A2 | **Venue structure and licensing boundary.** Decide custodial vs non-custodial vs licensed operator, and document why the chosen model sits where it sits | This is the stated reason the finished implementations are not shipping. It is a structuring question, not a coding one | Open, several conflicting assumptions in circulation | |
-| A3 | **Community fund.** Multisig, published rules, published address, published spends | Repeatedly asked for since September. Needed before anyone pays for infrastructure or milestones | Design written up, not implemented | |
+| A3 | **Community fund.** Multisig, published rules, published address, published spends | Repeatedly asked for since September. Needed before anyone pays for infrastructure or milestones | Discussion paper v0.1 in [`research/network-fund.md`](research/network-fund.md), not implemented | |
 | A4 | **btx-community.com.** Front door and maintained link directory, replacing the stale ones | A newcomer currently lands on outdated data and draws the obvious conclusion | Domain ordered, rebuild of btxlinks done, repo public | Lars |
 | A5 | **Node and infrastructure.** Archives, signed snapshots, monitoring, alerting for stranded nodes | A stranded node went unnoticed for four days in October. Measurement is in place; alerting is not | Two archives, monitoring and public API live | Lars |
 | A6 | **Comms and marketing.** X account, community channel, a single place to send people | Nothing to point at today, and the existing channels are either dead or hostile | Discussed, not started | |
@@ -69,6 +69,10 @@ in the specification. It also corrects two claims this community had wrong, incl
 
 What it cannot establish is listed in its §8, and that part only the holders can close: a
 signed statement, a viewing key, or a published destination list. That is the whole of B4.
+
+The two documents belong together. §8 of the fund paper, written on 3 November, already asked
+that the status and use of any early-phase supply be made transparent as part of setting up a
+fund. The deployment reward write-up is that, as far as public data allows.
 
 ---
 

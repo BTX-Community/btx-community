@@ -1,0 +1,20 @@
+# Who gets asked to review what.
+#
+# A path listed here requests a review from its owners automatically when a
+# pull request touches it. Add yourself next to the area you look after.
+# More than one name per line is the point: nobody should be the only
+# person who can approve a change.
+
+# The factual documents. These carry numbers people rely on, so they get a
+# second pair of eyes before anything changes.
+/research/            @dr-chambre
+
+# The roadmap is meant to be edited freely. Owners are listed so somebody
+# notices, not to gate it.
+/ROADMAP.md           @dr-chambre
+
+# Repository meta: licences, README, this file.
+/LICENSE              @dr-chambre
+/LICENSE-CONTENT      @dr-chambre
+/README.md            @dr-chambre
+/.github/             @dr-chambre
