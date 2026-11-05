@@ -15,6 +15,10 @@
 # notices, not to gate it.
 /ROADMAP.md           @dr-chambre @Jpp-matata @sunnyriverr
 
+# The website. A merge goes live within minutes, so somebody looks first.
+/site/                @dr-chambre @Jpp-matata
+/deploy/              @dr-chambre @Jpp-matata
+
 # Repository meta: licences, README, contributing rules, this file.
 /LICENSE              @dr-chambre
 /LICENSE-CONTENT      @dr-chambre

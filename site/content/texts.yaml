@@ -1,0 +1,98 @@
+# Fixed texts of btx-community.com, English (default) and German. Both languages must have the
+# same keys; site/build.py refuses the file otherwise. Placeholders in braces ({count}, {date},
+# {time}, {total}) are filled in by the page and must stay as they are.
+
+en:
+  lang_name: English
+  title: BTX Community
+  meta_description: >-
+    Start page of the BTX community: information and help for newcomers, miners and node
+    operators, with the network's live state and a checked link directory.
+  kicker: Community hub
+  lead: >-
+    A community page for everyone interested in BTX: what it is, how to mine it, how to run a
+    node, and where to find help. Run by community members, not by a company.
+  preview: Preview - this page is still being built.
+  live.title: Network right now
+  live.status: Status
+  live.height: Block height
+  live.release: Latest node release
+  live.on_release: Nodes on it
+  live.interval: Average block time (24 h)
+  live.signers: Active signers
+  live.updated: Data from {time}
+  live.loading: Loading live data …
+  live.stale: The data is out of date; the values may be wrong.
+  live.details: Full status page
+  on_release: "{count} of {total} nodes"
+  start.title: Where do you want to start?
+  directory.title: Link directory
+  directory.lead: "{count} links, every one opened and checked on {date}."
+  jump: Jump to
+  risk: Caution
+  note: Note
+  removed.title: No longer listed
+  removed.lead: Entries of the old btxlinks list that we removed, and why.
+  credit: Builds on btxlinks.com by vanities (MIT licence).
+  repo: Source code
+  disclaimer: >-
+    Independent community project. Links lead to third parties; we are not responsible for
+    their content. Nothing here is financial advice.
+  overall.normal: All systems normal
+  overall.degraded: Degraded
+  overall.incident: Incident
+  level.green: OK
+  level.yellow: Warning
+  level.red: Critical
+  level.unknown: Unknown
+  verdict.stable: Stable
+  verdict.performant: Performant
+  verdict.secure: Secure
+
+de:
+  lang_name: Deutsch
+  title: BTX Community
+  meta_description: >-
+    Startseite der BTX-Community: Informationen und Hilfe für Interessierte, Miner und
+    Node-Betreiber, mit dem Live-Zustand des Netzes und einem geprüften Linkverzeichnis.
+  kicker: Community-Treffpunkt
+  lead: >-
+    Eine Community-Seite für alle, die sich für BTX interessieren: was es ist, wie man es mint,
+    wie man einen Node betreibt und wo es Hilfe gibt. Betrieben von Community-Mitgliedern,
+    nicht von einer Firma.
+  preview: Vorschau - diese Seite ist noch im Aufbau.
+  live.title: Das Netz gerade
+  live.status: Status
+  live.height: Blockhöhe
+  live.release: Neueste Node-Version
+  live.on_release: Nodes damit
+  live.interval: Mittlere Blockzeit (24 h)
+  live.signers: Aktive Signer
+  live.updated: Daten von {time}
+  live.loading: Live-Daten werden geladen …
+  live.stale: Die Daten sind veraltet; die Werte können falsch sein.
+  live.details: Ganze Statusseite
+  on_release: "{count} von {total} Nodes"
+  start.title: Womit möchtest du anfangen?
+  directory.title: Linkverzeichnis
+  directory.lead: "{count} Links, jeder am {date} geöffnet und geprüft."
+  jump: Springe zu
+  risk: Vorsicht
+  note: Hinweis
+  removed.title: Nicht mehr gelistet
+  removed.lead: Einträge der alten btxlinks-Liste, die wir entfernt haben, und warum.
+  credit: Baut auf btxlinks.com von vanities auf (MIT-Lizenz).
+  repo: Quellcode
+  disclaimer: >-
+    Unabhängiges Community-Projekt. Links führen zu Dritten; für deren Inhalte sind wir nicht
+    verantwortlich. Nichts hier ist eine Finanzberatung.
+  overall.normal: Alles normal
+  overall.degraded: Eingeschränkt
+  overall.incident: Störung
+  level.green: OK
+  level.yellow: Warnung
+  level.red: Kritisch
+  level.unknown: Unbekannt
+  verdict.stable: Stabil
+  verdict.performant: Performant
+  verdict.secure: Sicher
