@@ -13,6 +13,7 @@ status page.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 import shutil
 import sys
@@ -438,6 +439,16 @@ def community_views(
     return audiences, tuple(categories)
 
 
+def asset_url(path: str) -> str:
+    """URL of a file under ``static/`` with a digest of its content as query.
+
+    Cloudflare tells browsers to keep static files for hours; a changed file gets a new URL, so
+    nobody runs an old script against a new page.
+    """
+    digest = hashlib.sha256((ROOT / "static" / path).read_bytes()).hexdigest()[:12]
+    return f"/static/{path}?v={digest}"
+
+
 def page_path(lang: str) -> str:
     """URL path of the page in a language: ``/`` or ``/de/``."""
     return "/" if lang == "en" else f"/{lang}/"
@@ -469,6 +480,8 @@ def context(
         "add_project_url": ADD_PROJECT_URL,
         "releases_url": RELEASES_URL,
         "version": version,
+        "css_url": asset_url("css/community.css"),
+        "js_url": asset_url("js/community.js"),
     }
 
 

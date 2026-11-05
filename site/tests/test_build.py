@@ -23,6 +23,8 @@ class ContentTest(unittest.TestCase):
             self.assertIn('<html lang="en">', english)
             self.assertIn('<html lang="de">', german)
             self.assertIn(build.STATUS_API, english)
+            self.assertRegex(english, r'<script src="/static/js/community\.js\?v=[0-9a-f]{12}" defer>')
+            self.assertRegex(english, r'href="/static/css/community\.css\?v=[0-9a-f]{12}"')
             self.assertTrue((out / "static" / "css" / "community.css").is_file())
             self.assertTrue((out / "static" / "fonts" / "InterVariable.woff2").is_file())
             for section in ('id="about"', 'id="next"', 'id="check"', 'data-live="fork"', 'data-live="supply"'):
