@@ -35,19 +35,24 @@ web container (Caddy) ◄── tunnel container (cloudflared) ◄── Cloudfl
 
 Protect the branch the server serves, so that only the workflow can write it. Without this,
 anyone with write access could push to `site-build` directly and skip the review on `main`.
-The workflow pushes with a deploy key that only jobs on `main` can use.
+The workflow pushes as an organisation-owned GitHub App whose key only jobs on `main` can use.
 
-1. Create a key pair on your own machine (no passphrase; it is used by the workflow):
-   `ssh-keygen -t ed25519 -N "" -C "site-build publisher" -f site-build-key`
-2. Settings → Deploy keys → *Add deploy key*: title `site-build publisher`, paste
-   `site-build-key.pub`, tick *Allow write access*.
-3. Settings → Environments → *New environment* `site-publish`:
+1. Organisation → Settings → Developer settings → GitHub Apps → *New GitHub App*:
+   - Name `BTX Community site publisher`, homepage `https://btx-community.com`
+   - Webhook: untick *Active*
+   - Repository permissions: *Contents: Read and write* (Metadata: read-only is added by
+     itself); nothing else
+   - Where can this app be installed: *Only on this account*
+2. On the app's page: note the *Client ID*; *Generate a private key* (downloads a `.pem`).
+3. *Install App* → BTX-Community → *Only select repositories* → `btx-community`.
+4. Repository → Settings → Environments → *New environment* `site-publish`:
    - Deployment branches and tags → *Selected branches and tags* → add `main`
-   - Environment secrets → *Add secret* `SITE_BUILD_KEY` with the content of `site-build-key`
-4. Delete both key files from your machine. If the key is ever lost or exposed, delete the
-   deploy key on GitHub and repeat from step 1.
-5. Settings → Rules → Rulesets → New branch ruleset `site-build`, *Active*:
-   - Bypass list: *Deploy keys*, *Always allow*; nobody else
+   - Environment variables → `SITE_PUBLISHER_CLIENT_ID` = the Client ID
+   - Environment secrets → `SITE_PUBLISHER_KEY` = the whole content of the `.pem`
+5. Delete the `.pem` from your machine. If it is ever lost or exposed, delete the key on the
+   app's page and generate a new one.
+6. Repository → Settings → Rules → Rulesets → New branch ruleset `site-build`, *Active*:
+   - Bypass list: the app `BTX Community site publisher`, *Always allow*; nobody else
    - Target: include by pattern `site-build`
    - Rules: *Restrict creations*, *Restrict updates*, *Restrict deletions*,
      *Block force pushes*

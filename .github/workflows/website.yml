@@ -6,11 +6,14 @@
 # "site-build". The server pulls that branch itself every two minutes (deploy/sync.sh);
 # GitHub holds no credentials to the server.
 #
-# The push uses a deploy key (secret SITE_BUILD_KEY of the environment "site-publish"). A
-# ruleset lets only deploy keys write site-build, and the environment releases the key only
-# to jobs running on main, so nothing reaches the live site without passing review on main.
+# The push uses the organisation's GitHub App "BTX Community site publisher" (client ID in the
+# variable SITE_PUBLISHER_CLIENT_ID, private key in the secret SITE_PUBLISHER_KEY, both in the
+# environment "site-publish"). A ruleset lets only this app write site-build, and the
+# environment releases the key only to jobs running on main, so nothing reaches the live site
+# without passing review on main.
 #
-# Only first-party actions are used, pinned to a commit SHA (version in the comment).
+# Only first-party actions (github.com/actions) are used, pinned to a commit SHA (version in
+# the comment).
 
 name: Website
 
@@ -73,21 +76,25 @@ jobs:
           .venv/bin/pip install --quiet --disable-pip-version-check -r site/requirements.txt
           .venv/bin/python site/build.py --out _site
 
+      - name: Get a token of the publisher app
+        id: app
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510  # v3.3.0
+        with:
+          client-id: ${{ vars.SITE_PUBLISHER_CLIENT_ID }}
+          private-key: ${{ secrets.SITE_PUBLISHER_KEY }}
+          permission-contents: write
+
       - name: Push the build to site-build
         env:
-          KEY: ${{ secrets.SITE_BUILD_KEY }}
+          TOKEN: ${{ steps.app.outputs.token }}
         run: |
           set -euo pipefail
-          install -d -m 700 ~/.ssh
-          printf '%s\n' "$KEY" > ~/.ssh/site-build
-          chmod 600 ~/.ssh/site-build
-          # GitHub's published host key, so the push cannot be redirected.
-          echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" > ~/.ssh/known_hosts
           cd _site
           git init -q -b site-build
           git add -A
           git -c user.name="github-actions[bot]" \
               -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
               commit -q -m "Build of ${GITHUB_SHA}"
-          GIT_SSH_COMMAND="ssh -i $HOME/.ssh/site-build -o IdentitiesOnly=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
-              git push --force "git@github.com:${GITHUB_REPOSITORY}.git" HEAD:site-build
+          auth=$(printf 'x-access-token:%s' "$TOKEN" | base64 -w0)
+          git -c http.extraheader="AUTHORIZATION: basic $auth" \
+              push --force "https://github.com/${GITHUB_REPOSITORY}.git" HEAD:site-build
