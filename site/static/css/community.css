@@ -221,17 +221,6 @@ a {
   font-size: 18px;
 }
 
-.c-preview {
-  display: inline-block;
-  margin: 20px 0 0;
-  padding: 4px 10px;
-  border: 1px dashed var(--faint);
-  border-radius: 6px;
-  color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-
 /* --- Live strip ------------------------------------------------------------------------- */
 
 .c-section-title {
