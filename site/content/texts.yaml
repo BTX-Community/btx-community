@@ -24,6 +24,30 @@ en:
   live.loading: Loading live data …
   live.stale: The data is out of date; the values may be wrong.
   live.details: Full status page
+  fork.title: Network upgrade ahead
+  fork.lead: >-
+    The rules change at the block below. Every node and miner needs a release that knows this
+    change before then, or it stops following the network.
+  fork.row: "{name}: block {height}, {remaining} blocks to go (about {time})"
+  fork.releases: Releases and release notes
+  numbers.title: BTX in numbers
+  numbers.supply: Mined so far
+  numbers.supply_of: "{pct} % of 21 million"
+  numbers.reward: Block reward
+  numbers.halving: Next halving
+  numbers.blocks: "{count} blocks"
+  numbers.about: "about {time}"
+  numbers.tx: Transactions (24 h)
+  numbers.size: Size of the chain
+  facts.title: What is BTX?
+  facts.source: Source
+  upcoming.title: "Coming soon: v{version}"
+  upcoming.checked: "Read from the development branch on {date}."
+  upcoming.caveats: Not ready yet
+  upcoming.notes: Release notes
+  checklists.title: Check first
+  directory.add: Missing a project? Add it with a pull request; no e-mail and no gatekeeper.
+  directory.add_link: How to add a project
   on_release: "{count} of {total} nodes"
   start.title: Where do you want to start?
   directory.title: Link directory
@@ -72,6 +96,30 @@ de:
   live.loading: Live-Daten werden geladen …
   live.stale: Die Daten sind veraltet; die Werte können falsch sein.
   live.details: Ganze Statusseite
+  fork.title: Netz-Upgrade steht an
+  fork.lead: >-
+    Ab dem Block unten ändern sich die Regeln. Jeder Node und Miner braucht bis dahin ein
+    Release, das die Änderung kennt, sonst folgt er dem Netz nicht mehr.
+  fork.row: "{name}: Block {height}, noch {remaining} Blöcke (etwa {time})"
+  fork.releases: Releases und Release-Notes
+  numbers.title: BTX in Zahlen
+  numbers.supply: Bisher gemint
+  numbers.supply_of: "{pct} % von 21 Millionen"
+  numbers.reward: Blockbelohnung
+  numbers.halving: Nächstes Halving
+  numbers.blocks: "{count} Blöcke"
+  numbers.about: "etwa {time}"
+  numbers.tx: Transaktionen (24 h)
+  numbers.size: Größe der Kette
+  facts.title: Was ist BTX?
+  facts.source: Quelle
+  upcoming.title: "Demnächst: v{version}"
+  upcoming.checked: "Aus dem Entwicklungszweig gelesen am {date}."
+  upcoming.caveats: Noch nicht fertig
+  upcoming.notes: Release-Notes
+  checklists.title: Erst prüfen
+  directory.add: Ein Projekt fehlt? Per Pull Request eintragen; ohne E-Mail und ohne Türsteher.
+  directory.add_link: So trägst du ein Projekt ein
   on_release: "{count} von {total} Nodes"
   start.title: Womit möchtest du anfangen?
   directory.title: Linkverzeichnis

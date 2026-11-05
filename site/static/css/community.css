@@ -57,6 +57,9 @@
   --a-wallets: #b79cff;
   --a-bridges: #ff9ec4;
   --a-exchanges: #dd93ff;
+  --a-facts: #ffd479;
+  --a-next: #ff9ec4;
+  --a-check: #ffb43a;
 }
 
 *,
@@ -329,6 +332,61 @@ a {
   overflow-wrap: normal;
 }
 
+.c-tile--wide {
+  grid-column: span 2;
+}
+
+.c-tile dd.c-tile__sub {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.c-tile dd.c-tile__sub:empty {
+  display: none;
+}
+
+.c-subtitle {
+  margin: 22px 0 10px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Shown only while the status page lists a rule change ahead of the chain tip. */
+.c-fork {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--yellow);
+  border-radius: 12px;
+  background: rgb(255 194 74 / 8%);
+}
+
+.c-fork[hidden] {
+  display: none;
+}
+
+.c-fork__title {
+  margin: 0 0 6px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
+.c-fork p {
+  margin: 0 0 8px;
+}
+
+.c-fork__rows {
+  margin: 0 0 10px;
+  padding-left: 20px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
 .c-verdicts {
   display: flex;
   flex-wrap: wrap;
@@ -388,9 +446,69 @@ a {
 
 /* --- Audiences -------------------------------------------------------------------------- */
 
+.c-facts,
 .c-start,
+.c-upcoming,
+.c-checks,
 .c-directory {
   margin-top: 56px;
+}
+
+/* --- What is BTX, coming soon ----------------------------------------------------------- */
+
+.c-fact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+  gap: 12px;
+}
+
+.c-fact {
+  --accent: var(--a-facts);
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.c-fact--next {
+  --accent: var(--a-next);
+}
+
+.c-fact__title {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
+.c-fact p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.c-fact__source {
+  margin-top: auto;
+  font-size: 13px;
+}
+
+.c-caveats {
+  margin: 0 0 12px;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.c-caveats li {
+  margin-bottom: 4px;
+}
+
+.c-add {
+  margin: 0 0 8px;
 }
 
 .c-audiences {
@@ -425,6 +543,10 @@ a {
 
 .c-audience--nodes {
   --accent: var(--a-node-tools);
+}
+
+.c-audience--check {
+  --accent: var(--a-check);
 }
 
 .c-audience__title {
@@ -685,5 +807,9 @@ a {
 
   .c-tile dd {
     font-size: 18px;
+  }
+
+  .c-tile--wide {
+    grid-column: auto;
   }
 }

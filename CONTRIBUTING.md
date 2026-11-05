@@ -21,11 +21,17 @@ Nobody should be locked out of this because of tooling.
 
 ## Changing the website
 
-The content of btx-community.com is in two files:
+The content of btx-community.com is in three files:
 
 - [`site/content/community.yaml`](site/content/community.yaml): the cards at the top and
   the link directory
+- [`site/content/guide.yaml`](site/content/guide.yaml): "What is BTX?", the next release and
+  the checklists. Every fact links to a source a reader can open; prefer the source code and
+  release notes over websites.
 - [`site/content/texts.yaml`](site/content/texts.yaml): the fixed texts of the page
+
+The live figures (network state, supply, halving, upgrade countdown) are not in these files;
+the page reads them from the public API of network.btx-monitoring.com.
 
 Every text exists in English and German; add both. Links must be plain `https://` URLs. The
 pull request checks the files and builds the page; if something does not fit, the check

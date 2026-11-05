@@ -5,8 +5,9 @@
 
 The content is validated before anything is written: a pull request with a broken link, a
 missing translation or an unknown anchor fails here, not on the live site. English is served
-under ``/``, German under ``/de/``. The live strip is empty in the built page and filled by
-``static/js/community.js`` from the public API of the status page.
+under ``/``, German under ``/de/``. The live strip, the figures and the upgrade countdown are
+empty in the built page and filled by ``static/js/community.js`` from the public API of the
+status page.
 """
 
 from __future__ import annotations
@@ -28,6 +29,8 @@ ROOT = Path(__file__).resolve().parent
 LANGUAGES = ("en", "de")
 MAX_YAML_BYTES = 256 * 1024
 REPO_URL = "https://github.com/BTX-Community/btx-community"
+ADD_PROJECT_URL = f"{REPO_URL}/blob/main/CONTRIBUTING.md#changing-the-website"
+RELEASES_URL = "https://github.com/btxchain/btx/releases"
 STATUS_API = "https://network.btx-monitoring.com/api/v1/status.json"
 STATUS_PAGE = {"en": "https://network.btx-monitoring.com/", "de": "https://network.btx-monitoring.com/de/"}
 VERDICTS = ("stable", "performant", "secure")
@@ -189,6 +192,70 @@ def load_community(path: Path) -> CommunityPage:
         raise ContentError(f"{path.name} is invalid: {exc}") from exc
 
 
+# --- Content schema (content/guide.yaml) ------------------------------------------------------
+
+
+class Fact(_Model):
+    """A card of "What is BTX", with the source a reader can check it against."""
+
+    id: Id
+    title: Text
+    text: Text
+    source: Link
+
+
+class Feature(_Model):
+    """One announced change of the next release."""
+
+    title: Text
+    text: Text
+    source: Link
+
+
+class Upcoming(_Model):
+    """The next release, as far as its development branch and release notes show it."""
+
+    version: Annotated[StrictStr, Field(pattern=r"^[0-9]{1,3}\.[0-9]{1,3}(\.[0-9]{1,3})?$")]
+    checked: date
+    status: Text
+    source: Link
+    features: Annotated[list[Feature], Field(min_length=1, max_length=8)]
+    caveats: Annotated[list[Text], Field(max_length=8)] = []
+
+
+class Checklist(_Model):
+    """A short list of things to check before doing something irreversible."""
+
+    id: Id
+    title: Text
+    items: Annotated[list[Text], Field(min_length=1, max_length=10)]
+
+
+class GuidePage(_Model):
+    """``content/guide.yaml``."""
+
+    schema_version: Literal[1]
+    facts: Annotated[list[Fact], Field(min_length=1, max_length=8)]
+    upcoming: Upcoming | None = None
+    checklists: Annotated[list[Checklist], Field(max_length=4)] = []
+
+    @model_validator(mode="after")
+    def _unique(self) -> Self:
+        for kind, ids in (("fact", [f.id for f in self.facts]), ("checklist", [c.id for c in self.checklists])):
+            if len(ids) != len(set(ids)):
+                msg = f"duplicate {kind} ids"
+                raise ValueError(msg)
+        return self
+
+
+def load_guide(path: Path) -> GuidePage:
+    """Load and validate ``guide.yaml``."""
+    try:
+        return GuidePage.model_validate(load_yaml(path))
+    except ValidationError as exc:
+        raise ContentError(f"{path.name} is invalid: {exc}") from exc
+
+
 def load_texts(path: Path) -> dict[str, dict[str, str]]:
     """Load ``texts.yaml``: the same keys in every language, every value a non-empty string."""
     data = load_yaml(path)
@@ -256,6 +323,73 @@ class CategoryView:
     entries: tuple[EntryView, ...]
 
 
+@dataclass(frozen=True)
+class FactView:
+    """A fact card in one language."""
+
+    id: str
+    title: str
+    text: str
+    source: str
+
+
+@dataclass(frozen=True)
+class FeatureView:
+    """An announced change in one language."""
+
+    title: str
+    text: str
+    source: str
+
+
+@dataclass(frozen=True)
+class UpcomingView:
+    """The next release in one language."""
+
+    version: str
+    checked: str
+    status: str
+    source: str
+    features: tuple[FeatureView, ...]
+    caveats: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class ChecklistView:
+    """A checklist in one language."""
+
+    id: str
+    title: str
+    items: tuple[str, ...]
+
+
+def guide_views(
+    guide: GuidePage, lang: str
+) -> tuple[tuple[FactView, ...], UpcomingView | None, tuple[ChecklistView, ...]]:
+    """The fact cards, the next release and the checklists in one language."""
+    facts = tuple(
+        FactView(f.id, getattr(f.title, lang), getattr(f.text, lang), f.source) for f in guide.facts
+    )
+    upcoming = None
+    if guide.upcoming is not None:
+        u = guide.upcoming
+        upcoming = UpcomingView(
+            version=u.version,
+            checked=u.checked.isoformat(),
+            status=getattr(u.status, lang),
+            source=u.source,
+            features=tuple(
+                FeatureView(getattr(f.title, lang), getattr(f.text, lang), f.source) for f in u.features
+            ),
+            caveats=tuple(getattr(c, lang) for c in u.caveats),
+        )
+    checklists = tuple(
+        ChecklistView(c.id, getattr(c.title, lang), tuple(getattr(i, lang) for i in c.items))
+        for c in guide.checklists
+    )
+    return facts, upcoming, checklists
+
+
 def _step(step: Step, lang: str) -> StepView:
     if step.url is not None:
         return StepView(getattr(step.text, lang), step.url, external=True)
@@ -309,9 +443,12 @@ def page_path(lang: str) -> str:
     return "/" if lang == "en" else f"/{lang}/"
 
 
-def context(page: CommunityPage, texts: dict[str, dict[str, str]], lang: str, version: str) -> dict[str, object]:
+def context(
+    page: CommunityPage, guide: GuidePage, texts: dict[str, dict[str, str]], lang: str, version: str
+) -> dict[str, object]:
     """Everything the template needs for one language."""
     audiences, categories = community_views(page, lang)
+    facts, upcoming, checklists = guide_views(guide, lang)
     ui = texts[lang]
     return {
         "lang": lang,
@@ -321,11 +458,16 @@ def context(page: CommunityPage, texts: dict[str, dict[str, str]], lang: str, ve
         "status_api": STATUS_API,
         "verdicts": [(v, ui[f"verdict.{v}"]) for v in VERDICTS],
         "audiences": audiences,
+        "facts": facts,
+        "upcoming": upcoming,
+        "checklists": checklists,
         "categories": categories,
         "removed": tuple((r.name, getattr(r.reason, lang)) for r in page.removed),
         "checked": page.checked.isoformat(),
         "entry_count": sum(len(c.entries) for c in categories),
         "repo_url": REPO_URL,
+        "add_project_url": ADD_PROJECT_URL,
+        "releases_url": RELEASES_URL,
         "version": version,
     }
 
@@ -336,6 +478,7 @@ def context(page: CommunityPage, texts: dict[str, dict[str, str]], lang: str, ve
 def build(out: Path, version: str) -> None:
     """Validate the content and write the complete site to ``out`` (replacing it)."""
     page = load_community(ROOT / "content" / "community.yaml")
+    guide = load_guide(ROOT / "content" / "guide.yaml")
     texts = load_texts(ROOT / "content" / "texts.yaml")
     env = Environment(
         loader=FileSystemLoader(ROOT / "templates"),
@@ -344,7 +487,7 @@ def build(out: Path, version: str) -> None:
         keep_trailing_newline=True,
     )
     template = env.get_template("index.html.j2")
-    pages = {lang: template.render(context(page, texts, lang, version)) for lang in LANGUAGES}
+    pages = {lang: template.render(context(page, guide, texts, lang, version)) for lang in LANGUAGES}
 
     if out.exists():
         shutil.rmtree(out)

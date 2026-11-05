@@ -42,6 +42,12 @@
           <a class="c-link" href="{{ status_page }}">{{ ui["live.details"] }} →</a>
         </div>
         <p class="c-warning" role="alert" data-live="stale" hidden>{{ ui["live.stale"] }}</p>
+        <div class="c-fork" data-live="fork" data-template="{{ ui['fork.row'] }}" hidden>
+          <h3 class="c-fork__title">{{ ui["fork.title"] }}</h3>
+          <p>{{ ui["fork.lead"] }}</p>
+          <ul class="c-fork__rows" data-live="fork-rows"></ul>
+          <a class="c-link" href="{{ releases_url }}" rel="noopener noreferrer">{{ ui["fork.releases"] }} ↗</a>
+        </div>
         <dl class="c-tiles">
           <div class="c-tile c-tile--status">
             <dt>{{ ui["live.status"] }}</dt>
@@ -78,7 +84,45 @@
           </li>
           {% endfor %}
         </ul>
+        <h3 class="c-subtitle" id="numbers-title">{{ ui["numbers.title"] }}</h3>
+        <dl class="c-tiles" aria-labelledby="numbers-title">
+          <div class="c-tile c-tile--wide">
+            <dt>{{ ui["numbers.supply"] }}</dt>
+            <dd data-live="supply">–</dd>
+            <dd class="c-tile__sub" data-live="supply-share" data-template="{{ ui['numbers.supply_of'] }}"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["numbers.reward"] }}</dt>
+            <dd data-live="reward">–</dd>
+          </div>
+          <div class="c-tile c-tile--wide">
+            <dt>{{ ui["numbers.halving"] }}</dt>
+            <dd data-live="halving" data-template="{{ ui['numbers.blocks'] }}">–</dd>
+            <dd class="c-tile__sub" data-live="halving-time" data-template="{{ ui['numbers.about'] }}"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["numbers.tx"] }}</dt>
+            <dd data-live="tx">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["numbers.size"] }}</dt>
+            <dd data-live="size">–</dd>
+          </div>
+        </dl>
         <p class="c-updated" data-live="updated" data-template="{{ ui['live.updated'] }}">{{ ui["live.loading"] }}</p>
+      </section>
+
+      <section class="c-facts" id="about" aria-labelledby="about-title">
+        <h2 class="c-section-title" id="about-title">{{ ui["facts.title"] }}</h2>
+        <div class="c-fact-grid">
+          {% for fact in facts %}
+          <article class="c-fact" id="fact-{{ fact.id }}">
+            <h3 class="c-fact__title">{{ fact.title }}</h3>
+            <p>{{ fact.text }}</p>
+            <a class="c-link c-fact__source" href="{{ fact.source }}" rel="noopener noreferrer">{{ ui["facts.source"] }} ↗</a>
+          </article>
+          {% endfor %}
+        </div>
       </section>
 
       <section class="c-start" id="start" aria-labelledby="start-title">
@@ -106,9 +150,56 @@
         </div>
       </section>
 
+      {% if upcoming %}
+      <section class="c-upcoming" id="next" aria-labelledby="next-title">
+        <h2 class="c-section-title" id="next-title">{{ ui["upcoming.title"].format(version=upcoming.version) }}</h2>
+        <p class="c-warning">{{ upcoming.status }}</p>
+        <div class="c-fact-grid">
+          {% for feature in upcoming.features %}
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">{{ feature.title }}</h3>
+            <p>{{ feature.text }}</p>
+            <a class="c-link c-fact__source" href="{{ feature.source }}" rel="noopener noreferrer">{{ ui["facts.source"] }} ↗</a>
+          </article>
+          {% endfor %}
+        </div>
+        {% if upcoming.caveats %}
+        <h3 class="c-subtitle">{{ ui["upcoming.caveats"] }}</h3>
+        <ul class="c-caveats">
+          {% for caveat in upcoming.caveats %}
+          <li>{{ caveat }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <p class="c-muted">
+          {{ ui["upcoming.checked"].format(date=upcoming.checked) }}
+          <a class="c-link" href="{{ upcoming.source }}" rel="noopener noreferrer">{{ ui["upcoming.notes"] }} ↗</a>
+        </p>
+      </section>
+      {% endif %}
+
+      {% if checklists %}
+      <section class="c-checks" id="check" aria-labelledby="check-title">
+        <h2 class="c-section-title" id="check-title">{{ ui["checklists.title"] }}</h2>
+        <div class="c-audiences">
+          {% for checklist in checklists %}
+          <article class="c-audience c-audience--check" id="{{ checklist.id }}">
+            <h3 class="c-audience__title">{{ checklist.title }}</h3>
+            <ol class="c-steps">
+              {% for item in checklist.items %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ol>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
       <section class="c-directory" id="links" aria-labelledby="links-title">
         <h2 class="c-section-title" id="links-title">{{ ui["directory.title"] }}</h2>
         <p class="c-muted">{{ ui["directory.lead"].format(count=entry_count, date=checked) }}</p>
+        <p class="c-add">{{ ui["directory.add"] }} <a class="c-link" href="{{ add_project_url }}" rel="noopener noreferrer">{{ ui["directory.add_link"] }} ↗</a></p>
         <nav class="c-jump" aria-label="{{ ui['jump'] }}">
           {% for category in categories %}
           <a class="c-chip c-chip--{{ category.id }}" href="#cat-{{ category.id }}">{{ category.title }}</a>
