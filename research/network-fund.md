@@ -2,7 +2,7 @@
 
 **Status:** First draft (v0.1) for discussion, completely open to changes and suggestions
 **Date:** 3 November 2026
-**Author:** dr_chambre (Lars)
+**Author:** dr_chambre
 
 > This paper is not a finished concept. It's a collection of ideas meant as a starting point for an open discussion about how BTX can fund its network sustainably. All numbers are suggestions, not requirements. Please challenge, improve and add to it.
 
