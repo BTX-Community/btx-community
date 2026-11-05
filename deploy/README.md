@@ -63,13 +63,17 @@ Check after the first merge: the job "Publish to site-build" is green, and
 ### 2. Cloudflare
 
 1. Zero Trust → Networks → Tunnels → *Create a tunnel* (type Cloudflared), name it
-   `btx-community`. Copy the token from the install step.
-2. Public hostnames of the tunnel, both with service `HTTP` and URL `web:8080`:
-   - `btx-community.com`
+   `btx-community`. Copy the token from the install step. Skip the connector check: the
+   connector is the `tunnel` container started in step 3.
+2. In the tunnel, *Routes* → *Add route* → *Published application*, twice, both with the
+   service URL `http://web:8080` (plain `http`, see step 3):
+   - `btx-community.com` (subdomain left empty)
    - `www.btx-community.com` (Caddy answers it with a 301 to the bare domain)
 
-   Cloudflare creates the DNS records itself. Remove any older `A`/`AAAA` records for these
-   names.
+   Cloudflare creates the DNS records itself, as `CNAME` to `<tunnel id>.cfargotunnel.com`.
+   Delete any older `A`, `AAAA` or `CNAME` records for these names first: an old `A` record
+   shows up as error 525, an old `CNAME` to a name that does not exist as error 1016.
+   (Older dashboards call the routes *Public hostnames*, with type and URL in two fields.)
 3. HTTPS. Visitors connect to Cloudflare, which serves its own certificate for both names
    (Universal SSL, renewed automatically). Cloudflare reaches the server only through the
    tunnel, which is encrypted itself, so the server needs no certificate; the plain HTTP
