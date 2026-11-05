@@ -52,9 +52,17 @@ review on `main`.
 
    Cloudflare creates the DNS records itself. Remove any older `A`/`AAAA` records for these
    names.
-3. SSL/TLS → *Full*. Turn off features that inject scripts into the page (Rocket Loader, email
-   address obfuscation, automatic Web Analytics); the page's Content-Security-Policy blocks
-   them anyway, and they would only produce errors.
+3. HTTPS. Visitors connect to Cloudflare, which serves its own certificate for both names
+   (Universal SSL, renewed automatically). Cloudflare reaches the server only through the
+   tunnel, which is encrypted itself, so the server needs no certificate; the plain HTTP
+   between `cloudflared` and Caddy stays inside an internal Docker network. Set:
+   - SSL/TLS → Edge Certificates → *Always Use HTTPS*: on
+   - SSL/TLS → Edge Certificates → *Minimum TLS Version*: 1.2
+
+   Caddy adds `Strict-Transport-Security`, so browsers stay on HTTPS after the first visit.
+4. Turn off features that inject scripts into the page (Rocket Loader, email address
+   obfuscation, automatic Web Analytics); the page's Content-Security-Policy blocks them
+   anyway, and they would only produce errors.
 
 ### 3. Server
 
