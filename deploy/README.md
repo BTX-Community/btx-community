@@ -33,14 +33,27 @@ web container (Caddy) ◄── tunnel container (cloudflared) ◄── Cloudfl
 
 ### 1. GitHub (organisation admin)
 
-Protect the branch the server serves, so that only the workflow can write it:
+Protect the branch the server serves, so that only the workflow can write it. Without this,
+anyone with write access could push to `site-build` directly and skip the review on `main`.
+The workflow pushes with a deploy key that only jobs on `main` can use.
 
-- Settings → Rules → Rulesets → New branch ruleset, target `site-build`
-- Rules: *Restrict updates*, *Restrict deletions*
-- Bypass list: *GitHub Actions* only (it needs to force-push each new build)
+1. Create a key pair on your own machine (no passphrase; it is used by the workflow):
+   `ssh-keygen -t ed25519 -N "" -C "site-build publisher" -f site-build-key`
+2. Settings → Deploy keys → *Add deploy key*: title `site-build publisher`, paste
+   `site-build-key.pub`, tick *Allow write access*.
+3. Settings → Environments → *New environment* `site-publish`:
+   - Deployment branches and tags → *Selected branches and tags* → add `main`
+   - Environment secrets → *Add secret* `SITE_BUILD_KEY` with the content of `site-build-key`
+4. Delete both key files from your machine. If the key is ever lost or exposed, delete the
+   deploy key on GitHub and repeat from step 1.
+5. Settings → Rules → Rulesets → New branch ruleset `site-build`, *Active*:
+   - Bypass list: *Deploy keys*, *Always allow*; nobody else
+   - Target: include by pattern `site-build`
+   - Rules: *Restrict creations*, *Restrict updates*, *Restrict deletions*,
+     *Block force pushes*
 
-Without this rule anyone with write access could push to `site-build` directly and skip the
-review on `main`.
+Check after the first merge: the job "Publish to site-build" is green, and
+`git push origin HEAD:site-build` from your machine is rejected.
 
 ### 2. Cloudflare
 
