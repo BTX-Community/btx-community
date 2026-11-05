@@ -25,6 +25,9 @@ class ContentTest(unittest.TestCase):
             self.assertIn(build.STATUS_API, english)
             self.assertTrue((out / "static" / "css" / "community.css").is_file())
             self.assertTrue((out / "static" / "fonts" / "InterVariable.woff2").is_file())
+            for section in ('id="about"', 'id="next"', 'id="check"', 'data-live="fork"', 'data-live="supply"'):
+                self.assertIn(section, english)
+                self.assertIn(section, german)
 
     def test_texts_have_the_same_keys_in_both_languages(self) -> None:
         texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
@@ -55,6 +58,23 @@ class RulesTest(unittest.TestCase):
         path = self._write("en:\n  title: A\n  extra: B\nde:\n  title: C\n")
         with self.assertRaises(build.ContentError):
             build.load_texts(path)
+
+    def test_guide_sources_must_be_plain_https(self) -> None:
+        text = {"en": "a", "de": "b"}
+        with self.assertRaises(Exception):  # noqa: B017, PT027
+            build.Fact.model_validate({"id": "x", "title": text, "text": text, "source": "http://example.com"})
+
+    def test_upcoming_needs_a_plain_version(self) -> None:
+        text = {"en": "a", "de": "b"}
+        feature = {"title": text, "text": text, "source": "https://example.com"}
+        for version in ("0.35", "0.35.1"):
+            build.Upcoming.model_validate(
+                {"version": version, "checked": "2026-11-05", "status": text, "source": "https://example.com", "features": [feature]}
+            )
+        with self.assertRaises(Exception):  # noqa: B017, PT027
+            build.Upcoming.model_validate(
+                {"version": "<b>", "checked": "2026-11-05", "status": text, "source": "https://example.com", "features": [feature]}
+            )
 
     def test_an_anchor_must_name_a_category(self) -> None:
         text = {"en": "a", "de": "b"}

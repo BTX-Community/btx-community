@@ -1,0 +1,191 @@
+# The explaining parts of btx-community.com: what BTX is, what the next release brings, and two
+# checklists. The live figures (supply, halving, upgrade countdown) are not in here; the page
+# reads them from the status API.
+#
+# Every fact needs a source a reader can open. Prefer the source code or the release notes over
+# a website: btx.dev was last updated for v0.33.2 (August 2026) and is out of date in places.
+#
+# upcoming: describe only what is in the published development branch and its release notes,
+#           and say what is not ready. Update "checked" whenever you re-read them. When the
+#           release ships, rewrite the section as "new in" or remove it.
+# Texts: English (default) and German, as in community.yaml.
+
+schema_version: 1
+
+facts:
+  - id: supply
+    title: { en: Fixed supply, de: Feste Menge }
+    text:
+      en: >-
+        At most 21 million BTX, as with Bitcoin. A block comes about every 90 seconds; its reward
+        of 20 BTX halves every 525,000 blocks, roughly every 18 months.
+      de: >-
+        Höchstens 21 Millionen BTX, wie bei Bitcoin. Etwa alle 90 Sekunden kommt ein Block; seine
+        Belohnung von 20 BTX halbiert sich alle 525.000 Blöcke, also ungefähr alle 18 Monate.
+    source: https://github.com/btxchain/btx/blob/main/src/kernel/chainparams.cpp
+
+  - id: matmul
+    title: { en: Mining by matrix multiplication, de: Mining mit Matrixmultiplikation }
+    text:
+      en: >-
+        Instead of hashing, miners multiply large matrices, the work AI accelerators are built
+        for. Since block 185,000 every block needs a complete, exactly reproducible run on a
+        qualified NVIDIA (CUDA) or Apple (Metal) GPU. There is no CPU mining.
+      de: >-
+        Statt zu hashen multiplizieren Miner große Matrizen, also genau die Arbeit, für die
+        KI-Beschleuniger gebaut sind. Seit Block 185.000 braucht jeder Block einen vollständigen,
+        exakt nachrechenbaren Lauf auf einer zugelassenen NVIDIA- (CUDA) oder Apple-GPU (Metal).
+        Mit der CPU kann man nicht minen.
+    source: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-pow-spec.md
+
+  - id: post-quantum
+    title: { en: Post-quantum signatures, de: Post-Quanten-Signaturen }
+    text:
+      en: >-
+        Coins are locked with signatures meant to withstand quantum computers: ML-DSA-44 (NIST
+        FIPS 204) for everyday spending, SLH-DSA (FIPS 205) as a hash-based fallback. These
+        P2MR addresses start with btx1z.
+      de: >-
+        Coins werden mit Signaturen gesichert, die auch Quantencomputern standhalten sollen:
+        ML-DSA-44 (NIST FIPS 204) für den Alltag, SLH-DSA (FIPS 205) als hashbasierte Reserve.
+        Diese P2MR-Adressen beginnen mit btx1z.
+    source: https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md
+
+  - id: bitcoin-core
+    title: { en: Built on Bitcoin Core, de: Gebaut auf Bitcoin Core }
+    text:
+      en: >-
+        The node is a fork of Bitcoin Core. btxd, btx-cli, the RPC interface and PSBTs work the
+        way Bitcoin users know them; what differs is the proof-of-work and the signatures.
+      de: >-
+        Der Node ist ein Fork von Bitcoin Core. btxd, btx-cli, die RPC-Schnittstelle und PSBTs
+        funktionieren so, wie Bitcoin-Nutzer es kennen; anders sind Proof-of-Work und Signaturen.
+    source: https://github.com/btxchain/btx
+
+upcoming:
+  version: "0.35"
+  checked: 2026-11-05
+  status:
+    en: >-
+      Release candidate v0.35.0rc1 since 13 October 2026. The developers call it not
+      release-qualified; the current release stays v0.34.15. Nothing below is final.
+    de: >-
+      Release-Kandidat v0.35.0rc1 seit 13. Oktober 2026. Die Entwickler nennen ihn nicht
+      release-reif; aktuelles Release bleibt v0.34.15. Nichts davon ist endgültig.
+  source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes/release-notes-0.35.0.md
+  features:
+    - title: { en: Swaps without staying online, de: "Swaps, ohne online zu bleiben" }
+      text:
+        en: >-
+          A swap party can sign its HTLC claim in advance and hand it to a watchtower. Today
+          every buyer has to keep a node and wallet online for the whole swap; this is what
+          makes non-custodial swaps practical for most people.
+        de: >-
+          Wer an einem Swap teilnimmt, kann seinen HTLC-Claim vorab signieren und einem
+          Watchtower übergeben. Heute muss jeder Käufer Node und Wallet für den ganzen Swap
+          online halten; erst damit werden Swaps ohne Verwahrer für die meisten praktikabel.
+      source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes-htlc-presign.md
+    - title: { en: Modelnet, de: Modelnet }
+      text:
+        en: >-
+          A network for AI models inside the node: offer, find, fetch and run models locally,
+          with signed identities and git over BTX. On by default, off with -modelnet=0. It does
+          not spend coins.
+        de: >-
+          Ein Netz für KI-Modelle im Node: Modelle anbieten, finden, laden und lokal ausführen,
+          mit signierten Identitäten und Git über BTX. Standardmäßig an, aus mit -modelnet=0.
+          Es gibt keine Coins aus.
+      source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/modelnet/swarm/00_THIS_TREE.md
+    - title: { en: Safer auto-update, de: Sichereres Auto-Update }
+      text:
+        en: >-
+          A node behind a proxy or Tor no longer checks for updates by itself, so it does not
+          reveal its address to the update server. The update helper runs isolated.
+        de: >-
+          Ein Node hinter Proxy oder Tor sucht nicht mehr selbst nach Updates und verrät so dem
+          Update-Server nicht seine Adresse. Das Update-Programm läuft abgeschottet.
+      source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes/release-notes-0.35.0.md
+    - title: { en: Desktop app and ZeroMQ, de: Desktop-App und ZeroMQ }
+      text:
+        en: >-
+          The official archives include the graphical wallet btx-qt and ZeroMQ notifications for
+          services that follow the chain.
+        de: >-
+          Die offiziellen Archive enthalten die grafische Wallet btx-qt und
+          ZeroMQ-Benachrichtigungen für Dienste, die der Kette folgen.
+      source: https://github.com/btxchain/btx/releases/tag/v0.35.0-rc1
+  caveats:
+    - en: >-
+        rc1 has no Linux CUDA archive. A GPU node started with it falls back to the CPU and can
+        stall at the next block. Miners and signers stay on v0.34.15.
+      de: >-
+        rc1 hat kein Linux-Archiv mit CUDA. Ein GPU-Node damit fällt auf die CPU zurück und kann
+        beim nächsten Block hängen bleiben. Miner und Signer bleiben auf v0.34.15.
+    - en: The desktop app of rc1 needs glibc 2.43 and does not start on Ubuntu 24.04.
+      de: Die Desktop-App von rc1 braucht glibc 2.43 und startet nicht unter Ubuntu 24.04.
+    - en: CUDA on Windows was neither built nor tested.
+      de: CUDA unter Windows wurde weder gebaut noch getestet.
+
+checklists:
+  - id: before-buying
+    title: { en: Before you buy or receive BTX, de: Bevor du BTX kaufst oder empfängst }
+    items:
+      - en: >-
+          Create the wallet first and write the backup down offline. Restore it once, so you
+          know the backup works before money depends on it.
+        de: >-
+          Zuerst die Wallet anlegen und das Backup offline aufschreiben. Einmal
+          wiederherstellen, damit du weißt, dass es funktioniert, bevor Geld davon abhängt.
+      - en: >-
+          Check the receiving address in full, not just its start and end. BTX addresses start
+          with btx1z.
+        de: >-
+          Die Empfangsadresse vollständig prüfen, nicht nur Anfang und Ende. BTX-Adressen
+          beginnen mit btx1z.
+      - en: Send a small test amount first and wait until it is confirmed.
+        de: Zuerst einen kleinen Testbetrag schicken und warten, bis er bestätigt ist.
+      - en: >-
+          Before you use an exchange or an OTC seller, check that withdrawals really work. A
+          price on a website is not a market you can sell into.
+        de: >-
+          Bevor du eine Börse oder einen OTC-Verkäufer nutzt, prüfen, ob Auszahlungen wirklich
+          funktionieren. Ein Preis auf einer Website ist kein Markt, an dem man verkaufen kann.
+      - en: >-
+          A "model" or "reference" price is an estimate, not an offer that anyone has to honour.
+        de: >-
+          Ein "Modell-" oder "Referenzpreis" ist eine Schätzung, kein Angebot, an das sich
+          jemand halten muss.
+      - en: >-
+          Nobody legitimate asks for your seed. Messages offering help, "recovery" or guaranteed
+          returns are scams.
+        de: >-
+          Niemand Seriöses fragt nach deinem Seed. Nachrichten mit Hilfe, "Wiederherstellung"
+          oder garantierten Renditen sind Betrug.
+
+  - id: before-installing
+    title: { en: Before you install a node release, de: Bevor du ein Node-Release installierst }
+    items:
+      - en: Download only from github.com/btxchain/btx/releases.
+        de: Nur von github.com/btxchain/btx/releases herunterladen.
+      - en: >-
+          Recent releases come without a signed checksum file; the last one with SHA256SUMS.asc
+          was v0.34.6. GitHub shows a SHA-256 for each file on the release page: compare it
+          with "shasum -a 256 <file>" ("sha256sum" on Linux).
+        de: >-
+          Neuere Releases kommen ohne signierte Prüfsummendatei; die letzte mit SHA256SUMS.asc
+          war v0.34.6. GitHub zeigt auf der Release-Seite eine SHA-256 pro Datei: mit
+          "shasum -a 256 <Datei>" vergleichen (unter Linux "sha256sum").
+      - en: >-
+          That proves the file is the one on GitHub, not who built it. If that matters to you,
+          build the tagged source yourself.
+        de: >-
+          Das beweist, dass die Datei die von GitHub ist, nicht wer sie gebaut hat. Wenn dir das
+          wichtig ist, den getaggten Quellcode selbst bauen.
+      - en: >-
+          Read the release notes before upgrading. Some releases change the rules at a fixed
+          block height; this page shows a countdown when one is coming.
+        de: >-
+          Vor dem Update die Release-Notes lesen. Manche Releases ändern die Regeln ab einer
+          festen Blockhöhe; diese Seite zeigt dann einen Countdown.
+      - en: Release candidates (rc) are for testing. Do not run them on a mining or signing node.
+        de: Release-Kandidaten (rc) sind zum Testen. Nicht auf einem Mining- oder Signer-Node einsetzen.

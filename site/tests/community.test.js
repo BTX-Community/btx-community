@@ -105,3 +105,58 @@ test("durations are formatted as on the status page", () => {
   assert.equal(live.formatDuration(7500, "en"), "2 h 5 min");
   assert.equal(live.formatDuration(3 * 86400 + 4 * 3600, "de"), "3 T 4 h");
 });
+
+test("the figures of BTX in numbers are read", () => {
+  const result = live.parseStatus(status({
+    metrics: [
+      { id: "econ.supply_mined", value: 5376278.75 },
+      { id: "econ.supply_pct_max", value: 25.6 },
+      { id: "econ.block_reward", value: 20 },
+      { id: "econ.halving_countdown", value: 255713 },
+      { id: "econ.tx_24h", value: 1025 },
+      { id: "chain.size_on_disk", value: 134761456808 },
+    ],
+  }));
+  assert.equal(result.supply, 5376278.75);
+  assert.equal(result.supplyShare, 25.6);
+  assert.equal(result.reward, 20);
+  assert.equal(result.halving, 255713);
+  assert.equal(result.tx, 1025);
+  assert.equal(result.size, 134761456808);
+});
+
+test("implausible figures are dropped", () => {
+  const result = live.parseStatus(status({
+    metrics: [
+      { id: "econ.supply_mined", value: 22000000 },
+      { id: "econ.supply_pct_max", value: "25" },
+      { id: "econ.block_reward", value: -1 },
+      { id: "econ.halving_countdown", value: 1.5 },
+      { id: "econ.tx_24h", value: "<b>" },
+      { id: "chain.size_on_disk", value: Infinity },
+    ],
+  }));
+  for (const key of ["supply", "supplyShare", "reward", "halving", "tx", "size"]) {
+    assert.equal(result[key], null, key);
+  }
+});
+
+test("upcoming rule changes are read, and nothing ahead gives an empty list", () => {
+  const ahead = live.parseStatus(status({
+    metrics: [{ id: "sw.upcoming_activation", value: [{ name: "asert_half_life", height: 300000, remaining_blocks: 1200 }] }],
+  }));
+  assert.deepEqual(ahead.activations, [{ name: "asert_half_life", height: 300000, remaining: 1200 }]);
+  const none = live.parseStatus(status({ metrics: [{ id: "sw.upcoming_activation", value: [] }] }));
+  assert.deepEqual(none.activations, []);
+  const missing = live.parseStatus(status({}));
+  assert.equal(missing.activations, null);
+});
+
+test("an unclear activation list hides nothing and shows nothing", () => {
+  for (const rows of ["x", [null], [{ name: "<img>", height: 1, remaining_blocks: 1 }],
+    [{ name: "a", height: -1, remaining_blocks: 1 }], [{ name: "a", height: 5, remaining_blocks: 0 }],
+    new Array(11).fill({ name: "a", height: 5, remaining_blocks: 1 })]) {
+    const result = live.parseStatus(status({ metrics: [{ id: "sw.upcoming_activation", value: rows }] }));
+    assert.equal(result.activations, null, JSON.stringify(rows).slice(0, 80));
+  }
+});

@@ -190,6 +190,65 @@ categories:
         description:
           en: Source code and releases of the reference node (btxd).
           de: Quellcode und Releases des Referenz-Nodes (btxd).
+      - id: protocol-of-record
+        name: The Protocol of Record
+        url: https://btx.dev/BTX-Context.pdf
+        tags: [whitepaper, pdf]
+        description:
+          en: The official whitepaper, describing what BTX is and why.
+          de: Das offizielle Whitepaper; beschreibt, was BTX ist und warum.
+        note:
+          en: Written for v0.33.2 (August 2026). Newer releases differ in places.
+          de: Geschrieben für v0.33.2 (August 2026). Neuere Releases weichen teils ab.
+      - id: specification
+        name: BTX Specification
+        url: https://btx.dev/BTX-Specifications.pdf
+        tags: [spec, pdf]
+        description:
+          en: The official technical specification of the protocol.
+          de: Die offizielle technische Spezifikation des Protokolls.
+        note:
+          en: Written for v0.33.2 (August 2026). Newer releases differ in places.
+          de: Geschrieben für v0.33.2 (August 2026). Neuere Releases weichen teils ab.
+      - id: build-from-source
+        name: Build from source
+        url: https://github.com/btxchain/btx/blob/main/doc/build-unix.md
+        tags: [docs, node]
+        description:
+          en: How to build btxd yourself on Linux, if you would rather not trust a binary.
+          de: So baust du btxd unter Linux selbst, wenn du keinem fertigen Programm vertrauen willst.
+      - id: pqc-spec
+        name: Post-quantum signatures
+        url: https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md
+        tags: [spec, pq]
+        description:
+          en: ML-DSA and SLH-DSA in BTX, P2MR outputs and the address format.
+          de: ML-DSA und SLH-DSA in BTX, P2MR-Outputs und das Adressformat.
+      - id: pq-multisig
+        name: Post-quantum multisig
+        url: https://github.com/btxchain/btx/blob/main/doc/btx-pq-multisig-tutorial.md
+        tags: [docs, pq]
+        description:
+          en: Step-by-step guide to a multisig wallet with post-quantum keys.
+          de: Schritt-für-Schritt-Anleitung für eine Multisig-Wallet mit Post-Quanten-Schlüsseln.
+      - id: matmul-spec
+        name: MatMul proof-of-work
+        url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-pow-spec.md
+        tags: [spec, mining]
+        description:
+          en: How mining by matrix multiplication works and how blocks are checked.
+          de: Wie Mining mit Matrixmultiplikation funktioniert und wie Blöcke geprüft werden.
+      - id: trusted-mirrors
+        name: Trusted MatMul mirrors
+        url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md
+        tags: [docs, node]
+        description:
+          en: >-
+            Running a node without a qualified GPU by trusting signers' replay attestations,
+            and what that trust means.
+          de: >-
+            Einen Node ohne zugelassene GPU betreiben, indem man den Replay-Bestätigungen von
+            Signern vertraut, und was dieses Vertrauen bedeutet.
 
   - id: network
     title: { en: Network and explorers, de: Netz und Explorer }
