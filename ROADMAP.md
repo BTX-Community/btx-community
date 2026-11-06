@@ -35,7 +35,7 @@ column B should not be scheduled until it lands.
 | # | Item | Why it matters | Status | Owner |
 |---|---|---|---|---|
 | A1 | **One trading venue.** Agree on a single implementation between the people already building one, instead of four in parallel | Named as the highest-leverage missing piece in the Growth debate. Four to six finished or near-finished implementations exist and none is live | Several candidates built, none released | |
-| A2 | **Venue structure and licensing boundary.** Decide custodial vs non-custodial vs licensed operator, and document why the chosen model sits where it sits | This is the stated reason the finished implementations are not shipping. It is a structuring question, not a coding one | Open, several conflicting assumptions in circulation | |
+| A2 | **Venue structure and licensing boundary.** Decide custodial vs non-custodial vs licensed operator, and document why the chosen model sits where it sits | This is the stated reason the finished implementations are not shipping. It is a structuring question, not a coding one | Structuring paper in draft: [`research/venue-structure.md`](research/venue-structure.md). Decision still open | dr.chambre |
 | A3 | **Community fund.** Multisig, published rules, published address, published spends | Repeatedly asked for since September. Needed before anyone pays for infrastructure or milestones | Discussion paper v0.1 in [`research/network-fund.md`](research/network-fund.md), not implemented | |
 | A4 | **btx-community.com.** Front door and maintained link directory, replacing the stale ones | A newcomer currently lands on outdated data and draws the obvious conclusion | Domain ordered, rebuild of btxlinks done, repo public | dr.chambre |
 | A5 | **Node and infrastructure.** Archives, signed snapshots, monitoring, alerting for stranded nodes | A stranded node went unnoticed for four days in October. Measurement is in place; alerting is not | Two archives, monitoring and public API live | dr.chambre |
@@ -49,7 +49,7 @@ column B should not be scheduled until it lands.
 
 | # | Item | Why it blocks us | Status | Who follows up |
 |---|---|---|---|---|
-| B1 | **0.35 with `htlc_presign` / `p2mr_leaf`** | Without it the non-custodial swap path requires every buyer to keep a full node and wallet online for the whole swap, which rules out most users | In the 0.35 branch, tested there, not released | |
+| B1 | **0.35 with `htlc_presign` / `p2mr_leaf`** | Without it the non-custodial swap path requires every buyer to keep a full node and wallet online for the whole swap, which rules out most users | In the 0.35 branch, tested there, not released. Why it gates the non-custodial path: [`research/venue-structure.md`](research/venue-structure.md) §2.2 | |
 | B2 | **btx.dev: website and whitepaper** | No outward push works while the official site shows a 20-week-old version. Promised repeatedly since September | Not delivered | |
 | B3 | **btx.dev: circulating supply figure** | The site states 3,647,340; the chain says 5,356,878.75 — understated by about 32 % on a page that leads with a fixed maximum supply | Reported 5 November 2026, no change | dr.chambre |
 | B4 | **A statement on the deployment reward** | The first question every newcomer asks. The specification itself (§8) says the operating policy "should be documented separately and precisely" and it never was | Our own write-up in draft; nothing from the core team | dr.chambre |
