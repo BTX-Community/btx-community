@@ -194,6 +194,24 @@
       </section>
       {% endif %}
 
+      {% if documents %}
+      <section class="c-docs" id="documents" aria-labelledby="documents-title">
+        <h2 class="c-section-title" id="documents-title">{{ ui["documents.title"] }}</h2>
+        <p class="c-muted">{{ ui["documents.lead"] }}</p>
+        <div class="c-audiences">
+          {% for document in documents %}
+          <article class="c-audience c-audience--doc" id="{{ document.id }}">
+            <h3 class="c-audience__title">{{ document.title }}</h3>
+            <p>{{ document.text }}</p>
+            {% if document.status %}<p class="c-muted">{{ document.status }}</p>{% endif %}
+            <a class="c-link c-fact__source" href="{{ document.url }}" rel="noopener noreferrer" aria-label="{{ ui['documents.open'] }}: {{ document.title }}">{{ ui["documents.open"] }} ↗</a>
+          </article>
+          {% endfor %}
+        </div>
+        <p class="c-add"><a class="c-link" href="{{ repo_url }}" rel="noopener noreferrer">{{ ui["documents.repo"] }} ↗</a></p>
+      </section>
+      {% endif %}
+
       <section class="c-directory" id="links" aria-labelledby="links-title">
         <h2 class="c-section-title" id="links-title">{{ ui["directory.title"] }}</h2>
         <p class="c-muted">{{ ui["directory.lead"].format(count=entry_count, date=checked) }}</p>

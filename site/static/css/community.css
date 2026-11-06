@@ -60,6 +60,7 @@
   --a-facts: #ffd479;
   --a-next: #ff9ec4;
   --a-check: #ffb43a;
+  --a-docs: #e3c56b;
 }
 
 *,
@@ -536,6 +537,10 @@ a {
 
 .c-audience--check {
   --accent: var(--a-check);
+}
+
+.c-audience--doc {
+  --accent: var(--a-docs);
 }
 
 .c-audience__title {

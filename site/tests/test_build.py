@@ -27,7 +27,15 @@ class ContentTest(unittest.TestCase):
             self.assertRegex(english, r'href="/static/css/community\.css\?v=[0-9a-f]{12}"')
             self.assertTrue((out / "static" / "css" / "community.css").is_file())
             self.assertTrue((out / "static" / "fonts" / "InterVariable.woff2").is_file())
-            for section in ('id="about"', 'id="next"', 'id="check"', 'data-live="fork"', 'data-live="supply"'):
+            for section in (
+                'id="about"',
+                'id="next"',
+                'id="check"',
+                'id="documents"',
+                'id="doc-venue-structure"',
+                'data-live="fork"',
+                'data-live="supply"',
+            ):
                 self.assertIn(section, english)
                 self.assertIn(section, german)
 
