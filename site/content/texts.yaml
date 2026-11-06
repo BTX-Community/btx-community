@@ -45,6 +45,12 @@ en:
   upcoming.caveats: Not ready yet
   upcoming.notes: Release notes
   checklists.title: Check first
+  documents.title: Documents
+  documents.lead: >-
+    What this community has written down. Every one of them lives in the repository, so each
+    change is visible as a commit and anyone can correct a figure.
+  documents.open: Read it
+  documents.repo: All of it, including the source of this page
   directory.add: Missing a project? Add it with a pull request; no e-mail and no gatekeeper.
   directory.add_link: How to add a project
   on_release: "{count} of {total} nodes"
@@ -116,6 +122,12 @@ de:
   upcoming.caveats: Noch nicht fertig
   upcoming.notes: Release-Notes
   checklists.title: Erst prüfen
+  documents.title: Dokumente
+  documents.lead: >-
+    Was diese Community aufgeschrieben hat. Alles davon liegt im Repository, jede Änderung ist
+    also als Commit sichtbar, und jeder kann eine Zahl korrigieren.
+  documents.open: Lesen
+  documents.repo: Alles davon, samt Quelltext dieser Seite
   directory.add: Ein Projekt fehlt? Per Pull Request eintragen; ohne E-Mail und ohne Türsteher.
   directory.add_link: So trägst du ein Projekt ein
   on_release: "{count} von {total} Nodes"

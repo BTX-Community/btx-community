@@ -458,6 +458,89 @@ categories:
           en: Centralised exchange with a BTX/USDT market.
           de: Zentrale Börse mit einem BTX/USDT-Markt.
 
+# The documents this group maintains. They live in the repository so that every change is
+# visible as a commit; this section is how a reader finds them without knowing git.
+# status: optional, says where a document stands. Leave it out once something is settled.
+documents:
+  - id: doc-roadmap
+    title:
+      en: Roadmap
+      de: Roadmap
+    text:
+      en: >-
+        What the community can do by itself and what depends on the core team, in two columns,
+        with a place to put your name against a lane.
+      de: >-
+        Was die Community selbst tun kann und was vom Kernteam abhängt, in zwei Spalten, mit
+        einer Spalte, in die man seinen Namen für einen Bereich eintragen kann.
+    url: https://github.com/BTX-Community/btx-community/blob/main/ROADMAP.md
+    status:
+      en: Open for edits
+      de: Offen für Änderungen
+
+  - id: doc-deployment-reward
+    title:
+      en: The bootstrap window and the 1,000,000 BTX deployment reward
+      de: Das Bootstrap-Fenster und die 1.000.000 BTX Deployment Reward
+    text:
+      en: >-
+        The first question most newcomers ask, answered from chain data: what the first 50,000
+        blocks produced, under which consensus rules, and what public data can and cannot show.
+      de: >-
+        Die erste Frage fast jedes Neuzugangs, beantwortet aus Chain-Daten: was die ersten
+        50.000 Blöcke erzeugt haben, unter welchen Konsensregeln, und was öffentliche Daten
+        zeigen können und was nicht.
+    url: https://github.com/BTX-Community/btx-community/blob/main/research/deployment-reward.md
+    status:
+      en: Draft - under review
+      de: Entwurf - in Prüfung
+
+  - id: doc-network-fund
+    title:
+      en: Network fund
+      de: Netzwerk-Fund
+    text:
+      en: >-
+        How the network could pay for its own infrastructure: contributions, multisig custody,
+        published rules and payouts against verified uptime.
+      de: >-
+        Wie das Netzwerk seine eigene Infrastruktur bezahlen könnte: Beiträge, Multisig-Verwahrung,
+        veröffentlichte Regeln und Auszahlungen gegen nachgewiesene Verfügbarkeit.
+    url: https://github.com/BTX-Community/btx-community/blob/main/research/network-fund.md
+    status:
+      en: Discussion paper
+      de: Diskussionspapier
+
+  - id: doc-venue-structure
+    title:
+      en: Venue structure and the licensing boundary
+      de: Handelsplatzstruktur und die Erlaubnisgrenze
+    text:
+      en: >-
+        What a decentralised exchange can be on a chain without a virtual machine, where the
+        regulatory line runs, and the models that remain open. Not legal advice.
+      de: >-
+        Was eine dezentrale Börse auf einer Chain ohne virtuelle Maschine sein kann, wo die
+        regulatorische Grenze verläuft und welche Modelle bleiben. Keine Rechtsberatung.
+    url: https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md
+    status:
+      en: Draft for discussion
+      de: Entwurf zur Diskussion
+
+  - id: doc-contributing
+    title:
+      en: How to change something here
+      de: Wie man hier etwas ändert
+    text:
+      en: >-
+        What you can edit freely, what needs a second pair of eyes, and how to report a wrong
+        figure if git is not your thing.
+      de: >-
+        Was man frei ändern kann, was ein zweites Augenpaar braucht, und wie man eine falsche
+        Zahl meldet, wenn git nicht das eigene Werkzeug ist.
+    url: https://github.com/BTX-Community/btx-community/blob/main/CONTRIBUTING.md
+
+
 removed:
   - name: minebtx (pool and explorer)
     reason:

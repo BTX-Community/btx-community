@@ -152,6 +152,17 @@ class Category(_Model):
     entries: Annotated[list[Entry], Field(min_length=1, max_length=40)]
 
 
+class Document(_Model):
+    """A document this community maintains, linked from the page so it is not only in git."""
+
+    id: Id
+    title: Text
+    text: Text
+    url: Link
+    status: Text | None = None
+    """Where the document stands, e.g. "Draft - under review"."""
+
+
 class Removed(_Model):
     """An entry of the old btxlinks list that is no longer listed, and why."""
 
@@ -166,6 +177,7 @@ class CommunityPage(_Model):
     checked: date
     audiences: Annotated[list[Audience], Field(min_length=1, max_length=5)]
     categories: Annotated[list[Category], Field(min_length=1, max_length=20)]
+    documents: Annotated[list[Document], Field(max_length=12)] = []
     removed: Annotated[list[Removed], Field(max_length=30)] = []
 
     @model_validator(mode="after")
@@ -173,7 +185,13 @@ class CommunityPage(_Model):
         categories = [category.id for category in self.categories]
         entries = [entry.id for category in self.categories for entry in category.entries]
         audiences = [audience.id for audience in self.audiences]
-        for kind, ids in (("category", categories), ("entry", entries), ("audience", audiences)):
+        documents = [document.id for document in self.documents]
+        for kind, ids in (
+            ("category", categories),
+            ("entry", entries),
+            ("audience", audiences),
+            ("document", documents),
+        ):
             if len(ids) != len(set(ids)):
                 msg = f"duplicate {kind} ids"
                 raise ValueError(msg)
@@ -325,6 +343,17 @@ class CategoryView:
 
 
 @dataclass(frozen=True)
+class DocumentView:
+    """A document card in one language."""
+
+    id: str
+    title: str
+    text: str
+    url: str
+    status: str | None
+
+
+@dataclass(frozen=True)
 class FactView:
     """A fact card in one language."""
 
@@ -400,8 +429,8 @@ def _step(step: Step, lang: str) -> StepView:
 
 def community_views(
     page: CommunityPage, lang: str
-) -> tuple[tuple[AudienceView, ...], tuple[CategoryView, ...]]:
-    """The audience cards and the categories in one language, entries numbered in page order."""
+) -> tuple[tuple[AudienceView, ...], tuple[CategoryView, ...], tuple[DocumentView, ...]]:
+    """The audience cards, categories and documents in one language, entries numbered in page order."""
     audiences = tuple(
         AudienceView(
             id=a.id,
@@ -436,7 +465,17 @@ def community_views(
                 entries=tuple(entries),
             )
         )
-    return audiences, tuple(categories)
+    documents = tuple(
+        DocumentView(
+            id=d.id,
+            title=getattr(d.title, lang),
+            text=getattr(d.text, lang),
+            url=d.url,
+            status=getattr(d.status, lang) if d.status else None,
+        )
+        for d in page.documents
+    )
+    return audiences, tuple(categories), documents
 
 
 def asset_url(path: str) -> str:
@@ -458,7 +497,7 @@ def context(
     page: CommunityPage, guide: GuidePage, texts: dict[str, dict[str, str]], lang: str, version: str
 ) -> dict[str, object]:
     """Everything the template needs for one language."""
-    audiences, categories = community_views(page, lang)
+    audiences, categories, documents = community_views(page, lang)
     facts, upcoming, checklists = guide_views(guide, lang)
     ui = texts[lang]
     return {
@@ -473,6 +512,7 @@ def context(
         "upcoming": upcoming,
         "checklists": checklists,
         "categories": categories,
+        "documents": documents,
         "removed": tuple((r.name, getattr(r.reason, lang)) for r in page.removed),
         "checked": page.checked.isoformat(),
         "entry_count": sum(len(c.entries) for c in categories),
