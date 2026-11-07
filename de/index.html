@@ -1,0 +1,1036 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Startseite der BTX-Community: Informationen und Hilfe für Interessierte, Miner und Node-Betreiber, mit dem Live-Zustand des Netzes und einem geprüften Linkverzeichnis.">
+  <meta name="color-scheme" content="dark">
+  <title>BTX Community</title>
+  
+  <link rel="alternate" hreflang="en" href="/">
+  
+  <link rel="alternate" hreflang="de" href="/de/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/community.css?v=e233b7488d89">
+  <script src="/static/js/community.js?v=7a65d56e76a8" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#start">Womit möchtest du anfangen?</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <span class="c-logo"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</span>
+      <nav class="c-lang" aria-label="BTX Community">
+        
+        <a class="c-chip" href="/" hreflang="en" lang="en" title="English">EN</a>
+        
+        <a class="c-chip c-chip--active" href="/de/" hreflang="de" lang="de" title="Deutsch" aria-current="page">DE</a>
+        
+      </nav>
+    </header>
+
+    <main>
+      <section class="c-hero">
+        <p class="c-kicker">Community-Treffpunkt</p>
+        <h1 class="c-hero__title">BTX<span class="c-hero__accent">.</span>community</h1>
+        <p class="c-hero__lead">Eine Community-Seite für alle, die sich für BTX interessieren: was es ist, wie man es mint, wie man einen Node betreibt und wo es Hilfe gibt. Betrieben von Community-Mitgliedern, nicht von einer Firma.</p>
+      </section>
+
+      <section class="c-live c-live--unknown" aria-labelledby="live-title" id="live" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="de"
+               data-level-green="OK" data-level-yellow="Warnung"
+               data-level-red="Kritisch" data-level-unknown="Unbekannt">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="live-title"><span class="c-pulse" aria-hidden="true"></span>Das Netz gerade</h2>
+          <a class="c-link" href="https://network.btx-monitoring.com/de/">Ganze Statusseite →</a>
+        </div>
+        <p class="c-warning" role="alert" data-live="stale" hidden>Die Daten sind veraltet; die Werte können falsch sein.</p>
+        <div class="c-fork" data-live="fork" data-template="{name}: Block {height}, noch {remaining} Blöcke (etwa {time})" hidden>
+          <h3 class="c-fork__title">Netz-Upgrade steht an</h3>
+          <p>Ab dem Block unten ändern sich die Regeln. Jeder Node und Miner braucht bis dahin ein Release, das die Änderung kennt, sonst folgt er dem Netz nicht mehr.</p>
+          <ul class="c-fork__rows" data-live="fork-rows"></ul>
+          <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases und Release-Notes ↗</a>
+        </div>
+        <dl class="c-tiles">
+          <div class="c-tile c-tile--status">
+            <dt>Status</dt>
+            <dd data-live="overall"
+                data-label-normal="Alles normal"
+                data-label-degraded="Eingeschränkt"
+                data-label-incident="Störung">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Blockhöhe</dt>
+            <dd data-live="height">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Neueste Node-Version</dt>
+            <dd data-live="release">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Nodes damit</dt>
+            <dd data-live="on-release" data-template="{count} von {total} Nodes">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Mittlere Blockzeit (24 h)</dt>
+            <dd data-live="interval">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Aktive Signer</dt>
+            <dd data-live="signers">–</dd>
+          </div>
+        </dl>
+        <ul class="c-verdicts">
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="stable">
+            <span class="c-dot" aria-hidden="true"></span>Stabil: <span data-verdict-label>Unbekannt</span>
+          </li>
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="performant">
+            <span class="c-dot" aria-hidden="true"></span>Performant: <span data-verdict-label>Unbekannt</span>
+          </li>
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="secure">
+            <span class="c-dot" aria-hidden="true"></span>Sicher: <span data-verdict-label>Unbekannt</span>
+          </li>
+          
+        </ul>
+        <h3 class="c-subtitle" id="numbers-title">BTX in Zahlen</h3>
+        <dl class="c-tiles" aria-labelledby="numbers-title">
+          <div class="c-tile c-tile--wide">
+            <dt>Bisher gemint</dt>
+            <dd data-live="supply">–</dd>
+            <dd class="c-tile__sub" data-live="supply-share" data-template="{pct} % von 21 Millionen"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>Blockbelohnung</dt>
+            <dd data-live="reward">–</dd>
+          </div>
+          <div class="c-tile c-tile--wide">
+            <dt>Nächstes Halving</dt>
+            <dd data-live="halving" data-template="{count} Blöcke">–</dd>
+            <dd class="c-tile__sub" data-live="halving-time" data-template="etwa {time}"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>Transaktionen (24 h)</dt>
+            <dd data-live="tx">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Größe der Kette</dt>
+            <dd data-live="size">–</dd>
+          </div>
+        </dl>
+        <p class="c-updated" data-live="updated" data-template="Daten von {time}">Live-Daten werden geladen …</p>
+      </section>
+
+      <section class="c-live c-dev" aria-labelledby="dev-title" id="development" hidden
+        data-api="https://network.btx-monitoring.com/api/v1/development.json" data-repo="btxchain/btx" data-lang="de"
+        data-default="Standard-Branch" data-today="heute"
+        data-day="vor 1 Tag" data-days="vor {count} Tagen">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="dev-title">Entwicklung der Node-Software</h2>
+          <a class="c-link" href="https://github.com/btxchain/btx" rel="noopener noreferrer">btxchain/btx auf GitHub ↗</a>
+        </div>
+        <p class="c-dev__lead">Commits und Pull Requests in btxchain/btx, der Referenz-Implementierung des BTX-Nodes. GitHub öffnet das Repository auf main, dem Standard-Branch; die anderen Zeilen sind die Branches mit den jüngsten Commits.</p>
+        <p class="c-warning" role="alert" data-dev="stale" hidden>Diese Messung ist älter als drei Stunden; die Zahlen können veraltet sein.</p>
+        <div class="c-branches" role="table" aria-labelledby="dev-title">
+          <div class="c-branch c-branch--head" role="row">
+            <span role="columnheader">Branch</span>
+            <span role="columnheader">Letzter Commit</span>
+            <span role="columnheader">Commits, 30 Tage</span>
+          </div>
+          <div role="rowgroup" data-dev="branches"></div>
+        </div>
+        <p class="c-dev__note">Commits werden je Branch nach Commit-Datum gezählt, höchstens 100 pro Branch (angezeigt als 100+). Ein Commit, der auf mehreren Branches liegt, zählt bei jedem davon.</p>
+        <dl class="c-tiles">
+          <div class="c-tile">
+            <dt>Aktualisierte Pull Requests, 7 Tage</dt>
+            <dd data-dev="pulls">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Letztes Release</dt>
+            <dd data-dev="release">–</dd>
+            <dd class="c-tile__sub" data-dev="release-date"></dd>
+          </div>
+          <div class="c-tile" data-dev="prerelease-tile" hidden>
+            <dt>Neueres Pre-Release</dt>
+            <dd data-dev="prerelease">–</dd>
+            <dd class="c-tile__sub" data-dev="prerelease-date"></dd>
+          </div>
+        </dl>
+        <p class="c-updated" data-dev="measured" data-template="Bei GitHub gemessen am {time}, stündlich."></p>
+      </section>
+
+      <section class="c-facts" id="about" aria-labelledby="about-title">
+        <h2 class="c-section-title" id="about-title">Was ist BTX?</h2>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact" id="fact-supply">
+            <h3 class="c-fact__title">Feste Menge</h3>
+            <p>Höchstens 21 Millionen BTX, wie bei Bitcoin. Etwa alle 90 Sekunden kommt ein Block; seine Belohnung von 20 BTX halbiert sich alle 525.000 Blöcke, also ungefähr alle 18 Monate.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/src/kernel/chainparams.cpp" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-matmul">
+            <h3 class="c-fact__title">Mining mit Matrixmultiplikation</h3>
+            <p>Statt zu hashen multiplizieren Miner große Matrizen, also genau die Arbeit, für die KI-Beschleuniger gebaut sind. Seit Block 185.000 braucht jeder Block einen vollständigen, exakt nachrechenbaren Lauf auf einer zugelassenen NVIDIA- (CUDA) oder Apple-GPU (Metal). Mit der CPU kann man nicht minen.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-pow-spec.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-post-quantum">
+            <h3 class="c-fact__title">Post-Quanten-Signaturen</h3>
+            <p>Coins werden mit Signaturen gesichert, die auch Quantencomputern standhalten sollen: ML-DSA-44 (NIST FIPS 204) für den Alltag, SLH-DSA (FIPS 205) als hashbasierte Reserve. Diese P2MR-Adressen beginnen mit btx1z.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-bitcoin-core">
+            <h3 class="c-fact__title">Gebaut auf Bitcoin Core</h3>
+            <p>Der Node ist ein Fork von Bitcoin Core. btxd, btx-cli, die RPC-Schnittstelle und PSBTs funktionieren so, wie Bitcoin-Nutzer es kennen; anders sind Proof-of-Work und Signaturen.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+        </div>
+      </section>
+
+      <section class="c-start" id="start" aria-labelledby="start-title">
+        <h2 class="c-section-title" id="start-title">Womit möchtest du anfangen?</h2>
+        <div class="c-audiences">
+          
+          <article class="c-audience c-audience--newcomers" id="newcomers">
+            <h3 class="c-audience__title">Neu bei BTX</h3>
+            <p class="c-audience__text">BTX ist ein Post-Quanten-Fork von Bitcoin mit fester Höchstmenge und eigenem Proof-of-Work (MatMul). Getragen wird es von einer offenen Community, nicht von einer Firma.</p>
+            <ol class="c-steps">
+              
+              <li>
+                
+                <a href="https://btx.dev/" rel="noopener noreferrer">Die offizielle Einführung und Dokumentation lesen. <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Nachsehen, wie es dem Netz gerade geht, verständlich erklärt. <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="#cat-community">Fragen in den Community-Chats stellen (Discord, Telegram). <span aria-hidden="true">↓</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <strong>Seed oder privaten Schlüssel nie weitergeben. Niemand aus der Community fragt danach; Direktnachrichten mit &#34;Hilfe&#34; oder &#34;Support&#34; sind Betrug.</strong>
+                
+              </li>
+              
+            </ol>
+          </article>
+          
+          <article class="c-audience c-audience--miners" id="miners">
+            <h3 class="c-audience__title">Mining</h3>
+            <p class="c-audience__text">Zum Minen braucht man eine Grafikkarte. Man kann allein gegen den eigenen Node minen und jeden Block behalten oder einem Pool beitreten und regelmäßiger ausgezahlt werden.</p>
+            <ol class="c-steps">
+              
+              <li>
+                
+                <a href="#cat-miners">Einen Miner wählen - easyBTX (eine App für Mac, Windows, Linux) oder matador (Open Source). <span aria-hidden="true">↓</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Lieber einen kleineren Pool wählen. Findet ein Pool die meisten Blöcke, hängt das Netz an ihm; die Statusseite zeigt die aktuellen Anteile. <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="#cat-pools">Die Beispiele von matador nennen noch den Pool minebtx, der nicht mehr erreichbar ist. Stattdessen einen Pool aus der Liste unten nehmen. <span aria-hidden="true">↓</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://github.com/btxchain/btx/blob/main/doc/btx-cuda-mining-troubleshooting.md" rel="noopener noreferrer">Probleme mit einer NVIDIA-Karte? Die offizielle CUDA-Fehlersuche hilft. <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+            </ol>
+          </article>
+          
+          <article class="c-audience c-audience--nodes" id="nodes">
+            <h3 class="c-audience__title">Einen Node betreiben</h3>
+            <p class="c-audience__text">Jeder Node prüft die Kette selbst und macht das Netz schwerer zu täuschen. Ein Heimrechner genügt; Signer haben deutlich höhere Anforderungen.</p>
+            <ol class="c-steps">
+              
+              <li>
+                
+                <a href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer">Einfachster Start zu Hause - easynode installiert und überwacht btxd für dich. <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Auf einem Server - das offizielle Linux-Release braucht glibc 2.38 oder neuer (Ubuntu 24.04, Debian 13). <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://github.com/dr-chambre/btx-snapshots" rel="noopener noreferrer">In Minuten aufholen mit einem täglich signierten Snapshot statt Sync ab Genesis. <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer">Node hängt bei einer Höhe? Die Node-Hilfe erklärt jeden bekannten Fall und die Lösung. <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer">Signer (GPU-Attestoren) brauchen eine NVIDIA-Blackwell-Karte (sm_120) und müssen sich an das Betreiber-Runbook der Entwickler halten. <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+            </ol>
+          </article>
+          
+        </div>
+      </section>
+
+      
+      <section class="c-upcoming" id="next" aria-labelledby="next-title">
+        <h2 class="c-section-title" id="next-title">Demnächst: v0.35</h2>
+        <p class="c-warning">Release-Kandidat v0.35.0rc1 seit 13. Oktober 2026. Die Entwickler nennen ihn nicht release-reif; aktuelles Release bleibt v0.34.15. Nichts davon ist endgültig.</p>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Swaps, ohne online zu bleiben</h3>
+            <p>Wer an einem Swap teilnimmt, kann seinen HTLC-Claim vorab signieren und einem Watchtower übergeben. Heute muss jeder Käufer Node und Wallet für den ganzen Swap online halten; erst damit werden Swaps ohne Verwahrer für die meisten praktikabel.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes-htlc-presign.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Das Modell-Netz zieht in den Node</h3>
+            <p>Das Netz für KI-Modelle läuft seit v0.34.9 neben dem Node (btx-modeld). In 0.35 läuft es in btxd, dazu kommt ein Forschungs-Lab: Identitäten mit Wiederherstellungsschlüssel, Git-Arbeitsbereiche für Modelle, Evaluationen. Aus mit -modelnet=0; es gibt keine Coins aus.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/btx-035/swarm/doc/modelnet/swarm/00_THIS_TREE.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Sichereres Auto-Update</h3>
+            <p>Ein Node hinter Proxy oder Tor sucht nicht mehr selbst nach Updates und verrät so dem Update-Server nicht seine Adresse. Das Update-Programm läuft abgeschottet.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes/release-notes-0.35.0.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Desktop-App und ZeroMQ</h3>
+            <p>Die offiziellen Archive enthalten die grafische Wallet btx-qt und ZeroMQ-Benachrichtigungen für Dienste, die der Kette folgen.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/releases/tag/v0.35.0-rc1" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+        </div>
+        
+        <h3 class="c-subtitle">Noch nicht fertig</h3>
+        <ul class="c-caveats">
+          
+          <li>rc1 hat kein Linux-Archiv mit CUDA. Ein GPU-Node damit fällt auf die CPU zurück und kann beim nächsten Block hängen bleiben. Miner und Signer bleiben auf v0.34.15.</li>
+          
+          <li>Die Desktop-App von rc1 braucht glibc 2.43 und startet nicht unter Ubuntu 24.04.</li>
+          
+          <li>CUDA unter Windows wurde weder gebaut noch getestet.</li>
+          
+        </ul>
+        
+        <p class="c-muted">
+          Aus dem Entwicklungszweig gelesen am 2026-11-05.
+          <a class="c-link" href="https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes/release-notes-0.35.0.md" rel="noopener noreferrer">Release-Notes ↗</a>
+        </p>
+      </section>
+      
+
+      
+      <section class="c-checks" id="check" aria-labelledby="check-title">
+        <h2 class="c-section-title" id="check-title">Erst prüfen</h2>
+        <div class="c-audiences">
+          
+          <article class="c-audience c-audience--check" id="before-buying">
+            <h3 class="c-audience__title">Bevor du BTX kaufst oder empfängst</h3>
+            <ol class="c-steps">
+              
+              <li>Zuerst die Wallet anlegen und das Backup offline aufschreiben. Einmal wiederherstellen, damit du weißt, dass es funktioniert, bevor Geld davon abhängt.</li>
+              
+              <li>Die Empfangsadresse vollständig prüfen, nicht nur Anfang und Ende. BTX-Adressen beginnen mit btx1z.</li>
+              
+              <li>Zuerst einen kleinen Testbetrag schicken und warten, bis er bestätigt ist.</li>
+              
+              <li>Bevor du eine Börse oder einen OTC-Verkäufer nutzt, prüfen, ob Auszahlungen wirklich funktionieren. Ein Preis auf einer Website ist kein Markt, an dem man verkaufen kann.</li>
+              
+              <li>Ein &#34;Modell-&#34; oder &#34;Referenzpreis&#34; ist eine Schätzung, kein Angebot, an das sich jemand halten muss.</li>
+              
+              <li>Niemand Seriöses fragt nach deinem Seed. Nachrichten mit Hilfe, &#34;Wiederherstellung&#34; oder garantierten Renditen sind Betrug.</li>
+              
+            </ol>
+          </article>
+          
+          <article class="c-audience c-audience--check" id="before-installing">
+            <h3 class="c-audience__title">Bevor du ein Node-Release installierst</h3>
+            <ol class="c-steps">
+              
+              <li>Nur von github.com/btxchain/btx/releases herunterladen.</li>
+              
+              <li>Neuere Releases kommen ohne signierte Prüfsummendatei; die letzte mit SHA256SUMS.asc war v0.34.6. GitHub zeigt auf der Release-Seite eine SHA-256 pro Datei: mit &#34;shasum -a 256 &lt;Datei&gt;&#34; vergleichen (unter Linux &#34;sha256sum&#34;).</li>
+              
+              <li>Das beweist, dass die Datei die von GitHub ist, nicht wer sie gebaut hat. Wenn dir das wichtig ist, den getaggten Quellcode selbst bauen.</li>
+              
+              <li>Vor dem Update die Release-Notes lesen. Manche Releases ändern die Regeln ab einer festen Blockhöhe; diese Seite zeigt dann einen Countdown.</li>
+              
+              <li>Release-Kandidaten (rc) sind zum Testen. Nicht auf einem Mining- oder Signer-Node einsetzen.</li>
+              
+            </ol>
+          </article>
+          
+        </div>
+      </section>
+      
+
+      
+      <section class="c-docs" id="documents" aria-labelledby="documents-title">
+        <h2 class="c-section-title" id="documents-title">Dokumente</h2>
+        <p class="c-muted">Was diese Community aufgeschrieben hat. Alles davon liegt im Repository, jede Änderung ist also als Commit sichtbar, und jeder kann eine Zahl korrigieren.</p>
+        <div class="c-audiences">
+          
+          <article class="c-audience c-audience--doc" id="doc-roadmap">
+            <h3 class="c-audience__title">Roadmap</h3>
+            <p>Was die Community selbst tun kann und was vom Kernteam abhängt, in zwei Spalten, mit einer Spalte, in die man seinen Namen für einen Bereich eintragen kann.</p>
+            <p class="c-muted">Offen für Änderungen</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/ROADMAP.md" rel="noopener noreferrer" aria-label="Lesen: Roadmap">Lesen ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-deployment-reward">
+            <h3 class="c-audience__title">Das Bootstrap-Fenster und die 1.000.000 BTX Deployment Reward</h3>
+            <p>Die erste Frage fast jedes Neuzugangs, beantwortet aus Chain-Daten: was die ersten 50.000 Blöcke erzeugt haben, unter welchen Konsensregeln, und was öffentliche Daten zeigen können und was nicht.</p>
+            <p class="c-muted">Entwurf - in Prüfung</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/research/deployment-reward.md" rel="noopener noreferrer" aria-label="Lesen: Das Bootstrap-Fenster und die 1.000.000 BTX Deployment Reward">Lesen ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-network-fund">
+            <h3 class="c-audience__title">Netzwerk-Fund</h3>
+            <p>Wie das Netzwerk seine eigene Infrastruktur bezahlen könnte: Beiträge, Multisig-Verwahrung, veröffentlichte Regeln und Auszahlungen gegen nachgewiesene Verfügbarkeit.</p>
+            <p class="c-muted">Diskussionspapier</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/research/network-fund.md" rel="noopener noreferrer" aria-label="Lesen: Netzwerk-Fund">Lesen ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-venue-structure">
+            <h3 class="c-audience__title">Handelsplatzstruktur und die Erlaubnisgrenze</h3>
+            <p>Was eine dezentrale Börse auf einer Chain ohne virtuelle Maschine sein kann, wo die regulatorische Grenze verläuft und welche Modelle bleiben. Keine Rechtsberatung.</p>
+            <p class="c-muted">Entwurf zur Diskussion</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md" rel="noopener noreferrer" aria-label="Lesen: Handelsplatzstruktur und die Erlaubnisgrenze">Lesen ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-contributing">
+            <h3 class="c-audience__title">Wie man hier etwas ändert</h3>
+            <p>Was man frei ändern kann, was ein zweites Augenpaar braucht, und wie man eine falsche Zahl meldet, wenn git nicht das eigene Werkzeug ist.</p>
+            
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/CONTRIBUTING.md" rel="noopener noreferrer" aria-label="Lesen: Wie man hier etwas ändert">Lesen ↗</a>
+          </article>
+          
+        </div>
+        <p class="c-add"><a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Alles davon, samt Quelltext dieser Seite ↗</a></p>
+      </section>
+      
+
+      <section class="c-directory" id="links" aria-labelledby="links-title">
+        <h2 class="c-section-title" id="links-title">Linkverzeichnis</h2>
+        <p class="c-muted">37 Links, jeder am 2026-11-03 geöffnet und geprüft.</p>
+        <p class="c-add">Ein Projekt fehlt? Per Pull Request eintragen; ohne E-Mail und ohne Türsteher. <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/main/CONTRIBUTING.md#changing-the-website" rel="noopener noreferrer">So trägst du ein Projekt ein ↗</a></p>
+        <nav class="c-jump" aria-label="Springe zu">
+          
+          <a class="c-chip c-chip--community" href="#cat-community">Community</a>
+          
+          <a class="c-chip c-chip--official" href="#cat-official">Offiziell</a>
+          
+          <a class="c-chip c-chip--network" href="#cat-network">Netz und Explorer</a>
+          
+          <a class="c-chip c-chip--pools" href="#cat-pools">Pools</a>
+          
+          <a class="c-chip c-chip--miners" href="#cat-miners">Miner</a>
+          
+          <a class="c-chip c-chip--node-tools" href="#cat-node-tools">Node-Werkzeuge</a>
+          
+          <a class="c-chip c-chip--wallets" href="#cat-wallets">Wallets</a>
+          
+          <a class="c-chip c-chip--bridges" href="#cat-bridges">Bridges und Testnetze</a>
+          
+          <a class="c-chip c-chip--exchanges" href="#cat-exchanges">Börsen</a>
+          
+        </nav>
+
+        
+        <section class="c-category c-category--community" id="cat-community" aria-labelledby="cat-community-title">
+          <h3 class="c-category__title" id="cat-community-title">Community <span class="c-count">7</span></h3>
+          
+          <ul class="c-cards">
+            
+            <li class="c-card" id="discord">
+              <a class="c-card__link" href="https://discord.gg/btx" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">01</span>
+                <span class="c-card__name">BTX Discord <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">discord</span><span class="c-tag">chat</span></span>
+                
+                <span class="c-card__text">Haupt-Server der Community, auch mit Mining-Hilfe.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="telegram">
+              <a class="c-card__link" href="https://t.me/btx_ecosystem" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">02</span>
+                <span class="c-card__name">BTX Community Chat <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">telegram</span><span class="c-tag">chat</span></span>
+                
+                <span class="c-card__text">Telegram-Gruppe der Community.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="x-community">
+              <a class="c-card__link" href="https://x.com/btxcommunity" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">03</span>
+                <span class="c-card__name">BTX on X <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">x</span><span class="c-tag">news</span></span>
+                
+                <span class="c-card__text">Community-Konto auf X.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="x-chain">
+              <a class="c-card__link" href="https://x.com/thebtxchain" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">04</span>
+                <span class="c-card__name">BTX Chain on X <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">x</span><span class="c-tag">news</span></span>
+                
+                <span class="c-card__text">Konto der Chain auf X.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="mining-hub">
+              <a class="c-card__link" href="https://t.me/Pr0_Crypto_Mining_chat/59061" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">05</span>
+                <span class="c-card__name">BTX Mining Hub <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">telegram</span><span class="c-tag">russian</span></span>
+                
+                <span class="c-card__text">Russischsprachiger Mining-Chat mit einem BTX-Thema.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="matador-chat">
+              <a class="c-card__link" href="https://t.me/+wy07HLBwE4kwNTkx" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">06</span>
+                <span class="c-card__name">matador chat <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">telegram</span><span class="c-tag">miner</span></span>
+                
+                <span class="c-card__text">Telegram-Chat des matador-Miners.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="btx-best">
+              <a class="c-card__link" href="https://btx.best/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">07</span>
+                <span class="c-card__name">BTX.best <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">portal</span><span class="c-tag">news</span></span>
+                
+                <span class="c-card__text">Portal des easyBTX-Teams - Explorer, Wallet, Mining und News an einem Ort.</span>
+                
+              </a>
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="c-category c-category--official" id="cat-official" aria-labelledby="cat-official-title">
+          <h3 class="c-category__title" id="cat-official-title">Offiziell <span class="c-count">9</span></h3>
+          
+          <ul class="c-cards">
+            
+            <li class="c-card" id="btx-dev">
+              <a class="c-card__link" href="https://btx.dev/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">08</span>
+                <span class="c-card__name">btx.dev <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">docs</span></span>
+                
+                <span class="c-card__text">Offizielle Website und Dokumentation von BTX.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="btx-node">
+              <a class="c-card__link" href="https://github.com/btxchain/btx" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">09</span>
+                <span class="c-card__name">BTX Node <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">source</span><span class="c-tag">node</span></span>
+                
+                <span class="c-card__text">Quellcode und Releases des Referenz-Nodes (btxd).</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="protocol-of-record">
+              <a class="c-card__link" href="https://btx.dev/BTX-Context.pdf" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">10</span>
+                <span class="c-card__name">The Protocol of Record <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">whitepaper</span><span class="c-tag">pdf</span></span>
+                
+                <span class="c-card__text">Das offizielle Whitepaper; beschreibt, was BTX ist und warum.</span>
+                
+                <span class="c-card__note"><strong>Hinweis:</strong> Geschrieben für v0.33.2 (August 2026). Neuere Releases weichen teils ab.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="specification">
+              <a class="c-card__link" href="https://btx.dev/BTX-Specifications.pdf" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">11</span>
+                <span class="c-card__name">BTX Specification <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">spec</span><span class="c-tag">pdf</span></span>
+                
+                <span class="c-card__text">Die offizielle technische Spezifikation des Protokolls.</span>
+                
+                <span class="c-card__note"><strong>Hinweis:</strong> Geschrieben für v0.33.2 (August 2026). Neuere Releases weichen teils ab.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="build-from-source">
+              <a class="c-card__link" href="https://github.com/btxchain/btx/blob/main/doc/build-unix.md" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">12</span>
+                <span class="c-card__name">Build from source <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">docs</span><span class="c-tag">node</span></span>
+                
+                <span class="c-card__text">So baust du btxd unter Linux selbst, wenn du keinem fertigen Programm vertrauen willst.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="pqc-spec">
+              <a class="c-card__link" href="https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">13</span>
+                <span class="c-card__name">Post-quantum signatures <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">spec</span><span class="c-tag">pq</span></span>
+                
+                <span class="c-card__text">ML-DSA und SLH-DSA in BTX, P2MR-Outputs und das Adressformat.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="pq-multisig">
+              <a class="c-card__link" href="https://github.com/btxchain/btx/blob/main/doc/btx-pq-multisig-tutorial.md" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">14</span>
+                <span class="c-card__name">Post-quantum multisig <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">docs</span><span class="c-tag">pq</span></span>
+                
+                <span class="c-card__text">Schritt-für-Schritt-Anleitung für eine Multisig-Wallet mit Post-Quanten-Schlüsseln.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="matmul-spec">
+              <a class="c-card__link" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-pow-spec.md" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">15</span>
+                <span class="c-card__name">MatMul proof-of-work <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">spec</span><span class="c-tag">mining</span></span>
+                
+                <span class="c-card__text">Wie Mining mit Matrixmultiplikation funktioniert und wie Blöcke geprüft werden.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="trusted-mirrors">
+              <a class="c-card__link" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">16</span>
+                <span class="c-card__name">Trusted MatMul mirrors <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">docs</span><span class="c-tag">node</span></span>
+                
+                <span class="c-card__text">Einen Node ohne zugelassene GPU betreiben, indem man den Replay-Bestätigungen von Signern vertraut, und was dieses Vertrauen bedeutet.</span>
+                
+              </a>
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="c-category c-category--network" id="cat-network" aria-labelledby="cat-network-title">
+          <h3 class="c-category__title" id="cat-network-title">Netz und Explorer <span class="c-count">5</span></h3>
+          
+          <ul class="c-cards">
+            
+            <li class="c-card" id="status">
+              <a class="c-card__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">17</span>
+                <span class="c-card__name">BTX Network Status <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">status</span><span class="c-tag">open source</span></span>
+                
+                <span class="c-card__text">Community-Statusseite - ist das Netz gesund, mit Verlauf und Node-Hilfe.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="btxscan">
+              <a class="c-card__link" href="https://btxscan.io/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">18</span>
+                <span class="c-card__name">BTXScan <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">explorer</span><span class="c-tag">halving</span></span>
+                
+                <span class="c-card__text">Block-Explorer für Blöcke, Transaktionen und Adressen.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="first-light">
+              <a class="c-card__link" href="https://explorer.btxbyronbay.com/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">19</span>
+                <span class="c-card__name">first light <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">explorer</span><span class="c-tag">stats</span></span>
+                
+                <span class="c-card__text">Explorer des Byron-Bay-Teams, mit einer 24-h-Mining-Ansicht.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="easybtx-census">
+              <a class="c-card__link" href="https://easybtx.com/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">20</span>
+                <span class="c-card__name">easyBTX network <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">census</span><span class="c-tag">signers</span></span>
+                
+                <span class="c-card__text">Node-Zählung und Signer-Witness des easyBTX-Teams.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="btxinfo">
+              <a class="c-card__link" href="https://btxinfo.com" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">21</span>
+                <span class="c-card__name">btxinfo <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">analytics</span><span class="c-tag">rich list</span></span>
+                
+                <span class="c-card__text">Umlaufmenge, Halter und Rich-List.</span>
+                
+                <span class="c-card__note"><strong>Hinweis:</strong> Der eigene Node zeigte am 2026-11-02 Höhe 184.999 (eine bekannte Hänge-Höhe); Datenstand prüfen.</span>
+                
+              </a>
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="c-category c-category--pools" id="cat-pools" aria-labelledby="cat-pools-title">
+          <h3 class="c-category__title" id="cat-pools-title">Pools <span class="c-count">3</span></h3>
+          
+          <ul class="c-cards">
+            
+            <li class="c-card" id="ninjaraider">
+              <a class="c-card__link" href="https://ninjaraider.com" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">22</span>
+                <span class="c-card__name">ninjaraider <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">pool</span><span class="c-tag">multi-coin</span></span>
+                
+                <span class="c-card__text">Multi-Coin-Pool mit BTX. Gebühr auf der Pool-Seite prüfen.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="btx-pool">
+              <a class="c-card__link" href="https://btx-pool.com" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">23</span>
+                <span class="c-card__name">BTX Pool <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">pool</span></span>
+                
+                <span class="c-card__text">Pool nur für BTX. Gebühr auf der Pool-Seite prüfen.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="byron-pool">
+              <a class="c-card__link" href="https://btxbyronbay.com" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">24</span>
+                <span class="c-card__name">Byron Pool <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">pool</span><span class="c-tag">pplns</span><span class="c-tag">au</span></span>
+                
+                <span class="c-card__text">PPLNS-Pool des Byron-Bay-Teams (Australien).</span>
+                
+                <span class="c-card__note"><strong>Hinweis:</strong> Die Website antwortete am 2026-11-03 mit &#34;503 nicht verfügbar&#34;.</span>
+                
+              </a>
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="c-category c-category--miners" id="cat-miners" aria-labelledby="cat-miners-title">
+          <h3 class="c-category__title" id="cat-miners-title">Miner <span class="c-count">2</span></h3>
+          
+          <ul class="c-cards">
+            
+            <li class="c-card" id="easybtx">
+              <a class="c-card__link" href="https://easybtx.com/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">25</span>
+                <span class="c-card__name">easyBTX <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">gpu</span><span class="c-tag">mac</span><span class="c-tag">windows</span><span class="c-tag">linux</span></span>
+                
+                <span class="c-card__text">Miner-App mit einem Klick und eingebauter selbstverwahrter Wallet.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="matador">
+              <a class="c-card__link" href="https://github.com/vanities/matador-miner" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">26</span>
+                <span class="c-card__name">matador <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">gpu</span><span class="c-tag">nvidia</span><span class="c-tag">open source</span></span>
+                
+                <span class="c-card__text">Open-Source-GPU-Miner (NVIDIA, CUDA), solo gegen den eigenen Node oder im Pool.</span>
+                
+                <span class="c-card__note"><strong>Hinweis:</strong> Letzte Änderung 2026-08-21; die Pool-Beispiele nennen noch den nicht erreichbaren Pool minebtx.</span>
+                
+              </a>
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="c-category c-category--node-tools" id="cat-node-tools" aria-labelledby="cat-node-tools-title">
+          <h3 class="c-category__title" id="cat-node-tools-title">Node-Werkzeuge <span class="c-count">4</span></h3>
+          
+          <ul class="c-cards">
+            
+            <li class="c-card" id="easynode">
+              <a class="c-card__link" href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">27</span>
+                <span class="c-card__name">easynode <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">desktop</span><span class="c-tag">open source</span></span>
+                
+                <span class="c-card__text">Desktop-App, die btxd auf dem eigenen Rechner installiert und überwacht.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="guardian">
+              <a class="c-card__link" href="https://easybtx.com/guardian" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">28</span>
+                <span class="c-card__name">BTX Node Guardian <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">script</span><span class="c-tag">watchdog</span></span>
+                
+                <span class="c-card__text">Kostenloses Skript, das ein wartendes Netz von einem hängenden Node unterscheidet und hilfreiche Peers anwählt. Es startet den Node nie neu.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="snapshots">
+              <a class="c-card__link" href="https://github.com/dr-chambre/btx-snapshots" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">29</span>
+                <span class="c-card__name">BTX snapshots <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">snapshot</span><span class="c-tag">signed</span></span>
+                
+                <span class="c-card__text">Täglicher Datadir-Snapshot, von einem zweiten Node geprüft und signiert.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="node-help">
+              <a class="c-card__link" href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">30</span>
+                <span class="c-card__name">Node help <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">help</span><span class="c-tag">stuck heights</span></span>
+                
+                <span class="c-card__text">Bekannte Hänge-Höhen mit Ursache und Lösung.</span>
+                
+              </a>
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="c-category c-category--wallets" id="cat-wallets" aria-labelledby="cat-wallets-title">
+          <h3 class="c-category__title" id="cat-wallets-title">Wallets <span class="c-count">3</span></h3>
+          
+          <p class="c-risk"><strong>Vorsicht:</strong> Von uns nicht geprüft. Wallets nur über den Link hier installieren, den Seed offline aufbewahren und nie auf einer Website eingeben.</p>
+          
+          <ul class="c-cards">
+            
+            <li class="c-card" id="btx-wallet">
+              <a class="c-card__link" href="https://btx.dev/wallet/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">31</span>
+                <span class="c-card__name">BTX Wallet <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">official</span><span class="c-tag">browser</span><span class="c-tag">pq</span></span>
+                
+                <span class="c-card__text">Offizielle Post-Quanten-Wallet im Browser.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="pq-wallet">
+              <a class="c-card__link" href="https://easybtx.com/wallet" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">32</span>
+                <span class="c-card__name">BTX PQ Wallet <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">desktop</span><span class="c-tag">pq</span></span>
+                
+                <span class="c-card__text">Desktop-Wallet des easyBTX-Teams.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="bonuz">
+              <a class="c-card__link" href="https://www.bonuz.xyz" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">33</span>
+                <span class="c-card__name">Bonuz <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">ios</span><span class="c-tag">seedless</span></span>
+                
+                <span class="c-card__text">iOS-Wallet ohne Seed, mit BTX-Unterstützung.</span>
+                
+              </a>
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="c-category c-category--bridges" id="cat-bridges" aria-labelledby="cat-bridges-title">
+          <h3 class="c-category__title" id="cat-bridges-title">Bridges und Testnetze <span class="c-count">3</span></h3>
+          
+          <p class="c-risk"><strong>Vorsicht:</strong> Experimentell und von uns nicht geprüft. Bridges können Guthaben verlieren; nicht mehr schicken, als man verlieren kann.</p>
+          
+          <ul class="c-cards">
+            
+            <li class="c-card" id="wbtx">
+              <a class="c-card__link" href="https://github.com/evxdev/wbtx-eth" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">34</span>
+                <span class="c-card__name">WBTX (wbtx-eth) <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">ethereum</span><span class="c-tag">wrapped</span><span class="c-tag">wip</span></span>
+                
+                <span class="c-card__text">Wrapped BTX auf Ethereum - Verträge und Validator-Werkzeuge, in Arbeit.</span>
+                
+                <span class="c-card__note"><strong>Hinweis:</strong> Letzte Änderung 2026-07-09.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="btx-supply">
+              <a class="c-card__link" href="https://btx.supply/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">35</span>
+                <span class="c-card__name">btx.supply <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">testnet</span><span class="c-tag">bridge</span><span class="c-tag">wip</span></span>
+                
+                <span class="c-card__text">Bridge in einem Testnetz.</span>
+                
+              </a>
+            </li>
+            
+            <li class="c-card" id="robinhood">
+              <a class="c-card__link" href="https://robinhood.btx.supply/" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">36</span>
+                <span class="c-card__name">Robinhood Chain testnet <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">testnet</span><span class="c-tag">bridge</span><span class="c-tag">wip</span></span>
+                
+                <span class="c-card__text">Bridge zum Testnetz der Robinhood Chain.</span>
+                
+              </a>
+            </li>
+            
+          </ul>
+        </section>
+        
+        <section class="c-category c-category--exchanges" id="cat-exchanges" aria-labelledby="cat-exchanges-title">
+          <h3 class="c-category__title" id="cat-exchanges-title">Börsen <span class="c-count">1</span></h3>
+          
+          <p class="c-risk"><strong>Vorsicht:</strong> Von uns nicht geprüft. Handel ist riskant; die Börse selbst prüfen und Coins dort nicht länger als nötig liegen lassen.</p>
+          
+          <ul class="c-cards">
+            
+            <li class="c-card" id="safetrade">
+              <a class="c-card__link" href="https://safetrade.com/exchange/BTX-USDT?type=basic" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">37</span>
+                <span class="c-card__name">SafeTrade <span aria-hidden="true">↗</span></span>
+                
+                <span class="c-tags"><span class="c-tag">cex</span><span class="c-tag">btx/usdt</span></span>
+                
+                <span class="c-card__text">Zentrale Börse mit einem BTX/USDT-Markt.</span>
+                
+              </a>
+            </li>
+            
+          </ul>
+        </section>
+        
+
+        
+        <section class="c-removed" aria-labelledby="removed-title">
+          <h3 class="c-category__title" id="removed-title">Nicht mehr gelistet</h3>
+          <p class="c-muted">Einträge der alten btxlinks-Liste, die wir entfernt haben, und warum.</p>
+          <ul>
+            
+            <li><strong>minebtx (pool and explorer)</strong> - Website nicht erreichbar, Explorer antwortete mit 503 (2026-11-03).</li>
+            
+            <li><strong>BTX Price (btxprice.com)</strong> - Website nicht erreichbar (2026-11-03).</li>
+            
+            <li><strong>btx.trade (OTC)</strong> - Website antwortete mit einem Fehler (520, 2026-11-03).</li>
+            
+            <li><strong>CoinPaprika</strong> - Die BTX-Seite gibt es nicht mehr (404, 2026-11-03).</li>
+            
+          </ul>
+        </section>
+        
+      </section>
+    </main>
+
+    <footer class="c-footer">
+      <p>Unabhängiges Community-Projekt. Links führen zu Dritten; für deren Inhalte sind wir nicht verantwortlich. Nichts hier ist eine Finanzberatung.</p>
+      <p>
+        <a class="c-link" href="https://github.com/vanities/btxlinks" rel="noopener noreferrer">Baut auf btxlinks.com von vanities auf (MIT-Lizenz). ↗</a>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Quellcode ↗</a>
+      </p>
+      <p class="c-muted">9075677ad26b</p>
+    </footer>
+  </div>
+</body>
+</html>
