@@ -425,6 +425,71 @@ a {
   font-size: 12px;
 }
 
+/* --- Development activity: hidden until development.json gives a usable answer ----------- */
+
+.c-dev {
+  margin-top: 24px;
+}
+
+.c-dev[hidden],
+.c-tile[hidden] {
+  display: none;
+}
+
+.c-dev__lead,
+.c-dev__note {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+.c-dev__note {
+  margin: 10px 0 16px;
+  font-size: 13px;
+}
+
+.c-branches {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.c-branch {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+}
+
+.c-branch--head {
+  border-top: 0;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.c-branch__name {
+  overflow-wrap: anywhere;
+}
+
+.c-branch__default {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.c-branch__commits,
+.c-branch--head span:last-child {
+  text-align: right;
+}
+
 .c-warning,
 .c-risk {
   margin: 0 0 14px;
@@ -805,5 +870,19 @@ a {
 
   .c-tile--wide {
     grid-column: auto;
+  }
+
+  /* Name on its own line, date and count below it. */
+  .c-branch {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 4px 12px;
+  }
+
+  .c-branch__name {
+    grid-column: 1 / -1;
+  }
+
+  .c-branch--head span:first-child {
+    grid-column: 1 / -1;
   }
 }

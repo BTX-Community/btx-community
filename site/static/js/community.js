@@ -1,8 +1,9 @@
 // btx-community.com: fill the live strip, "BTX in numbers" and the upgrade countdown from the
 // public API of the status page (network.btx-monitoring.com/api/v1/status.json) on load and
 // every 60 seconds after. Without JavaScript or without an answer the strip shows dashes and the
-// countdown stays hidden. The API answer is validated
-// before use and only ever written with textContent.
+// countdown stays hidden. The "Development activity" section reads development.json from the
+// same API every 10 minutes and stays hidden until it has a usable answer. Every API answer is
+// validated before use and only ever written with textContent.
 (function () {
   "use strict";
 
@@ -252,6 +253,178 @@
     }
   }
 
+  // --- Development activity: btx-monitoring measures btxchain/btx on GitHub every hour ---
+
+  var DEV_INTERVAL_MS = 10 * 60000;
+  var DEV_STALE_MS = 3 * 3600000;
+  var MAX_BRANCHES = 6;
+  var MAX_PAGE = 100;
+  var BRANCH = /^[A-Za-z0-9._][A-Za-z0-9._\/-]{0,99}$/;
+  var TAG = /^[A-Za-z0-9._-]{1,64}$/;
+
+  function instant(text) {
+    return typeof text === "string" && !isNaN(Date.parse(text)) ? new Date(text) : null;
+  }
+
+  function branchRow(row) {
+    if (!row || typeof row.name !== "string" || !BRANCH.test(row.name) || row.name.indexOf("..") !== -1) {
+      return null;
+    }
+    var last = instant(row.last_commit_at);
+    var commits = count(row.commits_30d, MAX_PAGE + 1);
+    if (last === null || commits === null || typeof row.default !== "boolean" || typeof row.commits_30d_capped !== "boolean") {
+      return null;
+    }
+    return { name: row.name, isDefault: row.default, last: last, commits: commits, capped: row.commits_30d_capped };
+  }
+
+  function parseRelease(value) {
+    if (!value || typeof value.tag !== "string" || !TAG.test(value.tag)) {
+      return null;
+    }
+    var published = instant(value.published_at);
+    return published === null ? null : { tag: value.tag, published: published };
+  }
+
+  // Reduce development.json to what the panel shows; null unless the branch table is complete and
+  // clean, with the default branch first and only once. Optional values that fail become null.
+  function parseDevelopment(text, repository, now) {
+    var doc;
+    try {
+      doc = JSON.parse(text);
+    } catch (error) {
+      return null;
+    }
+    if (!doc || doc.schema_version !== 1 || doc.repository !== repository || !Array.isArray(doc.branches)) {
+      return null;
+    }
+    var measured = instant(doc.measured_at);
+    if (measured === null || doc.branches.length === 0 || doc.branches.length > MAX_BRANCHES) {
+      return null;
+    }
+    var branches = [];
+    for (var i = 0; i < doc.branches.length; i += 1) {
+      var row = branchRow(doc.branches[i]);
+      if (row === null || row.isDefault !== (i === 0)) {
+        return null;
+      }
+      branches.push(row);
+    }
+    var pulls = count(doc.pulls_updated_7d, MAX_PAGE + 1);
+    return {
+      measured: measured,
+      stale: doc.stale === true || now - measured.getTime() > DEV_STALE_MS,
+      branches: branches,
+      pulls: pulls,
+      pullsCapped: pulls !== null && doc.pulls_updated_7d_capped === true,
+      release: parseRelease(doc.latest_release),
+      prerelease: parseRelease(doc.latest_prerelease),
+    };
+  }
+
+  function formatDate(date) {
+    return formatTime(date).slice(0, 10);
+  }
+
+  // "today", "1 day ago", "12 days ago", from the section's own texts.
+  function formatAge(date, now, texts) {
+    var days = Math.max(0, Math.floor((now - date.getTime()) / 86400000));
+    if (days === 0) {
+      return texts.today;
+    }
+    return days === 1 ? texts.day : texts.days.replace("{count}", String(days));
+  }
+
+  // GitHub URL of a validated branch name or tag; each path segment encoded on its own.
+  function githubUrl(repository, kind, name) {
+    return "https://github.com/" + repository + "/" + kind + "/" + name.split("/").map(encodeURIComponent).join("/");
+  }
+
+  function cell(tag, className, text) {
+    var element = document.createElement(tag);
+    element.className = className;
+    element.setAttribute("role", "cell");
+    if (text !== undefined) {
+      element.textContent = text;
+    }
+    return element;
+  }
+
+  function applyDevelopment(root, dev, now) {
+    var locale = root.dataset.lang === "de" ? "de-DE" : "en-US";
+    var repository = root.dataset.repo;
+    var list = root.querySelector('[data-dev="branches"]');
+    while (list.firstChild) {
+      list.removeChild(list.firstChild);
+    }
+    dev.branches.forEach(function (branch) {
+      var row = document.createElement("div");
+      row.className = "c-branch";
+      row.setAttribute("role", "row");
+      var name = cell("span", "c-branch__name");
+      var link = document.createElement("a");
+      link.className = "c-link";
+      link.href = githubUrl(repository, "commits", branch.name);
+      link.rel = "noopener noreferrer";
+      link.textContent = branch.name;
+      name.appendChild(link);
+      if (branch.isDefault) {
+        var label = document.createElement("span");
+        label.className = "c-branch__default";
+        label.textContent = root.dataset.default;
+        name.appendChild(label);
+      }
+      row.appendChild(name);
+      row.appendChild(cell("span", "c-branch__last", formatDate(branch.last) + " · " + formatAge(branch.last, now, root.dataset)));
+      row.appendChild(cell("span", "c-branch__commits", branch.commits.toLocaleString(locale) + (branch.capped ? "+" : "")));
+      list.appendChild(row);
+    });
+    setDev(root, "pulls", dev.pulls === null ? null : dev.pulls.toLocaleString(locale) + (dev.pullsCapped ? "+" : ""));
+    applyRelease(root, "release", dev.release);
+    applyRelease(root, "prerelease", dev.prerelease);
+    root.querySelector('[data-dev="prerelease-tile"]').hidden = dev.prerelease === null;
+    root.querySelector('[data-dev="stale"]').hidden = !dev.stale;
+    var measured = root.querySelector('[data-dev="measured"]');
+    measured.textContent = measured.dataset.template.replace("{time}", formatTime(dev.measured));
+    root.hidden = false;
+  }
+
+  function setDev(root, name, text) {
+    var element = root.querySelector('[data-dev="' + name + '"]');
+    if (element && text !== null) {
+      element.textContent = text;
+    }
+  }
+
+  function applyRelease(root, name, value) {
+    var element = root.querySelector('[data-dev="' + name + '"]');
+    if (!element || value === null) {
+      return;
+    }
+    var link = document.createElement("a");
+    link.className = "c-link";
+    link.href = githubUrl(root.dataset.repo, "releases/tag", value.tag);
+    link.rel = "noopener noreferrer";
+    link.textContent = value.tag;
+    element.textContent = "";
+    element.appendChild(link);
+    setDev(root, name + "-date", formatDate(value.published));
+  }
+
+  // The section stays hidden until a usable answer arrives; a later failure keeps what is shown.
+  function refreshDevelopment(root) {
+    fetch(root.dataset.api, { cache: "no-store", credentials: "omit" })
+      .then(function (response) { return response.ok ? response.text() : ""; })
+      .then(function (text) {
+        var now = Date.now();
+        var dev = parseDevelopment(text, root.dataset.repo, now);
+        if (dev) {
+          applyDevelopment(root, dev, now);
+        }
+      })
+      .catch(function () { /* keep the section as it is */ });
+  }
+
   function refresh(root) {
     fetch(root.dataset.api, { cache: "no-store", credentials: "omit" })
       .then(function (response) { return response.ok ? response.text() : ""; })
@@ -265,12 +438,24 @@
   }
 
   if (typeof module !== "undefined" && module.exports) {
-    module.exports = { parseStatus: parseStatus, formatTime: formatTime, formatDuration: formatDuration };
+    module.exports = {
+      parseStatus: parseStatus,
+      formatTime: formatTime,
+      formatDuration: formatDuration,
+      parseDevelopment: parseDevelopment,
+      formatAge: formatAge,
+      githubUrl: githubUrl,
+    };
   } else if (typeof document !== "undefined") {
     var root = document.getElementById("live");
     if (root && root.dataset.api && typeof fetch === "function") {
       refresh(root);
       window.setInterval(function () { refresh(root); }, INTERVAL_MS);
+    }
+    var development = document.getElementById("development");
+    if (development && development.dataset.api && development.dataset.repo && typeof fetch === "function") {
+      refreshDevelopment(development);
+      window.setInterval(function () { refreshDevelopment(development); }, DEV_INTERVAL_MS);
     }
   }
 }());

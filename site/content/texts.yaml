@@ -38,6 +38,27 @@ en:
   numbers.about: "about {time}"
   numbers.tx: Transactions (24 h)
   numbers.size: Size of the chain
+  dev.title: Development of the node software
+  dev.source: btxchain/btx on GitHub
+  dev.lead: >-
+    Commits and pull requests in btxchain/btx, the reference implementation of the BTX node.
+    GitHub opens the repository on main, the default branch; the other rows are the branches
+    with the most recent commits.
+  dev.stale: This measurement is more than three hours old; the figures may be out of date.
+  dev.branch: Branch
+  dev.last_commit: Last commit
+  dev.commits: Commits, 30 days
+  dev.default: default branch
+  dev.today: today
+  dev.day: 1 day ago
+  dev.days: "{count} days ago"
+  dev.note: >-
+    Commits are counted per branch by commit date, at most 100 per branch (shown as 100+). A
+    commit that is on several branches counts on each of them.
+  dev.pulls: Pull requests updated, 7 days
+  dev.release: Latest release
+  dev.prerelease: Newer pre-release
+  dev.measured: "Measured on GitHub at {time}, every hour."
   facts.title: What is BTX?
   facts.source: Source
   upcoming.title: "Coming soon: v{version}"
@@ -115,6 +136,27 @@ de:
   numbers.about: "etwa {time}"
   numbers.tx: Transaktionen (24 h)
   numbers.size: Größe der Kette
+  dev.title: Entwicklung der Node-Software
+  dev.source: btxchain/btx auf GitHub
+  dev.lead: >-
+    Commits und Pull Requests in btxchain/btx, der Referenz-Implementierung des BTX-Nodes.
+    GitHub öffnet das Repository auf main, dem Standard-Branch; die anderen Zeilen sind die
+    Branches mit den jüngsten Commits.
+  dev.stale: Diese Messung ist älter als drei Stunden; die Zahlen können veraltet sein.
+  dev.branch: Branch
+  dev.last_commit: Letzter Commit
+  dev.commits: Commits, 30 Tage
+  dev.default: Standard-Branch
+  dev.today: heute
+  dev.day: vor 1 Tag
+  dev.days: "vor {count} Tagen"
+  dev.note: >-
+    Commits werden je Branch nach Commit-Datum gezählt, höchstens 100 pro Branch (angezeigt als
+    100+). Ein Commit, der auf mehreren Branches liegt, zählt bei jedem davon.
+  dev.pulls: Aktualisierte Pull Requests, 7 Tage
+  dev.release: Letztes Release
+  dev.prerelease: Neueres Pre-Release
+  dev.measured: "Bei GitHub gemessen am {time}, stündlich."
   facts.title: Was ist BTX?
   facts.source: Quelle
   upcoming.title: "Demnächst: v{version}"
