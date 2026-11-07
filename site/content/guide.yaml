@@ -74,16 +74,18 @@ upcoming:
       release-reif; aktuelles Release bleibt v0.34.15. Nichts davon ist endgültig.
   source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes/release-notes-0.35.0.md
   features:
-    - title: { en: Swaps without staying online, de: "Swaps, ohne online zu bleiben" }
+    - title: { en: Presigned swap claims from the wallet, de: Vorsignierte Swap-Claims aus der Wallet }
       text:
         en: >-
-          A swap party can sign its HTLC claim in advance and hand it to a watchtower. Today
-          every buyer has to keep a node and wallet online for the whole swap; this is what
-          makes non-custodial swaps practical for most people.
+          Since 0.34.13 a swap claim can be signed at funding and completed later by anyone who
+          has the secret; nobody has to stay online, but someone must broadcast it in time. That
+          still takes hand-built transactions. htlc_presign and p2mr_leaf make it a wallet step.
+          Not in rc1; in the 0.35 branch and the v0.34.16 pre-release.
         de: >-
-          Wer an einem Swap teilnimmt, kann seinen HTLC-Claim vorab signieren und einem
-          Watchtower übergeben. Heute muss jeder Käufer Node und Wallet für den ganzen Swap
-          online halten; erst damit werden Swaps ohne Verwahrer für die meisten praktikabel.
+          Seit 0.34.13 lässt sich ein Swap-Claim beim Funding signieren und später von jedem mit
+          dem Geheimnis vervollständigen; niemand muss online bleiben, aber jemand muss ihn
+          rechtzeitig senden. Das geht noch mit handgebauten Transaktionen. htlc_presign und
+          p2mr_leaf machen daraus einen Wallet-Schritt. Nicht in rc1; im 0.35-Zweig und in v0.34.16.
       source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes-htlc-presign.md
     - title: { en: The model network moves into the node, de: Das Modell-Netz zieht in den Node }
       text:
