@@ -33,7 +33,10 @@ REPO_URL = "https://github.com/BTX-Community/btx-community"
 ADD_PROJECT_URL = f"{REPO_URL}/blob/main/CONTRIBUTING.md#changing-the-website"
 RELEASES_URL = "https://github.com/btxchain/btx/releases"
 STATUS_API = "https://network.btx-monitoring.com/api/v1/status.json"
-STATUS_PAGE = {"en": "https://network.btx-monitoring.com/", "de": "https://network.btx-monitoring.com/de/"}
+DEVELOPMENT_API = "https://network.btx-monitoring.com/api/v1/development.json"
+UPSTREAM_REPO = "btxchain/btx"
+"""Repository whose development activity the start page shows; the API must name the same one."""
+STATUS_PAGE = {"en":"https://network.btx-monitoring.com/", "de": "https://network.btx-monitoring.com/de/"}
 VERDICTS = ("stable", "performant", "secure")
 """Headline verdicts of the status page, in its order; titles come from texts.yaml."""
 
@@ -506,6 +509,9 @@ def context(
         "alternates": [(code, texts[code]["lang_name"], page_path(code)) for code in LANGUAGES],
         "status_page": STATUS_PAGE[lang],
         "status_api": STATUS_API,
+        "development_api": DEVELOPMENT_API,
+        "upstream_repo": UPSTREAM_REPO,
+        "upstream_url": f"https://github.com/{UPSTREAM_REPO}",
         "verdicts": [(v, ui[f"verdict.{v}"]) for v in VERDICTS],
         "audiences": audiences,
         "facts": facts,

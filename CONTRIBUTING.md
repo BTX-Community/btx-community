@@ -30,8 +30,9 @@ The content of btx-community.com is in three files:
   release notes over websites.
 - [`site/content/texts.yaml`](site/content/texts.yaml): the fixed texts of the page
 
-The live figures (network state, supply, halving, upgrade countdown) are not in these files;
-the page reads them from the public API of network.btx-monitoring.com.
+The live figures (network state, supply, halving, upgrade countdown, and the development
+activity of `btxchain/btx`) are not in these files; the page reads them from the public API of
+network.btx-monitoring.com.
 
 Every text exists in English and German; add both. Links must be plain `https://` URLs. The
 pull request checks the files and builds the page; if something does not fit, the check

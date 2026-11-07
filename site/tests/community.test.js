@@ -160,3 +160,82 @@ test("an unclear activation list hides nothing and shows nothing", () => {
     assert.equal(result.activations, null, JSON.stringify(rows).slice(0, 80));
   }
 });
+
+const NOW = Date.parse("2026-11-07T14:00:00Z");
+
+function development(changes) {
+  return JSON.stringify(Object.assign({
+    schema_version: 1,
+    repository: "btxchain/btx",
+    generated_at: "2026-11-07T13:05:00Z",
+    measured_at: "2026-11-07T13:00:12Z",
+    stale: false,
+    window_days: 30,
+    branches: [
+      { name: "main", default: true, last_commit_at: "2026-10-06T04:56:09Z", commits_30d: 0, commits_30d_capped: false },
+      { name: "btx-035/swarm", default: false, last_commit_at: "2026-11-07T04:26:31Z", commits_30d: 100, commits_30d_capped: true },
+      { name: "btx-035/lab", default: false, last_commit_at: "2026-10-21T05:26:59Z", commits_30d: 47, commits_30d_capped: false },
+    ],
+    pulls_updated_7d: 7,
+    pulls_updated_7d_capped: false,
+    latest_release: { tag: "v0.34.15", published_at: "2026-10-20T10:00:00Z" },
+    latest_prerelease: { tag: "v0.34.16", published_at: "2026-11-07T05:45:55Z" },
+  }, changes));
+}
+
+test("development activity keeps a stale main and capped counts as they are", () => {
+  const dev = live.parseDevelopment(development({}), "btxchain/btx", NOW);
+  assert.equal(dev.stale, false);
+  assert.deepEqual(dev.branches.map((b) => [b.name, b.isDefault, b.commits, b.capped]), [
+    ["main", true, 0, false],
+    ["btx-035/swarm", false, 100, true],
+    ["btx-035/lab", false, 47, false],
+  ]);
+  assert.equal(dev.pulls, 7);
+  assert.equal(dev.release.tag, "v0.34.15");
+  assert.equal(dev.prerelease.tag, "v0.34.16");
+  assert.equal(live.formatTime(dev.measured), "2026-11-07 13:00 UTC");
+});
+
+test("an old measurement or the stale flag marks development activity stale", () => {
+  assert.equal(live.parseDevelopment(development({ stale: true }), "btxchain/btx", NOW).stale, true);
+  const old = live.parseDevelopment(development({}), "btxchain/btx", NOW + 4 * 3600000);
+  assert.equal(old.stale, true);
+});
+
+test("development activity is refused unless the branch table is complete and clean", () => {
+  const main = { name: "main", default: true, last_commit_at: "2026-10-06T04:56:09Z", commits_30d: 0, commits_30d_capped: false };
+  const other = Object.assign({}, main, { name: "dev", default: false });
+  for (const text of ["", "null", development({ schema_version: 2 }), development({ repository: "evil/btx" }),
+    development({ measured_at: null }), development({ branches: [] }), development({ branches: [other, main] }),
+    development({ branches: [main, main] }), development({ branches: new Array(7).fill(other).fill(main, 0, 1) }),
+    development({ branches: [Object.assign({}, main, { name: "<img src=x>" })] }),
+    development({ branches: [Object.assign({}, main, { name: "a/../b" })] }),
+    development({ branches: [Object.assign({}, main, { name: "-x" })] }),
+    development({ branches: [Object.assign({}, main, { commits_30d: 101 })] }),
+    development({ branches: [Object.assign({}, main, { commits_30d: "5" })] }),
+    development({ branches: [Object.assign({}, main, { last_commit_at: "soon" })] })]) {
+    assert.equal(live.parseDevelopment(text, "btxchain/btx", NOW), null, text.slice(0, 120));
+  }
+});
+
+test("optional development values that fail are dropped, not shown", () => {
+  const dev = live.parseDevelopment(development({
+    pulls_updated_7d: -1,
+    latest_release: { tag: "<script>", published_at: "2026-10-20T10:00:00Z" },
+    latest_prerelease: { tag: "v1", published_at: "never" },
+  }), "btxchain/btx", NOW);
+  assert.equal(dev.pulls, null);
+  assert.equal(dev.release, null);
+  assert.equal(dev.prerelease, null);
+  assert.equal(live.parseDevelopment(development({ latest_prerelease: null }), "btxchain/btx", NOW).prerelease, null);
+});
+
+test("ages and GitHub links of branches", () => {
+  const texts = { today: "today", day: "1 day ago", days: "{count} days ago" };
+  assert.equal(live.formatAge(new Date(NOW - 3600000), NOW, texts), "today");
+  assert.equal(live.formatAge(new Date(NOW - 86400000), NOW, texts), "1 day ago");
+  assert.equal(live.formatAge(new Date("2026-10-06T04:56:09Z"), NOW, texts), "32 days ago");
+  assert.equal(live.githubUrl("btxchain/btx", "commits", "btx-035/swarm"), "https://github.com/btxchain/btx/commits/btx-035/swarm");
+  assert.equal(live.githubUrl("btxchain/btx", "releases/tag", "v0.34.16"), "https://github.com/btxchain/btx/releases/tag/v0.34.16");
+});
