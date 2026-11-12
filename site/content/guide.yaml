@@ -52,14 +52,16 @@ facts:
     source: https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md
 
   - id: bitcoin-core
-    title: { en: Built on Bitcoin Core, de: Gebaut auf Bitcoin Core }
+    title: { en: Built on Bitcoin Knots, de: Gebaut auf Bitcoin Knots }
     text:
       en: >-
-        The node is a fork of Bitcoin Core. btxd, btx-cli, the RPC interface and PSBTs work the
-        way Bitcoin users know them; what differs is the proof-of-work and the signatures.
+        The node derives from Bitcoin Knots v29.2, a variant of Bitcoin Core. btxd, btx-cli, the RPC
+        interface and PSBTs work the way Bitcoin users know them; what differs is the proof-of-work
+        and the signatures.
       de: >-
-        Der Node ist ein Fork von Bitcoin Core. btxd, btx-cli, die RPC-Schnittstelle und PSBTs
-        funktionieren so, wie Bitcoin-Nutzer es kennen; anders sind Proof-of-Work und Signaturen.
+        Der Node stammt von Bitcoin Knots v29.2 ab, einer Variante von Bitcoin Core. btxd, btx-cli,
+        die RPC-Schnittstelle und PSBTs funktionieren so, wie Bitcoin-Nutzer es kennen; anders sind
+        Proof-of-Work und Signaturen.
     source: https://github.com/btxchain/btx
 
 upcoming:

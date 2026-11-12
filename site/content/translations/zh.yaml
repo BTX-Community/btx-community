@@ -29,12 +29,13 @@ translations:
   zh: >-
     币由旨在抵御量子计算机的签名锁定：日常支付使用 ML-DSA-44（NIST FIPS 204），SLH-DSA（FIPS 205）作为基于哈希的备用方案。这类 P2MR 地址以 btx1z
     开头。
-- en: Built on Bitcoin Core
-  zh: 基于 Bitcoin Core
+- en: Built on Bitcoin Knots
+  zh: 基于 Bitcoin Knots
 - en: >-
-    The node is a fork of Bitcoin Core. btxd, btx-cli, the RPC interface and PSBTs work the way Bitcoin
-    users know them; what differs is the proof-of-work and the signatures.
-  zh: 节点是 Bitcoin Core 的分叉。btxd、btx-cli、RPC 接口和 PSBT 的用法与比特币用户熟悉的一样；不同的是工作量证明和签名。
+    The node derives from Bitcoin Knots v29.2, a variant of Bitcoin Core. btxd, btx-cli, the RPC
+    interface and PSBTs work the way Bitcoin users know them; what differs is the proof-of-work and the
+    signatures.
+  zh: 节点源自 Bitcoin Knots v29.2（Bitcoin Core 的一个变体）。btxd、btx-cli、RPC 接口和 PSBT 的用法与比特币用户熟悉的一样；不同的是工作量证明和签名。
 - en: >-
     Release candidate v0.35.0rc1 since 13 October 2026. The developers call it not release-qualified;
     the current release stays v0.34.15. Nothing below is final.

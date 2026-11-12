@@ -35,15 +35,16 @@ translations:
     Les coins sont verrouillés par des signatures conçues pour résister aux ordinateurs quantiques
     : ML-DSA-44 (NIST FIPS 204) pour les dépenses courantes, SLH-DSA (FIPS 205) comme solution de
     repli à base de hachage. Ces adresses P2MR commencent par btx1z.
-- en: Built on Bitcoin Core
-  fr: Bâti sur Bitcoin Core
+- en: Built on Bitcoin Knots
+  fr: Bâti sur Bitcoin Knots
 - en: >-
-    The node is a fork of Bitcoin Core. btxd, btx-cli, the RPC interface and PSBTs work the way Bitcoin
-    users know them; what differs is the proof-of-work and the signatures.
-  fr: >-
-    Le nœud est un fork de Bitcoin Core. btxd, btx-cli, l'interface RPC et les PSBT fonctionnent comme
-    les utilisateurs de Bitcoin les connaissent ; ce qui change, c'est la preuve de travail et les
+    The node derives from Bitcoin Knots v29.2, a variant of Bitcoin Core. btxd, btx-cli, the RPC
+    interface and PSBTs work the way Bitcoin users know them; what differs is the proof-of-work and the
     signatures.
+  fr: >-
+    Le nœud dérive de Bitcoin Knots v29.2, une variante de Bitcoin Core. btxd, btx-cli, l'interface RPC
+    et les PSBT fonctionnent comme les utilisateurs de Bitcoin les connaissent ; ce qui change, c'est la
+    preuve de travail et les signatures.
 - en: >-
     Release candidate v0.35.0rc1 since 13 October 2026. The developers call it not release-qualified;
     the current release stays v0.34.15. Nothing below is final.
