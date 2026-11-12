@@ -781,24 +781,6 @@ categories:
           en: Testnet only; it can be reset. Code unchanged since 2026-07-09.
           de: Nur Testnetz; es kann zurückgesetzt werden. Code unverändert seit 2026-07-09.
 
-  - id: exchanges
-    title: { en: Exchanges, de: Börsen }
-    risk:
-      en: >-
-        Not audited by us. Trading carries risk; check the exchange yourself and do not leave
-        coins there longer than needed.
-      de: >-
-        Von uns nicht geprüft. Handel ist riskant; die Börse selbst prüfen und Coins dort nicht
-        länger als nötig liegen lassen.
-    entries:
-      - id: safetrade
-        name: SafeTrade
-        url: https://safetrade.com/exchange/BTX-USDT?type=basic
-        tags: [cex, btx/usdt]
-        description:
-          en: Centralised exchange with a BTX/USDT market.
-          de: Zentrale Börse mit einem BTX/USDT-Markt.
-
 # The documents this group maintains. They live in the repository so that every change is
 # visible as a commit; this section is how a reader finds them without knowing git.
 # status: optional, says where a document stands. Leave it out once something is settled.
@@ -883,6 +865,10 @@ documents:
 
 
 removed:
+  - name: SafeTrade (exchange)
+    reason:
+      en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
+      de: Listet BTX nicht mehr; der BTX/USDT-Markt ist seit Juli 2026 weg.
   - name: minebtx (pool and explorer)
     reason:
       en: Website not reachable, explorer answered 503 (2026-11-03).
