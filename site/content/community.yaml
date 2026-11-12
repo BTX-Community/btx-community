@@ -70,10 +70,10 @@ audiences:
       - text:
           en: >-
             matador's examples still name the minebtx pool, which is offline. Use a pool from
-            the list below instead.
+            our link list instead.
           de: >-
             Die Beispiele von matador nennen noch den Pool minebtx, der nicht mehr erreichbar ist.
-            Stattdessen einen Pool aus der Liste unten nehmen.
+            Stattdessen einen Pool aus unserer Linkliste nehmen.
         anchor: pools
       - text:
           en: Problems with an NVIDIA card? The official CUDA troubleshooting guide helps.

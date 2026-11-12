@@ -5,7 +5,9 @@
 
 The content is validated before anything is written: a pull request with a broken link, a
 missing translation or an unknown anchor fails here, not on the live site. English is served
-under ``/``, German under ``/de/``. The live strip, the figures and the upgrade countdown are
+under ``/``, German under ``/de/``; every page in ``PAGES`` gets its own directory below that
+(``/links/``, ``/de/links/``) and its template ``<page>.html.j2``, which extends ``base.html.j2``
+with the menu. The live strip, the figures and the upgrade countdown are
 empty in the built page and filled by ``static/js/community.js`` from the public API of the
 status page.
 """
@@ -28,6 +30,8 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, m
 
 ROOT = Path(__file__).resolve().parent
 LANGUAGES = ("en", "de")
+PAGES = ("home", "learn", "network", "links", "docs")
+"""The pages of the site, in menu order; each has a template ``<page>.html.j2`` and texts ``nav.<page>``."""
 MAX_YAML_BYTES = 256 * 1024
 REPO_URL = "https://github.com/BTX-Community/btx-community"
 ADD_PROJECT_URL = f"{REPO_URL}/blob/main/CONTRIBUTING.md#changing-the-website"
@@ -35,7 +39,7 @@ RELEASES_URL = "https://github.com/btxchain/btx/releases"
 STATUS_API = "https://network.btx-monitoring.com/api/v1/status.json"
 DEVELOPMENT_API = "https://network.btx-monitoring.com/api/v1/development.json"
 UPSTREAM_REPO = "btxchain/btx"
-"""Repository whose development activity the start page shows; the API must name the same one."""
+"""Repository whose development activity the network page shows; the API must name the same one."""
 STATUS_PAGE = {"en":"https://network.btx-monitoring.com/", "de": "https://network.btx-monitoring.com/de/"}
 VERDICTS = ("stable", "performant", "secure")
 """Headline verdicts of the status page, in its order; titles come from texts.yaml."""
@@ -426,7 +430,7 @@ def guide_views(
 def _step(step: Step, lang: str) -> StepView:
     if step.url is not None:
         return StepView(getattr(step.text, lang), step.url, external=True)
-    href = f"#cat-{step.anchor}" if step.anchor is not None else None
+    href = f"{page_path(lang, 'links')}#cat-{step.anchor}" if step.anchor is not None else None
     return StepView(getattr(step.text, lang), href, external=False)
 
 
@@ -491,22 +495,33 @@ def asset_url(path: str) -> str:
     return f"/static/{path}?v={digest}"
 
 
-def page_path(lang: str) -> str:
-    """URL path of the page in a language: ``/`` or ``/de/``."""
-    return "/" if lang == "en" else f"/{lang}/"
+def page_path(lang: str, page: str = "home") -> str:
+    """URL path of a page in a language: ``/``, ``/de/``, ``/links/``, ``/de/links/``."""
+    prefix = "/" if lang == "en" else f"/{lang}/"
+    return prefix if page == "home" else f"{prefix}{page}/"
 
 
 def context(
-    page: CommunityPage, guide: GuidePage, texts: dict[str, dict[str, str]], lang: str, version: str
+    page: CommunityPage,
+    guide: GuidePage,
+    texts: dict[str, dict[str, str]],
+    lang: str,
+    version: str,
+    page_id: str = "home",
 ) -> dict[str, object]:
-    """Everything the template needs for one language."""
+    """Everything the templates need for one page in one language."""
     audiences, categories, documents = community_views(page, lang)
     facts, upcoming, checklists = guide_views(guide, lang)
     ui = texts[lang]
     return {
         "lang": lang,
         "ui": ui,
-        "alternates": [(code, texts[code]["lang_name"], page_path(code)) for code in LANGUAGES],
+        "alternates": [(code, texts[code]["lang_name"], page_path(code, page_id)) for code in LANGUAGES],
+        "page": page_id,
+        "page_title": None if page_id == "home" else ui[f"page.{page_id}.title"],
+        "page_lead": None if page_id == "home" else ui[f"page.{page_id}.lead"],
+        "nav": [(p, ui[f"nav.{p}"], page_path(lang, p)) for p in PAGES],
+        "nav_href": {p: page_path(lang, p) for p in PAGES},
         "status_page": STATUS_PAGE[lang],
         "status_api": STATUS_API,
         "development_api": DEVELOPMENT_API,
@@ -545,14 +560,19 @@ def build(out: Path, version: str) -> None:
         undefined=StrictUndefined,
         keep_trailing_newline=True,
     )
-    template = env.get_template("index.html.j2")
-    pages = {lang: template.render(context(page, guide, texts, lang, version)) for lang in LANGUAGES}
+    rendered = {
+        page_path(lang, page_id): env.get_template(f"{page_id}.html.j2").render(
+            context(page, guide, texts, lang, version, page_id)
+        )
+        for lang in LANGUAGES
+        for page_id in PAGES
+    }
 
     if out.exists():
         shutil.rmtree(out)
     shutil.copytree(ROOT / "static", out / "static")
-    for lang, html in pages.items():
-        target = out / page_path(lang).strip("/") / "index.html"
+    for path, html in rendered.items():
+        target = out / path.strip("/") / "index.html"
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(html, encoding="utf-8")
 

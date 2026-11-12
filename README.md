@@ -30,7 +30,7 @@ So this is the attempt to do it in the open, with two rules that follow from the
 | [`research/deployment-reward.md`](research/deployment-reward.md) | The 50,000-block bootstrap window and the 1,000,000 BTX deployment reward. Chain-verified, bilingual (EN leading, DE translation). **Draft — under review.** |
 | [`research/network-fund.md`](research/network-fund.md) | How the network could fund its own infrastructure: voluntary contributions now, a small block-reward share later, 5-of-7 multisig, payouts on verified uptime. **Discussion paper v0.1.** |
 | [`research/venue-structure.md`](research/venue-structure.md) | What a "DEX" can be on a UTXO chain, where the licensing boundary runs, and the four models still open to us. Bilingual (EN leading, DE translation). **Draft for discussion — not legal advice.** |
-| [`site/`](site/) | The website btx-community.com: start page, live network state and the link directory, rebuilt from the original [`vanities/btxlinks`](https://github.com/vanities/btxlinks), which stopped being updated in August 2026. Content in `site/content/`; see [CONTRIBUTING](CONTRIBUTING.md#changing-the-website). |
+| [`site/`](site/) | The website btx-community.com: a start page by audience, pages for learning, the network and development, the link directory and the documents, rebuilt from the original [`vanities/btxlinks`](https://github.com/vanities/btxlinks), which stopped being updated in August 2026. Content in `site/content/`; see [CONTRIBUTING](CONTRIBUTING.md#changing-the-website). |
 | [`deploy/`](deploy/) | How the website runs and gets published after a merge. |
 
 ---

@@ -26,7 +26,7 @@
 	}
 
 	# Pages change with every merge: always revalidate. Fonts and styles may be cached briefly.
-	@pages path / /index.html /de/ /de/index.html
+	@pages not path /static/*
 	header @pages Cache-Control "no-cache"
 	@static path /static/*
 	header @static Cache-Control "public, max-age=3600"
