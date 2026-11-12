@@ -603,7 +603,8 @@ a {
 .c-start,
 .c-upcoming,
 .c-checks,
-.c-directory {
+.c-directory,
+.c-hub {
   margin-top: 56px;
 }
 
@@ -928,6 +929,450 @@ a {
   padding-left: 20px;
 }
 
+/* --- Developer hub ---------------------------------------------------------------------- */
+
+/* The developers page: an anchor bar under the intro, then one section per part of the plan. */
+.c-jump--page {
+  margin: 0 0 32px;
+}
+
+.c-hub__cards {
+  margin-top: 16px;
+}
+
+.c-fact--principle {
+  --accent: var(--a-community);
+}
+
+.c-fact--route {
+  --accent: var(--a-official);
+}
+
+.c-fact--phase {
+  --accent: var(--a-network);
+}
+
+.c-fact__list {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+.c-note {
+  margin: 10px 0 0;
+  font-size: 13px;
+}
+
+/* Text for screen readers only, e.g. "no data" behind a dash. */
+.c-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* The prompt for an AI tool: one block, selectable without JavaScript, copied with it. */
+.c-prompt-box {
+  margin: 0 0 14px;
+}
+
+.c-prompt {
+  max-height: 32rem;
+  margin: 0;
+  padding: 16px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.c-prompt-box__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 0;
+  font-size: 13px;
+}
+
+.c-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+/* Buttons in the chip style: the filters, the sort, the copy button. */
+.c-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.55;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.c-btn:hover,
+.c-btn[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.c-btn[aria-pressed="true"] {
+  background: var(--surface);
+}
+
+/* The hidden attribute wins over the display of these classes. */
+.c-btn[hidden],
+.c-filter[hidden],
+.c-lane[hidden],
+.c-lane-group[hidden],
+.c-table tr[hidden] {
+  display: none;
+}
+
+.c-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.c-filter__label {
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.c-filter__count {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.c-filter__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.c-filter__check input {
+  accent-color: var(--accent);
+}
+
+.c-filter__shown {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* Tables: the test runs, coverage by area, the registry, the gates and the week. */
+.c-table-wrap {
+  position: relative;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.c-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.c-table th,
+.c-table td {
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.c-table thead th {
+  border-top: 0;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.c-table tbody th {
+  font-weight: 400;
+}
+
+.c-table th.c-table__num,
+.c-table td.c-table__num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.c-table__code,
+.c-table__name {
+  display: block;
+}
+
+.c-table__hint,
+.c-table__rule,
+.c-table__note {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  white-space: normal;
+}
+
+.c-table__hint {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.c-table td.c-table__num .c-table__note {
+  display: inline;
+}
+
+.c-table__lane {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.c-table--runs th,
+.c-table--runs td {
+  white-space: nowrap;
+}
+
+/* Coverage bars: a meter, so the value is an attribute and the page needs no inline style. */
+.c-bar {
+  --bar: var(--a-community);
+
+  display: block;
+  width: 100%;
+  min-width: 64px;
+  height: 6px;
+  margin-top: 6px;
+  border: 0;
+  border-radius: 3px;
+  background: var(--border);
+  appearance: none;
+}
+
+.c-bar--unit {
+  --bar: var(--a-community);
+}
+
+.c-bar--func {
+  --bar: var(--a-official);
+}
+
+.c-bar::-webkit-meter-bar {
+  height: 6px;
+  border: 0;
+  border-radius: 3px;
+  background: var(--border);
+}
+
+.c-bar::-webkit-meter-optimum-value,
+.c-bar::-webkit-meter-suboptimum-value,
+.c-bar::-webkit-meter-even-less-good-value {
+  border-radius: 3px;
+  background: var(--bar);
+}
+
+.c-bar::-moz-meter-bar {
+  border-radius: 3px;
+  background: var(--bar);
+}
+
+/* Where a bug class stands, in the look of the verdict pills. */
+.c-status {
+  --level: var(--grey);
+
+  display: inline-flex;
+  padding: 1px 10px;
+  border: 1px solid color-mix(in srgb, var(--level) 45%, transparent);
+  border-radius: 999px;
+  color: var(--level);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.c-status--worklist {
+  --level: var(--green);
+}
+
+.c-status--baseline {
+  --level: var(--a-network);
+}
+
+.c-status--count-first {
+  --level: var(--yellow);
+}
+
+.c-status--rule-only {
+  --level: var(--a-official);
+}
+
+.c-status--needs-ci {
+  --level: var(--a-pools);
+}
+
+.c-status--generators {
+  --level: var(--a-wallets);
+}
+
+.c-status--evidence {
+  --level: var(--red);
+}
+
+.c-tag--s {
+  --accent: var(--red);
+
+  cursor: help;
+  text-decoration: none;
+}
+
+.c-tag--open {
+  --accent: var(--yellow);
+}
+
+.c-tag--done {
+  --accent: var(--green);
+}
+
+/* How a lane's work reaches the maintainer. */
+.c-route--pr {
+  --accent: var(--a-official);
+}
+
+.c-route--evidence {
+  --accent: var(--red);
+}
+
+.c-route--run {
+  --accent: var(--a-network);
+}
+
+.c-route--fork {
+  --accent: var(--a-pools);
+}
+
+/* Lane cards: id, route and state on top, the facts as a list, the done bar folded. */
+.c-lane-group {
+  margin-top: 28px;
+}
+
+.c-lane[data-waiting="1"] {
+  --accent: var(--a-check);
+}
+
+.c-lane__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+
+.c-lane__meta {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 6px 12px;
+  margin: 0 0 14px;
+  font-size: 14px;
+}
+
+.c-lane__meta dt {
+  padding-top: 3px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.c-lane__meta dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+.c-lane__done {
+  margin: 0 0 12px;
+}
+
+.c-lane__done > summary {
+  padding: 6px 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.c-lane__done .c-steps li {
+  font-size: 14px;
+}
+
+.c-lane__label {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.c-lane__pack {
+  display: inline-block;
+  margin: 0;
+  font-size: 13px;
+}
+
+/* How a finding moves: the steps that can end the path early carry the warning border. */
+.c-steps--flow {
+  margin: 0 0 8px;
+}
+
+.c-steps li.c-steps__exit {
+  padding-left: 44px;
+  border-left: 3px solid var(--yellow);
+  background: rgb(255 194 74 / 6%);
+}
+
+.c-steps li.c-steps__exit::before {
+  left: 10px;
+}
+
+.c-audience--never {
+  --accent: var(--red);
+}
+
 /* --- Footer ----------------------------------------------------------------------------- */
 
 .c-link {
@@ -1015,5 +1460,24 @@ a {
 
   .c-branch--head span:first-child {
     grid-column: 1 / -1;
+  }
+
+  /* Developers page: tighter tables, lane facts stacked. */
+  .c-table {
+    font-size: 13px;
+  }
+
+  .c-table th,
+  .c-table td {
+    padding: 8px 10px;
+  }
+
+  .c-lane__meta {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .c-lane__meta dd {
+    margin-bottom: 6px;
   }
 }

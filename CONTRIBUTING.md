@@ -28,10 +28,20 @@ The content of btx-community.com is in these files:
 - [`site/content/guide.yaml`](site/content/guide.yaml): "What is BTX?", the next release and
   the checklists. Every fact links to a source a reader can open; prefer the source code and
   release notes over websites.
+- [`site/content/hub.yaml`](site/content/hub.yaml): the developers page, the public plan of
+  the developer hub in [`dev/`](dev/), copied from it by hand. The hub is the source; when it
+  changes, change this file too. `test_the_developers_page_matches_the_hub` in
+  `site/tests/test_build.py` compares every number and list on the page with the hub: the
+  coverage figures with `dev/01-state.md`, the test runs with `dev/plan/MASTER-PLAN.md`, the
+  areas, baselines, classes, gates and phases with `dev/plan/plan-data.json`, the lanes, flow,
+  week and sweep rules with `dev/plan/lanes.json`, the registry columns with
+  `dev/05-bug-classes.md` and the "never" list, routes and escalation with `dev/07-lanes.md`.
+  Texts written by hand, such as the lane scopes, are checked for the numbers, classes and lane
+  ids they name. The comment at the top of `hub.yaml` says which field comes from where.
 - [`site/content/texts.yaml`](site/content/texts.yaml): the fixed texts of the page, in all
   five languages
 - [`site/content/translations/`](site/content/translations/): the Spanish, French and Chinese
-  versions of the texts in the first two files, one file per language
+  versions of the texts in the first three files, one file per language
 
 The live figures (network state, supply, halving, upgrade countdown, and the development
 activity of `btxchain/btx`) are not in these files; the page reads them from the public API of

@@ -68,6 +68,7 @@ en:
   nav.network: Network
   nav.links: Links
   nav.docs: Documents
+  nav.dev: Developers
   live.more: BTX in numbers and development activity
   page.learn.title: Learn about BTX
   page.learn.lead: What BTX is, and what the next release brings.
@@ -79,6 +80,10 @@ en:
   page.links.lead: Projects, tools and services around BTX, each one opened and checked by hand.
   page.docs.title: Documents
   page.docs.lead: The roadmap and the research papers this group maintains in the open.
+  page.dev.title: Become a BTX dev
+  page.dev.lead: >-
+    How to send pull requests to the BTX node software that the maintainer can merge: for
+    people, and for the AI tools they work with.
   translation.note: This page was translated from English with AI help.
   translation.fix: Correct the translation
   facts.title: What is BTX?
@@ -94,6 +99,200 @@ en:
     change is visible as a commit and anyone can correct a figure.
   documents.open: Read it
   documents.repo: All of it, including the source of this page
+  hub.begin.title: Where to begin
+  hub.begin.lead: >-
+    The developer hub is a folder of text files in this site's repository on GitHub. It describes
+    how contributors work; it does not speak for btxchain/btx, whose maintainer decides what lands.
+    This page shows the essentials; the files have the detail, and your AI tool can read them
+    directly.
+  hub.steps.title: First steps
+  hub.rules.title: The rules in short
+  hub.levels.title: Three levels
+  hub.levels.lead: >-
+    A level is a starting point, not a rank. To take on the next one: you, or you and your AI
+    tool, pass the exam, and your first upstream pull request goes through a lane owner's second
+    review.
+  hub.levels.open: The brief to start from
+  hub.coverage.title: Test coverage of the node software
+  hub.coverage.source: Figures per area, and how to reproduce them
+  hub.lanes.title: Lanes
+  hub.lanes.lead: >-
+    {count} lanes, each with a scope and a done bar that says when the work is finished. Owners
+    are listed in the hub; a lane without one is open, and you claim it by pull request. The
+    owner and the second reviewer of a lane are never the same person.
+  hub.lanes.open: Scope and done bar of each lane
+  hub.checked: "Copied from the hub on {date}. If this page and the hub differ, the hub is right."
+  hub.source: The hub on GitHub
+  hub.nav.label: On this page
+  hub.nav.begin: Begin
+  hub.nav.brief: Brief your AI
+  hub.nav.levels: Levels
+  hub.nav.coverage: State
+  hub.nav.classes: Classes
+  hub.nav.lanes: Lanes
+  hub.nav.flow: Flow
+  hub.nav.gates: Gates
+  hub.nav.rhythm: Rhythm
+  hub.nav.rules: Rules
+  hub.nav.contribute: Contribute
+  hub.principles.title: How we work
+  hub.measured: >-
+    Measured at {commit} on {date}; live head {head}. Every number here is copied from the hub; the
+    hub is right if they differ.
+  hub.brief.title: Brief your AI
+  hub.brief.lead: >-
+    Paste this as the first message of a new session in your AI tool (Claude Code, Cursor, Codex or
+    another). It reads the agent file, asks you the first-run questions and stops at the
+    pull-request gate. You do everything that leaves the machine.
+  hub.brief.select: "Without JavaScript: select the block and copy it."
+  hub.brief.copy: Copy the prompt
+  hub.brief.copied: Copied
+  hub.brief.agents: The agent file, raw
+  hub.brief.llms: Every hub file with its raw URL
+  hub.runs.title: How the test runs ended
+  hub.runs.run: Run
+  hub.runs.unit: Unit (ctest)
+  hub.runs.functional: Functional scripts
+  hub.runs.total: Total
+  hub.runs.passed: Passed
+  hub.runs.timed_out: Timed out
+  hub.runs.failed: Failed
+  hub.runs.skipped: Skipped
+  hub.areas.title: Coverage by area
+  hub.areas.lead: >-
+    Lines covered, unit → unit + functional; branches with both. Size and risk rank from the plan's
+    risk map; a dash is no data, not zero.
+  hub.areas.area: Area
+  hub.areas.unit: Unit
+  hub.areas.functional: + functional
+  hub.areas.branches: Branches
+  hub.areas.size: Size (lines)
+  hub.areas.rank: Risk rank
+  hub.coverage.nodata: no data
+  hub.coverage.gui: "The GUI (Qt) is not built in any run: unknown, not zero."
+  hub.coverage.plan: The plan with every table
+  hub.sort.label: Sort
+  hub.sort.listed: As listed
+  hub.sort.lowest: Lowest first
+  hub.sort.risk: Risk rank
+  hub.sort.size: Size
+  hub.baselines.title: Static and dynamic baseline
+  hub.baselines.lead: >-
+    One run of each tool at the measured commit. Every result is a lead until a person has read the
+    code and reproduced it; nobody re-runs the tools for the baseline.
+  hub.classes.title: Recurring bug classes
+  hub.classes.lead: >-
+    A bug class is a mistake that keeps coming back in a new place. Before you file anything, find
+    its class here and answer the eight questions of the gate.
+  hub.classes.class: Class
+  hub.classes.name: Name and rule
+  hub.classes.prs: Fix PRs
+  hub.classes.sites: Open sites
+  hub.classes.status: Status
+  hub.classes.lane: Lane
+  hub.classes.security: >-
+    Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on
+    btxchain/btx.
+  hub.classes.s: security-relevant
+  hub.classes.registry: The registry, with example pull requests
+  hub.classes.shown: "{shown} of {total} classes"
+  hub.filter.all: All
+  hub.filter.classes: Filter the classes by status
+  hub.filter.lanes: Filter the lanes
+  hub.status.worklist: Worklist ready
+  hub.status.baseline: Baseline measured
+  hub.status.count-first: Count first
+  hub.status.rule-only: Rule only
+  hub.status.needs-ci: Needs fork CI
+  hub.status.generators: Generators
+  hub.status.evidence: Evidence
+  hub.lanes.waiting_lead: >-
+    Every lane is claimable. {count} have a scope and a done bar but no brief yet, and get no work
+    until someone takes them.
+  hub.lanes.kind.area: Area
+  hub.lanes.kind.class: Class
+  hub.lanes.kind.infra: Infra
+  hub.lanes.waiting: Waiting for an owner
+  hub.lanes.waiting_only: Only lanes waiting for an owner
+  hub.lanes.expand: Expand all done bars
+  hub.lanes.collapse: Collapse all done bars
+  hub.lanes.reset: Reset
+  hub.lanes.shown: "{shown} of {total} lanes"
+  hub.lanes.json: The lanes as JSON
+  hub.lane.scope: Scope
+  hub.lane.why: Why
+  hub.lane.target: Target
+  hub.lane.cadence: Cadence
+  hub.lane.route: Route
+  hub.lane.coverage: Lines now
+  hub.lane.rank: Risk rank
+  hub.lane.runners: Runner slots
+  hub.lane.done: Done bar ({count} items)
+  hub.lane.nodata: not a coverage lane
+  hub.lane.pack: The brief for this lane
+  hub.lane.nopack: No brief yet; claim the lane and one follows.
+  hub.route.pr: PR
+  hub.route.evidence: Evidence
+  hub.route.run: Run report
+  hub.route.fork: Fork branch
+  hub.flow.title: How a finding moves
+  hub.flow.lead: >-
+    From the moment someone finds something to the moment a baseline shrinks. Two exits leave the
+    path early.
+  hub.flow.exits: Where it ends up
+  hub.flow.exit: "(an exit: the path can end here)"
+  hub.flow.escalation: When something goes wrong
+  hub.flow.source: The flow in the hub
+  hub.flow.gate: The eight questions before a pull request
+  hub.gates.title: Gates
+  hub.gates.lead: >-
+    Upstream runs no hosted CI for the node software, by choice. The gates run on a contributor
+    fork, every class pull request links its run, and baselines only shrink. CI stays on the fork
+    and is offered upstream only on request.
+  hub.gates.ci: Fork CI jobs (lane I-CI)
+  hub.gates.release: The contributors' checklist for a final release
+  hub.gates.release_lead: >-
+    What contributors keep ready. Rows that depend on the maintainer are listed so the evidence is
+    there when the decision is made, not as requests; the maintainer decides what lands.
+  hub.gates.job: Job
+  hub.gates.gate: Gate
+  hub.gates.name: Name
+  hub.gates.state: State
+  hub.gates.phase: Phase
+  hub.gates.phase_value: phase {id}
+  hub.gates.done: done bar
+  hub.gates.source: The gates in the plan
+  hub.gates.pack: The brief for lane I-CI
+  hub.rhythm.title: Phases and the week
+  hub.rhythm.lead: >-
+    Phases overlap. Batches go out on Thursdays; dates live on the board, set by lane owners once
+    lanes are claimed. No single-site pull requests between batches unless a gate is red.
+  hub.rhythm.phase: Phase {id}
+  hub.rhythm.week: The week
+  hub.rhythm.day: Day
+  hub.rhythm.what: What
+  hub.rhythm.who: Who
+  hub.rhythm.source: The rhythm in the hub
+  hub.rhythm.plan: The dated plan
+  hub.day.monday: Monday
+  hub.day.tuesday_wednesday: Tuesday to Wednesday
+  hub.day.thursday: Thursday
+  hub.day.friday: Friday
+  hub.rules.section: Rules of the road
+  hub.rules.sweeps: Sweep rules and hot files
+  hub.rules.security: >-
+    Security-relevant findings go through GitHub private vulnerability reporting on btxchain/btx,
+    never into a public issue, pull request, board card or chat. The registry gets the class without
+    the detail; the guardrails say what counts.
+  hub.rules.method: The working method
+  hub.rules.guardrails: The guardrails
+  hub.never.title: What each person's AI never does
+  hub.never.lead: The person who owns the lane signs every post; the AI drafts.
+  hub.contribute.title: Contribute back
+  hub.contribute.lead: >-
+    Three loops keep the hub alive: lanes get owners, traps become lessons, lessons become exam
+    questions.
+  hub.contribute.open: How it works, in the hub
   directory.add: Missing a project? Add it with a pull request; no e-mail and no gatekeeper.
   directory.add_link: How to add a project
   on_release: "{count} of {total} nodes"
@@ -187,6 +386,7 @@ de:
   nav.network: Netz
   nav.links: Links
   nav.docs: Dokumente
+  nav.dev: Entwickeln
   live.more: BTX in Zahlen und Entwicklungsaktivität
   page.learn.title: BTX verstehen
   page.learn.lead: Was BTX ist und was das nächste Release bringt.
@@ -198,6 +398,10 @@ de:
   page.links.lead: Projekte, Werkzeuge und Dienste rund um BTX, jeder Eintrag von Hand geöffnet und geprüft.
   page.docs.title: Dokumente
   page.docs.lead: Die Roadmap und die Research-Papiere, die diese Gruppe offen pflegt.
+  page.dev.title: BTX-Entwickler werden
+  page.dev.lead: >-
+    Wie man Pull Requests für die BTX-Node-Software so vorbereitet, dass der Maintainer sie
+    übernehmen kann: für Menschen und für die KI-Werkzeuge, mit denen sie arbeiten.
   translation.note: Diese Seite wurde mit KI-Hilfe aus dem Englischen übersetzt.
   translation.fix: Übersetzung korrigieren
   facts.title: Was ist BTX?
@@ -213,6 +417,206 @@ de:
     also als Commit sichtbar, und jeder kann eine Zahl korrigieren.
   documents.open: Lesen
   documents.repo: Alles davon, samt Quelltext dieser Seite
+  hub.begin.title: Wo anfangen
+  hub.begin.lead: >-
+    Der Entwickler-Hub ist ein Ordner mit Textdateien im GitHub-Repository dieser Website. Er
+    beschreibt, wie Mitwirkende arbeiten; er spricht nicht für btxchain/btx, und was übernommen
+    wird, entscheidet dessen Maintainer. Diese Seite zeigt das Wesentliche; die Einzelheiten stehen
+    in den Dateien, und dein KI-Werkzeug kann sie direkt lesen.
+  hub.steps.title: Erste Schritte
+  hub.rules.title: Die Regeln in Kürze
+  hub.levels.title: Drei Stufen
+  hub.levels.lead: >-
+    Eine Stufe ist ein Einstieg, kein Rang. Für die nächste braucht es zweierlei: Du, oder du mit
+    deinem KI-Werkzeug, bestehst die Prüfung, und dein erster Upstream-Pull-Request geht durch die
+    Zweitprüfung der verantwortlichen Person eines Arbeitsbereichs.
+  hub.levels.open: Das Briefing für den Einstieg
+  hub.coverage.title: Testabdeckung der Node-Software
+  hub.coverage.source: Werte je Bereich und wie man sie nachmisst
+  hub.lanes.title: Arbeitsbereiche
+  hub.lanes.lead: >-
+    {count} Arbeitsbereiche, jeder mit Umfang und Abschlusskriterien. Die verantwortlichen
+    Personen stehen im Hub; ein Bereich ohne verantwortliche Person ist offen, und du übernimmst
+    ihn per Pull Request. Die verantwortliche Person und die zweite prüfende Person eines
+    Bereichs sind nie dieselbe.
+  hub.lanes.open: Umfang und Abschlusskriterien jedes Bereichs
+  hub.checked: "Stand {date}, aus dem Hub übernommen. Wenn diese Seite und der Hub voneinander abweichen, gilt der Hub."
+  hub.source: Der Hub auf GitHub
+  hub.nav.label: Auf dieser Seite
+  hub.nav.begin: Einstieg
+  hub.nav.brief: KI einweisen
+  hub.nav.levels: Stufen
+  hub.nav.coverage: Stand
+  hub.nav.classes: Klassen
+  hub.nav.lanes: Arbeitsbereiche
+  hub.nav.flow: Ablauf
+  hub.nav.gates: Gates
+  hub.nav.rhythm: Rhythmus
+  hub.nav.rules: Regeln
+  hub.nav.contribute: Mitmachen
+  hub.principles.title: Wie wir arbeiten
+  hub.measured: >-
+    Gemessen an {commit} am {date}; aktueller Head {head}. Jede Zahl hier ist aus dem Hub
+    übernommen; weichen sie ab, gilt der Hub.
+  hub.brief.title: Deine KI einweisen
+  hub.brief.lead: >-
+    Füge das als erste Nachricht einer neuen Sitzung in dein KI-Werkzeug ein (Claude Code, Cursor,
+    Codex oder ein anderes). Es liest die Agenten-Datei, stellt dir die Fragen für den ersten Start
+    und hält am Pull-Request-Gate an. Alles, was den Rechner verlässt, machst du.
+  hub.brief.select: "Ohne JavaScript: den Block markieren und kopieren."
+  hub.brief.copy: Prompt kopieren
+  hub.brief.copied: Kopiert
+  hub.brief.agents: Die Agenten-Datei als Rohtext
+  hub.brief.llms: Jede Datei des Hubs mit ihrer Roh-URL
+  hub.runs.title: Wie die Testläufe endeten
+  hub.runs.run: Lauf
+  hub.runs.unit: Unit (ctest)
+  hub.runs.functional: Funktionstest-Skripte
+  hub.runs.total: Gesamt
+  hub.runs.passed: Bestanden
+  hub.runs.timed_out: Timeout
+  hub.runs.failed: Fehlgeschlagen
+  hub.runs.skipped: Übersprungen
+  hub.areas.title: Abdeckung nach Bereich
+  hub.areas.lead: >-
+    Abgedeckte Zeilen, Unit → Unit + Funktionstests; Verzweigungen mit beiden. Größe und Risikorang
+    aus der Risikokarte des Plans; ein Strich bedeutet keine Daten, nicht null.
+  hub.areas.area: Bereich
+  hub.areas.unit: Unit
+  hub.areas.functional: + Funktionstests
+  hub.areas.branches: Verzweigungen
+  hub.areas.size: Größe (Zeilen)
+  hub.areas.rank: Risikorang
+  hub.coverage.nodata: keine Daten
+  hub.coverage.gui: "Die Oberfläche (Qt) wird in keinem Lauf gebaut: unbekannt, nicht null."
+  hub.coverage.plan: Der Plan mit allen Tabellen
+  hub.sort.label: Sortieren
+  hub.sort.listed: Wie gelistet
+  hub.sort.lowest: Niedrigste zuerst
+  hub.sort.risk: Risikorang
+  hub.sort.size: Größe
+  hub.baselines.title: Statische und dynamische Baseline
+  hub.baselines.lead: >-
+    Ein Lauf jedes Werkzeugs am gemessenen Commit. Jedes Ergebnis ist ein Hinweis, bis eine Person
+    den Code gelesen und es reproduziert hat; für die Baseline lässt niemand die Werkzeuge erneut
+    laufen.
+  hub.classes.title: Wiederkehrende Fehlerklassen
+  hub.classes.lead: >-
+    Eine Fehlerklasse ist ein Fehler, der an neuen Stellen wiederkehrt. Bevor du etwas einreichst,
+    such hier seine Klasse und beantworte die acht Fragen des Gates.
+  hub.classes.class: Klasse
+  hub.classes.name: Name und Regel
+  hub.classes.prs: Fix-PRs
+  hub.classes.sites: Offene Stellen
+  hub.classes.status: Stand
+  hub.classes.lane: Arbeitsbereich
+  hub.classes.security: >-
+    Sicherheitsrelevant: nur Zahlen. Befunde gehen über die private Sicherheitsmeldung von GitHub
+    (Private Vulnerability Reporting) an btxchain/btx.
+  hub.classes.s: sicherheitsrelevant
+  hub.classes.registry: Das Register mit Beispiel-Pull-Requests
+  hub.classes.shown: "{shown} von {total} Klassen"
+  hub.filter.all: Alle
+  hub.filter.classes: Klassen nach Stand filtern
+  hub.filter.lanes: Arbeitsbereiche filtern
+  hub.status.worklist: Arbeitsliste fertig
+  hub.status.baseline: Baseline gemessen
+  hub.status.count-first: Erst zählen
+  hub.status.rule-only: Nur die Regel
+  hub.status.needs-ci: Braucht Fork-CI
+  hub.status.generators: Generatoren
+  hub.status.evidence: Beleg
+  hub.lanes.waiting_lead: >-
+    Jeder Arbeitsbereich kann übernommen werden. {count} haben Umfang und Abschlusskriterien, aber
+    noch kein Briefing, und bekommen keine Arbeit, bis jemand sie übernimmt.
+  hub.lanes.kind.area: Code-Bereich
+  hub.lanes.kind.class: Fehlerklasse
+  hub.lanes.kind.infra: Infrastruktur
+  hub.lanes.waiting: Wartet auf eine verantwortliche Person
+  hub.lanes.waiting_only: Nur Bereiche ohne verantwortliche Person
+  hub.lanes.expand: Alle Abschlusskriterien aufklappen
+  hub.lanes.collapse: Alle Abschlusskriterien zuklappen
+  hub.lanes.reset: Zurücksetzen
+  hub.lanes.shown: "{shown} von {total} Arbeitsbereichen"
+  hub.lanes.json: Die Arbeitsbereiche als JSON
+  hub.lane.scope: Umfang
+  hub.lane.why: Warum
+  hub.lane.target: Ziel
+  hub.lane.cadence: Takt
+  hub.lane.route: Weg
+  hub.lane.coverage: Zeilen jetzt
+  hub.lane.rank: Risikorang
+  hub.lane.runners: Runner-Plätze
+  hub.lane.done: Abschlusskriterien ({count} Punkte)
+  hub.lane.nodata: kein Abdeckungsbereich
+  hub.lane.pack: Das Briefing für diesen Bereich
+  hub.lane.nopack: Noch kein Briefing; wer den Bereich übernimmt, bekommt eins.
+  hub.route.pr: PR
+  hub.route.evidence: Beleg
+  hub.route.run: Laufbericht
+  hub.route.fork: Fork-Branch
+  hub.flow.title: Wie ein Befund seinen Weg nimmt
+  hub.flow.lead: >-
+    Vom Moment, in dem jemand etwas findet, bis zu dem Moment, in dem eine Baseline schrumpft. Zwei
+    Ausgänge verlassen den Weg früher.
+  hub.flow.exits: Wo es landet
+  hub.flow.exit: "(ein Ausgang: hier kann der Weg enden)"
+  hub.flow.escalation: Wenn etwas schiefgeht
+  hub.flow.source: Der Ablauf im Hub
+  hub.flow.gate: Die acht Fragen vor einem Pull Request
+  hub.gates.title: Gates
+  hub.gates.lead: >-
+    Upstream betreibt bewusst keine gehostete CI für die Node-Software. Die Gates laufen auf dem
+    Fork einer mitwirkenden Person, jeder Klassen-Pull-Request verlinkt seinen Lauf, und Baselines
+    schrumpfen nur. Die CI bleibt auf dem Fork und wird upstream nur auf Anfrage angeboten.
+  hub.gates.ci: CI-Jobs auf dem Fork (Bereich I-CI)
+  hub.gates.release: Die Checkliste der Mitwirkenden für ein finales Release
+  hub.gates.release_lead: >-
+    Was die Mitwirkenden bereithalten. Zeilen, die vom Maintainer abhängen, stehen hier, damit die
+    Belege vorliegen, wenn entschieden wird, nicht als Bitten; was übernommen wird, entscheidet der
+    Maintainer.
+  hub.gates.job: Job
+  hub.gates.gate: Gate
+  hub.gates.name: Name
+  hub.gates.state: Stand
+  hub.gates.phase: Phase
+  hub.gates.phase_value: Phase {id}
+  hub.gates.done: Abschlusskriterium
+  hub.gates.source: Die Gates im Plan
+  hub.gates.pack: Das Briefing für den Bereich I-CI
+  hub.rhythm.title: Phasen und die Woche
+  hub.rhythm.lead: >-
+    Die Phasen überlappen. Pakete gehen donnerstags hinaus; die Termine stehen auf dem Board und
+    werden von den Verantwortlichen festgelegt, sobald Bereiche übernommen sind. Zwischen den
+    Paketen keine Pull Requests für einzelne Stellen, außer ein Gate ist rot.
+  hub.rhythm.phase: Phase {id}
+  hub.rhythm.week: Die Woche
+  hub.rhythm.day: Tag
+  hub.rhythm.what: Was
+  hub.rhythm.who: Wer
+  hub.rhythm.source: Der Rhythmus im Hub
+  hub.rhythm.plan: Der Plan mit Terminen
+  hub.day.monday: Montag
+  hub.day.tuesday_wednesday: Dienstag bis Mittwoch
+  hub.day.thursday: Donnerstag
+  hub.day.friday: Freitag
+  hub.rules.section: Spielregeln
+  hub.rules.sweeps: Regeln für Durchgänge und heiße Dateien
+  hub.rules.security: >-
+    Sicherheitsrelevante Befunde gehen über die private Sicherheitsmeldung von GitHub (Private
+    Vulnerability Reporting) an btxchain/btx, nie in ein öffentliches Issue, einen Pull Request,
+    eine Board-Karte oder einen Chat. Das Register bekommt die Klasse ohne Einzelheiten; was dazu
+    zählt, sagen die Leitplanken.
+  hub.rules.method: Die Arbeitsmethode
+  hub.rules.guardrails: Die Leitplanken
+  hub.never.title: Was die KI einer Person nie tut
+  hub.never.lead: >-
+    Die verantwortliche Person steht mit ihrem Namen hinter jedem Beitrag; die KI entwirft.
+  hub.contribute.title: Mitmachen
+  hub.contribute.lead: >-
+    Drei Kreisläufe halten den Hub lebendig: Arbeitsbereiche bekommen Verantwortliche, Fallen werden
+    zu Lektionen, Lektionen werden zu Prüfungsfragen.
+  hub.contribute.open: So geht es, im Hub
   directory.add: Ein Projekt fehlt? Per Pull Request eintragen; ohne E-Mail und ohne Türsteher.
   directory.add_link: So trägst du ein Projekt ein
   on_release: "{count} von {total} Nodes"
@@ -305,6 +709,7 @@ es:
   nav.network: Red
   nav.links: Enlaces
   nav.docs: Documentos
+  nav.dev: Desarrolladores
   live.more: BTX en cifras y actividad de desarrollo
   page.learn.title: Conocer BTX
   page.learn.lead: Qué es BTX y qué trae la próxima versión.
@@ -316,6 +721,10 @@ es:
   page.links.lead: Proyectos, herramientas y servicios en torno a BTX, cada uno abierto y revisado a mano.
   page.docs.title: Documentos
   page.docs.lead: La hoja de ruta y los documentos de investigación que este grupo mantiene en abierto.
+  page.dev.title: Hazte desarrollador de BTX
+  page.dev.lead: >-
+    Cómo enviar al software del nodo BTX pull requests que el mantenedor pueda integrar: para
+    personas, y para las herramientas de IA con las que trabajan.
   translation.note: Esta página se tradujo del inglés con ayuda de IA.
   translation.fix: Corregir la traducción
   facts.title: ¿Qué es BTX?
@@ -331,6 +740,207 @@ es:
     se ve como un commit y cualquiera puede corregir una cifra.
   documents.open: Leer
   documents.repo: Todo, incluido el código fuente de esta página
+  hub.begin.title: Por dónde empezar
+  hub.begin.lead: >-
+    El centro para desarrolladores es una carpeta de archivos de texto en el repositorio de esta web
+    en GitHub. Describe cómo trabajan los colaboradores; no habla en nombre de btxchain/btx, cuyo
+    mantenedor decide qué se incorpora. Esta página muestra lo esencial; los archivos tienen el
+    detalle, y tu herramienta de IA puede leerlos directamente.
+  hub.steps.title: Primeros pasos
+  hub.rules.title: Las reglas, en breve
+  hub.levels.title: Tres niveles
+  hub.levels.lead: >-
+    Un nivel es un punto de partida, no un rango. Para pasar al siguiente hacen falta dos cosas:
+    aprobar el examen, tú solo o con tu herramienta de IA, y que tu primer pull request upstream
+    pase la segunda revisión del responsable de una tarea.
+  hub.levels.open: El documento de partida
+  hub.coverage.title: Cobertura de pruebas del software del nodo
+  hub.coverage.source: Cifras por área y cómo reproducirlas
+  hub.lanes.title: Tareas
+  hub.lanes.lead: >-
+    {count} tareas, cada una con un alcance y un criterio de finalización que dice cuándo está
+    terminado el trabajo. Los responsables figuran en el centro; una tarea sin responsable está
+    abierta, y la asumes con un pull request. El responsable y el segundo revisor de una tarea nunca
+    son la misma persona.
+  hub.lanes.open: Alcance y criterio de finalización de cada tarea
+  hub.checked: "Copiado del centro el {date}. Si esta página y el centro difieren, vale lo que dice el centro."
+  hub.source: El centro en GitHub
+  hub.nav.label: En esta página
+  hub.nav.begin: Empezar
+  hub.nav.brief: Instruye a tu IA
+  hub.nav.levels: Niveles
+  hub.nav.coverage: Estado
+  hub.nav.classes: Clases
+  hub.nav.lanes: Tareas
+  hub.nav.flow: Flujo
+  hub.nav.gates: Controles
+  hub.nav.rhythm: Ritmo
+  hub.nav.rules: Reglas
+  hub.nav.contribute: Contribuir
+  hub.principles.title: Cómo trabajamos
+  hub.measured: >-
+    Medido en {commit} el {date}; head actual {head}. Cada cifra de aquí está copiada del centro; si
+    difieren, vale lo que dice el centro.
+  hub.brief.title: Instruye a tu IA
+  hub.brief.lead: >-
+    Pégalo como primer mensaje de una sesión nueva en tu herramienta de IA (Claude Code, Cursor,
+    Codex u otra). Lee el archivo para agentes, te hace las preguntas del primer arranque y se
+    detiene en el control previo al pull request. Todo lo que sale de tu equipo lo haces tú.
+  hub.brief.select: "Sin JavaScript: selecciona el bloque y cópialo."
+  hub.brief.copy: Copiar el prompt
+  hub.brief.copied: Copiado
+  hub.brief.agents: El archivo para agentes, en bruto
+  hub.brief.llms: Cada archivo del centro con su URL en bruto
+  hub.runs.title: Cómo terminaron las ejecuciones de pruebas
+  hub.runs.run: Ejecución
+  hub.runs.unit: Unitarias (ctest)
+  hub.runs.functional: Scripts funcionales
+  hub.runs.total: Total
+  hub.runs.passed: Superadas
+  hub.runs.timed_out: Tiempo agotado
+  hub.runs.failed: Fallidas
+  hub.runs.skipped: Omitidas
+  hub.areas.title: Cobertura por área
+  hub.areas.lead: >-
+    Líneas cubiertas, unitarias → unitarias + funcionales; ramas con ambas. Tamaño y puesto en el
+    ranking de riesgo según el mapa de riesgos del plan; un guion significa sin datos, no cero.
+  hub.areas.area: Área
+  hub.areas.unit: Unitarias
+  hub.areas.functional: + funcionales
+  hub.areas.branches: Ramas
+  hub.areas.size: Tamaño (líneas)
+  hub.areas.rank: Ranking de riesgo
+  hub.coverage.nodata: sin datos
+  hub.coverage.gui: >-
+    La interfaz gráfica (Qt) no se compila en ninguna ejecución: su cobertura es desconocida, no
+    cero.
+  hub.coverage.plan: El plan con todas las tablas
+  hub.sort.label: Ordenar
+  hub.sort.listed: Como en la lista
+  hub.sort.lowest: De menor a mayor
+  hub.sort.risk: Ranking de riesgo
+  hub.sort.size: Tamaño
+  hub.baselines.title: Línea base estática y dinámica
+  hub.baselines.lead: >-
+    Una ejecución de cada herramienta en el commit medido. Cada resultado es una pista hasta que una
+    persona haya leído el código y lo haya reproducido; nadie vuelve a ejecutar las herramientas
+    para la línea base.
+  hub.classes.title: Clases de errores recurrentes
+  hub.classes.lead: >-
+    Una clase de error es un fallo que reaparece en un lugar nuevo. Antes de enviar nada, busca aquí
+    su clase y responde a las ocho preguntas del control.
+  hub.classes.class: Clase
+  hub.classes.name: Nombre y regla
+  hub.classes.prs: PR de corrección
+  hub.classes.sites: Sitios abiertos
+  hub.classes.status: Estado
+  hub.classes.lane: Tarea
+  hub.classes.security: >-
+    Relevante para la seguridad: solo recuentos. Los hallazgos van por el aviso privado de
+    vulnerabilidades de GitHub (private vulnerability reporting) en btxchain/btx.
+  hub.classes.s: relevante para la seguridad
+  hub.classes.registry: El registro, con pull requests de ejemplo
+  hub.classes.shown: "{shown} de {total} clases"
+  hub.filter.all: Todas
+  hub.filter.classes: Filtrar las clases por estado
+  hub.filter.lanes: Filtrar las tareas
+  hub.status.worklist: Lista de trabajo preparada
+  hub.status.baseline: Línea base medida
+  hub.status.count-first: Contar primero
+  hub.status.rule-only: Solo la regla
+  hub.status.needs-ci: Necesita CI en el fork
+  hub.status.generators: Generadores
+  hub.status.evidence: Evidencia
+  hub.lanes.waiting_lead: >-
+    Todas las tareas se pueden asumir. {count} tienen alcance y criterio de finalización, pero aún
+    no tienen documento de partida, y no reciben trabajo hasta que alguien las asuma.
+  hub.lanes.kind.area: Área
+  hub.lanes.kind.class: Clase
+  hub.lanes.kind.infra: Infraestructura
+  hub.lanes.waiting: A la espera de responsable
+  hub.lanes.waiting_only: Solo tareas a la espera de responsable
+  hub.lanes.expand: Desplegar todos los criterios
+  hub.lanes.collapse: Plegar todos los criterios
+  hub.lanes.reset: Restablecer
+  hub.lanes.shown: "{shown} de {total} tareas"
+  hub.lanes.json: Las tareas en JSON
+  hub.lane.scope: Alcance
+  hub.lane.why: Por qué
+  hub.lane.target: Objetivo
+  hub.lane.cadence: Cadencia
+  hub.lane.route: Vía
+  hub.lane.coverage: Líneas ahora
+  hub.lane.rank: Ranking de riesgo
+  hub.lane.runners: Puestos de runner
+  hub.lane.done: Criterio de finalización ({count} puntos)
+  hub.lane.nodata: no es una tarea de cobertura
+  hub.lane.pack: El documento de partida de esta tarea
+  hub.lane.nopack: Aún no hay documento de partida; asume la tarea y llegará uno.
+  hub.route.pr: PR
+  hub.route.evidence: Evidencia
+  hub.route.run: Informe de ejecución
+  hub.route.fork: Rama en el fork
+  hub.flow.title: Cómo avanza un hallazgo
+  hub.flow.lead: >-
+    Desde que alguien encuentra algo hasta que una línea base se reduce. Dos salidas abandonan el
+    camino antes de tiempo.
+  hub.flow.exits: Dónde termina
+  hub.flow.exit: "(una salida: el camino puede terminar aquí)"
+  hub.flow.escalation: Cuando algo sale mal
+  hub.flow.source: El flujo en el centro
+  hub.flow.gate: Las ocho preguntas antes de un pull request
+  hub.gates.title: Controles
+  hub.gates.lead: >-
+    Upstream no usa CI alojada para el software del nodo, por decisión propia. Los controles se
+    ejecutan en el fork de un colaborador, cada pull request de clase enlaza su ejecución y las
+    líneas base solo se reducen. La CI se queda en el fork y solo se ofrece upstream si se pide.
+  hub.gates.ci: Trabajos de CI en el fork (tarea I-CI)
+  hub.gates.release: La lista de comprobación de los colaboradores para una versión final
+  hub.gates.release_lead: >-
+    Lo que los colaboradores tienen preparado. Las filas que dependen del mantenedor figuran aquí
+    para que las pruebas estén listas cuando se decida, no como peticiones; el mantenedor decide qué
+    se incorpora.
+  hub.gates.job: Trabajo
+  hub.gates.gate: Control
+  hub.gates.name: Nombre
+  hub.gates.state: Estado
+  hub.gates.phase: Fase
+  hub.gates.phase_value: fase {id}
+  hub.gates.done: criterio de finalización
+  hub.gates.source: Los controles en el plan
+  hub.gates.pack: El documento de partida de la tarea I-CI
+  hub.rhythm.title: Fases y la semana
+  hub.rhythm.lead: >-
+    Las fases se solapan. Los lotes salen los jueves; las fechas están en el tablero y las fijan los
+    responsables de las tareas cuando estas se asumen. Entre lotes no hay pull requests de un solo
+    sitio, salvo que un control esté en rojo.
+  hub.rhythm.phase: Fase {id}
+  hub.rhythm.week: La semana
+  hub.rhythm.day: Día
+  hub.rhythm.what: Qué
+  hub.rhythm.who: Quién
+  hub.rhythm.source: El ritmo en el centro
+  hub.rhythm.plan: El plan con fechas
+  hub.day.monday: Lunes
+  hub.day.tuesday_wednesday: Martes a miércoles
+  hub.day.thursday: Jueves
+  hub.day.friday: Viernes
+  hub.rules.section: Reglas del juego
+  hub.rules.sweeps: Reglas de barrido y archivos calientes
+  hub.rules.security: >-
+    Los hallazgos relevantes para la seguridad van por el aviso privado de vulnerabilidades de
+    GitHub (private vulnerability reporting) en btxchain/btx, nunca a un issue público, a un pull
+    request, a una tarjeta del tablero ni a un chat. El registro recibe la clase sin el detalle; las
+    salvaguardas dicen qué cuenta como tal.
+  hub.rules.method: El método de trabajo
+  hub.rules.guardrails: Las salvaguardas
+  hub.never.title: Lo que la IA de cada persona nunca hace
+  hub.never.lead: La persona responsable de la tarea firma cada publicación; la IA redacta.
+  hub.contribute.title: Contribuye
+  hub.contribute.lead: >-
+    Tres ciclos mantienen vivo el centro: las tareas consiguen responsables, las trampas se
+    convierten en lecciones y las lecciones en preguntas de examen.
+  hub.contribute.open: Cómo funciona, en el centro
   directory.add: ¿Falta un proyecto? Añádelo con un pull request; sin correo y sin guardianes.
   directory.add_link: Cómo añadir un proyecto
   on_release: "{count} de {total} nodos"
@@ -424,6 +1034,7 @@ fr:
   nav.network: Réseau
   nav.links: Liens
   nav.docs: Documents
+  nav.dev: Développeurs
   live.more: BTX en chiffres et activité de développement
   page.learn.title: Comprendre BTX
   page.learn.lead: Ce qu'est BTX, et ce qu'apporte la prochaine version.
@@ -435,6 +1046,10 @@ fr:
   page.links.lead: Projets, outils et services autour de BTX, chacun ouvert et vérifié à la main.
   page.docs.title: Documents
   page.docs.lead: La feuille de route et les documents de recherche que ce groupe tient à jour publiquement.
+  page.dev.title: Devenir développeur BTX
+  page.dev.lead: >-
+    Comment proposer au logiciel de nœud BTX des pull requests que le mainteneur peut fusionner :
+    pour les humains, et pour les outils d'IA avec lesquels ils travaillent.
   translation.note: Cette page a été traduite de l'anglais avec l'aide de l'IA.
   translation.fix: Corriger la traduction
   facts.title: Qu'est-ce que BTX ?
@@ -450,6 +1065,210 @@ fr:
     visible comme un commit et chacun peut corriger un chiffre.
   documents.open: Lire
   documents.repo: Le tout, y compris le code source de cette page
+  hub.begin.title: Par où commencer
+  hub.begin.lead: >-
+    Le hub des développeurs est un dossier de fichiers texte dans le dépôt GitHub de ce site. Il
+    décrit la façon de travailler des contributeurs ; il ne parle pas au nom de btxchain/btx, et
+    c'est le mainteneur de btxchain/btx qui décide de ce qui est intégré. Cette page en montre
+    l'essentiel ; les fichiers donnent le détail, et votre outil d'IA peut les lire directement.
+  hub.steps.title: Premiers pas
+  hub.rules.title: Les règles en bref
+  hub.levels.title: Trois niveaux
+  hub.levels.lead: >-
+    Un niveau est un point de départ, pas un grade. Pour passer au suivant : vous, ou vous et votre
+    outil d'IA, réussissez l'examen, et votre première pull request en amont passe par la seconde
+    revue du responsable d'un chantier.
+  hub.levels.open: Le brief de départ
+  hub.coverage.title: Couverture de tests du logiciel de nœud
+  hub.coverage.source: Chiffres par domaine, et comment les reproduire
+  hub.lanes.title: Chantiers
+  hub.lanes.lead: >-
+    {count} chantiers, chacun avec un périmètre et un critère d'achèvement qui dit quand le travail
+    est terminé. Les responsables sont indiqués dans le hub ; un chantier sans responsable est
+    ouvert, et vous le prenez en charge par une pull request. Le responsable et le second relecteur
+    d'un chantier ne sont jamais la même personne.
+  hub.lanes.open: Périmètre et critère d'achèvement de chaque chantier
+  hub.checked: "Copié depuis le hub le {date}. Si cette page et le hub diffèrent, c'est le hub qui fait foi."
+  hub.source: Le hub sur GitHub
+  hub.nav.label: Sur cette page
+  hub.nav.begin: Début
+  hub.nav.brief: Briefer votre IA
+  hub.nav.levels: Niveaux
+  hub.nav.coverage: État
+  hub.nav.classes: Classes
+  hub.nav.lanes: Chantiers
+  hub.nav.flow: Parcours
+  hub.nav.gates: Contrôles
+  hub.nav.rhythm: Rythme
+  hub.nav.rules: Règles
+  hub.nav.contribute: Contribuer
+  hub.principles.title: Notre façon de travailler
+  hub.measured: >-
+    Mesuré au commit {commit} le {date} ; tête actuelle : {head}. Chaque chiffre ici est copié du
+    hub ; en cas d'écart, c'est le hub qui fait foi.
+  hub.brief.title: Briefer votre IA
+  hub.brief.lead: >-
+    Collez-le comme premier message d'une nouvelle session dans votre outil d'IA (Claude Code,
+    Cursor, Codex ou un autre). Il lit le fichier pour agents, vous pose les questions du premier
+    lancement et s'arrête au contrôle avant pull request. Tout ce qui quitte la machine, c'est vous
+    qui le faites.
+  hub.brief.select: "Sans JavaScript : sélectionnez le bloc et copiez-le."
+  hub.brief.copy: Copier le prompt
+  hub.brief.copied: Copié
+  hub.brief.agents: Le fichier pour agents, en brut
+  hub.brief.llms: Chaque fichier du hub avec son URL brute
+  hub.runs.title: Comment les exécutions de tests se sont terminées
+  hub.runs.run: Exécution
+  hub.runs.unit: Unitaires (ctest)
+  hub.runs.functional: Scripts fonctionnels
+  hub.runs.total: Total
+  hub.runs.passed: Réussis
+  hub.runs.timed_out: Délai dépassé
+  hub.runs.failed: Échoués
+  hub.runs.skipped: Ignorés
+  hub.areas.title: Couverture par domaine
+  hub.areas.lead: >-
+    Lignes couvertes, unitaires → unitaires + fonctionnels ; branches avec les deux. Taille et rang
+    de risque d'après la carte des risques du plan ; un tiret signifie une absence de données, pas
+    zéro.
+  hub.areas.area: Domaine
+  hub.areas.unit: Unitaires
+  hub.areas.functional: + fonctionnels
+  hub.areas.branches: Branches
+  hub.areas.size: Taille (lignes)
+  hub.areas.rank: Rang de risque
+  hub.coverage.nodata: pas de données
+  hub.coverage.gui: >-
+    L'interface graphique (Qt) n'est compilée dans aucune exécution : sa couverture est inconnue,
+    pas nulle.
+  hub.coverage.plan: Le plan avec tous les tableaux
+  hub.sort.label: Trier
+  hub.sort.listed: Ordre de la liste
+  hub.sort.lowest: Plus faible d'abord
+  hub.sort.risk: Rang de risque
+  hub.sort.size: Taille
+  hub.baselines.title: Référence statique et dynamique
+  hub.baselines.lead: >-
+    Une exécution de chaque outil sur le commit mesuré. Chaque résultat est une piste tant qu'une
+    personne n'a pas lu le code et ne l'a pas reproduit ; personne ne relance les outils pour la
+    référence.
+  hub.classes.title: Classes de bugs récurrentes
+  hub.classes.lead: >-
+    Une classe de bugs est une erreur qui réapparaît sans cesse à un nouvel endroit. Avant de
+    soumettre quoi que ce soit, trouvez ici sa classe et répondez aux huit questions du contrôle.
+  hub.classes.class: Classe
+  hub.classes.name: Nom et règle
+  hub.classes.prs: PR de correction
+  hub.classes.sites: Sites ouverts
+  hub.classes.status: État
+  hub.classes.lane: Chantier
+  hub.classes.security: >-
+    Touchant à la sécurité : décomptes uniquement. Les constats passent par le signalement privé de
+    vulnérabilités de GitHub (private vulnerability reporting) sur btxchain/btx.
+  hub.classes.s: touchant à la sécurité
+  hub.classes.registry: Le registre, avec des pull requests d'exemple
+  hub.classes.shown: "{shown} classes sur {total}"
+  hub.filter.all: Tous
+  hub.filter.classes: Filtrer les classes par état
+  hub.filter.lanes: Filtrer les chantiers
+  hub.status.worklist: Liste de travail prête
+  hub.status.baseline: Référence mesurée
+  hub.status.count-first: Compter d'abord
+  hub.status.rule-only: Règle seule
+  hub.status.needs-ci: Requiert la CI du fork
+  hub.status.generators: Générateurs
+  hub.status.evidence: Preuve
+  hub.lanes.waiting_lead: >-
+    Chaque chantier peut être pris en charge. {count} ont un périmètre et un critère d'achèvement
+    mais pas encore de brief, et ne reçoivent aucun travail tant que personne ne les prend.
+  hub.lanes.kind.area: Domaine
+  hub.lanes.kind.class: Classe
+  hub.lanes.kind.infra: Infrastructure
+  hub.lanes.waiting: En attente d'un responsable
+  hub.lanes.waiting_only: Seulement les chantiers sans responsable
+  hub.lanes.expand: Déplier tous les critères d'achèvement
+  hub.lanes.collapse: Replier tous les critères d'achèvement
+  hub.lanes.reset: Réinitialiser
+  hub.lanes.shown: "{shown} chantiers sur {total}"
+  hub.lanes.json: Les chantiers en JSON
+  hub.lane.scope: Périmètre
+  hub.lane.why: Pourquoi
+  hub.lane.target: Objectif
+  hub.lane.cadence: Cadence
+  hub.lane.route: Voie
+  hub.lane.coverage: Lignes couvertes aujourd'hui
+  hub.lane.rank: Rang de risque
+  hub.lane.runners: Places de runner
+  hub.lane.done: Critère d'achèvement ({count} points)
+  hub.lane.nodata: pas un chantier de couverture
+  hub.lane.pack: Le brief de ce chantier
+  hub.lane.nopack: Pas encore de brief ; prenez le chantier en charge et il suivra.
+  hub.route.pr: PR
+  hub.route.evidence: Preuve
+  hub.route.run: Rapport d'exécution
+  hub.route.fork: Branche du fork
+  hub.flow.title: Le parcours d'un constat
+  hub.flow.lead: >-
+    Du moment où quelqu'un trouve quelque chose jusqu'à celui où une référence diminue. Deux sorties
+    permettent de quitter le parcours plus tôt.
+  hub.flow.exits: Où cela aboutit
+  hub.flow.exit: "(une sortie : le parcours peut s'arrêter ici)"
+  hub.flow.escalation: Quand quelque chose tourne mal
+  hub.flow.source: Le parcours dans le hub
+  hub.flow.gate: Les huit questions avant une pull request
+  hub.gates.title: Contrôles
+  hub.gates.lead: >-
+    En amont, aucune CI hébergée ne tourne pour le logiciel de nœud, par choix. Les contrôles
+    tournent sur le fork d'un contributeur, chaque pull request de classe renvoie à son exécution et
+    les références ne font que diminuer. La CI reste sur le fork et n'est proposée en amont que sur
+    demande.
+  hub.gates.ci: Jobs de CI du fork (chantier I-CI)
+  hub.gates.release: La liste de contrôle des contributeurs pour une version finale
+  hub.gates.release_lead: >-
+    Ce que les contributeurs tiennent prêt. Les lignes qui dépendent du mainteneur figurent ici pour
+    que les éléments soient prêts au moment de la décision, et non comme des demandes ; c'est le
+    mainteneur qui décide de ce qui est intégré.
+  hub.gates.job: Job
+  hub.gates.gate: Contrôle
+  hub.gates.name: Nom
+  hub.gates.state: État
+  hub.gates.phase: Phase
+  hub.gates.phase_value: phase {id}
+  hub.gates.done: critère d'achèvement
+  hub.gates.source: Les contrôles dans le plan
+  hub.gates.pack: Le brief du chantier I-CI
+  hub.rhythm.title: Les phases et la semaine
+  hub.rhythm.lead: >-
+    Les phases se chevauchent. Les lots partent le jeudi ; les dates figurent sur le tableau et sont
+    fixées par les responsables une fois les chantiers pris en charge. Pas de pull request pour un
+    seul site entre deux lots, sauf si un contrôle est au rouge.
+  hub.rhythm.phase: Phase {id}
+  hub.rhythm.week: La semaine
+  hub.rhythm.day: Jour
+  hub.rhythm.what: Quoi
+  hub.rhythm.who: Qui
+  hub.rhythm.source: Le rythme dans le hub
+  hub.rhythm.plan: Le plan daté
+  hub.day.monday: Lundi
+  hub.day.tuesday_wednesday: Du mardi au mercredi
+  hub.day.thursday: Jeudi
+  hub.day.friday: Vendredi
+  hub.rules.section: Règles du jeu
+  hub.rules.sweeps: Règles de balayage et fichiers sensibles
+  hub.rules.security: >-
+    Les constats touchant à la sécurité passent par le signalement privé de vulnérabilités de GitHub
+    (private vulnerability reporting) sur btxchain/btx, jamais par une issue publique, une pull
+    request, une carte du tableau ou un chat. Le registre reçoit la classe sans le détail ; les
+    garde-fous disent ce qui en relève.
+  hub.rules.method: La méthode de travail
+  hub.rules.guardrails: Les garde-fous
+  hub.never.title: Ce que l'IA de chacun ne fait jamais
+  hub.never.lead: La personne responsable du chantier signe chaque publication ; l'IA rédige.
+  hub.contribute.title: Contribuer en retour
+  hub.contribute.lead: >-
+    Trois boucles font vivre le hub : les chantiers trouvent des responsables, les pièges deviennent
+    des leçons, les leçons deviennent des questions d'examen.
+  hub.contribute.open: Comment faire, dans le hub
   directory.add: Un projet manque ? Ajoutez-le par une pull request ; ni e-mail ni gardien.
   directory.add_link: Comment ajouter un projet
   on_release: "{count} sur {total} nœuds"
@@ -536,6 +1355,7 @@ zh:
   nav.network: 网络
   nav.links: 链接
   nav.docs: 文档
+  nav.dev: 开发者
   live.more: BTX 数据与开发活动
   page.learn.title: 了解 BTX
   page.learn.lead: BTX 是什么，以及下一个版本会带来什么。
@@ -545,6 +1365,9 @@ zh:
   page.links.lead: 围绕 BTX 的项目、工具和服务，每一项都经人工打开并核实。
   page.docs.title: 文档
   page.docs.lead: 本小组公开维护的路线图和研究文档。
+  page.dev.title: 成为 BTX 开发者
+  page.dev.lead: >-
+    如何向 BTX 节点软件提交维护者能够合并的拉取请求：写给人，也写给他们使用的 AI 工具。
   translation.note: 本页由英文借助 AI 翻译。
   translation.fix: 修正翻译
   facts.title: BTX 是什么？
@@ -559,6 +1382,171 @@ zh:
     这个社区写下的内容。所有文档都在代码仓库中，因此每次修改都以提交的形式可见，任何人都可以更正数字。
   documents.open: 阅读
   documents.repo: 全部内容，包括本页的源代码
+  hub.begin.title: 从哪里开始
+  hub.begin.lead: >-
+    开发者中心是本网站 GitHub 代码仓库中的一个文本文件夹。它说明贡献者如何工作；它不代表 btxchain/btx 发言，合并什么由 btxchain/btx
+    的维护者决定。本页列出要点；细节在文件中，你的 AI 工具可以直接读取。
+  hub.steps.title: 入门步骤
+  hub.rules.title: 规则摘要
+  hub.levels.title: 三个级别
+  hub.levels.lead: >-
+    级别是起点，而不是头衔。要进入下一级：你（或你和你的 AI 工具）通过测验，并且你向上游提交的第一个拉取请求要经过某项任务负责人的二次审阅。
+  hub.levels.open: 入门简报
+  hub.coverage.title: 节点软件的测试覆盖率
+  hub.coverage.source: 各领域的数据及复现方法
+  hub.lanes.title: 任务
+  hub.lanes.lead: >-
+    {count} 项任务，每项都有范围和完成标准，说明工作何时算完成。负责人列在开发者中心里；没有负责人的任务是开放的，你可以通过拉取请求认领。同一项任务的负责人和第二审阅人绝不是同一个人。
+  hub.lanes.open: 每项任务的范围和完成标准
+  hub.checked: "于 {date} 从开发者中心复制。如果本页与开发者中心不一致，以开发者中心为准。"
+  hub.source: GitHub 上的开发者中心
+  hub.nav.label: 本页内容
+  hub.nav.begin: 开始
+  hub.nav.brief: AI 简报
+  hub.nav.levels: 级别
+  hub.nav.coverage: 现状
+  hub.nav.classes: 缺陷类别
+  hub.nav.lanes: 任务
+  hub.nav.flow: 流程
+  hub.nav.gates: 关卡
+  hub.nav.rhythm: 节奏
+  hub.nav.rules: 规则
+  hub.nav.contribute: 参与
+  hub.principles.title: 我们如何工作
+  hub.measured: 于 {date} 在 {commit} 上测量；当前最新提交为 {head}。此处每个数字都复制自开发者中心；如有不同，以开发者中心为准。
+  hub.brief.title: 给你的 AI 下达简报
+  hub.brief.lead: >-
+    把它作为新会话的第一条消息粘贴到你的 AI 工具中（Claude Code、Cursor、Codex
+    或其他工具）。它会阅读智能体文件，向你提出首次运行的问题，并在拉取请求关卡前停下。所有离开本机的操作都由你来完成。
+  hub.brief.select: 没有 JavaScript 时：选中整段文字并复制。
+  hub.brief.copy: 复制提示词
+  hub.brief.copied: 已复制
+  hub.brief.agents: 智能体文件（原始文本）
+  hub.brief.llms: 开发者中心每个文件及其原始 URL
+  hub.runs.title: 测试运行结果
+  hub.runs.run: 运行
+  hub.runs.unit: 单元测试（ctest）
+  hub.runs.functional: 功能测试脚本
+  hub.runs.total: 总数
+  hub.runs.passed: 通过
+  hub.runs.timed_out: 超时
+  hub.runs.failed: 失败
+  hub.runs.skipped: 跳过
+  hub.areas.title: 各领域覆盖率
+  hub.areas.lead: 覆盖的代码行：单元测试 → 单元 + 功能测试；分支覆盖率按单元 + 功能测试计算。规模和风险排名来自计划中的风险图；短横线表示没有数据，而不是零。
+  hub.areas.area: 领域
+  hub.areas.unit: 单元
+  hub.areas.functional: + 功能
+  hub.areas.branches: 分支
+  hub.areas.size: 规模（行）
+  hub.areas.rank: 风险排名
+  hub.coverage.nodata: 无数据
+  hub.coverage.gui: 图形界面（Qt）在任何一次运行中都未构建：未知，而不是零。
+  hub.coverage.plan: 包含全部表格的计划
+  hub.sort.label: 排序
+  hub.sort.listed: 原始顺序
+  hub.sort.lowest: 从低到高
+  hub.sort.risk: 风险排名
+  hub.sort.size: 规模
+  hub.baselines.title: 静态与动态基线
+  hub.baselines.lead: 每个工具在所测量的提交上运行一次。在有人阅读代码并复现之前，每个结果都只是线索；没有人为了基线而重新运行这些工具。
+  hub.classes.title: 反复出现的缺陷类别
+  hub.classes.lead: 缺陷类别是指在新位置反复出现的同一种错误。提交任何内容之前，先在这里找到它的类别，并回答关卡的八个问题。
+  hub.classes.class: 类别
+  hub.classes.name: 名称与规则
+  hub.classes.prs: 修复 PR
+  hub.classes.sites: 未处理位置
+  hub.classes.status: 状态
+  hub.classes.lane: 任务
+  hub.classes.security: >-
+    与安全相关：只列数量。发现的问题通过 btxchain/btx 上 GitHub 的私密漏洞报告（private vulnerability reporting）提交。
+  hub.classes.s: 与安全相关
+  hub.classes.registry: 登记表及示例拉取请求
+  hub.classes.shown: 共 {total} 个类别，显示 {shown} 个
+  hub.filter.all: 全部
+  hub.filter.classes: 按状态筛选缺陷类别
+  hub.filter.lanes: 筛选任务
+  hub.status.worklist: 工作清单就绪
+  hub.status.baseline: 基线已测量
+  hub.status.count-first: 先计数
+  hub.status.rule-only: 仅规则
+  hub.status.needs-ci: 需要 fork 上的 CI
+  hub.status.generators: 生成器
+  hub.status.evidence: 证据
+  hub.lanes.waiting_lead: 每项任务都可以认领。其中 {count} 项已有范围和完成标准，但还没有简报，在有人认领之前不会分配工作。
+  hub.lanes.kind.area: 代码领域
+  hub.lanes.kind.class: 缺陷类别
+  hub.lanes.kind.infra: 基础设施
+  hub.lanes.waiting: 等待负责人
+  hub.lanes.waiting_only: 仅显示等待负责人的任务
+  hub.lanes.expand: 展开全部完成标准
+  hub.lanes.collapse: 收起全部完成标准
+  hub.lanes.reset: 重置
+  hub.lanes.shown: 共 {total} 项任务，显示 {shown} 项
+  hub.lanes.json: 任务的 JSON 数据
+  hub.lane.scope: 范围
+  hub.lane.why: 原因
+  hub.lane.target: 目标
+  hub.lane.cadence: 频率
+  hub.lane.route: 提交途径
+  hub.lane.coverage: 当前行覆盖率
+  hub.lane.rank: 风险排名
+  hub.lane.runners: 运行者席位
+  hub.lane.done: 完成标准（{count} 项）
+  hub.lane.nodata: 非覆盖率任务
+  hub.lane.pack: 本任务的简报
+  hub.lane.nopack: 尚无简报；认领该任务后会补上。
+  hub.route.pr: PR
+  hub.route.evidence: 证据
+  hub.route.run: 运行报告
+  hub.route.fork: fork 分支
+  hub.flow.title: 一项发现如何流转
+  hub.flow.lead: 从有人发现问题，到某条基线缩小为止。有两个出口可以让它提前离开这条路径。
+  hub.flow.exits: 最终去向
+  hub.flow.exit: （出口：路径可在此结束）
+  hub.flow.escalation: 出现问题时
+  hub.flow.source: 开发者中心中的流程
+  hub.flow.gate: 提交拉取请求前的八个问题
+  hub.gates.title: 关卡
+  hub.gates.lead: >-
+    上游有意不为节点软件使用托管 CI。关卡运行在贡献者的 fork 上，每个类别拉取请求都链接其运行记录，基线只会缩小。CI 留在 fork 上，只有在上游提出请求时才提供。
+  hub.gates.ci: fork 上的 CI 作业（任务 I-CI）
+  hub.gates.release: 贡献者为正式版本准备的检查清单
+  hub.gates.release_lead: 贡献者需要准备好的内容。取决于维护者的条目列在这里，是为了在作出决定时证据已经就绪，而不是作为请求；合并什么由维护者决定。
+  hub.gates.job: 作业
+  hub.gates.gate: 关卡
+  hub.gates.name: 名称
+  hub.gates.state: 状态
+  hub.gates.phase: 阶段
+  hub.gates.phase_value: 阶段 {id}
+  hub.gates.done: 完成标准
+  hub.gates.source: 计划中的关卡
+  hub.gates.pack: 任务 I-CI 的简报
+  hub.rhythm.title: 阶段与每周安排
+  hub.rhythm.lead: 各阶段相互重叠。批次在每周四发出；日期写在看板上，由任务负责人在认领任务后确定。两个批次之间不提交只修一处的拉取请求，除非某个关卡变红。
+  hub.rhythm.phase: 阶段 {id}
+  hub.rhythm.week: 每周安排
+  hub.rhythm.day: 星期
+  hub.rhythm.what: 内容
+  hub.rhythm.who: 由谁
+  hub.rhythm.source: 开发者中心中的节奏
+  hub.rhythm.plan: 带日期的计划
+  hub.day.monday: 周一
+  hub.day.tuesday_wednesday: 周二至周三
+  hub.day.thursday: 周四
+  hub.day.friday: 周五
+  hub.rules.section: 工作守则
+  hub.rules.sweeps: 清理规则与热点文件
+  hub.rules.security: >-
+    与安全相关的发现要通过 btxchain/btx 上 GitHub 的私密漏洞报告（private vulnerability reporting）提交，绝不能发到公开的
+    issue、拉取请求、看板卡片或聊天中。登记表只记录类别，不含细节；哪些发现算在内，见防护规则。
+  hub.rules.method: 工作方法
+  hub.rules.guardrails: 防护规则
+  hub.never.title: 每个人的 AI 绝不做的事
+  hub.never.lead: 每条发布内容都由任务负责人署名；AI 只负责起草。
+  hub.contribute.title: 回馈贡献
+  hub.contribute.lead: 三个循环让开发者中心保持活力：任务有人认领，陷阱变成经验教训，经验教训变成测验题。
+  hub.contribute.open: 开发者中心中的做法
   directory.add: 缺少某个项目？通过拉取请求添加即可，无需邮件，也没有把关人。
   directory.add_link: 如何添加项目
   on_release: "{total} 个节点中的 {count} 个"
