@@ -39,7 +39,7 @@ Every figure below can be reproduced by anyone in a few minutes. Section 9 shows
 
 **The three things worth knowing:**
 
-1. **This was not a hidden premine.** The bootstrap window is written into the consensus rules and described in the published specification. The community shorthand "instamine" is imprecise: no protocol-level allocation exists, and no administrative mint occurred. The units were produced by ordinary proof of work — under rules that made that work roughly 300 times faster than it is today.
+1. **This was not a hidden premine.** The bootstrap window is written into the consensus rules and described in the published specification. The community shorthand "instamine" is imprecise: no protocol-level allocation exists, and no administrative mint occurred. The units were produced by ordinary proof of work — under rules that targeted a block every 250 milliseconds instead of every 90 seconds, 360 times the normal pace. Measured, the window ran at one block every 0.46 seconds, about 200 times the normal pace.
 
 2. **The specification's description no longer matches the chain.** The specification, in its 5 August 2026 version, states that these units "are held in a genesis multisig". On-chain, the address had been fully emptied ten weeks earlier, on 26 May 2026, through shielded transactions. Either a different address is meant, or the statement is stale. This cannot be resolved from public data.
 
@@ -160,7 +160,7 @@ All 1,000,000 BTX left the address in **346 transactions**, every one of them sh
 
 The pattern is regular and machine-like: uniform tranches, typically three per block, over a two-month period. It is consistent with a scripted, paced transfer rather than with ad-hoc spending.
 
-**What this means for traceability.** A shielded transaction moves value into the SMILE v2 pool. From outside, the destination, the subsequent movements, and the present holders are not determinable. The specification records that the shielded pool is now in wind-down: *"Shielded pool credits and new appends are disabled at height 125000. Public-flow shielding is disabled at height 128000."* These outflows completed at height 112,203, before those boundaries. The trail is therefore closed permanently as far as public analysis is concerned. Only voluntary disclosure by the holders — a viewing key, a signed statement, or a published destination list — could reopen it.
+**What this means for traceability.** A shielded transaction moves value into the SMILE v2 pool. From outside, the destination, the subsequent movements, and the present holders are not determinable. The specification records that the shielded pool is now in wind-down: *"Shielded pool credits and new appends are disabled at height 125000. Public-flow shielding is disabled at height 128000."* These outflows completed at height 112,203, before those boundaries. Since height 199,300 the shielded pool is closed in both directions (`BTX_SHIELDED_POOL_DISABLE_HEIGHT` in `src/kernel/chainparams.cpp`). The trail is therefore closed permanently as far as public analysis is concerned. Only voluntary disclosure by the holders — a viewing key, a signed statement, or a published destination list — could reopen it.
 
 ---
 
@@ -301,6 +301,8 @@ Corrections are listed here with their date, rather than folded silently into th
 | Date | Section | What changed |
 |---|---|---|
 | 2026-11-05 | §7.3 | Added that the circulating supply figure was reported to the project on 5 November 2026, and that the page is unchanged as of that date. No figure changed. |
+| 2026-11-12 | §1 | "Roughly 300 times faster than it is today" replaced. The figure could not be derived from anything in this document. Now: designed 250 ms vs 90 s per block (360 times), measured 0.46 s per block (about 200 times). Check: `curl -s https://btxscan.ninjaraider.com/api/block/1` and `/api/block/50000` give the timestamps 13:06:53 and 19:29:40 UTC; 22,967 s ÷ 50,000 blocks = 0.459 s; 90 ÷ 0.459 ≈ 196. Difficulty is not used for the comparison because the MatMul algorithm changed at block 185,000. |
+| 2026-11-12 | §4 | Added that the shielded pool is closed in both directions since height 199,300. It confirms the finding that the trail is closed; no figure changed. |
 
 If you find an error, open an issue or send a pull request. That applies to everyone, and most of all to the people who hold the units.
 
@@ -368,7 +370,7 @@ Jede Zahl unten lässt sich in wenigen Minuten reproduzieren. Abschnitt 9 zeigt 
 
 **Die drei Punkte, auf die es ankommt:**
 
-1. **Das war kein verdeckter Premine.** Das Bootstrap-Fenster steht in den Konsensregeln und ist in der veröffentlichten Spezifikation beschrieben. Das Schlagwort „Instamine" ist ungenau: Es gab keine Zuteilung auf Protokollebene und keine administrative Erzeugung. Die Einheiten entstanden durch gewöhnlichen Proof of Work – unter Regeln, die diese Arbeit rund 300-mal schneller machten als heute.
+1. **Das war kein verdeckter Premine.** Das Bootstrap-Fenster steht in den Konsensregeln und ist in der veröffentlichten Spezifikation beschrieben. Das Schlagwort „Instamine" ist ungenau: Es gab keine Zuteilung auf Protokollebene und keine administrative Erzeugung. Die Einheiten entstanden durch gewöhnlichen Proof of Work – unter Regeln, die einen Block alle 250 Millisekunden statt alle 90 Sekunden vorsahen, das 360-Fache des normalen Tempos. Gemessen lief das Fenster mit einem Block alle 0,46 Sekunden, etwa dem 200-Fachen des normalen Tempos.
 
 2. **Die Beschreibung in der Spezifikation stimmt nicht mehr mit der Kette überein.** Die Spezifikation in der Fassung vom 5. August 2026 sagt, diese Einheiten „are held in a genesis multisig" – würden also in einem Genesis-Multisig gehalten. On-chain war die Adresse zehn Wochen zuvor, am 26. Mai 2026, vollständig geleert worden, über abgeschirmte Transaktionen. Entweder ist eine andere Adresse gemeint, oder die Aussage ist veraltet. Aus öffentlichen Daten nicht auflösbar.
 
@@ -474,7 +476,7 @@ Alle 1.000.000 BTX verließen die Adresse in **346 Transaktionen**, jede einzeln
 
 Das Muster ist regelmäßig und maschinell: gleichförmige Tranchen, typischerweise drei je Block, über zwei Monate. Das spricht für einen skriptgesteuerten, getakteten Transfer, nicht für anlassbezogene Ausgaben.
 
-**Was das für die Nachvollziehbarkeit bedeutet.** Eine abgeschirmte Transaktion führt Wert in den SMILE-v2-Pool. Von außen sind Ziel, Weiterbewegungen und heutige Haltende nicht bestimmbar. Die Spezifikation hält fest, dass der Shielded Pool abgewickelt wird: *„Shielded pool credits and new appends are disabled at height 125000. Public-flow shielding is disabled at height 128000."* Diese Abflüsse endeten auf Höhe 112.203, also vor diesen Grenzen. Die Spur ist für öffentliche Analyse damit dauerhaft geschlossen. Nur eine freiwillige Offenlegung der Haltenden – ein Viewing Key, eine signierte Erklärung oder eine veröffentlichte Zielliste – könnte sie wieder öffnen.
+**Was das für die Nachvollziehbarkeit bedeutet.** Eine abgeschirmte Transaktion führt Wert in den SMILE-v2-Pool. Von außen sind Ziel, Weiterbewegungen und heutige Haltende nicht bestimmbar. Die Spezifikation hält fest, dass der Shielded Pool abgewickelt wird: *„Shielded pool credits and new appends are disabled at height 125000. Public-flow shielding is disabled at height 128000."* Diese Abflüsse endeten auf Höhe 112.203, also vor diesen Grenzen. Seit Höhe 199.300 ist der Shielded Pool in beide Richtungen geschlossen (`BTX_SHIELDED_POOL_DISABLE_HEIGHT` in `src/kernel/chainparams.cpp`). Die Spur ist für öffentliche Analyse damit dauerhaft geschlossen. Nur eine freiwillige Offenlegung der Haltenden – ein Viewing Key, eine signierte Erklärung oder eine veröffentlichte Zielliste – könnte sie wieder öffnen.
 
 ---
 
@@ -583,5 +585,7 @@ Korrekturen stehen hier mit Datum, statt still im Text zu verschwinden. Jede Än
 | Datum | Abschnitt | Änderung |
 |---|---|---|
 | 2026-11-05 | §7.3 | Ergänzt, dass die Umlaufmengen-Angabe am 5. November 2026 an das Projekt gemeldet wurde und die Seite zu diesem Datum unverändert ist. Keine Zahl geändert. |
+| 2026-11-12 | §1 | „Rund 300-mal schneller als heute“ ersetzt. Die Zahl ließ sich aus nichts in diesem Dokument herleiten. Jetzt: geplant 250 ms statt 90 s pro Block (360-fach), gemessen 0,46 s pro Block (etwa 200-fach). Prüfung: `curl -s https://btxscan.ninjaraider.com/api/block/1` und `/api/block/50000` liefern 13:06:53 und 19:29:40 UTC; 22.967 s ÷ 50.000 Blöcke = 0,459 s; 90 ÷ 0,459 ≈ 196. Die Schwierigkeit wird nicht verglichen, weil sich der MatMul-Algorithmus ab Block 185.000 geändert hat. |
+| 2026-11-12 | §4 | Ergänzt, dass der Shielded Pool seit Höhe 199.300 in beide Richtungen geschlossen ist. Bestätigt den Befund, dass die Spur geschlossen ist; keine Zahl geändert. |
 
 Wer einen Fehler findet, öffnet ein Issue oder schickt einen Pull Request.
