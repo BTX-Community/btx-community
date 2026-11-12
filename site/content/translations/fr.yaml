@@ -364,15 +364,6 @@ translations:
     mois.
 - en: Mining by matrix multiplication
   fr: Minage par multiplication de matrices
-- en: >-
-    Instead of hashing, miners multiply large matrices, the work AI accelerators are built for. Since
-    block 185,000 every block needs a complete, exactly reproducible run on a qualified NVIDIA (CUDA)
-    or Apple (Metal) GPU. There is no CPU mining.
-  fr: >-
-    Au lieu de calculer des hachages, les mineurs multiplient de grandes matrices, le travail pour
-    lequel les accélérateurs d'IA sont conçus. Depuis le bloc 185 000, chaque bloc exige une exécution
-    complète et exactement reproductible sur un GPU NVIDIA (CUDA) ou Apple (Metal) qualifié. Le minage
-    au CPU est impossible.
 - en: Post-quantum signatures
   fr: Signatures post-quantiques
 - en: >-
@@ -383,86 +374,17 @@ translations:
     Les coins sont verrouillés par des signatures conçues pour résister aux ordinateurs quantiques
     : ML-DSA-44 (NIST FIPS 204) pour les dépenses courantes, SLH-DSA (FIPS 205) comme solution de
     repli à base de hachage. Ces adresses P2MR commencent par btx1z.
-- en: Built on Bitcoin Core
-  fr: Bâti sur Bitcoin Core
-- en: >-
-    The node is a fork of Bitcoin Core. btxd, btx-cli, the RPC interface and PSBTs work the way Bitcoin
-    users know them; what differs is the proof-of-work and the signatures.
-  fr: >-
-    Le nœud est un fork de Bitcoin Core. btxd, btx-cli, l'interface RPC et les PSBT fonctionnent comme
-    les utilisateurs de Bitcoin les connaissent ; ce qui change, c'est la preuve de travail et les
-    signatures.
-- en: >-
-    Release candidate v0.35.0rc1 since 13 October 2026. The developers call it not release-qualified;
-    the current release stays v0.34.15. Nothing below is final.
-  fr: >-
-    Version candidate v0.35.0rc1 depuis le 13 octobre 2026. Les développeurs la jugent non qualifiée
-    pour une publication ; la version actuelle reste la v0.34.15. Rien de ce qui suit n'est définitif.
+- en: Built on Bitcoin Knots
+  fr: Bâti sur Bitcoin Knots
 - en: Presigned swap claims from the wallet
   fr: Réclamations de swap présignées depuis le portefeuille
-- en: >-
-    Since 0.34.13 a swap claim can be signed at funding and completed later by anyone who has the
-    secret; nobody has to stay online, but someone must broadcast it in time. That still takes hand-built
-    transactions. htlc_presign and p2mr_leaf make it a wallet step. Not in rc1; in the 0.35 branch
-    and the v0.34.16 pre-release.
-  fr: >-
-    Depuis la 0.34.13, une réclamation de swap peut être signée dès le financement et complétée plus
-    tard par quiconque détient le secret ; personne ne doit rester en ligne, mais quelqu'un doit la
-    diffuser à temps. Il faut encore des transactions faites à la main. htlc_presign et p2mr_leaf
-    en font une étape du portefeuille. Absents de la rc1 ; dans la branche 0.35 et la préversion v0.34.16.
-- en: The model network moves into the node
-  fr: Le réseau de modèles entre dans le nœud
-- en: >-
-    The network for AI models has run beside the node since v0.34.9 (btx-modeld). In 0.35 it runs
-    inside btxd, and a research lab joins it: identities with recovery keys, git workspaces for models,
-    evaluations. Off with -modelnet=0; it does not spend coins.
-  fr: >-
-    Le réseau pour les modèles d'IA fonctionne à côté du nœud depuis la v0.34.9 (btx-modeld). Dans
-    la 0.35, il tourne dans btxd, et un laboratoire de recherche le rejoint : identités avec clés
-    de récupération, espaces de travail git pour les modèles, évaluations. Désactivable avec -modelnet=0
-    ; il ne dépense pas de coins.
-- en: Safer auto-update
-  fr: Mise à jour automatique plus sûre
-- en: >-
-    A node behind a proxy or Tor no longer checks for updates by itself, so it does not reveal its
-    address to the update server. The update helper runs isolated.
-  fr: >-
-    Un nœud derrière un proxy ou Tor ne cherche plus lui-même les mises à jour et ne révèle donc pas
-    son adresse au serveur de mise à jour. L'outil de mise à jour s'exécute de façon isolée.
-- en: Desktop app and ZeroMQ
-  fr: Application de bureau et ZeroMQ
-- en: >-
-    The official archives include the graphical wallet btx-qt and ZeroMQ notifications for services
-    that follow the chain.
-  fr: >-
-    Les archives officielles contiennent le portefeuille graphique btx-qt et les notifications ZeroMQ
-    pour les services qui suivent la chaîne.
-- en: >-
-    rc1 has no Linux CUDA archive. A GPU node started with it falls back to the CPU and can stall
-    at the next block. Miners and signers stay on v0.34.15.
-  fr: >-
-    La rc1 n'a pas d'archive Linux avec CUDA. Un nœud GPU démarré avec elle se rabat sur le CPU et
-    peut se bloquer au bloc suivant. Mineurs et signataires restent sur la v0.34.15.
-- en: The desktop app of rc1 needs glibc 2.43 and does not start on Ubuntu 24.04.
-  fr: >-
-    L'application de bureau de la rc1 exige glibc 2.43 et ne démarre pas sous Ubuntu 24.04.
-- en: CUDA on Windows was neither built nor tested.
-  fr: CUDA sous Windows n'a été ni compilé ni testé.
 - en: Before you buy or receive BTX
   fr: Avant d'acheter ou de recevoir des BTX
-- en: >-
-    Create the wallet first and write the backup down offline. Restore it once, so you know the backup
-    works before money depends on it.
-  fr: >-
-    Créez d'abord le portefeuille et notez la sauvegarde hors ligne. Restaurez-la une fois, pour savoir
-    qu'elle fonctionne avant que de l'argent en dépende.
 - en: >-
     Check the receiving address in full, not just its start and end. BTX addresses start with btx1z.
   fr: >-
     Vérifiez l'adresse de réception en entier, pas seulement son début et sa fin. Les adresses BTX
     commencent par btx1z.
-- en: Send a small test amount first and wait until it is confirmed.
-  fr: Envoyez d'abord un petit montant de test et attendez qu'il soit confirmé.
 - en: >-
     Before you use an exchange or an OTC seller, check that withdrawals really work. A price on a
     website is not a market you can sell into.
@@ -482,8 +404,6 @@ translations:
     de l'aide, une « récupération » ou des rendements garantis sont des arnaques.
 - en: Before you install a node release
   fr: Avant d'installer une version du nœud
-- en: Download only from github.com/btxchain/btx/releases.
-  fr: Téléchargez uniquement depuis github.com/btxchain/btx/releases.
 - en: >-
     Recent releases come without a signed checksum file; the last one with SHA256SUMS.asc was v0.34.6.
     GitHub shows a SHA-256 for each file on the release page: compare it with "shasum -a 256 <file>"
@@ -498,17 +418,6 @@ translations:
   fr: >-
     Cela prouve que le fichier est bien celui de GitHub, pas qui l'a compilé. Si cela compte pour
     vous, compilez vous-même le code source étiqueté.
-- en: >-
-    Read the release notes before upgrading. Some releases change the rules at a fixed block height;
-    this page shows a countdown when one is coming.
-  fr: >-
-    Lisez les notes de version avant de mettre à jour. Certaines versions changent les règles à une
-    hauteur de bloc fixe ; cette page affiche un compte à rebours quand cela approche.
-- en: >-
-    Release candidates (rc) are for testing. Do not run them on a mining or signing node.
-  fr: >-
-    Les versions candidates (rc) servent aux tests. Ne les utilisez pas sur un nœud de minage ou de
-    signature.
 - en: New to BTX
   fr: Nouveau sur BTX
 - en: >-
@@ -706,3 +615,175 @@ translations:
   fr: Le site a répondu par une erreur (520, 2026-11-03).
 - en: The BTX page no longer exists (404, 2026-11-03).
   fr: La page BTX n'existe plus (404, 2026-11-03).
+- en: >-
+    A new node cannot sync from genesis: v0.34.15 and v0.34.16 stop at block 126,978. Start from a
+    signed snapshot, and do not run -reindex until a release fixes it.
+  fr: >-
+    Un nouveau nœud ne peut pas se synchroniser depuis la genèse : la v0.34.15 et la v0.34.16 s'arrêtent
+    au bloc 126 978. Commencez avec un instantané signé et n'exécutez pas -reindex tant qu'une version
+    n'a pas corrigé le problème.
+- en: >-
+    A node behind a proxy, or with -onlynet excluding IPv4 and IPv6, no longer checks for updates by
+    default. Every other mainnet node still polls btx.dev and installs a newer signed release by itself
+    unless autoupdateseamless=0.
+  fr: >-
+    Un nœud derrière un proxy, ou avec -onlynet sans IPv4 ni IPv6, ne cherche plus de mises à jour par
+    défaut. Tout autre nœud du mainnet continue d'interroger btx.dev et installe lui-même une version
+    signée plus récente, sauf avec autoupdateseamless=0.
+- en: >-
+    A sync from genesis still stops at block 126,978 (#272). Start from a snapshot.
+  fr: >-
+    Une synchronisation depuis la genèse s'arrête toujours au bloc 126 978 (#272). Commencez avec un
+    instantané.
+- en: Atlas, a second desktop app
+  fr: Atlas, une deuxième application de bureau
+- en: Auto-update off behind a proxy
+  fr: Mise à jour automatique désactivée derrière un proxy
+- en: >-
+    Before an upgrade, stop with btx-cli stop and wait until btxd has exited; never kill it. Then back
+    up the data directory and wallets.
+  fr: >-
+    Avant une mise à jour, arrêtez le nœud avec btx-cli stop et attendez que btxd se termine ; ne le
+    tuez jamais. Sauvegardez ensuite le répertoire de données et les portefeuilles.
+- en: >-
+    Decide the node's role first. Checking blocks yourself needs a qualified NVIDIA or Apple GPU.
+    Without one, run a trusted mirror with at least two signers, or the node stops.
+  fr: >-
+    Décidez d'abord du rôle du nœud. Vérifier soi-même les blocs nécessite un GPU qualifié NVIDIA ou
+    Apple. Sans lui, faites-le tourner comme miroir de confiance avec au moins deux signataires, sinon
+    le nœud s'arrête.
+- en: >-
+    Download node releases only from github.com/btxchain/btx/releases. Community tools such as easynode
+    or snapshots are your own choice to trust; check their signatures.
+  fr: >-
+    Téléchargez les versions du nœud uniquement depuis github.com/btxchain/btx/releases. Faire confiance
+    aux outils de la communauté comme easynode ou les instantanés relève de votre choix ; vérifiez leurs
+    signatures.
+- en: Clearer backup warning
+  fr: Avertissement de sauvegarde plus clair
+- en: >-
+    Instead of hashing, miners multiply large matrices, the work AI accelerators are built for. Since
+    block 185,000 a node that checks blocks itself replays each one exactly on a qualified NVIDIA (CUDA)
+    or Apple (Metal) GPU; nodes without one follow signed checks from others. There is no CPU mining.
+  fr: >-
+    Au lieu de calculer des hachages, les mineurs multiplient de grandes matrices, le travail pour
+    lequel les accélérateurs d'IA sont conçus. Depuis le bloc 185 000, un nœud qui vérifie lui-même les
+    blocs recalcule chacun exactement sur un GPU qualifié NVIDIA (CUDA) ou Apple (Metal) ; les nœuds
+    sans GPU suivent des vérifications signées par d'autres. On ne peut pas miner avec le CPU.
+- en: >-
+    Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.15 has archives for Linux,
+    Linux with CUDA and Apple Silicon Macs; there is no official Windows build.
+  fr: >-
+    Les binaires Linux nécessitent glibc 2.38 ou plus récent (Ubuntu 24.04, Debian 13). La v0.34.15
+    propose des archives pour Linux, Linux avec CUDA et les Mac Apple Silicon ; il n'existe pas de
+    version officielle pour Windows.
+- en: >-
+    Make a backup before money arrives. In btxd, backupwalletbundlearchive writes one encrypted file;
+    keep it and its passphrase offline and apart. Any backup can spend your coins: plain exports at
+    once, the archive once opened. Restore it once to test it.
+  fr: >-
+    Faites une sauvegarde avant que l'argent arrive. Dans btxd, backupwalletbundlearchive écrit un seul
+    fichier chiffré ; gardez-le, ainsi que sa phrase de passe, hors ligne et séparément. Toute
+    sauvegarde peut dépenser vos pièces : les exports simples tout de suite, l'archive une fois ouverte.
+    Restaurez-la une fois pour la tester.
+- en: Model network with fewer open ports
+  fr: Réseau de modèles avec moins de ports ouverts
+- en: >-
+    No CUDA, macOS or Windows archive. A GPU, mining or signing node on v0.34.16 loses its GPU path;
+    those nodes stay on v0.34.15.
+  fr: >-
+    Pas d'archive pour CUDA, macOS ni Windows. Un nœud GPU, de minage ou de signature perd avec la
+    v0.34.16 son chemin GPU ; ces nœuds restent en v0.34.15.
+- en: >-
+    Other coins also trade as BTX. A market is only for this chain if its deposit addresses start with
+    btx1z.
+  fr: >-
+    D'autres cryptomonnaies s'échangent aussi sous le sigle BTX. Un marché ne concerne cette chaîne que
+    si ses adresses de dépôt commencent par btx1z.
+- en: >-
+    Pre-release since 7 November 2026, Linux x86_64 only. It packages the 0.35 review branches; the 0.35
+    line stays open. The developers say it is not a release qualification. The current full release
+    stays v0.34.15.
+  fr: >-
+    Préversion depuis le 7 novembre 2026, uniquement pour Linux x86_64. Elle regroupe les branches de
+    revue de la 0.35 ; la ligne 0.35 reste ouverte. Les développeurs précisent que ce n'est pas une
+    version qualifiée. La version complète actuelle reste la v0.34.15.
+- en: >-
+    Pre-releases (rc, and v0.34.16) are for testing. v0.34.16 has no CUDA build: a GPU, mining or
+    signing node stays on v0.34.15.
+  fr: >-
+    Les préversions (rc et la v0.34.16) servent aux tests. La v0.34.16 n'a pas de version CUDA : un nœud
+    GPU, de minage ou de signature reste en v0.34.15.
+- en: >-
+    Read the release notes before upgrading. Some releases change the rules at a fixed block height;
+    this page shows a countdown when one is coming. Each release also stops working about two years
+    after it was built; current ones in November 2028.
+  fr: >-
+    Lisez les notes de version avant de mettre à jour. Certaines versions changent les règles à partir
+    d'une hauteur de bloc fixe ; cette page affiche un compte à rebours quand cela approche. Chaque
+    version cesse aussi de fonctionner environ deux ans après sa compilation ; les actuelles en novembre
+    2028.
+- en: >-
+    Send a small test amount first. Wait for at least 10 confirmations before you treat a payment as
+    final; short reorganisations of the chain happen several times a day.
+  fr: >-
+    Envoyez d'abord un petit montant de test. Attendez au moins 10 confirmations avant de considérer un
+    paiement comme définitif ; de courtes réorganisations de la chaîne se produisent plusieurs fois par
+    jour.
+- en: >-
+    Since 0.34.13 a swap claim can be signed at funding and completed later by anyone who has the
+    secret. htlc_presign and p2mr_leaf turn the hand-built transactions into a wallet step. The fee is
+    fixed when you presign, and the claim must confirm before the refund height.
+  fr: >-
+    Depuis la 0.34.13, une réclamation de swap peut être signée au financement et complétée plus tard
+    par toute personne qui connaît le secret. htlc_presign et p2mr_leaf transforment les transactions
+    construites à la main en une étape du portefeuille. Les frais sont fixés à la présignature, et la
+    réclamation doit être confirmée avant la hauteur de remboursement.
+- en: >-
+    The Linux archive adds btx-atlas beside btx-qt, which stays. Atlas needs glibc 2.39, WebKitGTK 4.1,
+    GTK 3, the Ayatana tray library and zenity. btx-qt and ZeroMQ were already in v0.34.15.
+  fr: >-
+    L'archive Linux ajoute btx-atlas à côté de btx-qt, qui reste. Atlas nécessite glibc 2.39, WebKitGTK
+    4.1, GTK 3, la bibliothèque de barre d'état Ayatana et zenity. btx-qt et ZeroMQ étaient déjà dans la
+    v0.34.15.
+- en: >-
+    The network for AI models is on by default and listens on TCP 29447. v0.34.16 no longer opens that
+    port with -listen=0 or a proxy, finds model peers on the local network over UDP 29448, and adds a
+    local security guard. -modelnet=0 turns all of it off; it does not spend coins.
+  fr: >-
+    Le réseau de modèles d'IA est activé par défaut et écoute sur TCP 29447. La v0.34.16 n'ouvre plus ce
+    port avec -listen=0 ou un proxy, cherche des pairs de modèles sur le réseau local via UDP 29448 et
+    ajoute un gardien de sécurité local. -modelnet=0 désactive le tout ; il ne dépense pas de pièces.
+- en: >-
+    The node derives from Bitcoin Knots v29.2, a variant of Bitcoin Core. btxd, btx-cli, the RPC
+    interface and PSBTs work the way Bitcoin users know them; what differs is the proof-of-work, the
+    signatures and some network rules.
+  fr: >-
+    Le nœud dérive de Bitcoin Knots v29.2, une variante de Bitcoin Core. btxd, btx-cli, l'interface RPC
+    et les PSBT fonctionnent comme les utilisateurs de Bitcoin les connaissent ; ce qui change, c'est la
+    preuve de travail, les signatures et certaines règles du réseau.
+- en: >-
+    Two defaults to decide on: btxd installs newer signed releases from btx.dev by itself
+    (autoupdateseamless=0 only reports them, autoupdate=0 stops checking), and the model network listens
+    on port 29447 (modelnet=0 turns it off).
+  fr: >-
+    Deux réglages par défaut à décider : btxd installe lui-même les versions signées plus récentes
+    depuis btx.dev (autoupdateseamless=0 les signale seulement, autoupdate=0 cesse de vérifier), et le
+    réseau de modèles écoute sur le port 29447 (modelnet=0 le désactive).
+- en: Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.
+  fr: >-
+    Décompressez toute l'archive et lancez bin/btxd depuis celle-ci. Un bin/btxd copié seul s'arrête.
+- en: >-
+    Wallet bundle backups now say that the descriptor file inside spends without the wallet passphrase,
+    and warn for an encrypted wallet. Backups made with earlier versions hold the same file.
+  fr: >-
+    Les sauvegardes groupées du portefeuille indiquent désormais que le fichier de descripteurs qu'elles
+    contiennent permet de dépenser sans la phrase de passe du portefeuille, et avertissent pour un
+    portefeuille chiffré. Les sauvegardes faites avec des versions antérieures contiennent le même
+    fichier.
+- en: >-
+    btx-qt in this archive needs glibc 2.43 and does not start on Ubuntu 24.04 or Debian 13; btxd and
+    btx-cli need 2.38.
+  fr: >-
+    btx-qt dans cette archive nécessite glibc 2.43 et ne démarre pas sous Ubuntu 24.04 ni Debian 13 ;
+    btxd et btx-cli nécessitent 2.38.
