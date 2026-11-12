@@ -1,0 +1,48 @@
+{% extends "base.html.j2" %}
+{% block content %}
+      <section class="c-intro">
+        <h1 class="c-page-title">{{ page_title }}</h1>
+        <p class="c-hero__lead">{{ page_lead }}</p>
+      </section>
+
+      <section class="c-facts" id="about" aria-labelledby="about-title">
+        <h2 class="c-section-title" id="about-title">{{ ui["facts.title"] }}</h2>
+        <div class="c-fact-grid">
+          {% for fact in facts %}
+          <article class="c-fact" id="fact-{{ fact.id }}">
+            <h3 class="c-fact__title">{{ fact.title }}</h3>
+            <p>{{ fact.text }}</p>
+            <a class="c-link c-fact__source" href="{{ fact.source }}" rel="noopener noreferrer">{{ ui["facts.source"] }} ↗</a>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      {% if upcoming %}
+      <section class="c-upcoming" id="next" aria-labelledby="next-title">
+        <h2 class="c-section-title" id="next-title">{{ ui["upcoming.title"].format(version=upcoming.version) }}</h2>
+        <p class="c-warning">{{ upcoming.status }}</p>
+        <div class="c-fact-grid">
+          {% for feature in upcoming.features %}
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">{{ feature.title }}</h3>
+            <p>{{ feature.text }}</p>
+            <a class="c-link c-fact__source" href="{{ feature.source }}" rel="noopener noreferrer">{{ ui["facts.source"] }} ↗</a>
+          </article>
+          {% endfor %}
+        </div>
+        {% if upcoming.caveats %}
+        <h3 class="c-subtitle">{{ ui["upcoming.caveats"] }}</h3>
+        <ul class="c-caveats">
+          {% for caveat in upcoming.caveats %}
+          <li>{{ caveat }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <p class="c-muted">
+          {{ ui["upcoming.checked"].format(date=upcoming.checked) }}
+          <a class="c-link" href="{{ upcoming.source }}" rel="noopener noreferrer">{{ ui["upcoming.notes"] }} ↗</a>
+        </p>
+      </section>
+      {% endif %}
+{% endblock %}

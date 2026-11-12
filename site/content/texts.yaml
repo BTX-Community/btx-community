@@ -59,6 +59,25 @@ en:
   dev.release: Latest release
   dev.prerelease: Newer pre-release
   dev.measured: "Measured on GitHub at {time}, every hour."
+  skip: Skip to content
+  nav.label: Pages
+  lang.label: Language
+  nav.home: Start
+  nav.learn: Learn
+  nav.network: Network
+  nav.links: Links
+  nav.docs: Documents
+  live.more: BTX in numbers and development activity
+  page.learn.title: Learn about BTX
+  page.learn.lead: What BTX is, and what the next release brings.
+  page.network.title: Network and development
+  page.network.lead: >-
+    The network's live state from the public status API, and the development of the node
+    software as measured on GitHub.
+  page.links.title: Links
+  page.links.lead: Projects, tools and services around BTX, each one opened and checked by hand.
+  page.docs.title: Documents
+  page.docs.lead: The roadmap and the research papers this group maintains in the open.
   facts.title: What is BTX?
   facts.source: Source
   upcoming.title: "Coming soon: v{version}"
@@ -157,6 +176,25 @@ de:
   dev.release: Letztes Release
   dev.prerelease: Neueres Pre-Release
   dev.measured: "Bei GitHub gemessen am {time}, stündlich."
+  skip: Zum Inhalt springen
+  nav.label: Seiten
+  lang.label: Sprache
+  nav.home: Start
+  nav.learn: Lernen
+  nav.network: Netz
+  nav.links: Links
+  nav.docs: Dokumente
+  live.more: BTX in Zahlen und Entwicklungsaktivität
+  page.learn.title: BTX verstehen
+  page.learn.lead: Was BTX ist und was das nächste Release bringt.
+  page.network.title: Netz und Entwicklung
+  page.network.lead: >-
+    Der Live-Zustand des Netzes aus der öffentlichen Status-API und die Entwicklung der
+    Node-Software, gemessen auf GitHub.
+  page.links.title: Links
+  page.links.lead: Projekte, Werkzeuge und Dienste rund um BTX, jeder Eintrag von Hand geöffnet und geprüft.
+  page.docs.title: Dokumente
+  page.docs.lead: Die Roadmap und die Research-Papiere, die diese Gruppe offen pflegt.
   facts.title: Was ist BTX?
   facts.source: Quelle
   upcoming.title: "Demnächst: v{version}"
