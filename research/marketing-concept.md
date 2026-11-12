@@ -115,7 +115,7 @@ Success is measured by network data, not by price. Almost all of it comes from o
 | KPI | Source | Market side |
 | --- | --- | --- |
 | Hashrate and difficulty | Own node | Miners |
-| Number of pool workers | Pool APIs (e.g. minebtx.com) | Miners |
+| Number of pool workers | Pool statistics of btx-pool.com and ninjaraider, already read every 5 minutes by btx-monitoring | Miners |
 | Active addresses per week | Own node / explorer | Buyers |
 | Share of mining rewards held rather than sold | On-chain analysis, if feasible | Both |
 | OTC volume | Voluntary figures from desks | Buyers |
@@ -256,7 +256,7 @@ Erfolg wird an Netzwerkdaten gemessen, nicht am Kurs. Fast alles liefert das eig
 | KPI | Quelle | Seite des Marktes |
 | --- | --- | --- |
 | Hashrate und Difficulty | eigene Node | Miner |
-| Anzahl Pool-Worker | Pool-APIs (z. B. minebtx.com) | Miner |
+| Anzahl Pool-Worker | Pool-Statistiken von btx-pool.com und ninjaraider, die btx-monitoring schon alle 5 Minuten ausliest | Miner |
 | Aktive Adressen pro Woche | eigene Node / Explorer | Käufer |
 | Anteil gehaltener statt verkaufter Mining-Erträge | On-Chain-Auswertung, sofern machbar | beide |
 | OTC-Volumen | freiwillige Angaben der Desks | Käufer |
