@@ -5,6 +5,352 @@
 
 schema_version: 1
 translations:
+- en: >-
+    A .btxwallet file holds the post-quantum seed in plain text. Treat it like a private key and
+    delete temporary copies.
+  es: >-
+    Un archivo .btxwallet contiene la semilla poscuántica en texto plano. Trátalo como una clave
+    privada y borra las copias temporales.
+- en: >-
+    A default build has no GPU support and cannot check MatMul blocks itself: add CUDA, or run it as
+    a trusted mirror. On Ubuntu 22.04 or 24.04 add -DWITH_MODELNET=OFF, unless you install OpenSSL
+    3.5 or newer.
+  es: >-
+    Una compilación por defecto no tiene soporte de GPU y no puede comprobar por sí misma los
+    bloques MatMul: añade CUDA o ejecútala como espejo de confianza. En Ubuntu 22.04 o 24.04 añade
+    -DWITH_MODELNET=OFF, salvo que instales OpenSSL 3.5 o más reciente.
+- en: >-
+    Back up the whole wallet with backupwalletbundlearchive (one passphrase-encrypted file; see
+    doc/managing-wallets.md), not only the seed. A .btxwallet export holds the seed in plain text.
+  es: >-
+    Haz una copia de seguridad del monedero completo con backupwalletbundlearchive (un solo archivo
+    cifrado con una frase de contraseña; consulta doc/managing-wallets.md), no solo de la semilla.
+    Una exportación .btxwallet contiene la semilla en texto plano.
+- en: >-
+    Block explorer of the easyBTX team for blocks, transactions and addresses, with a public API
+    (api.btxscan.io).
+  es: >-
+    Explorador de bloques, transacciones y direcciones del equipo easyBTX, con una API pública
+    (api.btxscan.io).
+- en: Block explorer run by the ninjaraider pool, with a JSON API for addresses and blocks.
+  es: >-
+    Explorador de bloques gestionado por el pool ninjaraider, con una API JSON para direcciones y
+    bloques.
+- en: >-
+    Catch up in minutes with a daily signed snapshot. A sync from genesis currently stops at block
+    126,978 (issue #272).
+  es: >-
+    Ponte al día en minutos con una instantánea diaria firmada. Una sincronización desde el génesis
+    se detiene actualmente en el bloque 126.978 (issue #272).
+- en: Closed source (stated in its README). 2% dev fee on BTX.
+  es: Código cerrado (según su README). Comisión de desarrollador del 2 % en BTX.
+- en: >-
+    Closed source; the builds are unsigned, so check the SHA-256 on the release page. It starts on
+    BTX Pool by default. A 5% dev fee was listed for it in August 2026; check the current fee in the
+    app.
+  es: >-
+    Código cerrado; las compilaciones no están firmadas, así que comprueba el SHA-256 en la página
+    de la versión. Por defecto arranca en BTX Pool. En agosto de 2026 se indicaba una comisión de
+    desarrollador del 5 %; consulta la comisión actual en la app.
+- en: Community Discord, open to everyone, including mining help.
+  es: Discord de la comunidad, abierto a todos, con ayuda para minar.
+- en: Community status page - is the network healthy, with history, node help and a public JSON API.
+  es: >-
+    Página de estado de la comunidad: si la red está sana, con historial, ayuda para nodos y una API
+    JSON pública.
+- en: >-
+    Community-run account on X, not the developers'. It posted release notes and network news in
+    August and September 2026.
+  es: >-
+    Cuenta en X gestionada por la comunidad, no la de los desarrolladores. Publicó notas de versión
+    y noticias de la red en agosto y septiembre de 2026.
+- en: >-
+    Daily pruned datadir snapshot, checked and signed by a second node. Built on a trusted mirror,
+    so the MatMul work was accepted on signers' attestations.
+  es: >-
+    Instantánea diaria de un directorio de datos podado, comprobada y firmada por un segundo nodo.
+    Se genera en un espejo de confianza, así que el trabajo MatMul se aceptó basándose en las
+    atestaciones de los firmantes.
+- en: >-
+    Early test build: internal security review, no independent audit; the source code is not public
+    and the direct downloads are unsigned. A 64-character master key is the only backup; keep it
+    offline.
+  es: >-
+    Versión de prueba temprana: revisión de seguridad interna, sin auditoría independiente; el
+    código fuente no es público y las descargas directas no están firmadas. Una clave maestra de 64
+    caracteres es la única copia de seguridad; guárdala fuera de línea.
+- en: >-
+    Every node relays blocks and keeps the network reachable. A node checks every block itself only
+    with a GPU that passes btxd's self-test. Without one, run it as a trusted mirror that follows
+    signed checks from at least two signers; otherwise it stops syncing. Signers have the highest
+    requirements.
+  es: >-
+    Cada nodo retransmite bloques y mantiene la red accesible. Un nodo solo comprueba cada bloque
+    por sí mismo con una GPU que supere la autoprueba de btxd. Sin ella, ejecútalo como un espejo de
+    confianza que sigue las comprobaciones firmadas de al menos dos firmantes; si no, deja de
+    sincronizar. Los firmantes tienen los requisitos más altos.
+- en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages and a public API.
+  es: >-
+    Explorador del equipo de Byron Bay, con una vista de minería de 24 h, páginas de estadísticas y
+    una API pública.
+- en: How to report a vulnerability privately to the BTX Development Team. Not for support questions.
+  es: >-
+    Cómo informar en privado de una vulnerabilidad al BTX Development Team. No es para consultas de
+    soporte.
+- en: >-
+    Its backup file (.btxwallet) holds the seed in plain text. Keep it offline and never send it to
+    anyone.
+  es: >-
+    Su archivo de copia de seguridad (.btxwallet) contiene la semilla en texto plano. Guárdalo fuera
+    de línea y nunca se lo envíes a nadie.
+- en: >-
+    Last change 2026-08-21. The quick start in its README contains a sample payout address and two
+    offline pools (minebtx, Byron); replace all three. 1% dev fee in pool mode; it updates itself
+    unless started with --no-auto-update. NVIDIA Ampere (RTX 30 series) or newer only.
+  es: >-
+    Último cambio el 2026-08-21. El inicio rápido de su README contiene una dirección de cobro de
+    ejemplo y dos pools fuera de servicio (minebtx, Byron); sustituye los tres. Comisión de
+    desarrollador del 1 % en modo pool; se actualiza automáticamente salvo que se inicie con
+    --no-auto-update. Solo NVIDIA Ampere (serie RTX 30) o más reciente.
+- en: Last updated for v0.33.2 (August 2026); newer releases are on the GitHub releases page.
+  es: >-
+    Actualizada por última vez para la v0.33.2 (agosto de 2026); las versiones más nuevas están en
+    la página de versiones de GitHub.
+- en: >-
+    MIT-licensed; this repository holds only the downloads and release notes. Compare the SHA-256
+    listed with each release.
+  es: >-
+    Con licencia MIT; este repositorio solo contiene las descargas y las notas de versión. Compara
+    el SHA-256 que se indica en cada versión.
+- en: >-
+    Mac app (Apple Silicon, macOS 13 or later) of the easyBTX team that fetches open AI models over
+    the BTX model network and runs them on your Mac. It only downloads; it never serves, pays or
+    earns.
+  es: >-
+    App para Mac (Apple Silicon, macOS 13 o posterior) del equipo easyBTX que obtiene modelos de IA
+    abiertos a través de la red de modelos de BTX y los ejecuta en tu Mac. Solo descarga; nunca
+    sirve modelos, ni paga ni gana nada.
+- en: Miners log in as ADDRESS.worker; nekominer documents this and charges no dev fee on this pool.
+  es: >-
+    Los mineros se conectan como DIRECCIÓN.worker; nekominer lo documenta y no cobra comisión de
+    desarrollador en este pool.
+- en: >-
+    Mining needs a qualified GPU and a node that checks blocks itself (matmulvalidation=consensus,
+    the default), not a trusted mirror. See the GPU operator runbook.
+  es: >-
+    Para minar hace falta una GPU homologada y un nodo que compruebe los bloques por sí mismo
+    (matmulvalidation=consensus, el valor por defecto), no un espejo de confianza. Consulta el
+    manual de operación para GPU.
+- en: >-
+    Multi-coin GPU miner with BTX support (MatMul v4.7 since version 1.6.0); its BTX example uses
+    BTX Pool. BTX mines on NVIDIA cards only.
+  es: >-
+    Minero de GPU multimoneda con soporte para BTX (MatMul v4.7 desde la versión 1.6.0); su ejemplo
+    para BTX usa BTX Pool. BTX solo se mina con tarjetas NVIDIA.
+- en: >-
+    NVIDIA (CUDA) miner for several coins; BTX runs as algorithm btxv4, the proof-of-work since
+    block 185,000. Its README has commands for ninjaraider and BTX Pool.
+  es: >-
+    Minero de varias monedas para NVIDIA (CUDA); BTX se mina con el algoritmo btxv4, la prueba de
+    trabajo desde el bloque 185.000. Su README tiene comandos para ninjaraider y BTX Pool.
+- en: No change to the miner since 2026-08-21.
+  es: Sin cambios en el minero desde el 2026-08-21.
+- en: Not launched. Its launch checklist is still open and the reference contracts are unaudited.
+  es: >-
+    Sin lanzar. Su lista de comprobación para el lanzamiento sigue abierta y los contratos de
+    referencia no están auditados.
+- en: >-
+    Official explanation of why a node needs a qualified GPU to check blocks itself since block
+    185,000, and what machines without one can do.
+  es: >-
+    Explicación oficial de por qué, desde el bloque 185.000, un nodo necesita una GPU homologada
+    para comprobar los bloques por sí mismo, y qué pueden hacer los equipos sin ella.
+- en: >-
+    Official guide to moving a btx.dev browser wallet into btxd and back, and how that file differs
+    from an encrypted node backup.
+  es: >-
+    Guía oficial para pasar un monedero de navegador de btx.dev a btxd y viceversa, y en qué se
+    diferencia ese archivo de una copia de seguridad cifrada del nodo.
+- en: >-
+    Official guide to wallet roles, multisig, timelocked recovery, watch-only setups and encrypted
+    backups, with a restore drill.
+  es: >-
+    Guía oficial sobre roles de monedero, multifirma, recuperación con bloqueo temporal,
+    configuraciones de solo observación y copias de seguridad cifradas, con un simulacro de
+    restauración.
+- en: >-
+    Official integration profile for exchanges and custodians: UTXO model, watch-only setup,
+    deposits, confirmations and reorg handling.
+  es: >-
+    Perfil oficial de integración para exchanges y custodios: modelo UTXO, configuración de solo
+    observación, depósitos, confirmaciones y gestión de reorganizaciones.
+- en: >-
+    Official scripts for solo mining against your own btxd: a health-aware mining loop, start and
+    stop scripts and a wallet backup. For larger setups the README points to getblocktemplate with
+    external miners.
+  es: >-
+    Scripts oficiales para minar en solitario contra tu propio btxd: un bucle de minería con
+    comprobación de estado, scripts de inicio y parada y una copia de seguridad del monedero. Para
+    instalaciones más grandes, el README remite a getblocktemplate con mineros externos.
+- en: Official step-by-step guide to building btxd and btx-cli on Windows 11.
+  es: Guía oficial paso a paso para compilar btxd y btx-cli en Windows 11.
+- en: Official website with documentation, the browser wallet and the whitepaper.
+  es: Web oficial con documentación, el monedero de navegador y el whitepaper.
+- en: >-
+    On a server - the official release for Linux needs glibc 2.38 or newer (Ubuntu 24.04, Debian
+    13); a GPU node takes the -cuda13 archive (Blackwell cards). The v0.34.16 pre-release has no
+    CUDA build, so GPU nodes stay on v0.34.15. The current release has no official Windows archive.
+  es: >-
+    En un servidor: la versión oficial para Linux necesita glibc 2.38 o más reciente (Ubuntu 24.04,
+    Debian 13); un nodo con GPU usa el archivo -cuda13 (tarjetas Blackwell). La versión preliminar
+    v0.34.16 no tiene compilación con CUDA, así que los nodos con GPU se quedan en la v0.34.15. La
+    versión actual no tiene archivo oficial para Windows.
+- en: >-
+    On mainnet it needs at least two pinned signers and a threshold of two. Pin only signers that
+    are live today.
+  es: >-
+    En la red principal necesita al menos dos firmantes fijados y un umbral de dos. Fija solo
+    firmantes que estén activos hoy.
+- en: >-
+    One-click miner app with a self-custodial wallet built in, for Apple Silicon Macs and Linux (on
+    Windows through WSL).
+  es: >-
+    App de minería con un clic y monedero propio integrado, para Mac con Apple Silicon y Linux (en
+    Windows a través de WSL).
+- en: >-
+    Open-source (MIT) desktop app of the easyBTX team that installs and supervises btxd on the
+    machine you already own.
+  es: >-
+    App de escritorio de código abierto (MIT) del equipo easyBTX que instala y supervisa btxd en el
+    equipo que ya tienes.
+- en: >-
+    Paused by its operator since September 2026; no blocks among the last 1,000 (2026-11-12). The
+    first light explorer of the same team stays listed.
+  es: >-
+    Pausado por su operador desde septiembre de 2026; ningún bloque entre los últimos 1.000
+    (2026-11-12). El explorador first light del mismo equipo sigue en la lista.
+- en: >-
+    Pick a miner from our link list - for example easyBTX (an app for Mac and Linux; on Windows
+    through WSL) or matador (open source).
+  es: >-
+    Elige un minero de nuestra lista de enlaces: por ejemplo easyBTX (una app para Mac y Linux; en
+    Windows a través de WSL) o matador (código abierto).
+- en: >-
+    Pool dedicated to BTX, run by the author of btx-pool-miner (GitHub lucasan123). It pays miners
+    inside each block it finds, split by work over a 30-minute window. Check its fee on the pool
+    page.
+  es: >-
+    Pool dedicado a BTX, gestionado por el autor de btx-pool-miner (GitHub lucasan123). Paga a los
+    mineros dentro de cada bloque que encuentra y reparte el pago según el trabajo de una ventana de
+    30 minutos. Consulta su comisión en la página del pool.
+- en: Post-quantum desktop wallet of the easyBTX team for macOS and Windows.
+  es: Monedero de escritorio poscuántico del equipo easyBTX para macOS y Windows.
+- en: >-
+    Problems with an NVIDIA card? The official CUDA troubleshooting guide helps; parts of it
+    describe the CUDA path from before block 185,000.
+  es: >-
+    ¿Problemas con una tarjeta NVIDIA? La guía oficial de solución de problemas de CUDA ayuda;
+    partes de ella describen la vía CUDA anterior al bloque 185.000.
+- en: >-
+    Public tester site and guide of the wbtx-eth project (evxdev): a WBTX bridge on an Ethereum
+    testnet. Test tokens have no value.
+  es: >-
+    Web pública de pruebas y guía del proyecto wbtx-eth (evxdev): un puente WBTX en una red de
+    prueba de Ethereum. Los tokens de prueba no tienen valor.
+- en: >-
+    Read the official introduction and documentation. It was written for v0.33.2; newer releases
+    differ in places.
+  es: >-
+    Lee la introducción y la documentación oficiales. Se escribieron para la v0.33.2; las versiones
+    más nuevas difieren en algunos puntos.
+- en: Run by the vendor of those apps.
+  es: Lo gestiona el proveedor de esas apps.
+- en: >-
+    Runs v0.34.15 without the model network. Without a qualified GPU the node follows signers'
+    checks instead of checking the MatMul work itself.
+  es: >-
+    Ejecuta la v0.34.15 sin la red de modelos. Sin una GPU homologada, el nodo sigue las
+    comprobaciones de los firmantes en lugar de comprobar por sí mismo el trabajo MatMul.
+- en: >-
+    Seedless means there is no seed phrase you back up yourself; access and recovery go through the
+    Bonuz login. Check how recovery works before you rely on it.
+  es: >-
+    "Sin semilla" significa que no hay una frase semilla de la que hagas tú la copia de seguridad;
+    el acceso y la recuperación pasan por el inicio de sesión de Bonuz. Comprueba cómo funciona la
+    recuperación antes de depender de ella.
+- en: Seedless mobile wallet for iOS and Android with BTX support.
+  es: Monedero móvil sin semilla para iOS y Android con soporte para BTX.
+- en: >-
+    Signers (GPU attestors) need a GPU that passes btxd's self-test and must stay online. The
+    official CUDA archive covers Blackwell cards (sm_120); other NVIDIA cards need a build from
+    source and may not qualify. Follow the developers' operator runbook.
+  es: >-
+    Los firmantes (atestadores con GPU) necesitan una GPU que supere la autoprueba de btxd y deben
+    permanecer conectados. El archivo oficial con CUDA cubre las tarjetas Blackwell (sm_120); otras
+    tarjetas NVIDIA necesitan una compilación desde el código fuente y puede que no cumplan los
+    requisitos. Sigue el manual de operación de los desarrolladores.
+- en: Some API endpoints need an access token.
+  es: Algunos endpoints de la API necesitan un token de acceso.
+- en: Telegram group of the easyBTX team, for questions about its miner, node app and wallet.
+  es: >-
+    Grupo de Telegram del equipo easyBTX, para preguntas sobre su minero, su app de nodo y su
+    monedero.
+- en: Testnet only; it can be reset. Code unchanged since 2026-07-09.
+  es: Solo red de prueba; puede reiniciarse. Código sin cambios desde el 2026-07-09.
+- en: >-
+    The current release has no official Windows archive. The handbook starts without CUDA, and such
+    a build cannot check MatMul blocks itself: run it as a trusted mirror.
+  es: >-
+    La versión actual no tiene archivo oficial para Windows. El manual empieza sin CUDA, y una
+    compilación así no puede comprobar por sí misma los bloques MatMul: ejecútala como espejo de
+    confianza.
+- en: >-
+    The developers' design for wrapped BTX on EVM chains: token rules, bridge models and reference
+    contracts. A design, not a working bridge.
+  es: >-
+    El diseño de los desarrolladores para BTX envuelto en cadenas EVM: reglas del token, modelos de
+    puente y contratos de referencia. Un diseño, no un puente en funcionamiento.
+- en: >-
+    The file is marked historical: it records the v3 design. Since block 185,000 the network runs
+    MatMul v4.7.
+  es: >-
+    El archivo está marcado como histórico: recoge el diseño v3. Desde el bloque 185.000 la red
+    funciona con MatMul v4.7.
+- en: >-
+    The miner's source is not published: the repository holds scripts and binary releases, with no
+    licence. 2% dev fee, 0% on ninjaraider.
+  es: >-
+    El código fuente del minero no está publicado: el repositorio contiene scripts y versiones
+    binarias, sin licencia. Comisión de desarrollador del 2 %, 0 % en ninjaraider.
+- en: >-
+    The same WBTX test bridge as btx.supply, on the Robinhood Chain testnet. Test tokens have no
+    value.
+  es: >-
+    El mismo puente WBTX de prueba que btx.supply, en la red de prueba de Robinhood Chain. Los
+    tokens de prueba no tienen valor.
+- en: >-
+    The wallet in the official releases for Linux and macOS: the desktop app btx-qt, or btxd with
+    btx-cli. Open source; it runs on your own node.
+  es: >-
+    El monedero de las versiones oficiales para Linux y macOS: la aplicación de escritorio btx-qt, o
+    btxd con btx-cli. Código abierto; funciona en tu propio nodo.
+- en: Verification gate; clearing it lets you into the main BTX Telegram groups.
+  es: Filtro de verificación; si lo superas, entras en los grupos principales de Telegram de BTX.
+- en: Verify the signature and SHA-256 before use. Not for signers.
+  es: Verifica la firma y el SHA-256 antes de usarla. No es para firmantes.
+- en: >-
+    Wrapped BTX on Ethereum - contracts, validator services and a local simulator, by the GitHub
+    organisation evxdev. Testnet only.
+  es: >-
+    BTX envuelto en Ethereum: contratos, servicios de validador y un simulador local, de la
+    organización de GitHub evxdev. Solo red de prueba.
+- en: >-
+    matador's quick start contains a sample payout address that is not yours and two pools that are
+    offline. Always put in your own btx1z address and a pool from our link list.
+  es: >-
+    El inicio rápido de matador contiene una dirección de cobro de ejemplo que no es tuya y dos
+    pools fuera de servicio. Pon siempre tu propia dirección btx1z y un pool de nuestra lista de
+    enlaces.
 - en: Fixed supply
   es: Suministro fijo
 - en: >-
@@ -15,15 +361,6 @@ translations:
     su recompensa de 20 BTX se reduce a la mitad cada 525.000 bloques, más o menos cada 18 meses.
 - en: Mining by matrix multiplication
   es: Minería por multiplicación de matrices
-- en: >-
-    Instead of hashing, miners multiply large matrices, the work AI accelerators are built for. Since
-    block 185,000 every block needs a complete, exactly reproducible run on a qualified NVIDIA (CUDA)
-    or Apple (Metal) GPU. There is no CPU mining.
-  es: >-
-    En lugar de calcular hashes, los mineros multiplican matrices grandes, el trabajo para el que
-    están hechos los aceleradores de IA. Desde el bloque 185.000 cada bloque necesita una ejecución
-    completa y exactamente reproducible en una GPU homologada de NVIDIA (CUDA) o Apple (Metal). No
-    se puede minar con la CPU.
 - en: Post-quantum signatures
   es: Firmas poscuánticas
 - en: >-
@@ -34,85 +371,17 @@ translations:
     Las monedas se bloquean con firmas pensadas para resistir a los ordenadores cuánticos: ML-DSA-44
     (NIST FIPS 204) para el gasto diario y SLH-DSA (FIPS 205) como respaldo basado en hashes. Estas
     direcciones P2MR empiezan por btx1z.
-- en: Built on Bitcoin Core
-  es: Basado en Bitcoin Core
-- en: >-
-    The node is a fork of Bitcoin Core. btxd, btx-cli, the RPC interface and PSBTs work the way Bitcoin
-    users know them; what differs is the proof-of-work and the signatures.
-  es: >-
-    El nodo es un fork de Bitcoin Core. btxd, btx-cli, la interfaz RPC y los PSBT funcionan como los
-    conocen los usuarios de Bitcoin; lo que cambia es la prueba de trabajo y las firmas.
-- en: >-
-    Release candidate v0.35.0rc1 since 13 October 2026. The developers call it not release-qualified;
-    the current release stays v0.34.15. Nothing below is final.
-  es: >-
-    Versión candidata v0.35.0rc1 desde el 13 de octubre de 2026. Los desarrolladores dicen que no
-    está lista para publicarse; la versión actual sigue siendo la v0.34.15. Nada de lo siguiente es
-    definitivo.
+- en: Built on Bitcoin Knots
+  es: Basado en Bitcoin Knots
 - en: Presigned swap claims from the wallet
   es: Reclamaciones de swap prefirmadas desde el monedero
-- en: >-
-    Since 0.34.13 a swap claim can be signed at funding and completed later by anyone who has the
-    secret; nobody has to stay online, but someone must broadcast it in time. That still takes hand-built
-    transactions. htlc_presign and p2mr_leaf make it a wallet step. Not in rc1; in the 0.35 branch
-    and the v0.34.16 pre-release.
-  es: >-
-    Desde la 0.34.13 una reclamación de swap puede firmarse al financiar el swap y completarla después
-    cualquiera que tenga el secreto; nadie tiene que seguir conectado, pero alguien debe difundirla
-    a tiempo. Por ahora requiere transacciones construidas a mano. htlc_presign y p2mr_leaf lo convierten
-    en un paso del monedero. No están en la rc1; sí en la rama 0.35 y en la versión preliminar v0.34.16.
-- en: The model network moves into the node
-  es: La red de modelos pasa al nodo
-- en: >-
-    The network for AI models has run beside the node since v0.34.9 (btx-modeld). In 0.35 it runs
-    inside btxd, and a research lab joins it: identities with recovery keys, git workspaces for models,
-    evaluations. Off with -modelnet=0; it does not spend coins.
-  es: >-
-    La red para modelos de IA funciona junto al nodo desde la v0.34.9 (btx-modeld). En la 0.35 funciona
-    dentro de btxd y se le une un laboratorio de investigación: identidades con claves de recuperación,
-    espacios de trabajo git para modelos y evaluaciones. Se desactiva con -modelnet=0; no gasta monedas.
-- en: Safer auto-update
-  es: Actualización automática más segura
-- en: >-
-    A node behind a proxy or Tor no longer checks for updates by itself, so it does not reveal its
-    address to the update server. The update helper runs isolated.
-  es: >-
-    Un nodo detrás de un proxy o de Tor ya no busca actualizaciones por sí mismo, así que no revela
-    su dirección al servidor de actualizaciones. El asistente de actualización se ejecuta aislado.
-- en: Desktop app and ZeroMQ
-  es: Aplicación de escritorio y ZeroMQ
-- en: >-
-    The official archives include the graphical wallet btx-qt and ZeroMQ notifications for services
-    that follow the chain.
-  es: >-
-    Los archivos oficiales incluyen el monedero gráfico btx-qt y las notificaciones ZeroMQ para servicios
-    que siguen la cadena.
-- en: >-
-    rc1 has no Linux CUDA archive. A GPU node started with it falls back to the CPU and can stall
-    at the next block. Miners and signers stay on v0.34.15.
-  es: >-
-    La rc1 no tiene archivo de Linux con CUDA. Un nodo con GPU iniciado con ella recurre a la CPU
-    y puede quedarse atascado en el siguiente bloque. Mineros y firmantes se quedan en la v0.34.15.
-- en: The desktop app of rc1 needs glibc 2.43 and does not start on Ubuntu 24.04.
-  es: >-
-    La aplicación de escritorio de la rc1 necesita glibc 2.43 y no arranca en Ubuntu 24.04.
-- en: CUDA on Windows was neither built nor tested.
-  es: CUDA en Windows no se compiló ni se probó.
 - en: Before you buy or receive BTX
   es: Antes de comprar o recibir BTX
-- en: >-
-    Create the wallet first and write the backup down offline. Restore it once, so you know the backup
-    works before money depends on it.
-  es: >-
-    Crea primero el monedero y apunta la copia de seguridad fuera de línea. Restáurala una vez para
-    saber que funciona antes de que dependa dinero de ella.
 - en: >-
     Check the receiving address in full, not just its start and end. BTX addresses start with btx1z.
   es: >-
     Comprueba la dirección de recepción completa, no solo el principio y el final. Las direcciones
     BTX empiezan por btx1z.
-- en: Send a small test amount first and wait until it is confirmed.
-  es: Envía primero una cantidad pequeña de prueba y espera a que se confirme.
 - en: >-
     Before you use an exchange or an OTC seller, check that withdrawals really work. A price on a
     website is not a market you can sell into.
@@ -131,8 +400,6 @@ translations:
     garantizada son estafas.
 - en: Before you install a node release
   es: Antes de instalar una versión del nodo
-- en: Download only from github.com/btxchain/btx/releases.
-  es: Descarga solo desde github.com/btxchain/btx/releases.
 - en: >-
     Recent releases come without a signed checksum file; the last one with SHA256SUMS.asc was v0.34.6.
     GitHub shows a SHA-256 for each file on the release page: compare it with "shasum -a 256 <file>"
@@ -147,16 +414,6 @@ translations:
   es: >-
     Eso prueba que el archivo es el de GitHub, no quién lo compiló. Si eso te importa, compila tú
     mismo el código etiquetado.
-- en: >-
-    Read the release notes before upgrading. Some releases change the rules at a fixed block height;
-    this page shows a countdown when one is coming.
-  es: >-
-    Lee las notas de versión antes de actualizar. Algunas versiones cambian las reglas a partir de
-    una altura de bloque fija; esta página muestra una cuenta atrás cuando se acerca una.
-- en: >-
-    Release candidates (rc) are for testing. Do not run them on a mining or signing node.
-  es: >-
-    Las versiones candidatas (rc) son para pruebas. No las uses en un nodo de minería o de firma.
 - en: New to BTX
   es: Nuevo en BTX
 - en: >-
@@ -165,8 +422,6 @@ translations:
   es: >-
     BTX es un fork poscuántico de Bitcoin con un suministro máximo fijo y su propia prueba de trabajo
     (MatMul). Lo sostiene una comunidad abierta, no una empresa.
-- en: Read the official introduction and documentation.
-  es: Lee la introducción y la documentación oficiales.
 - en: See how the network is doing right now, in plain terms.
   es: Mira cómo está la red ahora mismo, explicado con claridad.
 - en: Ask questions in the community chats (Discord, Telegram).
@@ -186,62 +441,22 @@ translations:
     Para minar hace falta una GPU. Puedes minar en solitario contra tu propio nodo y quedarte cada
     bloque, o unirte a un pool para cobrar de forma más regular.
 - en: >-
-    Pick a miner - easyBTX (one app for Mac, Windows, Linux) or matador (open source).
-  es: >-
-    Elige un minero: easyBTX (una app para Mac, Windows y Linux) o matador (código abierto).
-- en: >-
     Prefer a smaller pool. When one pool finds most blocks, the network depends on it; the status
     page shows the current shares.
   es: >-
     Mejor un pool pequeño. Cuando un pool encuentra la mayoría de los bloques, la red depende de él;
     la página de estado muestra las cuotas actuales.
-- en: >-
-    matador's examples still name the minebtx pool, which is offline. Use a pool from our link list
-    instead.
-  es: >-
-    Los ejemplos de matador todavía mencionan el pool minebtx, que está fuera de servicio. Usa en
-    su lugar un pool de nuestra lista de enlaces.
-- en: Problems with an NVIDIA card? The official CUDA troubleshooting guide helps.
-  es: >-
-    ¿Problemas con una tarjeta NVIDIA? La guía oficial de solución de problemas de CUDA ayuda.
 - en: Running a node
   es: Operar un nodo
-- en: >-
-    Every node checks the chain for itself and makes the network harder to fool. A home computer is
-    enough; signers have much higher requirements.
-  es: >-
-    Cada nodo comprueba la cadena por sí mismo y hace que sea más difícil engañar a la red. Basta
-    con un ordenador doméstico; los firmantes tienen requisitos mucho mayores.
 - en: Easiest start at home - easynode installs and supervises btxd for you.
   es: 'El inicio más fácil en casa: easynode instala y supervisa btxd por ti.'
-- en: >-
-    On a server - the official release for Linux needs glibc 2.38 or newer (Ubuntu 24.04, Debian 13).
-  es: >-
-    En un servidor: la versión oficial para Linux necesita glibc 2.38 o más reciente (Ubuntu 24.04,
-    Debian 13).
-- en: >-
-    Catch up in minutes with a daily signed snapshot instead of syncing from genesis.
-  es: >-
-    Ponte al día en minutos con una instantánea diaria firmada en lugar de sincronizar desde el génesis.
 - en: Node stuck at a height? The node help explains each known case and its fix.
   es: >-
     ¿Nodo atascado en una altura? La ayuda para nodos explica cada caso conocido y su solución.
-- en: >-
-    Signers (GPU attestors) need an NVIDIA Blackwell card (sm_120) and must follow the developers'
-    operator runbook.
-  es: >-
-    Los firmantes (atestadores con GPU) necesitan una tarjeta NVIDIA Blackwell (sm_120) y deben seguir
-    el manual de operación de los desarrolladores.
 - en: Community
   es: Comunidad
-- en: Main community server, including mining help.
-  es: Servidor principal de la comunidad, con ayuda para minar.
-- en: Telegram group of the community.
-  es: Grupo de Telegram de la comunidad.
 - en: Community account on X.
   es: Cuenta de la comunidad en X.
-- en: Chain account on X.
-  es: Cuenta de la cadena en X.
 - en: Russian-speaking mining chat with a BTX topic.
   es: Chat de minería en ruso con un tema sobre BTX.
 - en: Telegram chat of the matador miner.
@@ -251,8 +466,6 @@ translations:
     Portal del equipo easyBTX: explorador, monedero, minería y noticias en un solo lugar.
 - en: Official
   es: Oficial
-- en: Official website and documentation of BTX.
-  es: Web oficial y documentación de BTX.
 - en: Source code and releases of the reference node (btxd).
   es: Código fuente y versiones del nodo de referencia (btxd).
 - en: The official whitepaper, describing what BTX is and why.
@@ -279,13 +492,6 @@ translations:
     y qué significa esa confianza.
 - en: Network and explorers
   es: Red y exploradores
-- en: Community status page - is the network healthy, with history and node help.
-  es: >-
-    Página de estado de la comunidad: si la red está sana, con historial y ayuda para nodos.
-- en: Block explorer for blocks, transactions and addresses.
-  es: Explorador de bloques, transacciones y direcciones.
-- en: Explorer of the Byron Bay team, with a 24 h mining view.
-  es: Explorador del equipo de Byron Bay, con una vista de minería de 24 h.
 - en: Node census and signer witness of the easyBTX team.
   es: Censo de nodos y testigo de firmantes del equipo easyBTX.
 - en: Supply, holders and rich list.
@@ -300,35 +506,19 @@ translations:
   es: Pools
 - en: Multi-coin pool with BTX. Check its fee on the pool page.
   es: Pool multimoneda con BTX. Consulta su comisión en la página del pool.
-- en: Pool dedicated to BTX. Check its fee on the pool page.
-  es: Pool dedicado a BTX. Consulta su comisión en la página del pool.
-- en: PPLNS pool of the Byron Bay team (Australia).
-  es: Pool PPLNS del equipo de Byron Bay (Australia).
-- en: The website answered "503 unavailable" on 2026-11-03.
-  es: La web respondió "503 unavailable" el 2026-11-03.
 - en: Miners
   es: Mineros
-- en: One-click miner app with a self-custodial wallet built in.
-  es: App de minería con un clic y monedero propio integrado.
 - en: Open-source GPU miner (NVIDIA, CUDA), solo against your own node or in a pool.
   es: >-
     Minero de GPU de código abierto (NVIDIA, CUDA), en solitario contra tu propio nodo o en un pool.
-- en: Last change 2026-08-21; its pool examples still name the offline minebtx pool.
-  es: >-
-    Último cambio el 2026-08-21; sus ejemplos de pool aún mencionan el pool minebtx, fuera de servicio.
 - en: Node tools
   es: Herramientas para nodos
-- en: Desktop app that installs and supervises btxd on the machine you already own.
-  es: App de escritorio que instala y supervisa btxd en el equipo que ya tienes.
 - en: >-
     Free script that tells a waiting network from a stuck node and dials helpful peers. It never restarts
     the node.
   es: >-
     Script gratuito que distingue una red en espera de un nodo atascado y contacta con pares útiles.
     Nunca reinicia el nodo.
-- en: Daily datadir snapshot, checked and signed by a second node.
-  es: >-
-    Instantánea diaria del directorio de datos, comprobada y firmada por un segundo nodo.
 - en: Known stuck heights with their cause and fix.
   es: Alturas de atasco conocidas, con su causa y solución.
 - en: Wallets
@@ -341,10 +531,6 @@ translations:
     de línea y nunca la escribas en una web.
 - en: Official post-quantum wallet in the browser.
   es: Monedero poscuántico oficial en el navegador.
-- en: Desktop wallet of the easyBTX team.
-  es: Monedero de escritorio del equipo easyBTX.
-- en: Seedless iOS wallet with BTX support.
-  es: Monedero para iOS sin semilla con soporte para BTX.
 - en: Bridges and testnets
   es: Puentes y redes de prueba
 - en: >-
@@ -353,14 +539,8 @@ translations:
   es: >-
     Experimentales y no auditados por nosotros. Los puentes pueden perder fondos; no envíes más de
     lo que puedas permitirte perder.
-- en: Wrapped BTX on Ethereum - contracts and validator tools, work in progress.
-  es: 'BTX envuelto en Ethereum: contratos y herramientas de validador, en desarrollo.'
 - en: Last change 2026-07-09.
   es: Último cambio el 2026-07-09.
-- en: Bridge on a testnet.
-  es: Puente en una red de prueba.
-- en: Bridge to the Robinhood Chain testnet.
-  es: Puente a la red de prueba de Robinhood Chain.
 - en: Exchanges
   es: Exchanges
 - en: >-
@@ -428,6 +608,175 @@ translations:
   es: La web respondió con un error (520, 2026-11-03).
 - en: The BTX page no longer exists (404, 2026-11-03).
   es: La página de BTX ya no existe (404, 2026-11-03).
+- en: >-
+    A new node cannot sync from genesis: v0.34.15 and v0.34.16 stop at block 126,978. Start from a
+    signed snapshot, and do not run -reindex until a release fixes it.
+  es: >-
+    Un nodo nuevo no puede sincronizar desde el génesis: la v0.34.15 y la v0.34.16 se detienen en el
+    bloque 126.978. Empieza con una instantánea firmada y no ejecutes -reindex hasta que una versión lo
+    corrija.
+- en: >-
+    A node behind a proxy, or with -onlynet excluding IPv4 and IPv6, no longer checks for updates by
+    default. Every other mainnet node still polls btx.dev and installs a newer signed release by itself
+    unless autoupdateseamless=0.
+  es: >-
+    Un nodo detrás de un proxy, o con -onlynet sin IPv4 ni IPv6, ya no busca actualizaciones por
+    defecto. Cualquier otro nodo de mainnet sigue consultando btx.dev e instala por sí mismo una versión
+    firmada más reciente, salvo con autoupdateseamless=0.
+- en: >-
+    A sync from genesis still stops at block 126,978 (#272). Start from a snapshot.
+  es: >-
+    Una sincronización desde el génesis sigue deteniéndose en el bloque 126.978 (#272). Empieza con una
+    instantánea.
+- en: Atlas, a second desktop app
+  es: Atlas, una segunda aplicación de escritorio
+- en: Auto-update off behind a proxy
+  es: Actualización automática desactivada tras un proxy
+- en: >-
+    Before an upgrade, stop with btx-cli stop and wait until btxd has exited; never kill it. Then back
+    up the data directory and wallets.
+  es: >-
+    Antes de actualizar, detén el nodo con btx-cli stop y espera a que btxd termine; nunca lo mates.
+    Después haz una copia del directorio de datos y de los monederos.
+- en: >-
+    Decide the node's role first. Checking blocks yourself needs a qualified NVIDIA or Apple GPU.
+    Without one, run a trusted mirror with at least two signers, or the node stops.
+  es: >-
+    Decide primero el papel del nodo. Comprobar los bloques por ti mismo requiere una GPU homologada de
+    NVIDIA o Apple. Sin ella, ejecútalo como réplica de confianza con al menos dos firmantes, o el nodo
+    se detiene.
+- en: >-
+    Download node releases only from github.com/btxchain/btx/releases. Community tools such as easynode
+    or snapshots are your own choice to trust; check their signatures.
+  es: >-
+    Descarga las versiones del nodo solo desde github.com/btxchain/btx/releases. Confiar en herramientas
+    de la comunidad como easynode o las instantáneas es decisión tuya; comprueba sus firmas.
+- en: Clearer backup warning
+  es: Advertencia de copia de seguridad más clara
+- en: >-
+    Instead of hashing, miners multiply large matrices, the work AI accelerators are built for. Since
+    block 185,000 a node that checks blocks itself replays each one exactly on a qualified NVIDIA (CUDA)
+    or Apple (Metal) GPU; nodes without one follow signed checks from others. There is no CPU mining.
+  es: >-
+    En lugar de calcular hashes, los mineros multiplican matrices grandes, el trabajo para el que están
+    hechos los aceleradores de IA. Desde el bloque 185.000, un nodo que comprueba los bloques por sí
+    mismo vuelve a calcular cada uno exactamente en una GPU homologada de NVIDIA (CUDA) o Apple (Metal);
+    los nodos sin ella siguen comprobaciones firmadas por otros. No se puede minar con la CPU.
+- en: >-
+    Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.15 has archives for Linux,
+    Linux with CUDA and Apple Silicon Macs; there is no official Windows build.
+  es: >-
+    Los binarios de Linux necesitan glibc 2.38 o más reciente (Ubuntu 24.04, Debian 13). La v0.34.15
+    tiene archivos para Linux, Linux con CUDA y Mac con Apple Silicon; no hay versión oficial para
+    Windows.
+- en: >-
+    Make a backup before money arrives. In btxd, backupwalletbundlearchive writes one encrypted file;
+    keep it and its passphrase offline and apart. Any backup can spend your coins: plain exports at
+    once, the archive once opened. Restore it once to test it.
+  es: >-
+    Haz una copia de seguridad antes de que llegue el dinero. En btxd, backupwalletbundlearchive escribe
+    un único archivo cifrado; guárdalo junto con su frase de contraseña fuera de línea y por separado.
+    Cualquier copia puede gastar tus monedas: las exportaciones simples de inmediato, el archivo una vez
+    abierto. Restáurala una vez para probarla.
+- en: Model network with fewer open ports
+  es: Red de modelos con menos puertos abiertos
+- en: >-
+    No CUDA, macOS or Windows archive. A GPU, mining or signing node on v0.34.16 loses its GPU path;
+    those nodes stay on v0.34.15.
+  es: >-
+    No hay archivo para CUDA, macOS ni Windows. Un nodo con GPU, de minería o de firma pierde con la
+    v0.34.16 su ruta por GPU; esos nodos se quedan en la v0.34.15.
+- en: >-
+    Other coins also trade as BTX. A market is only for this chain if its deposit addresses start with
+    btx1z.
+  es: >-
+    Otras monedas también cotizan como BTX. Un mercado solo es de esta cadena si sus direcciones de
+    depósito empiezan por btx1z.
+- en: >-
+    Pre-release since 7 November 2026, Linux x86_64 only. It packages the 0.35 review branches; the 0.35
+    line stays open. The developers say it is not a release qualification. The current full release
+    stays v0.34.15.
+  es: >-
+    Versión preliminar desde el 7 de noviembre de 2026, solo para Linux x86_64. Reúne las ramas de
+    revisión de la 0.35; la línea 0.35 sigue abierta. Los desarrolladores dicen que no es una versión
+    validada para publicación. La versión completa actual sigue siendo la v0.34.15.
+- en: >-
+    Pre-releases (rc, and v0.34.16) are for testing. v0.34.16 has no CUDA build: a GPU, mining or
+    signing node stays on v0.34.15.
+  es: >-
+    Las versiones preliminares (rc y la v0.34.16) son para pruebas. La v0.34.16 no tiene versión con
+    CUDA: un nodo con GPU, de minería o de firma se queda en la v0.34.15.
+- en: >-
+    Read the release notes before upgrading. Some releases change the rules at a fixed block height;
+    this page shows a countdown when one is coming. Each release also stops working about two years
+    after it was built; current ones in November 2028.
+  es: >-
+    Lee las notas de versión antes de actualizar. Algunas versiones cambian las reglas a partir de una
+    altura de bloque fija; esta página muestra una cuenta atrás cuando se acerca una. Además, cada
+    versión deja de funcionar unos dos años después de compilarse; las actuales, en noviembre de 2028.
+- en: >-
+    Send a small test amount first. Wait for at least 10 confirmations before you treat a payment as
+    final; short reorganisations of the chain happen several times a day.
+  es: >-
+    Envía primero una pequeña cantidad de prueba. Espera al menos 10 confirmaciones antes de dar un pago
+    por definitivo; varias veces al día hay reorganizaciones cortas de la cadena.
+- en: >-
+    Since 0.34.13 a swap claim can be signed at funding and completed later by anyone who has the
+    secret. htlc_presign and p2mr_leaf turn the hand-built transactions into a wallet step. The fee is
+    fixed when you presign, and the claim must confirm before the refund height.
+  es: >-
+    Desde la 0.34.13 una reclamación de swap puede firmarse al financiar el swap y completarla después
+    cualquiera que tenga el secreto. htlc_presign y p2mr_leaf convierten las transacciones construidas a
+    mano en un paso del monedero. La comisión queda fijada al prefirmar, y la reclamación debe
+    confirmarse antes de la altura de reembolso.
+- en: >-
+    The Linux archive adds btx-atlas beside btx-qt, which stays. Atlas needs glibc 2.39, WebKitGTK 4.1,
+    GTK 3, the Ayatana tray library and zenity. btx-qt and ZeroMQ were already in v0.34.15.
+  es: >-
+    El archivo de Linux añade btx-atlas junto a btx-qt, que se mantiene. Atlas necesita glibc 2.39,
+    WebKitGTK 4.1, GTK 3, la biblioteca de bandeja Ayatana y zenity. btx-qt y ZeroMQ ya estaban en la
+    v0.34.15.
+- en: >-
+    The network for AI models is on by default and listens on TCP 29447. v0.34.16 no longer opens that
+    port with -listen=0 or a proxy, finds model peers on the local network over UDP 29448, and adds a
+    local security guard. -modelnet=0 turns all of it off; it does not spend coins.
+  es: >-
+    La red para modelos de IA está activada por defecto y escucha en TCP 29447. La v0.34.16 ya no abre
+    ese puerto con -listen=0 o con un proxy, busca pares de modelos en la red local por UDP 29448 y
+    añade un guardián de seguridad local. -modelnet=0 lo desactiva todo; no gasta monedas.
+- en: >-
+    The node derives from Bitcoin Knots v29.2, a variant of Bitcoin Core. btxd, btx-cli, the RPC
+    interface and PSBTs work the way Bitcoin users know them; what differs is the proof-of-work, the
+    signatures and some network rules.
+  es: >-
+    El nodo deriva de Bitcoin Knots v29.2, una variante de Bitcoin Core. btxd, btx-cli, la interfaz RPC
+    y los PSBT funcionan como los conocen los usuarios de Bitcoin; lo que cambia es la prueba de
+    trabajo, las firmas y algunas reglas de red.
+- en: >-
+    Two defaults to decide on: btxd installs newer signed releases from btx.dev by itself
+    (autoupdateseamless=0 only reports them, autoupdate=0 stops checking), and the model network listens
+    on port 29447 (modelnet=0 turns it off).
+  es: >-
+    Dos valores por defecto que debes decidir: btxd instala por sí mismo versiones firmadas más
+    recientes desde btx.dev (autoupdateseamless=0 solo las notifica, autoupdate=0 deja de buscarlas), y
+    la red de modelos escucha en el puerto 29447 (modelnet=0 la desactiva).
+- en: Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.
+  es: >-
+    Descomprime el archivo completo y ejecuta bin/btxd desde él. Un bin/btxd copiado por separado se
+    cierra.
+- en: >-
+    Wallet bundle backups now say that the descriptor file inside spends without the wallet passphrase,
+    and warn for an encrypted wallet. Backups made with earlier versions hold the same file.
+  es: >-
+    Las copias de seguridad en paquete del monedero ahora indican que el archivo de descriptores que
+    contienen puede gastar sin la frase de contraseña del monedero, y avisan si el monedero está
+    cifrado. Las copias hechas con versiones anteriores contienen el mismo archivo.
+- en: >-
+    btx-qt in this archive needs glibc 2.43 and does not start on Ubuntu 24.04 or Debian 13; btxd and
+    btx-cli need 2.38.
+  es: >-
+    btx-qt en este archivo necesita glibc 2.43 y no arranca en Ubuntu 24.04 ni en Debian 13; btxd y btx-
+    cli necesitan 2.38.
 - en: Become a BTX dev
   es: Hazte desarrollador de BTX
 - en: >-

@@ -50,7 +50,7 @@ column B should not be scheduled until it lands.
 
 | # | Item | Why it blocks us | Status | Who follows up |
 |---|---|---|---|---|
-| B1 | **0.35 with `htlc_presign` / `p2mr_leaf`** | Without it the non-custodial swap path requires every buyer to keep a full node and wallet online for the whole swap, which rules out most users | In the 0.35 branch, tested there, not released. Why it gates the non-custodial path: [`research/venue-structure.md`](research/venue-structure.md) §2.2 | |
+| B1 | **Wallet support for presigned swap claims (`htlc_presign` / `p2mr_leaf`)** | Ergonomics, not a blocker. Claims can already be signed at funding and completed by anyone on 0.34.15, but only with hand-built transactions; these wallet options make that a normal wallet step | Not in v0.35.0-rc1. In the 0.35 branches and in the v0.34.16 pre-release of 7 November 2026, not release-qualified. What already works and what is still open (relay, fee bumping): [`research/venue-structure.md`](research/venue-structure.md) §2.2 | |
 | B2 | **btx.dev: website and whitepaper** | No outward push works while the official site shows a 20-week-old version. Promised repeatedly since September | Not delivered | |
 | B3 | **btx.dev: circulating supply figure** | The site states 3,647,340; the chain says 5,356,878.75 — understated by about 32 % on a page that leads with a fixed maximum supply | Reported 5 November 2026, no change | dr.chambre |
 | B4 | **A statement on the deployment reward** | The first question every newcomer asks. The specification itself (§8) says the operating policy "should be documented separately and precisely" and it never was | Our own write-up in draft; nothing from the core team | dr.chambre |
