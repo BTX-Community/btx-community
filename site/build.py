@@ -19,7 +19,7 @@ import hashlib
 import os
 import shutil
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date  # noqa: TC003 - pydantic needs the type at runtime
 from pathlib import Path
 from typing import Annotated, Literal, Self
@@ -29,7 +29,15 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, model_validator
 
 ROOT = Path(__file__).resolve().parent
-LANGUAGES = ("en", "de")
+LANGUAGES = ("en", "de", "es", "fr", "zh")
+"""Every language of the site, in the order of the language menu."""
+INLINE_LANGUAGES = ("en", "de")
+"""Languages written next to each other in the content files; every text needs both."""
+TRANSLATED = ("es", "fr", "zh")
+"""Languages translated from English in ``content/translations/<lang>.yaml``; a missing
+translation shows the English text and is reported by the build."""
+HTML_LANG = {"zh": "zh-Hans"}
+"""``lang`` attribute where it differs from the URL code: the Chinese pages are Simplified Chinese."""
 PAGES = ("home", "learn", "network", "links", "docs")
 """The pages of the site, in menu order; each has a template ``<page>.html.j2`` and texts ``nav.<page>``."""
 MAX_YAML_BYTES = 256 * 1024
@@ -50,6 +58,7 @@ LINK_PATTERN = r"^https://[A-Za-z0-9.-]+(/[A-Za-z0-9._~/+-]*)?(\?[A-Za-z0-9=&_-]
 Nothing that could break out of an HTML attribute: no quotes, spaces, ``<``, ``>`` or fragments.
 """
 ID_PATTERN = r"^[a-z0-9-]{1,40}$"
+MAX_TEXT = 400
 TAG_PATTERN = r"^[a-z0-9 /.-]{1,20}$"
 
 Id = Annotated[StrictStr, Field(pattern=ID_PATTERN)]
@@ -110,8 +119,8 @@ class _Model(BaseModel):
 class Text(_Model):
     """A text in both page languages."""
 
-    en: Annotated[StrictStr, Field(min_length=1, max_length=400)]
-    de: Annotated[StrictStr, Field(min_length=1, max_length=400)]
+    en: Annotated[StrictStr, Field(min_length=1, max_length=MAX_TEXT)]
+    de: Annotated[StrictStr, Field(min_length=1, max_length=MAX_TEXT)]
 
 
 class Step(_Model):
@@ -295,13 +304,58 @@ def load_texts(path: Path) -> dict[str, dict[str, str]]:
         ):
             raise ContentError(f"{path.name}: every text in {lang!r} must be a non-empty string")
         texts[lang] = table
-    missing = set(texts["en"]) ^ set(texts["de"])
-    if missing:
-        raise ContentError(f"{path.name}: keys not in both languages: {', '.join(sorted(missing))}")
+    for lang in LANGUAGES[1:]:
+        missing = set(texts["en"]) ^ set(texts[lang])
+        if missing:
+            raise ContentError(f"{path.name}: keys not in both en and {lang}: {', '.join(sorted(missing))}")
     unknown = {f"verdict.{v}" for v in VERDICTS} - set(texts["en"])
     if unknown:
         raise ContentError(f"{path.name}: missing {', '.join(sorted(unknown))}")
     return texts
+
+
+def load_translations(path: Path, lang: str) -> dict[str, str]:
+    """Load ``translations/<lang>.yaml``: pairs of an English text and its translation."""
+    data = load_yaml(path)
+    if not isinstance(data, dict) or data.get("schema_version") != 1 or set(data) != {"schema_version", "translations"}:
+        raise ContentError(f"{path.name} needs schema_version: 1 and a list 'translations'")
+    pairs = data["translations"]
+    if not isinstance(pairs, list):
+        raise ContentError(f"{path.name}: 'translations' must be a list")
+    table: dict[str, str] = {}
+    for pair in pairs:
+        if not isinstance(pair, dict) or set(pair) != {"en", lang}:
+            raise ContentError(f"{path.name}: every entry needs exactly 'en' and {lang!r}")
+        source, target = pair["en"], pair[lang]
+        if not (isinstance(source, str) and isinstance(target, str) and source.strip() and target.strip()):
+            raise ContentError(f"{path.name}: every text must be a non-empty string")
+        if len(target) > MAX_TEXT:
+            raise ContentError(f"{path.name}: translation longer than {MAX_TEXT} characters: {target[:40]!r}")
+        if source in table:
+            raise ContentError(f"{path.name}: translated twice: {source[:60]!r}")
+        table[source] = target
+    return table
+
+
+@dataclass
+class Localizer:
+    """Picks a text in one language. en and de are in the content files; es, fr and zh are
+    looked up by their English text, so a changed English text shows up as missing."""
+
+    lang: str
+    table: dict[str, str] = field(default_factory=dict)
+    missing: set[str] = field(default_factory=set)
+    used: set[str] = field(default_factory=set)
+
+    def __call__(self, text: Text) -> str:
+        if self.lang in INLINE_LANGUAGES:
+            return str(getattr(text, self.lang))
+        found = self.table.get(text.en)
+        if found is None:
+            self.missing.add(text.en)
+            return text.en
+        self.used.add(text.en)
+        return found
 
 
 # --- Prepared for the template ----------------------------------------------------------------
@@ -401,11 +455,11 @@ class ChecklistView:
 
 
 def guide_views(
-    guide: GuidePage, lang: str
+    guide: GuidePage, say: Localizer
 ) -> tuple[tuple[FactView, ...], UpcomingView | None, tuple[ChecklistView, ...]]:
     """The fact cards, the next release and the checklists in one language."""
     facts = tuple(
-        FactView(f.id, getattr(f.title, lang), getattr(f.text, lang), f.source) for f in guide.facts
+        FactView(f.id, say(f.title), say(f.text), f.source) for f in guide.facts
     )
     upcoming = None
     if guide.upcoming is not None:
@@ -413,37 +467,37 @@ def guide_views(
         upcoming = UpcomingView(
             version=u.version,
             checked=u.checked.isoformat(),
-            status=getattr(u.status, lang),
+            status=say(u.status),
             source=u.source,
             features=tuple(
-                FeatureView(getattr(f.title, lang), getattr(f.text, lang), f.source) for f in u.features
+                FeatureView(say(f.title), say(f.text), f.source) for f in u.features
             ),
-            caveats=tuple(getattr(c, lang) for c in u.caveats),
+            caveats=tuple(say(c) for c in u.caveats),
         )
     checklists = tuple(
-        ChecklistView(c.id, getattr(c.title, lang), tuple(getattr(i, lang) for i in c.items))
+        ChecklistView(c.id, say(c.title), tuple(say(i) for i in c.items))
         for c in guide.checklists
     )
     return facts, upcoming, checklists
 
 
-def _step(step: Step, lang: str) -> StepView:
+def _step(step: Step, say: Localizer) -> StepView:
     if step.url is not None:
-        return StepView(getattr(step.text, lang), step.url, external=True)
-    href = f"{page_path(lang, 'links')}#cat-{step.anchor}" if step.anchor is not None else None
-    return StepView(getattr(step.text, lang), href, external=False)
+        return StepView(say(step.text), step.url, external=True)
+    href = f"{page_path(say.lang, 'links')}#cat-{step.anchor}" if step.anchor is not None else None
+    return StepView(say(step.text), href, external=False)
 
 
 def community_views(
-    page: CommunityPage, lang: str
+    page: CommunityPage, say: Localizer
 ) -> tuple[tuple[AudienceView, ...], tuple[CategoryView, ...], tuple[DocumentView, ...]]:
     """The audience cards, categories and documents in one language, entries numbered in page order."""
     audiences = tuple(
         AudienceView(
             id=a.id,
-            title=getattr(a.title, lang),
-            text=getattr(a.text, lang),
-            steps=tuple(_step(step, lang) for step in a.steps),
+            title=say(a.title),
+            text=say(a.text),
+            steps=tuple(_step(step, say) for step in a.steps),
         )
         for a in page.audiences
     )
@@ -460,25 +514,25 @@ def community_views(
                     name=entry.name,
                     url=entry.url,
                     tags=tuple(entry.tags),
-                    description=getattr(entry.description, lang),
-                    note=getattr(entry.note, lang) if entry.note else None,
+                    description=say(entry.description),
+                    note=say(entry.note) if entry.note else None,
                 )
             )
         categories.append(
             CategoryView(
                 id=category.id,
-                title=getattr(category.title, lang),
-                risk=getattr(category.risk, lang) if category.risk else None,
+                title=say(category.title),
+                risk=say(category.risk) if category.risk else None,
                 entries=tuple(entries),
             )
         )
     documents = tuple(
         DocumentView(
             id=d.id,
-            title=getattr(d.title, lang),
-            text=getattr(d.text, lang),
+            title=say(d.title),
+            text=say(d.text),
             url=d.url,
-            status=getattr(d.status, lang) if d.status else None,
+            status=say(d.status) if d.status else None,
         )
         for d in page.documents
     )
@@ -508,21 +562,28 @@ def context(
     lang: str,
     version: str,
     page_id: str = "home",
+    say: Localizer | None = None,
 ) -> dict[str, object]:
     """Everything the templates need for one page in one language."""
-    audiences, categories, documents = community_views(page, lang)
-    facts, upcoming, checklists = guide_views(guide, lang)
+    say = say or Localizer(lang)
+    audiences, categories, documents = community_views(page, say)
+    facts, upcoming, checklists = guide_views(guide, say)
     ui = texts[lang]
     return {
         "lang": lang,
+        "html_lang": HTML_LANG.get(lang, lang),
+        "translated": lang in TRANSLATED,
+        "translation_url": f"{REPO_URL}/blob/main/site/content/translations/{lang}.yaml",
         "ui": ui,
-        "alternates": [(code, texts[code]["lang_name"], page_path(code, page_id)) for code in LANGUAGES],
+        "alternates": [
+            (code, HTML_LANG.get(code, code), texts[code]["lang_name"], page_path(code, page_id)) for code in LANGUAGES
+        ],
         "page": page_id,
         "page_title": None if page_id == "home" else ui[f"page.{page_id}.title"],
         "page_lead": None if page_id == "home" else ui[f"page.{page_id}.lead"],
         "nav": [(p, ui[f"nav.{p}"], page_path(lang, p)) for p in PAGES],
         "nav_href": {p: page_path(lang, p) for p in PAGES},
-        "status_page": STATUS_PAGE[lang],
+        "status_page": STATUS_PAGE.get(lang, STATUS_PAGE["en"]),
         "status_api": STATUS_API,
         "development_api": DEVELOPMENT_API,
         "upstream_repo": UPSTREAM_REPO,
@@ -534,7 +595,7 @@ def context(
         "checklists": checklists,
         "categories": categories,
         "documents": documents,
-        "removed": tuple((r.name, getattr(r.reason, lang)) for r in page.removed),
+        "removed": tuple((r.name, say(r.reason)) for r in page.removed),
         "checked": page.checked.isoformat(),
         "entry_count": sum(len(c.entries) for c in categories),
         "repo_url": REPO_URL,
@@ -554,6 +615,9 @@ def build(out: Path, version: str) -> None:
     page = load_community(ROOT / "content" / "community.yaml")
     guide = load_guide(ROOT / "content" / "guide.yaml")
     texts = load_texts(ROOT / "content" / "texts.yaml")
+    sayers = {lang: Localizer(lang) for lang in INLINE_LANGUAGES}
+    for lang in TRANSLATED:
+        sayers[lang] = Localizer(lang, load_translations(ROOT / "content" / "translations" / f"{lang}.yaml", lang))
     env = Environment(
         loader=FileSystemLoader(ROOT / "templates"),
         autoescape=True,
@@ -562,7 +626,7 @@ def build(out: Path, version: str) -> None:
     )
     rendered = {
         page_path(lang, page_id): env.get_template(f"{page_id}.html.j2").render(
-            context(page, guide, texts, lang, version, page_id)
+            context(page, guide, texts, lang, version, page_id, sayers[lang])
         )
         for lang in LANGUAGES
         for page_id in PAGES
@@ -575,6 +639,12 @@ def build(out: Path, version: str) -> None:
         target = out / path.strip("/") / "index.html"
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(html, encoding="utf-8")
+    for lang in TRANSLATED:
+        say = sayers[lang]
+        for text in sorted(say.missing):
+            print(f"warning: no {lang} translation, English shown: {text[:70]!r}", file=sys.stderr)
+        for text in sorted(set(say.table) - say.used):
+            print(f"warning: unused {lang} translation (English text changed?): {text[:70]!r}", file=sys.stderr)
 
 
 def main(argv: list[str] | None = None) -> int:

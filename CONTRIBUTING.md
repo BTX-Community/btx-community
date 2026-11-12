@@ -21,20 +21,30 @@ Nobody should be locked out of this because of tooling.
 
 ## Changing the website
 
-The content of btx-community.com is in three files:
+The content of btx-community.com is in these files:
 
 - [`site/content/community.yaml`](site/content/community.yaml): the cards at the top and
   the link directory
 - [`site/content/guide.yaml`](site/content/guide.yaml): "What is BTX?", the next release and
   the checklists. Every fact links to a source a reader can open; prefer the source code and
   release notes over websites.
-- [`site/content/texts.yaml`](site/content/texts.yaml): the fixed texts of the page
+- [`site/content/texts.yaml`](site/content/texts.yaml): the fixed texts of the page, in all
+  five languages
+- [`site/content/translations/`](site/content/translations/): the Spanish, French and Chinese
+  versions of the texts in the first two files, one file per language
 
 The live figures (network state, supply, halving, upgrade countdown, and the development
 activity of `btxchain/btx`) are not in these files; the page reads them from the public API of
 network.btx-monitoring.com.
 
-Every text exists in English and German; add both. Links must be plain `https://` URLs. The
+The site is in English, German, Spanish, French and Simplified Chinese. In the content files
+every text exists in English and German; add both. Spanish, French and Chinese live in
+`translations/<lang>.yaml`, each paired with the English text it translates. If you add or
+change an English text and cannot translate it, that is fine: the page shows English in those
+languages until someone adds the translation, and the build lists what is missing. The
+translations were made with AI help; native speakers are very welcome to correct them.
+
+Links must be plain `https://` URLs. The
 pull request checks the files and builds the page; if something does not fit, the check
 fails and says why. Once the change is merged, the site updates itself within a few minutes.
 Nobody needs access to the server for that. How it works is in
