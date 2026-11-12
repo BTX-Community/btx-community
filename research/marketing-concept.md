@@ -35,9 +35,9 @@ BTX is positioned as “Bitcoin's monetary policy, quantum-safe from day one”.
 3. **Early stage.** About a quarter has been mined; the first halving is expected in summer 2027. The countdown is a natural, factual hook.
 4. **MatMul PoW on regular GPUs.** Gaming and workstation cards can take part; no ASICs needed.
 
-**Prerequisite before any promotion: transparency on the deployment reward.** Blocks 0 to 49,999 paid 1,000,000 BTX (4.76% of the maximum supply) to a single address. According to the specification these coins are intended for a genesis multisig for “network formation”, with separate documentation that has not been published yet. At the same time, easybtx.com and minebtx.com advertise “no premine”.
+**Prerequisite before any promotion: transparency on the deployment reward.** Blocks 1 to 50,000 paid 1,000,000 BTX (4.76% of the maximum supply, 18.67% of everything issued so far) to a single address, mined in about six and a half hours, one block every 0.46 seconds instead of every 90, under consensus rules written for exactly that bootstrap window. That was disclosed in the code and the specification, so it was not a hidden premine. But the specification says the coins “are held in a genesis multisig”, while the address has been empty since 26 May 2026: it was paid out in 346 shielded transactions that nobody outside can follow. The separate documentation the specification itself asks for has not been published. Details and the commands to check them: [`research/deployment-reward.md`](deployment-reward.md). At the same time, easybtx.com advertises “no premine”, and minebtx.com reportedly does too (not yet checked).
 
-That claim must not appear in any promotional material. Instead, the project should explain openly what happens with the 1 million BTX. Reaching out to new buyers without clarifying this hands critics their first headline.
+That claim must not appear in any promotional material without that context. In the narrow sense it is true, but without the context above it is misleading. Instead, the project should explain openly what happened to the 1 million BTX. Reaching out to new buyers without clarifying this hands critics their first headline.
 
 ## Target group: miners
 
@@ -106,7 +106,7 @@ All measures remain information and education, not brokering and not price suppo
 - **Label paid content**, including bounties and influencer posts.
 - **No brokering:** do not match buy and sell offers yourself, do not accept orders, do not hold anyone's coins. Under MiCA this requires a licence.
 - **No coordinated buying** and no wash trading. At the latest from a listing application, the market manipulation ban under Art. 91 MiCA applies.
-- **No false statements:** in particular no “no premine” while the deployment reward is unresolved.
+- **No misleading statements:** in particular “no premine” only together with the bootstrap window and the 1 million BTX, as long as the deployment reward is unresolved.
 
 ## KPIs and measurement
 
@@ -127,24 +127,24 @@ Targets for 90 days will be set after the first network report, once a baseline 
 
 | Phase | Period | Measures |
 | --- | --- | --- |
-| **1 Foundation** | Day 1 to 30 | Explain deployment reward · Correct the premine claim · Mandate and infra fund · Mining calculator live |
+| **1 Foundation** | Day 1 to 30 | Explain deployment reward · Add context to the premine claim · Mandate and infra fund · Mining calculator live |
 | *Gate: transparency established* | | |
 | **2 Visibility** | Day 31 to 60 | Weekly report starts · Benchmarks with bounties · Tutorials in DE and EN · Bitcointalk ANN thread |
 | *Gate: KPI baseline in place* | | |
 | **3 Reach** | Day 61 to 90 | Quantum explainers · Ambassador program · First talks, podcasts · Commission code audit |
 
-Phase 2 starts only once the deployment reward is explained and the premine claim corrected. Without that transparency, any added reach would work against the project.
+Phase 2 starts only once the deployment reward is explained and the premine claim has its context. Without that transparency, any added reach would work against the project.
 
 ## Open points and decisions
 
 - [ ] Core team statement on the deployment reward (1 million BTX): use, addresses, rules
-- [ ] Correct “no premine” on easybtx.com and minebtx.com (site owners' consent needed)
+- [ ] Add context to “no premine” on easybtx.com, and check whether minebtx.com says the same (site owners' consent needed)
 - [ ] Clarify the mandate: does this concept speak for the community working group or for the project?
 - [ ] Infra fund: who funds it, who approves bounties, how is it reported?
 - [ ] Clarify the budget for a code audit
 - [ ] Short legal review of the guardrails
 
-Sources: [BTXScan](https://btxscan.io/), [btx.dev](https://btx.dev/), [BaFin guidance notice on crypto-asset services](https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Merkblatt/mb_250103_Kryptowerte_Dienstl.html), own on-chain check of the deployment reward (October 2026).
+Sources: [BTXScan](https://btxscan.io/), [btx.dev](https://btx.dev/), [BaFin guidance notice on crypto-asset services](https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Merkblatt/mb_250103_Kryptowerte_Dienstl.html), own on-chain check of the deployment reward: [`research/deployment-reward.md`](deployment-reward.md).
 
 ---
 
@@ -176,9 +176,9 @@ BTX wird als „Bitcoins Geldpolitik, quantensicher von Anfang an“ positionier
 3. **Frühe Phase.** Rund ein Viertel ist gemint, das erste Halving kommt voraussichtlich im Sommer 2027. Der Countdown ist ein natürlicher, faktischer Aufhänger.
 4. **MatMul-PoW auf normalen GPUs.** Gaming- und Workstation-Karten können mitmachen, ASICs braucht es nicht.
 
-**Voraussetzung vor jeder Werbung: Transparenz zum Deployment Reward.** Die Blöcke 0 bis 49.999 haben 1.000.000 BTX (4,76 % der Maximalmenge) an eine einzige Adresse ausgegeben. Laut Spezifikation sind diese Coins für ein Genesis-Multisig zur „Netzwerkbildung“ bestimmt, mit einer gesonderten Dokumentation, die bisher nicht veröffentlicht ist. Gleichzeitig werben easybtx.com und minebtx.com mit „no premine“.
+**Voraussetzung vor jeder Werbung: Transparenz zum Deployment Reward.** Die Blöcke 1 bis 50.000 haben 1.000.000 BTX (4,76 % der Maximalmenge, 18,67 % aller bisher ausgegebenen BTX) an eine einzige Adresse ausgegeben, gemint in rund sechseinhalb Stunden, ein Block alle 0,46 Sekunden statt alle 90, unter Konsensregeln, die genau für dieses Bootstrap-Fenster geschrieben waren. Das stand offen im Code und in der Spezifikation, ein verdeckter Premine war es also nicht. Die Spezifikation sagt aber, die Coins „are held in a genesis multisig“, während die Adresse seit dem 26. Mai 2026 leer ist: Sie wurde in 346 abgeschirmten Transaktionen ausgezahlt, denen niemand von außen folgen kann. Die gesonderte Dokumentation, die die Spezifikation selbst verlangt, ist nicht veröffentlicht. Einzelheiten und die Befehle zum Nachprüfen: [`research/deployment-reward.md`](deployment-reward.md). Gleichzeitig wirbt easybtx.com mit „no premine“, minebtx.com laut Hinweisen ebenfalls (noch nicht geprüft).
 
-Diese Aussage darf in keinem Werbematerial mehr auftauchen. Stattdessen sollte das Projekt offen erklären, was mit der 1 Mio. BTX geschieht. Wer neue Käufer anspricht, ohne das zu klären, liefert Kritikern die erste Schlagzeile.
+Diese Aussage darf in keinem Werbematerial mehr ohne diesen Kontext auftauchen. Im engen Sinn stimmt sie, ohne den Kontext oben ist sie aber irreführend. Stattdessen sollte das Projekt offen erklären, was mit der 1 Mio. BTX geschehen ist. Wer neue Käufer anspricht, ohne das zu klären, liefert Kritikern die erste Schlagzeile.
 
 ## Zielgruppe Miner
 
@@ -247,7 +247,7 @@ Alle Maßnahmen bleiben Information und Aufklärung, keine Vermittlung und keine
 - **Bezahlte Beiträge kennzeichnen**, auch Bounties und Influencer-Posts.
 - **Keine Vermittlung:** Kauf- und Verkaufsangebote nicht selbst zusammenführen, keine Orders annehmen, nichts verwahren. Das ist nach MiCA erlaubnispflichtig.
 - **Keine abgesprochenen Kaufaktionen** und kein Wash Trading. Spätestens ab einem Listing-Antrag gilt das Marktmanipulationsverbot nach Art. 91 MiCA.
-- **Keine falschen Tatsachen:** insbesondere kein „no premine“, solange der Deployment Reward nicht geklärt ist.
+- **Keine irreführenden Aussagen:** insbesondere „no premine“ nur zusammen mit dem Bootstrap-Fenster und der 1 Mio. BTX, solange der Deployment Reward nicht geklärt ist.
 
 ## KPIs und Messung
 
@@ -268,21 +268,21 @@ Zielwerte für 90 Tage werden nach dem ersten Netzwerkbericht festgelegt, wenn e
 
 | Phase | Zeitraum | Maßnahmen |
 | --- | --- | --- |
-| **1 Fundament** | Tag 1 bis 30 | Deployment Reward erklären · Premine-Aussage korrigieren · Mandat und Infra-Fonds · Mining-Rechner online |
+| **1 Fundament** | Tag 1 bis 30 | Deployment Reward erklären · Premine-Aussage um Kontext ergänzen · Mandat und Infra-Fonds · Mining-Rechner online |
 | *Gate: Transparenz hergestellt* | | |
 | **2 Sichtbarkeit** | Tag 31 bis 60 | Wochenbericht startet · Benchmarks mit Bounties · Tutorials DE und EN · Bitcointalk-ANN-Thread |
 | *Gate: KPI-Basislinie steht* | | |
 | **3 Reichweite** | Tag 61 bis 90 | Quanten-Erklärstücke · Botschafter-Programm · Erste Vorträge, Podcasts · Code-Audit beauftragen |
 
-Phase 2 beginnt erst, wenn der Deployment Reward erklärt und die Premine-Aussage korrigiert ist. Ohne diese Transparenz würde jede Reichweite gegen das Projekt arbeiten.
+Phase 2 beginnt erst, wenn der Deployment Reward erklärt und die Premine-Aussage um ihren Kontext ergänzt ist. Ohne diese Transparenz würde jede Reichweite gegen das Projekt arbeiten.
 
 ## Offene Punkte und Entscheidungen
 
 - [ ] Erklärung des Core-Teams zum Deployment Reward (1 Mio. BTX): Verwendung, Adressen, Regeln
-- [ ] „no premine“ auf easybtx.com und minebtx.com korrigieren (Zustimmung der Seitenbetreiber nötig)
+- [ ] „no premine“ auf easybtx.com um Kontext ergänzen und prüfen, ob minebtx.com dasselbe sagt (Zustimmung der Seitenbetreiber nötig)
 - [ ] Mandat klären: Spricht das Konzept für die Community-Arbeitsgruppe oder für das Projekt?
 - [ ] Infra-Fonds: Wer füllt ihn, wer gibt Bounties frei, wie wird berichtet?
 - [ ] Budget für Code-Audit klären
 - [ ] Kurze anwaltliche Prüfung der Leitplanken
 
-Quellen: [BTXScan](https://btxscan.io/), [btx.dev](https://btx.dev/), [BaFin-Merkblatt Kryptowerte-Dienstleistungen](https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Merkblatt/mb_250103_Kryptowerte_Dienstl.html), eigene On-Chain-Prüfung des Deployment Rewards (Oktober 2026).
+Quellen: [BTXScan](https://btxscan.io/), [btx.dev](https://btx.dev/), [BaFin-Merkblatt Kryptowerte-Dienstleistungen](https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Merkblatt/mb_250103_Kryptowerte_Dienstl.html), eigene On-Chain-Prüfung des Deployment Rewards: [`research/deployment-reward.md`](deployment-reward.md).
