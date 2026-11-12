@@ -5,6 +5,20 @@
 
 schema_version: 1
 translations:
+- en: A general mining chat rather than a BTX group; the list keeps to BTX channels.
+  fr: Un chat de minage généraliste, pas un groupe BTX ; la liste s'en tient aux canaux BTX.
+- en: Ask questions in the community group on Telegram.
+  fr: Poser des questions dans le groupe de la communauté sur Telegram.
+- en: Hardly any activity any more; the community talks on Telegram.
+  fr: Presque plus d'activité ; la communauté discute sur Telegram.
+- en: No activity, and the miner has not changed since August 2026.
+  fr: Aucune activité, et le mineur n'a pas changé depuis août 2026.
+- en: Now leads to a group the community does not run; the community group above replaces it.
+  fr: >-
+    Mène désormais à un groupe que la communauté ne gère pas ; le groupe de la communauté ci-dessus
+    le remplace.
+- en: The main community group on Telegram, open to everyone.
+  fr: Le groupe principal de la communauté sur Telegram, ouvert à tous.
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   fr: Ne liste plus BTX ; son marché BTX/USDT a disparu en juillet 2026.
 - en: >-
@@ -54,8 +68,6 @@ translations:
     Code source fermé ; les builds ne sont pas signés, vérifiez donc le SHA-256 sur la page de la
     version. Elle démarre par défaut sur BTX Pool. Des frais de développement de 5 % étaient
     indiqués pour elle en août 2026 ; vérifiez les frais actuels dans l'appli.
-- en: Community Discord, open to everyone, including mining help.
-  fr: Discord de la communauté, ouvert à tous, avec aide au minage.
 - en: Community status page - is the network healthy, with history, node help and a public JSON API.
   fr: >-
     Page d'état de la communauté : le réseau est-il en bonne santé, avec historique, aide aux nœuds
@@ -156,8 +168,6 @@ translations:
     Logiciel de minage NVIDIA (CUDA) pour plusieurs cryptomonnaies ; BTX tourne sous l'algorithme
     btxv4, la preuve de travail en vigueur depuis le bloc 185 000. Son README contient des commandes
     pour ninjaraider et BTX Pool.
-- en: No change to the miner since 2026-08-21.
-  fr: Aucune modification du logiciel de minage depuis le 2026-08-21.
 - en: Not launched. Its launch checklist is still open and the reference contracts are unaudited.
   fr: >-
     Non lancé. Sa liste de contrôle de lancement est encore ouverte et les contrats de référence ne
@@ -338,8 +348,6 @@ translations:
   fr: >-
     Le portefeuille des versions officielles pour Linux et macOS : l'application de bureau btx-qt,
     ou btxd avec btx-cli. Open source ; il fonctionne sur votre propre nœud.
-- en: Verification gate; clearing it lets you into the main BTX Telegram groups.
-  fr: Sas de vérification ; le franchir donne accès aux principaux groupes Telegram de BTX.
 - en: Verify the signature and SHA-256 before use. Not for signers.
   fr: Vérifiez la signature et le SHA-256 avant usage. Pas pour les signataires.
 - en: >-
@@ -430,8 +438,6 @@ translations:
     travail (MatMul). Il est porté par une communauté ouverte, pas par une entreprise.
 - en: See how the network is doing right now, in plain terms.
   fr: Voir où en est le réseau en ce moment, expliqué simplement.
-- en: Ask questions in the community chats (Discord, Telegram).
-  fr: Poser des questions dans les chats de la communauté (Discord, Telegram).
 - en: >-
     Never share your seed or private key. Nobody from the community will ever ask for it; direct messages
     offering help or "support" are scams.
@@ -463,10 +469,6 @@ translations:
   fr: Communauté
 - en: Community account on X.
   fr: Compte de la communauté sur X.
-- en: Russian-speaking mining chat with a BTX topic.
-  fr: Chat de minage russophone avec un sujet BTX.
-- en: Telegram chat of the matador miner.
-  fr: Chat Telegram du logiciel de minage matador.
 - en: Portal of the easyBTX team - explorer, wallet, mining and news in one place.
   fr: >-
     Portail de l'équipe easyBTX : explorateur, portefeuille, minage et actualités au même endroit.
