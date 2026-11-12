@@ -439,3 +439,63 @@ translations:
   fr: Le site a répondu par une erreur (520, 2026-11-03).
 - en: The BTX page no longer exists (404, 2026-11-03).
   fr: La page BTX n'existe plus (404, 2026-11-03).
+- en: Become a BTX dev
+  fr: Devenir développeur BTX
+- en: Before you open a pull request upstream - the gate and the PR template.
+  fr: >-
+    Avant d'ouvrir une pull request en amont : le contrôle préalable et le modèle de PR.
+- en: >-
+    Build and test on Linux, macOS or Windows, coverage included; the page says which recipes were
+    run and which were only read.
+  fr: >-
+    Compiler et tester sous Linux, macOS ou Windows, couverture de tests comprise ; la page indique
+    quelles procédures ont été exécutées et lesquelles ont seulement été lues.
+- en: Check your setup with the exam - past cases with known answers.
+  fr: >-
+    Vérifier votre configuration avec l'examen : d'anciens cas dont la réponse est connue.
+- en: >-
+    How to work on the node software so that your change can be merged: the method, build and test
+    recipes, the gate before an upstream pull request, open lanes with claimable owners, an exam,
+    and an entry file for AI tools.
+  fr: >-
+    Comment travailler sur le logiciel du nœud pour que votre modification puisse être fusionnée :
+    la méthode, des procédures de compilation et de test, le contrôle préalable à une pull request
+    en amont, des chantiers ouverts à prendre en charge, un examen et un fichier servant de point
+    d'entrée aux outils d'IA.
+- en: Living document - every page carries its last-verified date
+  fr: >-
+    Document vivant : chaque page indique la date de sa dernière vérification
+- en: Measured 12 November 2026 at commit c6f9678d
+  fr: Mesuré le 12 novembre 2026 au commit c6f9678d
+- en: Pick a lane - open work with a role and an owner column you can claim.
+  fr: >-
+    Choisir un chantier : du travail ouvert, avec un rôle et une colonne de responsable où vous
+    pouvez vous inscrire.
+- en: Point your AI tool (Claude Code, Cursor, Codex or another) at the agent file.
+  fr: Faire lire le fichier pour agents à votre outil d'IA (Claude Code, Cursor, Codex ou un autre).
+- en: Review and test programme - one pull request per bug class
+  fr: >-
+    Programme de revue et de test : une pull request par classe de bugs
+- en: Start here - the hub's front page, written for people.
+  fr: >-
+    Commencer ici : la page d'accueil du hub, écrite pour des humains.
+- en: >-
+    Test coverage measured on the release line, the recurring bug classes behind 317 fix pull
+    requests since August, one sweep per class that closes it with a rule, and checks before a final
+    release. A proposal by contributors; the maintainer decides what lands.
+  fr: >-
+    La couverture de tests mesurée sur la branche de version, les classes de bugs récurrentes
+    derrière 317 pull requests de correction depuis août, un balayage par classe, qui la clôt par
+    une règle, et des vérifications avant une version finale. Une proposition de contributeurs ; le
+    mainteneur décide de ce qui est intégré.
+- en: >-
+    The node software is open source, and anyone can send it a pull request on GitHub. The developer
+    hub tells you, and the AI tool you work with, how to build, test and document a change so that
+    it can be merged, and which work is open.
+  fr: >-
+    Le logiciel du nœud est open source, et chacun peut y proposer une pull request sur GitHub. Le
+    hub des développeurs vous explique, à vous et à l'outil d'IA avec lequel vous travaillez,
+    comment compiler, tester et documenter une modification pour qu'elle puisse être fusionnée, et
+    quel travail est ouvert.
+- en: The reference implementation and its own rules for agents.
+  fr: L'implémentation de référence et ses propres règles pour les agents.

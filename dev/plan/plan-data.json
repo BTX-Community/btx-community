@@ -1,0 +1,726 @@
+{
+  "schema_version": 1,
+  "public": true,
+  "companion": "MASTER-PLAN.md",
+  "source_labels": {
+    "A": "bug-class taxonomy of every fix PR since 1 Aug",
+    "B": "risk map, LOC x churn x (1 - coverage)",
+    "C1": "CodeQL + cppcheck",
+    "C2": "clang-tidy, TSan, DEBUG_LOCKORDER, -Wthread-safety",
+    "C3": "unit + functional coverage",
+    "S1/S2": "attack surface and the history of past fixes",
+    "E2": "post-quantum and AI-layer assurance review",
+    "E3": "external lessons checklist",
+    "git": "the tree at 4c7840e9",
+    "note": "file names in src fields (A-TAXONOMY.md, C1-STATIC.md, ...) are the team's lane reports; the values they gave are the numbers in this file; labels are explained in MASTER-PLAN.md under 'Labels'"
+  },
+  "coverage_statement": "The coverage build configures again on release-0.34.16 since #578 (merged into the release line on 12 Nov as 7051507b); the fix is not in v0.34.15 (main, 476f3f23). Measured at c6f9678d with the same fix: 65.8% product lines unit-only, 69.9% unit + functional; branches 37.7% / 40.7%; all floors (47 unit suites timed out, 82 of 208 functional scripts failed in the coverage run). Recipe: ../04-build-and-test.md section 5.",
+  "measured_at": {
+    "commit": "c6f9678d",
+    "date": "2026-11-12",
+    "src": "C1, C2, C3 run logs (release-0.34.16 at c6f9678d)",
+    "live_head": "4c7840e9",
+    "live_head_note": "31 commits later; no change to validation.cpp, net_processing.cpp, pow.cpp, src/consensus, script/interpreter.cpp",
+    "live_head_src": "git rev-list / git diff c6f9678d..4c7840e9"
+  },
+  "coverage": {
+    "overall": {
+      "unit_lines": 65.8,
+      "unitfunc_lines": 69.9,
+      "branches": 40.7,
+      "branches_unit": 37.7,
+      "functions_unit": 76.3,
+      "functions_unitfunc": 80.4,
+      "scope": "product code, 5,519 files, 623,410 lines",
+      "basis": "branches = unit + functional",
+      "caveat": "floors: 47 unit suites timed out; 82 of 208 functional scripts failed",
+      "src": "C3 overall coverage summary"
+    },
+    "areas": [
+      {
+        "area": "consensus",
+        "unit_lines": 95.7,
+        "unitfunc_lines": 96.6,
+        "branches": 50.9,
+        "loc": 2452,
+        "risk_rank": null,
+        "src": "C3 per-area coverage table; loc B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "validation.cpp",
+        "unit_lines": 75.6,
+        "unitfunc_lines": 78.2,
+        "branches": 46.5,
+        "loc": 23687,
+        "risk_rank": 2,
+        "src": "C3 per-area coverage table; loc and rank (validation/chain/mempool) B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "pow.cpp",
+        "unit_lines": 68.9,
+        "unitfunc_lines": 70.3,
+        "branches": 46.3,
+        "loc": 9076,
+        "risk_rank": 2,
+        "src": "C3 per-area coverage table; loc and rank (validation/chain/mempool) B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "script",
+        "unit_lines": 80.7,
+        "unitfunc_lines": 81.2,
+        "branches": 53.6,
+        "loc": 18019,
+        "risk_rank": 11,
+        "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "wallet",
+        "unit_lines": 37.2,
+        "unitfunc_lines": 50.5,
+        "branches": 30.7,
+        "loc": 76263,
+        "risk_rank": 4,
+        "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "net_processing.cpp",
+        "unit_lines": 24.6,
+        "unitfunc_lines": 62.3,
+        "branches": 37.0,
+        "loc": 25300,
+        "risk_rank": 1,
+        "src": "C3 per-area coverage table; loc and rank (net/p2p) B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "other net",
+        "unit_lines": 50.4,
+        "unitfunc_lines": 75.5,
+        "branches": 45.3,
+        "loc": null,
+        "risk_rank": 1,
+        "src": "C3 per-area coverage table; rank (net/p2p) B-RISKMAP.md / B-files.tsv; no matching LOC row"
+      },
+      {
+        "area": "rpc",
+        "unit_lines": 51.6,
+        "unitfunc_lines": 72.9,
+        "branches": 43.4,
+        "loc": 33765,
+        "risk_rank": 5,
+        "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "node",
+        "unit_lines": 69.9,
+        "unitfunc_lines": 79.6,
+        "branches": 49.8,
+        "loc": 28129,
+        "risk_rank": 7,
+        "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "matmul",
+        "unit_lines": 62.6,
+        "unitfunc_lines": 62.7,
+        "branches": 35.1,
+        "loc": 468217,
+        "risk_rank": 9,
+        "note": "47 suites timed out: not measured",
+        "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "shielded",
+        "unit_lines": 71.8,
+        "unitfunc_lines": 72.3,
+        "branches": 47.1,
+        "loc": 50060,
+        "risk_rank": null,
+        "src": "C3 per-area coverage table; loc B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "modelnet",
+        "unit_lines": 83.7,
+        "unitfunc_lines": 85.6,
+        "branches": 47.8,
+        "loc": 369251,
+        "risk_rank": 3,
+        "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "kernel",
+        "unit_lines": 88.6,
+        "unitfunc_lines": 90.5,
+        "branches": 49.7,
+        "loc": 5400,
+        "risk_rank": 12,
+        "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "policy",
+        "unit_lines": 69.7,
+        "unitfunc_lines": 80.8,
+        "branches": 49.2,
+        "loc": 4695,
+        "risk_rank": null,
+        "src": "C3 per-area coverage table; loc B-RISKMAP.md / B-files.tsv"
+      },
+      {
+        "area": "pq",
+        "unit_lines": 92.7,
+        "unitfunc_lines": 92.7,
+        "branches": 62.4,
+        "loc": null,
+        "risk_rank": null,
+        "src": "C3 per-area coverage table (src/pq/ + src/pqkey.*)"
+      },
+      {
+        "area": "modelnet/security_v2",
+        "unit_lines": 0.2,
+        "unitfunc_lines": 15.0,
+        "branches": null,
+        "loc": 5365,
+        "risk_rank": null,
+        "note": "6 .cpp files at 0% with functional tests",
+        "src": "B-files.tsv + C3-perfile.csv, recomputed 12 Nov"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "id": "K09",
+      "name": "unbounded input from peers and model peers",
+      "prs": 18,
+      "sites_open": null,
+      "rule": "container -> bound -> eviction test table; fuzz target per message type",
+      "sweep_status": "not counted; no inventory yet",
+      "src": "A-TAXONOMY.md section 2; master plan section 2 row 1"
+    },
+    {
+      "id": "K01",
+      "name": "non-atomic or short state-file write",
+      "prs": 22,
+      "sites_open": 12,
+      "rule": "lint against raw ofstream to datadir paths; truncated-file load tests",
+      "sweep_status": "worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped: capability_bytes.cpp); shared helper exists (#576)",
+      "src": "A-TAXONOMY.md; grep at 4c7840e9"
+    },
+    {
+      "id": "K03",
+      "name": "lock order / self-deadlock / race",
+      "prs": 9,
+      "sites_open": 41,
+      "sites_unit": "TSan site pairs",
+      "rule": "-Wthread-safety, TSan + DEBUG_LOCKORDER nightly",
+      "sweep_status": "baseline measured",
+      "src": "A-TAXONOMY.md; C2-TIDY-TSAN.md"
+    },
+    {
+      "id": "C1-1",
+      "name": "file-system and environment trust",
+      "prs": null,
+      "sites_open": 133,
+      "sites_unit": "CodeQL results",
+      "rule": "CodeQL path/permission/process queries with a shrinking baseline",
+      "sweep_status": "baseline measured, untriaged",
+      "src": "C1-STATIC.md; C1 results table, recounted"
+    },
+    {
+      "id": "K05",
+      "name": "wallet-locked / passphrase ordering",
+      "prs": 10,
+      "sites_open": null,
+      "rule": "every wallet RPC tested against a locked wallet",
+      "sweep_status": "not counted (4 files call funding primitives)",
+      "src": "A-TAXONOMY.md section 3"
+    },
+    {
+      "id": "K08",
+      "name": "path / symlink / jail handling",
+      "prs": 8,
+      "sites_open": null,
+      "rule": "SafePath helper; jail tests with 0 skips",
+      "sweep_status": "not counted (44 files reference symlink APIs)",
+      "src": "A-TAXONOMY.md section 3"
+    },
+    {
+      "id": "K06",
+      "name": "Windows / MinGW / MSVC portability",
+      "prs": 33,
+      "sites_open": null,
+      "rule": "fork CI Windows jobs + POSIX grep lint",
+      "sweep_status": "waits for the first Windows CI run",
+      "src": "A-TAXONOMY.md"
+    },
+    {
+      "id": "K10",
+      "name": "CLI/RPC parameter conversion drift",
+      "prs": 14,
+      "sites_open": 1,
+      "rule": "unit test over the RPCHelpMan table vs vRPCConvertParams",
+      "sweep_status": "rule-only PR; Atlas half closed by #574",
+      "src": "conversion check re-run at 4c7840e9"
+    },
+    {
+      "id": "K04",
+      "name": "dangling reference / copy from freed memory",
+      "prs": 2,
+      "sites_open": 0,
+      "rule": "UniValue self-member-assignment lint",
+      "sweep_status": "rule-only PR",
+      "src": "regex re-run at 4c7840e9"
+    },
+    {
+      "id": "K15",
+      "name": "integer width / truncation",
+      "prs": 2,
+      "sites_open": 28,
+      "rule": "ParseUint32Index at every JSON-number cast",
+      "sweep_status": "worklist ready (consensus and matmul sites excluded)",
+      "src": "grep at 4c7840e9"
+    },
+    {
+      "id": "K16/K17",
+      "name": "helper lifecycle and options not honoured",
+      "prs": 15,
+      "sites_open": null,
+      "rule": "RAII wrappers; -listen/-proxy/-onlynet matrix over every surface",
+      "sweep_status": "not counted",
+      "src": "A-TAXONOMY.md"
+    },
+    {
+      "id": "K19/K22",
+      "name": "test registration, fuzz smoke, packaging drift",
+      "prs": 40,
+      "sites_open": null,
+      "rule": "registration diff, 10 s fuzz smoke, exec-bit lint, release gate",
+      "sweep_status": "in the CI branch",
+      "src": "A-TAXONOMY.md (26 + 14 PRs)"
+    },
+    {
+      "id": "K11/K12",
+      "name": "wallet RPC authorization and coin reservation",
+      "prs": 8,
+      "sites_open": null,
+      "rule": "restricted-user allowlist test; RAII reservation + two-sender test",
+      "sweep_status": "not counted",
+      "src": "A-TAXONOMY.md"
+    },
+    {
+      "id": "C1-3",
+      "name": "lifetime and initialisation",
+      "prs": null,
+      "sites_open": 120,
+      "sites_unit": "cppcheck + CodeQL results",
+      "rule": "ci/cppcheck.sh with fixed flags; shrinking baseline",
+      "sweep_status": "baseline measured, untriaged",
+      "src": "C1-STATIC.md"
+    },
+    {
+      "id": "K20/K21/K02",
+      "name": "store, deposit and persistence logic",
+      "prs": 52,
+      "sites_open": null,
+      "rule": "property tests per store; BCP/1 lifecycle table; mutate-reopen-compare",
+      "sweep_status": "generators, not instance fixes",
+      "src": "A-TAXONOMY.md (33 + 10 + 9 PRs)"
+    },
+    {
+      "id": "K07",
+      "name": "macOS / libc++ / Qt packaging",
+      "prs": 6,
+      "sites_open": null,
+      "rule": "otool check in the release gate; macOS CI",
+      "sweep_status": "not counted",
+      "src": "A-TAXONOMY.md"
+    },
+    {
+      "id": "K25",
+      "name": "privacy leak to peers or restricted views",
+      "prs": 5,
+      "sites_open": null,
+      "rule": "observing-peer functional test",
+      "sweep_status": "5 of 5 PRs landed; rule missing",
+      "src": "A-TAXONOMY.md; git"
+    },
+    {
+      "id": "K27",
+      "name": "secret or seed material exposed",
+      "prs": 3,
+      "sites_open": null,
+      "rule": "log-scan assertion; SecureString audit test",
+      "sweep_status": "not counted",
+      "src": "A-TAXONOMY.md"
+    },
+    {
+      "id": "K13",
+      "name": "MatMul attestation / frontier state",
+      "prs": 15,
+      "sites_open": null,
+      "rule": "model-based state-machine test",
+      "sweep_status": "evidence for #464, not a sweep",
+      "src": "A-TAXONOMY.md"
+    },
+    {
+      "id": "K14",
+      "name": "block download scheduling",
+      "prs": 19,
+      "sites_open": null,
+      "rule": "deterministic download simulation with an adversarial scheduler",
+      "sweep_status": "evidence for #464, not a sweep",
+      "src": "A-TAXONOMY.md"
+    }
+  ],
+  "hotspots": [
+    {
+      "file": "net_processing.cpp",
+      "loc": 25300,
+      "fix_commits": 113,
+      "coverage": 62.3,
+      "coverage_unit": 24.6,
+      "risk_rank": 1,
+      "src": "B rank 1; C3-perfile.csv"
+    },
+    {
+      "file": "validation.cpp",
+      "loc": 23687,
+      "fix_commits": 63,
+      "coverage": 78.2,
+      "coverage_unit": 75.6,
+      "risk_rank": 2,
+      "src": "B rank 2; C3-perfile.csv"
+    },
+    {
+      "file": "modelnet/helper.cpp",
+      "loc": 12944,
+      "fix_commits": 5,
+      "fix_prs": 42,
+      "coverage": 74.1,
+      "coverage_unit": 65.9,
+      "risk_rank": 3,
+      "src": "B rank 3 (fix_commits = maintainer fix-subject commits); A section 4 (fix PRs); C3-perfile.csv"
+    },
+    {
+      "file": "wallet/shielded_rpc.cpp",
+      "loc": 16911,
+      "fix_commits": 2,
+      "coverage": 24.3,
+      "coverage_unit": 15.8,
+      "risk_rank": 4,
+      "src": "B rank 4; C3-perfile.csv"
+    },
+    {
+      "file": "rpc/blockchain.cpp",
+      "loc": 5678,
+      "fix_commits": 7,
+      "coverage": 57.4,
+      "coverage_unit": 29.5,
+      "risk_rank": 5,
+      "src": "B rank 5; C3-perfile.csv"
+    },
+    {
+      "file": "node/matmul_trusted_attestations.h",
+      "loc": 3477,
+      "fix_commits": 50,
+      "coverage": 83.8,
+      "coverage_unit": 56.1,
+      "risk_rank": 6,
+      "src": "B rank 6; C3-perfile.csv"
+    },
+    {
+      "file": "qt/modelnetpage.cpp",
+      "loc": 2552,
+      "fix_commits": 0,
+      "coverage": null,
+      "coverage_unit": null,
+      "risk_rank": 7,
+      "note": "GUI not built in any lane: unknown, not zero",
+      "src": "B rank 7"
+    },
+    {
+      "file": "init.cpp",
+      "loc": 4605,
+      "fix_commits": 29,
+      "coverage": 77.7,
+      "coverage_unit": 29.4,
+      "risk_rank": 8,
+      "src": "B rank 8; C3-perfile.csv"
+    },
+    {
+      "file": "rpc/modelnet.cpp",
+      "loc": 2883,
+      "fix_commits": 3,
+      "coverage": 87.0,
+      "coverage_unit": 54.1,
+      "risk_rank": 9,
+      "src": "B rank 9; C3-perfile.csv"
+    },
+    {
+      "file": "matmul/matmul_v4_rc_gkr.cpp",
+      "loc": 6186,
+      "fix_commits": 4,
+      "coverage": 79.1,
+      "coverage_unit": 78.6,
+      "risk_rank": 10,
+      "src": "B rank 10; C3-perfile.csv"
+    }
+  ],
+  "static": {
+    "codeql_real": 260,
+    "codeql_real_note": "untriaged product-code results outside maintainability/documentation rules; not confirmed defects",
+    "codeql_security": 150,
+    "cppcheck_errors": 26,
+    "tsan_pairs": 41,
+    "tsa_warnings": 266,
+    "lock_inversions": 1,
+    "tidy_warnings": 1033,
+    "src": "C1-STATIC.md (CodeQL, cppcheck); C2-TIDY-TSAN.md and C2 tsan-stats.json (TSan, thread-safety, lock order, clang-tidy)"
+  },
+  "gates": [
+    {
+      "id": "CI-1",
+      "name": "linux-unit-functional (sharded)",
+      "state": "planned",
+      "src": "master plan 4.2"
+    },
+    {
+      "id": "CI-2",
+      "name": "linux-asan-ubsan",
+      "state": "planned",
+      "src": "master plan 4.2"
+    },
+    {
+      "id": "CI-3",
+      "name": "tsan-lockorder nightly",
+      "state": "planned; baseline 41 pairs",
+      "src": "master plan 4.2; C2"
+    },
+    {
+      "id": "CI-4",
+      "name": "lint (registration diff, UniValue, K01/K08/K17 greps, K10 test, exec bits)",
+      "state": "planned",
+      "src": "master plan 4.2"
+    },
+    {
+      "id": "CI-5",
+      "name": "clang-tidy-diff + -Werror=thread-safety on clean files",
+      "state": "planned",
+      "src": "master plan 4.2"
+    },
+    {
+      "id": "CI-6",
+      "name": "cppcheck with fixed flags",
+      "state": "planned; baseline 372",
+      "src": "master plan 4.2; C1"
+    },
+    {
+      "id": "CI-7",
+      "name": "fuzz-smoke (ClusterFuzzLite)",
+      "state": "planned",
+      "src": "master plan 4.2"
+    },
+    {
+      "id": "CI-8",
+      "name": "codeql weekly on a dedicated box",
+      "state": "planned; baseline 260",
+      "src": "master plan 4.2; C1"
+    },
+    {
+      "id": "CI-9",
+      "name": "coverage-ratchet on a dedicated box",
+      "state": "planned; baseline 69.9% lines; configure fix landed (#578)",
+      "src": "master plan 4.2; C3; git"
+    },
+    {
+      "id": "CI-10",
+      "name": "release-gate",
+      "state": "planned",
+      "src": "master plan 4.2"
+    },
+    {
+      "id": "CI-0",
+      "name": "fork build matrix (Linux, userns, mingw, Windows, macOS)",
+      "state": "workflow exists; never run on release-0.34.16; needs rebase to 4c7840e9",
+      "src": "fork CI workflow read 12 Nov; fork run list (GitHub API)"
+    },
+    {
+      "id": "G1",
+      "name": "Operators safe now",
+      "state": "partly",
+      "src": "security gates, master plan 4.4"
+    },
+    {
+      "id": "G2",
+      "name": "Machines on",
+      "state": "open",
+      "src": "master plan 4.4"
+    },
+    {
+      "id": "G3",
+      "name": "Parsers covered",
+      "state": "1 of about 13 targets exists",
+      "src": "master plan 4.4; git (#580)"
+    },
+    {
+      "id": "G4",
+      "name": "Classes swept",
+      "state": "open; worklists ready",
+      "src": "master plan 4.4"
+    },
+    {
+      "id": "G5",
+      "name": "Money separated from the AI layer",
+      "state": "open",
+      "src": "master plan 4.4"
+    },
+    {
+      "id": "G6",
+      "name": "Peer input charged and bounded",
+      "state": "open; #478 and #313 on the release line only",
+      "src": "master plan 4.4; git"
+    },
+    {
+      "id": "G7",
+      "name": "What runs is what was reviewed",
+      "state": "open",
+      "src": "master plan 4.4"
+    },
+    {
+      "id": "G8",
+      "name": "Chain verifiable from genesis",
+      "state": "open",
+      "src": "master plan 4.4"
+    },
+    {
+      "id": "G9",
+      "name": "Process (branch matrix per fix, the v0.34.15 gap list, a reporting route)",
+      "state": "open",
+      "src": "master plan 4.4"
+    }
+  ],
+  "phases": [
+    {
+      "id": "2a",
+      "name": "First value",
+      "window": "12-14 Nov",
+      "deliverables": [
+        "fork CI branch on 4c7840e9 with lint, clang-tidy-diff, cppcheck",
+        "rule-only PRs: K10 test, K04 lint",
+        "K15: 28 casts + 5 single results",
+        "K01 worklist and lint to the portability lane",
+        "functional-failure triage"
+      ],
+      "src": "master plan section 6"
+    },
+    {
+      "id": "2b",
+      "name": "The sweeps",
+      "window": "15-21 Nov",
+      "deliverables": [
+        "K05, K08, K03 + annotations",
+        "fs-trust policy",
+        "K16, K17, K19 lints",
+        "K22 release gate",
+        "K11, K12, K07, K25, K27 (counted first)",
+        "coverage ratchet and ASan job"
+      ],
+      "src": "master plan section 6"
+    },
+    {
+      "id": "3",
+      "name": "Deep reviews",
+      "window": "18-28 Nov",
+      "deliverables": [
+        "3.3, 3.4, 3.7, 3.8",
+        "3.2 and 3.6 test artefacts",
+        "3.1 and 3.5 as #464 evidence",
+        "fuzz batch: dispatcher, DLTX, chunks, hybrid handshake, model files"
+      ],
+      "src": "master plan section 6"
+    },
+    {
+      "id": "4",
+      "name": "Ratchet",
+      "window": "weekly from 24 Nov",
+      "deliverables": [
+        "baselines only shrink",
+        "weekly CodeQL",
+        "Thursday batch",
+        "#464 evidence list",
+        "external-review scope"
+      ],
+      "src": "master plan section 6"
+    }
+  ],
+  "deep_reviews": [
+    {
+      "id": "3.1",
+      "subsystem": "Consensus and validation",
+      "why": "frozen for 0.34.16 (#464); 68 consensus functions never executed under unit + functional tests",
+      "mode": "evidence for #464",
+      "src": "#464; C3-UNEXECUTED-FUNCTIONS.md"
+    },
+    {
+      "id": "3.2a",
+      "subsystem": "Input bounds: helper and model routes",
+      "why": "K09 18 PRs, 8 at a new site; no container inventory",
+      "mode": "PR",
+      "src": "A-TAXONOMY.md"
+    },
+    {
+      "id": "3.2b",
+      "subsystem": "Block download scheduling (net_processing)",
+      "why": "net/p2p holds 61.9% of measured risk; K14 19 PRs + 145 commits, 16 of 17 re-touch a file",
+      "mode": "evidence for #464",
+      "src": "B-RISKMAP.md; A-TAXONOMY.md"
+    },
+    {
+      "id": "3.3",
+      "subsystem": "Wallet secrets and backups",
+      "why": "wallet 37.2% unit / 50.5% with functional; 927 wallet functions never executed",
+      "mode": "PR",
+      "src": "C3"
+    },
+    {
+      "id": "3.4",
+      "subsystem": "PQ crypto use",
+      "why": "a verifier disagreement is a consensus split; differential testing is the only oracle",
+      "mode": "PR",
+      "src": "E2/E3 Q1-Q6"
+    },
+    {
+      "id": "3.5a",
+      "subsystem": "Shielded pool integration",
+      "why": "wallet/shielded_rpc.cpp 15.8% unit coverage, no test file",
+      "mode": "PR",
+      "src": "B; C3"
+    },
+    {
+      "id": "3.5b",
+      "subsystem": "Shielded anchor window",
+      "why": "#317/#461 not taken for 0.34.16",
+      "mode": "evidence for #464",
+      "src": "#464"
+    },
+    {
+      "id": "3.6a",
+      "subsystem": "MatMul cross-backend corpus and attestation model test",
+      "why": "K13 15 PRs, 11 refused; Metal never run; 47 suites time out",
+      "mode": "evidence for #464",
+      "src": "A-TAXONOMY.md; C3"
+    },
+    {
+      "id": "3.7",
+      "subsystem": "ModelNet helper surface",
+      "why": "helper.cpp touched by 42 fix PRs; dispatcher has no fuzz target; security_v2 0.2% unit coverage",
+      "mode": "PR",
+      "src": "A-TAXONOMY.md section 4; S1; B/C3"
+    },
+    {
+      "id": "3.8",
+      "subsystem": "Release and update integrity (installer and update path)",
+      "why": "7 fix PRs on one release script; the update path needs a real-archive test",
+      "mode": "PR",
+      "src": "A-TAXONOMY.md; git"
+    }
+  ]
+}

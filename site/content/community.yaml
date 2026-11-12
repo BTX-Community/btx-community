@@ -119,6 +119,52 @@ audiences:
             an das Betreiber-Runbook der Entwickler halten.
         url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md
 
+  - id: developers
+    title: { en: Become a BTX dev, de: BTX-Entwickler werden }
+    text:
+      en: >-
+        The node software is open source, and anyone can send it a pull request on GitHub.
+        The developer hub tells you, and the AI tool you work with, how to build, test and
+        document a change so that it can be merged, and which work is open.
+      de: >-
+        Die Node-Software ist Open Source, und jeder kann auf GitHub Pull Requests dafür
+        einreichen. Der Entwickler-Hub erklärt dir und deinem KI-Werkzeug, wie man eine
+        Änderung baut, testet und dokumentiert, damit sie übernommen werden kann, und welche
+        Arbeit offen ist.
+    steps:
+      - text:
+          en: Start here - the hub's front page, written for people.
+          de: Hier anfangen - die Startseite des Hubs, für Menschen geschrieben.
+        url: https://github.com/BTX-Community/btx-community/blob/main/dev/README.md
+      - text:
+          en: Point your AI tool (Claude Code, Cursor, Codex or another) at the agent file.
+          de: Deinem KI-Werkzeug (Claude Code, Cursor, Codex oder einem anderen) die Agenten-Datei zum Lesen geben.
+        url: https://github.com/BTX-Community/btx-community/blob/main/dev/AGENTS.md
+      - text:
+          en: >-
+            Build and test on Linux, macOS or Windows, coverage included; the page says which
+            recipes were run and which were only read.
+          de: >-
+            Unter Linux, macOS oder Windows bauen und testen, Testabdeckung inklusive; die Seite
+            sagt, welche Anleitungen ausgeführt und welche nur gelesen wurden.
+        url: https://github.com/BTX-Community/btx-community/blob/main/dev/04-build-and-test.md
+      - text:
+          en: Before you open a pull request upstream - the gate and the PR template.
+          de: Bevor du upstream einen Pull Request öffnest - die Prüfliste und die PR-Vorlage.
+        url: https://github.com/BTX-Community/btx-community/blob/main/dev/06-pr-gate.md
+      - text:
+          en: Pick a lane - open work with a role and an owner column you can claim.
+          de: Einen Bereich wählen - offene Arbeit mit Rolle und einer freien Spalte, in die du dich eintragen kannst.
+        url: https://github.com/BTX-Community/btx-community/blob/main/dev/07-lanes.md
+      - text:
+          en: Check your setup with the exam - past cases with known answers.
+          de: Das eigene Setup mit der Prüfung testen - frühere Fälle mit bekannten Antworten.
+        url: https://github.com/BTX-Community/btx-community/blob/main/dev/exam/questions.md
+      - text:
+          en: The reference implementation and its own rules for agents.
+          de: Die Referenzimplementierung und ihre eigenen Regeln für Agenten.
+        url: https://github.com/btxchain/btx
+
 categories:
   - id: community
     title: { en: Community, de: Community }
@@ -539,6 +585,44 @@ documents:
         Was man frei ändern kann, was ein zweites Augenpaar braucht, und wie man eine falsche
         Zahl meldet, wenn git nicht das eigene Werkzeug ist.
     url: https://github.com/BTX-Community/btx-community/blob/main/CONTRIBUTING.md
+
+  - id: doc-dev-hub
+    title:
+      en: Become a BTX dev
+      de: BTX-Entwickler werden
+    text:
+      en: >-
+        How to work on the node software so that your change can be merged: the method, build
+        and test recipes, the gate before an upstream pull request, open lanes with claimable
+        owners, an exam, and an entry file for AI tools.
+      de: >-
+        Wie man an der Node-Software so arbeitet, dass eine Änderung angenommen werden kann:
+        die Methode, Bau- und Testanleitungen, die Prüfliste vor einem Upstream-Pull-Request,
+        offene Bereiche, in die man sich eintragen kann, eine Prüfung und eine Einstiegsdatei
+        für KI-Werkzeuge.
+    url: https://github.com/BTX-Community/btx-community/blob/main/dev/README.md
+    status:
+      en: Living document - every page carries its last-verified date
+      de: Wird laufend gepflegt - jede Seite nennt das Datum ihrer letzten Prüfung
+
+  - id: doc-review-programme
+    title:
+      en: Review and test programme - one pull request per bug class
+      de: Review- und Testprogramm - ein Pull Request pro Fehlerklasse
+    text:
+      en: >-
+        Test coverage measured on the release line, the recurring bug classes behind 317 fix
+        pull requests since August, one sweep per class that closes it with a rule, and checks
+        before a final release. A proposal by contributors; the maintainer decides what lands.
+      de: >-
+        Die auf dem Release-Zweig gemessene Testabdeckung, die wiederkehrenden Fehlerklassen
+        hinter 317 Fix-Pull-Requests seit August, ein Sammel-PR pro Klasse, der sie mit einer
+        Regel schließt, und Prüfungen vor einem endgültigen Release. Ein Vorschlag von
+        Mitwirkenden; was übernommen wird, entscheidet der Maintainer.
+    url: https://github.com/BTX-Community/btx-community/blob/main/dev/plan/MASTER-PLAN.md
+    status:
+      en: Measured 12 November 2026 at commit c6f9678d
+      de: Gemessen am 12. November 2026 auf Commit c6f9678d
 
 
 removed:

@@ -343,3 +343,44 @@ translations:
   zh: 网站返回错误（520，2026-11-03）。
 - en: The BTX page no longer exists (404, 2026-11-03).
   zh: BTX 页面已不存在（404，2026-11-03）。
+- en: Become a BTX dev
+  zh: 成为 BTX 开发者
+- en: Before you open a pull request upstream - the gate and the PR template.
+  zh: 向上游提交拉取请求之前：把关检查和 PR 模板。
+- en: >-
+    Build and test on Linux, macOS or Windows, coverage included; the page says which recipes were
+    run and which were only read.
+  zh: 在 Linux、macOS 或 Windows 上构建和测试，包括测试覆盖率；页面会说明哪些步骤实际运行过，哪些只是读过。
+- en: Check your setup with the exam - past cases with known answers.
+  zh: 用测验检查你的配置：答案已知的过往案例。
+- en: >-
+    How to work on the node software so that your change can be merged: the method, build and test
+    recipes, the gate before an upstream pull request, open lanes with claimable owners, an exam,
+    and an entry file for AI tools.
+  zh: 如何开发节点软件，让你的更改能够被合并：方法、构建和测试步骤、向上游提交拉取请求之前的把关检查、可认领的开放任务、一套测验，以及供 AI 工具使用的入口文件。
+- en: Living document - every page carries its last-verified date
+  zh: 持续更新的文档：每个页面都标注最后核实日期
+- en: Measured 12 November 2026 at commit c6f9678d
+  zh: 2026 年 11 月 12 日在提交 c6f9678d 上测得
+- en: Pick a lane - open work with a role and an owner column you can claim.
+  zh: 选一项任务：开放的工作，注明角色，并留有你可以认领的负责人一栏。
+- en: Point your AI tool (Claude Code, Cursor, Codex or another) at the agent file.
+  zh: 让你的 AI 工具（Claude Code、Cursor、Codex 或其他工具）读取智能体文件。
+- en: Review and test programme - one pull request per bug class
+  zh: 审阅与测试计划：每类缺陷一个拉取请求
+- en: Start here - the hub's front page, written for people.
+  zh: 从这里开始：开发者中心的首页，面向人类读者。
+- en: >-
+    Test coverage measured on the release line, the recurring bug classes behind 317 fix pull
+    requests since August, one sweep per class that closes it with a rule, and checks before a final
+    release. A proposal by contributors; the maintainer decides what lands.
+  zh: >-
+    在发布分支上测得的测试覆盖率；自 8 月以来 317
+    个修复拉取请求背后反复出现的缺陷类别；每类一次集中清理，并用一条规则封堵该类缺陷；以及正式版发布前的检查。这是贡献者的提议，合并什么由维护者决定。
+- en: >-
+    The node software is open source, and anyone can send it a pull request on GitHub. The developer
+    hub tells you, and the AI tool you work with, how to build, test and document a change so that
+    it can be merged, and which work is open.
+  zh: 节点软件是开源的，任何人都可以在 GitHub 上向它提交拉取请求。开发者中心会告诉你以及你使用的 AI 工具，如何构建、测试一项更改并为其编写文档，使它能够被合并，以及哪些工作仍然开放。
+- en: The reference implementation and its own rules for agents.
+  zh: 参考实现及其针对智能体的自有规则。

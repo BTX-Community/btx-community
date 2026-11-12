@@ -428,3 +428,64 @@ translations:
   es: La web respondió con un error (520, 2026-11-03).
 - en: The BTX page no longer exists (404, 2026-11-03).
   es: La página de BTX ya no existe (404, 2026-11-03).
+- en: Become a BTX dev
+  es: Hazte desarrollador de BTX
+- en: Before you open a pull request upstream - the gate and the PR template.
+  es: >-
+    Antes de abrir un pull request upstream: la lista de comprobación y la plantilla de PR.
+- en: >-
+    Build and test on Linux, macOS or Windows, coverage included; the page says which recipes were
+    run and which were only read.
+  es: >-
+    Compila y prueba en Linux, macOS o Windows, cobertura incluida; la página indica qué recetas se
+    ejecutaron y cuáles solo se leyeron.
+- en: Check your setup with the exam - past cases with known answers.
+  es: >-
+    Pon a prueba tu configuración con el examen: casos pasados con respuestas conocidas.
+- en: >-
+    How to work on the node software so that your change can be merged: the method, build and test
+    recipes, the gate before an upstream pull request, open lanes with claimable owners, an exam,
+    and an entry file for AI tools.
+  es: >-
+    Cómo trabajar en el software del nodo para que tu cambio pueda integrarse: el método, recetas de
+    compilación y pruebas, la lista de comprobación previa a un pull request upstream, tareas
+    abiertas en las que puedes apuntarte como responsable, un examen y un archivo de entrada para
+    herramientas de IA.
+- en: Living document - every page carries its last-verified date
+  es: >-
+    Documento vivo: cada página indica la fecha de su última verificación
+- en: Measured 12 November 2026 at commit c6f9678d
+  es: Medido el 12 de noviembre de 2026 en el commit c6f9678d
+- en: Pick a lane - open work with a role and an owner column you can claim.
+  es: >-
+    Elige una tarea: trabajo abierto con un rol y una columna de responsable donde apuntarte.
+- en: Point your AI tool (Claude Code, Cursor, Codex or another) at the agent file.
+  es: >-
+    Indica a tu herramienta de IA (Claude Code, Cursor, Codex u otra) que lea el archivo para
+    agentes.
+- en: Review and test programme - one pull request per bug class
+  es: >-
+    Programa de revisión y pruebas: un pull request por clase de error
+- en: Start here - the hub's front page, written for people.
+  es: >-
+    Empieza aquí: la portada del centro, escrita para personas.
+- en: >-
+    Test coverage measured on the release line, the recurring bug classes behind 317 fix pull
+    requests since August, one sweep per class that closes it with a rule, and checks before a final
+    release. A proposal by contributors; the maintainer decides what lands.
+  es: >-
+    La cobertura de pruebas medida en la rama de publicación, las clases de error recurrentes detrás
+    de 317 pull requests de corrección desde agosto, un barrido por clase que la cierra con una
+    regla y comprobaciones antes de una versión final. Una propuesta de colaboradores; el mantenedor
+    decide qué se incorpora.
+- en: >-
+    The node software is open source, and anyone can send it a pull request on GitHub. The developer
+    hub tells you, and the AI tool you work with, how to build, test and document a change so that
+    it can be merged, and which work is open.
+  es: >-
+    El software del nodo es de código abierto y cualquiera puede enviarle un pull request en GitHub.
+    El centro para desarrolladores te explica a ti, y a la herramienta de IA con la que trabajas,
+    cómo compilar, probar y documentar un cambio para que pueda integrarse, y qué trabajo está
+    abierto.
+- en: The reference implementation and its own rules for agents.
+  es: La implementación de referencia y sus propias reglas para agentes.

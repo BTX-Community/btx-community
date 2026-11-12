@@ -1,0 +1,660 @@
+{
+  "meta": {
+    "date": "2026-11-12",
+    "measured_at": "c6f9678d",
+    "live_head": "4c7840e9",
+    "numbers_src": "plan-data.json and MASTER-PLAN.md; coverage = product-code lines on release-0.34.16 at c6f9678d, unit / unit+functional, floors (47 unit suites timed out; 82 of 208 functional scripts failed in the coverage run)",
+    "companion": "../07-lanes.md",
+    "public": true,
+    "claim": "add your handle by PR to this file and 07-lanes.md",
+    "board": "board link added when it exists"
+  },
+  "lanes": [
+    {
+      "id": "A-WALLET",
+      "name": "Wallet, RPC authorization, secrets",
+      "kind": "area",
+      "scope": "src/wallet/ (not shielded_rpc.cpp), src/wallet/rpc/, wallet-facing RPC auth in src/rpc/; classes K05, K11/K12, K25 (wallet half), K27; master plan 3.3",
+      "why": "wallet risk rank 4; 927 wallet functions never executed under unit+functional; K05 chain of 4 PRs in 4 days",
+      "risk_rank": 4,
+      "coverage_now": {
+        "unit_lines": 37.2,
+        "unitfunc_lines": 50.5,
+        "src": "plan-data.json areas.wallet"
+      },
+      "target": "wallet lines >= 70 (set here); K05/K11/K12 rules in ctest; restore-without-passphrase probe fails; no seed bytes after walletlock",
+      "owner": {
+        "role": "A-WALLET owner",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner)",
+        "handle": null
+      },
+      "cadence": "one class per week from phase 2b; 3.3 review in phase 3",
+      "done_bar": [
+        "K05 test enumerating every wallet RPC against a locked wallet, registered in ctest",
+        "K11 allowlist test per restricted-user RPC",
+        "K12 RAII reservation type plus a two-sender test",
+        "K27 log-scan assertion in the functional runner",
+        "restore-without-passphrase probe fails; memory scan after walletlock shows no seed bytes",
+        "wallet lines from 50.5 to at least 70 (target set here)",
+        "each of the 927 unexecuted wallet functions tested or listed as dead"
+      ],
+      "first_tasks": [
+        "run the K05 dominance check over the src/wallet/rpc files that call funding primitives; file the test as one PR",
+        "enumerate RPCs with a path/file/secret_ref/destination argument; write the K11 allowlist test",
+        "K12 UnlockSelected RAII type with the two-sender test"
+      ],
+      "route": "PR to release-0.34.16 (Thursday batch)"
+    },
+    {
+      "id": "A-STORES",
+      "name": "ModelNet store, deposit and persistence logic",
+      "kind": "area",
+      "scope": "ModelNet stores (modelnet/helper.cpp, bounty, campaign, mandate, feed, catalog), wallet/rpc/bcp1.cpp and BCP/1 planners, non-MatMul persistence; classes K20/K21/K02 (52 PRs); generators, not instance fixes",
+      "why": "modelnet risk rank 3; helper.cpp touched by 42 fix PRs; more single fixes landed on 12 Nov; logic slips hide behind high line coverage",
+      "risk_rank": 3,
+      "coverage_now": {
+        "unit_lines": 83.7,
+        "unitfunc_lines": 85.6,
+        "src": "plan-data.json areas.modelnet"
+      },
+      "target": "property tests per store and a BCP/1 lifecycle table in ctest; helper.cpp split proposed; 0 new single-site K20/K21 PRs",
+      "owner": {
+        "role": "A-STORES owner",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner)",
+        "handle": null
+      },
+      "cadence": "one store per week from phase 2b",
+      "done_bar": [
+        "property tests per store (idempotency keys, pagination completeness, monotonic counters, restart = no restart) in ctest",
+        "one table-driven BCP/1 lifecycle test (new, mempool, confirmed, replaced, spent, consolidated) through every reporting RPC",
+        "mutate -> reopen -> compare test per store",
+        "helper.cpp split proposed to the maintainer with the tests in hand",
+        "0 new single-site K20/K21 PRs after the generators land"
+      ],
+      "first_tasks": [
+        "list every store with ToJson/Serialize and a mutator; fields written by the mutator but absent from the serialiser (K02 static form)",
+        "the BCP/1 lifecycle table test",
+        "the first property-test generator on the bounty store"
+      ],
+      "route": "PR to release-0.34.16 (Thursday batch)"
+    },
+    {
+      "id": "E-CONSENSUS",
+      "name": "Consensus, fork choice, attestation, MatMul frontier (evidence only)",
+      "kind": "area",
+      "scope": "validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, fork choice and download scheduling in net_processing.cpp, node/matmul_trusted_attestations.*, src/matmul/; classes K13, K14; master plan 3.1, 3.6 rules, 3.2b, 3.5b; the #464 list",
+      "why": "net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63, matmul_trusted_attestations.h 50; 68 consensus functions never executed; frozen for 0.34.16 by #464, so only evidence lands",
+      "risk_rank": 1,
+      "coverage_now": {
+        "unit_lines": 24.6,
+        "unitfunc_lines": 62.3,
+        "src": "plan-data.json areas.net_processing.cpp (validation.cpp 75.6/78.2; consensus 95.7/96.6)"
+      },
+      "target": "a #464 evidence list: one measured result + one ready test + one paragraph per item; 0 re-filed PRs that were not taken",
+      "owner": {
+        "role": "E-CONSENSUS owner (prepares the evidence; the maintainer decides)",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner); field data from I-OPS run reports and I-XDEV verdict tables",
+        "handle": null
+      },
+      "cadence": "with the Thursday batch, only when a complete item exists; at most one short note",
+      "done_bar": [
+        "#464 evidence list with one measured result, one ready test and one paragraph per item",
+        "K13 attestation state machine as one model-based test (vote, withdraw, restart, reorg, missing index)",
+        "K14 download state machine as a deterministic simulation with an adversarial scheduler ('every announced body is requested within N ticks')",
+        "68 unexecuted consensus functions listed as tested or dead",
+        "byte-diff proof of block validity between main and the release line",
+        "net_processing and validation thread-safety warnings delivered as a measured result",
+        "0 re-filed PRs that were not taken"
+      ],
+      "first_tasks": [
+        "turn the items on #464's list and the K13 list that were not taken into evidence items, one per invariant",
+        "write the K13 model-based test",
+        "the K14 simulation skeleton on the existing p2p_* fixtures"
+      ],
+      "route": "EVIDENCE on #464; a PR only if the maintainer asks"
+    },
+    {
+      "id": "A-NET",
+      "name": "Non-consensus P2P bounds and parsers",
+      "kind": "area",
+      "scope": "net.cpp, netbase, addrman, message parsers outside fork choice and scheduling; fuzz targets for the five message types with none (DLTX, block chunks, mmsketch, mdpeers, mmatrefute) and the ML-KEM hybrid handshake; Dandelion stem limits; K09 P2P half; K25 observing-peer test (with A-WALLET)",
+      "why": "net/p2p risk rank 1; gate G3 at 1 of about 13 parser targets; no container inventory exists",
+      "risk_rank": 1,
+      "coverage_now": {
+        "unit_lines": 50.4,
+        "unitfunc_lines": 75.5,
+        "src": "plan-data.json areas.other net (net_processing.cpp 24.6/62.3)"
+      },
+      "target": "bounds table complete; 6 targets run 24 h clean under ASan; net_processing.cpp >= 75 lines with functional tests (set here)",
+      "owner": {
+        "role": "A-NET owner",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner)",
+        "handle": null
+      },
+      "cadence": "none until owned; the phase-3 fuzz batch produces the targets only",
+      "done_bar": [
+        "every peer-fed container in doc/resource-bounds.md with a bound, an eviction and a unit test",
+        "DLTX, chunks, mmsketch, mdpeers, mmatrefute and hybrid-handshake targets link and run 24 h clean under ASan",
+        "K25 observing-peer test in the functional runner",
+        "net_processing.cpp at or above 75 lines with functional tests through non-consensus tests (target set here)"
+      ],
+      "first_tasks": [
+        "container inventory for the P2P handlers (semgrep rule, master plan section 2 row 1)",
+        "the DLTX fuzz target",
+        "the K25 observing-peer test"
+      ],
+      "route": "PR for bounds and targets; scheduling or fork choice -> E-CONSENSUS"
+    },
+    {
+      "id": "A-HELPER",
+      "name": "ModelNet helper network surface and security_v2",
+      "kind": "area",
+      "scope": "the helper's native request dispatcher, the never-run fuzz targets, the modelnet fuzz build link gate, src/modelnet/security_v2/, two-user layout under -modelrpcsocket, jail escape suite; K09 helper half; fs-trust results in the helper (most of the 133); master plan 3.7",
+      "why": "modelnet risk rank 3; security_v2 at 0.2/15.0 with 6 files at 0 even with functional tests; the dispatcher has no fuzz target",
+      "risk_rank": 3,
+      "coverage_now": {
+        "unit_lines": 0.2,
+        "unitfunc_lines": 15.0,
+        "src": "plan-data.json areas.modelnet/security_v2"
+      },
+      "target": "dispatcher target 24 h clean; every security_v2 file above 0; listener and user-separation tests in the functional runner",
+      "owner": {
+        "role": "A-HELPER owner",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner)",
+        "handle": null
+      },
+      "cadence": "none until owned; phase-3 fuzz batch covers the dispatcher target and the native.cmake gate only",
+      "done_bar": [
+        "modelnet_native_dispatch target runs 24 h clean under ASan",
+        "the never-run targets run 1 h clean",
+        "every security_v2 file above 0 lines covered",
+        "functional test: no non-loopback listener on 29447 without -modelbind; no NAT-PMP mapping requested by default",
+        "under -modelrpcsocket the helper runs as a different user and cannot open .cookie or wallets/",
+        "a malformed reply fails the request, not the helper"
+      ],
+      "first_tasks": [
+        "make the modelnet fuzz build link at default options",
+        "the dispatcher fuzz target on a scratch catalog",
+        "the listener/NAT-PMP functional test"
+      ],
+      "route": "PR; the helper user default is the maintainer's decision (release-scope note)"
+    },
+    {
+      "id": "A-SHIELDED",
+      "name": "Shielded pool integration",
+      "kind": "area",
+      "scope": "src/shielded/ integration, wallet/shielded_rpc.cpp, note reservation (K12, with A-WALLET), verification cost limits; master plan 3.5a; proof soundness is external review, not this lane",
+      "why": "wallet/shielded_rpc.cpp is file risk rank 4 at 15.8/24.3 with no test file; the one lock-order inversion is on the wallet side",
+      "risk_rank": 4,
+      "coverage_now": {
+        "unit_lines": 71.8,
+        "unitfunc_lines": 72.3,
+        "src": "plan-data.json areas.shielded (hotspot wallet/shielded_rpc.cpp 15.8/24.3)"
+      },
+      "target": "a test file for shielded_rpc.cpp with the file above 50 lines (set here); the lock-order inversion fixed; verification fuzz targets",
+      "owner": {
+        "role": "A-SHIELDED owner",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner)",
+        "handle": null
+      },
+      "cadence": "none until owned",
+      "done_bar": [
+        "shielded_rpc_tests exists and wallet/shielded_rpc.cpp is above 50 lines covered (target set here)",
+        "verification fuzz targets with cost limits",
+        "a disconnect-reconnect functional test",
+        "the one lock-order inversion DEBUG_LOCKORDER reports fixed on the wallet side, with a DEBUG_LOCKORDER test",
+        "anchor-window item (#317/#461) filed as EVIDENCE"
+      ],
+      "first_tasks": [
+        "shielded_rpc_tests over the RPCs K12 touched",
+        "the lock-order fix with a DEBUG_LOCKORDER test",
+        "the disconnect-reconnect functional test"
+      ],
+      "route": "PR; anchor window -> E-CONSENSUS"
+    },
+    {
+      "id": "A-PQ",
+      "name": "Post-quantum crypto use",
+      "kind": "area",
+      "scope": "every verify call site (ML-DSA-44, SLH-DSA, P2MR evaluation), sigop accounting for PQ signatures, the ML-KEM transport, build flags for constant-time code; master plan 3.4",
+      "why": "a verifier disagreement between implementations is a consensus split; only differential testing is an oracle; already checked: reference-only Dilithium with the z-norm check, no affected PQ crates in Atlas",
+      "risk_rank": null,
+      "coverage_now": {
+        "unit_lines": 92.7,
+        "unitfunc_lines": 92.7,
+        "src": "plan-data.json areas.pq"
+      },
+      "target": "differential target clean; ACVP/Wycheproof vectors in ctest; build-flag check",
+      "owner": {
+        "role": "A-PQ owner (someone comfortable with crypto test vectors)",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner)",
+        "handle": null
+      },
+      "cadence": "none until owned",
+      "done_bar": [
+        "libFuzzer differential target (BTX verify vs an independent ML-DSA-44/SLH-DSA library) runs clean",
+        "ACVP and Wycheproof vectors in ctest",
+        "build check that constant-time paths are never compiled at -Os/-O1",
+        "nightly cross-implementation checksums"
+      ],
+      "first_tasks": [
+        "the vector test",
+        "the differential target",
+        "the build-flag check"
+      ],
+      "route": "PR for tests; any accept/reject disagreement -> EVIDENCE immediately"
+    },
+    {
+      "id": "A-GUI",
+      "name": "Qt and Atlas",
+      "kind": "area",
+      "scope": "src/qt/ (no coverage data in any run), the Atlas Rust and npm trees (OSV/cargo-audit listed, not run), Atlas RPC allowlists per screen",
+      "why": "qt/modelnetpage.cpp is file risk rank 7 with no data; nothing in the programme compiles the GUI",
+      "risk_rank": 7,
+      "coverage_now": {
+        "unit_lines": null,
+        "unitfunc_lines": null,
+        "src": "plan-data.json hotspots qt/modelnetpage.cpp: no data (unknown, not zero)"
+      },
+      "target": "GUI build in the fork CI matrix; cargo audit and OSV on every push; per-screen allowlist test",
+      "owner": {
+        "role": "A-GUI owner",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner)",
+        "handle": null
+      },
+      "cadence": "none until owned",
+      "done_bar": [
+        "a GUI build job in the fork CI matrix",
+        "cargo audit and OSV-Scanner over the Atlas lock files on every push",
+        "an Atlas per-screen RPC allowlist test"
+      ],
+      "first_tasks": [
+        "the GUI build job",
+        "cargo audit in CI-4",
+        "the allowlist test"
+      ],
+      "route": "PR"
+    },
+    {
+      "id": "C-K01",
+      "name": "Non-atomic or short state-file writes",
+      "kind": "class",
+      "scope": "12 files at 4c7840e9: modelnet package_channel, import_coordinator, workspace_git, swarm_evolution, obs01, acc04; wallet/wallet.cpp, wallet/dump.cpp, wallet/rpc/labels.cpp; node/blockstorage.cpp, node/attested_utxo_snapshot.cpp; init.cpp; plus one direct write in realm_channel.cpp, and one candidate the file-level filter skipped (capability_bytes.cpp, a raw .gen sidecar write; the pack counts 13); the shared WriteBinaryFileAtomically helper (#576), which has no fsync",
+      "why": "22 PRs, the class turning up module after module; a loader that reads a damaged file as empty starts from zero",
+      "risk_rank": null,
+      "coverage_now": {
+        "unit_lines": null,
+        "unitfunc_lines": null,
+        "src": "class, not an area; sites_open 12 from plan-data.json classes.K01"
+      },
+      "target": "12 files to 0; fsync in the helper; lint in CI-4; truncated-file load test per store",
+      "owner": {
+        "role": "C-K01 owner",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner); writes the lint",
+        "handle": null
+      },
+      "cadence": "phase 2a-2b, one PR",
+      "done_bar": [
+        "12 worklist files to 0",
+        "FileCommit of file and directory inside WriteBinaryFileAtomically",
+        "lint against raw ofstream/fopen(\"w\") to datadir paths in CI-4",
+        "a truncated-file load test per store",
+        "0 new K01 PRs after the sweep"
+      ],
+      "first_tasks": [
+        "re-grep the worklist on the live head",
+        "fsync in the helper with a test",
+        "the sweep PR with the lint"
+      ],
+      "route": "PR; node/blockstorage.cpp and attested_utxo_snapshot.cpp sites checked for consensus adjacency first (if adjacent -> EVIDENCE)"
+    },
+    {
+      "id": "C-PORT",
+      "name": "Windows, macOS, build and packaging, resource lifecycle",
+      "kind": "class",
+      "scope": "K06 Windows/MinGW/MSVC (33 PRs), K07 macOS/libc++/Qt packaging, K22 build/packaging/release-gate drift (K19/K22 40 PRs), K16 pipe/pid/socket lifecycle; src/compat/, scripts/release/package_release_archive.py, the installer path",
+      "why": "K06 (33 PRs), K19/K22 (40), K10 (14) and K07 (6) are classes a CI matrix catches before filing; K06 kept finding new files",
+      "risk_rank": null,
+      "coverage_now": {
+        "unit_lines": null,
+        "unitfunc_lines": null,
+        "src": "class, not an area; K06 33 PRs, K19/K22 40 PRs from plan-data.json classes"
+      },
+      "target": "POSIX grep lint; first green Windows and sharded macOS runs; otool step in the release gate; RAII wrappers with pidfd check",
+      "owner": {
+        "role": "C-PORT owner",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner); a macOS runner runs the macOS half when a PR has K07 content",
+        "handle": null
+      },
+      "cadence": "follows the first green Windows and macOS fork runs (I-CI), then one PR per class",
+      "done_bar": [
+        "POSIX-outside-#ifndef WIN32 grep as a lint in CI-4",
+        "first green Windows and sharded macOS runs on the release line",
+        "otool -L on every packaged binary in CI-10",
+        "RAII wrappers for fork/socket/pipe with a pidfd identity check before every kill",
+        "0 new-site K06 after the lint",
+        "release-gate job green (GLIBC ceiling, RUNPATH, elfcheck.py)"
+      ],
+      "first_tasks": [
+        "the POSIX grep lint",
+        "the otool step in the release gate",
+        "the K16 RAII wrapper PR"
+      ],
+      "route": "PR"
+    },
+    {
+      "id": "C-STATIC",
+      "name": "Machine-rule sweeps from the static and dynamic baselines",
+      "kind": "class",
+      "scope": "K10 (1 candidate; rule-only), K04 (0 sites; rule-only), K15 (28 casts), K03/TSan/thread-safety on modelnet/node/wallet (41 pairs, 5 product classes, 266 warnings, 1 inversion), fs-trust C1 class 1 (133), lifetime/init C1 class 3 (120), cppcheck errors (26), K19 registration and exec-bit lints, K09 container inventory as a CodeQL query; sweep rule (c): no hit in validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, fork choice or src/matmul/ is touched",
+      "why": "the baselines exist and are untriaged; each rule costs an afternoon and closes a class for good",
+      "risk_rank": null,
+      "coverage_now": {
+        "unit_lines": 65.8,
+        "unitfunc_lines": 69.9,
+        "src": "plan-data.json coverage.overall; static counts from plan-data.json static and classes"
+      },
+      "target": "K10 test and K04 lint in CI; 28 casts to 0; TSan product classes to 0; cppcheck errors 26 to 0; fs-trust policy with a shrinking baseline",
+      "owner": {
+        "role": "C-STATIC owner (agents do the mechanical part)",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner)",
+        "handle": null
+      },
+      "cadence": "K10 + K04 + K15 in phase 2a; K03, fs-trust, lifetime in phase 2b",
+      "done_bar": [
+        "K10 unit test over the RPCHelpMan table in ctest",
+        "K04 UniValue lint in CI-4",
+        "28 casts on ParseUint32Index or proved range-checked",
+        "TSan baseline 41 pairs only shrinks; the 5 product classes at 0",
+        "-Werror=thread-safety on every clean file",
+        "one fs-trust policy (0600 for secrets and sockets, audited env-var allowlist, provenance check at each sink); CodeQL baseline 133 only shrinks",
+        "120 lifetime results initialised or documented",
+        "cppcheck errors 26 to 0",
+        "doc/resource-bounds.md table started"
+      ],
+      "first_tasks": [
+        "the K10 test and K04 lint PRs",
+        "the K15 sweep with the 5 single results outside matmul (MASTER-PLAN.md section 1.2)",
+        "fixes for the five TSan product classes, with EXCLUSIVE_LOCKS_REQUIRED on the helper stores and wallet paths"
+      ],
+      "route": "PR; anything under rule (c) -> EVIDENCE"
+    },
+    {
+      "id": "C-PATHS",
+      "name": "Paths, symlinks, jail, options honoured",
+      "kind": "class",
+      "scope": "K08 path/symlink/jail (8 PRs), K17 option or mode not honoured (10 PRs: -listen=0, -proxy, -onlynet, -v2pqonly, -natpmp=0 on every network surface outside net.cpp)",
+      "why": "a jail step that fails and carries on unjailed, or a second surface that ignores -proxy, undoes the operator's safe profile",
+      "risk_rank": null,
+      "coverage_now": {
+        "unit_lines": null,
+        "unitfunc_lines": null,
+        "src": "class, not an area; K08 8 PRs, K17 10 PRs from plan-data.json classes"
+      },
+      "target": "SafePath helper; jail tests with 0 skips; option matrix test",
+      "owner": {
+        "role": "C-PATHS owner",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner); a Windows runner checks reparse-point behaviour",
+        "handle": null
+      },
+      "cadence": "phase 2b",
+      "done_bar": [
+        "one SafePath helper",
+        "every pivot_root|chroot|unshare|mount( failure fatal",
+        "tests with a symlinked ancestor and a symlinked leaf",
+        "jail tests with 0 'jail absent' skips under BTX_TEST_REQUIRE_LINUX_JAIL=1 in CI",
+        "functional matrix {-listen=0, -proxy, -onlynet, -v2pqonly} x every listening surface"
+      ],
+      "first_tasks": [
+        "count the K08 and K17 sites on the live head (rule (a): under 3 real sites, file the rule alone)",
+        "the SafePath helper PR",
+        "the option matrix test"
+      ],
+      "route": "PR"
+    },
+    {
+      "id": "I-CI",
+      "name": "Fork CI gates",
+      "kind": "infra",
+      "scope": "the fork workflow (exists; never run on the release line; rebase onto 4c7840e9, keep the upstream Atlas workflows): CI-0 build matrix, CI-1 sharded unit+functional, CI-2 ASan/UBSan, CI-3 TSan+DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke, CI-8 CodeQL weekly on a box, CI-9 coverage ratchet on a box, CI-10 release gate; ci/known-failing.txt; nightly stage3 job for the 47 timing-out suites",
+      "why": "upstream runs no hosted CI by choice; baselines: coverage 69.9/40.7, TSan 41, cppcheck 372, CodeQL 260, tidy 1,033; macOS test job ran out of time on the last fork run, so it is sharded",
+      "risk_rank": null,
+      "coverage_now": {
+        "unit_lines": 65.8,
+        "unitfunc_lines": 69.9,
+        "src": "plan-data.json coverage.overall; gates CI-0..CI-10 from plan-data.json gates"
+      },
+      "target": "CI-0 run once on 4c7840e9; known-failing written and only shrinking; every class PR links a run; ratchet fails any area dropping more than 0.2 points",
+      "owner": {
+        "role": "I-CI owner",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner); someone who reads fork CI output",
+        "handle": null
+      },
+      "cadence": "CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4",
+      "done_bar": [
+        "CI-0 run once on 4c7840e9; shard counts set from it",
+        "ci/known-failing.txt written from that run (the unit failures, the 48 ExactReplay-stall scripts [C3], gcc-baseline failures after triage) and only shrinking",
+        "every class PR links a run with fails-before and passes-after",
+        "CI-9 fails any area that drops more than 0.2 points against the 69.9/40.7 baseline",
+        "the 47 timeouts have a job and a number",
+        "every baseline (TSan 41, cppcheck 372, CodeQL 260) only shrinks"
+      ],
+      "first_tasks": [
+        "rebase the workflow, restore the Atlas workflows, update its description, run it",
+        "CI-4 lint with the K19 registration diff and exec bits",
+        "triage the 82 functional failures into stall class vs real"
+      ],
+      "route": "fork branch; a workflow file goes upstream only if the maintainer asks"
+    },
+    {
+      "id": "I-RC",
+      "name": "Release-candidate qualification and basic verify",
+      "kind": "infra",
+      "scope": "one archive per OS with a fixed checklist (the four-check pass posted on #432, 11 Nov: compatibility, desktop first use, restart, model download and recovery); install_prebuilt_release_tree on the real archive; the per-PR 're-run the stated test on your own hardware' service",
+      "why": "7 fix PRs on one release script; the Linux candidate at c6f9678d had one independent four-check run (#432, 11 Nov); no macOS, Windows or CUDA candidate has had one yet",
+      "risk_rank": null,
+      "coverage_now": {
+        "unit_lines": null,
+        "unitfunc_lines": null,
+        "src": "not a coverage lane"
+      },
+      "target": "a Linux, Windows and macOS line with SHA and pass/fail for every candidate; installer starts a node; one-line verify script",
+      "owner": {
+        "role": "I-RC owner (writes the checklist and the one-command script)",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner): a second runner on a different OS; never the same box twice",
+        "handle": null
+      },
+      "cadence": "every candidate; verify requests tagged on the board, answered within the week",
+      "done_bar": [
+        "Linux, Windows and macOS lines with SHA and pass/fail for every candidate before anyone writes 'ready'",
+        "install_prebuilt_release_tree on the real archive starts a node",
+        "the verify script prints one line (commit, test, result) that the runner pastes unchanged",
+        "no runner box holds keys, tokens or wallets"
+      ],
+      "first_tasks": [
+        "the one-page brief and the one-command script (start from packs/I-RC-runner.md)",
+        "the Windows run of the current candidate by two Windows runners",
+        "the installer-on-real-archive test"
+      ],
+      "route": "RUN report on the board; a failure becomes a registry entry, then a PR by the class owner",
+      "runners": [
+        {
+          "role": "runner: native Windows with an NVIDIA GPU",
+          "handle": null
+        },
+        {
+          "role": "runner: Windows 11 + WSL2",
+          "handle": null
+        },
+        {
+          "role": "runner: Linux (IBD from genesis, upgrade from a saved datadir)",
+          "handle": null
+        },
+        {
+          "role": "runner: macOS",
+          "handle": null
+        }
+      ]
+    },
+    {
+      "id": "I-OPS",
+      "name": "Operators and whole-system runs",
+      "kind": "infra",
+      "scope": "archive mirrors and signed snapshots, monitoring as the health signal, IBD from genesis on a stock binary, staged upgrades, mixed-version interop (v0.34.15 vs the release line), the operator safe profile in the guides (-modelnet=0 and -natpmp=0 on any node holding a wallet or signer key; -autoupdate reviewed), which fixes a v0.34.15 node lacks (gate G1)",
+      "why": "gate G1 is 'partly'; most nodes run v0.34.15 and the release line is far ahead; operator data has found real bugs before",
+      "risk_rank": null,
+      "coverage_now": {
+        "unit_lines": null,
+        "unitfunc_lines": null,
+        "src": "not a coverage lane; G1 state from plan-data.json gates"
+      },
+      "target": "safe profile published; genesis sync on a stock binary reaches the tip; upgrade and interop run per candidate",
+      "owner": {
+        "role": "I-OPS owner (an archive operator)",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner): a second operator; a second lane owner reads any technical claim before it goes public",
+        "handle": null
+      },
+      "cadence": "one run line per candidate; the safe-profile text once, then kept current",
+      "done_bar": [
+        "the safe profile in the community guide and the status page",
+        "a genesis sync with assumevalid=0 on a stock binary that reaches the tip, reported with the height",
+        "an upgrade from a saved datadir on every candidate",
+        "one interop run per candidate",
+        "UTC timelines on every report"
+      ],
+      "first_tasks": [
+        "the safe-profile paragraph",
+        "the genesis-sync run on the current candidate",
+        "the upgrade run from the saved datadir"
+      ],
+      "route": "RUN report; findings to the registry, then to the class owner or E-CONSENSUS"
+    },
+    {
+      "id": "I-XDEV",
+      "name": "MatMul cross-backend corpus",
+      "kind": "infra",
+      "scope": "one mutated-block corpus replayed on CPU, CUDA and Metal; one script; one verdict table; master plan 3.6 tests half",
+      "why": "matmul 62.6/62.7 with 47 suites unmeasured; a CPU/CUDA corpus run exists; Metal never run; a backend disagreement is a consensus split",
+      "risk_rank": 9,
+      "coverage_now": {
+        "unit_lines": 62.6,
+        "unitfunc_lines": 62.7,
+        "src": "plan-data.json areas.matmul"
+      },
+      "target": "a verdict table with one row per (block, backend), no disagreement, a Metal row",
+      "owner": {
+        "role": "I-XDEV owner (needs CUDA and Apple Silicon Metal hardware)",
+        "handle": null
+      },
+      "second_pass": {
+        "role": "second pass (never the owner): an independent CUDA re-run on different hardware; the E-CONSENSUS owner reads the verdict table into the evidence list",
+        "handle": null
+      },
+      "cadence": "once per candidate, and once after any matmul change lands",
+      "done_bar": [
+        "corpus and script in the repo",
+        "one row per (block, backend) with no disagreement",
+        "a Metal row exists",
+        "every disagreement filed as EVIDENCE within the week"
+      ],
+      "first_tasks": [
+        "take the existing CPU/CUDA corpus and script",
+        "run Metal",
+        "publish the table"
+      ],
+      "route": "RUN report; disagreements -> EVIDENCE"
+    }
+  ],
+  "rhythm": {
+    "monday": "each lane picks one class or item from the board; owners post the plan line on their card",
+    "tuesday_wednesday": "sweep, rule, fork CI run; second passes on Wednesday",
+    "thursday": "one batch to the maintainer (PRs with run links); an evidence note on #464 only when a complete item exists; one operator line (batch coordinator)",
+    "friday": "board updated; baselines rechecked; I-RC verify lines in (batch coordinator, runners)",
+    "first_batch": "Thursdays; phase 2a first (K10, K04, K15, the CI branch, the K01 worklist); dates on the board, set by lane owners once lanes are claimed",
+    "phases": {
+      "2a": "first value: K10, K04, K15, CI branch, K01 worklist",
+      "2b": "remaining class sweeps",
+      "3": "deep reviews",
+      "4": "weekly ratchet"
+    },
+    "between_batches": "no single-site PRs unless a gate is red",
+    "board": "GitHub Project on a contributor fork (fallback: one pinned issue there); board link added when it exists; columns class -> lane -> owner -> rule -> sweep PR -> fork run -> second pass -> batch -> gate; not chat: chat is for questions, the board is the state; this folder carries the definitions",
+    "registry": "doc/bug-classes.md shipped in the first class PR: id, name, pattern, rule, status (swept / rule only / not counted / evidence), lane, sites open at the last sweep and the head counted on, example PRs; until it lands upstream the public mirror is ../05-bug-classes.md"
+  },
+  "flow": [
+    "found",
+    "class check against doc/bug-classes.md (add a class if new)",
+    "if the class touches validation, fork choice, attestation or the MatMul frontier -> E-CONSENSUS evidence; stop here",
+    "count sites on the live head (under 3 real sites: file the rule alone)",
+    "sweep every site + write the rule (test, lint or CI job)",
+    "PR with the fork CI link: fails before, passes after",
+    "second pass by the lane's reviewer (Wednesday)",
+    "Thursday batch to the maintainer",
+    "merged -> board card moved -> baseline shrinks"
+  ],
+  "rules": [
+    "Load: one person owns at most 3 lanes and second-passes at most 3; a first-time owner owns 1; lanes that get no work until claimed are stated, not hidden",
+    "Second pass is never the owner; a run lane's second pass is an independent run on different hardware",
+    "Registry rule: a new report names its class; swept -> gate failure fixed in the rule; not swept -> the class's sweep PR, never an instance fix",
+    "Sweep rule (a): a 'not counted' class is counted on the live head first; under 3 real sites, the rule alone",
+    "Sweep rule (b): a sweep PR changes nothing beyond its class; anything else it finds goes to the lane worklist or its own PR",
+    "Sweep rule (c): no sweep touches validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, fork choice or src/matmul/; hits go to E-CONSENSUS",
+    "Hot files (net_processing.cpp, modelnet/helper.cpp, node/matmul_trusted_attestations.*): no per-event PR without a model-based test or a split proposal first",
+    "Escalation: gate red -> the lane stops new work and fixes the gate; a PR closed without being taken -> never re-filed, becomes evidence or is dropped; owner/second-pass disagreement -> the batch coordinator decides what goes into the batch, question into the Thursday batch; security-relevant finding -> GitHub private vulnerability reporting upstream, never a public issue or chat post; runner cannot reproduce -> the PR waits and the owner investigates",
+    "Maintainer interface: one Thursday message per batch; each PR states class, rule, sites, run link and the invariant it keeps; tested fixes only; no stubs, fail-closed workarounds or disabled tests; nothing into #464's frozen set; CI stays on the fork and is offered upstream only on request; 'would the maintainer reject this?' defaults to yes until the PR says why not",
+    "AI never: posts, comments, pushes or opens a PR on its own; opens a PR into release-0.34.16 touching the rule (c) set; files a single-site fix for a registered class; puts a fix in a commit linked from a comment; claims a test ran without run link, SHA and platform; adds a stub, fail-closed workaround, skipped test or widened timeout; touches out-of-scope code (sweep rule b); re-runs a baseline tool already run; holds keys, wallets, cookies or tokens on a test box; quotes private chats, names people other than by handle, or states a figure without its source",
+    "Programme done when gates G2 (machines on), G3 (about 13 parser targets; 1 exists) and G4 (K10, K04, K15, K01, K05, K08/K16/K17, K06, K19 each with its rule) are true; then the batch shrinks to the weekly ratchet"
+  ],
+  "no_work_until_claimed": [
+    "A-NET",
+    "A-HELPER",
+    "A-SHIELDED",
+    "A-PQ",
+    "A-GUI"
+  ]
+}
