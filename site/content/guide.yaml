@@ -5,9 +5,9 @@
 # Every fact needs a source a reader can open. Prefer the source code or the release notes over
 # a website: btx.dev was last updated for v0.33.2 (August 2026) and is out of date in places.
 #
-# upcoming: describe only what is in the published development branch and its release notes,
-#           and say what is not ready. Update "checked" whenever you re-read them. When the
-#           release ships, rewrite the section as "new in" or remove it.
+# upcoming: the newest pre-release, described from its published release notes only. Say what
+#           is missing and who should not install it. Update "checked" whenever you re-read
+#           them. When a full release replaces it, rewrite the section or remove it.
 # Texts: English (default) and German, as in community.yaml.
 
 schema_version: 1
@@ -29,14 +29,16 @@ facts:
     text:
       en: >-
         Instead of hashing, miners multiply large matrices, the work AI accelerators are built
-        for. Since block 185,000 every block needs a complete, exactly reproducible run on a
-        qualified NVIDIA (CUDA) or Apple (Metal) GPU. There is no CPU mining.
+        for. Since block 185,000 a node that checks blocks itself replays each one exactly on a
+        qualified NVIDIA (CUDA) or Apple (Metal) GPU; nodes without one follow signed checks from
+        others. There is no CPU mining.
       de: >-
         Statt zu hashen multiplizieren Miner große Matrizen, also genau die Arbeit, für die
-        KI-Beschleuniger gebaut sind. Seit Block 185.000 braucht jeder Block einen vollständigen,
-        exakt nachrechenbaren Lauf auf einer zugelassenen NVIDIA- (CUDA) oder Apple-GPU (Metal).
-        Mit der CPU kann man nicht minen.
-    source: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-pow-spec.md
+        KI-Beschleuniger gebaut sind. Seit Block 185.000 rechnet ein Node, der Blöcke selbst
+        prüft, jeden exakt auf einer zugelassenen NVIDIA- (CUDA) oder Apple-GPU (Metal) nach;
+        Nodes ohne eine solche GPU folgen signierten Prüfungen anderer. Mit der CPU kann man
+        nicht minen.
+    source: https://github.com/btxchain/btx/blob/main/doc/btx-gpu-verified-network-transition.md
 
   - id: post-quantum
     title: { en: Post-quantum signatures, de: Post-Quanten-Signaturen }
@@ -56,104 +58,148 @@ facts:
     text:
       en: >-
         The node derives from Bitcoin Knots v29.2, a variant of Bitcoin Core. btxd, btx-cli, the RPC
-        interface and PSBTs work the way Bitcoin users know them; what differs is the proof-of-work
-        and the signatures.
+        interface and PSBTs work the way Bitcoin users know them; what differs is the proof-of-work,
+        the signatures and some network rules.
       de: >-
         Der Node stammt von Bitcoin Knots v29.2 ab, einer Variante von Bitcoin Core. btxd, btx-cli,
         die RPC-Schnittstelle und PSBTs funktionieren so, wie Bitcoin-Nutzer es kennen; anders sind
-        Proof-of-Work und Signaturen.
+        Proof-of-Work, Signaturen und einige Netzregeln.
     source: https://github.com/btxchain/btx
 
 upcoming:
-  version: "0.35"
-  checked: 2026-11-05
+  version: "0.34.16"
+  checked: 2026-11-12
   status:
     en: >-
-      Release candidate v0.35.0rc1 since 13 October 2026. The developers call it not
-      release-qualified; the current release stays v0.34.15. Nothing below is final.
+      Pre-release since 7 November 2026, Linux x86_64 only. It packages the 0.35 review branches;
+      the 0.35 line stays open. The developers say it is not a release qualification. The
+      current full release stays v0.34.15.
     de: >-
-      Release-Kandidat v0.35.0rc1 seit 13. Oktober 2026. Die Entwickler nennen ihn nicht
-      release-reif; aktuelles Release bleibt v0.34.15. Nichts davon ist endgültig.
-  source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes/release-notes-0.35.0.md
+      Pre-Release seit 7. November 2026, nur Linux x86_64. Es bündelt die Review-Zweige von
+      0.35; die 0.35-Reihe bleibt offen. Die Entwickler sagen, es ist keine Release-Freigabe.
+      Aktuelles volles Release bleibt v0.34.15.
+  source: https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md
   features:
     - title: { en: Presigned swap claims from the wallet, de: Vorsignierte Swap-Claims aus der Wallet }
       text:
         en: >-
           Since 0.34.13 a swap claim can be signed at funding and completed later by anyone who
-          has the secret; nobody has to stay online, but someone must broadcast it in time. That
-          still takes hand-built transactions. htlc_presign and p2mr_leaf make it a wallet step.
-          Not in rc1; in the 0.35 branch and the v0.34.16 pre-release.
+          has the secret. htlc_presign and p2mr_leaf turn the hand-built transactions into a
+          wallet step. The fee is fixed when you presign, and the claim must confirm before the
+          refund height.
         de: >-
           Seit 0.34.13 lässt sich ein Swap-Claim beim Funding signieren und später von jedem mit
-          dem Geheimnis vervollständigen; niemand muss online bleiben, aber jemand muss ihn
-          rechtzeitig senden. Das geht noch mit handgebauten Transaktionen. htlc_presign und
-          p2mr_leaf machen daraus einen Wallet-Schritt. Nicht in rc1; im 0.35-Zweig und in v0.34.16.
-      source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes-htlc-presign.md
-    - title: { en: The model network moves into the node, de: Das Modell-Netz zieht in den Node }
+          dem Geheimnis vervollständigen. htlc_presign und p2mr_leaf machen aus handgebauten
+          Transaktionen einen Wallet-Schritt. Die Gebühr steht beim Vorsignieren fest, und der
+          Claim muss vor der Refund-Höhe bestätigt sein.
+      source: https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-htlc-presign.md
+    - title: { en: Model network with fewer open ports, de: Modell-Netz mit weniger offenen Ports }
       text:
         en: >-
-          The network for AI models has run beside the node since v0.34.9 (btx-modeld). In 0.35
-          it runs inside btxd, and a research lab joins it: identities with recovery keys, git
-          workspaces for models, evaluations. Off with -modelnet=0; it does not spend coins.
+          The network for AI models is on by default and listens on TCP 29447. v0.34.16 no
+          longer opens that port with -listen=0 or a proxy, finds model peers on the local
+          network over UDP 29448, and adds a local security guard. -modelnet=0 turns all of it
+          off; it does not spend coins.
         de: >-
-          Das Netz für KI-Modelle läuft seit v0.34.9 neben dem Node (btx-modeld). In 0.35 läuft
-          es in btxd, dazu kommt ein Forschungs-Lab: Identitäten mit Wiederherstellungsschlüssel,
-          Git-Arbeitsbereiche für Modelle, Evaluationen. Aus mit -modelnet=0; es gibt keine Coins aus.
-      source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/modelnet/swarm/00_THIS_TREE.md
-    - title: { en: Safer auto-update, de: Sichereres Auto-Update }
+          Das Netz für KI-Modelle ist standardmäßig an und lauscht auf TCP 29447. v0.34.16 öffnet
+          den Port mit -listen=0 oder Proxy nicht mehr, sucht Modell-Peers im lokalen Netz über
+          UDP 29448 und bringt einen lokalen Sicherheitswächter mit. -modelnet=0 schaltet alles
+          ab; es gibt keine Coins aus.
+      source: https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md
+    - title: { en: Auto-update off behind a proxy, de: Auto-Update hinter Proxy aus }
       text:
         en: >-
-          A node behind a proxy or Tor no longer checks for updates by itself, so it does not
-          reveal its address to the update server. The update helper runs isolated.
+          A node behind a proxy, or with -onlynet excluding IPv4 and IPv6, no longer checks for
+          updates by default. Every other mainnet node still polls btx.dev and installs a newer
+          signed release by itself unless autoupdateseamless=0.
         de: >-
-          Ein Node hinter Proxy oder Tor sucht nicht mehr selbst nach Updates und verrät so dem
-          Update-Server nicht seine Adresse. Das Update-Programm läuft abgeschottet.
-      source: https://github.com/btxchain/btx/blob/btx-035/swarm/doc/release-notes/release-notes-0.35.0.md
-    - title: { en: Desktop app and ZeroMQ, de: Desktop-App und ZeroMQ }
+          Ein Node hinter einem Proxy oder mit -onlynet ohne IPv4 und IPv6 sucht standardmäßig
+          nicht mehr nach Updates. Jeder andere Mainnet-Node fragt weiter btx.dev ab und
+          installiert ein neueres signiertes Release selbst, außer mit autoupdateseamless=0.
+      source: https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md
+    - title: { en: "Atlas, a second desktop app", de: "Atlas, eine zweite Desktop-App" }
       text:
         en: >-
-          The official archives include the graphical wallet btx-qt and ZeroMQ notifications for
-          services that follow the chain.
+          The Linux archive adds btx-atlas beside btx-qt, which stays. Atlas needs glibc 2.39,
+          WebKitGTK 4.1, GTK 3, the Ayatana tray library and zenity. btx-qt and ZeroMQ were
+          already in v0.34.15.
         de: >-
-          Die offiziellen Archive enthalten die grafische Wallet btx-qt und
-          ZeroMQ-Benachrichtigungen für Dienste, die der Kette folgen.
-      source: https://github.com/btxchain/btx/releases/tag/v0.35.0-rc1
+          Das Linux-Archiv bringt btx-atlas neben btx-qt, das bleibt. Atlas braucht glibc 2.39,
+          WebKitGTK 4.1, GTK 3, die Ayatana-Tray-Bibliothek und zenity. btx-qt und ZeroMQ gab es
+          schon in v0.34.15.
+      source: https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md
+    - title: { en: Clearer backup warning, de: Klarere Backup-Warnung }
+      text:
+        en: >-
+          Wallet bundle backups now say that the descriptor file inside spends without the wallet
+          passphrase, and warn for an encrypted wallet. Backups made with earlier versions hold
+          the same file.
+        de: >-
+          Wallet-Bundle-Backups sagen jetzt, dass die Deskriptor-Datei darin ohne
+          Wallet-Passphrase ausgeben kann, und warnen bei verschlüsselter Wallet. Backups älterer
+          Versionen enthalten dieselbe Datei.
+      source: https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md
   caveats:
     - en: >-
-        rc1 has no Linux CUDA archive. A GPU node started with it falls back to the CPU and can
-        stall at the next block. Miners and signers stay on v0.34.15.
+        No CUDA, macOS or Windows archive. A GPU, mining or signing node on v0.34.16 loses its
+        GPU path; those nodes stay on v0.34.15.
       de: >-
-        rc1 hat kein Linux-Archiv mit CUDA. Ein GPU-Node damit fällt auf die CPU zurück und kann
-        beim nächsten Block hängen bleiben. Miner und Signer bleiben auf v0.34.15.
-    - en: The desktop app of rc1 needs glibc 2.43 and does not start on Ubuntu 24.04.
-      de: Die Desktop-App von rc1 braucht glibc 2.43 und startet nicht unter Ubuntu 24.04.
-    - en: CUDA on Windows was neither built nor tested.
-      de: CUDA unter Windows wurde weder gebaut noch getestet.
+        Kein Archiv für CUDA, macOS oder Windows. Ein GPU-, Mining- oder Signer-Node verliert mit
+        v0.34.16 seinen GPU-Pfad; diese Nodes bleiben auf v0.34.15.
+    - en: >-
+        btx-qt in this archive needs glibc 2.43 and does not start on Ubuntu 24.04 or Debian 13;
+        btxd and btx-cli need 2.38.
+      de: >-
+        btx-qt in diesem Archiv braucht glibc 2.43 und startet nicht unter Ubuntu 24.04 oder
+        Debian 13; btxd und btx-cli brauchen 2.38.
+    - en: >-
+        Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.
+      de: >-
+        Das ganze Archiv entpacken und bin/btxd daraus starten. Ein einzeln kopiertes bin/btxd
+        beendet sich.
+    - en: >-
+        A sync from genesis still stops at block 126,978 (#272). Start from a snapshot.
+      de: >-
+        Ein Sync ab Genesis bleibt weiter bei Block 126.978 stehen (#272). Mit einem Snapshot
+        starten.
 
 checklists:
   - id: before-buying
     title: { en: Before you buy or receive BTX, de: Bevor du BTX kaufst oder empfängst }
     items:
       - en: >-
-          Create the wallet first and write the backup down offline. Restore it once, so you
-          know the backup works before money depends on it.
+          Make a backup before money arrives. In btxd, backupwalletbundlearchive writes one
+          encrypted file; keep it and its passphrase offline and apart. Any backup can spend your
+          coins: plain exports at once, the archive once opened. Restore it once to test it.
         de: >-
-          Zuerst die Wallet anlegen und das Backup offline aufschreiben. Einmal
-          wiederherstellen, damit du weißt, dass es funktioniert, bevor Geld davon abhängt.
+          Ein Backup machen, bevor Geld ankommt. In btxd schreibt backupwalletbundlearchive eine
+          verschlüsselte Datei; sie und ihre Passphrase offline und getrennt aufbewahren. Jedes
+          Backup kann deine Coins ausgeben: einfache Exporte sofort, das Archiv nach dem Öffnen.
+          Einmal wiederherstellen, um es zu testen.
       - en: >-
           Check the receiving address in full, not just its start and end. BTX addresses start
           with btx1z.
         de: >-
           Die Empfangsadresse vollständig prüfen, nicht nur Anfang und Ende. BTX-Adressen
           beginnen mit btx1z.
-      - en: Send a small test amount first and wait until it is confirmed.
-        de: Zuerst einen kleinen Testbetrag schicken und warten, bis er bestätigt ist.
+      - en: >-
+          Send a small test amount first. Wait for at least 10 confirmations before you treat a
+          payment as final; short reorganisations of the chain happen several times a day.
+        de: >-
+          Zuerst einen kleinen Testbetrag schicken. Mindestens 10 Bestätigungen abwarten, bevor
+          eine Zahlung als endgültig gilt; kurze Reorganisationen der Kette gibt es mehrmals am Tag.
       - en: >-
           Before you use an exchange or an OTC seller, check that withdrawals really work. A
           price on a website is not a market you can sell into.
         de: >-
           Bevor du eine Börse oder einen OTC-Verkäufer nutzt, prüfen, ob Auszahlungen wirklich
           funktionieren. Ein Preis auf einer Website ist kein Markt, an dem man verkaufen kann.
+      - en: >-
+          Other coins also trade as BTX. A market is only for this chain if its deposit addresses
+          start with btx1z.
+        de: >-
+          Auch andere Coins handeln unter dem Kürzel BTX. Ein Markt gehört nur zu dieser Kette,
+          wenn seine Einzahlungsadressen mit btx1z beginnen.
       - en: >-
           A "model" or "reference" price is an estimate, not an offer that anyone has to honour.
         de: >-
@@ -169,8 +215,12 @@ checklists:
   - id: before-installing
     title: { en: Before you install a node release, de: Bevor du ein Node-Release installierst }
     items:
-      - en: Download only from github.com/btxchain/btx/releases.
-        de: Nur von github.com/btxchain/btx/releases herunterladen.
+      - en: >-
+          Download node releases only from github.com/btxchain/btx/releases. Community tools such
+          as easynode or snapshots are your own choice to trust; check their signatures.
+        de: >-
+          Node-Releases nur von github.com/btxchain/btx/releases herunterladen. Community-Werkzeuge
+          wie easynode oder Snapshots vertraust du auf eigene Entscheidung; ihre Signaturen prüfen.
       - en: >-
           Recent releases come without a signed checksum file; the last one with SHA256SUMS.asc
           was v0.34.6. GitHub shows a SHA-256 for each file on the release page: compare it
@@ -186,10 +236,53 @@ checklists:
           Das beweist, dass die Datei die von GitHub ist, nicht wer sie gebaut hat. Wenn dir das
           wichtig ist, den getaggten Quellcode selbst bauen.
       - en: >-
+          Decide the node's role first. Checking blocks yourself needs a qualified NVIDIA or
+          Apple GPU. Without one, run a trusted mirror with at least two signers, or the node
+          stops.
+        de: >-
+          Zuerst die Rolle des Nodes festlegen. Blöcke selbst prüfen geht nur mit einer
+          zugelassenen NVIDIA- oder Apple-GPU. Ohne sie als vertrauender Spiegel mit mindestens
+          zwei Signern laufen, sonst bleibt der Node stehen.
+      - en: >-
+          A new node cannot sync from genesis: v0.34.15 and v0.34.16 stop at block 126,978. Start
+          from a signed snapshot, and do not run -reindex until a release fixes it.
+        de: >-
+          Ein neuer Node kann nicht ab Genesis synchronisieren: v0.34.15 und v0.34.16 bleiben bei
+          Block 126.978 stehen. Mit einem signierten Snapshot starten und kein -reindex, bis ein
+          Release das behebt.
+      - en: >-
+          Two defaults to decide on: btxd installs newer signed releases from btx.dev by itself
+          (autoupdateseamless=0 only reports them, autoupdate=0 stops checking), and the model
+          network listens on port 29447 (modelnet=0 turns it off).
+        de: >-
+          Zwei Voreinstellungen bewusst wählen: btxd installiert neuere signierte Releases von
+          btx.dev selbst (autoupdateseamless=0 meldet sie nur, autoupdate=0 prüft gar nicht), und
+          das Modell-Netz lauscht auf Port 29447 (modelnet=0 schaltet es ab).
+      - en: >-
+          Before an upgrade, stop with btx-cli stop and wait until btxd has exited; never kill it.
+          Then back up the data directory and wallets.
+        de: >-
+          Vor einem Update mit btx-cli stop anhalten und warten, bis btxd beendet ist; nie hart
+          abbrechen. Dann Datenverzeichnis und Wallets sichern.
+      - en: >-
           Read the release notes before upgrading. Some releases change the rules at a fixed
-          block height; this page shows a countdown when one is coming.
+          block height; this page shows a countdown when one is coming. Each release also stops
+          working about two years after it was built; current ones in November 2028.
         de: >-
           Vor dem Update die Release-Notes lesen. Manche Releases ändern die Regeln ab einer
-          festen Blockhöhe; diese Seite zeigt dann einen Countdown.
-      - en: Release candidates (rc) are for testing. Do not run them on a mining or signing node.
-        de: Release-Kandidaten (rc) sind zum Testen. Nicht auf einem Mining- oder Signer-Node einsetzen.
+          festen Blockhöhe; diese Seite zeigt dann einen Countdown. Jedes Release hört außerdem
+          etwa zwei Jahre nach dem Bau auf zu laufen, die aktuellen im November 2028.
+      - en: >-
+          Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.15 has
+          archives for Linux, Linux with CUDA and Apple Silicon Macs; there is no official
+          Windows build.
+        de: >-
+          Linux-Programme brauchen glibc 2.38 oder neuer (Ubuntu 24.04, Debian 13). v0.34.15 hat
+          Archive für Linux, Linux mit CUDA und Macs mit Apple Silicon; einen offiziellen
+          Windows-Build gibt es nicht.
+      - en: >-
+          Pre-releases (rc, and v0.34.16) are for testing. v0.34.16 has no CUDA build: a GPU,
+          mining or signing node stays on v0.34.15.
+        de: >-
+          Pre-Releases (rc und v0.34.16) sind zum Testen. v0.34.16 hat keinen CUDA-Build: Ein
+          GPU-, Mining- oder Signer-Node bleibt auf v0.34.15.

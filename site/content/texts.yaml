@@ -44,7 +44,8 @@ en:
   dev.lead: >-
     Commits and pull requests in btxchain/btx, the reference implementation of the BTX node.
     GitHub opens the repository on main, the default branch; the other rows are the branches
-    with the most recent commits.
+    with the most recent commits. main holds the last full release; current work happens on
+    the release and review branches.
   dev.stale: This measurement is more than three hours old; the figures may be out of date.
   dev.branch: Branch
   dev.last_commit: Last commit
@@ -83,9 +84,9 @@ en:
   translation.fix: Correct the translation
   facts.title: What is BTX?
   facts.source: Source
-  upcoming.title: "Coming soon: v{version}"
-  upcoming.checked: "Read from the development branch on {date}."
-  upcoming.caveats: Not ready yet
+  upcoming.title: "New in pre-release v{version}"
+  upcoming.checked: "Read from the release notes on {date}."
+  upcoming.caveats: Before you switch
   upcoming.notes: Release notes
   checklists.title: Check first
   documents.title: Documents
@@ -163,7 +164,8 @@ de:
   dev.lead: >-
     Commits und Pull Requests in btxchain/btx, der Referenz-Implementierung des BTX-Nodes.
     GitHub öffnet das Repository auf main, dem Standard-Branch; die anderen Zeilen sind die
-    Branches mit den jüngsten Commits.
+    Branches mit den jüngsten Commits. main enthält das letzte volle Release; die laufende
+    Arbeit passiert auf den Release- und Review-Branches.
   dev.stale: Diese Messung ist älter als drei Stunden; die Zahlen können veraltet sein.
   dev.branch: Branch
   dev.last_commit: Letzter Commit
@@ -202,9 +204,9 @@ de:
   translation.fix: Übersetzung korrigieren
   facts.title: Was ist BTX?
   facts.source: Quelle
-  upcoming.title: "Demnächst: v{version}"
-  upcoming.checked: "Aus dem Entwicklungszweig gelesen am {date}."
-  upcoming.caveats: Noch nicht fertig
+  upcoming.title: "Neu im Pre-Release v{version}"
+  upcoming.checked: "Aus den Release-Notes gelesen am {date}."
+  upcoming.caveats: Bevor du wechselst
   upcoming.notes: Release-Notes
   checklists.title: Erst prüfen
   documents.title: Dokumente
@@ -281,7 +283,8 @@ es:
   dev.lead: >-
     Commits y pull requests en btxchain/btx, la implementación de referencia del nodo BTX. GitHub
     abre el repositorio en main, la rama por defecto; las demás filas son las ramas con los
-    commits más recientes.
+    commits más recientes. main contiene la última versión completa; el trabajo actual se hace
+    en las ramas de versión y de revisión.
   dev.stale: Esta medición tiene más de tres horas; las cifras pueden estar desactualizadas.
   dev.branch: Rama
   dev.last_commit: Último commit
@@ -320,9 +323,9 @@ es:
   translation.fix: Corregir la traducción
   facts.title: ¿Qué es BTX?
   facts.source: Fuente
-  upcoming.title: "Próximamente: v{version}"
-  upcoming.checked: "Leído en la rama de desarrollo el {date}."
-  upcoming.caveats: Aún no está listo
+  upcoming.title: "Novedades de la versión preliminar v{version}"
+  upcoming.checked: "Leído en las notas de versión el {date}."
+  upcoming.caveats: Antes de cambiar
   upcoming.notes: Notas de versión
   checklists.title: Comprueba primero
   documents.title: Documentos
@@ -400,7 +403,8 @@ fr:
   dev.lead: >-
     Commits et pull requests dans btxchain/btx, l'implémentation de référence du nœud BTX. GitHub
     ouvre le dépôt sur main, la branche par défaut ; les autres lignes sont les branches avec les
-    commits les plus récents.
+    commits les plus récents. main contient la dernière version complète ; le travail en cours
+    se fait sur les branches de version et de revue.
   dev.stale: Cette mesure date de plus de trois heures ; les chiffres peuvent être dépassés.
   dev.branch: Branche
   dev.last_commit: Dernier commit
@@ -439,9 +443,9 @@ fr:
   translation.fix: Corriger la traduction
   facts.title: Qu'est-ce que BTX ?
   facts.source: Source
-  upcoming.title: "Bientôt : v{version}"
-  upcoming.checked: "Lu dans la branche de développement le {date}."
-  upcoming.caveats: Pas encore prêt
+  upcoming.title: "Nouveautés de la préversion v{version}"
+  upcoming.checked: "Lu dans les notes de version le {date}."
+  upcoming.caveats: Avant de changer
   upcoming.notes: Notes de version
   checklists.title: À vérifier d'abord
   documents.title: Documents
@@ -513,7 +517,7 @@ zh:
   dev.title: 节点软件的开发
   dev.source: GitHub 上的 btxchain/btx
   dev.lead: >-
-    btxchain/btx 中的提交和拉取请求，这是 BTX 节点的参考实现。GitHub 默认打开 main 分支；其余各行是最近有提交的分支。
+    btxchain/btx 中的提交和拉取请求，这是 BTX 节点的参考实现。GitHub 默认打开 main 分支；其余各行是最近有提交的分支。main 保存最近一个正式版本；当前的工作在发布分支和评审分支上进行。
   dev.stale: 此测量已超过三小时，数据可能已过时。
   dev.branch: 分支
   dev.last_commit: 最近提交
@@ -549,9 +553,9 @@ zh:
   translation.fix: 修正翻译
   facts.title: BTX 是什么？
   facts.source: 来源
-  upcoming.title: "即将推出：v{version}"
-  upcoming.checked: "于 {date} 从开发分支读取。"
-  upcoming.caveats: 尚未就绪
+  upcoming.title: "预发布版 v{version} 的新内容"
+  upcoming.checked: "于 {date} 从发布说明读取。"
+  upcoming.caveats: 切换之前
   upcoming.notes: 发布说明
   checklists.title: 先检查
   documents.title: 文档
