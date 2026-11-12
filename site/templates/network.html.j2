@@ -1,0 +1,11 @@
+{% extends "base.html.j2" %}
+{% block content %}
+      <section class="c-intro">
+        <h1 class="c-page-title">{{ page_title }}</h1>
+        <p class="c-hero__lead">{{ page_lead }}</p>
+      </section>
+
+      {% with full = True %}{% include "_live.html.j2" %}{% endwith %}
+
+      {% include "_development.html.j2" %}
+{% endblock %}

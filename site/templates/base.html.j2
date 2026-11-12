@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="{{ html_lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ ui['meta_description'] }}">
+  <meta name="color-scheme" content="dark">
+  <title>{% if page_title %}{{ page_title }} · {% endif %}{{ ui["title"] }}</title>
+  {% for code, tag, name, href in alternates %}
+  <link rel="alternate" hreflang="{{ tag }}" href="{{ href }}">
+  {% endfor %}
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ css_url }}">
+  <script src="{{ js_url }}" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">{{ ui["skip"] }}</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="{{ nav_href.home }}"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="{{ ui['nav.label'] }}">
+        {% for id, label, href in nav %}
+        <a class="c-menu__link{% if id == page %} c-menu__link--active{% endif %}" href="{{ href }}"{% if id == page %} aria-current="page"{% endif %}>{{ label }}</a>
+        {% endfor %}
+      </nav>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="{{ ui['lang.label'] }}: {{ ui['lang_name'] }}">{{ lang | upper }} <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="{{ ui['lang.label'] }}">
+          {% for code, tag, name, href in alternates %}
+          <a class="c-lang__item{% if code == lang %} c-lang__item--active{% endif %}" href="{{ href }}" hreflang="{{ tag }}" lang="{{ tag }}"{% if code == lang %} aria-current="true"{% endif %}><span class="c-lang__code">{{ code | upper }}</span> {{ name }}</a>
+          {% endfor %}
+        </nav>
+      </details>
+    </header>
+
+    <main id="main">
+{% block content %}{% endblock %}
+    </main>
+
+    <footer class="c-footer">
+      <p>{{ ui["disclaimer"] }}</p>
+      {% if translated %}<p class="c-muted">{{ ui["translation.note"] }} <a class="c-link" href="{{ translation_url }}" rel="noopener noreferrer">{{ ui["translation.fix"] }} ↗</a></p>{% endif %}
+      <p>
+        <a class="c-link" href="https://github.com/vanities/btxlinks" rel="noopener noreferrer">{{ ui["credit"] }} ↗</a>
+        <a class="c-link" href="{{ repo_url }}" rel="noopener noreferrer">{{ ui["repo"] }} ↗</a>
+      </p>
+      <p class="c-muted">{{ version }}</p>
+    </footer>
+  </div>
+</body>
+</html>

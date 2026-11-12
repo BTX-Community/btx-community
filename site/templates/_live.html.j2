@@ -1,0 +1,83 @@
+{# The live strip; full=True adds "BTX in numbers" (network page). #}
+      <section class="c-live c-live--unknown" aria-labelledby="live-title" id="live" data-api="{{ status_api }}" data-lang="{{ lang }}"
+               data-level-green="{{ ui['level.green'] }}" data-level-yellow="{{ ui['level.yellow'] }}"
+               data-level-red="{{ ui['level.red'] }}" data-level-unknown="{{ ui['level.unknown'] }}">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="live-title"><span class="c-pulse" aria-hidden="true"></span>{{ ui["live.title"] }}</h2>
+          <a class="c-link" href="{{ status_page }}">{{ ui["live.details"] }} →</a>
+        </div>
+        <p class="c-warning" role="alert" data-live="stale" hidden>{{ ui["live.stale"] }}</p>
+        <div class="c-fork" data-live="fork" data-template="{{ ui['fork.row'] }}" hidden>
+          <h3 class="c-fork__title">{{ ui["fork.title"] }}</h3>
+          <p>{{ ui["fork.lead"] }}</p>
+          <ul class="c-fork__rows" data-live="fork-rows"></ul>
+          <a class="c-link" href="{{ releases_url }}" rel="noopener noreferrer">{{ ui["fork.releases"] }} ↗</a>
+        </div>
+        <dl class="c-tiles">
+          <div class="c-tile c-tile--status">
+            <dt>{{ ui["live.status"] }}</dt>
+            <dd data-live="overall"
+                data-label-normal="{{ ui['overall.normal'] }}"
+                data-label-degraded="{{ ui['overall.degraded'] }}"
+                data-label-incident="{{ ui['overall.incident'] }}">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["live.height"] }}</dt>
+            <dd data-live="height">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["live.release"] }}</dt>
+            <dd data-live="release">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["live.on_release"] }}</dt>
+            <dd data-live="on-release" data-template="{{ ui['on_release'] }}">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["live.interval"] }}</dt>
+            <dd data-live="interval">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["live.signers"] }}</dt>
+            <dd data-live="signers">–</dd>
+          </div>
+        </dl>
+        <ul class="c-verdicts">
+          {% for id, title in verdicts %}
+          <li class="c-verdict c-verdict--unknown" data-verdict="{{ id }}">
+            <span class="c-dot" aria-hidden="true"></span>{{ title }}: <span data-verdict-label>{{ ui["level.unknown"] }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if full %}
+        <h3 class="c-subtitle" id="numbers-title">{{ ui["numbers.title"] }}</h3>
+        <dl class="c-tiles" aria-labelledby="numbers-title">
+          <div class="c-tile c-tile--wide">
+            <dt>{{ ui["numbers.supply"] }}</dt>
+            <dd data-live="supply">–</dd>
+            <dd class="c-tile__sub" data-live="supply-share" data-template="{{ ui['numbers.supply_of'] }}"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["numbers.reward"] }}</dt>
+            <dd data-live="reward">–</dd>
+          </div>
+          <div class="c-tile c-tile--wide">
+            <dt>{{ ui["numbers.halving"] }}</dt>
+            <dd data-live="halving" data-template="{{ ui['numbers.blocks'] }}">–</dd>
+            <dd class="c-tile__sub" data-live="halving-time" data-template="{{ ui['numbers.about'] }}"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["numbers.tx"] }}</dt>
+            <dd data-live="tx">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["numbers.size"] }}</dt>
+            <dd data-live="size">–</dd>
+          </div>
+        </dl>
+        {% endif %}
+        <p class="c-updated" data-live="updated" data-template="{{ ui['live.updated'] }}">{{ ui["live.loading"] }}</p>
+        {% if not full %}
+        <p class="c-add"><a class="c-link" href="{{ nav_href.network }}">{{ ui["live.more"] }} →</a></p>
+        {% endif %}
+      </section>

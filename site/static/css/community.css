@@ -132,16 +132,58 @@ a {
 
 /* --- Top bar ---------------------------------------------------------------------------- */
 
+/* Stays at the top while scrolling, so every page is one tap away. */
 .c-top {
+  position: sticky;
+  z-index: 10;
+  top: 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 20px 0;
+  gap: 12px 20px;
+  margin: 0 -16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: rgb(8 8 12 / 92%);
+  backdrop-filter: blur(8px);
+}
+
+.c-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-right: auto;
+}
+
+.c-menu__link {
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.c-menu__link:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.c-menu__link--active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+/* Anchors land below the sticky bar, not under it. */
+[id] {
+  scroll-margin-top: 90px;
 }
 
 .c-logo {
   display: inline-flex;
+  color: var(--text);
+  text-decoration: none;
   align-items: center;
   gap: 10px;
   font-family: var(--font-mono);
@@ -161,9 +203,54 @@ a {
   color: var(--faint);
 }
 
+/* Language menu: a native disclosure, so it works without JavaScript. */
 .c-lang {
+  position: relative;
+}
+
+.c-lang > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.c-lang > summary::-webkit-details-marker {
+  display: none;
+}
+
+.c-lang__list {
+  position: absolute;
+  z-index: 20;
+  right: 0;
   display: flex;
-  gap: 6px;
+  flex-direction: column;
+  min-width: 160px;
+  margin-top: 6px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-raised);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 50%);
+}
+
+.c-lang__item {
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.c-lang__item:hover,
+.c-lang__item--active {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.c-lang__code {
+  display: inline-block;
+  width: 2.4em;
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 12px;
 }
 
 .c-chip {
@@ -184,7 +271,18 @@ a {
   color: var(--text);
 }
 
-/* --- Hero ------------------------------------------------------------------------------- */
+/* --- Hero and page titles ------------------------------------------------------------- */
+
+.c-intro {
+  padding: 40px 0 24px;
+}
+
+.c-page-title {
+  margin: 0 0 12px;
+  font-family: var(--font-mono);
+  font-size: clamp(28px, 6vw, 44px);
+  line-height: 1.1;
+}
 
 .c-hero {
   padding: 48px 0 32px;
@@ -857,6 +955,39 @@ a {
 
 @media (max-width: 600px) {
   .c-hero {
+    padding-top: 24px;
+  }
+
+  /* Logo and language on the first line, the menu on its own line and scrollable sideways. */
+  .c-top {
+    gap: 8px;
+    padding: 10px 16px;
+  }
+
+  .c-lang {
+    margin-left: auto;
+  }
+
+  .c-menu {
+    flex-wrap: nowrap;
+    order: 3;
+    width: 100%;
+    margin-right: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .c-menu__link {
+    flex: none;
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+
+  [id] {
+    scroll-margin-top: 120px;
+  }
+
+  .c-intro {
     padding-top: 24px;
   }
 

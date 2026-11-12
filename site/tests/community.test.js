@@ -239,3 +239,15 @@ test("ages and GitHub links of branches", () => {
   assert.equal(live.githubUrl("btxchain/btx", "commits", "btx-035/swarm"), "https://github.com/btxchain/btx/commits/btx-035/swarm");
   assert.equal(live.githubUrl("btxchain/btx", "releases/tag", "v0.34.16"), "https://github.com/btxchain/btx/releases/tag/v0.34.16");
 });
+
+test("links into the old single page lead to the page that holds the section now", () => {
+  assert.equal(live.movedTarget("/", "#development"), "/network/#development");
+  assert.equal(live.movedTarget("/de/", "#links"), "/de/links/#links");
+  assert.equal(live.movedTarget("/", "#cat-pools"), "/links/#cat-pools");
+  assert.equal(live.movedTarget("/de/", "#doc-venue-structure"), "/de/docs/#doc-venue-structure");
+  assert.equal(live.movedTarget("/", "#about"), "/learn/#about");
+  for (const [path, hash] of [["/", ""], ["/", "#start"], ["/", "#check"], ["/links/", "#development"],
+    ["/", "#cat-<img>"], ["//evil.example/", "#links"], ["/", "#development/../x"]]) {
+    assert.equal(live.movedTarget(path, hash), null, path + hash);
+  }
+});

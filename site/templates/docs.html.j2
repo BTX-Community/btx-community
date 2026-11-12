@@ -1,0 +1,25 @@
+{% extends "base.html.j2" %}
+{% block content %}
+      <section class="c-intro">
+        <h1 class="c-page-title">{{ page_title }}</h1>
+        <p class="c-hero__lead">{{ page_lead }}</p>
+      </section>
+
+      {% if documents %}
+      <section class="c-docs" id="documents" aria-labelledby="documents-title">
+        <h2 class="c-section-title" id="documents-title">{{ ui["documents.title"] }}</h2>
+        <p class="c-muted">{{ ui["documents.lead"] }}</p>
+        <div class="c-audiences">
+          {% for document in documents %}
+          <article class="c-audience c-audience--doc" id="{{ document.id }}">
+            <h3 class="c-audience__title">{{ document.title }}</h3>
+            <p>{{ document.text }}</p>
+            {% if document.status %}<p class="c-muted">{{ document.status }}</p>{% endif %}
+            <a class="c-link c-fact__source" href="{{ document.url }}" rel="noopener noreferrer" aria-label="{{ ui['documents.open'] }}: {{ document.title }}">{{ ui["documents.open"] }} ↗</a>
+          </article>
+          {% endfor %}
+        </div>
+        <p class="c-add"><a class="c-link" href="{{ repo_url }}" rel="noopener noreferrer">{{ ui["documents.repo"] }} ↗</a></p>
+      </section>
+      {% endif %}
+{% endblock %}

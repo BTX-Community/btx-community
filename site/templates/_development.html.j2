@@ -1,0 +1,37 @@
+      <section class="c-live c-dev" aria-labelledby="dev-title" id="development" hidden
+        data-api="{{ development_api }}" data-repo="{{ upstream_repo }}" data-lang="{{ lang }}"
+        data-default="{{ ui['dev.default'] }}" data-today="{{ ui['dev.today'] }}"
+        data-day="{{ ui['dev.day'] }}" data-days="{{ ui['dev.days'] }}">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="dev-title">{{ ui["dev.title"] }}</h2>
+          <a class="c-link" href="{{ upstream_url }}" rel="noopener noreferrer">{{ ui["dev.source"] }} ↗</a>
+        </div>
+        <p class="c-dev__lead">{{ ui["dev.lead"] }}</p>
+        <p class="c-warning" role="alert" data-dev="stale" hidden>{{ ui["dev.stale"] }}</p>
+        <div class="c-branches" role="table" aria-labelledby="dev-title">
+          <div class="c-branch c-branch--head" role="row">
+            <span role="columnheader">{{ ui["dev.branch"] }}</span>
+            <span role="columnheader">{{ ui["dev.last_commit"] }}</span>
+            <span role="columnheader">{{ ui["dev.commits"] }}</span>
+          </div>
+          <div role="rowgroup" data-dev="branches"></div>
+        </div>
+        <p class="c-dev__note">{{ ui["dev.note"] }}</p>
+        <dl class="c-tiles">
+          <div class="c-tile">
+            <dt>{{ ui["dev.pulls"] }}</dt>
+            <dd data-dev="pulls">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>{{ ui["dev.release"] }}</dt>
+            <dd data-dev="release">–</dd>
+            <dd class="c-tile__sub" data-dev="release-date"></dd>
+          </div>
+          <div class="c-tile" data-dev="prerelease-tile" hidden>
+            <dt>{{ ui["dev.prerelease"] }}</dt>
+            <dd data-dev="prerelease">–</dd>
+            <dd class="c-tile__sub" data-dev="prerelease-date"></dd>
+          </div>
+        </dl>
+        <p class="c-updated" data-dev="measured" data-template="{{ ui['dev.measured'] }}"></p>
+      </section>

@@ -24,7 +24,7 @@ It is written because four to six people in this group have each built a venue, 
 | | |
 |---|---|
 | **What BTX can support natively** | Cross-chain atomic swaps via HTLC. Not an AMM — there is no virtual machine to hold a pool |
-| **What 0.35 changes** | `htlc_presign` / `p2mr_leaf` let the claim be signed in advance, so a user no longer has to keep a full node online for the whole swap. Without it the non-custodial path is impractical for ordinary users |
+| **What the current pin already supports** | The claim can be signed when the swap is funded, and any third party without keys can complete and broadcast it later. Settlement does not need either party online with a node and a wallet. Still open: who relays the claim, and how its fee gets bumped |
 | **The regulated part** | Not the swap. The **matching layer** — whatever brings buyers and sellers together and produces a price |
 | **Why non-custodial is not a safe harbour** | "Operation of a trading platform" is defined by bringing together third-party buying and selling interests in a system that results in a contract. Holding assets is not part of the test |
 | **The decentralisation exemption** | A single recital, undefined in the operative text, and currently being narrowed rather than widened |
@@ -58,7 +58,13 @@ A hash time-locked contract lets two parties on two chains exchange assets with 
 
 Either both legs settle or both refund. At no point does anyone hold anyone else's funds. The asymmetry of the timelocks is what makes it safe: the party who commits first must have the longer window, so that the party who moves second cannot run out the clock.
 
-**What 0.35 changes.** Without presigned claims, both parties must stay online with a full node and an unlocked wallet for the entire window, or the swap fails. That rules out essentially every ordinary user, and it is why the non-custodial path has stayed theoretical. `htlc_presign` and `p2mr_leaf` allow the claim transaction to be signed in advance and broadcast by anyone, which removes the liveness requirement. This is the dependency recorded as **B1** in the roadmap, and it is the single technical item that gates the honest version of this.
+**What the current pin already supports.** An earlier version of this paragraph said that without 0.35 both parties must stay online with a full node and an unlocked wallet for the whole window, and that this gated the non-custodial path. That is wrong; see Corrections.
+
+The `htlc_sha256` claim leaf commits to `SHA256(x)`, a 32-byte digest, and never to `x` itself. The claim can therefore be signed as soon as the swap is funded, and any third party without keys can later splice the real preimage into that same transaction and broadcast it. Oth measured this with three variants: (A) the claim with a placeholder preimage is rejected, (B) the same claim with the real `x` spliced in, signature untouched, is accepted, (C) the same splice with a wrong `x` is rejected. The signatures were byte-identical. Three qualifications apply to that measurement: it ran on regtest with `testmempoolaccept`, so no funds moved; the presigned artefact his venue actually ships is the refund and recovery side (`apps/web/lib/recovery-kit.ts`), not the claim; and the `htlc_presign` RPC that produces such claims from the wallet is not in v0.35.0-rc1. repch1c measured the same behaviour on 12 October against a 0.34.15 build.
+
+P2MR leaves, `htlc_sha256` among them, are live on 0.34.15, the production pin. What the newer code adds is not the leaf type but two `walletprocesspsbt` options: `p2mr_leaf` (choose the leaf) and `htlc_presign`. 0.34.15 rejects both as unknown keys. Checked in the source on 7 November 2026: `htlc_presign` is in the branches `btx-035/lab`, `btx-035/swarm` and `release-0.34.16` and in the v0.34.16 pre-release of the same day (Linux x86_64 only, not release-qualified), but not in v0.35.0-rc1; that pre-release also lets `finalizepsbt` take preimages. The pull request that first proposed this, #410, was closed without merging.
+
+What remains is a relay and uptime problem, not a key-custody problem. Someone has to broadcast the completed claim in time, and a completer without keys cannot bump its fee. Mitigations exist: fee-ladder bidding and a keyless claim relayer as described in `docs/HTLC_BUILD_PLAN.md` of Oth's venue, and repch1c's design of two or more watchtowers holding a presigned RBF fee ladder. Roadmap item **B1** is therefore ergonomics, a wallet path to do this without hand-built transactions, and not a prerequisite for the non-custodial path.
 
 ### 2.3 Wrapped / bridged — the worst of the three
 
@@ -152,12 +158,14 @@ None of this argues for anonymity. It argues for not standing in a position that
 | **How it works** | Software published; peers run it and swap directly. No hosted interface, no fee | Hosted order book, non-custodial settlement, EU/DE users excluded | Hosted venue under a CASP authorisation in one member state, passported | No venue of our own; an OTC desk already exists, run by someone outside this group |
 | **Who operates it** | Nobody | A named operator, somewhere | A company with capital, staff and an address | Not us |
 | **Licensing exposure** | Lowest, but rests on the Recital 22 reading that ESMA is actively narrowing | Depends on the target jurisdiction. EU exposure returns if the block is cosmetic | Compliant by construction | None for us, provided we keep an actual distance |
-| **Main obstacle** | Counterparty discovery. Without a matching layer almost nobody finds a trade | The block has to be real and documented. A checkbox is not a block | Cost, capital, substance, time. Needs a company, not a group chat | It is the situation that produced this roadmap |
+| **Main obstacle** | Counterparty discovery. Without a matching layer almost nobody finds a trade. Settlement is cheaper than first assumed: the current pin already allows claims signed at funding (section 2.2), so what is left there is relay and fee bumping | The block has to be real and documented. A checkbox is not a block | Cost, capital, substance, time. Needs a company, not a group chat | It is the situation that produced this roadmap |
 | **Honest verdict** | The only model consistent with the project's stated values, and the one that most needs someone to solve discovery without becoming an operator | Workable, but someone has to put their name on it and accept that they are the operator | The only model that can serve EU users at scale, and far beyond what this group can currently fund | Not a plan, but a legitimate interim position |
 
 Two observations that follow from the table rather than from preference:
 
 **The models are mutually exclusive in practice.** A protocol that later grows an official frontend and a fee has quietly become model B without anyone deciding so. The decision has to be made before, not discovered after.
+
+**Model A is cheaper than the first version of this paper assumed.** That version reasoned that model A was impractical until 0.35, which pushed towards operating or licensing. The premise does not hold (section 2.2), so that step of the argument falls away; the regulatory reasoning in sections 3 to 6 is unaffected.
 
 **Model A's hard problem is discovery, not settlement.** That is where this group's engineering effort would be best spent, and it is a genuinely interesting problem: how do two people find each other and agree a price without anyone operating a system that brings them together. Anything that solves it without creating an operator is worth more to BTX than a fourth order book.
 
@@ -240,7 +248,7 @@ Commentary (secondary; law-firm and vendor publications, and they do not agree w
 
 BTX technical sources:
 
-- [`btxchain/btx`](https://github.com/btxchain/btx) — consensus rules, `htlc_presign` and `p2mr_leaf` in the 0.35 branch
+- [`btxchain/btx`](https://github.com/btxchain/btx) — consensus rules; P2MR leaves including `htlc_sha256` live on 0.34.15; the `walletprocesspsbt` options `htlc_presign` and `p2mr_leaf` in the 0.35 branches and the v0.34.16 pre-release
 - [`research/network-fund.md`](network-fund.md) — the fund design this document intersects with in section 6
 - [`ROADMAP.md`](../ROADMAP.md) — items A1, A2, A3 and B1
 
@@ -254,7 +262,7 @@ Corrections are recorded here with their date rather than folded silently into t
 
 | Date | Section | What changed |
 |---|---|---|
-| — | — | — |
+| 7 Nov 2026 | 1, 2.2, 5, 10 | The paper said 0.35 was needed so that swap parties need not stay online, and called B1 the item that gates the non-custodial path. Wrong: the `htlc_sha256` leaf commits to a digest, so claims can be signed at funding and completed by a keyless third party on 0.34.15 already. Measured by Oth (regtest, A/B/C splice test) and earlier by repch1c (0.34.15 build, 12 Oct), raised in the group on 6 Nov. What is new in later code is the wallet option `htlc_presign`, not the leaf. B1 is ergonomics, not a gate; model A's settlement side is cheaper than stated. Source check of where `htlc_presign` lives: `gh api 'repos/btxchain/btx/contents/src/wallet/rpc/spend.cpp?ref=<tag or branch>' --jq .content \| base64 -d \| grep -c htlc_presign` gives 0 for v0.34.15 and v0.35.0-rc1, more than 0 for v0.34.16, btx-035/swarm and btx-035/lab |
 
 Corrections are welcome from everyone, and most of all from anyone who can replace an inference here with a citation.
 
@@ -293,7 +301,7 @@ Geschrieben ist es, weil vier bis sechs Leute in dieser Gruppe je einen Handelsp
 | | |
 |---|---|
 | **Was BTX nativ kann** | Cross-Chain-Atomic-Swaps per HTLC. Keine AMM — es gibt keine VM, die einen Pool halten könnte |
-| **Was 0.35 ändert** | `htlc_presign` / `p2mr_leaf` erlauben vorsignierte Claims, sodass niemand mehr über die gesamte Swap-Dauer einen Full Node online halten muss. Ohne das ist der nicht-verwahrende Weg für normale Nutzer unbrauchbar |
+| **Was der aktuelle Pin schon kann** | Der Claim lässt sich beim Funding signieren, und ein beliebiger Dritter ohne Schlüssel kann ihn später vervollständigen und broadcasten. Für das Settlement muss keine Partei mit Node und Wallet online bleiben. Offen bleibt: wer den Claim weiterleitet und wie seine Gebühr erhöht wird |
 | **Der regulierte Teil** | Nicht der Swap. Die **Matching-Schicht** — alles, was Käufer und Verkäufer zusammenbringt und einen Preis herstellt |
 | **Warum nicht-verwahrend kein sicherer Hafen ist** | „Betrieb einer Handelsplattform" ist definiert über das Zusammenführen von Kauf- und Verkaufsinteressen Dritter in einem System, das zum Vertragsschluss führt. Das Halten von Vermögenswerten kommt in dem Test nicht vor |
 | **Die Dezentralisierungsausnahme** | Ein einzelner Erwägungsgrund, im operativen Text nirgends definiert, und derzeit wird er enger gezogen, nicht weiter |
@@ -327,7 +335,13 @@ Ein Hash Time-Locked Contract lässt zwei Parteien auf zwei Chains tauschen, ohn
 
 Entweder beide Seiten gehen durch oder beide fallen zurück. In keinem Moment hält jemand fremde Mittel. Die Asymmetrie der Timelocks ist das Sicherheitsmerkmal: Wer zuerst bindet, braucht das längere Fenster, damit die zweite Partei die Uhr nicht gegen ihn laufen lassen kann.
 
-**Was 0.35 ändert.** Ohne vorsignierte Claims müssen beide Parteien über das gesamte Fenster mit Full Node und entsperrter Wallet online sein, sonst scheitert der Swap. Das schließt praktisch jeden normalen Nutzer aus, und genau deshalb ist der nicht-verwahrende Weg bisher theoretisch geblieben. `htlc_presign` und `p2mr_leaf` erlauben, die Claim-Transaktion vorab zu signieren und von beliebiger Seite broadcasten zu lassen. Das ist die Abhängigkeit **B1** der Roadmap und der einzige technische Punkt, der die ehrliche Variante blockiert.
+**Was der aktuelle Pin schon kann.** Eine frühere Fassung dieses Absatzes sagte, ohne 0.35 müssten beide Parteien über das ganze Fenster mit Full Node und entsperrter Wallet online bleiben, und das blockiere den nicht-verwahrenden Weg. Das ist falsch; siehe Korrekturen.
+
+Das Claim-Leaf `htlc_sha256` committet auf `SHA256(x)`, einen 32-Byte-Digest, und nie auf `x` selbst. Der Claim lässt sich deshalb schon beim Funding signieren, und ein beliebiger Dritter ohne Schlüssel kann später das echte Preimage in dieselbe Transaktion einsetzen und sie broadcasten. Oth hat das mit drei Varianten gemessen: (A) der Claim mit Platzhalter-Preimage wird abgelehnt, (B) derselbe Claim mit eingesetztem echtem `x`, Signatur unberührt, wird akzeptiert, (C) dasselbe mit falschem `x` wird abgelehnt. Die Signaturen waren byte-identisch. Für diese Messung gelten drei Einschränkungen: Sie lief auf regtest mit `testmempoolaccept`, es wurden keine Mittel bewegt; das vorsignierte Artefakt, das sein Handelsplatz tatsächlich ausliefert, ist die Refund- und Recovery-Seite (`apps/web/lib/recovery-kit.ts`), nicht der Claim; und die RPC `htlc_presign`, die solche Claims aus der Wallet erzeugt, ist nicht in v0.35.0-rc1. repch1c hat dasselbe Verhalten am 12. Oktober gegen einen 0.34.15-Build gemessen.
+
+P2MR-Leaves, darunter `htlc_sha256`, sind auf 0.34.15 live, dem Produktions-Pin. Neu im jüngeren Code ist nicht der Leaf-Typ, sondern zwei Optionen von `walletprocesspsbt`: `p2mr_leaf` (Leaf-Auswahl) und `htlc_presign`. 0.34.15 lehnt beide als unbekannte Keys ab. Im Quellcode geprüft am 7. November 2026: `htlc_presign` steht in den Branches `btx-035/lab`, `btx-035/swarm` und `release-0.34.16` und im Pre-Release v0.34.16 vom selben Tag (nur Linux x86_64, nicht release-qualifiziert), aber nicht in v0.35.0-rc1; dieses Pre-Release lässt `finalizepsbt` außerdem Preimages entgegennehmen. Der Pull Request, der das zuerst vorschlug, #410, wurde ohne Merge geschlossen.
+
+Was bleibt, ist ein Relay- und Uptime-Problem, kein Problem der Schlüsselverwahrung. Jemand muss den vervollständigten Claim rechtzeitig broadcasten, und wer ihn ohne Schlüssel vervollständigt, kann die Gebühr nicht erhöhen. Dafür gibt es Ansätze: Fee-Ladder-Bidding und ein schlüsselloser Claim-Relayer, beschrieben in `docs/HTLC_BUILD_PLAN.md` von Oths Handelsplatz, und repch1cs Entwurf mit zwei oder mehr Watchtowern, die eine vorsignierte RBF-Fee-Ladder halten. Roadmap-Punkt **B1** ist damit Ergonomie, ein Wallet-Weg, das ohne handgebaute Transaktionen zu tun, und keine Voraussetzung für den nicht-verwahrenden Weg.
 
 ### 2.3 Wrapped / Bridged — die schlechteste der drei
 
@@ -421,12 +435,14 @@ Nichts davon ist ein Argument für Anonymität. Es ist ein Argument dafür, kein
 | **Funktionsweise** | Software veröffentlicht; Peers betreiben sie und tauschen direkt. Kein gehostetes Interface, keine Gebühr | Gehostetes Orderbuch, nicht-verwahrendes Settlement, EU-/DE-Nutzer ausgeschlossen | Gehosteter Handelsplatz mit CASP-Zulassung in einem Mitgliedstaat, gepasst | Kein eigener Handelsplatz; ein OTC-Desk existiert bereits, betrieben von jemandem außerhalb dieser Gruppe |
 | **Wer betreibt** | Niemand | Ein namentlicher Betreiber, irgendwo | Eine Gesellschaft mit Kapital, Personal und Anschrift | Nicht wir |
 | **Erlaubnisrisiko** | Am geringsten, stützt sich aber auf die Lesart von Erwägungsgrund 22, die ESMA gerade verengt | Abhängig von der Zieljurisdiktion. EU-Risiko kehrt zurück, wenn die Sperre kosmetisch ist | Konstruktionsbedingt konform | Für uns keines, solange wir echten Abstand halten |
-| **Hauptproblem** | Das Finden der Gegenseite. Ohne Matching-Schicht findet fast niemand einen Trade | Die Sperre muss echt und dokumentiert sein. Eine Checkbox ist keine Sperre | Kosten, Kapital, Substanz, Zeit. Braucht eine Gesellschaft, keinen Gruppenchat | Es ist die Lage, die zu dieser Roadmap geführt hat |
+| **Hauptproblem** | Das Finden der Gegenseite. Ohne Matching-Schicht findet fast niemand einen Trade. Das Settlement ist billiger als zuerst angenommen: Der aktuelle Pin erlaubt schon beim Funding signierte Claims (Abschnitt 2.2), dort bleiben Relay und Gebührenerhöhung | Die Sperre muss echt und dokumentiert sein. Eine Checkbox ist keine Sperre | Kosten, Kapital, Substanz, Zeit. Braucht eine Gesellschaft, keinen Gruppenchat | Es ist die Lage, die zu dieser Roadmap geführt hat |
 | **Ehrliches Urteil** | Das einzige Modell, das zu den erklärten Werten des Projekts passt, und das, bei dem jemand das Discovery-Problem lösen muss, ohne Betreiber zu werden | Gangbar, aber jemand muss seinen Namen daruntersetzen und akzeptieren, dass er der Betreiber ist | Das einzige Modell, das EU-Nutzer in Breite bedienen kann, und weit jenseits dessen, was diese Gruppe derzeit finanzieren kann | Kein Plan, aber eine legitime Zwischenposition |
 
 Zwei Beobachtungen, die aus der Tabelle folgen und nicht aus Vorliebe:
 
 **Die Modelle schließen einander praktisch aus.** Ein Protokoll, dem später ein offizielles Frontend und eine Gebühr zuwachsen, ist unbemerkt Modell B geworden, ohne dass jemand das entschieden hätte. Die Entscheidung muss vorher fallen, nicht hinterher auffallen.
+
+**Modell A ist billiger, als die erste Fassung dieses Papiers annahm.** Sie folgerte, Modell A sei bis 0.35 nicht praktikabel, und das schob in Richtung Betreiben oder Lizenzieren. Die Prämisse hält nicht (Abschnitt 2.2), dieser Schritt der Argumentation entfällt; die regulatorische Begründung in den Abschnitten 3 bis 6 ist davon nicht berührt.
 
 **Das schwierige Problem von Modell A ist Discovery, nicht Settlement.** Dort wäre der Entwicklungsaufwand dieser Gruppe am besten aufgehoben, und es ist ein wirklich interessantes Problem: Wie finden zwei Menschen einander und einigen sich auf einen Preis, ohne dass jemand ein System betreibt, das sie zusammenbringt? Alles, was das löst, ohne einen Betreiber zu erzeugen, ist für BTX mehr wert als ein viertes Orderbuch.
 
@@ -509,7 +525,7 @@ Kommentarliteratur (Sekundärquellen; Kanzlei- und Anbieterveröffentlichungen, 
 
 Technische BTX-Quellen:
 
-- [`btxchain/btx`](https://github.com/btxchain/btx) — Konsensregeln, `htlc_presign` und `p2mr_leaf` im 0.35-Branch
+- [`btxchain/btx`](https://github.com/btxchain/btx) — Konsensregeln; P2MR-Leaves einschließlich `htlc_sha256` live auf 0.34.15; die `walletprocesspsbt`-Optionen `htlc_presign` und `p2mr_leaf` in den 0.35-Branches und im Pre-Release v0.34.16
 - [`research/network-fund.md`](network-fund.md) — der Fund-Entwurf, mit dem dieses Dokument sich in Abschnitt 6 schneidet
 - [`ROADMAP.md`](../ROADMAP.md) — Punkte A1, A2, A3 und B1
 
@@ -523,6 +539,6 @@ Korrekturen werden hier mit Datum festgehalten, statt still in den Text eingearb
 
 | Datum | Abschnitt | Was sich geändert hat |
 |---|---|---|
-| — | — | — |
+| 7. Nov. 2026 | 1, 2.2, 5, 10 | Das Papier sagte, 0.35 sei nötig, damit Swap-Parteien nicht online bleiben müssen, und nannte B1 den Punkt, der den nicht-verwahrenden Weg blockiert. Falsch: Das Leaf `htlc_sha256` committet auf einen Digest, Claims lassen sich deshalb schon auf 0.34.15 beim Funding signieren und von einem Dritten ohne Schlüssel vervollständigen. Gemessen von Oth (regtest, Splice-Test A/B/C) und zuvor von repch1c (0.34.15-Build, 12. Okt.), eingebracht in der Gruppe am 6. Nov. Neu im späteren Code ist die Wallet-Option `htlc_presign`, nicht das Leaf. B1 ist Ergonomie, keine Voraussetzung; die Settlement-Seite von Modell A ist billiger als dargestellt. Prüfung, wo `htlc_presign` steht: `gh api 'repos/btxchain/btx/contents/src/wallet/rpc/spend.cpp?ref=<Tag oder Branch>' --jq .content \| base64 -d \| grep -c htlc_presign` ergibt 0 für v0.34.15 und v0.35.0-rc1, mehr als 0 für v0.34.16, btx-035/swarm und btx-035/lab |
 
 Korrekturen sind von allen willkommen, besonders von jedem, der eine Schlussfolgerung hier durch eine Fundstelle ersetzen kann.

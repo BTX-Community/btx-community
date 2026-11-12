@@ -19,7 +19,8 @@
   var OVERALL = ["normal", "degraded", "incident"];
   var LEVELS = ["green", "yellow", "red", "unknown"];
   var RELEASE = /^v?[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/;
-  var DAY = { en: "d", de: "T" };
+  var DAY = { en: "d", de: "T", es: "d", fr: "j", zh: "天" };
+  var LOCALES = { en: "en-US", de: "de-DE", es: "es-ES", fr: "fr-FR", zh: "zh-CN" };
 
   function count(value, max) {
     return Number.isInteger(value) && value >= 0 && value < max ? value : null;
@@ -204,7 +205,7 @@
   }
 
   function apply(root, status) {
-    var locale = root.dataset.lang === "de" ? "de-DE" : "en-US";
+    var locale = LOCALES[root.dataset.lang] || LOCALES.en;
     applyNumbers(root, status, locale);
     applyFork(root, status, locale);
     var overall = root.querySelector('[data-live="overall"]');
@@ -351,7 +352,7 @@
   }
 
   function applyDevelopment(root, dev, now) {
-    var locale = root.dataset.lang === "de" ? "de-DE" : "en-US";
+    var locale = LOCALES[root.dataset.lang] || LOCALES.en;
     var repository = root.dataset.repo;
     var list = root.querySelector('[data-dev="branches"]');
     while (list.firstChild) {
@@ -437,8 +438,33 @@
       .catch(function () { /* keep the values shown so far */ });
   }
 
+  // --- Links shared before the site had several pages, e.g. /#development or /de/#links ---
+
+  var MOVED = [
+    [/^development$/, "network/"],
+    [/^(about|next|fact-[a-z0-9-]+)$/, "learn/"],
+    [/^(links|removed-title|cat-[a-z0-9-]+)$/, "links/"],
+    [/^(documents|doc-[a-z0-9-]+)$/, "docs/"],
+  ];
+
+  // Where a section of the old single page lives now; null if the hash is not one of them.
+  function movedTarget(pathname, hash) {
+    var home = /^\/([a-z]{2}\/)?$/.exec(pathname);
+    var id = hash.replace(/^#/, "");
+    if (!home || !id) {
+      return null;
+    }
+    for (var i = 0; i < MOVED.length; i += 1) {
+      if (MOVED[i][0].test(id)) {
+        return "/" + (home[1] || "") + MOVED[i][1] + "#" + id;
+      }
+    }
+    return null;
+  }
+
   if (typeof module !== "undefined" && module.exports) {
     module.exports = {
+      movedTarget: movedTarget,
       parseStatus: parseStatus,
       formatTime: formatTime,
       formatDuration: formatDuration,
@@ -447,6 +473,11 @@
       githubUrl: githubUrl,
     };
   } else if (typeof document !== "undefined") {
+    var moved = movedTarget(window.location.pathname, window.location.hash);
+    if (moved && !document.getElementById(window.location.hash.slice(1))) {
+      window.location.replace(moved);
+      return;
+    }
     var root = document.getElementById("live");
     if (root && root.dataset.api && typeof fetch === "function") {
       refresh(root);

@@ -1,0 +1,56 @@
+{% extends "base.html.j2" %}
+{% block content %}
+      <section class="c-intro">
+        <h1 class="c-page-title">{{ page_title }}</h1>
+        <p class="c-hero__lead">{{ page_lead }}</p>
+      </section>
+
+      <section class="c-directory" id="links" aria-labelledby="links-title">
+        <h2 class="c-section-title" id="links-title">{{ ui["directory.title"] }}</h2>
+        <p class="c-muted">{{ ui["directory.lead"].format(count=entry_count, date=checked) }}</p>
+        <p class="c-add">{{ ui["directory.add"] }} <a class="c-link" href="{{ add_project_url }}" rel="noopener noreferrer">{{ ui["directory.add_link"] }} ↗</a></p>
+        <nav class="c-jump" aria-label="{{ ui['jump'] }}">
+          {% for category in categories %}
+          <a class="c-chip c-chip--{{ category.id }}" href="#cat-{{ category.id }}">{{ category.title }}</a>
+          {% endfor %}
+        </nav>
+
+        {% for category in categories %}
+        <section class="c-category c-category--{{ category.id }}" id="cat-{{ category.id }}" aria-labelledby="cat-{{ category.id }}-title">
+          <h3 class="c-category__title" id="cat-{{ category.id }}-title">{{ category.title }} <span class="c-count">{{ category.entries | length }}</span></h3>
+          {% if category.risk %}
+          <p class="c-risk"><strong>{{ ui["risk"] }}:</strong> {{ category.risk }}</p>
+          {% endif %}
+          <ul class="c-cards">
+            {% for entry in category.entries %}
+            <li class="c-card" id="{{ entry.id }}">
+              <a class="c-card__link" href="{{ entry.url }}" rel="noopener noreferrer">
+                <span class="c-card__number" aria-hidden="true">{{ entry.number }}</span>
+                <span class="c-card__name">{{ entry.name }} <span aria-hidden="true">↗</span></span>
+                {% if entry.tags %}
+                <span class="c-tags">{% for tag in entry.tags %}<span class="c-tag">{{ tag }}</span>{% endfor %}</span>
+                {% endif %}
+                <span class="c-card__text">{{ entry.description }}</span>
+                {% if entry.note %}
+                <span class="c-card__note"><strong>{{ ui["note"] }}:</strong> {{ entry.note }}</span>
+                {% endif %}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endfor %}
+
+        {% if removed %}
+        <section class="c-removed" aria-labelledby="removed-title">
+          <h3 class="c-category__title" id="removed-title">{{ ui["removed.title"] }}</h3>
+          <p class="c-muted">{{ ui["removed.lead"] }}</p>
+          <ul>
+            {% for name, reason in removed %}
+            <li><strong>{{ name }}</strong> - {{ reason }}</li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+      </section>
+{% endblock %}

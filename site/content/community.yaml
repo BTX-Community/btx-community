@@ -26,8 +26,12 @@ audiences:
         Proof-of-Work (MatMul). Getragen wird es von einer offenen Community, nicht von einer Firma.
     steps:
       - text:
-          en: Read the official introduction and documentation.
-          de: Die offizielle Einführung und Dokumentation lesen.
+          en: >-
+            Read the official introduction and documentation. It was written for v0.33.2;
+            newer releases differ in places.
+          de: >-
+            Die offizielle Einführung und Dokumentation lesen. Sie wurde für v0.33.2 geschrieben;
+            neuere Releases weichen teils ab.
         url: https://btx.dev/
       - text:
           en: See how the network is doing right now, in plain terms.
@@ -56,8 +60,12 @@ audiences:
         jeden Block behalten oder einem Pool beitreten und regelmäßiger ausgezahlt werden.
     steps:
       - text:
-          en: Pick a miner - easyBTX (one app for Mac, Windows, Linux) or matador (open source).
-          de: Einen Miner wählen - easyBTX (eine App für Mac, Windows, Linux) oder matador (Open Source).
+          en: >-
+            Pick a miner from our link list - for example easyBTX (an app for Mac and Linux; on
+            Windows through WSL) or matador (open source).
+          de: >-
+            Einen Miner aus unserer Linkliste wählen - etwa easyBTX (eine App für Mac und Linux;
+            unter Windows über WSL) oder matador (Open Source).
         anchor: miners
       - text:
           en: >-
@@ -69,26 +77,36 @@ audiences:
         url: https://network.btx-monitoring.com/
       - text:
           en: >-
-            matador's examples still name the minebtx pool, which is offline. Use a pool from
-            the list below instead.
+            matador's quick start contains a sample payout address that is not yours and two
+            pools that are offline. Always put in your own btx1z address and a pool from our
+            link list.
           de: >-
-            Die Beispiele von matador nennen noch den Pool minebtx, der nicht mehr erreichbar ist.
-            Stattdessen einen Pool aus der Liste unten nehmen.
+            Im Schnellstart von matador stehen eine fremde Beispiel-Auszahlungsadresse und zwei
+            Pools, die nicht mehr erreichbar sind. Immer die eigene btx1z-Adresse und einen Pool
+            aus unserer Linkliste eintragen.
         anchor: pools
       - text:
-          en: Problems with an NVIDIA card? The official CUDA troubleshooting guide helps.
-          de: Probleme mit einer NVIDIA-Karte? Die offizielle CUDA-Fehlersuche hilft.
+          en: >-
+            Problems with an NVIDIA card? The official CUDA troubleshooting guide helps; parts of
+            it describe the CUDA path from before block 185,000.
+          de: >-
+            Probleme mit einer NVIDIA-Karte? Die offizielle CUDA-Fehlersuche hilft; Teile davon
+            beschreiben den CUDA-Weg von vor Block 185.000.
         url: https://github.com/btxchain/btx/blob/main/doc/btx-cuda-mining-troubleshooting.md
 
   - id: nodes
     title: { en: Running a node, de: Einen Node betreiben }
     text:
       en: >-
-        Every node checks the chain for itself and makes the network harder to fool. A home
-        computer is enough; signers have much higher requirements.
+        Every node relays blocks and keeps the network reachable. A node checks every block
+        itself only with a GPU that passes btxd's self-test. Without one, run it as a trusted
+        mirror that follows signed checks from at least two signers; otherwise it stops
+        syncing. Signers have the highest requirements.
       de: >-
-        Jeder Node prüft die Kette selbst und macht das Netz schwerer zu täuschen. Ein
-        Heimrechner genügt; Signer haben deutlich höhere Anforderungen.
+        Jeder Node leitet Blöcke weiter und hält das Netz erreichbar. Jeden Block selbst prüft
+        ein Node nur mit einer GPU, die den Selbsttest von btxd besteht. Ohne sie läuft er als
+        Trusted Mirror, der signierten Prüfungen von mindestens zwei Signern folgt; sonst
+        bleibt er stehen. Signer haben die höchsten Anforderungen.
     steps:
       - text:
           en: Easiest start at home - easynode installs and supervises btxd for you.
@@ -97,26 +115,37 @@ audiences:
       - text:
           en: >-
             On a server - the official release for Linux needs glibc 2.38 or newer
-            (Ubuntu 24.04, Debian 13).
+            (Ubuntu 24.04, Debian 13); a GPU node takes the -cuda13 archive (Blackwell cards).
+            The v0.34.16 pre-release has no CUDA build, so GPU nodes stay on v0.34.15. The
+            current release has no official Windows archive.
           de: >-
             Auf einem Server - das offizielle Linux-Release braucht glibc 2.38 oder neuer
-            (Ubuntu 24.04, Debian 13).
+            (Ubuntu 24.04, Debian 13); ein GPU-Node nimmt das Archiv -cuda13 (Blackwell-Karten).
+            Das Pre-Release v0.34.16 hat keinen CUDA-Build, GPU-Nodes bleiben daher auf v0.34.15.
+            Für das aktuelle Release gibt es kein offizielles Windows-Archiv.
         url: https://github.com/btxchain/btx/releases
       - text:
-          en: Catch up in minutes with a daily signed snapshot instead of syncing from genesis.
-          de: In Minuten aufholen mit einem täglich signierten Snapshot statt Sync ab Genesis.
-        url: https://github.com/dr-chambre/btx-snapshots
+          en: >-
+            Catch up in minutes with a daily signed snapshot. A sync from genesis currently
+            stops at block 126,978 (issue #272).
+          de: >-
+            In Minuten aufholen mit einem täglich signierten Snapshot. Ein Sync ab Genesis bleibt
+            derzeit bei Block 126.978 stehen (Issue #272).
+        url: https://github.com/dr-chambre/btx-snapshots/releases/latest
       - text:
           en: Node stuck at a height? The node help explains each known case and its fix.
           de: Node hängt bei einer Höhe? Die Node-Hilfe erklärt jeden bekannten Fall und die Lösung.
         url: https://network.btx-monitoring.com/help/
       - text:
           en: >-
-            Signers (GPU attestors) need an NVIDIA Blackwell card (sm_120) and must follow the
-            developers' operator runbook.
+            Signers (GPU attestors) need a GPU that passes btxd's self-test and must stay
+            online. The official CUDA archive covers Blackwell cards (sm_120); other NVIDIA cards
+            need a build from source and may not qualify. Follow the developers' operator runbook.
           de: >-
-            Signer (GPU-Attestoren) brauchen eine NVIDIA-Blackwell-Karte (sm_120) und müssen sich
-            an das Betreiber-Runbook der Entwickler halten.
+            Signer (GPU-Attestoren) brauchen eine GPU, die den Selbsttest von btxd besteht, und
+            müssen ständig online sein. Das offizielle CUDA-Archiv deckt Blackwell-Karten (sm_120)
+            ab; andere NVIDIA-Karten brauchen einen eigenen Build und qualifizieren sich womöglich
+            nicht. An das Betreiber-Runbook der Entwickler halten.
         url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md
 
 categories:
@@ -128,15 +157,15 @@ categories:
         url: https://discord.gg/btx
         tags: [discord, chat]
         description:
-          en: Main community server, including mining help.
-          de: Haupt-Server der Community, auch mit Mining-Hilfe.
+          en: Community Discord, open to everyone, including mining help.
+          de: Community-Discord, offen für alle, auch mit Mining-Hilfe.
       - id: telegram
-        name: BTX Community Chat
+        name: BTX Telegram (gate)
         url: https://t.me/btx_ecosystem
         tags: [telegram, chat]
         description:
-          en: Telegram group of the community.
-          de: Telegram-Gruppe der Community.
+          en: Verification gate; clearing it lets you into the main BTX Telegram groups.
+          de: Verifizierungs-Gate; wer es passiert, kommt in die Haupt-Telegram-Gruppen von BTX.
       - id: x-community
         name: BTX on X
         url: https://x.com/btxcommunity
@@ -149,8 +178,12 @@ categories:
         url: https://x.com/thebtxchain
         tags: [x, news]
         description:
-          en: Chain account on X.
-          de: Konto der Chain auf X.
+          en: >-
+            Community-run account on X, not the developers'. It posted release notes and network
+            news in August and September 2026.
+          de: >-
+            Von der Community betriebenes Konto auf X, nicht das der Entwickler. Es brachte im
+            August und September 2026 Release-Hinweise und Netz-News.
       - id: mining-hub
         name: BTX Mining Hub
         url: https://t.me/Pr0_Crypto_Mining_chat/59061
@@ -165,6 +198,19 @@ categories:
         description:
           en: Telegram chat of the matador miner.
           de: Telegram-Chat des matador-Miners.
+        note:
+          en: No change to the miner since 2026-08-21.
+          de: Am Miner gab es seit 2026-08-21 keine Änderung.
+      - id: easybtx-chat
+        name: easyBTX chat
+        url: https://t.me/easyBTX
+        tags: [telegram, support]
+        description:
+          en: Telegram group of the easyBTX team, for questions about its miner, node app and wallet.
+          de: Telegram-Gruppe des easyBTX-Teams für Fragen zu Miner, Node-App und Wallet.
+        note:
+          en: Run by the vendor of those apps.
+          de: Vom Anbieter dieser Apps betrieben.
       - id: btx-best
         name: BTX.best
         url: https://btx.best/
@@ -179,10 +225,13 @@ categories:
       - id: btx-dev
         name: btx.dev
         url: https://btx.dev/
-        tags: [docs]
+        tags: [docs, wallet]
         description:
-          en: Official website and documentation of BTX.
-          de: Offizielle Website und Dokumentation von BTX.
+          en: Official website with documentation, the browser wallet and the whitepaper.
+          de: Offizielle Website mit Dokumentation, Browser-Wallet und Whitepaper.
+        note:
+          en: Last updated for v0.33.2 (August 2026); newer releases are on the GitHub releases page.
+          de: Zuletzt für v0.33.2 aktualisiert (August 2026); neuere Releases stehen auf der Release-Seite bei GitHub.
       - id: btx-node
         name: BTX Node
         url: https://github.com/btxchain/btx
@@ -217,6 +266,30 @@ categories:
         description:
           en: How to build btxd yourself on Linux, if you would rather not trust a binary.
           de: So baust du btxd unter Linux selbst, wenn du keinem fertigen Programm vertrauen willst.
+        note:
+          en: >-
+            A default build has no GPU support and cannot check MatMul blocks itself: add CUDA,
+            or run it as a trusted mirror. On Ubuntu 22.04 or 24.04 add -DWITH_MODELNET=OFF,
+            unless you install OpenSSL 3.5 or newer.
+          de: >-
+            Ein Standard-Build hat keine GPU-Unterstützung und kann MatMul-Blöcke nicht selbst
+            prüfen: CUDA hinzufügen oder als Trusted Mirror betreiben. Unter Ubuntu 22.04 oder
+            24.04 -DWITH_MODELNET=OFF setzen, außer man installiert OpenSSL 3.5 oder neuer.
+      - id: windows-build
+        name: Build on Windows 11
+        url: https://github.com/btxchain/btx/blob/main/doc/btx-windows-11-compile-handbook.md
+        tags: [docs, windows, node]
+        description:
+          en: Official step-by-step guide to building btxd and btx-cli on Windows 11.
+          de: Offizielle Schritt-für-Schritt-Anleitung, um btxd und btx-cli unter Windows 11 zu bauen.
+        note:
+          en: >-
+            The current release has no official Windows archive. The handbook starts without
+            CUDA, and such a build cannot check MatMul blocks itself: run it as a trusted mirror.
+          de: >-
+            Für das aktuelle Release gibt es kein offizielles Windows-Archiv. Das Handbuch beginnt
+            ohne CUDA, und ein solcher Build kann MatMul-Blöcke nicht selbst prüfen: als Trusted
+            Mirror betreiben.
       - id: pqc-spec
         name: Post-quantum signatures
         url: https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md
@@ -231,6 +304,35 @@ categories:
         description:
           en: Step-by-step guide to a multisig wallet with post-quantum keys.
           de: Schritt-für-Schritt-Anleitung für eine Multisig-Wallet mit Post-Quanten-Schlüsseln.
+      - id: key-management
+        name: Key management and backups
+        url: https://github.com/btxchain/btx/blob/main/doc/btx-key-management-guide.md
+        tags: [docs, wallet, backup]
+        description:
+          en: >-
+            Official guide to wallet roles, multisig, timelocked recovery, watch-only setups and
+            encrypted backups, with a restore drill.
+          de: >-
+            Offizielle Anleitung zu Wallet-Rollen, Multisig, zeitgesperrter Wiederherstellung,
+            Watch-only-Setups und verschlüsselten Backups, mit einer Übung zur Wiederherstellung.
+      - id: browser-wallet-interop
+        name: Browser wallet and node wallet
+        url: https://github.com/btxchain/btx/blob/main/doc/btxwallet-browser-node-interop.md
+        tags: [docs, wallet, browser]
+        description:
+          en: >-
+            Official guide to moving a btx.dev browser wallet into btxd and back, and how that
+            file differs from an encrypted node backup.
+          de: >-
+            Offizielle Anleitung, wie man eine Browser-Wallet von btx.dev in btxd überträgt und
+            zurück, und wie sich diese Datei von einem verschlüsselten Node-Backup unterscheidet.
+        note:
+          en: >-
+            A .btxwallet file holds the post-quantum seed in plain text. Treat it like a private
+            key and delete temporary copies.
+          de: >-
+            Eine .btxwallet-Datei enthält den Post-Quanten-Seed im Klartext. Wie einen privaten
+            Schlüssel behandeln und temporäre Kopien löschen.
       - id: matmul-spec
         name: MatMul proof-of-work
         url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-pow-spec.md
@@ -238,6 +340,13 @@ categories:
         description:
           en: How mining by matrix multiplication works and how blocks are checked.
           de: Wie Mining mit Matrixmultiplikation funktioniert und wie Blöcke geprüft werden.
+        note:
+          en: >-
+            The file is marked historical: it records the v3 design. Since block 185,000 the
+            network runs MatMul v4.7.
+          de: >-
+            Die Datei ist als historisch markiert: Sie hält den Entwurf v3 fest. Seit Block 185.000
+            läuft das Netz mit MatMul v4.7.
       - id: trusted-mirrors
         name: Trusted MatMul mirrors
         url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md
@@ -249,6 +358,42 @@ categories:
           de: >-
             Einen Node ohne zugelassene GPU betreiben, indem man den Replay-Bestätigungen von
             Signern vertraut, und was dieses Vertrauen bedeutet.
+        note:
+          en: >-
+            On mainnet it needs at least two pinned signers and a threshold of two. Pin only
+            signers that are live today.
+          de: >-
+            Im Mainnet braucht es mindestens zwei gepinnte Signer und eine Schwelle von zwei. Nur
+            Signer pinnen, die heute aktiv sind.
+      - id: gpu-verified-nodes
+        name: Who needs a GPU
+        url: https://github.com/btxchain/btx/blob/main/doc/btx-gpu-verified-network-transition.md
+        tags: [docs, node, gpu]
+        description:
+          en: >-
+            Official explanation of why a node needs a qualified GPU to check blocks itself since
+            block 185,000, and what machines without one can do.
+          de: >-
+            Offizielle Erklärung, warum ein Node seit Block 185.000 eine zugelassene GPU braucht,
+            um Blöcke selbst zu prüfen, und was Rechner ohne eine solche GPU tun können.
+      - id: integration-docs
+        name: Exchange and custody integration (BCP/1)
+        url: https://github.com/btxchain/btx/blob/main/doc/integrations/README.md
+        tags: [docs, exchange, custody]
+        description:
+          en: >-
+            Official integration profile for exchanges and custodians: UTXO model, watch-only
+            setup, deposits, confirmations and reorg handling.
+          de: >-
+            Offizielles Integrationsprofil für Börsen und Verwahrer: UTXO-Modell, Watch-only-Setup,
+            Einzahlungen, Bestätigungen und Umgang mit Reorgs.
+      - id: security-policy
+        name: Report a security problem
+        url: https://github.com/btxchain/btx/blob/main/SECURITY.md
+        tags: [security]
+        description:
+          en: How to report a vulnerability privately to the BTX Development Team. Not for support questions.
+          de: Wie man eine Schwachstelle vertraulich an das BTX Development Team meldet. Nicht für Support-Fragen.
 
   - id: network
     title: { en: Network and explorers, de: Netz und Explorer }
@@ -256,24 +401,38 @@ categories:
       - id: status
         name: BTX Network Status
         url: https://network.btx-monitoring.com/
-        tags: [status, open source]
+        tags: [status, api]
         description:
-          en: Community status page - is the network healthy, with history and node help.
-          de: Community-Statusseite - ist das Netz gesund, mit Verlauf und Node-Hilfe.
+          en: Community status page - is the network healthy, with history, node help and a public JSON API.
+          de: Community-Statusseite - ist das Netz gesund, mit Verlauf, Node-Hilfe und öffentlicher JSON-API.
       - id: btxscan
         name: BTXScan
         url: https://btxscan.io/
-        tags: [explorer, halving]
+        tags: [explorer, halving, api]
         description:
-          en: Block explorer for blocks, transactions and addresses.
-          de: Block-Explorer für Blöcke, Transaktionen und Adressen.
+          en: >-
+            Block explorer of the easyBTX team for blocks, transactions and addresses, with a
+            public API (api.btxscan.io).
+          de: >-
+            Block-Explorer des easyBTX-Teams für Blöcke, Transaktionen und Adressen, mit
+            öffentlicher API (api.btxscan.io).
       - id: first-light
         name: first light
         url: https://explorer.btxbyronbay.com/
-        tags: [explorer, stats]
+        tags: [explorer, stats, api]
         description:
-          en: Explorer of the Byron Bay team, with a 24 h mining view.
-          de: Explorer des Byron-Bay-Teams, mit einer 24-h-Mining-Ansicht.
+          en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages and a public API.
+          de: Explorer des Byron-Bay-Teams, mit einer 24-h-Mining-Ansicht, Statistikseiten und öffentlicher API.
+        note:
+          en: Some API endpoints need an access token.
+          de: Manche API-Endpunkte brauchen einen Zugangsschlüssel.
+      - id: ninjaraider-explorer
+        name: ninjaraider explorer
+        url: https://btxscan.ninjaraider.com
+        tags: [explorer, api]
+        description:
+          en: Block explorer run by the ninjaraider pool, with a JSON API for addresses and blocks.
+          de: Block-Explorer des Pools ninjaraider, mit JSON-API für Adressen und Blöcke.
       - id: easybtx-census
         name: easyBTX network
         url: https://easybtx.com/
@@ -302,23 +461,22 @@ categories:
         description:
           en: Multi-coin pool with BTX. Check its fee on the pool page.
           de: Multi-Coin-Pool mit BTX. Gebühr auf der Pool-Seite prüfen.
+        note:
+          en: Miners log in as ADDRESS.worker; nekominer documents this and charges no dev fee on this pool.
+          de: Anmeldung als ADRESSE.worker; nekominer beschreibt das und verlangt bei diesem Pool keine Dev-Gebühr.
       - id: btx-pool
         name: BTX Pool
         url: https://btx-pool.com
         tags: [pool]
         description:
-          en: Pool dedicated to BTX. Check its fee on the pool page.
-          de: Pool nur für BTX. Gebühr auf der Pool-Seite prüfen.
-      - id: byron-pool
-        name: Byron Pool
-        url: https://btxbyronbay.com
-        tags: [pool, pplns, au]
-        description:
-          en: PPLNS pool of the Byron Bay team (Australia).
-          de: PPLNS-Pool des Byron-Bay-Teams (Australien).
-        note:
-          en: The website answered "503 unavailable" on 2026-11-03.
-          de: Die Website antwortete am 2026-11-03 mit "503 nicht verfügbar".
+          en: >-
+            Pool dedicated to BTX, run by the author of btx-pool-miner (GitHub lucasan123). It
+            pays miners inside each block it finds, split by work over a 30-minute window. Check
+            its fee on the pool page.
+          de: >-
+            Pool nur für BTX, betrieben vom Autor von btx-pool-miner (GitHub lucasan123). Er
+            zahlt die Miner direkt in jedem gefundenen Block aus, aufgeteilt nach Arbeit über ein
+            30-Minuten-Fenster. Gebühr auf der Pool-Seite prüfen.
 
   - id: miners
     title: { en: Miners, de: Miner }
@@ -326,10 +484,23 @@ categories:
       - id: easybtx
         name: easyBTX
         url: https://easybtx.com/
-        tags: [gpu, mac, windows, linux]
+        tags: [gpu, mac, linux, wsl, closed source]
         description:
-          en: One-click miner app with a self-custodial wallet built in.
-          de: Miner-App mit einem Klick und eingebauter selbstverwahrter Wallet.
+          en: >-
+            One-click miner app with a self-custodial wallet built in, for Apple Silicon Macs and
+            Linux (on Windows through WSL).
+          de: >-
+            Miner-App mit einem Klick und eingebauter selbstverwahrter Wallet, für Apple-Silicon-Macs
+            und Linux (unter Windows über WSL).
+        note:
+          en: >-
+            Closed source; the builds are unsigned, so check the SHA-256 on the release page. It
+            starts on BTX Pool by default. A 5% dev fee was listed for it in August 2026; check
+            the current fee in the app.
+          de: >-
+            Closed Source; die Builds sind unsigniert, daher die SHA-256 auf der Release-Seite
+            prüfen. Startet standardmäßig auf BTX Pool. Im August 2026 wurde eine Dev-Gebühr von
+            5 % genannt; die aktuelle Gebühr in der App prüfen.
       - id: matador
         name: matador
         url: https://github.com/vanities/matador-miner
@@ -338,8 +509,71 @@ categories:
           en: Open-source GPU miner (NVIDIA, CUDA), solo against your own node or in a pool.
           de: Open-Source-GPU-Miner (NVIDIA, CUDA), solo gegen den eigenen Node oder im Pool.
         note:
-          en: Last change 2026-08-21; its pool examples still name the offline minebtx pool.
-          de: Letzte Änderung 2026-08-21; die Pool-Beispiele nennen noch den nicht erreichbaren Pool minebtx.
+          en: >-
+            Last change 2026-08-21. The quick start in its README contains a sample payout
+            address and two offline pools (minebtx, Byron); replace all three. 1% dev fee in pool
+            mode; it updates itself unless started with --no-auto-update. NVIDIA Ampere (RTX 30
+            series) or newer only.
+          de: >-
+            Letzte Änderung 2026-08-21. Im Schnellstart des README stehen eine
+            Beispiel-Auszahlungsadresse und zwei nicht erreichbare Pools (minebtx, Byron); alle
+            drei ersetzen. 1 % Dev-Gebühr im Pool-Modus; aktualisiert sich selbst, außer beim
+            Start mit --no-auto-update. Nur NVIDIA Ampere (RTX-30-Serie) oder neuer.
+      - id: nekominer
+        name: nekominer
+        url: https://github.com/nr800/nekominer
+        tags: [gpu, nvidia, linux, hiveos, closed source]
+        description:
+          en: >-
+            NVIDIA (CUDA) miner for several coins; BTX runs as algorithm btxv4, the proof-of-work
+            since block 185,000. Its README has commands for ninjaraider and BTX Pool.
+          de: >-
+            NVIDIA-Miner (CUDA) für mehrere Coins; BTX läuft als Algorithmus btxv4, der
+            Proof-of-Work seit Block 185.000. Das README enthält Befehle für ninjaraider und
+            BTX Pool.
+        note:
+          en: >-
+            The miner's source is not published: the repository holds scripts and binary releases,
+            with no licence. 2% dev fee, 0% on ninjaraider.
+          de: >-
+            Der Quellcode des Miners ist nicht veröffentlicht: Das Repository enthält Skripte und
+            Binär-Releases, ohne Lizenz. 2 % Dev-Gebühr, 0 % bei ninjaraider.
+      - id: forgeminer
+        name: ForgeMiner
+        url: https://github.com/0xHashRaptor/ForgeMiner
+        tags: [gpu, nvidia, windows, hiveos, closed source]
+        description:
+          en: >-
+            Multi-coin GPU miner with BTX support (MatMul v4.7 since version 1.6.0); its BTX
+            example uses BTX Pool. BTX mines on NVIDIA cards only.
+          de: >-
+            Multi-Coin-GPU-Miner mit BTX-Unterstützung (MatMul v4.7 seit Version 1.6.0); das
+            BTX-Beispiel nutzt BTX Pool. BTX läuft nur auf NVIDIA-Karten.
+        note:
+          en: Closed source (stated in its README). 2% dev fee on BTX.
+          de: Closed Source (laut README). 2 % Dev-Gebühr auf BTX.
+      - id: btxd-solo-mining
+        name: Solo mining helpers (btxd)
+        url: https://github.com/btxchain/btx/tree/main/contrib/mining
+        tags: [solo, official, open source, scripts]
+        description:
+          en: >-
+            Official scripts for solo mining against your own btxd: a health-aware mining loop,
+            start and stop scripts and a wallet backup. For larger setups the README points to
+            getblocktemplate with external miners.
+          de: >-
+            Offizielle Skripte für Solo-Mining gegen den eigenen btxd: eine Mining-Schleife mit
+            Zustandsprüfung, Start- und Stopp-Skripte und ein Wallet-Backup. Für größere Setups
+            verweist das README auf getblocktemplate mit externen Minern.
+        note:
+          en: >-
+            Mining needs a qualified GPU and a node that checks blocks itself
+            (matmulvalidation=consensus, the default), not a trusted mirror. See the GPU
+            operator runbook.
+          de: >-
+            Mining braucht eine zugelassene GPU und einen Node, der Blöcke selbst prüft
+            (matmulvalidation=consensus, die Voreinstellung), keinen Trusted Mirror. Siehe das
+            GPU-Betreiber-Runbook.
 
   - id: node-tools
     title: { en: Node tools, de: Node-Werkzeuge }
@@ -349,8 +583,19 @@ categories:
         url: https://github.com/MendeMatthias/easynode
         tags: [desktop, open source]
         description:
-          en: Desktop app that installs and supervises btxd on the machine you already own.
-          de: Desktop-App, die btxd auf dem eigenen Rechner installiert und überwacht.
+          en: >-
+            Open-source (MIT) desktop app of the easyBTX team that installs and supervises btxd
+            on the machine you already own.
+          de: >-
+            Open-Source-Desktop-App (MIT) des easyBTX-Teams, die btxd auf dem eigenen Rechner
+            installiert und überwacht.
+        note:
+          en: >-
+            Runs v0.34.15 without the model network. Without a qualified GPU the node follows
+            signers' checks instead of checking the MatMul work itself.
+          de: >-
+            Läuft mit v0.34.15 ohne Modellnetz. Ohne zugelassene GPU folgt der Node den Prüfungen
+            der Signer, statt die MatMul-Arbeit selbst zu prüfen.
       - id: guardian
         name: BTX Node Guardian
         url: https://easybtx.com/guardian
@@ -360,11 +605,19 @@ categories:
           de: Kostenloses Skript, das ein wartendes Netz von einem hängenden Node unterscheidet und hilfreiche Peers anwählt. Es startet den Node nie neu.
       - id: snapshots
         name: BTX snapshots
-        url: https://github.com/dr-chambre/btx-snapshots
-        tags: [snapshot, signed]
+        url: https://github.com/dr-chambre/btx-snapshots/releases/latest
+        tags: [snapshot, signed, pruned]
         description:
-          en: Daily datadir snapshot, checked and signed by a second node.
-          de: Täglicher Datadir-Snapshot, von einem zweiten Node geprüft und signiert.
+          en: >-
+            Daily pruned datadir snapshot, checked and signed by a second node. Built on a
+            trusted mirror, so the MatMul work was accepted on signers' attestations.
+          de: >-
+            Täglicher Datadir-Snapshot (pruned), von einem zweiten Node geprüft und signiert. Auf
+            einem Trusted Mirror gebaut: Die MatMul-Arbeit wurde anhand der Bestätigungen von
+            Signern akzeptiert.
+        note:
+          en: Verify the signature and SHA-256 before use. Not for signers.
+          de: Vor der Nutzung Signatur und SHA-256 prüfen. Nicht für Signer.
       - id: node-help
         name: Node help
         url: https://network.btx-monitoring.com/help/
@@ -372,6 +625,26 @@ categories:
         description:
           en: Known stuck heights with their cause and fix.
           de: Bekannte Hänge-Höhen mit Ursache und Lösung.
+      - id: ainode
+        name: AInode
+        url: https://github.com/MendeMatthias/ainode-releases
+        tags: [mac, model network, desktop]
+        description:
+          en: >-
+            Mac app (Apple Silicon, macOS 13 or later) of the easyBTX team that fetches open AI
+            models over the BTX model network and runs them on your Mac. It only downloads; it
+            never serves, pays or earns.
+          de: >-
+            Mac-App (Apple Silicon, ab macOS 13) des easyBTX-Teams, die offene KI-Modelle über das
+            BTX-Modellnetz lädt und auf dem eigenen Mac ausführt. Sie lädt nur herunter; sie
+            stellt nichts bereit, zahlt nichts und verdient nichts.
+        note:
+          en: >-
+            MIT-licensed; this repository holds only the downloads and release notes. Compare the
+            SHA-256 listed with each release.
+          de: >-
+            MIT-lizenziert; dieses Repository enthält nur die Downloads und Release-Notes. Die bei
+            jedem Release angegebene SHA-256 vergleichen.
 
   - id: wallets
     title: { en: Wallets, de: Wallets }
@@ -390,20 +663,60 @@ categories:
         description:
           en: Official post-quantum wallet in the browser.
           de: Offizielle Post-Quanten-Wallet im Browser.
+        note:
+          en: Its backup file (.btxwallet) holds the seed in plain text. Keep it offline and never send it to anyone.
+          de: Die Sicherungsdatei (.btxwallet) enthält den Seed im Klartext. Offline aufbewahren und nie an jemanden schicken.
+      - id: node-wallet
+        name: Node wallet (btx-qt, btx-cli)
+        url: https://github.com/btxchain/btx/releases
+        tags: [official, desktop, open source, pq]
+        description:
+          en: >-
+            The wallet in the official releases for Linux and macOS: the desktop app btx-qt, or
+            btxd with btx-cli. Open source; it runs on your own node.
+          de: >-
+            Die Wallet in den offiziellen Releases für Linux und macOS: die Desktop-App btx-qt oder
+            btxd mit btx-cli. Open Source; sie läuft auf dem eigenen Node.
+        note:
+          en: >-
+            Back up the whole wallet with backupwalletbundlearchive (one passphrase-encrypted
+            file; see doc/managing-wallets.md), not only the seed. A .btxwallet export holds the
+            seed in plain text.
+          de: >-
+            Die ganze Wallet mit backupwalletbundlearchive sichern (eine mit Passphrase
+            verschlüsselte Datei; siehe doc/managing-wallets.md), nicht nur den Seed. Ein
+            .btxwallet-Export enthält den Seed im Klartext.
       - id: pq-wallet
         name: BTX PQ Wallet
         url: https://easybtx.com/wallet
-        tags: [desktop, pq]
+        tags: [desktop, pq, mac, windows]
         description:
-          en: Desktop wallet of the easyBTX team.
-          de: Desktop-Wallet des easyBTX-Teams.
+          en: Post-quantum desktop wallet of the easyBTX team for macOS and Windows.
+          de: Post-Quanten-Desktop-Wallet des easyBTX-Teams für macOS und Windows.
+        note:
+          en: >-
+            Early test build: internal security review, no independent audit; the source code is
+            not public and the direct downloads are unsigned. A 64-character master key is the
+            only backup; keep it offline.
+          de: >-
+            Frühe Testversion: interne Sicherheitsprüfung, kein unabhängiges Audit; der Quellcode
+            ist nicht öffentlich und die direkten Downloads sind unsigniert. Ein Master-Key mit 64
+            Zeichen ist das einzige Backup; offline aufbewahren.
       - id: bonuz
         name: Bonuz
         url: https://www.bonuz.xyz
-        tags: [ios, seedless]
+        tags: [mobile, ios, android, seedless]
         description:
-          en: Seedless iOS wallet with BTX support.
-          de: iOS-Wallet ohne Seed, mit BTX-Unterstützung.
+          en: Seedless mobile wallet for iOS and Android with BTX support.
+          de: Mobile Wallet ohne Seed für iOS und Android, mit BTX-Unterstützung.
+        note:
+          en: >-
+            Seedless means there is no seed phrase you back up yourself; access and recovery go
+            through the Bonuz login. Check how recovery works before you rely on it.
+          de: >-
+            Seedless heißt: Es gibt keine Seed-Phrase, die man selbst sichert; Zugang und
+            Wiederherstellung laufen über das Bonuz-Login. Vor dem Einsatz prüfen, wie die
+            Wiederherstellung funktioniert.
 
   - id: bridges
     title: { en: Bridges and testnets, de: Bridges und Testnetze }
@@ -415,13 +728,31 @@ categories:
         Experimentell und von uns nicht geprüft. Bridges können Guthaben verlieren; nicht mehr
         schicken, als man verlieren kann.
     entries:
+      - id: wbtx-spec
+        name: wBTX specification (official)
+        url: https://github.com/btxchain/btx/blob/main/docs/wBTX.md
+        tags: [official, spec, wrapped, ethereum]
+        description:
+          en: >-
+            The developers' design for wrapped BTX on EVM chains: token rules, bridge models and
+            reference contracts. A design, not a working bridge.
+          de: >-
+            Der Entwurf der Entwickler für Wrapped BTX auf EVM-Chains: Token-Regeln, Bridge-Modelle
+            und Referenzverträge. Ein Entwurf, keine laufende Bridge.
+        note:
+          en: Not launched. Its launch checklist is still open and the reference contracts are unaudited.
+          de: Nicht gestartet. Die Start-Checkliste ist noch offen, und die Referenzverträge sind nicht auditiert.
       - id: wbtx
         name: WBTX (wbtx-eth)
         url: https://github.com/evxdev/wbtx-eth
-        tags: [ethereum, wrapped, wip]
+        tags: [ethereum, wrapped, testnet]
         description:
-          en: Wrapped BTX on Ethereum - contracts and validator tools, work in progress.
-          de: Wrapped BTX auf Ethereum - Verträge und Validator-Werkzeuge, in Arbeit.
+          en: >-
+            Wrapped BTX on Ethereum - contracts, validator services and a local simulator, by the
+            GitHub organisation evxdev. Testnet only.
+          de: >-
+            Wrapped BTX auf Ethereum - Verträge, Validator-Dienste und ein lokaler Simulator der
+            GitHub-Organisation evxdev. Nur Testnetz.
         note:
           en: Last change 2026-07-09.
           de: Letzte Änderung 2026-07-09.
@@ -430,15 +761,25 @@ categories:
         url: https://btx.supply/
         tags: [testnet, bridge, wip]
         description:
-          en: Bridge on a testnet.
-          de: Bridge in einem Testnetz.
+          en: >-
+            Public tester site and guide of the wbtx-eth project (evxdev): a WBTX bridge on an
+            Ethereum testnet. Test tokens have no value.
+          de: >-
+            Öffentliche Testseite mit Anleitung des Projekts wbtx-eth (evxdev): eine WBTX-Bridge in
+            einem Ethereum-Testnetz. Test-Token sind nichts wert.
+        note:
+          en: Testnet only; it can be reset. Code unchanged since 2026-07-09.
+          de: Nur Testnetz; es kann zurückgesetzt werden. Code unverändert seit 2026-07-09.
       - id: robinhood
         name: Robinhood Chain testnet
         url: https://robinhood.btx.supply/
         tags: [testnet, bridge, wip]
         description:
-          en: Bridge to the Robinhood Chain testnet.
-          de: Bridge zum Testnetz der Robinhood Chain.
+          en: The same WBTX test bridge as btx.supply, on the Robinhood Chain testnet. Test tokens have no value.
+          de: Dieselbe WBTX-Test-Bridge wie btx.supply, im Testnetz der Robinhood Chain. Test-Token sind nichts wert.
+        note:
+          en: Testnet only; it can be reset. Code unchanged since 2026-07-09.
+          de: Nur Testnetz; es kann zurückgesetzt werden. Code unverändert seit 2026-07-09.
 
   - id: exchanges
     title: { en: Exchanges, de: Börsen }
@@ -558,3 +899,11 @@ removed:
     reason:
       en: The BTX page no longer exists (404, 2026-11-03).
       de: Die BTX-Seite gibt es nicht mehr (404, 2026-11-03).
+  - name: Byron Pool (btxbyronbay.com)
+    reason:
+      en: >-
+        Paused by its operator since September 2026; no blocks among the last 1,000
+        (2026-11-12). The first light explorer of the same team stays listed.
+      de: >-
+        Seit September 2026 vom Betreiber pausiert; keine Blöcke unter den letzten 1.000
+        (2026-11-12). Der Explorer first light desselben Teams bleibt gelistet.

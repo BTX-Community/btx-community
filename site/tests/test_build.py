@@ -18,33 +18,65 @@ class ContentTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "site"
             build.build(out, "test")
-            english = (out / "index.html").read_text(encoding="utf-8")
-            german = (out / "de" / "index.html").read_text(encoding="utf-8")
+
+            def read(lang: str, page: str) -> str:
+                return (out / build.page_path(lang, page).strip("/") / "index.html").read_text(encoding="utf-8")
+
+            english = read("en", "home")
+            german = read("de", "home")
             self.assertIn('<html lang="en">', english)
             self.assertIn('<html lang="de">', german)
             self.assertIn(build.STATUS_API, english)
-            self.assertIn(f'data-api="{build.DEVELOPMENT_API}"', english)
-            self.assertIn(f'data-repo="{build.UPSTREAM_REPO}"', german)
-            self.assertRegex(english, r'<section class="c-live c-dev"[^>]* id="development" hidden')
             self.assertRegex(english, r'<script src="/static/js/community\.js\?v=[0-9a-f]{12}" defer>')
             self.assertRegex(english, r'href="/static/css/community\.css\?v=[0-9a-f]{12}"')
             self.assertTrue((out / "static" / "css" / "community.css").is_file())
             self.assertTrue((out / "static" / "fonts" / "InterVariable.woff2").is_file())
-            for section in (
-                'id="about"',
-                'id="next"',
-                'id="check"',
-                'id="documents"',
-                'id="doc-venue-structure"',
-                'data-live="fork"',
-                'data-live="supply"',
-            ):
-                self.assertIn(section, english)
-                self.assertIn(section, german)
+            # Each section lives on exactly one page, in both languages.
+            expected = {
+                "home": ('id="start"', 'id="check"', 'data-live="fork"', 'href="{links}#cat-'),
+                "learn": ('id="about"', 'id="next"'),
+                "network": ('data-live="supply"', 'data-live="fork"', 'id="development" hidden',
+                            f'data-api="{build.DEVELOPMENT_API}"', f'data-repo="{build.UPSTREAM_REPO}"'),
+                "links": ('id="links"', 'id="cat-'),
+                "docs": ('id="documents"', 'id="doc-venue-structure"'),
+            }
+            for lang in build.LANGUAGES:
+                for page, needles in expected.items():
+                    html = read(lang, page)
+                    self.assertIn('aria-current="page"', html)
+                    for needle in needles:
+                        self.assertIn(needle.format(links=build.page_path(lang, "links")), html, (lang, page))
+                    for other in build.PAGES:
+                        self.assertIn(f'href="{build.page_path(lang, other)}"', html)
+                    for code in build.LANGUAGES:
+                        tag = build.HTML_LANG.get(code, code)
+                        self.assertIn(f'href="{build.page_path(code, page)}" hreflang="{tag}"', html)
+            self.assertNotIn('data-live="supply"', english)
+            self.assertNotIn('id="development"', english)
+            self.assertIn('href="/de/links/"', read("en", "links").split('class="c-lang"')[1])
+            chinese = read("zh", "learn")
+            self.assertIn('<html lang="zh-Hans">', chinese)
+            self.assertIn("固定供应量", chinese)
+            self.assertIn("translations/zh.yaml", chinese)
+            self.assertNotIn("translations/", english)
 
-    def test_texts_have_the_same_keys_in_both_languages(self) -> None:
+    def test_every_content_text_is_translated(self) -> None:
+        page = build.load_community(build.ROOT / "content" / "community.yaml")
+        guide = build.load_guide(build.ROOT / "content" / "guide.yaml")
         texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
-        self.assertEqual(set(texts["en"]), set(texts["de"]))
+        for lang in build.TRANSLATED:
+            table = build.load_translations(build.ROOT / "content" / "translations" / f"{lang}.yaml", lang)
+            say = build.Localizer(lang, table)
+            for page_id in build.PAGES:
+                build.context(page, guide, texts, lang, "test", page_id, say)
+            with self.subTest(lang=lang):
+                self.assertEqual(say.missing, set())
+                self.assertEqual(set(table) - say.used, set())
+
+    def test_texts_have_the_same_keys_in_every_language(self) -> None:
+        texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
+        for lang in build.LANGUAGES:
+            self.assertEqual(set(texts["en"]), set(texts[lang]), lang)
 
 
 class RulesTest(unittest.TestCase):
@@ -71,6 +103,25 @@ class RulesTest(unittest.TestCase):
         path = self._write("en:\n  title: A\n  extra: B\nde:\n  title: C\n")
         with self.assertRaises(build.ContentError):
             build.load_texts(path)
+
+    def test_broken_translation_files_are_rejected(self) -> None:
+        for text in (
+            "translations: []\n",
+            "schema_version: 1\ntranslations: {}\n",
+            "schema_version: 1\ntranslations:\n- en: A\n",
+            "schema_version: 1\ntranslations:\n- en: A\n  fr: B\n",
+            "schema_version: 1\ntranslations:\n- en: A\n  es: ''\n",
+            "schema_version: 1\ntranslations:\n- en: A\n  es: B\n- en: A\n  es: C\n",
+            f"schema_version: 1\ntranslations:\n- en: A\n  es: {'x' * 401}\n",
+        ):
+            with self.subTest(text=text[:60]), self.assertRaises(build.ContentError):
+                build.load_translations(self._write(text), "es")
+
+    def test_a_missing_translation_shows_english(self) -> None:
+        say = build.Localizer("es", {"Hello": "Hola"})
+        self.assertEqual(say(build.Text(en="Hello", de="Hallo")), "Hola")
+        self.assertEqual(say(build.Text(en="New", de="Neu")), "New")
+        self.assertEqual(say.missing, {"New"})
 
     def test_guide_sources_must_be_plain_https(self) -> None:
         text = {"en": "a", "de": "b"}
