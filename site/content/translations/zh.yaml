@@ -5,6 +5,250 @@
 
 schema_version: 1
 translations:
+- en: >-
+    A .btxwallet file holds the post-quantum seed in plain text. Treat it like a private key and
+    delete temporary copies.
+  zh: .btxwallet 文件以明文保存后量子助记词。请像对待私钥一样对待它，并删除临时副本。
+- en: >-
+    A default build has no GPU support and cannot check MatMul blocks itself: add CUDA, or run it as
+    a trusted mirror. On Ubuntu 22.04 or 24.04 add -DWITH_MODELNET=OFF, unless you install OpenSSL
+    3.5 or newer.
+  zh: >-
+    默认构建不支持 GPU，无法自行验证 MatMul 区块：请启用 CUDA，或将其作为受信任镜像运行。在 Ubuntu 22.04 或 24.04 上请添加
+    -DWITH_MODELNET=OFF，除非你安装 OpenSSL 3.5 或更新版本。
+- en: >-
+    Back up the whole wallet with backupwalletbundlearchive (one passphrase-encrypted file; see
+    doc/managing-wallets.md), not only the seed. A .btxwallet export holds the seed in plain text.
+  zh: >-
+    用 backupwalletbundlearchive 备份整个钱包（一个用密码短语加密的文件；见 doc/managing-wallets.md），而不只是助记词。.btxwallet
+    导出文件以明文保存助记词。
+- en: >-
+    Block explorer of the easyBTX team for blocks, transactions and addresses, with a public API
+    (api.btxscan.io).
+  zh: easyBTX 团队的区块浏览器，可查询区块、交易和地址，提供公开 API（api.btxscan.io）。
+- en: Block explorer run by the ninjaraider pool, with a JSON API for addresses and blocks.
+  zh: 由 ninjaraider 矿池运营的区块浏览器，提供地址和区块的 JSON API。
+- en: >-
+    Catch up in minutes with a daily signed snapshot. A sync from genesis currently stops at block
+    126,978 (issue #272).
+  zh: >-
+    使用每日签名快照，几分钟内追上进度。从创世区块开始的同步目前会停在区块 126,978（issue #272）。
+- en: Closed source (stated in its README). 2% dev fee on BTX.
+  zh: 闭源（其 README 中写明）。挖 BTX 时收取 2% 的开发者费用。
+- en: >-
+    Closed source; the builds are unsigned, so check the SHA-256 on the release page. It starts on
+    BTX Pool by default. A 5% dev fee was listed for it in August 2026; check the current fee in the
+    app.
+  zh: 闭源；构建版本未签名，因此请核对发布页面上的 SHA-256。它默认在 BTX Pool 上开始挖矿。2026 年 8 月时，其开发者费用被列为 5%；请在应用中查看当前费率。
+- en: Community Discord, open to everyone, including mining help.
+  zh: 社区 Discord，对所有人开放，包括挖矿帮助。
+- en: Community status page - is the network healthy, with history, node help and a public JSON API.
+  zh: 社区状态页：网络是否健康，附历史记录、节点帮助和公开 JSON API。
+- en: >-
+    Community-run account on X, not the developers'. It posted release notes and network news in
+    August and September 2026.
+  zh: 社区运营的 X 账号，不是开发者的账号。它在 2026 年 8 月和 9 月发过发布说明和网络新闻。
+- en: >-
+    Daily pruned datadir snapshot, checked and signed by a second node. Built on a trusted mirror,
+    so the MatMul work was accepted on signers' attestations.
+  zh: 每日修剪后的数据目录快照，由第二个节点核验并签名。由受信任镜像生成，因此其中的 MatMul 工作是依据签名者的证明而被接受的。
+- en: >-
+    Early test build: internal security review, no independent audit; the source code is not public
+    and the direct downloads are unsigned. A 64-character master key is the only backup; keep it
+    offline.
+  zh: 早期测试版本：经过内部安全审查，没有独立审计；源代码未公开，直接下载的文件未签名。一个 64 字符的主密钥是唯一的备份；请离线保管。
+- en: >-
+    Every node relays blocks and keeps the network reachable. A node checks every block itself only
+    with a GPU that passes btxd's self-test. Without one, run it as a trusted mirror that follows
+    signed checks from at least two signers; otherwise it stops syncing. Signers have the highest
+    requirements.
+  zh: >-
+    每个节点都会转发区块，让网络保持可达。只有配备通过 btxd 自检的 GPU，节点才会自行验证每个区块。没有这样的
+    GPU，就把它作为受信任镜像运行，跟随至少两个签名者签署的验证结果；否则它会停止同步。签名者的要求最高。
+- en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages and a public API.
+  zh: Byron Bay 团队的区块浏览器，带 24 小时挖矿视图、统计页面和公开 API。
+- en: How to report a vulnerability privately to the BTX Development Team. Not for support questions.
+  zh: 如何私下向 BTX 开发团队报告漏洞。不用于技术支持问题。
+- en: >-
+    Its backup file (.btxwallet) holds the seed in plain text. Keep it offline and never send it to
+    anyone.
+  zh: 它的备份文件（.btxwallet）以明文保存助记词。请离线保管，绝不要发送给任何人。
+- en: >-
+    Last change 2026-08-21. The quick start in its README contains a sample payout address and two
+    offline pools (minebtx, Byron); replace all three. 1% dev fee in pool mode; it updates itself
+    unless started with --no-auto-update. NVIDIA Ampere (RTX 30 series) or newer only.
+  zh: >-
+    最后更新于 2026-08-21。其 README 中的快速入门包含一个示例收款地址和两个已下线的矿池（minebtx、Byron）；三者都要替换。矿池模式下收取 1% 的开发者费用；除非用
+    --no-auto-update 启动，否则它会自动更新。仅支持 NVIDIA Ampere（RTX 30 系列）或更新的显卡。
+- en: Last updated for v0.33.2 (August 2026); newer releases are on the GitHub releases page.
+  zh: 最后针对 v0.33.2（2026 年 8 月）更新；较新的版本见 GitHub 发布页面。
+- en: >-
+    MIT-licensed; this repository holds only the downloads and release notes. Compare the SHA-256
+    listed with each release.
+  zh: 采用 MIT 许可证；此仓库只包含下载文件和发布说明。请比对每个版本附带列出的 SHA-256。
+- en: >-
+    Mac app (Apple Silicon, macOS 13 or later) of the easyBTX team that fetches open AI models over
+    the BTX model network and runs them on your Mac. It only downloads; it never serves, pays or
+    earns.
+  zh: >-
+    easyBTX 团队的 Mac 应用（Apple Silicon，macOS 13 或更高版本），通过 BTX 模型网络获取开放的 AI 模型，并在你的 Mac
+    上运行。它只下载；从不对外提供模型，也不付款或赚取收益。
+- en: Miners log in as ADDRESS.worker; nekominer documents this and charges no dev fee on this pool.
+  zh: 矿工以 ADDRESS.worker 的形式登录；nekominer 对此有说明，并且在这个矿池上不收取开发者费用。
+- en: >-
+    Mining needs a qualified GPU and a node that checks blocks itself (matmulvalidation=consensus,
+    the default), not a trusted mirror. See the GPU operator runbook.
+  zh: 挖矿需要一块合格的 GPU 和一个自行验证区块的节点（matmulvalidation=consensus，即默认值），而不是受信任镜像。参见 GPU 运维手册。
+- en: >-
+    Multi-coin GPU miner with BTX support (MatMul v4.7 since version 1.6.0); its BTX example uses
+    BTX Pool. BTX mines on NVIDIA cards only.
+  zh: 支持 BTX 的多币种 GPU 挖矿软件（自 1.6.0 版起支持 MatMul v4.7）；其 BTX 示例使用 BTX Pool。挖 BTX 仅支持 NVIDIA 显卡。
+- en: >-
+    NVIDIA (CUDA) miner for several coins; BTX runs as algorithm btxv4, the proof-of-work since
+    block 185,000. Its README has commands for ninjaraider and BTX Pool.
+  zh: >-
+    适用于多种币的 NVIDIA（CUDA）挖矿软件；BTX 对应算法 btxv4，即自区块 185,000 起的工作量证明。其 README 提供了用于 ninjaraider 和 BTX
+    Pool 的命令。
+- en: No change to the miner since 2026-08-21.
+  zh: 该挖矿软件自 2026-08-21 以来没有任何更改。
+- en: Not launched. Its launch checklist is still open and the reference contracts are unaudited.
+  zh: 尚未上线。其上线检查清单仍未完成，参考合约也未经审计。
+- en: >-
+    Official explanation of why a node needs a qualified GPU to check blocks itself since block
+    185,000, and what machines without one can do.
+  zh: 官方说明：为什么自区块 185,000 起节点需要合格的 GPU 才能自行验证区块，以及没有合格 GPU 的机器能做什么。
+- en: >-
+    Official guide to moving a btx.dev browser wallet into btxd and back, and how that file differs
+    from an encrypted node backup.
+  zh: 官方指南：如何在 btx.dev 浏览器钱包和 btxd 之间双向迁移，以及该文件与加密的节点备份有何不同。
+- en: >-
+    Official guide to wallet roles, multisig, timelocked recovery, watch-only setups and encrypted
+    backups, with a restore drill.
+  zh: 官方指南：钱包角色、多签、时间锁恢复、仅观察（watch-only）设置和加密备份，附恢复演练。
+- en: >-
+    Official integration profile for exchanges and custodians: UTXO model, watch-only setup,
+    deposits, confirmations and reorg handling.
+  zh: 面向交易所和托管方的官方集成概要：UTXO 模型、仅观察（watch-only）设置、充值、确认数和重组处理。
+- en: >-
+    Official scripts for solo mining against your own btxd: a health-aware mining loop, start and
+    stop scripts and a wallet backup. For larger setups the README points to getblocktemplate with
+    external miners.
+  zh: >-
+    连接你自己的 btxd 单独挖矿的官方脚本：一个感知健康状态的挖矿循环、启动和停止脚本，以及钱包备份。对于更大规模的部署，README 指向 getblocktemplate
+    配合外部挖矿软件的用法。
+- en: Official step-by-step guide to building btxd and btx-cli on Windows 11.
+  zh: 在 Windows 11 上编译 btxd 和 btx-cli 的官方分步指南。
+- en: Official website with documentation, the browser wallet and the whitepaper.
+  zh: 官方网站，含文档、浏览器钱包和白皮书。
+- en: >-
+    On a server - the official release for Linux needs glibc 2.38 or newer (Ubuntu 24.04, Debian
+    13); a GPU node takes the -cuda13 archive (Blackwell cards). The v0.34.16 pre-release has no
+    CUDA build, so GPU nodes stay on v0.34.15. The current release has no official Windows archive.
+  zh: >-
+    在服务器上：官方 Linux 版本需要 glibc 2.38 或更新版本（Ubuntu 24.04、Debian 13）；GPU 节点使用 -cuda13 压缩包（Blackwell
+    显卡）。v0.34.16 预发布版没有 CUDA 构建，因此 GPU 节点继续使用 v0.34.15。当前正式版没有官方 Windows 压缩包。
+- en: >-
+    On mainnet it needs at least two pinned signers and a threshold of two. Pin only signers that
+    are live today.
+  zh: 在主网上，它需要至少两个固定的签名者，且阈值为 2。只固定目前仍在运行的签名者。
+- en: >-
+    One-click miner app with a self-custodial wallet built in, for Apple Silicon Macs and Linux (on
+    Windows through WSL).
+  zh: 一键挖矿应用，内置自托管钱包，适用于 Apple Silicon Mac 和 Linux（在 Windows 上通过 WSL）。
+- en: >-
+    Open-source (MIT) desktop app of the easyBTX team that installs and supervises btxd on the
+    machine you already own.
+  zh: easyBTX 团队的开源（MIT）桌面应用，在你现有的电脑上安装并监管 btxd。
+- en: >-
+    Paused by its operator since September 2026; no blocks among the last 1,000 (2026-11-12). The
+    first light explorer of the same team stays listed.
+  zh: 自 2026 年 9 月起被其运营者暂停；最近 1,000 个区块中没有它找到的区块（2026-11-12）。同一团队的 first light 区块浏览器仍保留在列表中。
+- en: >-
+    Pick a miner from our link list - for example easyBTX (an app for Mac and Linux; on Windows
+    through WSL) or matador (open source).
+  zh: 从我们的链接列表中选择挖矿软件：例如 easyBTX（适用于 Mac 和 Linux 的应用；在 Windows 上通过 WSL）或 matador（开源）。
+- en: >-
+    Pool dedicated to BTX, run by the author of btx-pool-miner (GitHub lucasan123). It pays miners
+    inside each block it finds, split by work over a 30-minute window. Check its fee on the pool
+    page.
+  zh: >-
+    专门的 BTX 矿池，由 btx-pool-miner 的作者（GitHub lucasan123）运营。它在找到的每个区块内直接向矿工付款，按 30
+    分钟窗口内的工作量分配。请在矿池页面查看其费率。
+- en: Post-quantum desktop wallet of the easyBTX team for macOS and Windows.
+  zh: easyBTX 团队的后量子桌面钱包，适用于 macOS 和 Windows。
+- en: >-
+    Problems with an NVIDIA card? The official CUDA troubleshooting guide helps; parts of it
+    describe the CUDA path from before block 185,000.
+  zh: NVIDIA 显卡有问题？官方 CUDA 故障排除指南可以帮忙；其中部分内容描述的是区块 185,000 之前的 CUDA 路径。
+- en: >-
+    Public tester site and guide of the wbtx-eth project (evxdev): a WBTX bridge on an Ethereum
+    testnet. Test tokens have no value.
+  zh: wbtx-eth 项目（evxdev）面向测试者的公开网站和指南：以太坊测试网上的 WBTX 跨链桥。测试代币没有价值。
+- en: >-
+    Read the official introduction and documentation. It was written for v0.33.2; newer releases
+    differ in places.
+  zh: 阅读官方介绍和文档。它针对 v0.33.2 编写；较新版本在部分地方有所不同。
+- en: Run by the vendor of those apps.
+  zh: 由这些应用的厂商运营。
+- en: >-
+    Runs v0.34.15 without the model network. Without a qualified GPU the node follows signers'
+    checks instead of checking the MatMul work itself.
+  zh: 运行 v0.34.15，不含模型网络。没有合格的 GPU 时，节点跟随签名者的验证结果，而不是自行验证 MatMul 工作。
+- en: >-
+    Seedless means there is no seed phrase you back up yourself; access and recovery go through the
+    Bonuz login. Check how recovery works before you rely on it.
+  zh: 无助记词指没有需要你自己备份的助记词；访问和恢复都通过 Bonuz 登录完成。在依赖它之前，先弄清恢复是如何进行的。
+- en: Seedless mobile wallet for iOS and Android with BTX support.
+  zh: 支持 BTX 的无助记词移动钱包，适用于 iOS 和 Android。
+- en: >-
+    Signers (GPU attestors) need a GPU that passes btxd's self-test and must stay online. The
+    official CUDA archive covers Blackwell cards (sm_120); other NVIDIA cards need a build from
+    source and may not qualify. Follow the developers' operator runbook.
+  zh: >-
+    签名者（GPU 证明者）需要一块通过 btxd 自检的 GPU，并且必须保持在线。官方 CUDA 压缩包支持 Blackwell 显卡（sm_120）；其他 NVIDIA
+    显卡需要从源代码编译，而且可能不合格。请遵循开发者的运维手册。
+- en: Some API endpoints need an access token.
+  zh: 部分 API 端点需要访问令牌。
+- en: Telegram group of the easyBTX team, for questions about its miner, node app and wallet.
+  zh: easyBTX 团队的 Telegram 群组，用于咨询其挖矿软件、节点应用和钱包。
+- en: Testnet only; it can be reset. Code unchanged since 2026-07-09.
+  zh: 仅限测试网；可能会被重置。代码自 2026-07-09 以来未更改。
+- en: >-
+    The current release has no official Windows archive. The handbook starts without CUDA, and such
+    a build cannot check MatMul blocks itself: run it as a trusted mirror.
+  zh: 当前正式版没有官方 Windows 压缩包。该手册从不带 CUDA 的构建开始，这样的构建无法自行验证 MatMul 区块：请将其作为受信任镜像运行。
+- en: >-
+    The developers' design for wrapped BTX on EVM chains: token rules, bridge models and reference
+    contracts. A design, not a working bridge.
+  zh: 开发者关于 EVM 链上封装 BTX 的设计：代币规则、跨链桥模型和参考合约。这是一份设计，不是可用的跨链桥。
+- en: >-
+    The file is marked historical: it records the v3 design. Since block 185,000 the network runs
+    MatMul v4.7.
+  zh: 该文件被标记为历史文档：它记录的是 v3 设计。自区块 185,000 起，网络运行 MatMul v4.7。
+- en: >-
+    The miner's source is not published: the repository holds scripts and binary releases, with no
+    licence. 2% dev fee, 0% on ninjaraider.
+  zh: 该挖矿软件的源代码未公开：仓库包含脚本和二进制版本，没有许可证。开发者费用为 2%，在 ninjaraider 上为 0%。
+- en: >-
+    The same WBTX test bridge as btx.supply, on the Robinhood Chain testnet. Test tokens have no
+    value.
+  zh: 与 btx.supply 相同的 WBTX 测试跨链桥，位于 Robinhood Chain 测试网上。测试代币没有价值。
+- en: >-
+    The wallet in the official releases for Linux and macOS: the desktop app btx-qt, or btxd with
+    btx-cli. Open source; it runs on your own node.
+  zh: Linux 和 macOS 官方版本中自带的钱包：桌面应用 btx-qt，或 btxd 配合 btx-cli。开源；它运行在你自己的节点上。
+- en: Verification gate; clearing it lets you into the main BTX Telegram groups.
+  zh: 验证入口；通过验证后即可进入 BTX 的主要 Telegram 群组。
+- en: Verify the signature and SHA-256 before use. Not for signers.
+  zh: 使用前请核验签名和 SHA-256。不适用于签名者。
+- en: >-
+    Wrapped BTX on Ethereum - contracts, validator services and a local simulator, by the GitHub
+    organisation evxdev. Testnet only.
+  zh: 以太坊上的封装 BTX：合约、验证者服务和本地模拟器，由 GitHub 组织 evxdev 开发。仅限测试网。
+- en: >-
+    matador's quick start contains a sample payout address that is not yours and two pools that are
+    offline. Always put in your own btx1z address and a pool from our link list.
+  zh: matador 的快速入门包含一个不属于你的示例收款地址，以及两个已下线的矿池。务必填入你自己的 btx1z 地址和我们链接列表中的矿池。
 - en: Fixed supply
   zh: 固定供应量
 - en: >-
@@ -128,8 +372,6 @@ translations:
     BTX is a post-quantum fork of Bitcoin with a fixed maximum supply and its own proof-of-work (MatMul).
     It is run by an open community, not by a company.
   zh: BTX 是比特币的后量子分叉，拥有固定的最大供应量和自己的工作量证明（MatMul）。它由开放的社区维护，而非公司。
-- en: Read the official introduction and documentation.
-  zh: 阅读官方介绍和文档。
 - en: See how the network is doing right now, in plain terms.
   zh: 用通俗的方式查看网络当前的运行情况。
 - en: Ask questions in the community chats (Discord, Telegram).
@@ -145,48 +387,19 @@ translations:
     for steadier payouts.
   zh: 挖矿需要一块 GPU。你可以连接自己的节点单独挖矿并保留每个区块，也可以加入矿池以获得更稳定的收益。
 - en: >-
-    Pick a miner - easyBTX (one app for Mac, Windows, Linux) or matador (open source).
-  zh: 选择挖矿软件：easyBTX（适用于 Mac、Windows、Linux 的一体化应用）或 matador（开源）。
-- en: >-
     Prefer a smaller pool. When one pool finds most blocks, the network depends on it; the status
     page shows the current shares.
   zh: 优先选择较小的矿池。当一个矿池找到大多数区块时，网络就依赖于它；状态页显示当前各矿池的份额。
-- en: >-
-    matador's examples still name the minebtx pool, which is offline. Use a pool from our link list
-    instead.
-  zh: matador 的示例仍写着 minebtx 矿池，但它已下线。请改用我们链接列表中的矿池。
-- en: Problems with an NVIDIA card? The official CUDA troubleshooting guide helps.
-  zh: NVIDIA 显卡有问题？官方 CUDA 故障排除指南可以帮忙。
 - en: Running a node
   zh: 运行节点
-- en: >-
-    Every node checks the chain for itself and makes the network harder to fool. A home computer is
-    enough; signers have much higher requirements.
-  zh: 每个节点都会自行验证区块链，让网络更难被欺骗。家用电脑就够了；签名者的要求则高得多。
 - en: Easiest start at home - easynode installs and supervises btxd for you.
   zh: 在家最简单的开始方式：easynode 帮你安装并监管 btxd。
-- en: >-
-    On a server - the official release for Linux needs glibc 2.38 or newer (Ubuntu 24.04, Debian 13).
-  zh: 在服务器上：官方 Linux 版本需要 glibc 2.38 或更新版本（Ubuntu 24.04、Debian 13）。
-- en: >-
-    Catch up in minutes with a daily signed snapshot instead of syncing from genesis.
-  zh: 使用每日签名快照，几分钟内追上进度，而不必从创世区块开始同步。
 - en: Node stuck at a height? The node help explains each known case and its fix.
   zh: 节点卡在某个高度？节点帮助页面解释了每种已知情况及其解决方法。
-- en: >-
-    Signers (GPU attestors) need an NVIDIA Blackwell card (sm_120) and must follow the developers'
-    operator runbook.
-  zh: 签名者（GPU 证明者）需要 NVIDIA Blackwell 显卡（sm_120），并须遵循开发者的运维手册。
 - en: Community
   zh: 社区
-- en: Main community server, including mining help.
-  zh: 社区主服务器，包括挖矿帮助。
-- en: Telegram group of the community.
-  zh: 社区的 Telegram 群组。
 - en: Community account on X.
   zh: 社区在 X 上的账号。
-- en: Chain account on X.
-  zh: 链在 X 上的账号。
 - en: Russian-speaking mining chat with a BTX topic.
   zh: 俄语挖矿聊天群，设有 BTX 话题。
 - en: Telegram chat of the matador miner.
@@ -195,8 +408,6 @@ translations:
   zh: easyBTX 团队的门户：浏览器、钱包、挖矿和新闻集于一处。
 - en: Official
   zh: 官方
-- en: Official website and documentation of BTX.
-  zh: BTX 官方网站和文档。
 - en: Source code and releases of the reference node (btxd).
   zh: 参考节点（btxd）的源代码和版本发布。
 - en: The official whitepaper, describing what BTX is and why.
@@ -219,12 +430,6 @@ translations:
   zh: 在没有合格 GPU 的情况下，通过信任签名者的重放证明来运行节点，以及这种信任意味着什么。
 - en: Network and explorers
   zh: 网络与区块浏览器
-- en: Community status page - is the network healthy, with history and node help.
-  zh: 社区状态页：网络是否健康，附历史记录和节点帮助。
-- en: Block explorer for blocks, transactions and addresses.
-  zh: 区块、交易和地址的区块浏览器。
-- en: Explorer of the Byron Bay team, with a 24 h mining view.
-  zh: Byron Bay 团队的区块浏览器，带 24 小时挖矿视图。
 - en: Node census and signer witness of the easyBTX team.
   zh: easyBTX 团队的节点统计和签名者见证。
 - en: Supply, holders and rich list.
@@ -237,30 +442,16 @@ translations:
   zh: 矿池
 - en: Multi-coin pool with BTX. Check its fee on the pool page.
   zh: 支持 BTX 的多币种矿池。请在矿池页面查看其费率。
-- en: Pool dedicated to BTX. Check its fee on the pool page.
-  zh: 专门的 BTX 矿池。请在矿池页面查看其费率。
-- en: PPLNS pool of the Byron Bay team (Australia).
-  zh: Byron Bay 团队的 PPLNS 矿池（澳大利亚）。
-- en: The website answered "503 unavailable" on 2026-11-03.
-  zh: 该网站于 2026-11-03 返回 “503 unavailable”。
 - en: Miners
   zh: 挖矿软件
-- en: One-click miner app with a self-custodial wallet built in.
-  zh: 一键挖矿应用，内置自托管钱包。
 - en: Open-source GPU miner (NVIDIA, CUDA), solo against your own node or in a pool.
   zh: 开源 GPU 挖矿软件（NVIDIA、CUDA），可连接自己的节点单独挖矿，也可加入矿池。
-- en: Last change 2026-08-21; its pool examples still name the offline minebtx pool.
-  zh: 最后更新于 2026-08-21；其矿池示例仍写着已下线的 minebtx 矿池。
 - en: Node tools
   zh: 节点工具
-- en: Desktop app that installs and supervises btxd on the machine you already own.
-  zh: 在你现有的电脑上安装并监管 btxd 的桌面应用。
 - en: >-
     Free script that tells a waiting network from a stuck node and dials helpful peers. It never restarts
     the node.
   zh: 免费脚本，可区分是网络在等待还是节点卡住，并连接有用的节点。它从不重启节点。
-- en: Daily datadir snapshot, checked and signed by a second node.
-  zh: 每日数据目录快照，由第二个节点核验并签名。
 - en: Known stuck heights with their cause and fix.
   zh: 已知的卡住高度，以及原因和解决方法。
 - en: Wallets
@@ -271,24 +462,14 @@ translations:
   zh: 未经我们审计。只从这里的链接安装钱包，离线保管助记词，绝不在网站上输入。
 - en: Official post-quantum wallet in the browser.
   zh: 官方浏览器后量子钱包。
-- en: Desktop wallet of the easyBTX team.
-  zh: easyBTX 团队的桌面钱包。
-- en: Seedless iOS wallet with BTX support.
-  zh: 支持 BTX 的无助记词 iOS 钱包。
 - en: Bridges and testnets
   zh: 跨链桥和测试网
 - en: >-
     Experimental and not audited by us. Bridges can lose funds; do not send more than you can afford
     to lose.
   zh: 处于实验阶段，未经我们审计。跨链桥可能导致资金损失；不要发送超出你能承受损失的金额。
-- en: Wrapped BTX on Ethereum - contracts and validator tools, work in progress.
-  zh: 以太坊上的封装 BTX：合约和验证者工具，仍在开发中。
 - en: Last change 2026-07-09.
   zh: 最后更新于 2026-07-09。
-- en: Bridge on a testnet.
-  zh: 测试网上的跨链桥。
-- en: Bridge to the Robinhood Chain testnet.
-  zh: 通往 Robinhood Chain 测试网的跨链桥。
 - en: Exchanges
   zh: 交易所
 - en: >-
