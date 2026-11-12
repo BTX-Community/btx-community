@@ -1,5 +1,6 @@
-# Fixed texts of btx-community.com, English (default) and German. Both languages must have the
-# same keys; site/build.py refuses the file otherwise. Placeholders in braces ({count}, {date},
+# Fixed texts of btx-community.com in every language of the site: English (default), German,
+# Spanish, French and Simplified Chinese. All languages must have the same keys; site/build.py
+# refuses the file otherwise. Placeholders in braces ({count}, {date},
 # {time}, {total}) are filled in by the page and must stay as they are.
 
 en:
@@ -78,6 +79,8 @@ en:
   page.links.lead: Projects, tools and services around BTX, each one opened and checked by hand.
   page.docs.title: Documents
   page.docs.lead: The roadmap and the research papers this group maintains in the open.
+  translation.note: This page was translated from English with AI help.
+  translation.fix: Correct the translation
   facts.title: What is BTX?
   facts.source: Source
   upcoming.title: "Coming soon: v{version}"
@@ -195,6 +198,8 @@ de:
   page.links.lead: Projekte, Werkzeuge und Dienste rund um BTX, jeder Eintrag von Hand geöffnet und geprüft.
   page.docs.title: Dokumente
   page.docs.lead: Die Roadmap und die Research-Papiere, die diese Gruppe offen pflegt.
+  translation.note: Diese Seite wurde mit KI-Hilfe aus dem Englischen übersetzt.
+  translation.fix: Übersetzung korrigieren
   facts.title: Was ist BTX?
   facts.source: Quelle
   upcoming.title: "Demnächst: v{version}"
@@ -234,3 +239,348 @@ de:
   verdict.stable: Stabil
   verdict.performant: Performant
   verdict.secure: Sicher
+
+es:
+  lang_name: Español
+  title: Comunidad BTX
+  meta_description: >-
+    Página de inicio de la comunidad BTX: información y ayuda para recién llegados, mineros y
+    operadores de nodos, con el estado de la red en directo y un directorio de enlaces revisado.
+  kicker: Punto de encuentro
+  lead: >-
+    Una página de la comunidad para todos los interesados en BTX: qué es, cómo minarlo, cómo operar
+    un nodo y dónde encontrar ayuda. La llevan miembros de la comunidad, no una empresa.
+  live.title: La red ahora
+  live.status: Estado
+  live.height: Altura de bloque
+  live.release: Última versión del nodo
+  live.on_release: Nodos con ella
+  live.interval: Tiempo medio de bloque (24 h)
+  live.signers: Firmantes activos
+  live.updated: Datos de {time}
+  live.loading: Cargando datos en directo …
+  live.stale: Los datos están desactualizados; los valores pueden ser incorrectos.
+  live.details: Página de estado completa
+  fork.title: Actualización de la red en camino
+  fork.lead: >-
+    Las reglas cambian en el bloque indicado abajo. Antes de eso, cada nodo y cada minero necesita
+    una versión que conozca el cambio; si no, deja de seguir a la red.
+  fork.row: "{name}: bloque {height}, faltan {remaining} bloques (unos {time})"
+  fork.releases: Versiones y notas de versión
+  numbers.title: BTX en cifras
+  numbers.supply: Minado hasta ahora
+  numbers.supply_of: "{pct} % de 21 millones"
+  numbers.reward: Recompensa por bloque
+  numbers.halving: Próximo halving
+  numbers.blocks: "{count} bloques"
+  numbers.about: "unos {time}"
+  numbers.tx: Transacciones (24 h)
+  numbers.size: Tamaño de la cadena
+  dev.title: Desarrollo del software del nodo
+  dev.source: btxchain/btx en GitHub
+  dev.lead: >-
+    Commits y pull requests en btxchain/btx, la implementación de referencia del nodo BTX. GitHub
+    abre el repositorio en main, la rama por defecto; las demás filas son las ramas con los
+    commits más recientes.
+  dev.stale: Esta medición tiene más de tres horas; las cifras pueden estar desactualizadas.
+  dev.branch: Rama
+  dev.last_commit: Último commit
+  dev.commits: Commits, 30 días
+  dev.default: rama por defecto
+  dev.today: hoy
+  dev.day: hace 1 día
+  dev.days: "hace {count} días"
+  dev.note: >-
+    Los commits se cuentan por rama según su fecha, como máximo 100 por rama (se muestra 100+).
+    Un commit que está en varias ramas cuenta en cada una de ellas.
+  dev.pulls: Pull requests actualizados, 7 días
+  dev.release: Última versión
+  dev.prerelease: Versión preliminar más reciente
+  dev.measured: "Medido en GitHub el {time}, cada hora."
+  skip: Ir al contenido
+  nav.label: Páginas
+  lang.label: Idioma
+  nav.home: Inicio
+  nav.learn: Aprender
+  nav.network: Red
+  nav.links: Enlaces
+  nav.docs: Documentos
+  live.more: BTX en cifras y actividad de desarrollo
+  page.learn.title: Conocer BTX
+  page.learn.lead: Qué es BTX y qué trae la próxima versión.
+  page.network.title: Red y desarrollo
+  page.network.lead: >-
+    El estado de la red en directo desde la API pública de estado, y el desarrollo del software
+    del nodo medido en GitHub.
+  page.links.title: Enlaces
+  page.links.lead: Proyectos, herramientas y servicios en torno a BTX, cada uno abierto y revisado a mano.
+  page.docs.title: Documentos
+  page.docs.lead: La hoja de ruta y los documentos de investigación que este grupo mantiene en abierto.
+  translation.note: Esta página se tradujo del inglés con ayuda de IA.
+  translation.fix: Corregir la traducción
+  facts.title: ¿Qué es BTX?
+  facts.source: Fuente
+  upcoming.title: "Próximamente: v{version}"
+  upcoming.checked: "Leído en la rama de desarrollo el {date}."
+  upcoming.caveats: Aún no está listo
+  upcoming.notes: Notas de versión
+  checklists.title: Comprueba primero
+  documents.title: Documentos
+  documents.lead: >-
+    Lo que esta comunidad ha puesto por escrito. Todo está en el repositorio, así que cada cambio
+    se ve como un commit y cualquiera puede corregir una cifra.
+  documents.open: Leer
+  documents.repo: Todo, incluido el código fuente de esta página
+  directory.add: ¿Falta un proyecto? Añádelo con un pull request; sin correo y sin guardianes.
+  directory.add_link: Cómo añadir un proyecto
+  on_release: "{count} de {total} nodos"
+  start.title: ¿Por dónde quieres empezar?
+  directory.title: Directorio de enlaces
+  directory.lead: "{count} enlaces, cada uno abierto y revisado el {date}."
+  jump: Ir a
+  risk: Precaución
+  note: Nota
+  removed.title: Ya no figuran
+  removed.lead: Entradas de la antigua lista btxlinks que hemos quitado, y por qué.
+  credit: Basado en btxlinks.com de vanities (licencia MIT).
+  repo: Código fuente
+  disclaimer: >-
+    Proyecto independiente de la comunidad. Los enlaces llevan a terceros; no somos responsables de
+    su contenido. Nada aquí es asesoramiento financiero.
+  overall.normal: Todo normal
+  overall.degraded: Degradado
+  overall.incident: Incidencia
+  level.green: OK
+  level.yellow: Aviso
+  level.red: Crítico
+  level.unknown: Desconocido
+  verdict.stable: Estable
+  verdict.performant: Rendimiento
+  verdict.secure: Seguro
+
+fr:
+  lang_name: Français
+  title: Communauté BTX
+  meta_description: >-
+    Page d'accueil de la communauté BTX : informations et aide pour les nouveaux venus, les mineurs
+    et les opérateurs de nœuds, avec l'état du réseau en direct et un annuaire de liens vérifié.
+  kicker: Point de rencontre
+  lead: >-
+    Une page communautaire pour toutes celles et tous ceux qui s'intéressent à BTX : ce que c'est,
+    comment le miner, comment faire tourner un nœud et où trouver de l'aide. Tenue par des membres
+    de la communauté, pas par une entreprise.
+  live.title: Le réseau en ce moment
+  live.status: État
+  live.height: Hauteur de bloc
+  live.release: Dernière version du nœud
+  live.on_release: Nœuds à jour
+  live.interval: Temps de bloc moyen (24 h)
+  live.signers: Signataires actifs
+  live.updated: Données du {time}
+  live.loading: Chargement des données en direct …
+  live.stale: Les données ne sont plus à jour ; les valeurs peuvent être fausses.
+  live.details: Page d'état complète
+  fork.title: Mise à niveau du réseau à venir
+  fork.lead: >-
+    Les règles changent au bloc indiqué ci-dessous. D'ici là, chaque nœud et chaque mineur a besoin
+    d'une version qui connaît ce changement, sinon il cesse de suivre le réseau.
+  fork.row: "{name} : bloc {height}, encore {remaining} blocs (environ {time})"
+  fork.releases: Versions et notes de version
+  numbers.title: BTX en chiffres
+  numbers.supply: Miné jusqu'ici
+  numbers.supply_of: "{pct} % de 21 millions"
+  numbers.reward: Récompense de bloc
+  numbers.halving: Prochain halving
+  numbers.blocks: "{count} blocs"
+  numbers.about: "environ {time}"
+  numbers.tx: Transactions (24 h)
+  numbers.size: Taille de la chaîne
+  dev.title: Développement du logiciel de nœud
+  dev.source: btxchain/btx sur GitHub
+  dev.lead: >-
+    Commits et pull requests dans btxchain/btx, l'implémentation de référence du nœud BTX. GitHub
+    ouvre le dépôt sur main, la branche par défaut ; les autres lignes sont les branches avec les
+    commits les plus récents.
+  dev.stale: Cette mesure date de plus de trois heures ; les chiffres peuvent être dépassés.
+  dev.branch: Branche
+  dev.last_commit: Dernier commit
+  dev.commits: Commits, 30 jours
+  dev.default: branche par défaut
+  dev.today: aujourd'hui
+  dev.day: il y a 1 jour
+  dev.days: "il y a {count} jours"
+  dev.note: >-
+    Les commits sont comptés par branche selon leur date, au plus 100 par branche (affiché 100+).
+    Un commit présent sur plusieurs branches compte pour chacune d'elles.
+  dev.pulls: Pull requests mises à jour, 7 jours
+  dev.release: Dernière version
+  dev.prerelease: Préversion plus récente
+  dev.measured: "Mesuré sur GitHub le {time}, toutes les heures."
+  skip: Aller au contenu
+  nav.label: Pages
+  lang.label: Langue
+  nav.home: Accueil
+  nav.learn: Comprendre
+  nav.network: Réseau
+  nav.links: Liens
+  nav.docs: Documents
+  live.more: BTX en chiffres et activité de développement
+  page.learn.title: Comprendre BTX
+  page.learn.lead: Ce qu'est BTX, et ce qu'apporte la prochaine version.
+  page.network.title: Réseau et développement
+  page.network.lead: >-
+    L'état du réseau en direct depuis l'API publique de statut, et le développement du logiciel de
+    nœud tel que mesuré sur GitHub.
+  page.links.title: Liens
+  page.links.lead: Projets, outils et services autour de BTX, chacun ouvert et vérifié à la main.
+  page.docs.title: Documents
+  page.docs.lead: La feuille de route et les documents de recherche que ce groupe tient à jour publiquement.
+  translation.note: Cette page a été traduite de l'anglais avec l'aide de l'IA.
+  translation.fix: Corriger la traduction
+  facts.title: Qu'est-ce que BTX ?
+  facts.source: Source
+  upcoming.title: "Bientôt : v{version}"
+  upcoming.checked: "Lu dans la branche de développement le {date}."
+  upcoming.caveats: Pas encore prêt
+  upcoming.notes: Notes de version
+  checklists.title: À vérifier d'abord
+  documents.title: Documents
+  documents.lead: >-
+    Ce que cette communauté a mis par écrit. Tout se trouve dans le dépôt : chaque modification est
+    visible comme un commit et chacun peut corriger un chiffre.
+  documents.open: Lire
+  documents.repo: Le tout, y compris le code source de cette page
+  directory.add: Un projet manque ? Ajoutez-le par une pull request ; ni e-mail ni gardien.
+  directory.add_link: Comment ajouter un projet
+  on_release: "{count} sur {total} nœuds"
+  start.title: Par où voulez-vous commencer ?
+  directory.title: Annuaire de liens
+  directory.lead: "{count} liens, chacun ouvert et vérifié le {date}."
+  jump: Aller à
+  risk: Attention
+  note: Remarque
+  removed.title: Plus listés
+  removed.lead: Entrées de l'ancienne liste btxlinks que nous avons retirées, et pourquoi.
+  credit: S'appuie sur btxlinks.com de vanities (licence MIT).
+  repo: Code source
+  disclaimer: >-
+    Projet communautaire indépendant. Les liens mènent vers des tiers ; nous ne sommes pas
+    responsables de leur contenu. Rien ici n'est un conseil financier.
+  overall.normal: Tout est normal
+  overall.degraded: Dégradé
+  overall.incident: Incident
+  level.green: OK
+  level.yellow: Avertissement
+  level.red: Critique
+  level.unknown: Inconnu
+  verdict.stable: Stable
+  verdict.performant: Performant
+  verdict.secure: Sûr
+
+zh:
+  lang_name: 中文
+  title: BTX 社区
+  meta_description: >-
+    BTX 社区首页：为新手、矿工和节点运营者提供信息与帮助，附网络实时状态和经过核实的链接目录。
+  kicker: 社区枢纽
+  lead: >-
+    一个面向所有关注 BTX 的人的社区页面：BTX 是什么、如何挖矿、如何运行节点，以及在哪里获得帮助。由社区成员运营，而非公司。
+  live.title: 网络实时状态
+  live.status: 状态
+  live.height: 区块高度
+  live.release: 最新节点版本
+  live.on_release: 运行该版本的节点
+  live.interval: 平均出块时间（24 小时）
+  live.signers: 活跃签名者
+  live.updated: 数据时间 {time}
+  live.loading: 正在加载实时数据 …
+  live.stale: 数据已过时，数值可能不准确。
+  live.details: 完整状态页
+  fork.title: 网络即将升级
+  fork.lead: >-
+    规则将在下方所示区块发生变化。在此之前，每个节点和矿工都需要一个支持此变更的版本，否则将无法继续跟随网络。
+  fork.row: "{name}：区块 {height}，还剩 {remaining} 个区块（约 {time}）"
+  fork.releases: 版本发布与发布说明
+  numbers.title: BTX 数据
+  numbers.supply: 已挖出
+  numbers.supply_of: "占 2100 万的 {pct} %"
+  numbers.reward: 区块奖励
+  numbers.halving: 下次减半
+  numbers.blocks: "{count} 个区块"
+  numbers.about: "约 {time}"
+  numbers.tx: 交易数（24 小时）
+  numbers.size: 区块链大小
+  dev.title: 节点软件的开发
+  dev.source: GitHub 上的 btxchain/btx
+  dev.lead: >-
+    btxchain/btx 中的提交和拉取请求，这是 BTX 节点的参考实现。GitHub 默认打开 main 分支；其余各行是最近有提交的分支。
+  dev.stale: 此测量已超过三小时，数据可能已过时。
+  dev.branch: 分支
+  dev.last_commit: 最近提交
+  dev.commits: 提交数（30 天）
+  dev.default: 默认分支
+  dev.today: 今天
+  dev.day: 1 天前
+  dev.days: "{count} 天前"
+  dev.note: >-
+    提交按分支和提交日期统计，每个分支最多 100 个（显示为 100+）。同时存在于多个分支的提交在每个分支中都会计入。
+  dev.pulls: 7 天内更新的拉取请求
+  dev.release: 最新正式版
+  dev.prerelease: 更新的预发布版
+  dev.measured: "于 {time} 在 GitHub 测量，每小时一次。"
+  skip: 跳到正文
+  nav.label: 页面
+  lang.label: 语言
+  nav.home: 首页
+  nav.learn: 了解
+  nav.network: 网络
+  nav.links: 链接
+  nav.docs: 文档
+  live.more: BTX 数据与开发活动
+  page.learn.title: 了解 BTX
+  page.learn.lead: BTX 是什么，以及下一个版本会带来什么。
+  page.network.title: 网络与开发
+  page.network.lead: 来自公开状态 API 的网络实时状态，以及在 GitHub 上测量的节点软件开发情况。
+  page.links.title: 链接
+  page.links.lead: 围绕 BTX 的项目、工具和服务，每一项都经人工打开并核实。
+  page.docs.title: 文档
+  page.docs.lead: 本小组公开维护的路线图和研究文档。
+  translation.note: 本页由英文借助 AI 翻译。
+  translation.fix: 修正翻译
+  facts.title: BTX 是什么？
+  facts.source: 来源
+  upcoming.title: "即将推出：v{version}"
+  upcoming.checked: "于 {date} 从开发分支读取。"
+  upcoming.caveats: 尚未就绪
+  upcoming.notes: 发布说明
+  checklists.title: 先检查
+  documents.title: 文档
+  documents.lead: >-
+    这个社区写下的内容。所有文档都在代码仓库中，因此每次修改都以提交的形式可见，任何人都可以更正数字。
+  documents.open: 阅读
+  documents.repo: 全部内容，包括本页的源代码
+  directory.add: 缺少某个项目？通过拉取请求添加即可，无需邮件，也没有把关人。
+  directory.add_link: 如何添加项目
+  on_release: "{total} 个节点中的 {count} 个"
+  start.title: 你想从哪里开始？
+  directory.title: 链接目录
+  directory.lead: "共 {count} 个链接，每个都已于 {date} 打开并核实。"
+  jump: 跳转到
+  risk: 注意
+  note: 备注
+  removed.title: 已不再收录
+  removed.lead: 我们从旧的 btxlinks 列表中移除的条目及原因。
+  credit: 基于 vanities 的 btxlinks.com（MIT 许可证）。
+  repo: 源代码
+  disclaimer: >-
+    独立的社区项目。链接指向第三方，我们不对其内容负责。本页内容均不构成投资建议。
+  overall.normal: 一切正常
+  overall.degraded: 性能下降
+  overall.incident: 故障
+  level.green: 正常
+  level.yellow: 警告
+  level.red: 严重
+  level.unknown: 未知
+  verdict.stable: 稳定
+  verdict.performant: 性能
+  verdict.secure: 安全

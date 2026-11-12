@@ -19,7 +19,8 @@
   var OVERALL = ["normal", "degraded", "incident"];
   var LEVELS = ["green", "yellow", "red", "unknown"];
   var RELEASE = /^v?[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/;
-  var DAY = { en: "d", de: "T" };
+  var DAY = { en: "d", de: "T", es: "d", fr: "j", zh: "天" };
+  var LOCALES = { en: "en-US", de: "de-DE", es: "es-ES", fr: "fr-FR", zh: "zh-CN" };
 
   function count(value, max) {
     return Number.isInteger(value) && value >= 0 && value < max ? value : null;
@@ -204,7 +205,7 @@
   }
 
   function apply(root, status) {
-    var locale = root.dataset.lang === "de" ? "de-DE" : "en-US";
+    var locale = LOCALES[root.dataset.lang] || LOCALES.en;
     applyNumbers(root, status, locale);
     applyFork(root, status, locale);
     var overall = root.querySelector('[data-live="overall"]');
@@ -351,7 +352,7 @@
   }
 
   function applyDevelopment(root, dev, now) {
-    var locale = root.dataset.lang === "de" ? "de-DE" : "en-US";
+    var locale = LOCALES[root.dataset.lang] || LOCALES.en;
     var repository = root.dataset.repo;
     var list = root.querySelector('[data-dev="branches"]');
     while (list.firstChild) {

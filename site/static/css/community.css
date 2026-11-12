@@ -203,9 +203,54 @@ a {
   color: var(--faint);
 }
 
+/* Language menu: a native disclosure, so it works without JavaScript. */
 .c-lang {
+  position: relative;
+}
+
+.c-lang > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.c-lang > summary::-webkit-details-marker {
+  display: none;
+}
+
+.c-lang__list {
+  position: absolute;
+  z-index: 20;
+  right: 0;
   display: flex;
-  gap: 6px;
+  flex-direction: column;
+  min-width: 160px;
+  margin-top: 6px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-raised);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 50%);
+}
+
+.c-lang__item {
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.c-lang__item:hover,
+.c-lang__item--active {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.c-lang__code {
+  display: inline-block;
+  width: 2.4em;
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 12px;
 }
 
 .c-chip {

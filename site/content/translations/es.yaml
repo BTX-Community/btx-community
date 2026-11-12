@@ -1,0 +1,430 @@
+# Spanish translations of the content texts of btx-community.com (community.yaml and
+# guide.yaml). Each entry pairs the English text exactly as it stands there with its translation;
+# when the English text changes, the old pair no longer matches, the page shows English and the
+# build prints a warning. Translated with AI help; corrections by native speakers are welcome.
+
+schema_version: 1
+translations:
+- en: Fixed supply
+  es: Suministro fijo
+- en: >-
+    At most 21 million BTX, as with Bitcoin. A block comes about every 90 seconds; its reward of 20
+    BTX halves every 525,000 blocks, roughly every 18 months.
+  es: >-
+    Como máximo 21 millones de BTX, como en Bitcoin. Llega un bloque cada 90 segundos aproximadamente;
+    su recompensa de 20 BTX se reduce a la mitad cada 525.000 bloques, más o menos cada 18 meses.
+- en: Mining by matrix multiplication
+  es: Minería por multiplicación de matrices
+- en: >-
+    Instead of hashing, miners multiply large matrices, the work AI accelerators are built for. Since
+    block 185,000 every block needs a complete, exactly reproducible run on a qualified NVIDIA (CUDA)
+    or Apple (Metal) GPU. There is no CPU mining.
+  es: >-
+    En lugar de calcular hashes, los mineros multiplican matrices grandes, el trabajo para el que
+    están hechos los aceleradores de IA. Desde el bloque 185.000 cada bloque necesita una ejecución
+    completa y exactamente reproducible en una GPU homologada de NVIDIA (CUDA) o Apple (Metal). No
+    se puede minar con la CPU.
+- en: Post-quantum signatures
+  es: Firmas poscuánticas
+- en: >-
+    Coins are locked with signatures meant to withstand quantum computers: ML-DSA-44 (NIST FIPS 204)
+    for everyday spending, SLH-DSA (FIPS 205) as a hash-based fallback. These P2MR addresses start
+    with btx1z.
+  es: >-
+    Las monedas se bloquean con firmas pensadas para resistir a los ordenadores cuánticos: ML-DSA-44
+    (NIST FIPS 204) para el gasto diario y SLH-DSA (FIPS 205) como respaldo basado en hashes. Estas
+    direcciones P2MR empiezan por btx1z.
+- en: Built on Bitcoin Core
+  es: Basado en Bitcoin Core
+- en: >-
+    The node is a fork of Bitcoin Core. btxd, btx-cli, the RPC interface and PSBTs work the way Bitcoin
+    users know them; what differs is the proof-of-work and the signatures.
+  es: >-
+    El nodo es un fork de Bitcoin Core. btxd, btx-cli, la interfaz RPC y los PSBT funcionan como los
+    conocen los usuarios de Bitcoin; lo que cambia es la prueba de trabajo y las firmas.
+- en: >-
+    Release candidate v0.35.0rc1 since 13 October 2026. The developers call it not release-qualified;
+    the current release stays v0.34.15. Nothing below is final.
+  es: >-
+    Versión candidata v0.35.0rc1 desde el 13 de octubre de 2026. Los desarrolladores dicen que no
+    está lista para publicarse; la versión actual sigue siendo la v0.34.15. Nada de lo siguiente es
+    definitivo.
+- en: Presigned swap claims from the wallet
+  es: Reclamaciones de swap prefirmadas desde el monedero
+- en: >-
+    Since 0.34.13 a swap claim can be signed at funding and completed later by anyone who has the
+    secret; nobody has to stay online, but someone must broadcast it in time. That still takes hand-built
+    transactions. htlc_presign and p2mr_leaf make it a wallet step. Not in rc1; in the 0.35 branch
+    and the v0.34.16 pre-release.
+  es: >-
+    Desde la 0.34.13 una reclamación de swap puede firmarse al financiar el swap y completarla después
+    cualquiera que tenga el secreto; nadie tiene que seguir conectado, pero alguien debe difundirla
+    a tiempo. Por ahora requiere transacciones construidas a mano. htlc_presign y p2mr_leaf lo convierten
+    en un paso del monedero. No están en la rc1; sí en la rama 0.35 y en la versión preliminar v0.34.16.
+- en: The model network moves into the node
+  es: La red de modelos pasa al nodo
+- en: >-
+    The network for AI models has run beside the node since v0.34.9 (btx-modeld). In 0.35 it runs
+    inside btxd, and a research lab joins it: identities with recovery keys, git workspaces for models,
+    evaluations. Off with -modelnet=0; it does not spend coins.
+  es: >-
+    La red para modelos de IA funciona junto al nodo desde la v0.34.9 (btx-modeld). En la 0.35 funciona
+    dentro de btxd y se le une un laboratorio de investigación: identidades con claves de recuperación,
+    espacios de trabajo git para modelos y evaluaciones. Se desactiva con -modelnet=0; no gasta monedas.
+- en: Safer auto-update
+  es: Actualización automática más segura
+- en: >-
+    A node behind a proxy or Tor no longer checks for updates by itself, so it does not reveal its
+    address to the update server. The update helper runs isolated.
+  es: >-
+    Un nodo detrás de un proxy o de Tor ya no busca actualizaciones por sí mismo, así que no revela
+    su dirección al servidor de actualizaciones. El asistente de actualización se ejecuta aislado.
+- en: Desktop app and ZeroMQ
+  es: Aplicación de escritorio y ZeroMQ
+- en: >-
+    The official archives include the graphical wallet btx-qt and ZeroMQ notifications for services
+    that follow the chain.
+  es: >-
+    Los archivos oficiales incluyen el monedero gráfico btx-qt y las notificaciones ZeroMQ para servicios
+    que siguen la cadena.
+- en: >-
+    rc1 has no Linux CUDA archive. A GPU node started with it falls back to the CPU and can stall
+    at the next block. Miners and signers stay on v0.34.15.
+  es: >-
+    La rc1 no tiene archivo de Linux con CUDA. Un nodo con GPU iniciado con ella recurre a la CPU
+    y puede quedarse atascado en el siguiente bloque. Mineros y firmantes se quedan en la v0.34.15.
+- en: The desktop app of rc1 needs glibc 2.43 and does not start on Ubuntu 24.04.
+  es: >-
+    La aplicación de escritorio de la rc1 necesita glibc 2.43 y no arranca en Ubuntu 24.04.
+- en: CUDA on Windows was neither built nor tested.
+  es: CUDA en Windows no se compiló ni se probó.
+- en: Before you buy or receive BTX
+  es: Antes de comprar o recibir BTX
+- en: >-
+    Create the wallet first and write the backup down offline. Restore it once, so you know the backup
+    works before money depends on it.
+  es: >-
+    Crea primero el monedero y apunta la copia de seguridad fuera de línea. Restáurala una vez para
+    saber que funciona antes de que dependa dinero de ella.
+- en: >-
+    Check the receiving address in full, not just its start and end. BTX addresses start with btx1z.
+  es: >-
+    Comprueba la dirección de recepción completa, no solo el principio y el final. Las direcciones
+    BTX empiezan por btx1z.
+- en: Send a small test amount first and wait until it is confirmed.
+  es: Envía primero una cantidad pequeña de prueba y espera a que se confirme.
+- en: >-
+    Before you use an exchange or an OTC seller, check that withdrawals really work. A price on a
+    website is not a market you can sell into.
+  es: >-
+    Antes de usar un exchange o un vendedor OTC, comprueba que los retiros funcionan de verdad. Un
+    precio en una web no es un mercado en el que puedas vender.
+- en: >-
+    A "model" or "reference" price is an estimate, not an offer that anyone has to honour.
+  es: >-
+    Un precio "modelo" o "de referencia" es una estimación, no una oferta que nadie tenga que cumplir.
+- en: >-
+    Nobody legitimate asks for your seed. Messages offering help, "recovery" or guaranteed returns
+    are scams.
+  es: >-
+    Nadie legítimo te pedirá tu semilla. Los mensajes que ofrecen ayuda, "recuperación" o rentabilidad
+    garantizada son estafas.
+- en: Before you install a node release
+  es: Antes de instalar una versión del nodo
+- en: Download only from github.com/btxchain/btx/releases.
+  es: Descarga solo desde github.com/btxchain/btx/releases.
+- en: >-
+    Recent releases come without a signed checksum file; the last one with SHA256SUMS.asc was v0.34.6.
+    GitHub shows a SHA-256 for each file on the release page: compare it with "shasum -a 256 <file>"
+    ("sha256sum" on Linux).
+  es: >-
+    Las versiones recientes vienen sin archivo de sumas de comprobación firmado; la última con SHA256SUMS.asc
+    fue la v0.34.6. GitHub muestra un SHA-256 por archivo en la página de la versión: compáralo con
+    "shasum -a 256 <archivo>" ("sha256sum" en Linux).
+- en: >-
+    That proves the file is the one on GitHub, not who built it. If that matters to you, build the
+    tagged source yourself.
+  es: >-
+    Eso prueba que el archivo es el de GitHub, no quién lo compiló. Si eso te importa, compila tú
+    mismo el código etiquetado.
+- en: >-
+    Read the release notes before upgrading. Some releases change the rules at a fixed block height;
+    this page shows a countdown when one is coming.
+  es: >-
+    Lee las notas de versión antes de actualizar. Algunas versiones cambian las reglas a partir de
+    una altura de bloque fija; esta página muestra una cuenta atrás cuando se acerca una.
+- en: >-
+    Release candidates (rc) are for testing. Do not run them on a mining or signing node.
+  es: >-
+    Las versiones candidatas (rc) son para pruebas. No las uses en un nodo de minería o de firma.
+- en: New to BTX
+  es: Nuevo en BTX
+- en: >-
+    BTX is a post-quantum fork of Bitcoin with a fixed maximum supply and its own proof-of-work (MatMul).
+    It is run by an open community, not by a company.
+  es: >-
+    BTX es un fork poscuántico de Bitcoin con un suministro máximo fijo y su propia prueba de trabajo
+    (MatMul). Lo sostiene una comunidad abierta, no una empresa.
+- en: Read the official introduction and documentation.
+  es: Lee la introducción y la documentación oficiales.
+- en: See how the network is doing right now, in plain terms.
+  es: Mira cómo está la red ahora mismo, explicado con claridad.
+- en: Ask questions in the community chats (Discord, Telegram).
+  es: Haz preguntas en los chats de la comunidad (Discord, Telegram).
+- en: >-
+    Never share your seed or private key. Nobody from the community will ever ask for it; direct messages
+    offering help or "support" are scams.
+  es: >-
+    Nunca compartas tu semilla ni tu clave privada. Nadie de la comunidad te la pedirá; los mensajes
+    directos que ofrecen ayuda o "soporte" son estafas.
+- en: Mining
+  es: Minería
+- en: >-
+    Mining needs a GPU. You can mine alone against your own node and keep every block, or join a pool
+    for steadier payouts.
+  es: >-
+    Para minar hace falta una GPU. Puedes minar en solitario contra tu propio nodo y quedarte cada
+    bloque, o unirte a un pool para cobrar de forma más regular.
+- en: >-
+    Pick a miner - easyBTX (one app for Mac, Windows, Linux) or matador (open source).
+  es: >-
+    Elige un minero: easyBTX (una app para Mac, Windows y Linux) o matador (código abierto).
+- en: >-
+    Prefer a smaller pool. When one pool finds most blocks, the network depends on it; the status
+    page shows the current shares.
+  es: >-
+    Mejor un pool pequeño. Cuando un pool encuentra la mayoría de los bloques, la red depende de él;
+    la página de estado muestra las cuotas actuales.
+- en: >-
+    matador's examples still name the minebtx pool, which is offline. Use a pool from our link list
+    instead.
+  es: >-
+    Los ejemplos de matador todavía mencionan el pool minebtx, que está fuera de servicio. Usa en
+    su lugar un pool de nuestra lista de enlaces.
+- en: Problems with an NVIDIA card? The official CUDA troubleshooting guide helps.
+  es: >-
+    ¿Problemas con una tarjeta NVIDIA? La guía oficial de solución de problemas de CUDA ayuda.
+- en: Running a node
+  es: Operar un nodo
+- en: >-
+    Every node checks the chain for itself and makes the network harder to fool. A home computer is
+    enough; signers have much higher requirements.
+  es: >-
+    Cada nodo comprueba la cadena por sí mismo y hace que sea más difícil engañar a la red. Basta
+    con un ordenador doméstico; los firmantes tienen requisitos mucho mayores.
+- en: Easiest start at home - easynode installs and supervises btxd for you.
+  es: 'El inicio más fácil en casa: easynode instala y supervisa btxd por ti.'
+- en: >-
+    On a server - the official release for Linux needs glibc 2.38 or newer (Ubuntu 24.04, Debian 13).
+  es: >-
+    En un servidor: la versión oficial para Linux necesita glibc 2.38 o más reciente (Ubuntu 24.04,
+    Debian 13).
+- en: >-
+    Catch up in minutes with a daily signed snapshot instead of syncing from genesis.
+  es: >-
+    Ponte al día en minutos con una instantánea diaria firmada en lugar de sincronizar desde el génesis.
+- en: Node stuck at a height? The node help explains each known case and its fix.
+  es: >-
+    ¿Nodo atascado en una altura? La ayuda para nodos explica cada caso conocido y su solución.
+- en: >-
+    Signers (GPU attestors) need an NVIDIA Blackwell card (sm_120) and must follow the developers'
+    operator runbook.
+  es: >-
+    Los firmantes (atestadores con GPU) necesitan una tarjeta NVIDIA Blackwell (sm_120) y deben seguir
+    el manual de operación de los desarrolladores.
+- en: Community
+  es: Comunidad
+- en: Main community server, including mining help.
+  es: Servidor principal de la comunidad, con ayuda para minar.
+- en: Telegram group of the community.
+  es: Grupo de Telegram de la comunidad.
+- en: Community account on X.
+  es: Cuenta de la comunidad en X.
+- en: Chain account on X.
+  es: Cuenta de la cadena en X.
+- en: Russian-speaking mining chat with a BTX topic.
+  es: Chat de minería en ruso con un tema sobre BTX.
+- en: Telegram chat of the matador miner.
+  es: Chat de Telegram del minero matador.
+- en: Portal of the easyBTX team - explorer, wallet, mining and news in one place.
+  es: >-
+    Portal del equipo easyBTX: explorador, monedero, minería y noticias en un solo lugar.
+- en: Official
+  es: Oficial
+- en: Official website and documentation of BTX.
+  es: Web oficial y documentación de BTX.
+- en: Source code and releases of the reference node (btxd).
+  es: Código fuente y versiones del nodo de referencia (btxd).
+- en: The official whitepaper, describing what BTX is and why.
+  es: El whitepaper oficial, que describe qué es BTX y por qué.
+- en: Written for v0.33.2 (August 2026). Newer releases differ in places.
+  es: >-
+    Escrito para la v0.33.2 (agosto de 2026). Las versiones más nuevas difieren en algunos puntos.
+- en: The official technical specification of the protocol.
+  es: La especificación técnica oficial del protocolo.
+- en: How to build btxd yourself on Linux, if you would rather not trust a binary.
+  es: Cómo compilar btxd tú mismo en Linux, si prefieres no confiar en un binario.
+- en: ML-DSA and SLH-DSA in BTX, P2MR outputs and the address format.
+  es: ML-DSA y SLH-DSA en BTX, salidas P2MR y el formato de dirección.
+- en: Step-by-step guide to a multisig wallet with post-quantum keys.
+  es: Guía paso a paso para un monedero multifirma con claves poscuánticas.
+- en: How mining by matrix multiplication works and how blocks are checked.
+  es: >-
+    Cómo funciona la minería por multiplicación de matrices y cómo se comprueban los bloques.
+- en: >-
+    Running a node without a qualified GPU by trusting signers' replay attestations, and what that
+    trust means.
+  es: >-
+    Operar un nodo sin GPU homologada confiando en las atestaciones de reproducción de los firmantes,
+    y qué significa esa confianza.
+- en: Network and explorers
+  es: Red y exploradores
+- en: Community status page - is the network healthy, with history and node help.
+  es: >-
+    Página de estado de la comunidad: si la red está sana, con historial y ayuda para nodos.
+- en: Block explorer for blocks, transactions and addresses.
+  es: Explorador de bloques, transacciones y direcciones.
+- en: Explorer of the Byron Bay team, with a 24 h mining view.
+  es: Explorador del equipo de Byron Bay, con una vista de minería de 24 h.
+- en: Node census and signer witness of the easyBTX team.
+  es: Censo de nodos y testigo de firmantes del equipo easyBTX.
+- en: Supply, holders and rich list.
+  es: Suministro, tenedores y lista de los más ricos.
+- en: >-
+    Its own node showed height 184,999 (a known stuck height) on 2026-11-02; check the date of its
+    data.
+  es: >-
+    Su propio nodo mostraba la altura 184.999 (una altura de atasco conocida) el 2026-11-02; comprueba
+    la fecha de sus datos.
+- en: Pools
+  es: Pools
+- en: Multi-coin pool with BTX. Check its fee on the pool page.
+  es: Pool multimoneda con BTX. Consulta su comisión en la página del pool.
+- en: Pool dedicated to BTX. Check its fee on the pool page.
+  es: Pool dedicado a BTX. Consulta su comisión en la página del pool.
+- en: PPLNS pool of the Byron Bay team (Australia).
+  es: Pool PPLNS del equipo de Byron Bay (Australia).
+- en: The website answered "503 unavailable" on 2026-11-03.
+  es: La web respondió "503 unavailable" el 2026-11-03.
+- en: Miners
+  es: Mineros
+- en: One-click miner app with a self-custodial wallet built in.
+  es: App de minería con un clic y monedero propio integrado.
+- en: Open-source GPU miner (NVIDIA, CUDA), solo against your own node or in a pool.
+  es: >-
+    Minero de GPU de código abierto (NVIDIA, CUDA), en solitario contra tu propio nodo o en un pool.
+- en: Last change 2026-08-21; its pool examples still name the offline minebtx pool.
+  es: >-
+    Último cambio el 2026-08-21; sus ejemplos de pool aún mencionan el pool minebtx, fuera de servicio.
+- en: Node tools
+  es: Herramientas para nodos
+- en: Desktop app that installs and supervises btxd on the machine you already own.
+  es: App de escritorio que instala y supervisa btxd en el equipo que ya tienes.
+- en: >-
+    Free script that tells a waiting network from a stuck node and dials helpful peers. It never restarts
+    the node.
+  es: >-
+    Script gratuito que distingue una red en espera de un nodo atascado y contacta con pares útiles.
+    Nunca reinicia el nodo.
+- en: Daily datadir snapshot, checked and signed by a second node.
+  es: >-
+    Instantánea diaria del directorio de datos, comprobada y firmada por un segundo nodo.
+- en: Known stuck heights with their cause and fix.
+  es: Alturas de atasco conocidas, con su causa y solución.
+- en: Wallets
+  es: Monederos
+- en: >-
+    Not audited by us. Only install wallets from the link here, keep your seed offline and never type
+    it into a website.
+  es: >-
+    No auditados por nosotros. Instala monederos solo desde el enlace de aquí, guarda tu semilla fuera
+    de línea y nunca la escribas en una web.
+- en: Official post-quantum wallet in the browser.
+  es: Monedero poscuántico oficial en el navegador.
+- en: Desktop wallet of the easyBTX team.
+  es: Monedero de escritorio del equipo easyBTX.
+- en: Seedless iOS wallet with BTX support.
+  es: Monedero para iOS sin semilla con soporte para BTX.
+- en: Bridges and testnets
+  es: Puentes y redes de prueba
+- en: >-
+    Experimental and not audited by us. Bridges can lose funds; do not send more than you can afford
+    to lose.
+  es: >-
+    Experimentales y no auditados por nosotros. Los puentes pueden perder fondos; no envíes más de
+    lo que puedas permitirte perder.
+- en: Wrapped BTX on Ethereum - contracts and validator tools, work in progress.
+  es: 'BTX envuelto en Ethereum: contratos y herramientas de validador, en desarrollo.'
+- en: Last change 2026-07-09.
+  es: Último cambio el 2026-07-09.
+- en: Bridge on a testnet.
+  es: Puente en una red de prueba.
+- en: Bridge to the Robinhood Chain testnet.
+  es: Puente a la red de prueba de Robinhood Chain.
+- en: Exchanges
+  es: Exchanges
+- en: >-
+    Not audited by us. Trading carries risk; check the exchange yourself and do not leave coins there
+    longer than needed.
+  es: >-
+    No auditados por nosotros. Operar conlleva riesgos; revisa tú mismo el exchange y no dejes monedas
+    allí más tiempo del necesario.
+- en: Centralised exchange with a BTX/USDT market.
+  es: Exchange centralizado con un mercado BTX/USDT.
+- en: Roadmap
+  es: Hoja de ruta
+- en: >-
+    What the community can do by itself and what depends on the core team, in two columns, with a
+    place to put your name against a lane.
+  es: >-
+    Lo que la comunidad puede hacer por sí misma y lo que depende del equipo principal, en dos columnas,
+    con un sitio para poner tu nombre junto a una tarea.
+- en: Open for edits
+  es: Abierta a cambios
+- en: The bootstrap window and the 1,000,000 BTX deployment reward
+  es: La ventana de arranque y la recompensa de despliegue de 1.000.000 BTX
+- en: >-
+    The first question most newcomers ask, answered from chain data: what the first 50,000 blocks
+    produced, under which consensus rules, and what public data can and cannot show.
+  es: >-
+    La primera pregunta de casi todos los recién llegados, respondida con datos de la cadena: qué
+    produjeron los primeros 50.000 bloques, con qué reglas de consenso y qué pueden y qué no pueden
+    mostrar los datos públicos.
+- en: Draft - under review
+  es: Borrador, en revisión
+- en: Network fund
+  es: Fondo de la red
+- en: >-
+    How the network could pay for its own infrastructure: contributions, multisig custody, published
+    rules and payouts against verified uptime.
+  es: >-
+    Cómo podría la red pagar su propia infraestructura: aportaciones, custodia multifirma, reglas
+    publicadas y pagos según la disponibilidad verificada.
+- en: Discussion paper
+  es: Documento de debate
+- en: Venue structure and the licensing boundary
+  es: Estructura de un mercado y el límite de la licencia
+- en: >-
+    What a decentralised exchange can be on a chain without a virtual machine, where the regulatory
+    line runs, and the models that remain open. Not legal advice.
+  es: >-
+    Qué puede ser un exchange descentralizado en una cadena sin máquina virtual, dónde está la línea
+    regulatoria y qué modelos siguen abiertos. No es asesoramiento jurídico.
+- en: Draft for discussion
+  es: Borrador para debatir
+- en: How to change something here
+  es: Cómo cambiar algo aquí
+- en: >-
+    What you can edit freely, what needs a second pair of eyes, and how to report a wrong figure if
+    git is not your thing.
+  es: >-
+    Qué puedes editar libremente, qué necesita un segundo par de ojos y cómo informar de una cifra
+    errónea si git no es lo tuyo.
+- en: Website not reachable, explorer answered 503 (2026-11-03).
+  es: Web no accesible, el explorador respondió 503 (2026-11-03).
+- en: Website not reachable (2026-11-03).
+  es: Web no accesible (2026-11-03).
+- en: Website answered with an error (520, 2026-11-03).
+  es: La web respondió con un error (520, 2026-11-03).
+- en: The BTX page no longer exists (404, 2026-11-03).
+  es: La página de BTX ya no existe (404, 2026-11-03).
