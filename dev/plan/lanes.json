@@ -350,7 +350,7 @@
       "target": "POSIX grep lint; first green Windows and sharded macOS runs; otool step in the release gate; RAII wrappers with pidfd check",
       "owner": {
         "role": "C-PORT owner",
-        "handle": null
+        "handle": "sunnyriverr"
       },
       "second_pass": {
         "role": "second pass (never the owner); a macOS runner runs the macOS half when a PR has K07 content",

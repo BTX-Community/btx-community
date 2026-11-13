@@ -5,7 +5,7 @@
 
 **For an AI working a lane.** Read [`AGENTS.md`](AGENTS.md), [`06-pr-gate.md`](06-pr-gate.md) and the lane's pack in [`packs/`](packs/) first. §8 of this page is the stop list: if a step would break one of its rules, stop and hand the question to the human.
 
-This is the public version: roles, not names. Every owner, second-pass and runner slot below is open. Companion to the plan, [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md); the machine-readable form is [`plan/lanes.json`](plan/lanes.json). Which lane fits which level: [`08-levels.md`](08-levels.md). Lanes with an AI pack have it in [`packs/`](packs/) (A-WALLET, A-STORES, C-K01, C-PORT, C-PATHS, C-STATIC, I-CI, I-RC and `I-RC-runner`, I-OPS, I-XDEV, E-CONSENSUS); the five lanes in §4 have none yet.
+This is the public version. Slots marked claimable are open. Companion to the plan, [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md); the machine-readable form is [`plan/lanes.json`](plan/lanes.json). Which lane fits which level: [`08-levels.md`](08-levels.md). Lanes with an AI pack have it in [`packs/`](packs/) (A-WALLET, A-STORES, C-K01, C-PORT, C-PATHS, C-STATIC, I-CI, I-RC and `I-RC-runner`, I-OPS, I-XDEV, E-CONSENSUS); the five lanes in §4 have none yet.
 
 Every number below comes from [`plan/plan-data.json`](plan/plan-data.json) or the plan; [C3] marks a number from the coverage run. Coverage is product-code line coverage on `release-0.34.16` at `c6f9678d`, unit-only / unit + functional. All coverage numbers are floors: 47 unit suites timed out and 82 of 208 functional scripts failed in the coverage run. The coverage build configures again on `release-0.34.16` since #578 (merged into the release line on 12 Nov as `7051507b`); the fix is not in v0.34.15. The recipe is in [`04-build-and-test.md`](04-build-and-test.md) §5. The live head is `4c7840e9` (31 commits later; none touches `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus` or `script/interpreter.cpp`: `git diff --stat c6f9678d 4c7840e9 -- src/validation.cpp src/net_processing.cpp src/pow.cpp src/consensus src/script/interpreter.cpp` prints nothing).
 
@@ -145,7 +145,7 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 **C-PORT: Windows, macOS, build and packaging, resource lifecycle**
 - Scope: K06 Windows/MinGW/MSVC (33 PRs), K07 macOS/libc++/Qt packaging, K22 build/packaging/release-gate drift (K19/K22 together 40 PRs), K16 pipe/pid/socket lifecycle; `src/compat/`, `scripts/release/package_release_archive.py`, the installer path (`install_prebuilt_release_tree`).
 - Why: K06 (33 PRs), K19/K22 (40), K10 (14) and K07 (6) are classes a CI matrix catches before filing; K06 kept finding new files.
-- Owner: (claimable) · Second pass: (claimable; never the owner); a macOS runner runs the macOS half when a PR has K07 content.
+- Owner: `sunnyriverr` · Second pass: (claimable; never the owner); a macOS runner runs the macOS half when a PR has K07 content.
 - Cadence: follows the first green Windows and macOS fork runs (I-CI), then one PR per class.
 - Done bar: the POSIX-outside-`#ifndef WIN32` grep as a lint in CI-4; the first green Windows and sharded macOS runs on the release line; `otool -L` on every packaged binary in CI-10; RAII wrappers for fork/socket/pipe with a pidfd identity check before every `kill`; zero new-site K06 after the lint; the release-gate job green (GLIBC ceiling, RUNPATH, `elfcheck.py`).
 - First three tasks: (1) the POSIX grep lint; (2) the `otool` step in the release gate; (3) the K16 RAII wrapper PR.
