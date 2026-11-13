@@ -172,7 +172,7 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 ### Infrastructure lanes
 
 **I-CI: the fork CI gates**
-- Scope: the fork workflow (exists; never run on the release line; must be rebased onto `4c7840e9` with the upstream Atlas workflows kept): CI-0 build matrix (Linux, userns, mingw, Windows, macOS), CI-1 sharded unit + functional, CI-2 ASan/UBSan, CI-3 TSan + DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke (ClusterFuzzLite), CI-8 CodeQL weekly on a dedicated box, CI-9 coverage ratchet on a dedicated box, CI-10 release gate; `ci/known-failing.txt`; the nightly stage3 job for the 47 timing-out suites.
+- Scope: the fork workflow (exists; its first run on the release line, 12 Nov at `4c7840e9`, was red and a fixed branch is pending; the upstream Atlas workflows are kept): CI-0 build matrix (Linux, userns, mingw, Windows, macOS), CI-1 sharded unit + functional, CI-2 ASan/UBSan, CI-3 TSan + DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke (ClusterFuzzLite), CI-8 CodeQL weekly on a dedicated box, CI-9 coverage ratchet on a dedicated box, CI-10 release gate; `ci/known-failing.txt`; the nightly stage3 job for the 47 timing-out suites.
 - Why: upstream runs no hosted CI by choice (`.github/workflows/README.md`), so the contributor-side gate runs on a fork. Baselines: coverage 69.9 lines / 40.7 branches, TSan 41, cppcheck 372, CodeQL 260, tidy 1,033. The macOS test job ran out of time on the last fork run, so it is sharded.
 - Owner: (claimable) · Second pass: (claimable; never the owner; someone who reads fork CI output).
 - Cadence: CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4.

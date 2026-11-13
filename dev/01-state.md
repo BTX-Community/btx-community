@@ -96,7 +96,7 @@ Each baseline may only shrink. Do not re-run these tools to "check" them; reuse 
 | Fact | Value | Source | Verified on |
 |---|---|---|---|
 | Upstream hosted CI | None for node validation, by policy: the repository "does not use GitHub-hosted CI for validation". The only workflow files on `release-0.34.16` are three Atlas workflows: `atlas-native.yml` and `atlas-source.yml` run on pull requests that touch the Atlas tree, and `release-atlas-binaries.yml` runs only by hand (`workflow_dispatch`). On `main` the folder holds only that README [read] | `.github/workflows/README.md` and `git ls-tree --name-only 4c7840e9 .github/workflows/` | 2026-11-12 |
-| Contributor gates | Run on contributor forks; every class PR links its fork run (fails before, passes after). The fork workflow has not yet run on `release-0.34.16` [read] | `plan/MASTER-PLAN.md` §4.1; `07-lanes.md` (I-CI) | 2026-11-12 |
+| Contributor gates | Run on contributor forks; every class PR links its fork run (fails before, passes after). The fork workflow first ran on 12 Nov at `4c7840e9` and was red; a fixed branch is pending. Separately, the status page's operator publishes a nightly Linux build with unit and functional tests on `release-0.34.16` (its API calls the job CI-0; it is not the fork build matrix) [read] | `plan/MASTER-PLAN.md` §4.1; `07-lanes.md` (I-CI); `https://network.btx-monitoring.com/api/v1/ci.json` | 2026-11-13 |
 | Agent rules upstream | `AGENTS.md` and `HUMANS.md` sit at the repo root. `AGENTS.md`: default posture is read-only unless the operator asked [read] | `git show 4c7840e9:AGENTS.md` | 2026-11-12 |
 
 ## 7. Operators and community infrastructure

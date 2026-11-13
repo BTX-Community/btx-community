@@ -36,6 +36,8 @@
 # dev/lessons/README.md, dev/exam/questions.md). The counts they name are checked all the same: the
 # lanes that wait for an owner and the exits of the flow.
 #
+# ci is not from the hub: the texts of the panel that shows the last nightly CI-0 run.
+#
 # brief.prompt is shown in English on every page (the files it points at are English); everything
 # else is a text in English and German, as in community.yaml. Spanish, French and Chinese are in
 # translations/<lang>.yaml.
@@ -1392,14 +1394,15 @@ lanes:
           title: { en: Fork CI gates, de: CI-Prüfungen auf dem Fork }
           scope:
             en: >-
-              The fork CI workflow (it exists but has never run on the release line; rebase onto
-              4c7840e9 and keep the upstream Atlas workflows): jobs CI-0 to CI-10, the known-failing
-              list, and a nightly job for the 47 unit suites that time out.
+              The fork CI workflow (its first run on the release line, 12 Nov at 4c7840e9, was red and a fixed branch is pending; keep the upstream Atlas workflows):
+              jobs CI-0 to CI-10, the known-failing list, and a nightly job for the 47 unit suites
+              that time out.
             de: >-
-              Der Fork-CI-Workflow (er existiert, lief aber nie auf der Release-Linie; Rebase auf
-              4c7840e9, die Atlas-Workflows von upstream bleiben): die Jobs CI-0 bis CI-10, die
-              Liste bekannter Fehlschläge und ein nächtlicher Job für die 47 Unit-Suites, die in
-              einen Timeout laufen.
+              Der Fork-CI-Workflow (sein erster Lauf auf der Release-Linie, am 12. Nov. auf
+              4c7840e9, war rot, ein korrigierter Branch steht aus;
+              die Atlas-Workflows von upstream bleiben): die Jobs CI-0 bis CI-10, die Liste
+              bekannter Fehlschläge und ein nächtlicher Job für die 47 Unit-Suites, die in einen
+              Timeout laufen.
           why:
             en: >-
               upstream runs no hosted CI by choice; baselines: coverage 69.9/40.7, TSan 41, cppcheck
@@ -1726,8 +1729,13 @@ gates:
       en: fork build matrix (Linux, userns, mingw, Windows, macOS)
       de: Build-Matrix auf dem Fork (Linux, userns, mingw, Windows, macOS)
     state:
-      en: workflow exists; never run on release-0.34.16; needs rebase to 4c7840e9
-      de: Workflow existiert; lief nie auf release-0.34.16; braucht ein Rebase auf 4c7840e9
+      en: >-
+        first ran 12 Nov at 4c7840e9, red; fixed branch pending; the status page's
+        operator publishes a nightly Linux build with unit and functional tests on release-0.34.16
+      de: >-
+        lief erstmals am 12. Nov. auf 4c7840e9, rot; korrigierter
+        Branch steht aus; der Betreiber der Statusseite veröffentlicht einen nächtlichen Linux-Build
+        mit Unit- und Funktionstests auf release-0.34.16
     phase: 2a
   - id: CI-1
     name: { en: linux-unit-functional (sharded), de: linux-unit-functional (aufgeteilt) }
@@ -1825,6 +1833,53 @@ gates:
     state: { en: open, de: offen }
 gates_source: https://github.com/BTX-Community/btx-community/blob/main/dev/plan/MASTER-PLAN.md
 ci_pack: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-CI.md
+
+# The panel with the last nightly CI-0 run, below the CI jobs. These are the page's own texts, not
+# from the hub; the run itself is read live from the status page's API (CI_API in site/build.py) by
+# site/static/js/ci.js. Placeholders in braces are filled in by the script and must stay as they are.
+# The noscript text carries its own punctuation and the space before the link (none after a
+# full-width colon). The labels are specific ("build passed", not "passed"), since translations are
+# keyed by the English text and a one-word key would be reused for other meanings.
+ci:
+  title: { en: Nightly CI-0 run, de: Nächtlicher CI-0-Lauf }
+  lead:
+    en: >-
+      The last nightly Linux build with unit and functional tests that the status page's operator
+      publishes as job CI-0, read live from its API. It is one build, not the fork build matrix in
+      the table above.
+    de: >-
+      Der letzte nächtliche Linux-Build mit Unit- und Funktionstests, den der Betreiber der
+      Statusseite als Job CI-0 veröffentlicht, live aus deren API gelesen. Es ist ein einzelner
+      Build, nicht die Build-Matrix auf dem Fork aus der Tabelle oben.
+  raw: { en: The run as JSON, de: Der Lauf als JSON }
+  noscript:
+    en: "This panel is filled in by JavaScript. The run as raw data: "
+    de: "Dieser Bereich wird per JavaScript gefüllt. Der Lauf als Rohdaten: "
+  loading: { en: Loading the last run …, de: Der letzte Lauf wird geladen … }
+  none: { en: No current run., de: Kein aktueller Lauf. }
+  stale:
+    en: Last run is older than 36 h; the figures below may be out of date.
+    de: Der letzte Lauf ist älter als 36 h; die Zahlen unten sind womöglich veraltet.
+  error: { en: CI data unavailable., de: CI-Daten nicht verfügbar. }
+  ref: { en: Branch @ commit, de: Branch @ Commit }
+  build: { en: Build result, de: Build-Ergebnis }
+  ok: { en: build passed, de: Build bestanden }
+  failed: { en: build failed, de: Build fehlgeschlagen }
+  not_run: { en: tests not run, de: Tests nicht gelaufen }
+  unit: { en: Unit tests, de: Unit-Tests }
+  functional: { en: Functional tests, de: Funktionstests }
+  count: { en: "{passed} of {run}", de: "{passed} von {run}" }
+  unit_sub: { en: "passed · {failed} failed", de: "bestanden · {failed} fehlgeschlagen" }
+  functional_sub:
+    en: "passed · {failed} failed · {skipped} skipped"
+    de: "bestanden · {failed} fehlgeschlagen · {skipped} übersprungen"
+  failed_unit: { en: "Failed unit suites ({count})", de: "Fehlgeschlagene Unit-Suites ({count})" }
+  failed_functional:
+    en: "Failed functional scripts ({count})"
+    de: "Fehlgeschlagene Skripte der Funktionstests ({count})"
+  names_of: { en: "{listed} of {failed}", de: "{listed} von {failed}" }
+  more: { en: "… and {count} more", de: "… und {count} weitere" }
+  times: { en: "Measured {measured} · finished {finished}", de: "Gemessen {measured} · fertig {finished}" }
 
 phases:
   - id: 2a

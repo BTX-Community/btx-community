@@ -9,7 +9,8 @@ under ``/``, German under ``/de/``; every page in ``PAGES`` gets its own directo
 (``/links/``, ``/de/links/``) and its template ``<page>.html.j2``, which extends ``base.html.j2``
 with the menu. The live strip, the figures and the upgrade countdown are
 empty in the built page and filled by ``static/js/community.js`` from the public API of the
-status page.
+status page; the nightly CI panel of the developers page likewise by ``static/js/ci.js``, which
+only that page loads.
 """
 
 from __future__ import annotations
@@ -18,6 +19,7 @@ import argparse
 import hashlib
 import math
 import os
+import re
 import shutil
 import sys
 from dataclasses import dataclass, field
@@ -67,6 +69,9 @@ ADD_PROJECT_URL = f"{REPO_URL}/blob/main/CONTRIBUTING.md#changing-the-website"
 RELEASES_URL = "https://github.com/btxchain/btx/releases"
 STATUS_API = "https://network.btx-monitoring.com/api/v1/status.json"
 DEVELOPMENT_API = "https://network.btx-monitoring.com/api/v1/development.json"
+CI_API = "https://network.btx-monitoring.com/api/v1/ci.json"
+"""The last nightly run of the CI-0 job (build, unit and functional tests), shown on the developers page."""
+CI_JOB = "CI-0"
 UPSTREAM_REPO = "btxchain/btx"
 """Repository whose development activity the network page shows; the API must name the same one."""
 STATUS_PAGE = {"en":"https://network.btx-monitoring.com/", "de": "https://network.btx-monitoring.com/de/"}
@@ -636,6 +641,63 @@ class Loop(_Model):
         return self
 
 
+CI_PLACEHOLDERS = {
+    "count": {"passed", "run"},
+    "unit_sub": {"failed"},
+    "functional_sub": {"failed", "skipped"},
+    "failed_unit": {"count"},
+    "failed_functional": {"count"},
+    "names_of": {"listed", "failed"},
+    "more": {"count"},
+    "times": {"measured", "finished"},
+}
+"""The texts of the CI panel that ``static/js/ci.js`` fills in, with the placeholders each must keep."""
+
+
+def placeholders(text: str) -> set[str]:
+    """The ``{name}`` placeholders of a text."""
+    return set(re.findall(r"\{(\w+)\}", text))
+
+
+class CiPanel(_Model):
+    """The fixed texts of the nightly CI panel; the run itself is read live from ``CI_API``."""
+
+    title: Text
+    lead: Text
+    raw: Text
+    noscript: Text
+    loading: Text
+    none: Text
+    stale: Text
+    error: Text
+    ref: Text
+    build: Text
+    ok: Text
+    failed: Text
+    not_run: Text
+    unit: Text
+    functional: Text
+    count: Text
+    unit_sub: Text
+    functional_sub: Text
+    failed_unit: Text
+    failed_functional: Text
+    names_of: Text
+    more: Text
+    times: Text
+
+    @model_validator(mode="after")
+    def _placeholders(self) -> Self:
+        for name in type(self).model_fields:
+            wanted = CI_PLACEHOLDERS.get(name, set())
+            text = getattr(self, name)
+            for lang in INLINE_LANGUAGES:
+                if placeholders(getattr(text, lang)) != wanted:
+                    msg = f"ci.{name} ({lang}) must have exactly the placeholders {sorted(wanted)}"
+                    raise ValueError(msg)
+        return self
+
+
 class HubPage(_Model):
     """``content/hub.yaml``: the public plan of the developer hub in ``dev/``, copied from it by hand."""
 
@@ -660,6 +722,7 @@ class HubPage(_Model):
     gates: Annotated[list[Gate], Field(min_length=1, max_length=30)]
     gates_source: Link
     ci_pack: Link
+    ci: CiPanel
     phases: Annotated[list[Phase], Field(min_length=1, max_length=6)]
     week: Annotated[list[Day], Field(min_length=4, max_length=4)]
     rhythm_source: Link
@@ -1188,6 +1251,7 @@ class HubView:
     method_source: str
     guardrails_source: str
     contribute: tuple[LoopView, ...]
+    ci: dict[str, str]
 
 
 def format_percent(value: float, lang: str) -> str:
@@ -1269,6 +1333,16 @@ def _lane_view(lane: Lane, kind: str, say: Localizer) -> LaneView:
 
 def _gate_view(gate: Gate, say: Localizer) -> GateView:
     return GateView(gate.id, say(gate.name), say(gate.state), gate.phase, gate.done_bar)
+
+
+def ci_texts(ci: CiPanel, say: Localizer) -> dict[str, str]:
+    """The texts of the CI panel in one language; a translation must keep the placeholders."""
+    texts = {name: say(getattr(ci, name)) for name in CiPanel.model_fields}
+    for name, wanted in CI_PLACEHOLDERS.items():
+        if placeholders(texts[name]) != wanted:
+            msg = f"the {say.lang} text of ci.{name} must have exactly the placeholders {sorted(wanted)}"
+            raise ContentError(msg)
+    return texts
 
 
 def hub_view(hub: HubPage, say: Localizer) -> HubView:
@@ -1356,6 +1430,7 @@ def hub_view(hub: HubPage, say: Localizer) -> HubView:
             )
             for loop in hub.contribute
         ),
+        ci=ci_texts(hub.ci, say),
     )
 
 
@@ -1407,6 +1482,8 @@ def context(
         "status_page": STATUS_PAGE.get(lang, STATUS_PAGE["en"]),
         "status_api": STATUS_API,
         "development_api": DEVELOPMENT_API,
+        "ci_api": CI_API,
+        "ci_job": CI_JOB,
         "upstream_repo": UPSTREAM_REPO,
         "upstream_url": f"https://github.com/{UPSTREAM_REPO}",
         "verdicts": [(v, ui[f"verdict.{v}"]) for v in VERDICTS],
@@ -1426,6 +1503,7 @@ def context(
         "version": version,
         "css_url": asset_url("css/community.css"),
         "js_url": asset_url("js/community.js"),
+        "ci_js_url": asset_url("js/ci.js"),
     }
 
 

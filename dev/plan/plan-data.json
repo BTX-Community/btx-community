@@ -539,8 +539,8 @@
     {
       "id": "CI-0",
       "name": "fork build matrix (Linux, userns, mingw, Windows, macOS)",
-      "state": "workflow exists; never run on release-0.34.16; needs rebase to 4c7840e9",
-      "src": "fork CI workflow read 12 Nov; fork run list (GitHub API)"
+      "state": "first ran 12 Nov at 4c7840e9, red; fixed branch pending; the status page's operator publishes a nightly Linux build with unit and functional tests on release-0.34.16",
+      "src": "fork CI workflow read 12 Nov; fork run list (GitHub API); status page API ci.json read 13 Nov"
     },
     {
       "id": "G1",
