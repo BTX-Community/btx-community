@@ -94,6 +94,9 @@ after that it becomes version 1.0 and the corrections process above applies.
   one place has the same problem as the pages this repository was built to replace.
 - **Code** — MIT, see [`LICENSE`](LICENSE).
 
+The link directory started from [btxlinks](https://github.com/vanities/btxlinks) (MIT); its
+copyright notice and licence are in [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
+
 Material quoted from other sources — the BTX Specification, the reference implementation —
 remains with its own rights holders and is reproduced here as short quotations for
 documentation and review.

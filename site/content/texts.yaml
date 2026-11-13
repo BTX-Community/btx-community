@@ -305,7 +305,6 @@ en:
   note: Note
   removed.title: No longer listed
   removed.lead: Entries of the old btxlinks list that we removed, and why.
-  credit: Builds on btxlinks.com by vanities (MIT licence).
   repo: Source code
   disclaimer: >-
     Independent community project. Links lead to third parties; we are not responsible for
@@ -630,7 +629,6 @@ de:
   note: Hinweis
   removed.title: Nicht mehr gelistet
   removed.lead: Einträge der alten btxlinks-Liste, die wir entfernt haben, und warum.
-  credit: Baut auf btxlinks.com von vanities auf (MIT-Lizenz).
   repo: Quellcode
   disclaimer: >-
     Unabhängiges Community-Projekt. Links führen zu Dritten; für deren Inhalte sind wir nicht
@@ -955,7 +953,6 @@ es:
   note: Nota
   removed.title: Ya no figuran
   removed.lead: Entradas de la antigua lista btxlinks que hemos quitado, y por qué.
-  credit: Basado en btxlinks.com de vanities (licencia MIT).
   repo: Código fuente
   disclaimer: >-
     Proyecto independiente de la comunidad. Los enlaces llevan a terceros; no somos responsables de
@@ -1284,7 +1281,6 @@ fr:
   note: Remarque
   removed.title: Plus listés
   removed.lead: Entrées de l'ancienne liste btxlinks que nous avons retirées, et pourquoi.
-  credit: S'appuie sur btxlinks.com de vanities (licence MIT).
   repo: Code source
   disclaimer: >-
     Projet communautaire indépendant. Les liens mènent vers des tiers ; nous ne sommes pas
@@ -1562,7 +1558,6 @@ zh:
   note: 备注
   removed.title: 已不再收录
   removed.lead: 我们从旧的 btxlinks 列表中移除的条目及原因。
-  credit: 基于 vanities 的 btxlinks.com（MIT 许可证）。
   repo: 源代码
   disclaimer: >-
     独立的社区项目。链接指向第三方，我们不对其内容负责。本页内容均不构成投资建议。
