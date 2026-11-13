@@ -823,7 +823,7 @@ documents:
         with a place to put your name against a lane.
       de: >-
         Was die Community selbst tun kann und was vom Kernteam abhängt, in zwei Spalten, mit
-        einer Spalte, in die man seinen Namen für einen Bereich eintragen kann.
+        einem Feld, in das man seinen Namen für einen Bereich eintragen kann.
     url: https://github.com/BTX-Community/btx-community/blob/main/ROADMAP.md
     status:
       en: Open for edits
@@ -945,8 +945,8 @@ removed:
       de: Website nicht erreichbar (2026-11-03).
   - name: btx.trade (OTC)
     reason:
-      en: Website answered with an error (520, 2026-11-03).
-      de: Website antwortete mit einem Fehler (520, 2026-11-03).
+      en: Custodial OTC desk run by a third party, with no published company, licence, fees or audit; outside what this page can check.
+      de: Verwahrender OTC-Desk eines Dritten, ohne veröffentlichte Firma, Lizenz, Gebühren oder Prüfung; außerhalb dessen, was diese Seite prüfen kann.
   - name: CoinPaprika
     reason:
       en: The BTX page no longer exists (404, 2026-11-03).

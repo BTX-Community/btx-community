@@ -603,8 +603,8 @@ translations:
   fr: Site inaccessible, l'explorateur a répondu 503 (2026-11-03).
 - en: Website not reachable (2026-11-03).
   fr: Site inaccessible (2026-11-03).
-- en: Website answered with an error (520, 2026-11-03).
-  fr: Le site a répondu par une erreur (520, 2026-11-03).
+- en: Custodial OTC desk run by a third party, with no published company, licence, fees or audit; outside what this page can check.
+  fr: Desk OTC dépositaire tenu par un tiers, sans société, licence, frais ni audit publiés ; hors de ce que cette page peut vérifier.
 - en: The BTX page no longer exists (404, 2026-11-03).
   fr: La page BTX n'existe plus (404, 2026-11-03).
 - en: >-
