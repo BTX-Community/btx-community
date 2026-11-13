@@ -5,6 +5,8 @@
 
 schema_version: 1
 translations:
+- en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
+  fr: Ne liste plus BTX ; son marché BTX/USDT a disparu en juillet 2026.
 - en: >-
     A .btxwallet file holds the post-quantum seed in plain text. Treat it like a private key and
     delete temporary copies.
@@ -548,16 +550,6 @@ translations:
     que ce que vous pouvez vous permettre de perdre.
 - en: Last change 2026-07-09.
   fr: Dernière modification le 2026-07-09.
-- en: Exchanges
-  fr: Plateformes d'échange
-- en: >-
-    Not audited by us. Trading carries risk; check the exchange yourself and do not leave coins there
-    longer than needed.
-  fr: >-
-    Non auditées par nous. Le trading comporte des risques ; vérifiez vous-même la plateforme et n'y
-    laissez pas de coins plus longtemps que nécessaire.
-- en: Centralised exchange with a BTX/USDT market.
-  fr: Plateforme d'échange centralisée avec un marché BTX/USDT.
 - en: Roadmap
   fr: Feuille de route
 - en: >-

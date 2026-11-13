@@ -6,6 +6,8 @@
 
 schema_version: 1
 translations:
+- en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
+  zh: 已不再上架 BTX；其 BTX/USDT 交易对自 2026 年 7 月起已下线。
 - en: >-
     A .btxwallet file holds the post-quantum seed in plain text. Treat it like a private key and
     delete temporary copies.
@@ -404,14 +406,6 @@ translations:
   zh: 处于实验阶段，未经我们审计。跨链桥可能导致资金损失；不要发送超出你能承受损失的金额。
 - en: Last change 2026-07-09.
   zh: 最后更新于 2026-07-09。
-- en: Exchanges
-  zh: 交易所
-- en: >-
-    Not audited by us. Trading carries risk; check the exchange yourself and do not leave coins there
-    longer than needed.
-  zh: 未经我们审计。交易有风险；请自行核查交易所，不要把币放在那里超过必要的时间。
-- en: Centralised exchange with a BTX/USDT market.
-  zh: 提供 BTX/USDT 交易对的中心化交易所。
 - en: Roadmap
   zh: 路线图
 - en: >-
