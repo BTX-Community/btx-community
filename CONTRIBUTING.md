@@ -8,7 +8,8 @@ Short version: change what you think is wrong, and say why in the commit message
 means: you are the person others ask about that line, and the person who says so when
 it stalls. Not a title, not exclusive — two names on a row beats none.
 
-If git is in your way, say it in the Growth topic and someone will enter it for you.
+If git is in your way, say it in the Growth topic, or open an issue at
+https://github.com/BTX-Community/btx-community/issues, and someone will enter it for you.
 Nobody should be locked out of this because of tooling.
 
 ## Changing a document
