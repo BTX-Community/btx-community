@@ -1,6 +1,7 @@
 # Start page of btx-community.com: cards for newcomers, miners and node operators, plus a link
 # directory. The directory continues the community list btxlinks.com
-# (github.com/vanities/btxlinks, MIT licence) with every entry re-checked.
+# (github.com/vanities/btxlinks, Copyright (c) 2026 Adam Mischke, MIT License) with every
+# entry re-checked; its licence text is in THIRD-PARTY-NOTICES.md.
 #
 # Edit this file to change the page; site/build.py checks it on every pull request and
 # refuses anything that does not fit the rules below.
