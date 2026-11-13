@@ -11,6 +11,10 @@
 # second pair of eyes before anything changes.
 /research/            @dr-chambre @Jpp-matata @MendeMatthias @repch1c @sunnyriverr
 
+# The developer hub. Method, recipes and lanes that people and their AI tools
+# act on, so they get a second pair of eyes before anything changes.
+/dev/                 @dr-chambre @Jpp-matata
+
 # The roadmap is meant to be edited freely. Owners are listed so somebody
 # notices, not to gate it.
 /ROADMAP.md           @dr-chambre @Jpp-matata @sunnyriverr

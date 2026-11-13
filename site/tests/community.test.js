@@ -251,3 +251,71 @@ test("links into the old single page lead to the page that holds the section now
     assert.equal(live.movedTarget(path, hash), null, path + hash);
   }
 });
+
+// --- Developers page ---
+
+const AREAS = [
+  { id: "consensus", unit: 95.7, rank: null, loc: 2452 },
+  { id: "validation", unit: 75.6, rank: 2, loc: 23687 },
+  { id: "wallet", unit: 37.2, rank: 4, loc: 76263 },
+  { id: "net-processing", unit: 24.6, rank: 1, loc: 25300 },
+  { id: "other-net", unit: 50.4, rank: 1, loc: null },
+  { id: "matmul", unit: 62.6, rank: 9, loc: 468217 },
+  { id: "pq", unit: 92.7, rank: null, loc: null },
+  { id: "security-v2", unit: 0.2, rank: null, loc: 5365 },
+];
+
+test("lanes are shown by kind and by whether they wait for an owner", () => {
+  const lanes = [
+    { kind: "area", waiting: false }, { kind: "area", waiting: true },
+    { kind: "class", waiting: false }, { kind: "infra", waiting: false },
+  ];
+  const shown = (kind, waitingOnly) => lanes.filter((lane) => live.laneVisible(lane, kind, waitingOnly));
+  assert.deepEqual(shown("area", false), lanes.slice(0, 2));
+  assert.deepEqual(shown("all", true), [lanes[1]]);
+  assert.deepEqual(shown("class", true), []);
+  assert.deepEqual(shown("area", true), [lanes[1]]);
+  assert.equal(shown("all", false).length, 4);
+  assert.deepEqual(shown("bogus", false), []);
+  assert.equal(live.laneVisible({ kind: "bogus", waiting: false }, "all", false), false);
+});
+
+test("registry rows are shown by status", () => {
+  for (const status of ["worklist", "baseline", "count-first", "rule-only", "needs-ci", "generators", "evidence"]) {
+    assert.equal(live.classVisible({ status }, "all"), true, status);
+  }
+  assert.equal(live.classVisible({ status: "evidence" }, "evidence"), true);
+  assert.equal(live.classVisible({ status: "worklist" }, "evidence"), false);
+  assert.equal(live.classVisible({ status: "worklist" }, "bogus"), false);
+  assert.equal(live.classVisible({ status: "swept" }, "all"), false);
+});
+
+test("registry rows are counted per status", () => {
+  const rows = [
+    ...Array(2).fill("worklist"), ...Array(3).fill("baseline"), ...Array(7).fill("count-first"),
+    ...Array(3).fill("rule-only"), ...Array(2).fill("needs-ci"), "generators", ...Array(2).fill("evidence"),
+  ].map((status) => ({ status }));
+  const expected = {
+    all: 20, worklist: 2, baseline: 3, "count-first": 7, "rule-only": 3, "needs-ci": 2, generators: 1, evidence: 2,
+  };
+  assert.deepEqual(live.countByStatus(rows), expected);
+  assert.deepEqual(live.countByStatus([...rows, { status: "bogus" }, null]), expected);
+});
+
+test("coverage areas sort by lowest coverage, risk rank and size", () => {
+  assert.deepEqual(live.areaOrder(AREAS, "lowest"),
+    ["security-v2", "net-processing", "wallet", "other-net", "matmul", "validation", "pq", "consensus"]);
+  assert.deepEqual(live.areaOrder(AREAS, "risk"),
+    ["net-processing", "other-net", "validation", "wallet", "matmul", "consensus", "pq", "security-v2"]);
+  assert.deepEqual(live.areaOrder(AREAS, "size"),
+    ["matmul", "wallet", "net-processing", "validation", "security-v2", "consensus", "other-net", "pq"]);
+  assert.deepEqual(live.areaOrder(AREAS, "listed"), AREAS.map((area) => area.id));
+  assert.deepEqual(live.areaOrder(AREAS, "bogus"), AREAS.map((area) => area.id));
+  const tied = [{ id: "a", unit: 1, rank: null, loc: null }, { id: "b", unit: 1, rank: null, loc: null }];
+  assert.deepEqual(live.areaOrder(tied, "lowest"), ["a", "b"]);
+});
+
+test("the data of a coverage row becomes numbers or null", () => {
+  assert.deepEqual(live.areaFromRow({ unit: "37.2", rank: "", loc: "76263" }), { unit: 37.2, rank: null, loc: 76263 });
+  assert.deepEqual(live.areaFromRow({ unit: "abc", rank: "4", loc: undefined }), { unit: null, rank: 4, loc: null });
+});

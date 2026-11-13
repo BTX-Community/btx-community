@@ -9,6 +9,7 @@
 # risk:     category with services we have not audited (wallets, bridges, exchanges); the page
 #           shows its warning above the entries.
 # url:      plain https URL; a short query (e.g. "?type=basic") is allowed, nothing else.
+# page:     a step can link to a page of this site instead, e.g. "dev" for the developers page.
 # Texts: English (default) and German. Keep them factual; no claims we cannot back up.
 
 schema_version: 1
@@ -147,6 +148,32 @@ audiences:
             ab; andere NVIDIA-Karten brauchen einen eigenen Build und qualifizieren sich womöglich
             nicht. An das Betreiber-Runbook der Entwickler halten.
         url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md
+
+  - id: developers
+    title: { en: Become a BTX dev, de: BTX-Entwickler werden }
+    text:
+      en: >-
+        The node software is open source, and anyone can send it a pull request on GitHub.
+        The developer hub tells you, and the AI tool you work with, how to build, test and
+        document a change so that it can be merged, and which work is open.
+      de: >-
+        Die Node-Software ist Open Source, und jeder kann auf GitHub Pull Requests dafür
+        einreichen. Der Entwickler-Hub erklärt dir und deinem KI-Werkzeug, wie man eine
+        Änderung baut, testet und dokumentiert, damit sie übernommen werden kann, und welche
+        Arbeit offen ist.
+    steps:
+      - text:
+          en: "Start on the developers page: where to begin, levels, test coverage and open lanes."
+          de: "Auf der Entwickler-Seite anfangen: Einstieg, Stufen, Testabdeckung und offene Arbeitsbereiche."
+        page: dev
+      - text:
+          en: Give your AI tool (Claude Code, Cursor, Codex or another) the agent file.
+          de: Dem eigenen KI-Werkzeug (Claude Code, Cursor, Codex oder einem anderen) die Agenten-Datei geben.
+        url: https://github.com/BTX-Community/btx-community/blob/main/dev/AGENTS.md
+      - text:
+          en: The reference implementation and its own rules for agents.
+          de: Die Referenzimplementierung und ihre eigenen Regeln für Agenten.
+        url: https://github.com/btxchain/btx
 
 categories:
   - id: community
@@ -880,6 +907,44 @@ documents:
         Was man frei ändern kann, was ein zweites Augenpaar braucht, und wie man eine falsche
         Zahl meldet, wenn git nicht das eigene Werkzeug ist.
     url: https://github.com/BTX-Community/btx-community/blob/main/CONTRIBUTING.md
+
+  - id: doc-dev-hub
+    title:
+      en: Become a BTX dev
+      de: BTX-Entwickler werden
+    text:
+      en: >-
+        How to work on the node software so that your change can be merged: the method, build
+        and test recipes, the gate before an upstream pull request, open lanes with claimable
+        owners, an exam, and an entry file for AI tools.
+      de: >-
+        Wie man an der Node-Software so arbeitet, dass eine Änderung angenommen werden kann:
+        die Methode, Bau- und Testanleitungen, die Prüfliste vor einem Upstream-Pull-Request,
+        offene Bereiche, in die man sich eintragen kann, eine Prüfung und eine Einstiegsdatei
+        für KI-Werkzeuge.
+    url: https://github.com/BTX-Community/btx-community/blob/main/dev/README.md
+    status:
+      en: Living document - every page carries its last-verified date
+      de: Wird laufend gepflegt - jede Seite nennt das Datum ihrer letzten Prüfung
+
+  - id: doc-review-programme
+    title:
+      en: Review and test programme - one pull request per bug class
+      de: Review- und Testprogramm - ein Pull Request pro Fehlerklasse
+    text:
+      en: >-
+        Test coverage measured on the release line, the recurring bug classes behind 317 fix
+        pull requests since August, one sweep per class that closes it with a rule, and checks
+        before a final release. A proposal by contributors; the maintainer decides what lands.
+      de: >-
+        Die auf dem Release-Zweig gemessene Testabdeckung, die wiederkehrenden Fehlerklassen
+        hinter 317 Fix-Pull-Requests seit August, ein Sammel-PR pro Klasse, der sie mit einer
+        Regel schließt, und Prüfungen vor einem endgültigen Release. Ein Vorschlag von
+        Mitwirkenden; was übernommen wird, entscheidet der Maintainer.
+    url: https://github.com/BTX-Community/btx-community/blob/main/dev/plan/MASTER-PLAN.md
+    status:
+      en: Measured 12 November 2026 at commit c6f9678d
+      de: Gemessen am 12. November 2026 auf Commit c6f9678d
 
 
 removed:

@@ -3,7 +3,7 @@
 **Working document — open for edits.** Add your name, change a line, add a row.
 Pull requests welcome; so is saying it in the Growth topic and someone else enters it.
 
-Last updated: 5 November 2026
+Last updated: 12 November 2026
 
 ---
 
@@ -42,6 +42,7 @@ column B should not be scheduled until it lands.
 | A6 | **Comms and marketing.** X account, community channel, a single place to send people | Nothing to point at today, and the existing channels are either dead or hostile | Discussed, not started | |
 | A7 | **Documentation.** The questions newcomers actually ask, answered once, in writing, with sources | First question is always the deployment reward. See `research/deployment-reward.md` | First document in draft | dr.chambre |
 | A8 | **Roles and continuity.** A name against each lane, and more than one person able to push everywhere | Every single-owner service in this ecosystem has failed the same way | This document | |
+| A9 | **Developer hub ("Become a BTX dev").** One place for people and their AI tools: method, build and test recipes, the gate before an upstream PR, open lanes, exam, lessons | 317 fix PRs since August, often the same bug class at a new site; 89 % of them have landed ([`dev/plan/MASTER-PLAN.md`](dev/plan/MASTER-PLAN.md) §0). Newcomers and their AI tools have had no shared way to build, test and file a change | First version in [`dev/`](dev/); a site card and two document cards link to it | |
 
 ---
 

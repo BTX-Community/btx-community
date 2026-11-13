@@ -1,0 +1,507 @@
+{% extends "base.html.j2" %}
+{% block content %}
+{% set measured = ui["hub.measured"].format(commit=hub.measured_commit, date=hub.measured_date, head=hub.measured_head) %}
+{% macro nodata() %}<span aria-hidden="true">–</span><span class="c-sr">{{ ui["hub.coverage.nodata"] }}</span>{% endmacro %}
+      <section class="c-intro">
+        <h1 class="c-page-title">{{ page_title }}</h1>
+        <p class="c-hero__lead">{{ page_lead }}</p>
+      </section>
+
+      <nav class="c-jump c-jump--page" aria-label="{{ ui['hub.nav.label'] }}">
+        {% for id in ("begin", "brief", "levels", "coverage", "classes", "lanes", "flow", "gates", "rhythm", "rules", "contribute") %}
+        <a class="c-chip" href="#{{ id }}">{{ ui["hub.nav." ~ id] }}</a>
+        {% endfor %}
+      </nav>
+
+      <section class="c-hub" id="begin" aria-labelledby="begin-title">
+        <h2 class="c-section-title" id="begin-title">{{ ui["hub.begin.title"] }}</h2>
+        <p class="c-muted">{{ ui["hub.begin.lead"] }}</p>
+        <div class="c-audiences c-hub__cards">
+          <article class="c-audience" id="first-steps">
+            <h3 class="c-audience__title">{{ ui["hub.steps.title"] }}</h3>
+            <ol class="c-steps">
+              {% for step in hub.start %}
+              <li><a href="{{ step.href }}" rel="noopener noreferrer">{{ step.text }} <span aria-hidden="true">↗</span></a></li>
+              {% endfor %}
+            </ol>
+          </article>
+        </div>
+        <h3 class="c-subtitle" id="principles-title">{{ ui["hub.principles.title"] }}</h3>
+        <div class="c-fact-grid" aria-labelledby="principles-title" role="group">
+          {% for principle in hub.principles %}
+          <article class="c-fact c-fact--principle" id="principle-{{ principle.id }}">
+            <h4 class="c-fact__title">{{ principle.title }}</h4>
+            <p>{{ principle.text }}</p>
+          </article>
+          {% endfor %}
+        </div>
+        <p class="c-updated">
+          {{ ui["hub.checked"].format(date=hub.checked) }}
+          <a class="c-link" href="{{ hub.source }}" rel="noopener noreferrer">{{ ui["hub.source"] }} ↗</a>
+        </p>
+      </section>
+
+      <section class="c-hub" id="brief" aria-labelledby="brief-title">
+        <h2 class="c-section-title" id="brief-title">{{ ui["hub.brief.title"] }}</h2>
+        <p class="c-muted">{{ ui["hub.brief.lead"] }}</p>
+        <div class="c-prompt-box">
+          <pre class="c-prompt" id="ai-prompt" lang="en" translate="no" tabindex="0" role="region" aria-labelledby="brief-title">{{ hub.brief_prompt }}</pre>
+          <p class="c-prompt-box__bar">
+            <button type="button" class="c-btn c-btn--copy" data-copy="ai-prompt" data-copied="{{ ui['hub.brief.copied'] }}" hidden>{{ ui["hub.brief.copy"] }}</button>
+            <span class="c-muted" data-copy-hint>{{ ui["hub.brief.select"] }}</span>
+            <span class="c-sr" aria-live="polite" data-copy-status></span>
+          </p>
+        </div>
+        <p class="c-links">
+          <a class="c-link" href="{{ hub.brief_agents }}" rel="noopener noreferrer">{{ ui["hub.brief.agents"] }} ↗</a>
+          <a class="c-link" href="{{ hub.brief_llms }}" rel="noopener noreferrer">{{ ui["hub.brief.llms"] }} ↗</a>
+        </p>
+        <ul class="c-caveats">
+          {% for note in hub.brief_notes %}
+          <li>{{ note }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section class="c-hub" id="levels" aria-labelledby="levels-title">
+        <h2 class="c-section-title" id="levels-title">{{ ui["hub.levels.title"] }}</h2>
+        <p class="c-muted">{{ ui["hub.levels.lead"] }}</p>
+        <div class="c-audiences">
+          {% for level in hub.levels %}
+          <article class="c-audience" id="level-{{ level.id }}">
+            <h3 class="c-audience__title">{{ level.title }}</h3>
+            <p class="c-audience__text">{{ level.text }}</p>
+            <a class="c-link c-fact__source" href="{{ level.url }}" rel="noopener noreferrer" aria-label="{{ ui['hub.levels.open'] }}: {{ level.title }}">{{ ui["hub.levels.open"] }} ↗</a>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="c-hub" id="coverage" aria-labelledby="coverage-title">
+        <h2 class="c-section-title" id="coverage-title">{{ ui["hub.coverage.title"] }}</h2>
+        <p class="c-muted">{{ hub.coverage_text }}</p>
+        <dl class="c-tiles">
+          {% for figure in hub.figures %}
+          <div class="c-tile" id="figure-{{ figure.id }}">
+            <dt>{{ figure.label }}</dt>
+            <dd>{{ figure.value }}</dd>
+            <dd class="c-tile__sub">{{ figure.note }}</dd>
+          </div>
+          {% endfor %}
+        </dl>
+
+        <h3 class="c-subtitle" id="runs-title">{{ ui["hub.runs.title"] }}</h3>
+        <div class="c-table-wrap" tabindex="0" role="region" aria-labelledby="runs-title">
+          <table class="c-table c-table--runs" aria-labelledby="runs-title">
+            <thead>
+              <tr>
+                <th scope="col">{{ ui["hub.runs.run"] }}</th>
+                {% for column in ("total", "passed", "timed_out", "failed", "skipped") %}
+                <th scope="col" class="c-table__num">{{ ui["hub.runs." ~ column] }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for run in hub.runs %}
+              <tr id="run-{{ run.id }}">
+                <th scope="row">{{ ui["hub.runs." ~ run.id] }}</th>
+                <td class="c-table__num">{{ run.total }}</td>
+                <td class="c-table__num">{{ run.passed }}</td>
+                <td class="c-table__num">{{ run.timed_out }}</td>
+                <td class="c-table__num">{{ run.failed }}</td>
+                <td class="c-table__num">{{ run.skipped }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="c-subtitle" id="areas-title">{{ ui["hub.areas.title"] }}</h3>
+        <p class="c-muted">{{ ui["hub.areas.lead"] }}</p>
+        <div class="c-filter" data-filter="areas" role="group" aria-label="{{ ui['hub.sort.label'] }}" hidden>
+          <span class="c-filter__label" aria-hidden="true">{{ ui["hub.sort.label"] }}</span>
+          {% for key in ("listed", "lowest", "risk", "size") %}
+          <button type="button" class="c-btn c-filter__chip" data-sort="{{ key }}" aria-pressed="{{ 'true' if key == 'listed' else 'false' }}">{{ ui["hub.sort." ~ key] }}</button>
+          {% endfor %}
+        </div>
+        <div class="c-table-wrap" tabindex="0" role="region" aria-labelledby="areas-title">
+          <table class="c-table c-table--areas" id="areas" aria-labelledby="areas-title">
+            <thead>
+              <tr>
+                <th scope="col">{{ ui["hub.areas.area"] }}</th>
+                <th scope="col" class="c-table__num" data-sort-column="lowest">{{ ui["hub.areas.unit"] }}</th>
+                <th scope="col" class="c-table__num">{{ ui["hub.areas.functional"] }}</th>
+                <th scope="col" class="c-table__num">{{ ui["hub.areas.branches"] }}</th>
+                <th scope="col" class="c-table__num" data-sort-column="size">{{ ui["hub.areas.size"] }}</th>
+                <th scope="col" class="c-table__num" data-sort-column="risk">{{ ui["hub.areas.rank"] }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for area in hub.areas %}
+              <tr id="area-{{ area.id }}" data-unit="{{ area.unit_value }}" data-rank="{{ area.risk_rank or '' }}" data-loc="{{ area.loc_value }}">
+                <th scope="row">
+                  <span class="c-table__code">{{ area.name }}</span>
+                  {% if area.path %}<span class="c-table__hint">{{ area.path }}</span>{% endif %}
+                  {% if area.note %}<span class="c-table__note">{{ area.note }}</span>{% endif %}
+                </th>
+                <td class="c-table__num">{{ area.unit }}<meter class="c-bar c-bar--unit" min="0" max="100" value="{{ area.unit_value }}" aria-hidden="true"></meter></td>
+                <td class="c-table__num">{{ area.functional }}<meter class="c-bar c-bar--func" min="0" max="100" value="{{ area.functional_value }}" aria-hidden="true"></meter></td>
+                <td class="c-table__num">{% if area.branches %}{{ area.branches }}{% else %}{{ nodata() }}{% endif %}</td>
+                <td class="c-table__num">{% if area.loc %}{{ area.loc }}{% else %}{{ nodata() }}{% endif %}</td>
+                <td class="c-table__num">{% if area.risk_rank %}{{ area.risk_rank }}{% else %}{{ nodata() }}{% endif %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="c-muted c-note">{{ ui["hub.coverage.gui"] }}</p>
+
+        <h3 class="c-subtitle" id="baselines-title">{{ ui["hub.baselines.title"] }}</h3>
+        <p class="c-muted">{{ ui["hub.baselines.lead"] }}</p>
+        <dl class="c-tiles">
+          {% for baseline in hub.baselines %}
+          <div class="c-tile" id="baseline-{{ baseline.id }}">
+            <dt>{{ baseline.label }}</dt>
+            <dd>{{ baseline.count }}</dd>
+            {% if baseline.note %}<dd class="c-tile__sub">{{ baseline.note }}</dd>{% endif %}
+          </div>
+          {% endfor %}
+        </dl>
+        <p class="c-updated">
+          {{ measured }}
+          <a class="c-link" href="{{ hub.coverage_source }}" rel="noopener noreferrer">{{ ui["hub.coverage.source"] }} ↗</a>
+          <a class="c-link" href="{{ hub.coverage_plan }}" rel="noopener noreferrer">{{ ui["hub.coverage.plan"] }} ↗</a>
+        </p>
+      </section>
+
+      <section class="c-hub" id="classes" aria-labelledby="classes-title">
+        <h2 class="c-section-title" id="classes-title">{{ ui["hub.classes.title"] }}</h2>
+        <p class="c-muted">{{ ui["hub.classes.lead"] }}</p>
+        <p class="c-muted">{{ hub.classes_text }}</p>
+        <div class="c-filter" data-filter="registry" role="group" aria-label="{{ ui['hub.filter.classes'] }}" hidden>
+          <button type="button" class="c-btn c-filter__chip" data-status="all" aria-pressed="true">{{ ui["hub.filter.all"] }} <span class="c-filter__count">{{ hub.classes | length }}</span></button>
+          {% for status, count in hub.status_counts %}
+          <button type="button" class="c-btn c-filter__chip" data-status="{{ status }}" aria-pressed="false">{{ ui["hub.status." ~ status] }} <span class="c-filter__count">{{ count }}</span></button>
+          {% endfor %}
+          <p class="c-filter__shown" aria-live="polite" data-template="{{ ui['hub.classes.shown'] }}">{{ ui["hub.classes.shown"].format(shown=hub.classes | length, total=hub.classes | length) }}</p>
+        </div>
+        <div class="c-table-wrap" tabindex="0" role="region" aria-labelledby="classes-title">
+          <table class="c-table c-table--classes" id="registry" aria-labelledby="classes-title">
+            <thead>
+              <tr>
+                <th scope="col">{{ ui["hub.classes.class"] }}</th>
+                <th scope="col">{{ ui["hub.classes.name"] }}</th>
+                <th scope="col" class="c-table__num">{{ ui["hub.classes.prs"] }}</th>
+                <th scope="col" class="c-table__num">{{ ui["hub.classes.sites"] }}</th>
+                <th scope="col">{{ ui["hub.classes.status"] }}</th>
+                <th scope="col">{{ ui["hub.classes.lane"] }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for bug in hub.classes %}
+              <tr id="class-{{ bug.anchor }}" data-status="{{ bug.status }}">
+                <th scope="row">
+                  <span class="c-tag">{{ bug.id }}</span>
+                  {% if bug.security %}<abbr class="c-tag c-tag--s" title="{{ ui['hub.classes.security'] }}" aria-hidden="true">S</abbr><span class="c-sr">{{ ui["hub.classes.s"] }}</span>{% endif %}
+                </th>
+                <td>
+                  <span class="c-table__name">{{ bug.name }}</span>
+                  <span class="c-table__rule">{{ bug.rule }}</span>
+                </td>
+                <td class="c-table__num">{% if bug.prs %}{{ bug.prs }}{% else %}{{ nodata() }}{% endif %}</td>
+                <td class="c-table__num">{% if bug.sites_open %}{{ bug.sites_open }}{% if bug.sites_unit %} <span class="c-table__note">{{ bug.sites_unit }}</span>{% endif %}{% else %}{{ nodata() }}{% endif %}</td>
+                <td>
+                  <span class="c-status c-status--{{ bug.status }}">{{ ui["hub.status." ~ bug.status] }}</span>
+                  <span class="c-table__note">{{ bug.status_text }}</span>
+                </td>
+                <td>
+                  {% for lane in bug.lanes %}<a class="c-link c-table__lane" href="#lane-{{ lane }}">{{ lane }}</a>{% if not loop.last %} {% endif %}{% endfor %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="c-muted c-note"><span class="c-tag c-tag--s" aria-hidden="true">S</span> {{ ui["hub.classes.security"] }}</p>
+        <p class="c-updated">
+          {{ measured }}
+          <a class="c-link" href="{{ hub.classes_source }}" rel="noopener noreferrer">{{ ui["hub.classes.registry"] }} ↗</a>
+        </p>
+      </section>
+
+      <section class="c-hub" id="lanes" aria-labelledby="lanes-title">
+        <h2 class="c-section-title" id="lanes-title">{{ ui["hub.lanes.title"] }}</h2>
+        <p class="c-muted">
+          {{ ui["hub.lanes.lead"].format(count=hub.lane_count) }}
+          {{ ui["hub.lanes.waiting_lead"].format(count=hub.waiting_count) }}
+        </p>
+        <div class="c-filter" data-filter="lanes" role="group" aria-label="{{ ui['hub.filter.lanes'] }}" hidden>
+          <button type="button" class="c-btn c-filter__chip" data-kind="all" aria-pressed="true">{{ ui["hub.filter.all"] }} <span class="c-filter__count">{{ hub.lane_count }}</span></button>
+          {% for group in hub.lane_groups %}
+          <button type="button" class="c-btn c-filter__chip" data-kind="{{ group.id }}" aria-pressed="false">{{ ui["hub.lanes.kind." ~ group.id] }} <span class="c-filter__count">{{ group.lanes | length }}</span></button>
+          {% endfor %}
+          <label class="c-filter__check"><input type="checkbox" data-waiting-only> {{ ui["hub.lanes.waiting_only"] }}</label>
+          <button type="button" class="c-btn" data-expand aria-expanded="false" data-label-expand="{{ ui['hub.lanes.expand'] }}" data-label-collapse="{{ ui['hub.lanes.collapse'] }}">{{ ui["hub.lanes.expand"] }}</button>
+          <button type="button" class="c-btn" data-reset>{{ ui["hub.lanes.reset"] }}</button>
+          <p class="c-filter__shown" aria-live="polite" data-template="{{ ui['hub.lanes.shown'] }}">{{ ui["hub.lanes.shown"].format(shown=hub.lane_count, total=hub.lane_count) }}</p>
+        </div>
+        {% for group in hub.lane_groups %}
+        <section class="c-lane-group" id="group-{{ group.id }}" aria-labelledby="group-{{ group.id }}-title">
+          <h3 class="c-category__title" id="group-{{ group.id }}-title">{{ group.title }} <span class="c-count">{{ group.lanes | length }}</span></h3>
+          <p class="c-muted">{{ group.text }}</p>
+          <div class="c-audiences">
+            {% for lane in group.lanes %}
+            <article class="c-audience c-lane" id="lane-{{ lane.id }}" data-kind="{{ lane.kind }}" data-waiting="{{ '1' if lane.waiting else '0' }}" aria-labelledby="lane-{{ lane.id }}-title">
+              <p class="c-lane__head">
+                <span class="c-tag">{{ lane.id }}</span>
+                <span class="c-tag c-route c-route--{{ lane.route }}">{{ ui["hub.route." ~ lane.route] }}</span>
+                {% if lane.waiting %}<span class="c-tag c-tag--open">{{ ui["hub.lanes.waiting"] }}</span>{% endif %}
+              </p>
+              <h4 class="c-audience__title" id="lane-{{ lane.id }}-title">{{ lane.title }}</h4>
+              <dl class="c-lane__meta">
+                <dt>{{ ui["hub.lane.scope"] }}</dt>
+                <dd>{{ lane.scope }}</dd>
+                <dt>{{ ui["hub.lane.why"] }}</dt>
+                <dd>{{ lane.why }}</dd>
+                <dt>{{ ui["hub.lane.target"] }}</dt>
+                <dd>{{ lane.target }}</dd>
+                <dt>{{ ui["hub.lane.cadence"] }}</dt>
+                <dd>{{ lane.cadence }}</dd>
+                <dt>{{ ui["hub.lane.route"] }}</dt>
+                <dd>{{ lane.route_text }}</dd>
+                <dt>{{ ui["hub.lane.coverage"] }}</dt>
+                {% if lane.coverage %}
+                <dd>
+                  {{ lane.coverage }}
+                  <meter class="c-bar c-bar--unit" min="0" max="100" value="{{ lane.coverage_values[0] }}" aria-hidden="true"></meter>
+                  <meter class="c-bar c-bar--func" min="0" max="100" value="{{ lane.coverage_values[1] }}" aria-hidden="true"></meter>
+                </dd>
+                {% else %}
+                <dd class="c-muted">{{ ui["hub.lane.nodata"] }}</dd>
+                {% endif %}
+                <dt>{{ ui["hub.lane.rank"] }}</dt>
+                <dd>{% if lane.risk_rank %}{{ lane.risk_rank }}{% else %}{{ nodata() }}{% endif %}</dd>
+              </dl>
+              <details class="c-lane__done">
+                <summary>{{ ui["hub.lane.done"].format(count=lane.done_bar | length) }}</summary>
+                <ol class="c-steps">
+                  {% for item in lane.done_bar %}
+                  <li>{{ item }}</li>
+                  {% endfor %}
+                </ol>
+              </details>
+              {% if lane.runners %}
+              <p class="c-lane__label">{{ ui["hub.lane.runners"] }}</p>
+              <ul class="c-caveats">
+                {% for runner in lane.runners %}
+                <li>{{ runner }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+              {% if lane.pack %}
+              <a class="c-link c-lane__pack" href="{{ lane.pack }}" rel="noopener noreferrer" aria-label="{{ ui['hub.lane.pack'] }}: {{ lane.id }}">{{ ui["hub.lane.pack"] }} ↗</a>
+              {% else %}
+              <a class="c-link c-lane__pack" href="{{ hub.lanes_source }}" rel="noopener noreferrer">{{ ui["hub.lane.nopack"] }} ↗</a>
+              {% endif %}
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+        {% endfor %}
+        <p class="c-updated">
+          {{ measured }}
+          <a class="c-link" href="{{ hub.lanes_source }}" rel="noopener noreferrer">{{ ui["hub.lanes.open"] }} ↗</a>
+          <a class="c-link" href="{{ hub.lanes_data }}" rel="noopener noreferrer">{{ ui["hub.lanes.json"] }} ↗</a>
+        </p>
+      </section>
+
+      <section class="c-hub" id="flow" aria-labelledby="flow-title">
+        <h2 class="c-section-title" id="flow-title">{{ ui["hub.flow.title"] }}</h2>
+        <p class="c-muted">{{ ui["hub.flow.lead"] }}</p>
+        <ol class="c-steps c-steps--flow">
+          {% for text, exit in hub.flow %}
+          <li{% if exit %} class="c-steps__exit"{% endif %}>{{ text }}{% if exit %} <span class="c-sr">{{ ui["hub.flow.exit"] }}</span>{% endif %}</li>
+          {% endfor %}
+        </ol>
+        <h3 class="c-subtitle" id="routes-title">{{ ui["hub.flow.exits"] }}</h3>
+        <div class="c-fact-grid" role="group" aria-labelledby="routes-title">
+          {% for route in hub.routes %}
+          <article class="c-fact c-fact--route" id="route-{{ route.id }}">
+            <h4 class="c-fact__title">{{ route.title }}</h4>
+            <p>{{ route.text }}</p>
+          </article>
+          {% endfor %}
+        </div>
+        <h3 class="c-subtitle" id="escalation-title">{{ ui["hub.flow.escalation"] }}</h3>
+        <ul class="c-caveats" aria-labelledby="escalation-title">
+          {% for item in hub.escalation %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+        <p class="c-updated">
+          <a class="c-link" href="{{ hub.flow_source }}" rel="noopener noreferrer">{{ ui["hub.flow.source"] }} ↗</a>
+          <a class="c-link" href="{{ hub.gate_source }}" rel="noopener noreferrer">{{ ui["hub.flow.gate"] }} ↗</a>
+        </p>
+      </section>
+
+      <section class="c-hub" id="gates" aria-labelledby="gates-title">
+        <h2 class="c-section-title" id="gates-title">{{ ui["hub.gates.title"] }}</h2>
+        <p class="c-muted">{{ ui["hub.gates.lead"] }}</p>
+        <h3 class="c-subtitle" id="gates-ci-title">{{ ui["hub.gates.ci"] }}</h3>
+        <div class="c-table-wrap" tabindex="0" role="region" aria-labelledby="gates-ci-title">
+          <table class="c-table c-table--gates" aria-labelledby="gates-ci-title">
+            <thead>
+              <tr>
+                <th scope="col">{{ ui["hub.gates.job"] }}</th>
+                <th scope="col">{{ ui["hub.gates.name"] }}</th>
+                <th scope="col">{{ ui["hub.gates.state"] }}</th>
+                <th scope="col">{{ ui["hub.gates.phase"] }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for gate in hub.ci_gates %}
+              <tr id="gate-{{ gate.id }}">
+                <th scope="row"><span class="c-tag">{{ gate.id }}</span></th>
+                <td>{{ gate.name }}</td>
+                <td><span class="c-table__note">{{ gate.state }}</span></td>
+                <td>{{ ui["hub.gates.phase_value"].format(id=gate.phase) }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <h3 class="c-subtitle" id="gates-release-title">{{ ui["hub.gates.release"] }}</h3>
+        <p class="c-muted">{{ ui["hub.gates.release_lead"] }}</p>
+        <div class="c-table-wrap" tabindex="0" role="region" aria-labelledby="gates-release-title">
+          <table class="c-table c-table--gates" aria-labelledby="gates-release-title">
+            <thead>
+              <tr>
+                <th scope="col">{{ ui["hub.gates.gate"] }}</th>
+                <th scope="col">{{ ui["hub.gates.name"] }}</th>
+                <th scope="col">{{ ui["hub.gates.state"] }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for gate in hub.release_gates %}
+              <tr id="gate-{{ gate.id }}">
+                <th scope="row">
+                  <span class="c-tag">{{ gate.id }}</span>
+                  {% if gate.done_bar %}<span class="c-tag c-tag--done">{{ ui["hub.gates.done"] }}</span>{% endif %}
+                </th>
+                <td>{{ gate.name }}</td>
+                <td><span class="c-table__note">{{ gate.state }}</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="c-updated">
+          {{ measured }}
+          <a class="c-link" href="{{ hub.gates_source }}" rel="noopener noreferrer">{{ ui["hub.gates.source"] }} ↗</a>
+          <a class="c-link" href="{{ hub.ci_pack }}" rel="noopener noreferrer">{{ ui["hub.gates.pack"] }} ↗</a>
+        </p>
+      </section>
+
+      <section class="c-hub" id="rhythm" aria-labelledby="rhythm-title">
+        <h2 class="c-section-title" id="rhythm-title">{{ ui["hub.rhythm.title"] }}</h2>
+        <p class="c-muted">{{ ui["hub.rhythm.lead"] }}</p>
+        <div class="c-fact-grid">
+          {% for phase in hub.phases %}
+          <article class="c-fact c-fact--phase" id="phase-{{ phase.id }}">
+            <p class="c-kicker">{{ ui["hub.rhythm.phase"].format(id=phase.id) }}</p>
+            <h3 class="c-fact__title">{{ phase.name }}</h3>
+            <p>{{ phase.window }}</p>
+            <ul class="c-caveats c-fact__list">
+              {% for item in phase.deliverables %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </article>
+          {% endfor %}
+        </div>
+        <h3 class="c-subtitle" id="week-title">{{ ui["hub.rhythm.week"] }}</h3>
+        <div class="c-table-wrap" tabindex="0" role="region" aria-labelledby="week-title">
+          <table class="c-table c-table--week" aria-labelledby="week-title">
+            <thead>
+              <tr>
+                <th scope="col">{{ ui["hub.rhythm.day"] }}</th>
+                <th scope="col">{{ ui["hub.rhythm.what"] }}</th>
+                <th scope="col">{{ ui["hub.rhythm.who"] }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for day in hub.week %}
+              <tr id="day-{{ day.id }}">
+                <th scope="row">{{ ui["hub.day." ~ day.id] }}</th>
+                <td>{{ day.what }}</td>
+                <td><span class="c-table__note">{{ day.who }}</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="c-updated">
+          <a class="c-link" href="{{ hub.rhythm_source }}" rel="noopener noreferrer">{{ ui["hub.rhythm.source"] }} ↗</a>
+          <a class="c-link" href="{{ hub.coverage_plan }}" rel="noopener noreferrer">{{ ui["hub.rhythm.plan"] }} ↗</a>
+        </p>
+      </section>
+
+      <section class="c-hub" id="rules" aria-labelledby="rules-title">
+        <h2 class="c-section-title" id="rules-title">{{ ui["hub.rules.section"] }}</h2>
+        <p class="c-warning">{{ ui["hub.rules.security"] }}</p>
+        <div class="c-audiences">
+          {% if hub.rules %}
+          <article class="c-audience c-audience--check" id="rules-short">
+            <h3 class="c-audience__title">{{ ui["hub.rules.title"] }}</h3>
+            <ol class="c-steps">
+              {% for rule in hub.rules %}
+              <li>{{ rule }}</li>
+              {% endfor %}
+            </ol>
+          </article>
+          {% endif %}
+          <article class="c-audience c-audience--never" id="never">
+            <h3 class="c-audience__title">{{ ui["hub.never.title"] }}</h3>
+            <p class="c-audience__text">{{ ui["hub.never.lead"] }}</p>
+            <ol class="c-steps">
+              {% for item in hub.never %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ol>
+          </article>
+        </div>
+        <h3 class="c-subtitle" id="sweeps-title">{{ ui["hub.rules.sweeps"] }}</h3>
+        <ul class="c-caveats" aria-labelledby="sweeps-title">
+          {% for rule in hub.sweep_rules %}
+          <li>{{ rule }}</li>
+          {% endfor %}
+        </ul>
+        <p class="c-updated">
+          <a class="c-link" href="{{ hub.method_source }}" rel="noopener noreferrer">{{ ui["hub.rules.method"] }} ↗</a>
+          <a class="c-link" href="{{ hub.guardrails_source }}" rel="noopener noreferrer">{{ ui["hub.rules.guardrails"] }} ↗</a>
+        </p>
+      </section>
+
+      <section class="c-hub" id="contribute" aria-labelledby="contribute-title">
+        <h2 class="c-section-title" id="contribute-title">{{ ui["hub.contribute.title"] }}</h2>
+        <p class="c-muted">{{ ui["hub.contribute.lead"] }}</p>
+        <div class="c-audiences">
+          {% for loop_ in hub.contribute %}
+          <article class="c-audience" id="loop-{{ loop_.id }}">
+            <h3 class="c-audience__title">{{ loop_.title }}</h3>
+            <p class="c-audience__text">{{ loop_.text }}</p>
+            <ol class="c-steps">
+              {% for step in loop_.steps %}
+              <li>{% if step.href %}<a href="{{ step.href }}" rel="noopener noreferrer">{{ step.text }} <span aria-hidden="true">↗</span></a>{% else %}{{ step.text }}{% endif %}</li>
+              {% endfor %}
+            </ol>
+            <a class="c-link c-fact__source" href="{{ loop_.url }}" rel="noopener noreferrer" aria-label="{{ ui['hub.contribute.open'] }}: {{ loop_.title }}">{{ ui["hub.contribute.open"] }} ↗</a>
+          </article>
+          {% endfor %}
+        </div>
+        <p class="c-updated">
+          {{ ui["hub.checked"].format(date=hub.checked) }}
+          <a class="c-link" href="{{ hub.source }}" rel="noopener noreferrer">{{ ui["hub.source"] }} ↗</a>
+        </p>
+      </section>
+{% endblock %}

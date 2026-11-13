@@ -1,5 +1,5 @@
-# Spanish translations of the content texts of btx-community.com (community.yaml and
-# guide.yaml). Each entry pairs the English text exactly as it stands there with its translation;
+# Spanish translations of the content texts of btx-community.com (community.yaml, guide.yaml and
+# hub.yaml). Each entry pairs the English text exactly as it stands there with its translation;
 # when the English text changes, the old pair no longer matches, the page shows English and the
 # build prints a warning. Translated with AI help; corrections by native speakers are welcome.
 
@@ -777,3 +777,1496 @@ translations:
   es: >-
     btx-qt en este archivo necesita glibc 2.43 y no arranca en Ubuntu 24.04 ni en Debian 13; btxd y btx-
     cli necesitan 2.38.
+- en: Become a BTX dev
+  es: Hazte desarrollador de BTX
+- en: >-
+    How to work on the node software so that your change can be merged: the method, build and test
+    recipes, the gate before an upstream pull request, open lanes with claimable owners, an exam,
+    and an entry file for AI tools.
+  es: >-
+    Cómo trabajar en el software del nodo para que tu cambio pueda integrarse: el método, recetas de
+    compilación y pruebas, la lista de comprobación previa a un pull request upstream, tareas
+    abiertas en las que puedes apuntarte como responsable, un examen y un archivo de entrada para
+    herramientas de IA.
+- en: Living document - every page carries its last-verified date
+  es: >-
+    Documento vivo: cada página indica la fecha de su última verificación
+- en: Measured 12 November 2026 at commit c6f9678d
+  es: Medido el 12 de noviembre de 2026 en el commit c6f9678d
+- en: Review and test programme - one pull request per bug class
+  es: >-
+    Programa de revisión y pruebas: un pull request por clase de error
+- en: >-
+    Test coverage measured on the release line, the recurring bug classes behind 317 fix pull
+    requests since August, one sweep per class that closes it with a rule, and checks before a final
+    release. A proposal by contributors; the maintainer decides what lands.
+  es: >-
+    La cobertura de pruebas medida en la rama de publicación, las clases de error recurrentes detrás
+    de 317 pull requests de corrección desde agosto, un barrido por clase que la cierra con una
+    regla y comprobaciones antes de una versión final. Una propuesta de colaboradores; el mantenedor
+    decide qué se incorpora.
+- en: >-
+    The node software is open source, and anyone can send it a pull request on GitHub. The developer
+    hub tells you, and the AI tool you work with, how to build, test and document a change so that
+    it can be merged, and which work is open.
+  es: >-
+    El software del nodo es de código abierto y cualquiera puede enviarle un pull request en GitHub.
+    El centro para desarrolladores te explica a ti, y a la herramienta de IA con la que trabajas,
+    cómo compilar, probar y documentar un cambio para que pueda integrarse, y qué trabajo está
+    abierto.
+- en: The reference implementation and its own rules for agents.
+  es: La implementación de referencia y sus propias reglas para agentes.
+- en: >-
+    Start on the developers page: where to begin, levels, test coverage and open lanes.
+  es: >-
+    Empieza por la página para desarrolladores: primeros pasos, niveles, cobertura de pruebas y
+    tareas abiertas.
+- en: Read the hub's front page, written for people.
+  es: Lee la portada del centro, escrita para personas.
+- en: >-
+    Pick a level: what each one needs, and its first hour.
+  es: >-
+    Elige un nivel: qué necesita cada uno y su primera hora.
+- en: Give your AI tool (Claude Code, Cursor, Codex or another) the agent file.
+  es: Dale a tu herramienta de IA (Claude Code, Cursor, Codex u otra) el archivo para agentes.
+- en: >-
+    Learn the working method: generate, challenge, verify, then publish.
+  es: >-
+    Aprende el método de trabajo: generar, cuestionar, verificar y después publicar.
+- en: Build and test on Linux, macOS or Windows; the coverage recipe is for Linux.
+  es: Compila y prueba en Linux, macOS o Windows; la receta de cobertura es para Linux.
+- en: >-
+    Before you open a pull request upstream: the eight questions and the template.
+  es: >-
+    Antes de abrir un pull request upstream: las ocho preguntas y la plantilla.
+- en: >-
+    Claim a lane: put your GitHub handle in its owner line, by pull request.
+  es: >-
+    Asume una tarea: pon tu usuario de GitHub en su línea de responsable, con un pull request.
+- en: >-
+    Check your setup with the exam: twelve cases with known answers.
+  es: >-
+    Pon a prueba tu configuración con el examen: doce casos con respuestas conocidas.
+- en: >-
+    Generate, challenge, verify, then publish: assume the draft is wrong, check every claim against
+    a primary source, and treat AI output as a lead until a command you ran reproduces it.
+  es: >-
+    Generar, cuestionar, verificar y después publicar: da por hecho que el borrador está mal,
+    comprueba cada afirmación contra una fuente primaria y trata lo que produce la IA como una pista
+    hasta que lo reproduzca un comando que hayas ejecutado tú.
+- en: >-
+    Fix a class, not one spot: every place in the code, plus the test, lint or CI job that keeps the
+    class at zero.
+  es: >-
+    Corrige una clase de error, no un solo punto: cada lugar del código, más la prueba, la regla de
+    lint o el trabajo de CI que mantiene la clase en cero.
+- en: >-
+    Tested fixes only: fails before, passes after, with commit, platform and command. Say what was
+    not tested.
+  es: >-
+    Solo correcciones probadas: falla antes, pasa después, con commit, plataforma y comando. Di qué
+    no se probó.
+- en: >-
+    Validation, fork choice, attestation and the MatMul frontier stay out of release-0.34.16
+    (btxchain/btx #464 and the pull requests closed on the same day, 11 November 2026). Findings
+    there go to the E-CONSENSUS lane as evidence, not as pull requests.
+  es: >-
+    La validación, la elección de fork, la atestación y la frontera MatMul quedan fuera de
+    release-0.34.16 (btxchain/btx #464 y los pull requests cerrados el mismo día, 11 de noviembre de
+    2026). Los hallazgos en esas áreas van a la tarea E-CONSENSUS como evidencias, no como pull
+    requests.
+- en: >-
+    A second person who is not the author reviews before anything goes upstream. Lanes send their
+    pull requests together once a week, so the maintainer gets one batch, not a stream.
+  es: >-
+    Una segunda persona, que no sea el autor, revisa antes de que nada vaya upstream. Las tareas
+    envían sus pull requests juntos una vez por semana, para que el mantenedor reciba un lote y no
+    un goteo constante.
+- en: >-
+    The AI never posts, pushes or opens a pull request. You do, after reading the full text and the
+    full diff.
+  es: >-
+    La IA nunca publica, nunca hace push ni abre un pull request. Lo haces tú, después de leer el
+    texto completo y el diff completo.
+- en: >-
+    No secrets anywhere: no keys, wallets, RPC cookies or tokens on a test machine, in a log, a
+    commit or a prompt.
+  es: >-
+    Ningún secreto en ninguna parte: ni claves, ni monederos, ni cookies RPC, ni tokens, ya sea en
+    una máquina de pruebas, en un log, en un commit o en un prompt.
+- en: >-
+    Basic: verify
+  es: >-
+    Basic: verificar
+- en: >-
+    Re-run a pull request's stated test at its commit, or check a release archive's SHA-256 and that
+    it starts. A Linux machine or WSL2, about an hour of setup, no spend, no wallet on the machine.
+  es: >-
+    Repite la prueba indicada de un pull request en su commit, o comprueba el SHA-256 de un archivo
+    de versión y que arranca. Una máquina Linux o WSL2, una hora de preparación aproximadamente, sin
+    gastos y sin monedero en la máquina.
+- en: >-
+    Advanced: team
+  es: >-
+    Advanced: en equipo
+- en: >-
+    Own a lane (a bug class or a code area) with a second person who checks every diff. Sweep the
+    class, add the rule that keeps it at zero, send tested pull requests. A machine that builds the
+    code with tests, a fork, a few hours every week.
+  es: >-
+    Hazte responsable de una tarea (una clase de error o un área del código) con una segunda persona
+    que revisa cada diff. Barre la clase, añade la regla que la mantiene en cero y envía pull
+    requests probados. Una máquina que compile el código con pruebas, un fork y unas horas cada
+    semana.
+- en: >-
+    Core: runs
+  es: >-
+    Core: comprobaciones
+- en: >-
+    Run the checks others rely on: CI on a fork, release qualification, and collecting the week's
+    pull requests into one batch. A fork with GitHub Actions and time every week.
+  es: >-
+    Ejecuta las comprobaciones de las que dependen los demás: CI en un fork, la validación de
+    versiones y la recopilación de los pull requests de la semana en un solo lote. Un fork con
+    GitHub Actions y tiempo cada semana.
+- en: >-
+    Product code of release-0.34.16, measured at commit c6f9678d with the fix from btxchain/btx #578
+    applied. The coverage build configures again on release-0.34.16 since #578 (12 November 2026),
+    not in v0.34.15. All figures are floors: 47 unit suites timed out and 82 of 208 functional
+    scripts failed in the coverage run, and a test that is killed writes no counts.
+  es: >-
+    Código de producción de release-0.34.16, medido en el commit c6f9678d con la corrección de
+    btxchain/btx #578. La compilación de cobertura vuelve a configurarse en release-0.34.16 desde
+    #578 (12 de noviembre de 2026), no en v0.34.15. Todas las cifras son mínimos: en la medición,
+    47 suites unitarias agotaron el tiempo y fallaron 82 de 208 scripts funcionales; una prueba
+    interrumpida no deja datos.
+- en: Lines
+  es: Líneas
+- en: unit tests
+  es: pruebas unitarias
+- en: unit and functional tests
+  es: pruebas unitarias y funcionales
+- en: Branches
+  es: Ramas
+- en: Area lanes
+  es: Tareas por área
+- en: >-
+    One area of the code each. E-CONSENSUS prepares evidence and files a pull request only when the
+    maintainer asks for one. A-NET, A-HELPER, A-SHIELDED, A-PQ and A-GUI have a scope and a done bar
+    but no brief yet, and wait for an owner.
+  es: >-
+    Cada una cubre un área del código. E-CONSENSUS prepara evidencias y solo abre un pull request
+    cuando el mantenedor lo pide. A-NET, A-HELPER, A-SHIELDED, A-PQ y A-GUI tienen alcance y
+    criterio de finalización, pero aún no tienen documento de partida y están a la espera de un
+    responsable.
+- en: Wallet, RPC authorization, secrets
+  es: Monedero, autorización RPC, secretos
+- en: ModelNet store, deposit and persistence logic
+  es: Lógica de almacenamiento, depósitos y persistencia de ModelNet
+- en: Consensus, fork choice, attestation, MatMul frontier (evidence only)
+  es: Consenso, elección de fork, atestación, frontera MatMul (solo evidencias)
+- en: Non-consensus P2P bounds and parsers
+  es: Límites y parsers P2P fuera del consenso
+- en: ModelNet helper network surface and security_v2
+  es: Superficie de red del helper de ModelNet y security_v2
+- en: Shielded pool integration
+  es: Integración del shielded pool
+- en: Post-quantum crypto use
+  es: Uso de la criptografía poscuántica
+- en: Qt and Atlas
+  es: Qt y Atlas
+- en: Class sweeps
+  es: Barridos por clase
+- en: >-
+    One bug class each: every place in the current code, plus the rule that keeps the class at zero.
+  es: >-
+    Una clase de error cada una: cada lugar del código actual, más la regla que mantiene la clase en
+    cero.
+- en: Non-atomic or short state-file writes
+  es: Escrituras de archivos de estado no atómicas o incompletas
+- en: Windows, macOS, build and packaging, resource lifecycle
+  es: Windows, macOS, compilación y empaquetado, ciclo de vida de recursos
+- en: Machine-rule sweeps from the static and dynamic baselines
+  es: Barridos con reglas automáticas a partir de los análisis estáticos y dinámicos de referencia
+- en: Paths, symlinks, jail, options honoured
+  es: Rutas, enlaces simbólicos, jail, opciones respetadas
+- en: Infrastructure lanes
+  es: Tareas de infraestructura
+- en: >-
+    What the other lanes build on. I-RC also takes runners: people who run one script on their own
+    hardware and report one result line.
+  es: >-
+    Aquello en lo que se apoyan las demás tareas. I-RC también acepta runners: personas que
+    ejecutan un script en su propio hardware y comunican una línea de resultado.
+- en: Fork CI gates
+  es: Controles de CI en el fork
+- en: Release-candidate qualification and basic verify
+  es: Validación de versiones candidatas y verificación básica
+- en: Operators and whole-system runs
+  es: Operadores y ejecuciones del sistema completo
+- en: MatMul cross-backend corpus
+  es: Corpus MatMul entre backends
+- en: >-
+    #464 evidence list
+  es: >-
+    lista de evidencias para #464
+- en: >-
+    #464 evidence list with one measured result, one ready test and one paragraph per item
+  es: >-
+    lista de evidencias para #464 con un resultado medido, una prueba lista y un párrafo por punto
+- en: -Werror=thread-safety on every clean file
+  es: -Werror=thread-safety en cada archivo limpio
+- en: -Wthread-safety, TSan + DEBUG_LOCKORDER nightly
+  es: -Wthread-safety, TSan + DEBUG_LOCKORDER cada noche
+- en: 0 new K01 PRs after the sweep
+  es: 0 PR nuevos de K01 tras el barrido
+- en: 0 new single-site K20/K21 PRs after the generators land
+  es: 0 PR nuevos de un solo sitio para K20/K21 una vez incorporados los generadores
+- en: 0 new-site K06 after the lint
+  es: 0 casos de K06 en sitios nuevos tras la regla de lint
+- en: 0 re-filed PRs that were not taken
+  es: 0 PR reenviados que no se aceptaron
+- en: 1 of about 13 targets exists
+  es: existe 1 de unos 13 targets
+- en: 12 files to 0; fsync in the helper; lint in CI-4; truncated-file load test per store
+  es: >-
+    12 archivos a 0; fsync en la función auxiliar; regla de lint en CI-4; prueba de carga con
+    archivo truncado por almacén
+- en: 12 worklist files to 0
+  es: 12 archivos de la lista de trabajo a 0
+- en: 12-14 Nov
+  es: 12-14 nov.
+- en: 120 lifetime results initialised or documented
+  es: 120 resultados de tiempo de vida inicializados o documentados
+- en: 15-21 Nov
+  es: 15-21 nov.
+- en: 150 security-tagged; untriaged results, not confirmed defects
+  es: 150 con etiqueta de seguridad; resultados sin revisar, no defectos confirmados
+- en: 18-28 Nov
+  es: 18-28 nov.
+- en: >-
+    22 PRs, the class turning up module after module; a loader that reads a damaged file as empty
+    starts from zero
+  es: >-
+    22 PR, la clase aparece módulo tras módulo; un cargador que lee un archivo dañado como vacío
+    empieza desde cero
+- en: 28 casts on ParseUint32Index or proved range-checked
+  es: 28 casts pasan por ParseUint32Index o tienen probada la comprobación de rango
+- en: >-
+    3.1 and 3.5 as #464 evidence
+  es: >-
+    3.1 y 3.5 como evidencias para #464
+- en: 3.2 and 3.6 test artefacts
+  es: artefactos de prueba de 3.2 y 3.6
+- en: 3.3, 3.4, 3.7, 3.8
+  es: 3.3, 3.4, 3.7, 3.8
+- en: >-
+    47 suites timed out: not measured
+  es: >-
+    47 suites agotaron el tiempo: sin medir
+- en: 5 of 5 PRs landed; rule missing
+  es: 5 de 5 PR incorporados; falta la regla
+- en: 6 .cpp files at 0% with functional tests
+  es: 6 archivos .cpp al 0 % con pruebas funcionales
+- en: 68 unexecuted consensus functions listed as tested or dead
+  es: 68 funciones de consenso no ejecutadas, listadas como probadas o como código muerto
+- en: >-
+    7 fix PRs on one release script; the Linux candidate at c6f9678d had one independent four-check
+    run (#432, 11 Nov); no macOS, Windows or CUDA candidate has had one yet
+  es: >-
+    7 PR de corrección en un mismo script de publicación; la candidata de Linux en c6f9678d tuvo una
+    ejecución independiente de cuatro comprobaciones (#432, 11 de noviembre); ninguna candidata de
+    macOS, Windows o CUDA ha tenido una todavía
+- en: A done bar for every lane
+  es: Un criterio de finalización para cada tarea
+- en: >-
+    A normal pull request to release-0.34.16, sent in the Thursday batch with its fork CI run: fails
+    before, passes after.
+  es: >-
+    Un pull request normal a release-0.34.16, enviado en el lote del jueves con su ejecución de CI
+    en el fork: falla antes, pasa después.
+- en: >-
+    A pull request the maintainer closed without taking it is never re-filed; it becomes an evidence
+    item or is dropped.
+  es: >-
+    Un pull request que el mantenedor cerró sin aceptarlo nunca se vuelve a enviar; se convierte en
+    un punto de evidencia o se descarta.
+- en: >-
+    A question counts when the verdict matches and at least one cited source is one the key names;
+    11 of 12 pass.
+  es: >-
+    Una pregunta cuenta cuando el veredicto coincide y al menos una de las fuentes citadas es una de
+    las que nombra la clave; se aprueba con 11 de 12.
+- en: >-
+    A runner cannot reproduce a stated test: the pull request waits, and the owner, not the runner,
+    investigates.
+  es: >-
+    Un runner no puede reproducir una prueba indicada: el pull request espera, y quien investiga es
+    el responsable, no el runner.
+- en: A second pass goes in second_pass.handle. The second pass is never the owner.
+  es: >-
+    El usuario del segundo revisor va en second_pass.handle. El segundo revisor nunca es el
+    responsable.
+- en: >-
+    A security-relevant finding goes through GitHub private vulnerability reporting on btxchain/btx,
+    never into a public issue or a chat; the class goes on the registry without the detail.
+  es: >-
+    Un hallazgo relevante para la seguridad va por el aviso privado de vulnerabilidades de GitHub
+    (private vulnerability reporting) en btxchain/btx, nunca a un issue público ni a un chat; la
+    clase entra en el registro sin el detalle.
+- en: >-
+    A taxonomy of every fix pull request to btxchain/btx since 1 August: 317 fix PRs in 26 named
+    classes, plus "other". Class assignments are 10-15% noisy. Site counts are on the live head;
+    static and dynamic counts were measured at c6f9678d and are untriaged.
+  es: >-
+    Una taxonomía de todos los pull requests de corrección a btxchain/btx desde el 1 de agosto: 317
+    PR de corrección en 26 clases con nombre, más "otros". La asignación a clases tiene un 10-15 % de
+    ruido. Los sitios se cuentan en el head actual; las cifras estáticas y dinámicas se midieron en
+    c6f9678d y están sin revisar.
+- en: ACVP and Wycheproof vectors in ctest
+  es: vectores ACVP y Wycheproof en ctest
+- en: An owner and a second pass
+  es: Un responsable y una segunda revisión
+- en: >-
+    Answer every question in the fixed shape: verdict, why, sources.
+  es: >-
+    Responde a cada pregunta con el formato fijo: veredicto, motivo, fuentes.
+- en: >-
+    Archive mirrors and signed snapshots, monitoring as the health signal, IBD from genesis on a
+    stock binary, staged upgrades, mixed-version interop (v0.34.15 against the release line), the
+    operator safe profile in the guides, and which fixes a v0.34.15 node lacks (gate G1).
+  es: >-
+    Espejos de los archivos de versiones e instantáneas firmadas, la monitorización como señal de
+    salud, IBD desde el génesis con un binario sin modificar, actualizaciones escalonadas,
+    interoperabilidad entre versiones (v0.34.15 frente a la rama de publicación), el perfil seguro
+    del operador en las guías y qué correcciones le faltan a un nodo v0.34.15 (control G1).
+- en: >-
+    CI-0 run once on 4c7840e9; known-failing written and only shrinking; every class PR links a run;
+    ratchet fails any area dropping more than 0.2 points
+  es: >-
+    CI-0 ejecutado una vez en 4c7840e9; lista de fallos conocidos escrita y solo a la baja; cada PR
+    de clase enlaza una ejecución; el trinquete falla si un área baja más de 0,2 puntos
+- en: CI-0 run once on 4c7840e9; shard counts set from it
+  es: CI-0 ejecutado una vez en 4c7840e9; número de fragmentos fijado a partir de él
+- en: CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4
+  es: CI-0, CI-4, CI-5, CI-6 en la fase 2a; CI-2, CI-9 en la fase 2b; el resto para la fase 4
+- en: CI-9 fails any area that drops more than 0.2 points against the 69.9/40.7 baseline
+  es: CI-9 falla si un área baja más de 0,2 puntos respecto a la línea base 69,9/40,7
+- en: CLI/RPC parameter conversion drift
+  es: divergencia en la conversión de parámetros entre CLI y RPC
+- en: Chain verifiable from genesis
+  es: Cadena verificable desde el génesis
+- en: Claim a lane
+  es: Asume una tarea
+- en: >-
+    Class K01 across the code: the 12 files of the worklist at 4c7840e9 in ModelNet, the wallet and
+    the node, two more sites the file-level filter cannot see, and the shared atomic-write helper
+    (#576), which does not fsync yet.
+  es: >-
+    La clase K01 en todo el código: los 12 archivos de la lista de trabajo en 4c7840e9, repartidos
+    entre ModelNet, el monedero y el nodo, dos sitios más que el filtro por archivo no ve, y la
+    función auxiliar compartida de escritura atómica (#576), que aún no hace fsync.
+- en: Classes swept
+  es: Clases barridas
+- en: Classes, not instances
+  es: Clases, no casos aislados
+- en: CodeQL path/permission/process queries with a shrinking baseline
+  es: consultas de CodeQL sobre rutas, permisos y procesos con una línea base que se reduce
+- en: CodeQL results
+  es: resultados de CodeQL
+- en: CodeQL results outside the maintainability and documentation rules
+  es: Resultados de CodeQL fuera de las reglas de mantenibilidad y documentación
+- en: Copy the template in lessons/README.md to lessons/YYYY-MM-DD-slug.md.
+  es: Copia la plantilla de lessons/README.md en lessons/YYYY-MM-DD-slug.md.
+- en: >-
+    DLTX, chunks, mmsketch, mdpeers, mmatrefute and hybrid-handshake targets link and run 24 h clean
+    under ASan
+  es: >-
+    los targets de DLTX, chunks, mmsketch, mdpeers, mmatrefute y del handshake híbrido enlazan y se
+    ejecutan 24 h sin errores con ASan
+- en: Deep reviews
+  es: Revisiones en profundidad
+- en: >-
+    EVIDENCE on #464; a PR only if the maintainer asks
+  es: >-
+    EVIDENCIA en #464; un PR solo si el mantenedor lo pide
+- en: >-
+    Each lane has one owner and one second-pass reviewer, never the same person. For a run lane, the
+    second pass is an independent run on different hardware.
+  es: >-
+    Cada tarea tiene un responsable y un segundo revisor, que nunca son la misma persona. En una
+    tarea de ejecuciones, la segunda revisión es una ejecución independiente en otro hardware.
+- en: >-
+    Every lane has a measurable done bar. The programme is done when gates G2 (machines on), G3
+    (parsers covered) and G4 (classes swept) hold; then the weekly batch shrinks to the ratchet.
+  es: >-
+    Cada tarea tiene un criterio de finalización medible. El programa termina cuando se cumplen los
+    controles G2 (máquinas en marcha), G3 (parsers cubiertos) y G4 (clases barridas); después, el
+    lote semanal se reduce al trinquete.
+- en: >-
+    Every lane is claimable, including the five that wait for an owner. A claim is a small pull
+    request to this repository.
+  es: >-
+    Todas las tareas se pueden asumir, incluidas las cinco que están a la espera de un responsable.
+    Una tarea se asume con un pequeño pull request a este repositorio.
+- en: >-
+    Every verify call site for ML-DSA-44, SLH-DSA and the P2MR evaluation, sigop accounting for
+    post-quantum signatures, the ML-KEM transport and the build flags for constant-time code; deep
+    review 3.4.
+  es: >-
+    Cada sitio que llama a la verificación de ML-DSA-44, SLH-DSA y la evaluación P2MR, el cómputo de
+    sigops de las firmas poscuánticas, el transporte ML-KEM y las opciones de compilación del código
+    de tiempo constante; revisión en profundidad 3.4.
+- en: Evidence
+  es: Evidencia
+- en: File a lesson
+  es: Registra una lección
+- en: FileCommit of file and directory inside WriteBinaryFileAtomically
+  es: FileCommit del archivo y del directorio dentro de WriteBinaryFileAtomically
+- en: >-
+    Fill in what happened, what was done, the rule now, the source, how it was verified (command,
+    commit, platform) and which hub pages change.
+  es: >-
+    Rellena qué pasó, qué se hizo, la regla a partir de ahora, la fuente, cómo se verificó (comando,
+    commit, plataforma) y qué páginas del centro cambian.
+- en: First value
+  es: Primeras mejoras
+- en: >-
+    For validation, fork choice, attestation and the MatMul frontier: one measured result, one ready
+    test and one paragraph on #464. A pull request only if the maintainer asks for one.
+  es: >-
+    Para la validación, la elección de fork, la atestación y la frontera MatMul: un resultado
+    medido, una prueba lista y un párrafo en #464. Un pull request solo si el mantenedor lo pide.
+- en: >-
+    Fork CI runs every class rule, and each pull request links its run: fails before, passes after.
+    Every number carries its source and the commit it was measured on.
+  es: >-
+    La CI del fork ejecuta cada regla de clase y cada pull request enlaza su ejecución: falla antes,
+    pasa después. Cada cifra lleva su fuente y el commit en el que se midió.
+- en: GUI build in the fork CI matrix; cargo audit and OSV on every push; per-screen allowlist test
+  es: >-
+    compilación de la interfaz gráfica en la matriz de CI del fork; cargo audit y OSV en cada push;
+    prueba de lista de permitidos por pantalla
+- en: >-
+    Gate red (a baseline grew, a known-failing list grew): the lane stops new work and fixes the
+    gate first.
+  es: >-
+    Control en rojo (creció una línea base, creció una lista de fallos conocidos): la tarea detiene
+    todo trabajo nuevo y arregla primero el control.
+- en: >-
+    Give the questions to the person or the AI session being checked, in a clone without
+    exam/answers.md, so the key is never in its context.
+  es: >-
+    Da las preguntas a la persona o a la sesión de IA que se evalúa, en un clon sin exam/answers.md,
+    para que la clave nunca esté en su contexto.
+- en: Grade in a separate session or by hand, with the key.
+  es: Evalúa las respuestas en una sesión aparte o a mano, con la clave.
+- en: >-
+    Hot files (net_processing.cpp, modelnet/helper.cpp, node/matmul_trusted_attestations.*): no
+    per-event PR without a model-based test or a split proposal first
+  es: >-
+    Archivos calientes (net_processing.cpp, modelnet/helper.cpp,
+    node/matmul_trusted_attestations.*): ningún PR por evento suelto si antes no hay una prueba
+    basada en modelos o una propuesta de división
+- en: K01 worklist and lint to the portability lane
+  es: lista de trabajo y regla de lint de K01 para la tarea de portabilidad
+- en: K04 UniValue lint in CI-4
+  es: regla de lint K04 de UniValue en CI-4
+- en: K05 test enumerating every wallet RPC against a locked wallet, registered in ctest
+  es: prueba K05 que recorre cada RPC del monedero con un monedero bloqueado, registrada en ctest
+- en: K05, K08, K03 + annotations
+  es: K05, K08, K03 + anotaciones
+- en: >-
+    K06 (33 PRs), K19/K22 (40), K10 (14) and K07 (6) are classes a CI matrix catches before filing;
+    K06 kept finding new files
+  es: >-
+    K06 (33 PR), K19/K22 (40), K10 (14) y K07 (6) son clases que una matriz de CI detecta antes de
+    enviar el PR; K06 no dejaba de aparecer en archivos nuevos
+- en: >-
+    K08 paths, symlinks and the jail (8 PRs) and K17 options or modes not honoured (10 PRs):
+    -listen=0, -proxy, -onlynet, -v2pqonly and -natpmp=0 on every network surface outside the core
+    networking code.
+  es: >-
+    K08 rutas, enlaces simbólicos y el jail (8 PR) y K17 opciones o modos no respetados (10 PR):
+    -listen=0, -proxy, -onlynet, -v2pqonly y -natpmp=0 en cada superficie de red fuera del código de
+    red principal.
+- en: K10 + K04 + K15 in phase 2a; K03, fs-trust, lifetime in phase 2b
+  es: K10 + K04 + K15 en la fase 2a; K03, fs-trust y tiempo de vida en la fase 2b
+- en: >-
+    K10 test and K04 lint in CI; 28 casts to 0; TSan product classes to 0; cppcheck errors 26 to 0;
+    fs-trust policy with a shrinking baseline
+  es: >-
+    prueba K10 y regla de lint K04 en CI; 28 casts a 0; clases de TSan del código de producción a 0;
+    errores de cppcheck de 26 a 0; política fs-trust con una línea base que se reduce
+- en: K10 unit test over the RPCHelpMan table in ctest
+  es: prueba unitaria K10 sobre la tabla RPCHelpMan en ctest
+- en: K11 allowlist test per restricted-user RPC
+  es: prueba de lista de permitidos K11 para cada RPC de usuario restringido
+- en: K11, K12, K07, K25, K27 (counted first)
+  es: K11, K12, K07, K25, K27 (contadas primero)
+- en: K12 RAII reservation type plus a two-sender test
+  es: tipo de reserva RAII para K12 más una prueba con dos remitentes
+- en: >-
+    K13 attestation state machine as one model-based test (vote, withdraw, restart, reorg, missing
+    index)
+  es: >-
+    máquina de estados de atestación K13 como una prueba basada en modelos (voto, retirada,
+    reinicio, reorg, índice ausente)
+- en: >-
+    K14 download state machine as a deterministic simulation with an adversarial scheduler ('every
+    announced body is requested within N ticks')
+  es: >-
+    máquina de estados de descarga K14 como simulación determinista con un planificador adversario
+    ("cada cuerpo de bloque anunciado se solicita en N ticks")
+- en: >-
+    K15: 28 casts + 5 single results
+  es: >-
+    K15: 28 casts + 5 resultados sueltos
+- en: K16, K17, K19 lints
+  es: reglas de lint de K16, K17, K19
+- en: K22 release gate
+  es: control de publicación de K22
+- en: K25 observing-peer test in the functional runner
+  es: prueba K25 con un par observador en el ejecutor de pruebas funcionales
+- en: K27 log-scan assertion in the functional runner
+  es: aserción K27 por escaneo de logs en el ejecutor de pruebas funcionales
+- en: >-
+    Lane owners give their AI AGENTS.md and the lane's pack, then paste the prompt block at the end
+    of the pack; it names the first task.
+  es: >-
+    Los responsables de una tarea dan a su IA AGENTS.md y el documento de partida de la tarea, y
+    después pegan el bloque de prompt del final de ese documento; indica el primer trabajo.
+- en: >-
+    Linux, Windows and macOS lines with SHA and pass/fail for every candidate before anyone writes
+    'ready'
+  es: >-
+    líneas de Linux, Windows y macOS con SHA y aprobado/fallado para cada candidata antes de que
+    nadie escriba "lista"
+- en: Lock-order inversions
+  es: Inversiones del orden de bloqueo
+- en: >-
+    Machine-rule sweeps from the static and dynamic baselines: K10 and K04 (rule only), K15 (28
+    casts), K03 with TSan and thread-safety in ModelNet, node and wallet code, fs-trust (133),
+    lifetime and initialisation (120), cppcheck errors (26), the K19 lints and the K09 container
+    inventory; nothing under sweep rule (c).
+  es: >-
+    Barridos con reglas automáticas a partir de los análisis estáticos y dinámicos de referencia:
+    K10 y K04 (solo la regla), K15 (28 casts), K03 con TSan y thread-safety en el código de
+    ModelNet, el nodo y el monedero, fs-trust (133), tiempo de vida e inicialización (120), errores
+    de cppcheck (26), las reglas de lint de K19 y el inventario de contenedores de K09; nada bajo la
+    regla de barrido (c).
+- en: Machines on
+  es: Máquinas en marcha
+- en: MatMul attestation / frontier state
+  es: atestación MatMul / estado de la frontera
+- en: Measure first, on the fork
+  es: Primero medir, en el fork
+- en: Money separated from the AI layer
+  es: Dinero separado de la capa de IA
+- en: >-
+    Never add a stub, a fail-closed workaround, a skipped test or a widened timeout to make a job
+    green.
+  es: >-
+    Nunca añade un stub, una solución provisional fail-closed, una prueba omitida o un tiempo de
+    espera ampliado para poner un trabajo en verde.
+- en: >-
+    Never claim a test ran without the run link or log, the commit SHA and the platform. "Fails
+    before, passes after" or nothing.
+  es: >-
+    Nunca afirma que una prueba se ejecutó sin el enlace o el log de la ejecución, el SHA del commit
+    y la plataforma. "Falla antes, pasa después" o nada.
+- en: >-
+    Never file a single-site fix for a class in the registry. Count the class on the live head;
+    sweep it; add the rule.
+  es: >-
+    Nunca envía una corrección de un solo sitio para una clase que está en el registro. Cuenta la
+    clase en el head actual, la barre y añade la regla.
+- en: >-
+    Never hold keys, wallet files, RPC cookies or tokens on a test or runner box; never test on the
+    machine that holds a wallet.
+  es: >-
+    Nunca guarda claves, archivos de monedero, cookies RPC ni tokens en una máquina de pruebas o de
+    runner; nunca prueba en la máquina que tiene un monedero.
+- en: >-
+    Never open a PR into release-0.34.16 that touches validation.cpp, pow.cpp, src/consensus/,
+    script/interpreter.cpp, fork choice or download scheduling in net_processing.cpp,
+    node/matmul_trusted_attestations.* rules, or src/matmul/. Those go to E-CONSENSUS.
+  es: >-
+    Nunca abre un PR a release-0.34.16 que toque validation.cpp, pow.cpp, src/consensus/,
+    script/interpreter.cpp, la elección de fork o la planificación de descargas en
+    net_processing.cpp, las reglas de node/matmul_trusted_attestations.* o src/matmul/. Eso va a
+    E-CONSENSUS.
+- en: >-
+    Never post, comment, push or open a PR on its own. The owner reads the full text and the diff
+    first.
+  es: >-
+    Nunca publica, comenta, hace push ni abre un PR por su cuenta. El responsable lee antes el texto
+    completo y el diff.
+- en: Never put a fix in a commit linked from a comment. Follow-ups are PRs.
+  es: >-
+    Nunca mete una corrección en un commit enlazado desde un comentario. Las correcciones
+    posteriores van en PR.
+- en: >-
+    Never quote private chats, name people other than by handle, or state a figure without its
+    source.
+  es: Nunca cita chats privados, nombra a personas salvo por su usuario ni da una cifra sin su fuente.
+- en: >-
+    Never re-run a baseline tool that already ran; reuse the C1-C3 results (the numbers in
+    plan/plan-data.json) and re-grep only the live head.
+  es: >-
+    Nunca vuelve a ejecutar una herramienta de línea base que ya se ejecutó; reutiliza los
+    resultados de C1-C3 (las cifras de plan/plan-data.json) y solo vuelve a buscar con grep en el
+    head actual.
+- en: >-
+    Never stop a node with kill -9. Stop any keeper or watchdog first, back up the datadir, then
+    stop the node cleanly.
+  es: >-
+    Nunca detiene un nodo con kill -9. Primero detiene cualquier keeper o watchdog, hace una copia
+    de seguridad del directorio de datos y después detiene el nodo limpiamente.
+- en: >-
+    One approving review from a /dev/ code owner merges it. If git is in your way, ask, and someone
+    enters it for you.
+  es: >-
+    Lo integra una revisión aprobatoria de un propietario de código de /dev/. Si git te estorba,
+    pregunta y alguien hará el cambio por ti.
+- en: >-
+    One approving review from a /dev/ code owner merges it; the owner of each affected page folds
+    the rule in within a week.
+  es: >-
+    Lo integra una revisión aprobatoria de un propietario de código de /dev/; el responsable de cada
+    página afectada incorpora la regla en el plazo de una semana.
+- en: >-
+    One mutated-block corpus replayed on CPU, CUDA and Metal, one script and one verdict table; the
+    test half of deep review 3.6.
+  es: >-
+    Un corpus de bloques mutados reproducido en CPU, CUDA y Metal, un script y una tabla de
+    veredictos; la parte de pruebas de la revisión en profundidad 3.6.
+- en: >-
+    One pull request per recurring bug class: the fix at every site a machine rule finds, plus the
+    rule (a unit test, a lint or a CI job) that keeps the class at zero.
+  es: >-
+    Un pull request por cada clase de error recurrente: la corrección en cada sitio que encuentra
+    una regla automática, más la regla (una prueba unitaria, una regla de lint o un trabajo de CI)
+    que mantiene la clase en cero.
+- en: >-
+    One script on one machine prints one result line, which the runner pastes unchanged, plus one
+    line that says what was not tested.
+  es: >-
+    Un script en una máquina imprime una línea de resultado, que el runner pega sin cambios, más una
+    línea que dice qué no se probó.
+- en: >-
+    Open a pull request that puts your GitHub handle in the lane's Owner line in 07-lanes.md and in
+    owner.handle in plan/lanes.json.
+  es: >-
+    Abre un pull request que ponga tu usuario de GitHub en la línea de responsable (Owner) de la
+    tarea en 07-lanes.md y en owner.handle de plan/lanes.json.
+- en: Open a pull request. Your AI may draft it; you open it.
+  es: Abre un pull request. Tu IA puede redactarlo; lo abres tú.
+- en: Operators safe now
+  es: Operadores a salvo ya
+- en: >-
+    Owner and second pass disagree: the batch coordinator decides what goes into the batch, and the
+    question goes into the Thursday batch as one line if the maintainer's view is needed.
+  es: >-
+    El responsable y el segundo revisor no están de acuerdo: la coordinación del lote decide qué
+    entra en el lote, y la pregunta va al lote del jueves como una línea si hace falta la opinión
+    del mantenedor.
+- en: >-
+    POSIX grep lint; first green Windows and sharded macOS runs; otool step in the release gate;
+    RAII wrappers with pidfd check
+  es: >-
+    regla de lint con grep de POSIX; primeras ejecuciones en verde de Windows y de macOS en
+    fragmentos; paso de otool en el control de publicación; envoltorios RAII con comprobación pidfd
+- en: POSIX-outside-#ifndef WIN32 grep as a lint in CI-4
+  es: >-
+    grep de POSIX fuera de #ifndef WIN32 como regla de lint en CI-4
+- en: PR
+  es: PR
+- en: PR for bounds and targets; scheduling or fork choice -> E-CONSENSUS
+  es: PR para límites y targets; planificación o elección de fork -> E-CONSENSUS
+- en: PR for tests; any accept/reject disagreement -> EVIDENCE immediately
+  es: PR para pruebas; cualquier discrepancia de aceptación/rechazo -> EVIDENCIA de inmediato
+- en: PR to release-0.34.16 (Thursday batch)
+  es: PR a release-0.34.16 (lote del jueves)
+- en: >-
+    PR with the fork CI link: fails before, passes after
+  es: >-
+    PR con el enlace a la CI del fork: falla antes, pasa después
+- en: PR; anchor window -> E-CONSENSUS
+  es: PR; ventana de anclaje -> E-CONSENSUS
+- en: PR; anything under rule (c) -> EVIDENCE
+  es: PR; todo lo que caiga bajo la regla (c) -> EVIDENCIA
+- en: >-
+    PR; node/blockstorage.cpp and attested_utxo_snapshot.cpp sites checked for consensus adjacency
+    first (if adjacent -> EVIDENCE)
+  es: >-
+    PR; los sitios de node/blockstorage.cpp y attested_utxo_snapshot.cpp se comprueban antes por su
+    cercanía al consenso (si están cerca -> EVIDENCIA)
+- en: PR; the helper user default is the maintainer's decision (release-scope note)
+  es: >-
+    PR; el usuario por defecto del helper lo decide el mantenedor (nota sobre el alcance de la
+    versión)
+- en: ParseUint32Index at every JSON-number cast
+  es: ParseUint32Index en cada cast de un número JSON
+- en: Parsers covered
+  es: Parsers cubiertos
+- en: Peer input charged and bounded
+  es: Entradas de pares contabilizadas y acotadas
+- en: >-
+    Peer-to-peer code outside fork choice and scheduling: networking, the address manager and the
+    message parsers; fuzz targets for the five message types that have none and for the hybrid
+    handshake; Dandelion stem limits; K09 (peer half) and, with A-WALLET, the K25 observing-peer
+    test.
+  es: >-
+    Código peer-to-peer fuera de la elección de fork y la planificación: la red, el gestor de
+    direcciones y los parsers de mensajes; targets de fuzzing para los cinco tipos de mensaje que no
+    tienen ninguno y para el handshake híbrido; límites del stem de Dandelion; K09 (parte de pares)
+    y, con A-WALLET, la prueba K25 con un par observador.
+- en: >-
+    Pick a lane in 07-lanes.md: its scope, why, done bar and first tasks.
+  es: >-
+    Elige una tarea en 07-lanes.md: su alcance, el porqué, el criterio de finalización y los
+    primeros trabajos.
+- en: >-
+    Portability and packaging: K06 Windows, MinGW and MSVC (33 PRs), K07 macOS, libc++ and Qt
+    packaging, K22 build, packaging and release-gate drift, K16 pipe, pid and socket lifecycle; the
+    compatibility layer, the release packaging script and the installer path.
+  es: >-
+    Portabilidad y empaquetado: K06 Windows, MinGW y MSVC (33 PR), K07 empaquetado de macOS, libc++
+    y Qt, K22 divergencias de compilación, empaquetado y control de publicación, K16 ciclo de vida
+    de pipes, PID y sockets; la capa de compatibilidad, el script de empaquetado de versiones y la
+    ruta del instalador.
+- en: Process (branch matrix per fix, the v0.34.15 gap list, a reporting route)
+  es: >-
+    Proceso (matriz de ramas por corrección, la lista de carencias de v0.34.15, una vía de
+    notificación)
+- en: Pull request
+  es: Pull request
+- en: RAII wrappers for fork/socket/pipe with a pidfd identity check before every kill
+  es: >-
+    envoltorios RAII para fork/socket/pipe con una comprobación de identidad pidfd antes de cada
+    kill
+- en: RAII wrappers; -listen/-proxy/-onlynet matrix over every surface
+  es: envoltorios RAII; matriz -listen/-proxy/-onlynet sobre cada superficie
+- en: RUN report on the board; a failure becomes a registry entry, then a PR by the class owner
+  es: >-
+    Informe de EJECUCIÓN en el tablero; un fallo se convierte en una entrada del registro y después
+    en un PR del responsable de la clase
+- en: RUN report; disagreements -> EVIDENCE
+  es: Informe de EJECUCIÓN; discrepancias -> EVIDENCIA
+- en: RUN report; findings to the registry, then to the class owner or E-CONSENSUS
+  es: Informe de EJECUCIÓN; hallazgos al registro y después al responsable de la clase o a E-CONSENSUS
+- en: Ratchet
+  es: Trinquete
+- en: >-
+    Release candidates: one archive per OS with a fixed checklist (the four-check pass posted on
+    #432, 11 Nov: compatibility, desktop first use, restart, model download and recovery), the
+    installer on the real archive, and re-running a pull request's stated test on your own hardware.
+  es: >-
+    Versiones candidatas: un archivo por sistema operativo con una lista de comprobación fija (la
+    pasada de cuatro comprobaciones publicada en #432, 11 de noviembre: compatibilidad, primer uso
+    en escritorio, reinicio, descarga de modelos y recuperación), el instalador sobre el archivo
+    real y repetir en tu propio hardware la prueba indicada de un pull request.
+- en: Run report
+  es: Informe de ejecución
+- en: >-
+    Runners at the Basic level give their AI packs/I-RC-runner.md and nothing else; it is complete
+    on its own.
+  es: >-
+    Los runners del nivel Basic dan a su IA packs/I-RC-runner.md y nada más; ese archivo está
+    completo por sí solo.
+- en: SafePath helper; jail tests with 0 skips
+  es: función auxiliar SafePath; pruebas del jail con 0 omisiones
+- en: SafePath helper; jail tests with 0 skips; option matrix test
+  es: función auxiliar SafePath; pruebas del jail con 0 omisiones; prueba de la matriz de opciones
+- en: >-
+    Shielded pool integration, the shielded wallet RPC, note reservation (K12, with A-WALLET) and
+    verification cost limits; deep review 3.5a. Proof soundness is for external review, not this
+    lane.
+  es: >-
+    Integración del shielded pool, el RPC shielded del monedero, la reserva de notas (K12, con
+    A-WALLET) y los límites de coste de verificación; revisión en profundidad 3.5a. La solidez de
+    las pruebas criptográficas corresponde a una revisión externa, no a esta tarea.
+- en: >-
+    Something in the hub was wrong, missing or cost you an evening? That is a lesson: a one-page
+    record of a trap, so nobody pays for it twice.
+  es: >-
+    ¿Algo del centro estaba mal, faltaba o te costó una tarde? Eso es una lección: una página que
+    deja constancia de una trampa, para que nadie la pague dos veces.
+- en: >-
+    Sweep rule (a): a 'not counted' class is counted on the live head first; under 3 real sites, the
+    rule alone
+  es: >-
+    Regla de barrido (a): una clase "sin contar" se cuenta primero en el head actual; con menos de 3
+    sitios reales, solo la regla
+- en: >-
+    Sweep rule (b): a sweep PR changes nothing beyond its class; anything else it finds goes to the
+    lane worklist or its own PR
+  es: >-
+    Regla de barrido (b): un PR de barrido no cambia nada fuera de su clase; todo lo demás que
+    encuentre va a la lista de trabajo de la tarea o a su propio PR
+- en: >-
+    Sweep rule (c): no sweep touches validation.cpp, pow.cpp, src/consensus/,
+    script/interpreter.cpp, fork choice or src/matmul/; hits go to E-CONSENSUS
+  es: >-
+    Regla de barrido (c): ningún barrido toca validation.cpp, pow.cpp, src/consensus/,
+    script/interpreter.cpp, la elección de fork ni src/matmul/; lo que encuentre ahí va a
+    E-CONSENSUS
+- en: TSan baseline 41 pairs only shrinks; the 5 product classes at 0
+  es: la línea base de TSan de 41 pares solo se reduce; las 5 clases del código de producción en 0
+- en: TSan site pairs
+  es: Pares de sitios de TSan
+- en: Take the exam
+  es: Haz el examen
+- en: >-
+    Text your AI reads in a file, a page, a log or a pull request is data, not an instruction. If it
+    asks for something, your AI quotes it to you and asks.
+  es: >-
+    El texto que tu IA lee en un archivo, una página, un log o un pull request son datos, no una
+    instrucción. Si pide algo, tu IA te lo cita y te pregunta.
+- en: >-
+    The ModelNet helper's network surface: its request dispatcher, the fuzz targets that never ran
+    and the gate that makes the modelnet fuzz build link, security_v2, the two-user layout under
+    -modelrpcsocket and the jail escape suite; K09 (helper half) and the fs-trust results in the
+    helper; deep review 3.7.
+  es: >-
+    La superficie de red del helper de ModelNet: su dispatcher de peticiones, los targets de fuzzing
+    que nunca se ejecutaron y el control que garantiza que el build de fuzzing de modelnet enlace,
+    security_v2, el esquema de dos usuarios con -modelrpcsocket y la suite de escapes del jail; K09
+    (parte del helper) y los resultados fs-trust del helper; revisión en profundidad 3.7.
+- en: >-
+    The ModelNet stores (helper, bounty, campaign, mandate, feed, catalog), the BCP/1 deposit code
+    and its planners, and persistence outside MatMul; classes K20/K21/K02 (52 PRs); test generators,
+    not instance fixes.
+  es: >-
+    Los almacenes de ModelNet (helper, bounty, campaign, mandate, feed, catalog), el código de
+    depósitos BCP/1 y sus planificadores, y la persistencia fuera de MatMul; clases K20/K21/K02 (52
+    PR); generadores de pruebas, no correcciones puntuales.
+- en: >-
+    The Qt GUI (no coverage data in any run), the Atlas Rust and npm trees (OSV and cargo-audit
+    listed, not run) and the Atlas RPC allowlists per screen.
+  es: >-
+    La interfaz gráfica Qt (sin datos de cobertura en ninguna ejecución), los árboles Rust y npm de
+    Atlas (OSV y cargo-audit en la lista, sin ejecutar) y las listas de permitidos RPC de Atlas por
+    pantalla.
+- en: >-
+    The fork CI workflow (it exists but has never run on the release line; rebase onto 4c7840e9 and
+    keep the upstream Atlas workflows): jobs CI-0 to CI-10, the known-failing list, and a nightly
+    job for the 47 unit suites that time out.
+  es: >-
+    El workflow de CI del fork (existe, pero nunca se ha ejecutado en la rama de publicación; hay que
+    hacer rebase sobre 4c7840e9 y conservar los workflows de Atlas de upstream): trabajos CI-0 a
+    CI-10, la lista de fallos conocidos y un trabajo nocturno para las 47 suites unitarias que
+    agotan el tiempo.
+- en: The sweeps
+  es: Los barridos
+- en: >-
+    The wallet and its RPC calls (the shielded RPC belongs to A-SHIELDED) and wallet-facing RPC
+    authorization; classes K05, K11/K12, K25 (wallet half) and K27; deep review 3.3 of the plan.
+  es: >-
+    El monedero y sus llamadas RPC (el RPC shielded pertenece a A-SHIELDED) y la autorización de los
+    RPC del monedero; clases K05, K11/K12, K25 (parte del monedero) y K27; revisión en profundidad
+    3.3 del plan.
+- en: Thread-safety warnings
+  es: Advertencias de thread-safety
+- en: Thursday batch
+  es: Lote del jueves
+- en: Thursday batch to the maintainer
+  es: lote del jueves al mantenedor
+- en: >-
+    Twelve cases with known answers, from public pull requests and the rules of the hub. Passing it,
+    11 of 12 with sources, is half of moving up a level.
+  es: >-
+    Doce casos con respuestas conocidas, sacados de pull requests públicos y de las reglas del
+    centro. Aprobarlo, 11 de 12 con fuentes, es la mitad de lo que hace falta para subir de nivel.
+- en: UTC timelines on every report
+  es: cronologías en UTC en cada informe
+- en: UniValue self-member-assignment lint
+  es: regla de lint contra la autoasignación de miembros de UniValue
+- en: >-
+    Validation, proof of work, the consensus rules, the script interpreter, fork choice and download
+    scheduling, the MatMul attestation rules and the MatMul code; classes K13 and K14; deep reviews
+    3.1, 3.2b, 3.5b and the rules of 3.6; the #464 list.
+  es: >-
+    Validación, prueba de trabajo, las reglas de consenso, el intérprete de scripts, la elección de
+    fork y la planificación de descargas, las reglas de atestación MatMul y el código MatMul; clases
+    K13 y K14; revisiones en profundidad 3.1, 3.2b, 3.5b y las reglas de 3.6; la lista de #464.
+- en: What runs is what was reviewed
+  es: Lo que se ejecuta es lo que se revisó
+- en: Windows / MinGW / MSVC portability
+  es: Portabilidad Windows / MinGW / MSVC
+- en: >-
+    a #464 evidence list: one measured result + one ready test + one paragraph per item; 0 re-filed
+    PRs that were not taken
+  es: >-
+    una lista de evidencias para #464: un resultado medido + una prueba lista + un párrafo por
+    punto; 0 PR reenviados que no se aceptaron
+- en: a GUI build job in the fork CI matrix
+  es: un trabajo de compilación de la interfaz gráfica en la matriz de CI del fork
+- en: >-
+    a Linux, Windows and macOS line with SHA and pass/fail for every candidate; installer starts a
+    node; one-line verify script
+  es: >-
+    una línea de Linux, Windows y macOS con SHA y aprobado/fallado para cada candidata; el
+    instalador arranca un nodo; script de verificación de una línea
+- en: a Metal row exists
+  es: existe una fila de Metal
+- en: a disconnect-reconnect functional test
+  es: una prueba funcional de desconexión y reconexión
+- en: >-
+    a genesis sync with assumevalid=0 on a stock binary that reaches the tip, reported with the
+    height
+  es: >-
+    una sincronización desde el génesis con assumevalid=0 en un binario sin modificar que llega a la
+    punta de la cadena, informada con la altura
+- en: >-
+    a jail step that fails and carries on unjailed, or a second surface that ignores -proxy, undoes
+    the operator's safe profile
+  es: >-
+    un paso del jail que falla y continúa sin jail, o una segunda superficie que ignora -proxy,
+    deshace el perfil seguro del operador
+- en: a malformed reply fails the request, not the helper
+  es: una respuesta malformada hace fallar la petición, no el helper
+- en: >-
+    a test file for shielded_rpc.cpp with the file above 50 lines (set here); the lock-order
+    inversion fixed; verification fuzz targets
+  es: >-
+    un archivo de pruebas para shielded_rpc.cpp, con el archivo por encima de 50 líneas (fijado
+    aquí); la inversión del orden de bloqueo, corregida; targets de fuzzing de verificación
+- en: a truncated-file load test per store
+  es: una prueba de carga con archivo truncado por almacén
+- en: a verdict table with one row per (block, backend), no disagreement, a Metal row
+  es: >-
+    una tabla de veredictos con una fila por (bloque, backend), sin discrepancias, con una fila de
+    Metal
+- en: >-
+    a verifier disagreement between implementations is a consensus split; only differential testing
+    is an oracle; already checked: reference-only Dilithium with the z-norm check, no affected PQ
+    crates in Atlas
+  es: >-
+    una discrepancia de verificación entre implementaciones es una división del consenso; solo las
+    pruebas diferenciales sirven de oráculo; ya comprobado: Dilithium solo de referencia con la
+    comprobación de la norma z, ningún crate PQ afectado en Atlas
+- en: an Atlas per-screen RPC allowlist test
+  es: una prueba de lista de permitidos RPC por pantalla para Atlas
+- en: an upgrade from a saved datadir on every candidate
+  es: una actualización desde un directorio de datos guardado en cada candidata
+- en: anchor-window item (#317/#461) filed as EVIDENCE
+  es: el punto de la ventana de anclaje (#317/#461) enviado como EVIDENCIA
+- en: baseline measured
+  es: línea base medida
+- en: baseline measured, untriaged
+  es: línea base medida, sin revisar
+- en: baselines only shrink
+  es: las líneas base solo se reducen
+- en: batch coordinator
+  es: coordinación del lote
+- en: batch coordinator, runners
+  es: coordinación del lote, runners
+- en: block download scheduling
+  es: planificación de la descarga de bloques
+- en: board updated; baselines rechecked; I-RC verify lines in (batch coordinator, runners)
+  es: >-
+    tablero actualizado; líneas base revisadas de nuevo; líneas de verificación de I-RC recibidas
+    (coordinación del lote, runners)
+- en: >-
+    bounds table complete; 6 targets run 24 h clean under ASan; net_processing.cpp >= 75 lines with
+    functional tests (set here)
+  es: >-
+    tabla de límites completa; 6 targets ejecutados 24 h sin errores con ASan; net_processing.cpp >=
+    75 líneas con pruebas funcionales (fijado aquí)
+- en: build check that constant-time paths are never compiled at -Os/-O1
+  es: >-
+    comprobación en la compilación de que las rutas de tiempo constante nunca se compilan con
+    -Os/-O1
+- en: byte-diff proof of block validity between main and the release line
+  es: >-
+    demostración, por diff de bytes, de la validez de los bloques entre main y la rama de
+    publicación
+- en: cargo audit and OSV-Scanner over the Atlas lock files on every push
+  es: cargo audit y OSV-Scanner sobre los archivos lock de Atlas en cada push
+- en: ci/cppcheck.sh with fixed flags; shrinking baseline
+  es: ci/cppcheck.sh con opciones fijas; línea base que se reduce
+- en: >-
+    ci/known-failing.txt written from that run (the unit failures, the 48 ExactReplay-stall scripts
+    [C3], gcc-baseline failures after triage) and only shrinking
+  es: >-
+    ci/known-failing.txt escrito a partir de esa ejecución (los fallos unitarios, los 48 scripts que
+    se atascan en ExactReplay [C3], los fallos de la línea base de gcc tras su triaje) y solo a la
+    baja
+- en: clang-tidy warnings
+  es: advertencias de clang-tidy
+- en: clang-tidy-diff + -Werror=thread-safety on clean files
+  es: clang-tidy-diff + -Werror=thread-safety en archivos limpios
+- en: class check against doc/bug-classes.md (add a class if new)
+  es: comprobar la clase en doc/bug-classes.md (añadir una clase si es nueva)
+- en: codeql weekly on a dedicated box
+  es: CodeQL semanal en una máquina dedicada
+- en: container -> bound -> eviction test table; fuzz target per message type
+  es: tabla contenedor -> límite -> prueba de desalojo; un target de fuzzing por tipo de mensaje
+- en: corpus and script in the repo
+  es: corpus y script en el repositorio
+- en: >-
+    count sites on the live head (under 3 real sites: file the rule alone)
+  es: >-
+    contar los sitios en el head actual (menos de 3 sitios reales: enviar solo la regla)
+- en: coverage ratchet and ASan job
+  es: trinquete de cobertura y trabajo de ASan
+- en: coverage-ratchet on a dedicated box
+  es: trinquete de cobertura en una máquina dedicada
+- en: cppcheck + CodeQL results
+  es: resultados de cppcheck + CodeQL
+- en: cppcheck errors
+  es: errores de cppcheck
+- en: cppcheck errors 26 to 0
+  es: errores de cppcheck de 26 a 0
+- en: cppcheck with fixed flags
+  es: cppcheck con opciones fijas
+- en: dangling reference / copy from freed memory
+  es: referencia colgante / copia desde memoria liberada
+- en: deterministic download simulation with an adversarial scheduler
+  es: simulación determinista de descargas con un planificador adversario
+- en: differential target clean; ACVP/Wycheproof vectors in ctest; build-flag check
+  es: >-
+    target diferencial sin errores; vectores ACVP/Wycheproof en ctest; comprobación de las opciones
+    de compilación
+- en: >-
+    dispatcher target 24 h clean; every security_v2 file above 0; listener and user-separation tests
+    in the functional runner
+  es: >-
+    target del dispatcher 24 h sin errores; cada archivo de security_v2 por encima de 0; pruebas de
+    listeners y de separación de usuarios en el ejecutor de pruebas funcionales
+- en: doc/resource-bounds.md table started
+  es: tabla de doc/resource-bounds.md empezada
+- en: each lane picks one class or item from the board; owners post the plan line on their card
+  es: >-
+    cada tarea elige una clase o un punto del tablero; los responsables publican la línea del plan
+    en su tarjeta
+- en: each of the 927 unexecuted wallet functions tested or listed as dead
+  es: cada una de las 927 funciones del monedero no ejecutadas, probada o listada como código muerto
+- en: every baseline (TSan 41, cppcheck 372, CodeQL 260) only shrinks
+  es: cada línea base (TSan 41, cppcheck 372, CodeQL 260) solo se reduce
+- en: every candidate; verify requests tagged on the board, answered within the week
+  es: >-
+    cada candidata; las solicitudes de verificación se marcan en el tablero y se responden en la
+    misma semana
+- en: every class PR links a run with fails-before and passes-after
+  es: cada PR de clase enlaza una ejecución que falla antes y pasa después
+- en: every disagreement filed as EVIDENCE within the week
+  es: cada discrepancia enviada como EVIDENCIA en la misma semana
+- en: every peer-fed container in doc/resource-bounds.md with a bound, an eviction and a unit test
+  es: >-
+    cada contenedor alimentado por pares en doc/resource-bounds.md con un límite, un desalojo y una
+    prueba unitaria
+- en: every pivot_root|chroot|unshare|mount( failure fatal
+  es: todo fallo de pivot_root|chroot|unshare|mount( es fatal
+- en: every security_v2 file above 0 lines covered
+  es: cada archivo de security_v2 con más de 0 líneas cubiertas
+- en: every wallet RPC tested against a locked wallet
+  es: cada RPC del monedero probado con un monedero bloqueado
+- en: >-
+    evidence for #464, not a sweep
+  es: >-
+    evidencias para #464, no un barrido
+- en: external-review scope
+  es: alcance de la revisión externa
+- en: file-system and environment trust
+  es: confianza en el sistema de archivos y el entorno
+- en: first green Windows and sharded macOS runs on the release line
+  es: primeras ejecuciones en verde de Windows y de macOS en fragmentos en la rama de publicación
+- en: follows the first green Windows and macOS fork runs (I-CI), then one PR per class
+  es: >-
+    sigue a las primeras ejecuciones en verde de Windows y macOS en el fork (I-CI); después, un PR
+    por clase
+- en: fork CI Windows jobs + POSIX grep lint
+  es: trabajos de Windows en la CI del fork + regla de lint con grep de POSIX
+- en: fork CI branch on 4c7840e9 with lint, clang-tidy-diff, cppcheck
+  es: rama de CI del fork sobre 4c7840e9 con lint, clang-tidy-diff y cppcheck
+- en: fork branch; a workflow file goes upstream only if the maintainer asks
+  es: rama en el fork; un archivo de workflow solo va upstream si el mantenedor lo pide
+- en: fork build matrix (Linux, userns, mingw, Windows, macOS)
+  es: matriz de compilación en el fork (Linux, userns, mingw, Windows, macOS)
+- en: found
+  es: encontrado
+- en: fs-trust policy
+  es: política fs-trust
+- en: functional matrix {-listen=0, -proxy, -onlynet, -v2pqonly} x every listening surface
+  es: matriz funcional {-listen=0, -proxy, -onlynet, -v2pqonly} x cada superficie que escucha
+- en: >-
+    functional test: no non-loopback listener on 29447 without -modelbind; no NAT-PMP mapping
+    requested by default
+  es: >-
+    prueba funcional: ningún listener fuera de loopback en 29447 sin -modelbind; ninguna asignación
+    NAT-PMP solicitada por defecto
+- en: functional-failure triage
+  es: triaje de los fallos funcionales
+- en: >-
+    fuzz batch: dispatcher, DLTX, chunks, hybrid handshake, model files
+  es: >-
+    lote de fuzzing: dispatcher, DLTX, chunks, handshake híbrido, archivos de modelo
+- en: fuzz-smoke (ClusterFuzzLite)
+  es: prueba de humo de fuzzing (ClusterFuzzLite)
+- en: >-
+    gate G1 is 'partly'; most nodes run v0.34.15 and the release line is far ahead; operator data
+    has found real bugs before
+  es: >-
+    el control G1 figura como "en parte"; la mayoría de los nodos usan v0.34.15 y la rama de
+    publicación va muy por delante; los datos de los operadores ya han sacado a la luz errores reales
+- en: generators, not instance fixes
+  es: generadores, no correcciones puntuales
+- en: helper lifecycle and options not honoured
+  es: ciclo de vida de procesos auxiliares y opciones no respetadas
+- en: helper.cpp split proposed to the maintainer with the tests in hand
+  es: división de helper.cpp propuesta al mantenedor con las pruebas en la mano
+- en: >-
+    if the class touches validation, fork choice, attestation or the MatMul frontier -> E-CONSENSUS
+    evidence; stop here
+  es: >-
+    si la clase toca validación, elección de fork, atestación o la frontera MatMul -> evidencia para
+    E-CONSENSUS; aquí termina
+- en: in the CI branch
+  es: en la rama de CI
+- en: in wallet code; known, on the A-SHIELDED lane's done bar
+  es: en código del monedero; conocida, en el criterio de finalización de la tarea A-SHIELDED
+- en: install_prebuilt_release_tree on the real archive starts a node
+  es: install_prebuilt_release_tree sobre el archivo real arranca un nodo
+- en: integer width / truncation
+  es: ancho de enteros / truncamiento
+- en: jail tests with 0 'jail absent' skips under BTX_TEST_REQUIRE_LINUX_JAIL=1 in CI
+  es: pruebas del jail con 0 omisiones por "jail absent" con BTX_TEST_REQUIRE_LINUX_JAIL=1 en CI
+- en: >-
+    libFuzzer differential target (BTX verify vs an independent ML-DSA-44/SLH-DSA library) runs
+    clean
+  es: >-
+    el target diferencial de libFuzzer (verificación de BTX frente a una biblioteca
+    ML-DSA-44/SLH-DSA independiente) se ejecuta sin errores
+- en: lifetime and initialisation
+  es: tiempo de vida e inicialización
+- en: lint (registration diff, UniValue, K01/K08/K17 greps, K10 test, exec bits)
+  es: lint (diff de registro, UniValue, greps de K01/K08/K17, prueba K10, bits de ejecución)
+- en: lint against raw ofstream to datadir paths; truncated-file load tests
+  es: >-
+    regla de lint contra ofstream directo a rutas del directorio de datos; pruebas de carga con
+    archivos truncados
+- en: lint against raw ofstream/fopen("w") to datadir paths in CI-4
+  es: regla de lint contra ofstream/fopen("w") directos a rutas del directorio de datos en CI-4
+- en: linux-asan-ubsan
+  es: linux-asan-ubsan
+- en: linux-unit-functional (sharded)
+  es: linux-unit-functional (en fragmentos)
+- en: lock order / self-deadlock / race
+  es: orden de bloqueos / autobloqueo / condición de carrera
+- en: log-scan assertion; SecureString audit test
+  es: aserción por escaneo de logs; prueba de auditoría de SecureString
+- en: macOS / libc++ / Qt packaging
+  es: empaquetado macOS / libc++ / Qt
+- en: >-
+    matmul 62.6/62.7 with 47 suites unmeasured; a CPU/CUDA corpus run exists; Metal never run; a
+    backend disagreement is a consensus split
+  es: >-
+    matmul 62,6/62,7 con 47 suites sin medir; existe una ejecución del corpus en CPU/CUDA; Metal
+    nunca se ha ejecutado; una discrepancia entre backends es una división del consenso
+- en: merged -> board card moved -> baseline shrinks
+  es: integrado -> tarjeta del tablero movida -> la línea base se reduce
+- en: model-based state-machine test
+  es: prueba basada en modelos de la máquina de estados
+- en: >-
+    modelnet risk rank 3; helper.cpp touched by 42 fix PRs; more single fixes landed on 12 Nov;
+    logic slips hide behind high line coverage
+  es: >-
+    modelnet, puesto 3 en el ranking de riesgo; helper.cpp tocado por 42 PR de corrección; el 12 de
+    noviembre se incorporaron más correcciones sueltas; los fallos de lógica se esconden tras una
+    cobertura de líneas alta
+- en: >-
+    modelnet risk rank 3; security_v2 at 0.2/15.0 with 6 files at 0 even with functional tests; the
+    dispatcher has no fuzz target
+  es: >-
+    modelnet, puesto 3 en el ranking de riesgo; security_v2 en 0,2/15,0, con 6 archivos en 0
+    incluso con pruebas funcionales; el dispatcher no tiene target de fuzzing
+- en: modelnet_native_dispatch target runs 24 h clean under ASan
+  es: el target modelnet_native_dispatch se ejecuta 24 h sin errores con ASan
+- en: mutate -> reopen -> compare test per store
+  es: prueba mutar -> reabrir -> comparar por almacén
+- en: >-
+    net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63,
+    matmul_trusted_attestations.h 50; 68 consensus functions never executed; frozen for 0.34.16 by
+    #464, so only evidence lands
+  es: >-
+    net/p2p, puesto 1 en el ranking de riesgo, y validación, puesto 2; net_processing.cpp 113
+    commits de corrección, validation.cpp 63, matmul_trusted_attestations.h 50; 68 funciones de
+    consenso nunca ejecutadas; congelado para 0.34.16 por #464, así que solo se incorporan
+    evidencias
+- en: net/p2p risk rank 1; gate G3 at 1 of about 13 parser targets; no container inventory exists
+  es: >-
+    net/p2p, puesto 1 en el ranking de riesgo; control G3 en 1 de unos 13 targets de parsers; no
+    existe un inventario de contenedores
+- en: net_processing and validation thread-safety warnings delivered as a measured result
+  es: advertencias de thread-safety de net_processing y validation entregadas como resultado medido
+- en: >-
+    net_processing.cpp at or above 75 lines with functional tests through non-consensus tests
+    (target set here)
+  es: >-
+    net_processing.cpp en 75 líneas o más con pruebas funcionales, mediante pruebas fuera del
+    consenso (objetivo fijado aquí)
+- en: nightly cross-implementation checksums
+  es: sumas de comprobación nocturnas entre implementaciones
+- en: no runner box holds keys, tokens or wallets
+  es: ninguna máquina de runner guarda claves, tokens ni monederos
+- en: non-atomic or short state-file write
+  es: escritura no atómica o incompleta de archivos de estado
+- en: none until owned
+  es: ninguna hasta que tenga responsable
+- en: none until owned; phase-3 fuzz batch covers the dispatcher target and the native.cmake gate only
+  es: >-
+    ninguna hasta que tenga responsable; el lote de fuzzing de la fase 3 solo cubre el target del
+    dispatcher y el control de native.cmake
+- en: none until owned; the phase-3 fuzz batch produces the targets only
+  es: ninguna hasta que tenga responsable; el lote de fuzzing de la fase 3 solo produce los targets
+- en: not counted
+  es: sin contar
+- en: not counted (4 files call funding primitives)
+  es: sin contar (4 archivos llaman a primitivas de financiación)
+- en: not counted (44 files reference symlink APIs)
+  es: sin contar (44 archivos hacen referencia a API de enlaces simbólicos)
+- en: not counted; no inventory yet
+  es: sin contar; aún no hay inventario
+- en: observing-peer functional test
+  es: prueba funcional con un par observador
+- en: once per candidate, and once after any matmul change lands
+  es: una vez por candidata, y una vez después de que se incorpore cualquier cambio en matmul
+- en: one SafePath helper
+  es: una función auxiliar SafePath
+- en: >-
+    one batch to the maintainer (PRs with run links); an evidence note on #464 only when a complete
+    item exists; one operator line (batch coordinator)
+  es: >-
+    un lote al mantenedor (PR con enlaces a las ejecuciones); una nota de evidencias en #464 solo
+    cuando exista un punto completo; una línea para los operadores (coordinación del lote)
+- en: one class per week from phase 2b; 3.3 review in phase 3
+  es: una clase por semana desde la fase 2b; revisión 3.3 en la fase 3
+- en: >-
+    one fs-trust policy (0600 for secrets and sockets, audited env-var allowlist, provenance check
+    at each sink); CodeQL baseline 133 only shrinks
+  es: >-
+    una política fs-trust (0600 para secretos y sockets, lista de permitidos auditada de variables
+    de entorno, comprobación de procedencia en cada sumidero); la línea base de CodeQL de 133 solo
+    se reduce
+- en: one interop run per candidate
+  es: una ejecución de interoperabilidad por candidata
+- en: one row per (block, backend) with no disagreement
+  es: una fila por (bloque, backend) sin discrepancias
+- en: one run line per candidate; the safe-profile text once, then kept current
+  es: >-
+    una línea de ejecución por candidata; el texto del perfil seguro una vez, y después se mantiene
+    al día
+- en: one store per week from phase 2b
+  es: un almacén por semana desde la fase 2b
+- en: >-
+    one table-driven BCP/1 lifecycle test (new, mempool, confirmed, replaced, spent, consolidated)
+    through every reporting RPC
+  es: >-
+    una prueba del ciclo de vida BCP/1 basada en tablas (nuevo, mempool, confirmado, reemplazado,
+    gastado, consolidado) a través de cada RPC que informa del estado
+- en: open
+  es: abierto
+- en: >-
+    open; #478 and #313 on the release line only
+  es: >-
+    abierto; #478 y #313 solo en la rama de publicación
+- en: open; worklists ready
+  es: abierto; listas de trabajo preparadas
+- en: otool -L on every packaged binary in CI-10
+  es: otool -L en cada binario empaquetado en CI-10
+- en: otool check in the release gate; macOS CI
+  es: comprobación con otool en el control de publicación; CI de macOS
+- en: owners
+  es: responsables
+- en: owners, second pass
+  es: responsables, segundos revisores
+- en: partly
+  es: en parte
+- en: path / symlink / jail handling
+  es: manejo de rutas / enlaces simbólicos / jail
+- en: phase 2a-2b, one PR
+  es: fase 2a-2b, un PR
+- en: phase 2b
+  es: fase 2b
+- en: planned
+  es: previsto
+- en: planned; baseline 260
+  es: previsto; línea base 260
+- en: planned; baseline 372
+  es: previsto; línea base 372
+- en: planned; baseline 41 pairs
+  es: previsto; línea base de 41 pares
+- en: planned; baseline 69.9% lines; configure fix landed (#578)
+  es: previsto; línea base 69,9 % de líneas; corrección de la configuración incorporada (#578)
+- en: privacy leak to peers or restricted views
+  es: fuga de privacidad hacia pares o vistas restringidas
+- en: >-
+    property tests per store (idempotency keys, pagination completeness, monotonic counters, restart
+    = no restart) in ctest
+  es: >-
+    pruebas de propiedades por almacén (claves de idempotencia, paginación completa, contadores
+    monótonos, reinicio = sin reinicio) en ctest
+- en: >-
+    property tests per store and a BCP/1 lifecycle table in ctest; helper.cpp split proposed; 0 new
+    single-site K20/K21 PRs
+  es: >-
+    pruebas de propiedades por almacén y una tabla del ciclo de vida BCP/1 en ctest; división de
+    helper.cpp propuesta; 0 PR nuevos de un solo sitio para K20/K21
+- en: property tests per store; BCP/1 lifecycle table; mutate-reopen-compare
+  es: pruebas de propiedades por almacén; tabla del ciclo de vida BCP/1; mutar-reabrir-comparar
+- en: qt/modelnetpage.cpp is file risk rank 7 with no data; nothing in the programme compiles the GUI
+  es: >-
+    qt/modelnetpage.cpp ocupa el puesto 7 en el ranking de riesgo por archivo y no tiene datos; nada
+    en el programa compila la interfaz gráfica
+- en: registration diff, 10 s fuzz smoke, exec-bit lint, release gate
+  es: >-
+    diff de registro, prueba de humo de fuzzing de 10 s, regla de lint de bits de ejecución, control
+    de publicación
+- en: release-gate
+  es: control de publicación
+- en: release-gate job green (GLIBC ceiling, RUNPATH, elfcheck.py)
+  es: trabajo del control de publicación en verde (techo de GLIBC, RUNPATH, elfcheck.py)
+- en: restore-without-passphrase probe fails; memory scan after walletlock shows no seed bytes
+  es: >-
+    el intento de restaurar sin frase de contraseña fracasa; un escaneo de memoria tras walletlock
+    no muestra bytes de la semilla
+- en: restricted-user allowlist test; RAII reservation + two-sender test
+  es: >-
+    prueba de lista de permitidos para usuarios restringidos; reserva RAII + prueba con dos
+    remitentes
+- en: rule-only PR
+  es: PR solo con la regla
+- en: >-
+    rule-only PR; Atlas half closed by #574
+  es: >-
+    PR solo con la regla; la parte de Atlas la cerró #574
+- en: >-
+    rule-only PRs: K10 test, K04 lint
+  es: >-
+    PR solo con la regla: prueba K10, regla de lint K04
+- en: >-
+    runner: Linux (IBD from genesis, upgrade from a saved datadir)
+  es: >-
+    runner: Linux (IBD desde el génesis, actualización desde un directorio de datos guardado)
+- en: >-
+    runner: Windows 11 + WSL2
+  es: >-
+    runner: Windows 11 + WSL2
+- en: >-
+    runner: macOS
+  es: >-
+    runner: macOS
+- en: >-
+    runner: native Windows with an NVIDIA GPU
+  es: >-
+    runner: Windows nativo con una GPU NVIDIA
+- en: >-
+    safe profile published; genesis sync on a stock binary reaches the tip; upgrade and interop run
+    per candidate
+  es: >-
+    perfil seguro publicado; la sincronización desde el génesis con un binario sin modificar llega a
+    la punta de la cadena; ejecución de actualización e interoperabilidad por candidata
+- en: second pass by the lane's reviewer (Wednesday)
+  es: segunda revisión por el revisor de la tarea (miércoles)
+- en: secret or seed material exposed
+  es: secretos o material de semilla expuestos
+- en: >-
+    shielded_rpc_tests exists and wallet/shielded_rpc.cpp is above 50 lines covered (target set
+    here)
+  es: >-
+    shielded_rpc_tests existe y wallet/shielded_rpc.cpp supera las 50 líneas cubiertas (objetivo
+    fijado aquí)
+- en: store, deposit and persistence logic
+  es: lógica de almacenamiento, depósitos y persistencia
+- en: sweep every site + write the rule (test, lint or CI job)
+  es: barrer cada sitio + escribir la regla (prueba, regla de lint o trabajo de CI)
+- en: sweep, rule, fork CI run; second passes on Wednesday
+  es: barrido, regla, ejecución de CI en el fork; segundas revisiones el miércoles
+- en: test registration, fuzz smoke, packaging drift
+  es: registro de pruebas, prueba de humo de fuzzing, divergencias de empaquetado
+- en: tests with a symlinked ancestor and a symlinked leaf
+  es: >-
+    pruebas con un directorio ancestro que es un enlace simbólico y una hoja que es un enlace
+    simbólico
+- en: the 47 timeouts have a job and a number
+  es: las 47 suites que agotan el tiempo tienen un trabajo y una cifra
+- en: the baselines exist and are untriaged; each rule costs an afternoon and closes a class for good
+  es: >-
+    las líneas base existen y están sin revisar; cada regla cuesta una tarde y cierra una clase
+    para siempre
+- en: the never-run targets run 1 h clean
+  es: los targets que nunca se ejecutaron se ejecutan 1 h sin errores
+- en: >-
+    the one lock-order inversion DEBUG_LOCKORDER reports fixed on the wallet side, with a
+    DEBUG_LOCKORDER test
+  es: >-
+    la única inversión del orden de bloqueo de la que informa DEBUG_LOCKORDER, corregida del lado del
+    monedero, con una prueba DEBUG_LOCKORDER
+- en: the safe profile in the community guide and the status page
+  es: el perfil seguro en la guía de la comunidad y en la página de estado
+- en: the verify script prints one line (commit, test, result) that the runner pastes unchanged
+  es: >-
+    el script de verificación imprime una línea (commit, prueba, resultado) que el runner pega sin
+    cambios
+- en: tsan-lockorder nightly
+  es: tsan-lockorder, nocturno
+- en: unbounded input from peers and model peers
+  es: entradas sin límite de pares y de pares de modelos
+- en: under -modelrpcsocket the helper runs as a different user and cannot open .cookie or wallets/
+  es: con -modelrpcsocket el helper se ejecuta como otro usuario y no puede abrir .cookie ni wallets/
+- en: unit test over the RPCHelpMan table vs vRPCConvertParams
+  es: prueba unitaria sobre la tabla RPCHelpMan frente a vRPCConvertParams
+- en: >-
+    upstream runs no hosted CI by choice; baselines: coverage 69.9/40.7, TSan 41, cppcheck 372,
+    CodeQL 260, tidy 1,033; macOS test job ran out of time on the last fork run, so it is sharded
+  es: >-
+    upstream no usa CI alojada por decisión propia; líneas base: cobertura 69,9/40,7, TSan 41,
+    cppcheck 372, CodeQL 260, tidy 1.033; el trabajo de pruebas de macOS se quedó sin tiempo en la
+    última ejecución del fork, así que se divide en fragmentos
+- en: verification fuzz targets with cost limits
+  es: targets de fuzzing de verificación con límites de coste
+- en: waits for the first Windows CI run
+  es: a la espera de la primera ejecución de CI en Windows
+- en: wallet RPC authorization and coin reservation
+  es: autorización de RPC del monedero y reserva de monedas
+- en: >-
+    wallet lines >= 70 (set here); K05/K11/K12 rules in ctest; restore-without-passphrase probe
+    fails; no seed bytes after walletlock
+  es: >-
+    líneas del monedero >= 70 (fijado aquí); reglas K05/K11/K12 en ctest; el intento de restaurar
+    sin frase de contraseña fracasa; ningún byte de la semilla tras walletlock
+- en: wallet lines from 50.5 to at least 70 (target set here)
+  es: líneas del monedero de 50,5 a al menos 70 (objetivo fijado aquí)
+- en: >-
+    wallet risk rank 4; 927 wallet functions never executed under unit+functional; K05 chain of 4
+    PRs in 4 days
+  es: >-
+    monedero, puesto 4 en el ranking de riesgo; 927 funciones del monedero nunca ejecutadas con
+    pruebas unitarias + funcionales; en K05, una cadena de 4 PR en 4 días
+- en: wallet-locked / passphrase ordering
+  es: monedero bloqueado / orden de la frase de contraseña
+- en: >-
+    wallet/shielded_rpc.cpp is file risk rank 4 at 15.8/24.3 with no test file; the one lock-order
+    inversion is on the wallet side
+  es: >-
+    wallet/shielded_rpc.cpp ocupa el puesto 4 en el ranking de riesgo por archivo, con 15,8/24,3 y
+    sin archivo de pruebas; la única inversión del orden de bloqueo está del lado del monedero
+- en: weekly CodeQL
+  es: CodeQL semanal
+- en: weekly from 24 Nov
+  es: semanal desde el 24 de noviembre
+- en: with the Thursday batch, only when a complete item exists; at most one short note
+  es: con el lote del jueves, solo cuando exista un punto completo; como mucho una nota breve
+- en: workflow exists; never run on release-0.34.16; needs rebase to 4c7840e9
+  es: el workflow existe; nunca se ha ejecutado en release-0.34.16; necesita un rebase sobre 4c7840e9
+- en: >-
+    worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); shared helper exists
+    (#576)
+  es: >-
+    lista de trabajo preparada (12 archivos en 4c7840e9, más 1 candidato que el filtro omitió); la
+    función auxiliar compartida existe (#576)
+- en: worklist ready (consensus and matmul sites excluded)
+  es: lista de trabajo preparada (sin los sitios de consenso y matmul)
