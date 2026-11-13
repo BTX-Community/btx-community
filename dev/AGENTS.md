@@ -36,7 +36,8 @@ repository or into any file that could be committed.
    partner) or Core (run the gates: fork CI, release qualification, the weekly batch). See
    [`08-levels.md`](08-levels.md). If the operator is unsure: Basic.
 2. **Machine.** OS and version, CPU and thread count, GPU and driver (if any), RAM, free disk
-   where the work will live. Print them; do not guess.
+   where the work will live. Show the operator the command for their OS below and run it once
+   they say yes; do not guess.
    - Linux or WSL2: `. /etc/os-release; echo "$PRETTY_NAME"; uname -m; nproc; free -g; df -h "$HOME"; command -v nvidia-smi && nvidia-smi -L`
    - macOS: `sw_vers; uname -m; sysctl -n machdep.cpu.brand_string hw.ncpu hw.memsize; df -h "$HOME"`
    - Windows (PowerShell): `Get-CimInstance Win32_OperatingSystem | Select-Object Caption, Version, OSArchitecture; Get-CimInstance Win32_Processor | Select-Object Name, NumberOfLogicalProcessors; Get-CimInstance Win32_ComputerSystem | Select-Object TotalPhysicalMemory; Get-CimInstance Win32_VideoController | Select-Object Name, DriverVersion; Get-PSDrive C`

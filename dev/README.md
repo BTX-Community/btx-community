@@ -157,8 +157,10 @@ a change to both, in the same pull request.
 ### Security findings
 
 A remote crash, a path to lost funds or exposed keys is not a pull request, an issue, a board card
-or a chat post. It goes through GitHub private vulnerability reporting on `btxchain/btx` (the
-repository's Security tab). The class goes on the registry without the detail
+or a chat post. It goes privately: email `team@btx.dev` per btxchain/btx's
+[`SECURITY.md`](https://github.com/btxchain/btx/blob/main/SECURITY.md), or GitHub private
+vulnerability reporting on `btxchain/btx` (the repository's Security tab). The
+class goes on the registry without the detail
 ([`03-guardrails.md`](03-guardrails.md) §8).
 
 ### Keeping it true
