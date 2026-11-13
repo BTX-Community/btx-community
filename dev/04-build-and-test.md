@@ -6,7 +6,7 @@ How to build `btxchain/btx` and run its unit, functional, coverage, sanitizer an
 
 Every command and flag below was checked against the tree at `4c7840e9` (`CMakeLists.txt`, `src/CMakeLists.txt`, `CMakePresets.json`, `cmake/script/`, `ci/test/`, `test/functional/test_runner.py`). Numbers live in [`01-state.md`](01-state.md).
 
-**Source tags.** `[C3]` = the 12 Nov unit + functional coverage run at `c6f9678d` (recipe in §5). `[C2]` = the 12 Nov clang-tidy, TSan and lock-order run at `c6f9678d`. `[repo]` = a file in the tree at `4c7840e9`. `[plan]` = [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md). `[data]` = [`plan/plan-data.json`](plan/plan-data.json). `[read]` = taken from a source; `[tested]` = a command was run; `[inferred]` = judgement.
+**Source tags.** `[C3]` = the 12 Nov unit + functional coverage run at `c6f9678d` (recipe in §5). `[C2]` = the 12 Nov clang-tidy, TSan and lock-order run at `c6f9678d`. `[C0]` = the 13 Nov unit + functional run at `88c9b49c` in rootless Podman (Ubuntu 24.04 container, 24 threads, 12 functional jobs). `[repo]` = a file in the tree at `4c7840e9`. `[plan]` = [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md). `[data]` = [`plan/plan-data.json`](plan/plan-data.json). `[read]` = taken from a source; `[tested]` = a command was run; `[inferred]` = judgement.
 
 ## 1. Setup
 
@@ -83,7 +83,7 @@ cmake --build build -j"$(nproc)"
 - Check the cache line after configure. `doc/build-unix.md` warns that `OPENSSL_ROOT_DIR` alone can pair 3.5 headers with the distro's 3.0 `libssl` [repo]. The `no-shared` build above leaves only static libraries in the prefix, which is what `-DOPENSSL_USE_STATIC_LIBS=ON` looks for. If the cache still points at a system library, pin both with `-DOPENSSL_SSL_LIBRARY=` and `-DOPENSSL_CRYPTO_LIBRARY=`, as that document does.
 - `-DBTX_ENABLE_CUDA_EXPERIMENTAL=OFF` matters on any box with `nvcc`: the CUDA backend turns itself on when a CUDA compiler is found, and configure then fails unless `BTX_CUDA_ARCHITECTURES` (or `CMAKE_CUDA_ARCHITECTURES`) is set [repo: `src/CMakeLists.txt:93-158`].
 - CUDA builds: add `-DBTX_ENABLE_CUDA_EXPERIMENTAL=ON -DCMAKE_CUDA_COMPILER="$(command -v nvcc)" -DBTX_CUDA_ARCHITECTURES=<cc> -DCMAKE_CUDA_ARCHITECTURES=<cc>`, where `<cc>` is `nvidia-smi --query-gpu=compute_cap --format=csv,noheader` without the dot (RTX 50-series: 120; RTX 30-series: 86). CUDA 12.8 and earlier crash compiling for 80/86/89/90; use 12.9 or newer there. 120 compiles on 12.8 [repo: `doc/btx-cuda-mining-troubleshooting.md` §5].
-- Tests that mint ML-DSA certificates need the 3.5 binary at run time: `export BTX_OPENSSL="$OSSL/bin/openssl" OPENSSL_CONF="$OSSL/ssl/openssl.cnf"` [C3].
+- Tests that mint ML-DSA certificates need the 3.5 binary at run time: `export BTX_OPENSSL="$OSSL/bin/openssl" OPENSSL_CONF="$OSSL/ssl/openssl.cnf"` [C3]. The BCP/1 mock signer used by `feature_bcp1.py` does not read `BTX_OPENSSL`: it takes `BTX_BCP1_OPENSSL`, then `OPENSSL`, then the first `openssl` on `PATH` [repo: `contrib/bcp1/mock_signer.py:136-137` at `88c9b49c`]. With the distro's 3.0 first on `PATH`, the whole test skips at its first step ("openssl does not advertise ML-DSA-44") [repo: `test/functional/feature_bcp1.py:583-585`], so a run looks clean while it tested nothing. Add `export BTX_BCP1_OPENSSL="$OSSL/bin/openssl"`, or put `$OSSL/bin` first on `PATH` [C0].
 - Headless box with no login session: `mkdir -p -m 700 "$HOME/.xdg" && export XDG_RUNTIME_DIR="$HOME/.xdg"` [C3].
 
 ### 2.2 macOS (Apple Silicon, AppleClang) [read: `doc/build-osx.md`; configure checked on Apple clang 21 with Metal off, 12 Nov]
@@ -142,7 +142,7 @@ gcc -shared -fPIC -O2 -o ~/btx-work/libhwc.so ~/btx-work/hwc.c
 BTX_HWC=2 LD_PRELOAD="$HOME/btx-work/libhwc.so" ctest --test-dir build -j "$J" --timeout 900 -E 'matmul_v4_rc_stage3_'
 ```
 
-- **Slow suites.** There are 191 `matmul_v4_rc_stage3_*` suites [tested: suite names at `4c7840e9`]. Under coverage they took 100-300 s each; 47 did not finish within 3,600 s each on 6 threads [C3; plan §1.1]. Leave them out of routine runs. A suite that times out on your machine: rerun it alone (`-R '^name$' --timeout 3600`) before you call it a failure. Never raise a timeout in a PR.
+- **Slow suites.** There are 191 `matmul_v4_rc_stage3_*` suites [tested: suite names at `4c7840e9`]. Under coverage they took 100-300 s each; 47 did not finish within 3,600 s each on 6 threads [C3; plan §1.1]. Leave them out of routine runs. A suite that times out on your machine: rerun it alone (`-R '^name$' --timeout 3600`) before you call it a failure. Outside the stage3 set, `smile2_audit_tests` and `smile2_membership_tests` need 17.5 and 21.7 min on one core, so they miss `--timeout 900` on a plain build; alone with `--timeout 3600` both pass [C0]. Never raise a timeout in a PR.
 - **Known state.** At `c6f9678d` under coverage: 2,575 passed, 47 timed out, 2 failed, 1 skipped [C3; plan §1.1]. A red suite is news only if it is green on the base commit with the same build. Show both.
 - **Registration.** A new suite must appear in `ctest --test-dir build -N`. Unregistered tests are class K19 ([`05-bug-classes.md`](05-bug-classes.md)).
 
@@ -159,6 +159,10 @@ python3 build/test/functional/test_runner.py --configfile=build/test/config.ini 
 
 - `--configfile` points at the build tree's `test/config.ini`; that file decides which components (wallet, modelnet, ZMQ) the runner thinks exist [repo: `test/config.ini.in`]. ZMQ tests need `python3-zmq`.
 - **Known state.** On the coverage build at `c6f9678d`, 82 of 208 scripts failed; 48 of them stalled with "ExactReplay required" in the node logs [plan §1.1]. Under TSan, 55 of a 200-script subset (the `feature_`, `wallet_`, `p2p_` and `rpc_` scripts) failed, and 51 of those 55 also fail on a plain gcc build [C2; plan §1.3]. A red functional run is not news by itself: compare the script on the base commit.
+- **In a container (rootless Podman)** [C0]:
+  - Rootless Podman caps a container at 2,048 processes and threads by default (`pids_limit` in `containers.conf`). With 12 functional jobs, nodes then fail to start threads (`std::system_error`, "Resource temporarily unavailable", EAGAIN). Start the container with `--pids-limit 65536` (or `-1` for none).
+  - Keep `--tmpdirprefix` short, for example `/tmp/f`. `btx-modeld` puts a Unix socket under the node's datadir, and a long prefix pushes it past the 108-byte limit ("AF_UNIX path too long"). The runner only adds a short `XDG_RUNTIME_DIR` fallback when that variable is unset [repo: `test/functional/test_runner.py:970-977` at `88c9b49c`], and inside a container it often is set.
+  - The OpenSSL 3.5 binary has to be found inside the container too: set `BTX_BCP1_OPENSSL` or `PATH` there (see §2.1).
 - **Stall check:** `grep -l 'ExactReplay required' ~/btx-work/func-tmp/test_runner_*/<script>_*/node*/regtest/debug.log`, where `<script>` is the name without `.py` [repo: `test/functional/test_runner.py`]. A stall is the known class, not your bug. Never "fix" it in a PR with `-matmulvalidation=economic`: that setting is a non-default diagnostic [plan §1.1]. Tests that do not need MatMul can follow the `MATMUL_OFF` argument pattern in `test/functional/rpc_bounty_secret_ref_wallet_restriction.py` [repo].
 
 ## 5. Coverage (gcc, Linux)
