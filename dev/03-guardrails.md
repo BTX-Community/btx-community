@@ -264,8 +264,12 @@ Source: `04-build-and-test.md` §2-§4; plan §1.1; the tree at `4c7840e9` as ci
 
 - **What counts:** a remote crash or hang, a path to lost funds, exposed keys or seed material, a
   consensus split, a way around confinement or a wallet authorization check.
-- **Where it goes:** GitHub private vulnerability reporting on `btxchain/btx` (the repository's
-  Security tab, "Report a vulnerability").
+- **Where it goes:** the route in btxchain/btx's
+  [`SECURITY.md`](https://github.com/btxchain/btx/blob/main/SECURITY.md), which is the source of
+  truth if this page ever disagrees: email `team@btx.dev` (ask for the current disclosure key
+  before sending anything sensitive). Do not use inherited upstream keys: Bitcoin Core's
+  disclosure keys and contacts are not BTX's. GitHub private vulnerability reporting is also
+  enabled on `btxchain/btx` (the repository's Security tab, "Report a vulnerability").
 - **Where it never goes:** a public issue, a PR, a comment, a commit message, a branch on a public
   fork, a board card or any group chat. Do not push a reproducer or a fix for an unreported
   finding to a fork: forks are public.
