@@ -71,6 +71,7 @@ en:
   nav.docs: Documents
   nav.dev: Developers
   live.more: BTX in numbers and development activity
+  network.observatory: Live view and node map from the Byron Bay archive node
   page.learn.title: Learn about BTX
   page.learn.lead: What BTX is, and what the next release brings.
   page.network.title: Network and development
@@ -389,6 +390,7 @@ de:
   nav.docs: Dokumente
   nav.dev: Entwickeln
   live.more: BTX in Zahlen und Entwicklungsaktivität
+  network.observatory: Live-Ansicht und Node-Karte der Archive-Node von Byron Bay
   page.learn.title: BTX verstehen
   page.learn.lead: Was BTX ist und was das nächste Release bringt.
   page.network.title: Netz und Entwicklung
@@ -712,6 +714,7 @@ es:
   nav.docs: Documentos
   nav.dev: Desarrolladores
   live.more: BTX en cifras y actividad de desarrollo
+  network.observatory: Vista en vivo y mapa de nodos del nodo de archivo de Byron Bay
   page.learn.title: Conocer BTX
   page.learn.lead: Qué es BTX y qué trae la próxima versión.
   page.network.title: Red y desarrollo
@@ -1037,6 +1040,7 @@ fr:
   nav.docs: Documents
   nav.dev: Développeurs
   live.more: BTX en chiffres et activité de développement
+  network.observatory: "Vue en direct et carte des nœuds du nœud d'archive de Byron Bay"
   page.learn.title: Comprendre BTX
   page.learn.lead: Ce qu'est BTX, et ce qu'apporte la prochaine version.
   page.network.title: Réseau et développement
@@ -1357,6 +1361,7 @@ zh:
   nav.docs: 文档
   nav.dev: 开发者
   live.more: BTX 数据与开发活动
+  network.observatory: Byron Bay 归档节点的实时视图与节点地图
   page.learn.title: 了解 BTX
   page.learn.lead: BTX 是什么，以及下一个版本会带来什么。
   page.network.title: 网络与开发

@@ -5,6 +5,18 @@
 
 schema_version: 1
 translations:
+- en: 'Live view from the Byron Bay archive node: its chain progress, the heights of the nodes connected
+    to it, and a map of those connections (preview).'
+  es: 'Vista en vivo del nodo de archivo de Byron Bay: el avance de su cadena, las alturas de los nodos
+    conectados a él y un mapa de esas conexiones (vista previa).'
+- en: 'Clickable walk-throughs of two features in development: the Atlas desktop app (btxchain/btx #273)
+    and SwapNet (#630), built by the Byron Bay team.'
+  es: 'Recorridos interactivos por dos funciones en desarrollo: la aplicación de escritorio Atlas (btxchain/btx
+    #273) y SwapNet (#630), creados por el equipo de Byron Bay.'
+- en: Unofficial demos with sample data only. Neither feature is released; the pages connect to no node
+    or wallet.
+  es: Demos no oficiales, solo con datos de ejemplo. Ninguna de las dos funciones está publicada; las
+    páginas no se conectan a ningún nodo ni monedero.
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   es: Ya no lista BTX; su mercado BTX/USDT desapareció en julio de 2026.
 - en: >-

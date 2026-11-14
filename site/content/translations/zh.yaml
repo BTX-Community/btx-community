@@ -6,6 +6,15 @@
 
 schema_version: 1
 translations:
+- en: 'Live view from the Byron Bay archive node: its chain progress, the heights of the nodes connected
+    to it, and a map of those connections (preview).'
+  zh: Byron Bay 归档节点的实时视图：其链进度、与其相连节点的高度，以及这些连接的地图（预览）。
+- en: 'Clickable walk-throughs of two features in development: the Atlas desktop app (btxchain/btx #273)
+    and SwapNet (#630), built by the Byron Bay team.'
+  zh: '两项开发中功能的可点击演示：桌面应用 Atlas（btxchain/btx #273）和 SwapNet（#630），由 Byron Bay 团队制作。'
+- en: Unofficial demos with sample data only. Neither feature is released; the pages connect to no node
+    or wallet.
+  zh: 非官方演示，仅含示例数据。两项功能均未发布；这些页面不连接任何节点或钱包。
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   zh: 已不再上架 BTX；其 BTX/USDT 交易对自 2026 年 7 月起已下线。
 - en: >-

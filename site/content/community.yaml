@@ -454,6 +454,35 @@ categories:
         note:
           en: Some API endpoints need an access token.
           de: Manche API-Endpunkte brauchen einen Zugangsschlüssel.
+      - id: byron-observatory
+        name: BTX Network Observatory
+        url: https://explorer.btxbyronbay.com/observatory
+        tags: [map, stats]
+        description:
+          en: >-
+            Live view from the Byron Bay archive node: its chain progress, the heights of the nodes
+            connected to it, and a map of those connections (preview).
+          de: >-
+            Live-Ansicht der Archive-Node von Byron Bay: ihr Kettenfortschritt, die Höhen der mit ihr
+            verbundenen Nodes und eine Karte dieser Verbindungen (Vorschau).
+      - id: byron-demos
+        name: Demos of upcoming features (Atlas, SwapNet)
+        url: https://explorer.btxbyronbay.com/observatory-atlas/
+        tags: [demo, preview]
+        description:
+          en: >-
+            Clickable walk-throughs of two features in development: the Atlas desktop app
+            (btxchain/btx #273) and SwapNet (#630), built by the Byron Bay team.
+          de: >-
+            Klickbare Rundgänge durch zwei Funktionen in Entwicklung: die Desktop-App Atlas
+            (btxchain/btx #273) und SwapNet (#630), gebaut vom Byron-Bay-Team.
+        note:
+          en: >-
+            Unofficial demos with sample data only. Neither feature is released; the pages connect to
+            no node or wallet.
+          de: >-
+            Inoffizielle Demos, nur mit Beispieldaten. Keine der beiden Funktionen ist veröffentlicht;
+            die Seiten verbinden sich mit keiner Node und keinem Wallet.
       - id: ninjaraider-explorer
         name: ninjaraider explorer
         url: https://btxscan.ninjaraider.com
