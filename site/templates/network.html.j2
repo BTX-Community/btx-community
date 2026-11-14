@@ -7,5 +7,7 @@
 
       {% with full = True %}{% include "_live.html.j2" %}{% endwith %}
 
+      <p class="c-add"><a class="c-link" href="{{ observatory_url }}" rel="noopener noreferrer">{{ ui["network.observatory"] }} ↗</a></p>
+
       {% include "_development.html.j2" %}
 {% endblock %}
