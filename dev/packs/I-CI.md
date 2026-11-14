@@ -14,7 +14,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 ## 2. Scope
 
 - Upstream runs no hosted CI on purpose: `.github/workflows/README.md` says the repository does not use GitHub-hosted CI for validation and workflow files are intentionally absent [repo]. So contributors run CI on their own forks, and a fork run is the evidence a PR carries when it reaches the maintainer.
-- A draft fork workflow exists on a contributor fork; it has never run on the release line and must be rebased onto `4c7840e9`, keeping the three upstream workflows `atlas-native.yml`, `atlas-source.yml` and `release-atlas-binaries.yml` [lanes; repo: `.github/workflows/`]. Its location is on the board.
+- A draft fork workflow exists on a contributor fork; it first ran on the release line on 12 Nov at `4c7840e9` and was red; a fixed branch is pending. It must keep the three upstream workflows `atlas-native.yml`, `atlas-source.yml` and `release-atlas-binaries.yml` [lanes; repo: `.github/workflows/`]. Its location is on the board.
 - Jobs [PLAN §4.2]: CI-0 build matrix (Linux, Linux user namespaces, MinGW, Windows, macOS); CI-1 sharded unit + functional; CI-2 ASan/UBSan; CI-3 TSan + DEBUG_LOCKORDER nightly; CI-4 lint; CI-5 clang-tidy-diff; CI-6 cppcheck; CI-7 fuzz smoke (ClusterFuzzLite); CI-8 CodeQL weekly on a dedicated machine; CI-9 coverage ratchet on a dedicated machine; CI-10 release gate. Plus `ci/known-failing.txt` and a nightly job for the 47 slow `matmul_v4_rc_stage3_*` suites that time out.
 
 ## 3. Why: current numbers

@@ -78,6 +78,15 @@ def numbered_items(markdown: str) -> list[str]:
     return items
 
 
+def ci_panel() -> dict[str, dict[str, str]]:
+    """The texts of the CI panel with the placeholders each needs, in both inline languages."""
+    panel = {}
+    for name in build.CiPanel.model_fields:
+        text = " ".join(f"{{{p}}}" for p in sorted(build.CI_PLACEHOLDERS.get(name, ()))) or name
+        panel[name] = {"en": text, "de": text}
+    return panel
+
+
 class ContentTest(unittest.TestCase):
     def test_the_real_content_builds(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -114,7 +123,10 @@ class ContentTest(unittest.TestCase):
                         'data-expand', 'data-reset', 'data-label-expand="', 'data-label-collapse="',
                         'data-copied="', 'data-copy-hint', 'data-copy-status', 'data-sort-column="lowest"',
                         'data-sort-column="risk"', 'data-sort-column="size"', 'data-filter="registry"',
-                        'data-filter="lanes"', 'data-filter="areas"', 'class="c-link c-table__lane"'),
+                        'data-filter="lanes"', 'data-filter="areas"', 'class="c-link c-table__lane"',
+                        'id="ci"', f'data-api="{build.CI_API}"', f'data-repo="{build.UPSTREAM_REPO}"',
+                        f'data-job="{build.CI_JOB}"', 'data-ci="status"', 'data-ci="run" hidden',
+                        'data-times="', 'data-failed-functional="', '<noscript>'),
             }
             for lang in build.LANGUAGES:
                 for page, needles in expected.items():
@@ -130,6 +142,10 @@ class ContentTest(unittest.TestCase):
                         self.assertIn(f'href="{build.page_path(code, page)}" hreflang="{tag}"', html)
             self.assertNotIn('data-live="supply"', english)
             self.assertNotIn('id="development"', english)
+            # The CI panel and its script are on the developers page only.
+            for page in build.PAGES:
+                self.assertEqual("/static/js/ci.js?v=" in read("en", page), page == "dev", page)
+            self.assertTrue((out / "static" / "js" / "ci.js").is_file())
             self.assertIn('href="/de/links/"', read("en", "links").split('class="c-lang"')[1])
             chinese = read("zh", "learn")
             self.assertIn('<html lang="zh-Hans">', chinese)
@@ -268,6 +284,23 @@ class RulesTest(unittest.TestCase):
         self.assertEqual(build.format_count(468217, "en"), "468,217")
         self.assertEqual(build.format_count(26, "fr"), "26")
 
+    def test_the_ci_panel_texts_keep_their_placeholders(self) -> None:
+        build.CiPanel.model_validate(ci_panel())
+        for name, wanted in build.CI_PLACEHOLDERS.items():
+            for lang, text in (("en", "{passed}"), ("de", "no placeholder")):
+                broken = {**ci_panel(), name: {**ci_panel()[name], lang: text}}
+                with self.subTest(name=name, lang=lang), self.assertRaises(Exception):  # noqa: B017, PT027
+                    build.CiPanel.model_validate(broken)
+            self.assertTrue(wanted)
+        with self.assertRaises(Exception):  # noqa: B017, PT027
+            build.CiPanel.model_validate({**ci_panel(), "title": {"en": "a", "de": "{x}"}})
+        # A translation that loses a placeholder fails the build instead of showing "{failed}".
+        panel = build.CiPanel.model_validate(ci_panel())
+        self.assertEqual(build.ci_texts(panel, build.Localizer("es", {}))["times"], "{finished} {measured}")
+        say = build.Localizer("es", {"{finished} {measured}": "{measured}"})
+        with self.assertRaisesRegex(build.ContentError, r"ci\.times"):
+            build.ci_texts(panel, say)
+
     def _developers_page(self) -> dict[str, object]:
         """The smallest developers page that validates."""
         text = {"en": "a", "de": "b"}
@@ -308,6 +341,7 @@ class RulesTest(unittest.TestCase):
                       {"id": "G2", "name": text, "state": text, "done_bar": True}],
             "gates_source": url,
             "ci_pack": url,
+            "ci": ci_panel(),
             "phases": [{"id": "2a", "name": text, "window": text, "deliverables": [text]}],
             "week": [{"id": day, "what": text, "who": text} for day in build.DAYS],
             "rhythm_source": url,
@@ -666,8 +700,10 @@ class PageTest(unittest.TestCase):
             with self.subTest(page=str(page.relative_to(self.out))):
                 self.assertNotIn("<style", html)
                 self.assertNotIn("javascript:", html)
-                self.assertEqual(html.count("<script"), 1)
-                self.assertRegex(html, r'<script src="/static/js/community\.js\?v=[0-9a-f]{12}" defer></script>')
+                scripts = re.findall(r'<script src="/static/js/([a-z]+)\.js\?v=[0-9a-f]{12}" defer></script>', html)
+                self.assertEqual(html.count("<script"), len(scripts))
+                developers = page.parent.name == "dev"
+                self.assertEqual(scripts, ["community", "ci"] if developers else ["community"])
                 for tag, attrs in tags(html):
                     self.assertNotIn(tag, ("img", "iframe", "object", "embed", "base"))
                     self.assertNotIn("style", attrs, tag)

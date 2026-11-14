@@ -6,6 +6,69 @@
 
 schema_version: 1
 translations:
+- en: Build result
+  zh: 构建结果
+- en: >-
+    The fork CI workflow (its first run on the release line, 12 Nov at 4c7840e9, was red and a fixed branch is pending; keep the upstream Atlas workflows): jobs CI-0 to CI-10,
+    the known-failing list, and a nightly job for the 47 unit suites that time out.
+  zh: >-
+    fork 上的 CI 工作流（11 月 12 日在发布分支的 4c7840e9 上首次运行，结果失败，修复后的分支尚待完成；需保留上游的 Atlas 工作流）：作业 CI-0 至
+    CI-10、已知失败列表，以及为 47 个超时的单元测试套件设置的每晚作业。
+- en: >-
+    The last nightly Linux build with unit and functional tests that the status page's operator
+    publishes as job CI-0, read live from its API. It is one build, not the fork build matrix in the
+    table above.
+  zh: 状态页运营者以作业 CI-0 发布的最近一次 Linux 夜间构建及单元测试和功能测试，实时读取自其 API。这只是一次构建，不是上表中 fork 上的构建矩阵。
+- en: "This panel is filled in by JavaScript. The run as raw data: "
+  zh: 此面板由 JavaScript 填充。运行结果的原始数据：
+- en: build failed
+  zh: 构建失败
+- en: build passed
+  zh: 构建通过
+- en: >-
+    first ran 12 Nov at 4c7840e9, red; fixed branch pending; the status page's
+    operator publishes a nightly Linux build with unit and functional tests on release-0.34.16
+  zh: 11 月 12 日在 4c7840e9 上首次运行，结果失败；修复后的分支尚待完成；状态页运营者在 release-0.34.16 上发布每晚的 Linux 构建及单元测试和功能测试
+- en: tests not run
+  zh: 测试未运行
+- en: >-
+    {listed} of {failed}
+  zh: >-
+    {listed} / {failed}
+- en: … and {count} more
+  zh: … 另有 {count} 个
+- en: Branch @ commit
+  zh: 分支 @ 提交
+- en: CI data unavailable.
+  zh: CI 数据不可用。
+- en: Failed functional scripts ({count})
+  zh: 失败的功能测试脚本（{count}）
+- en: Failed unit suites ({count})
+  zh: 失败的单元测试套件（{count}）
+- en: Functional tests
+  zh: 功能测试
+- en: Last run is older than 36 h; the figures below may be out of date.
+  zh: 最近一次运行已超过 36 小时，下方数据可能已过时。
+- en: Loading the last run …
+  zh: 正在加载最近一次运行 …
+- en: Measured {measured} · finished {finished}
+  zh: 测量于 {measured} · 完成于 {finished}
+- en: Nightly CI-0 run
+  zh: CI-0 夜间运行
+- en: No current run.
+  zh: 当前没有运行结果。
+- en: The run as JSON
+  zh: JSON 格式的运行结果
+- en: Unit tests
+  zh: 单元测试
+- en: passed · {failed} failed
+  zh: 通过 · {failed} 个失败
+- en: passed · {failed} failed · {skipped} skipped
+  zh: 通过 · {failed} 个失败 · {skipped} 个跳过
+- en: >-
+    {passed} of {run}
+  zh: >-
+    {passed} / {run}
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   zh: 已不再上架 BTX；其 BTX/USDT 交易对自 2026 年 7 月起已下线。
 - en: >-
@@ -1246,13 +1309,6 @@ translations:
   zh: >-
     Qt 图形界面（任何一次运行都没有覆盖率数据）、Atlas 的 Rust 和 npm 依赖树（OSV 和 cargo-audit 已列出，但未运行）以及 Atlas 按界面划分的 RPC
     允许列表。
-- en: >-
-    The fork CI workflow (it exists but has never run on the release line; rebase onto 4c7840e9 and
-    keep the upstream Atlas workflows): jobs CI-0 to CI-10, the known-failing list, and a nightly
-    job for the 47 unit suites that time out.
-  zh: >-
-    fork 上的 CI 工作流（已存在，但从未在发布分支上运行过；需变基到 4c7840e9，并保留上游的 Atlas 工作流）：作业 CI-0 至 CI-10、已知失败列表，以及为 47
-    个超时的单元测试套件设置的每晚作业。
 - en: The sweeps
   zh: 集中清理
 - en: >-
@@ -1743,8 +1799,6 @@ translations:
   zh: 自 11 月 24 日起每周
 - en: with the Thursday batch, only when a complete item exists; at most one short note
   zh: 随周四批次，只在有完整条目时；最多一条简短说明
-- en: workflow exists; never run on release-0.34.16; needs rebase to 4c7840e9
-  zh: 工作流已存在；从未在 release-0.34.16 上运行；需要变基到 4c7840e9
 - en: >-
     worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); shared helper exists
     (#576)

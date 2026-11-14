@@ -452,7 +452,7 @@
       "id": "I-CI",
       "name": "Fork CI gates",
       "kind": "infra",
-      "scope": "the fork workflow (exists; never run on the release line; rebase onto 4c7840e9, keep the upstream Atlas workflows): CI-0 build matrix, CI-1 sharded unit+functional, CI-2 ASan/UBSan, CI-3 TSan+DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke, CI-8 CodeQL weekly on a box, CI-9 coverage ratchet on a box, CI-10 release gate; ci/known-failing.txt; nightly stage3 job for the 47 timing-out suites",
+      "scope": "the fork workflow (exists; first run on the release line 12 Nov at 4c7840e9, red, fixed branch pending; keep the upstream Atlas workflows): CI-0 build matrix, CI-1 sharded unit+functional, CI-2 ASan/UBSan, CI-3 TSan+DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke, CI-8 CodeQL weekly on a box, CI-9 coverage ratchet on a box, CI-10 release gate; ci/known-failing.txt; nightly stage3 job for the 47 timing-out suites",
       "why": "upstream runs no hosted CI by choice; baselines: coverage 69.9/40.7, TSan 41, cppcheck 372, CodeQL 260, tidy 1,033; macOS test job ran out of time on the last fork run, so it is sharded",
       "risk_rank": null,
       "coverage_now": {

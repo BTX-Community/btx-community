@@ -290,8 +290,9 @@ The method with the best yield since August [S2]: a named invariant, one reader,
 
 ### 4.1 Where CI runs
 - **Upstream runs no hosted CI on purpose**, so the CI lives on a contributor fork, and every class PR links its fork run.
-- **The fork workflow already exists** (`btx-035-ci.yml`), with jobs tools, linux-build, linux-userns, mingw-cross, mingw-tests, windows-smoke, windows-tests, macos-build and macos-arm64, plus native Windows lanes in a later variant. It has not yet run on `release-0.34.16`.
-- **Before its first run** it is rebased onto `4c7840e9`, the upstream Atlas workflows are kept, and its description is updated. It already handles the user-namespace setting the jail tests need.
+- **The fork workflow already exists** (`btx-035-ci.yml`), with jobs tools, linux-build, linux-userns, mingw-cross, mingw-tests, windows-smoke, windows-tests, macos-build and macos-arm64, plus native Windows lanes in a later variant. It first ran on `release-0.34.16` on 12 Nov at `4c7840e9` and was red; a fixed branch is pending.
+- **On `4c7840e9`** it must keep the three upstream Atlas workflows; its description is still to be updated. It already handles the user-namespace setting the jail tests need.
+- **Not the same job: the status page's nightly run.** The status page's operator publishes a nightly Linux build with unit and functional tests on `release-0.34.16` (its API names the job CI-0). It is one build, not the fork build matrix.
 - **Runner limits** [read: GitHub docs, 12 Nov]:
   - Standard runners are free and unlimited for public repos.
   - `ubuntu-24.04` and `windows-latest`: 4 CPU, 16 GB RAM, 14 GB SSD.
@@ -347,7 +348,7 @@ This is the contributors' checklist. Rows owned by the community are lane work. 
 | Gate | Must be true | Owner | Status 12 Nov |
 |---|---|---|---|
 | G1 Operators safe now | guides carry the safe profile below; v0.34.15 operators are told which fixes they lack | community, operators | partly |
-| G2 Machines on | fork CI covering Linux, Linux-userns, mingw, Windows, macOS, ASan/UBSan, DEBUG_LOCKORDER, registration diff, CodeQL, tidy baseline, ClusterFuzzLite, OSV/cargo-audit, release gate | community | workflow exists; not yet run on the release line |
+| G2 Machines on | fork CI covering Linux, Linux-userns, mingw, Windows, macOS, ASan/UBSan, DEBUG_LOCKORDER, registration diff, CodeQL, tidy baseline, ClusterFuzzLite, OSV/cargo-audit, release gate | community | workflow first ran 12 Nov at `4c7840e9`, red; fixed branch pending |
 | G3 Parsers covered | a target exists, links and has run ≥ 1 h clean under ASan for the dispatcher, DLTX, model-file import, ML-KEM hybrid, chunks/sketch/mdpeers/refute/beacons/guard frames, and rcadmit | community | 1 of about 13 exists (rcadmit) |
 | G4 Classes swept | K10, K04, K15, K01, K05, K08/K16/K17, K06, K19, each with its rule | community | K04 0 sites, K10 at most 1, K01 12 files; rules not yet in |
 | G5 Money separated from the AI layer | helper under its own user with confinement tests on a user-namespace host; wallet secret items landed with user-path tests | community; maintainer for defaults | open |
@@ -436,7 +437,7 @@ Owner slots, second passes and done bars per lane are in the lane plan, [`../07-
   - the soundness of the shielded proofs (external review only)
   - the Atlas Rust and npm trees until OSV/cargo-audit runs
   - the lag between the release line and v0.34.15 nodes (1,194 commits)
-- **The release-line workflow has never run.** The first fork run sets the shard counts.
+- **The release-line workflow has not run green yet.** Its first run (12 Nov, `4c7840e9`) was red and a fixed branch is pending; the shard counts are set from a fork run that completes.
 
 ## Verification notes
 This version was checked against the raw lane outputs and the live tree on 12 Nov.
@@ -449,6 +450,6 @@ This version was checked against the raw lane outputs and the live tree on 12 No
 - **`security_v2`:** the earlier 0.3% figure was a risk share, not coverage.
 - **Class count:** 26 named classes.
 - **Upstream CI:** absent by policy, so the gate is fork-side.
-- **Workflow file:** the fork workflow also removed the Atlas workflows and sat 157 commits behind; both are fixed before its first run.
+- **Workflow file:** the fork workflow also removed the Atlas workflows and sat 157 commits behind; both must be fixed on the branch it runs from.
 - **Coverage ratchet:** it needs a dedicated box because of disk size.
 - **Runner limits:** read from GitHub's docs, not from memory.

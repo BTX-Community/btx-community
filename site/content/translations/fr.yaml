@@ -5,6 +5,78 @@
 
 schema_version: 1
 translations:
+- en: Build result
+  fr: Résultat de la compilation
+- en: >-
+    The fork CI workflow (its first run on the release line, 12 Nov at 4c7840e9, was red and a fixed branch is pending; keep the upstream Atlas workflows): jobs CI-0 to CI-10,
+    the known-failing list, and a nightly job for the 47 unit suites that time out.
+  fr: >-
+    Le workflow de CI du fork (sa première exécution sur la branche de version, le 12 nov. sur
+    4c7840e9, a échoué, et une branche corrigée est en
+    attente ; garder les workflows Atlas de l'amont) : jobs CI-0 à CI-10, la liste des échecs connus
+    et un job nocturne pour les 47 suites unitaires qui expirent.
+- en: >-
+    The last nightly Linux build with unit and functional tests that the status page's operator
+    publishes as job CI-0, read live from its API. It is one build, not the fork build matrix in the
+    table above.
+  fr: >-
+    La dernière compilation nocturne pour Linux, avec tests unitaires et fonctionnels, que
+    l'opérateur de la page d'état publie comme job CI-0, lue en direct dans son API. C'est une seule
+    compilation, pas la matrice de compilation du fork du tableau ci-dessus.
+- en: "This panel is filled in by JavaScript. The run as raw data: "
+  fr: "Ce panneau est rempli par JavaScript. L'exécution en données brutes : "
+- en: build failed
+  fr: compilation en échec
+- en: build passed
+  fr: compilation réussie
+- en: >-
+    first ran 12 Nov at 4c7840e9, red; fixed branch pending; the status page's
+    operator publishes a nightly Linux build with unit and functional tests on release-0.34.16
+  fr: >-
+    première exécution le 12 nov. sur 4c7840e9, en échec ;
+    branche corrigée en attente ; l'opérateur de la page d'état publie une compilation nocturne pour
+    Linux avec tests unitaires et fonctionnels sur release-0.34.16
+- en: tests not run
+  fr: tests non exécutés
+- en: >-
+    {listed} of {failed}
+  fr: >-
+    {listed} sur {failed}
+- en: … and {count} more
+  fr: … et {count} de plus
+- en: Branch @ commit
+  fr: Branche @ commit
+- en: CI data unavailable.
+  fr: Données de CI indisponibles.
+- en: Failed functional scripts ({count})
+  fr: Scripts fonctionnels en échec ({count})
+- en: Failed unit suites ({count})
+  fr: Suites unitaires en échec ({count})
+- en: Functional tests
+  fr: Tests fonctionnels
+- en: Last run is older than 36 h; the figures below may be out of date.
+  fr: La dernière exécution date de plus de 36 h ; les chiffres ci-dessous peuvent être dépassés.
+- en: Loading the last run …
+  fr: Chargement de la dernière exécution …
+- en: Measured {measured} · finished {finished}
+  fr: >-
+    Mesure : {measured} · fin : {finished}
+- en: Nightly CI-0 run
+  fr: Exécution nocturne de CI-0
+- en: No current run.
+  fr: Aucune exécution récente.
+- en: The run as JSON
+  fr: L'exécution en JSON
+- en: Unit tests
+  fr: Tests unitaires
+- en: passed · {failed} failed
+  fr: réussis · {failed} en échec
+- en: passed · {failed} failed · {skipped} skipped
+  fr: réussis · {failed} en échec · {skipped} ignorés
+- en: >-
+    {passed} of {run}
+  fr: >-
+    {passed} sur {run}
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   fr: Ne liste plus BTX ; son marché BTX/USDT a disparu en juillet 2026.
 - en: >-
@@ -1663,14 +1735,6 @@ translations:
     L'interface graphique Qt (aucune donnée de couverture dans aucune exécution), les arborescences
     Rust et npm d'Atlas (OSV et cargo-audit répertoriés, pas exécutés) et les listes d'autorisation
     RPC d'Atlas par écran.
-- en: >-
-    The fork CI workflow (it exists but has never run on the release line; rebase onto 4c7840e9 and
-    keep the upstream Atlas workflows): jobs CI-0 to CI-10, the known-failing list, and a nightly
-    job for the 47 unit suites that time out.
-  fr: >-
-    Le workflow de CI du fork (il existe mais n'a jamais tourné sur la branche de version ; rebaser
-    sur 4c7840e9 et garder les workflows Atlas de l'amont) : jobs CI-0 à CI-10, la liste des échecs
-    connus et un job nocturne pour les 47 suites unitaires qui expirent.
 - en: The sweeps
   fr: Les balayages
 - en: >-
@@ -2276,8 +2340,6 @@ translations:
   fr: chaque semaine à partir du 24 nov.
 - en: with the Thursday batch, only when a complete item exists; at most one short note
   fr: avec le lot du jeudi, seulement quand un élément complet existe ; au plus une courte note
-- en: workflow exists; never run on release-0.34.16; needs rebase to 4c7840e9
-  fr: le workflow existe ; jamais exécuté sur release-0.34.16 ; à rebaser sur 4c7840e9
 - en: >-
     worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); shared helper exists
     (#576)

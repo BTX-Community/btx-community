@@ -5,6 +5,79 @@
 
 schema_version: 1
 translations:
+- en: Build result
+  es: Resultado de la compilación
+- en: >-
+    The fork CI workflow (its first run on the release line, 12 Nov at 4c7840e9, was red and a fixed branch is pending; keep the upstream Atlas workflows): jobs CI-0 to CI-10,
+    the known-failing list, and a nightly job for the 47 unit suites that time out.
+  es: >-
+    El workflow de CI del fork (su primera ejecución en la rama de publicación, el 12 de noviembre
+    sobre 4c7840e9, terminó en rojo y hay una rama corregida
+    pendiente; hay que conservar los workflows de Atlas de upstream): trabajos CI-0 a CI-10, la
+    lista de fallos conocidos y un trabajo nocturno para las 47 suites unitarias que agotan el
+    tiempo.
+- en: >-
+    The last nightly Linux build with unit and functional tests that the status page's operator
+    publishes as job CI-0, read live from its API. It is one build, not the fork build matrix in the
+    table above.
+  es: >-
+    La última compilación nocturna para Linux con pruebas unitarias y funcionales que el operador de
+    la página de estado publica como job CI-0, leída en directo de su API. Es una sola compilación,
+    no la matriz de compilación del fork de la tabla de arriba.
+- en: "This panel is filled in by JavaScript. The run as raw data: "
+  es: "Este panel se rellena con JavaScript. La ejecución como datos sin procesar: "
+- en: build failed
+  es: compilación fallida
+- en: build passed
+  es: compilación correcta
+- en: >-
+    first ran 12 Nov at 4c7840e9, red; fixed branch pending; the status page's
+    operator publishes a nightly Linux build with unit and functional tests on release-0.34.16
+  es: >-
+    primera ejecución el 12 de noviembre sobre 4c7840e9, en rojo;
+    rama corregida pendiente; el operador de la página de estado publica una compilación nocturna
+    para Linux con pruebas unitarias y funcionales sobre release-0.34.16
+- en: tests not run
+  es: pruebas no ejecutadas
+- en: >-
+    {listed} of {failed}
+  es: >-
+    {listed} de {failed}
+- en: … and {count} more
+  es: … y {count} más
+- en: Branch @ commit
+  es: Rama @ commit
+- en: CI data unavailable.
+  es: Datos de CI no disponibles.
+- en: Failed functional scripts ({count})
+  es: Scripts funcionales fallidos ({count})
+- en: Failed unit suites ({count})
+  es: Suites unitarias fallidas ({count})
+- en: Functional tests
+  es: Pruebas funcionales
+- en: Last run is older than 36 h; the figures below may be out of date.
+  es: La última ejecución tiene más de 36 h; las cifras de abajo pueden estar desactualizadas.
+- en: Loading the last run …
+  es: Cargando la última ejecución …
+- en: Measured {measured} · finished {finished}
+  es: >-
+    Medición: {measured} · fin: {finished}
+- en: Nightly CI-0 run
+  es: Ejecución nocturna de CI-0
+- en: No current run.
+  es: No hay ninguna ejecución actual.
+- en: The run as JSON
+  es: La ejecución en JSON
+- en: Unit tests
+  es: Pruebas unitarias
+- en: passed · {failed} failed
+  es: superadas · {failed} fallidas
+- en: passed · {failed} failed · {skipped} skipped
+  es: superadas · {failed} fallidas · {skipped} omitidas
+- en: >-
+    {passed} of {run}
+  es: >-
+    {passed} de {run}
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   es: Ya no lista BTX; su mercado BTX/USDT desapareció en julio de 2026.
 - en: >-
@@ -1641,15 +1714,6 @@ translations:
     La interfaz gráfica Qt (sin datos de cobertura en ninguna ejecución), los árboles Rust y npm de
     Atlas (OSV y cargo-audit en la lista, sin ejecutar) y las listas de permitidos RPC de Atlas por
     pantalla.
-- en: >-
-    The fork CI workflow (it exists but has never run on the release line; rebase onto 4c7840e9 and
-    keep the upstream Atlas workflows): jobs CI-0 to CI-10, the known-failing list, and a nightly
-    job for the 47 unit suites that time out.
-  es: >-
-    El workflow de CI del fork (existe, pero nunca se ha ejecutado en la rama de publicación; hay que
-    hacer rebase sobre 4c7840e9 y conservar los workflows de Atlas de upstream): trabajos CI-0 a
-    CI-10, la lista de fallos conocidos y un trabajo nocturno para las 47 suites unitarias que
-    agotan el tiempo.
 - en: The sweeps
   es: Los barridos
 - en: >-
@@ -2252,8 +2316,6 @@ translations:
   es: semanal desde el 24 de noviembre
 - en: with the Thursday batch, only when a complete item exists; at most one short note
   es: con el lote del jueves, solo cuando exista un punto completo; como mucho una nota breve
-- en: workflow exists; never run on release-0.34.16; needs rebase to 4c7840e9
-  es: el workflow existe; nunca se ha ejecutado en release-0.34.16; necesita un rebase sobre 4c7840e9
 - en: >-
     worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); shared helper exists
     (#576)

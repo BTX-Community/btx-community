@@ -12,6 +12,7 @@
   <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ css_url }}">
   <script src="{{ js_url }}" defer></script>
+{%- block scripts %}{% endblock %}
 </head>
 <body class="c">
   <a class="c-skip" href="#main">{{ ui["skip"] }}</a>
