@@ -172,7 +172,7 @@
       "target": "dispatcher target 24 h clean; every security_v2 file above 0; listener and user-separation tests in the functional runner",
       "owner": {
         "role": "A-HELPER owner",
-        "handle": null
+        "handle": "jarekpiot"
       },
       "second_pass": {
         "role": "second pass (never the owner)",

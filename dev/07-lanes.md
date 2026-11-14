@@ -29,7 +29,7 @@ Every number below comes from [`plan/plan-data.json`](plan/plan-data.json) or th
 
 Load rule: one person owns at most three lanes and second-passes at most three; someone taking a first lane owns one. Five lanes get no work until someone takes them (§4). That is stated, not hidden.
 
-Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-STORES; L3 = C-STATIC + I-CI (+ A-HELPER, which waits for an owner); L4 = E-CONSENSUS; L5 = I-OPS; L6 + L8 = I-RC; L7 = I-XDEV.
+Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-STORES; L3 = C-STATIC + I-CI (+ A-HELPER); L4 = E-CONSENSUS; L5 = I-OPS; L6 + L8 = I-RC; L7 = I-XDEV.
 
 ## 2. The lane map
 
@@ -48,7 +48,7 @@ Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-S
    A-STORES    [claim]    C-PORT   [claim]        I-RC    [claim]
    E-CONSENSUS [claim]    C-STATIC [claim]        I-OPS   dr-chambre
    A-NET       [claim]    C-PATHS  [claim]        I-XDEV  [claim]
-   A-HELPER    [claim]
+   A-HELPER    jarekpiot
    A-SHIELDED  [claim]    Runners: [claim] Windows, Linux, macOS, GPU
    A-PQ        [claim]    Second passes: see §3 (never the owner)
    A-GUI       [claim]
@@ -99,10 +99,10 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 - First three tasks: (1) the container inventory for the P2P handlers (semgrep rule from the master plan §2 row 1); (2) the DLTX fuzz target; (3) the K25 observing-peer test.
 - Route: PR for bounds and targets; anything in scheduling or fork choice goes to E-CONSENSUS.
 
-**A-HELPER: ModelNet helper network surface and `security_v2` (no work until claimed)**
+**A-HELPER: ModelNet helper network surface and `security_v2`**
 - Scope: the helper's native request dispatcher, the fuzz targets that have never run, the modelnet fuzz build that does not link by default, `src/modelnet/security_v2/`, the two-user layout under `-modelrpcsocket`, the jail escape suite. Master plan §3.7. K09 helper half, fs-trust results that sit in the helper (most of the 133 are in the helper and stores).
 - Why: modelnet is risk rank 3; `security_v2` is at 0.2 / 15.0 with 6 files at 0 even with functional tests; the dispatcher has no fuzz target.
-- Owner: (claimable) · Second pass: (claimable; never the owner). Interim: the phase-3 fuzz batch covers the dispatcher target and the `native.cmake` gate only.
+- Owner: jarekpiot · Second pass: (claimable; never the owner). Interim: the phase-3 fuzz batch covers the dispatcher target and the `native.cmake` gate only.
 - Done bar: `modelnet_native_dispatch` target runs 24 h clean under ASan; the never-run targets run 1 h clean; every `security_v2` file above 0; a functional test that no non-loopback listener opens on 29447 without `-modelbind` and no NAT-PMP mapping is requested; under `-modelrpcsocket` the helper runs as a different user and cannot open `.cookie` or `wallets/`; a malformed reply fails the request, not the helper.
 - First three tasks: (1) make the modelnet fuzz build link at default options; (2) the dispatcher fuzz target on a scratch catalog; (3) the listener/NAT-PMP functional test.
 - Route: PR; the helper user default is the maintainer's decision and goes with the release-scope note.
