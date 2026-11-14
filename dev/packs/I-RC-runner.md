@@ -9,7 +9,7 @@ This file is complete on its own: point your AI at it and nothing else. It runs 
 1. **Lane:** I-RC, release-candidate qualification ([`../07-lanes.md`](../07-lanes.md)). The I-RC lane owner posts candidates and requests on the board. You are a runner: you run checks on your own hardware.
 2. **Your job:** run checks A to D below when a candidate or a request is posted, and send back the `RUN | ...` lines, unchanged. With an NVIDIA GPU you can also be the independent CUDA re-run for the I-XDEV lane (check B with `LANE=I-XDEV`).
 3. **Why it matters:** as of 12 Nov, only a Linux candidate has had an independent run; no Windows or CUDA candidate has had one [lanes; #432, 11 Nov]. And a CPU/GPU disagreement can only be told apart from one box's quirk by a second machine [lanes].
-4. **Where:** checks A, B and D run on Ubuntu 24.04 or newer, native or inside WSL2 (section 3b). Check C runs on native Windows. Use machines that hold no wallet and no key (S1). Re-running a PR builds and runs that PR's code, so a virtual machine or a throwaway box is the safer place for it.
+4. **Where:** checks A, B and D run on Ubuntu 24.04 or newer, native or inside WSL2 (section 3b). Check C runs on native Windows. Use machines that hold no wallet and no key (S1). Re-running a PR builds and runs that PR's code, so a virtual machine or a throwaway box is the safer place for it. WSL2 is not that box: it mounts the Windows drives, so for S1 it counts as the Windows machine.
 5. **Time:** setup about 1 hour once; check A about 10 minutes; check B 1-2 hours (mostly compiling); check C about 10 minutes; check D depends on the request.
 
 **Your name on the lines.** Every script prints `RUNNER` in its line. Set it once per shell: `export RUNNER=<your GitHub handle>`. Leave it unset and the lines say `runner`.
@@ -362,7 +362,7 @@ PR=<number> SHA_FULL=<full sha> TEST_CMD='<command from the board>' bash ~/btx-r
 - **Every check:** the `RUN | ...` line exactly as printed, plus one line: `NOT TESTED: <what you did not run, e.g. check C: no Windows candidate>`.
 - **Where:** the board card for that candidate or request (the board link is in [`../07-lanes.md`](../07-lanes.md)), for the I-RC lane owner. A check B line run as the I-XDEV second pass goes on the I-XDEV card, next to the owner's row for the same commit. Not in a group chat: chat is for questions, the board is the state. If you have no GitHub account, ask the I-RC lane owner how to hand the lines over; the owner posts them with the credit you choose.
 - **Logs:** keep them in `~/btx-rc/` (Windows: `C:\btx-rc\`). Send them only when asked, and only after the AI has replaced your home path with `~` and checked for hostnames and IP addresses.
-- **S7 (a CPU/GPU difference or `CONSENSUS SPLIT`):** this result does not go to the board, an issue, a PR or any chat. Treat it as security-relevant until a second machine shows it is local to your box. Report it through GitHub private vulnerability reporting on `btxchain/btx` (the Security tab of the repository) with the line and `determinism.log`. If you have no GitHub account, ask the I-XDEV lane owner on the board for a private contact, and say only that you need one.
+- **S7 (a CPU/GPU difference or `CONSENSUS SPLIT`):** this result does not go to the board, an issue, a PR or any chat. Treat it as security-relevant until a second machine shows it is local to your box. Report it privately, the way btxchain/btx's [`SECURITY.md`](https://github.com/btxchain/btx/blob/main/SECURITY.md) says: email `team@btx.dev`, and ask for the current disclosure key before you send the line and `determinism.log`. With a GitHub account you can instead use GitHub private vulnerability reporting on `btxchain/btx` (the Security tab of the repository). If this file and SECURITY.md ever disagree, SECURITY.md wins.
 - **Credit:** your GitHub handle on the lines only if you set `RUNNER`. Otherwise your runs are credited as "a runner".
 - **Second pass:** another runner re-runs your check on different hardware. Your line is never confirmed by a second run on your own box.
 
@@ -393,7 +393,7 @@ How to work:
 6. At the end print, for each check run: the RUN line exactly as the script printed it, and one
    NOT TESTED line. Replace my home folder with ~ and remove any hostname, IP address or user name.
 7. If any STOP condition (S1-S10) hits, stop at once and tell me which one and why. On S7, also
-   tell me that the result goes only through private vulnerability reporting (section 8).
+   tell me that the result goes only through the private routes in section 8.
 
 Today: do section 3 (setup), then check A (section 4), then check B (section 5) on GPU 0 if this
 machine has an NVIDIA GPU (on WSL2, only after I confirm GPU work on the Windows side is paused).
