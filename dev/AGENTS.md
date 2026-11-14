@@ -115,7 +115,7 @@ What it says that shapes every PR from this hub [read: `git show 4c7840e9:AGENTS
   unless the operator asked. The lane pack the operator hands you is that ask, for the commands
   it lists and nothing beyond them, with one exception: a line that needs `sudo` or administrator
   rights, installs a package or changes a system setting (`sysctl`, a keyring, a service) needs a
-  fresh yes each time, even when the pack lists it. Anything else needs a fresh yes.
+  fresh yes each time, even when the pack lists it. Anything the pack does not list needs one too.
 - Three planes never mix: monetary (`btxd`), model (`btx-modeld`), hosted (`btx-hcpd` /
   `btx-hosted`). `btx-modeld` never holds wallet secrets.
 - `prepare` / `approve` / `sign` / `submit` stay distinct steps. `automatic_spend_atoms` stays 0.
