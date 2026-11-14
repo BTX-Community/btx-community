@@ -553,7 +553,7 @@
       "target": "safe profile published; genesis sync on a stock binary reaches the tip; upgrade and interop run per candidate",
       "owner": {
         "role": "I-OPS owner (an archive operator)",
-        "handle": null
+        "handle": "dr-chambre"
       },
       "second_pass": {
         "role": "second pass (never the owner): a second operator; a second lane owner reads any technical claim before it goes public",
