@@ -725,5 +725,32 @@ class PageTest(unittest.TestCase):
             self.assertLessEqual(after, before + 1, "a heading level is skipped")
 
 
+    def test_the_files_for_ai_tools_carry_the_whole_content(self) -> None:
+        index = (self.out / "llms.txt").read_text(encoding="utf-8")
+        full = (self.out / "llms-full.txt").read_text(encoding="utf-8")
+        page = build.load_community(build.ROOT / "content" / "community.yaml")
+        guide = build.load_guide(build.ROOT / "content" / "guide.yaml")
+        for text in (index, full):
+            self.assertTrue(text.startswith("# BTX Community"))
+            self.assertIn(build.LLMS_NOTICE, text)
+            self.assertNotRegex(text, r"\{[a-z]+\}", "a placeholder was left unfilled")
+            # Every link is absolute: these files are read outside the site.
+            for url in re.findall(r"\]\(([^)]*)\)", text):
+                self.assertTrue(url.startswith("https://"), url)
+        for page_id in build.PAGES:
+            self.assertIn(f"]({build.SITE_URL}{build.page_path('en', page_id)})", index)
+        self.assertIn(f"]({build.SITE_URL}/llms-full.txt)", index)
+        for category in page.categories:
+            for entry in category.entries:
+                self.assertIn(f"- [{entry.name}]({entry.url}): {entry.description.en}", full)
+        for removed in page.removed:
+            self.assertIn(f"- {removed.name}: {removed.reason.en}", full)
+        for fact in guide.facts:
+            self.assertIn(fact.text.en, full)
+        for checklist in guide.checklists:
+            for item in checklist.items:
+                self.assertIn(f"- {item.en}", full)
+
+
 if __name__ == "__main__":
     unittest.main()

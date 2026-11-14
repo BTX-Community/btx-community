@@ -44,6 +44,9 @@ The content of btx-community.com is in these files:
 - [`site/content/translations/`](site/content/translations/): the Spanish, French and Chinese
   versions of the texts in the first three files, one file per language
 
+`/llms.txt` and `/llms-full.txt`, the files for AI tools, are written by `site/build.py` from
+the same files in English; there is nothing to edit by hand.
+
 The live figures (network state, supply, halving, upgrade countdown, and the development
 activity of `btxchain/btx`) are not in these files; the page reads them from the public API of
 network.btx-monitoring.com.
