@@ -40,8 +40,8 @@ audiences:
           de: Nachsehen, wie es dem Netz gerade geht, verständlich erklärt.
         url: https://network.btx-monitoring.com/
       - text:
-          en: Ask questions in the community chats (Discord, Telegram).
-          de: Fragen in den Community-Chats stellen (Discord, Telegram).
+          en: Ask questions in the community group on Telegram.
+          de: Fragen in der Community-Gruppe auf Telegram stellen.
         anchor: community
       - text:
           en: >-
@@ -180,20 +180,13 @@ categories:
   - id: community
     title: { en: Community, de: Community }
     entries:
-      - id: discord
-        name: BTX Discord
-        url: https://discord.gg/btx
-        tags: [discord, chat]
-        description:
-          en: Community Discord, open to everyone, including mining help.
-          de: Community-Discord, offen für alle, auch mit Mining-Hilfe.
       - id: telegram
-        name: BTX Telegram (gate)
-        url: https://t.me/btx_ecosystem
+        name: BTX Community (Telegram)
+        url: https://t.me/BTX_COMMUNITY_ENTRY
         tags: [telegram, chat]
         description:
-          en: Verification gate; clearing it lets you into the main BTX Telegram groups.
-          de: Verifizierungs-Gate; wer es passiert, kommt in die Haupt-Telegram-Gruppen von BTX.
+          en: The main community group on Telegram, open to everyone.
+          de: Die Haupt-Community-Gruppe auf Telegram, offen für alle.
       - id: x-community
         name: BTX on X
         url: https://x.com/btxcommunity
@@ -212,23 +205,6 @@ categories:
           de: >-
             Von der Community betriebenes Konto auf X, nicht das der Entwickler. Es brachte im
             August und September 2026 Release-Hinweise und Netz-News.
-      - id: mining-hub
-        name: BTX Mining Hub
-        url: https://t.me/Pr0_Crypto_Mining_chat/59061
-        tags: [telegram, russian]
-        description:
-          en: Russian-speaking mining chat with a BTX topic.
-          de: Russischsprachiger Mining-Chat mit einem BTX-Thema.
-      - id: matador-chat
-        name: matador chat
-        url: https://t.me/+wy07HLBwE4kwNTkx
-        tags: [telegram, miner]
-        description:
-          en: Telegram chat of the matador miner.
-          de: Telegram-Chat des matador-Miners.
-        note:
-          en: No change to the miner since 2026-08-21.
-          de: Am Miner gab es seit 2026-08-21 keine Änderung.
       - id: easybtx-chat
         name: easyBTX chat
         url: https://t.me/easyBTX
@@ -931,6 +907,22 @@ documents:
 
 
 removed:
+  - name: BTX Discord
+    reason:
+      en: Hardly any activity any more; the community talks on Telegram.
+      de: Kaum noch Aktivität; die Community ist auf Telegram.
+  - name: BTX Telegram gate (t.me/btx_ecosystem)
+    reason:
+      en: Now leads to a group the community does not run; the community group above replaces it.
+      de: Führt jetzt in eine Gruppe, die nicht von der Community betrieben wird; die Community-Gruppe oben ersetzt es.
+  - name: BTX Mining Hub
+    reason:
+      en: A general mining chat rather than a BTX group; the list keeps to BTX channels.
+      de: Ein allgemeiner Mining-Chat, keine BTX-Gruppe; die Liste bleibt bei BTX-Kanälen.
+  - name: matador chat
+    reason:
+      en: No activity, and the miner has not changed since August 2026.
+      de: Keine Aktivität, und der Miner hat sich seit August 2026 nicht verändert.
   - name: SafeTrade (exchange)
     reason:
       en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.

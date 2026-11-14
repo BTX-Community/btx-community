@@ -6,6 +6,18 @@
 
 schema_version: 1
 translations:
+- en: A general mining chat rather than a BTX group; the list keeps to BTX channels.
+  zh: 一个通用的挖矿聊天群，而不是 BTX 群组；本列表只收录 BTX 频道。
+- en: Ask questions in the community group on Telegram.
+  zh: 在 Telegram 上的社区群组中提问。
+- en: Hardly any activity any more; the community talks on Telegram.
+  zh: 几乎已无活动；社区在 Telegram 上交流。
+- en: No activity, and the miner has not changed since August 2026.
+  zh: 没有活动，且该矿工软件自 2026 年 8 月以来未再更新。
+- en: Now leads to a group the community does not run; the community group above replaces it.
+  zh: 现在会进入一个并非由社区运营的群组；由上方的社区群组取代。
+- en: The main community group on Telegram, open to everyone.
+  zh: Telegram 上的主要社区群组，向所有人开放。
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   zh: 已不再上架 BTX；其 BTX/USDT 交易对自 2026 年 7 月起已下线。
 - en: >-
@@ -43,8 +55,6 @@ translations:
     BTX Pool by default. A 5% dev fee was listed for it in August 2026; check the current fee in the
     app.
   zh: 闭源；构建版本未签名，因此请核对发布页面上的 SHA-256。它默认在 BTX Pool 上开始挖矿。2026 年 8 月时，其开发者费用被列为 5%；请在应用中查看当前费率。
-- en: Community Discord, open to everyone, including mining help.
-  zh: 社区 Discord，对所有人开放，包括挖矿帮助。
 - en: Community status page - is the network healthy, with history, node help and a public JSON API.
   zh: 社区状态页：网络是否健康，附历史记录、节点帮助和公开 JSON API。
 - en: >-
@@ -112,8 +122,6 @@ translations:
   zh: >-
     适用于多种币的 NVIDIA（CUDA）挖矿软件；BTX 对应算法 btxv4，即自区块 185,000 起的工作量证明。其 README 提供了用于 ninjaraider 和 BTX
     Pool 的命令。
-- en: No change to the miner since 2026-08-21.
-  zh: 该挖矿软件自 2026-08-21 以来没有任何更改。
 - en: Not launched. Its launch checklist is still open and the reference contracts are unaudited.
   zh: 尚未上线。其上线检查清单仍未完成，参考合约也未经审计。
 - en: >-
@@ -240,8 +248,6 @@ translations:
     The wallet in the official releases for Linux and macOS: the desktop app btx-qt, or btxd with
     btx-cli. Open source; it runs on your own node.
   zh: Linux 和 macOS 官方版本中自带的钱包：桌面应用 btx-qt，或 btxd 配合 btx-cli。开源；它运行在你自己的节点上。
-- en: Verification gate; clearing it lets you into the main BTX Telegram groups.
-  zh: 验证入口；通过验证后即可进入 BTX 的主要 Telegram 群组。
 - en: Verify the signature and SHA-256 before use. Not for signers.
   zh: 使用前请核验签名和 SHA-256。不适用于签名者。
 - en: >-
@@ -310,8 +316,6 @@ translations:
   zh: BTX 是比特币的后量子分叉，拥有固定的最大供应量和自己的工作量证明（MatMul）。它由开放的社区维护，而非公司。
 - en: See how the network is doing right now, in plain terms.
   zh: 用通俗的方式查看网络当前的运行情况。
-- en: Ask questions in the community chats (Discord, Telegram).
-  zh: 在社区聊天（Discord、Telegram）中提问。
 - en: >-
     Never share your seed or private key. Nobody from the community will ever ask for it; direct messages
     offering help or "support" are scams.
@@ -336,10 +340,6 @@ translations:
   zh: 社区
 - en: Community account on X.
   zh: 社区在 X 上的账号。
-- en: Russian-speaking mining chat with a BTX topic.
-  zh: 俄语挖矿聊天群，设有 BTX 话题。
-- en: Telegram chat of the matador miner.
-  zh: matador 挖矿软件的 Telegram 聊天群。
 - en: Portal of the easyBTX team - explorer, wallet, mining and news in one place.
   zh: easyBTX 团队的门户：浏览器、钱包、挖矿和新闻集于一处。
 - en: Official
