@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Página de inicio de la comunidad BTX: información y ayuda para recién llegados, mineros y operadores de nodos, con el estado de la red en directo y un directorio de enlaces revisado.">
+  <meta name="color-scheme" content="dark">
+  <title>Red y desarrollo · Comunidad BTX</title>
+  
+  <link rel="alternate" hreflang="en" href="/network/">
+  
+  <link rel="alternate" hreflang="de" href="/de/network/">
+  
+  <link rel="alternate" hreflang="es" href="/es/network/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/network/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/network/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/community.css?v=0827039e0598">
+  <script src="/static/js/community.js?v=3d7a27904fac" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">Ir al contenido</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/es/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="Páginas">
+        
+        <a class="c-menu__link" href="/es/">Inicio</a>
+        
+        <a class="c-menu__link" href="/es/learn/">Aprender</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/es/network/" aria-current="page">Red</a>
+        
+        <a class="c-menu__link" href="/es/links/">Enlaces</a>
+        
+        <a class="c-menu__link" href="/es/docs/">Documentos</a>
+        
+        <a class="c-menu__link" href="/es/dev/">Desarrolladores</a>
+        
+      </nav>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="Idioma: Español">ES <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="Idioma">
+          
+          <a class="c-lang__item" href="/network/" hreflang="en" lang="en"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item" href="/de/network/" hreflang="de" lang="de"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item c-lang__item--active" href="/es/network/" hreflang="es" lang="es" aria-current="true"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item" href="/fr/network/" hreflang="fr" lang="fr"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item" href="/zh/network/" hreflang="zh-Hans" lang="zh-Hans"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">Red y desarrollo</h1>
+        <p class="c-hero__lead">El estado de la red en directo desde la API pública de estado, y el desarrollo del software del nodo medido en GitHub.</p>
+      </section>
+
+      
+      <section class="c-live c-live--unknown" aria-labelledby="live-title" id="live" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="es"
+               data-level-green="OK" data-level-yellow="Aviso"
+               data-level-red="Crítico" data-level-unknown="Desconocido">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="live-title"><span class="c-pulse" aria-hidden="true"></span>La red ahora</h2>
+          <a class="c-link" href="https://network.btx-monitoring.com/">Página de estado completa →</a>
+        </div>
+        <p class="c-warning" role="alert" data-live="stale" hidden>Los datos están desactualizados; los valores pueden ser incorrectos.</p>
+        <div class="c-fork" data-live="fork" data-template="{name}: bloque {height}, faltan {remaining} bloques (unos {time})" hidden>
+          <h3 class="c-fork__title">Actualización de la red en camino</h3>
+          <p>Las reglas cambian en el bloque indicado abajo. Antes de eso, cada nodo y cada minero necesita una versión que conozca el cambio; si no, deja de seguir a la red.</p>
+          <ul class="c-fork__rows" data-live="fork-rows"></ul>
+          <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Versiones y notas de versión ↗</a>
+        </div>
+        <dl class="c-tiles">
+          <div class="c-tile c-tile--status">
+            <dt>Estado</dt>
+            <dd data-live="overall"
+                data-label-normal="Todo normal"
+                data-label-degraded="Degradado"
+                data-label-incident="Incidencia">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Altura de bloque</dt>
+            <dd data-live="height">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Última versión del nodo</dt>
+            <dd data-live="release">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Nodos con ella</dt>
+            <dd data-live="on-release" data-template="{count} de {total} nodos">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Tiempo medio de bloque (24 h)</dt>
+            <dd data-live="interval">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Firmantes activos</dt>
+            <dd data-live="signers">–</dd>
+          </div>
+        </dl>
+        <ul class="c-verdicts">
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="stable">
+            <span class="c-dot" aria-hidden="true"></span>Estable: <span data-verdict-label>Desconocido</span>
+          </li>
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="performant">
+            <span class="c-dot" aria-hidden="true"></span>Rendimiento: <span data-verdict-label>Desconocido</span>
+          </li>
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="secure">
+            <span class="c-dot" aria-hidden="true"></span>Seguro: <span data-verdict-label>Desconocido</span>
+          </li>
+          
+        </ul>
+        
+        <h3 class="c-subtitle" id="numbers-title">BTX en cifras</h3>
+        <dl class="c-tiles" aria-labelledby="numbers-title">
+          <div class="c-tile c-tile--wide">
+            <dt>Minado hasta ahora</dt>
+            <dd data-live="supply">–</dd>
+            <dd class="c-tile__sub" data-live="supply-share" data-template="{pct} % de 21 millones"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>Recompensa por bloque</dt>
+            <dd data-live="reward">–</dd>
+          </div>
+          <div class="c-tile c-tile--wide">
+            <dt>Próximo halving</dt>
+            <dd data-live="halving" data-template="{count} bloques">–</dd>
+            <dd class="c-tile__sub" data-live="halving-time" data-template="unos {time}"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>Transacciones (24 h)</dt>
+            <dd data-live="tx">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Tamaño de la cadena</dt>
+            <dd data-live="size">–</dd>
+          </div>
+        </dl>
+        
+        <p class="c-updated" data-live="updated" data-template="Datos de {time}">Cargando datos en directo …</p>
+        
+      </section>
+
+
+            <section class="c-live c-dev" aria-labelledby="dev-title" id="development" hidden
+        data-api="https://network.btx-monitoring.com/api/v1/development.json" data-repo="btxchain/btx" data-lang="es"
+        data-default="rama por defecto" data-today="hoy"
+        data-day="hace 1 día" data-days="hace {count} días">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="dev-title">Desarrollo del software del nodo</h2>
+          <a class="c-link" href="https://github.com/btxchain/btx" rel="noopener noreferrer">btxchain/btx en GitHub ↗</a>
+        </div>
+        <p class="c-dev__lead">Commits y pull requests en btxchain/btx, la implementación de referencia del nodo BTX. GitHub abre el repositorio en main, la rama por defecto; las demás filas son las ramas con los commits más recientes. main contiene la última versión completa; el trabajo actual se hace en las ramas de versión y de revisión.</p>
+        <p class="c-warning" role="alert" data-dev="stale" hidden>Esta medición tiene más de tres horas; las cifras pueden estar desactualizadas.</p>
+        <div class="c-branches" role="table" aria-labelledby="dev-title">
+          <div class="c-branch c-branch--head" role="row">
+            <span role="columnheader">Rama</span>
+            <span role="columnheader">Último commit</span>
+            <span role="columnheader">Commits, 30 días</span>
+          </div>
+          <div role="rowgroup" data-dev="branches"></div>
+        </div>
+        <p class="c-dev__note">Los commits se cuentan por rama según su fecha, como máximo 100 por rama (se muestra 100+). Un commit que está en varias ramas cuenta en cada una de ellas.</p>
+        <dl class="c-tiles">
+          <div class="c-tile">
+            <dt>Pull requests actualizados, 7 días</dt>
+            <dd data-dev="pulls">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Última versión</dt>
+            <dd data-dev="release">–</dd>
+            <dd class="c-tile__sub" data-dev="release-date"></dd>
+          </div>
+          <div class="c-tile" data-dev="prerelease-tile" hidden>
+            <dt>Versión preliminar más reciente</dt>
+            <dd data-dev="prerelease">–</dd>
+            <dd class="c-tile__sub" data-dev="prerelease-date"></dd>
+          </div>
+        </dl>
+        <p class="c-updated" data-dev="measured" data-template="Medido en GitHub el {time}, cada hora."></p>
+      </section>
+
+
+    </main>
+
+    <footer class="c-footer">
+      <p>Proyecto independiente de la comunidad. Los enlaces llevan a terceros; no somos responsables de su contenido. Nada aquí es asesoramiento financiero.</p>
+      <p class="c-muted">Esta página se tradujo del inglés con ayuda de IA. <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/main/site/content/translations/es.yaml" rel="noopener noreferrer">Corregir la traducción ↗</a></p>
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Código fuente ↗</a>
+      </p>
+      <p class="c-muted">6d84c5449266</p>
+    </footer>
+  </div>
+</body>
+</html>

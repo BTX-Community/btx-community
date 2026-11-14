@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="BTX 社区首页：为新手、矿工和节点运营者提供信息与帮助，附网络实时状态和经过核实的链接目录。">
+  <meta name="color-scheme" content="dark">
+  <title>了解 BTX · BTX 社区</title>
+  
+  <link rel="alternate" hreflang="en" href="/learn/">
+  
+  <link rel="alternate" hreflang="de" href="/de/learn/">
+  
+  <link rel="alternate" hreflang="es" href="/es/learn/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/learn/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/learn/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/community.css?v=0827039e0598">
+  <script src="/static/js/community.js?v=3d7a27904fac" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">跳到正文</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/zh/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="页面">
+        
+        <a class="c-menu__link" href="/zh/">首页</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/zh/learn/" aria-current="page">了解</a>
+        
+        <a class="c-menu__link" href="/zh/network/">网络</a>
+        
+        <a class="c-menu__link" href="/zh/links/">链接</a>
+        
+        <a class="c-menu__link" href="/zh/docs/">文档</a>
+        
+        <a class="c-menu__link" href="/zh/dev/">开发者</a>
+        
+      </nav>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="语言: 中文">ZH <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="语言">
+          
+          <a class="c-lang__item" href="/learn/" hreflang="en" lang="en"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item" href="/de/learn/" hreflang="de" lang="de"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/learn/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item" href="/fr/learn/" hreflang="fr" lang="fr"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item c-lang__item--active" href="/zh/learn/" hreflang="zh-Hans" lang="zh-Hans" aria-current="true"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">了解 BTX</h1>
+        <p class="c-hero__lead">BTX 是什么，以及下一个版本会带来什么。</p>
+      </section>
+
+      <section class="c-facts" id="about" aria-labelledby="about-title">
+        <h2 class="c-section-title" id="about-title">BTX 是什么？</h2>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact" id="fact-supply">
+            <h3 class="c-fact__title">固定供应量</h3>
+            <p>与比特币一样，最多 2100 万枚 BTX。大约每 90 秒出一个区块；每个区块 20 BTX 的奖励每 525,000 个区块减半一次，约每 18 个月一次。</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/src/kernel/chainparams.cpp" rel="noopener noreferrer">来源 ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-matmul">
+            <h3 class="c-fact__title">矩阵乘法挖矿</h3>
+            <p>矿工不做哈希运算，而是计算大型矩阵乘法，这正是 AI 加速器擅长的工作。自区块 185,000 起，自行验证区块的节点要在合格的 NVIDIA（CUDA）或 Apple（Metal）GPU 上精确重算每个区块；没有这种 GPU 的节点依赖他人签名的验证结果。无法用 CPU 挖矿。</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-gpu-verified-network-transition.md" rel="noopener noreferrer">来源 ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-post-quantum">
+            <h3 class="c-fact__title">后量子签名</h3>
+            <p>币由旨在抵御量子计算机的签名锁定：日常支付使用 ML-DSA-44（NIST FIPS 204），SLH-DSA（FIPS 205）作为基于哈希的备用方案。这类 P2MR 地址以 btx1z 开头。</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md" rel="noopener noreferrer">来源 ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-bitcoin-core">
+            <h3 class="c-fact__title">基于 Bitcoin Knots</h3>
+            <p>节点源自 Bitcoin Knots v29.2（Bitcoin Core 的一个变体）。btxd、btx-cli、RPC 接口和 PSBT 的用法与比特币用户熟悉的一样；不同的是工作量证明、签名和部分网络规则。</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx" rel="noopener noreferrer">来源 ↗</a>
+          </article>
+          
+        </div>
+      </section>
+
+      
+      <section class="c-upcoming" id="next" aria-labelledby="next-title">
+        <h2 class="c-section-title" id="next-title">预发布版 v0.34.16 的新内容</h2>
+        <p class="c-warning">自 2026 年 11 月 7 日起发布的预发布版，仅限 Linux x86_64。它打包了 0.35 的评审分支；0.35 版本线仍在继续。开发者表示这不是经过发布验证的版本。当前正式版仍为 v0.34.15。</p>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">从钱包预签名互换领取交易</h3>
+            <p>自 0.34.13 起，互换的领取交易可以在注资时签好，之后由任何掌握秘密的人完成。htlc_presign 和 p2mr_leaf 把手工构造的交易变成钱包中的一个步骤。手续费在预签名时就已确定，领取交易必须在退款高度之前得到确认。</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-htlc-presign.md" rel="noopener noreferrer">来源 ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">开放端口更少的模型网络</h3>
+            <p>AI 模型网络默认开启，监听 TCP 29447。v0.34.16 在使用 -listen=0 或代理时不再打开该端口，会通过 UDP 29448 在本地网络中寻找模型节点，并新增一个本地安全守护程序。-modelnet=0 可全部关闭；它不会花费币。</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">来源 ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">使用代理时关闭自动更新</h3>
+            <p>位于代理之后、或 -onlynet 排除了 IPv4 和 IPv6 的节点，默认不再检查更新。其他所有主网节点仍会查询 btx.dev，并自行安装更新的签名版本，除非设置 autoupdateseamless=0。</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">来源 ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Atlas，第二个桌面应用</h3>
+            <p>Linux 压缩包在保留 btx-qt 的同时新增 btx-atlas。Atlas 需要 glibc 2.39、WebKitGTK 4.1、GTK 3、Ayatana 托盘库和 zenity。btx-qt 和 ZeroMQ 在 v0.34.15 中就已提供。</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">来源 ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">更清楚的备份警告</h3>
+            <p>钱包打包备份现在会说明，其中的描述符文件无需钱包密码即可花费，并对加密钱包发出警告。用早期版本制作的备份也包含同一个文件。</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">来源 ↗</a>
+          </article>
+          
+        </div>
+        
+        <h3 class="c-subtitle">切换之前</h3>
+        <ul class="c-caveats">
+          
+          <li>没有 CUDA、macOS 或 Windows 压缩包。GPU、挖矿或签名节点升级到 v0.34.16 会失去 GPU 路径；这些节点请继续使用 v0.34.15。</li>
+          
+          <li>此压缩包中的 btx-qt 需要 glibc 2.43，无法在 Ubuntu 24.04 或 Debian 13 上启动；btxd 和 btx-cli 需要 2.38。</li>
+          
+          <li>解压整个压缩包，并从中运行 bin/btxd。单独复制出来的 bin/btxd 会直接退出。</li>
+          
+          <li>从创世区块开始同步仍会停在区块 126,978（#272）。请从快照开始。</li>
+          
+        </ul>
+        
+        <p class="c-muted">
+          于 2026-11-12 从发布说明读取。
+          <a class="c-link" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">发布说明 ↗</a>
+        </p>
+      </section>
+      
+
+    </main>
+
+    <footer class="c-footer">
+      <p>独立的社区项目。链接指向第三方，我们不对其内容负责。本页内容均不构成投资建议。</p>
+      <p class="c-muted">本页由英文借助 AI 翻译。 <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/main/site/content/translations/zh.yaml" rel="noopener noreferrer">修正翻译 ↗</a></p>
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">源代码 ↗</a>
+      </p>
+      <p class="c-muted">6d84c5449266</p>
+    </footer>
+  </div>
+</body>
+</html>

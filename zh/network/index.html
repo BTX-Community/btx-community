@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="BTX 社区首页：为新手、矿工和节点运营者提供信息与帮助，附网络实时状态和经过核实的链接目录。">
+  <meta name="color-scheme" content="dark">
+  <title>网络与开发 · BTX 社区</title>
+  
+  <link rel="alternate" hreflang="en" href="/network/">
+  
+  <link rel="alternate" hreflang="de" href="/de/network/">
+  
+  <link rel="alternate" hreflang="es" href="/es/network/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/network/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/network/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/community.css?v=0827039e0598">
+  <script src="/static/js/community.js?v=3d7a27904fac" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">跳到正文</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/zh/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="页面">
+        
+        <a class="c-menu__link" href="/zh/">首页</a>
+        
+        <a class="c-menu__link" href="/zh/learn/">了解</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/zh/network/" aria-current="page">网络</a>
+        
+        <a class="c-menu__link" href="/zh/links/">链接</a>
+        
+        <a class="c-menu__link" href="/zh/docs/">文档</a>
+        
+        <a class="c-menu__link" href="/zh/dev/">开发者</a>
+        
+      </nav>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="语言: 中文">ZH <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="语言">
+          
+          <a class="c-lang__item" href="/network/" hreflang="en" lang="en"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item" href="/de/network/" hreflang="de" lang="de"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/network/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item" href="/fr/network/" hreflang="fr" lang="fr"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item c-lang__item--active" href="/zh/network/" hreflang="zh-Hans" lang="zh-Hans" aria-current="true"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">网络与开发</h1>
+        <p class="c-hero__lead">来自公开状态 API 的网络实时状态，以及在 GitHub 上测量的节点软件开发情况。</p>
+      </section>
+
+      
+      <section class="c-live c-live--unknown" aria-labelledby="live-title" id="live" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="zh"
+               data-level-green="正常" data-level-yellow="警告"
+               data-level-red="严重" data-level-unknown="未知">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="live-title"><span class="c-pulse" aria-hidden="true"></span>网络实时状态</h2>
+          <a class="c-link" href="https://network.btx-monitoring.com/">完整状态页 →</a>
+        </div>
+        <p class="c-warning" role="alert" data-live="stale" hidden>数据已过时，数值可能不准确。</p>
+        <div class="c-fork" data-live="fork" data-template="{name}：区块 {height}，还剩 {remaining} 个区块（约 {time}）" hidden>
+          <h3 class="c-fork__title">网络即将升级</h3>
+          <p>规则将在下方所示区块发生变化。在此之前，每个节点和矿工都需要一个支持此变更的版本，否则将无法继续跟随网络。</p>
+          <ul class="c-fork__rows" data-live="fork-rows"></ul>
+          <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">版本发布与发布说明 ↗</a>
+        </div>
+        <dl class="c-tiles">
+          <div class="c-tile c-tile--status">
+            <dt>状态</dt>
+            <dd data-live="overall"
+                data-label-normal="一切正常"
+                data-label-degraded="性能下降"
+                data-label-incident="故障">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>区块高度</dt>
+            <dd data-live="height">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>最新节点版本</dt>
+            <dd data-live="release">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>运行该版本的节点</dt>
+            <dd data-live="on-release" data-template="{total} 个节点中的 {count} 个">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>平均出块时间（24 小时）</dt>
+            <dd data-live="interval">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>活跃签名者</dt>
+            <dd data-live="signers">–</dd>
+          </div>
+        </dl>
+        <ul class="c-verdicts">
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="stable">
+            <span class="c-dot" aria-hidden="true"></span>稳定: <span data-verdict-label>未知</span>
+          </li>
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="performant">
+            <span class="c-dot" aria-hidden="true"></span>性能: <span data-verdict-label>未知</span>
+          </li>
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="secure">
+            <span class="c-dot" aria-hidden="true"></span>安全: <span data-verdict-label>未知</span>
+          </li>
+          
+        </ul>
+        
+        <h3 class="c-subtitle" id="numbers-title">BTX 数据</h3>
+        <dl class="c-tiles" aria-labelledby="numbers-title">
+          <div class="c-tile c-tile--wide">
+            <dt>已挖出</dt>
+            <dd data-live="supply">–</dd>
+            <dd class="c-tile__sub" data-live="supply-share" data-template="占 2100 万的 {pct} %"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>区块奖励</dt>
+            <dd data-live="reward">–</dd>
+          </div>
+          <div class="c-tile c-tile--wide">
+            <dt>下次减半</dt>
+            <dd data-live="halving" data-template="{count} 个区块">–</dd>
+            <dd class="c-tile__sub" data-live="halving-time" data-template="约 {time}"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>交易数（24 小时）</dt>
+            <dd data-live="tx">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>区块链大小</dt>
+            <dd data-live="size">–</dd>
+          </div>
+        </dl>
+        
+        <p class="c-updated" data-live="updated" data-template="数据时间 {time}">正在加载实时数据 …</p>
+        
+      </section>
+
+
+            <section class="c-live c-dev" aria-labelledby="dev-title" id="development" hidden
+        data-api="https://network.btx-monitoring.com/api/v1/development.json" data-repo="btxchain/btx" data-lang="zh"
+        data-default="默认分支" data-today="今天"
+        data-day="1 天前" data-days="{count} 天前">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="dev-title">节点软件的开发</h2>
+          <a class="c-link" href="https://github.com/btxchain/btx" rel="noopener noreferrer">GitHub 上的 btxchain/btx ↗</a>
+        </div>
+        <p class="c-dev__lead">btxchain/btx 中的提交和拉取请求，这是 BTX 节点的参考实现。GitHub 默认打开 main 分支；其余各行是最近有提交的分支。main 保存最近一个正式版本；当前的工作在发布分支和评审分支上进行。</p>
+        <p class="c-warning" role="alert" data-dev="stale" hidden>此测量已超过三小时，数据可能已过时。</p>
+        <div class="c-branches" role="table" aria-labelledby="dev-title">
+          <div class="c-branch c-branch--head" role="row">
+            <span role="columnheader">分支</span>
+            <span role="columnheader">最近提交</span>
+            <span role="columnheader">提交数（30 天）</span>
+          </div>
+          <div role="rowgroup" data-dev="branches"></div>
+        </div>
+        <p class="c-dev__note">提交按分支和提交日期统计，每个分支最多 100 个（显示为 100+）。同时存在于多个分支的提交在每个分支中都会计入。</p>
+        <dl class="c-tiles">
+          <div class="c-tile">
+            <dt>7 天内更新的拉取请求</dt>
+            <dd data-dev="pulls">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>最新正式版</dt>
+            <dd data-dev="release">–</dd>
+            <dd class="c-tile__sub" data-dev="release-date"></dd>
+          </div>
+          <div class="c-tile" data-dev="prerelease-tile" hidden>
+            <dt>更新的预发布版</dt>
+            <dd data-dev="prerelease">–</dd>
+            <dd class="c-tile__sub" data-dev="prerelease-date"></dd>
+          </div>
+        </dl>
+        <p class="c-updated" data-dev="measured" data-template="于 {time} 在 GitHub 测量，每小时一次。"></p>
+      </section>
+
+
+    </main>
+
+    <footer class="c-footer">
+      <p>独立的社区项目。链接指向第三方，我们不对其内容负责。本页内容均不构成投资建议。</p>
+      <p class="c-muted">本页由英文借助 AI 翻译。 <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/main/site/content/translations/zh.yaml" rel="noopener noreferrer">修正翻译 ↗</a></p>
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">源代码 ↗</a>
+      </p>
+      <p class="c-muted">6d84c5449266</p>
+    </footer>
+  </div>
+</body>
+</html>

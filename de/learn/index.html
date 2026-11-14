@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Startseite der BTX-Community: Informationen und Hilfe für Interessierte, Miner und Node-Betreiber, mit dem Live-Zustand des Netzes und einem geprüften Linkverzeichnis.">
+  <meta name="color-scheme" content="dark">
+  <title>BTX verstehen · BTX Community</title>
+  
+  <link rel="alternate" hreflang="en" href="/learn/">
+  
+  <link rel="alternate" hreflang="de" href="/de/learn/">
+  
+  <link rel="alternate" hreflang="es" href="/es/learn/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/learn/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/learn/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/community.css?v=0827039e0598">
+  <script src="/static/js/community.js?v=3d7a27904fac" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">Zum Inhalt springen</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/de/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="Seiten">
+        
+        <a class="c-menu__link" href="/de/">Start</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/de/learn/" aria-current="page">Lernen</a>
+        
+        <a class="c-menu__link" href="/de/network/">Netz</a>
+        
+        <a class="c-menu__link" href="/de/links/">Links</a>
+        
+        <a class="c-menu__link" href="/de/docs/">Dokumente</a>
+        
+        <a class="c-menu__link" href="/de/dev/">Entwickeln</a>
+        
+      </nav>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="Sprache: Deutsch">DE <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="Sprache">
+          
+          <a class="c-lang__item" href="/learn/" hreflang="en" lang="en"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item c-lang__item--active" href="/de/learn/" hreflang="de" lang="de" aria-current="true"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/learn/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item" href="/fr/learn/" hreflang="fr" lang="fr"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item" href="/zh/learn/" hreflang="zh-Hans" lang="zh-Hans"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">BTX verstehen</h1>
+        <p class="c-hero__lead">Was BTX ist und was das nächste Release bringt.</p>
+      </section>
+
+      <section class="c-facts" id="about" aria-labelledby="about-title">
+        <h2 class="c-section-title" id="about-title">Was ist BTX?</h2>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact" id="fact-supply">
+            <h3 class="c-fact__title">Feste Menge</h3>
+            <p>Höchstens 21 Millionen BTX, wie bei Bitcoin. Etwa alle 90 Sekunden kommt ein Block; seine Belohnung von 20 BTX halbiert sich alle 525.000 Blöcke, also ungefähr alle 18 Monate.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/src/kernel/chainparams.cpp" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-matmul">
+            <h3 class="c-fact__title">Mining mit Matrixmultiplikation</h3>
+            <p>Statt zu hashen multiplizieren Miner große Matrizen, also genau die Arbeit, für die KI-Beschleuniger gebaut sind. Seit Block 185.000 rechnet ein Node, der Blöcke selbst prüft, jeden exakt auf einer zugelassenen NVIDIA- (CUDA) oder Apple-GPU (Metal) nach; Nodes ohne eine solche GPU folgen signierten Prüfungen anderer. Mit der CPU kann man nicht minen.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-gpu-verified-network-transition.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-post-quantum">
+            <h3 class="c-fact__title">Post-Quanten-Signaturen</h3>
+            <p>Coins werden mit Signaturen gesichert, die auch Quantencomputern standhalten sollen: ML-DSA-44 (NIST FIPS 204) für den Alltag, SLH-DSA (FIPS 205) als hashbasierte Reserve. Diese P2MR-Adressen beginnen mit btx1z.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-bitcoin-core">
+            <h3 class="c-fact__title">Gebaut auf Bitcoin Knots</h3>
+            <p>Der Node stammt von Bitcoin Knots v29.2 ab, einer Variante von Bitcoin Core. btxd, btx-cli, die RPC-Schnittstelle und PSBTs funktionieren so, wie Bitcoin-Nutzer es kennen; anders sind Proof-of-Work, Signaturen und einige Netzregeln.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+        </div>
+      </section>
+
+      
+      <section class="c-upcoming" id="next" aria-labelledby="next-title">
+        <h2 class="c-section-title" id="next-title">Neu im Pre-Release v0.34.16</h2>
+        <p class="c-warning">Pre-Release seit 7. November 2026, nur Linux x86_64. Es bündelt die Review-Zweige von 0.35; die 0.35-Reihe bleibt offen. Die Entwickler sagen, es ist keine Release-Freigabe. Aktuelles volles Release bleibt v0.34.15.</p>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Vorsignierte Swap-Claims aus der Wallet</h3>
+            <p>Seit 0.34.13 lässt sich ein Swap-Claim beim Funding signieren und später von jedem mit dem Geheimnis vervollständigen. htlc_presign und p2mr_leaf machen aus handgebauten Transaktionen einen Wallet-Schritt. Die Gebühr steht beim Vorsignieren fest, und der Claim muss vor der Refund-Höhe bestätigt sein.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-htlc-presign.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Modell-Netz mit weniger offenen Ports</h3>
+            <p>Das Netz für KI-Modelle ist standardmäßig an und lauscht auf TCP 29447. v0.34.16 öffnet den Port mit -listen=0 oder Proxy nicht mehr, sucht Modell-Peers im lokalen Netz über UDP 29448 und bringt einen lokalen Sicherheitswächter mit. -modelnet=0 schaltet alles ab; es gibt keine Coins aus.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Auto-Update hinter Proxy aus</h3>
+            <p>Ein Node hinter einem Proxy oder mit -onlynet ohne IPv4 und IPv6 sucht standardmäßig nicht mehr nach Updates. Jeder andere Mainnet-Node fragt weiter btx.dev ab und installiert ein neueres signiertes Release selbst, außer mit autoupdateseamless=0.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Atlas, eine zweite Desktop-App</h3>
+            <p>Das Linux-Archiv bringt btx-atlas neben btx-qt, das bleibt. Atlas braucht glibc 2.39, WebKitGTK 4.1, GTK 3, die Ayatana-Tray-Bibliothek und zenity. btx-qt und ZeroMQ gab es schon in v0.34.15.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Klarere Backup-Warnung</h3>
+            <p>Wallet-Bundle-Backups sagen jetzt, dass die Deskriptor-Datei darin ohne Wallet-Passphrase ausgeben kann, und warnen bei verschlüsselter Wallet. Backups älterer Versionen enthalten dieselbe Datei.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+        </div>
+        
+        <h3 class="c-subtitle">Bevor du wechselst</h3>
+        <ul class="c-caveats">
+          
+          <li>Kein Archiv für CUDA, macOS oder Windows. Ein GPU-, Mining- oder Signer-Node verliert mit v0.34.16 seinen GPU-Pfad; diese Nodes bleiben auf v0.34.15.</li>
+          
+          <li>btx-qt in diesem Archiv braucht glibc 2.43 und startet nicht unter Ubuntu 24.04 oder Debian 13; btxd und btx-cli brauchen 2.38.</li>
+          
+          <li>Das ganze Archiv entpacken und bin/btxd daraus starten. Ein einzeln kopiertes bin/btxd beendet sich.</li>
+          
+          <li>Ein Sync ab Genesis bleibt weiter bei Block 126.978 stehen (#272). Mit einem Snapshot starten.</li>
+          
+        </ul>
+        
+        <p class="c-muted">
+          Aus den Release-Notes gelesen am 2026-11-12.
+          <a class="c-link" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Release-Notes ↗</a>
+        </p>
+      </section>
+      
+
+    </main>
+
+    <footer class="c-footer">
+      <p>Unabhängiges Community-Projekt. Links führen zu Dritten; für deren Inhalte sind wir nicht verantwortlich. Nichts hier ist eine Finanzberatung.</p>
+      
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Quellcode ↗</a>
+      </p>
+      <p class="c-muted">6d84c5449266</p>
+    </footer>
+  </div>
+</body>
+</html>

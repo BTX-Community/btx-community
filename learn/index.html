@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Start page of the BTX community: information and help for newcomers, miners and node operators, with the network&#39;s live state and a checked link directory.">
+  <meta name="color-scheme" content="dark">
+  <title>Learn about BTX · BTX Community</title>
+  
+  <link rel="alternate" hreflang="en" href="/learn/">
+  
+  <link rel="alternate" hreflang="de" href="/de/learn/">
+  
+  <link rel="alternate" hreflang="es" href="/es/learn/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/learn/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/learn/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/static/css/community.css?v=0827039e0598">
+  <script src="/static/js/community.js?v=3d7a27904fac" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">Skip to content</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="Pages">
+        
+        <a class="c-menu__link" href="/">Start</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/learn/" aria-current="page">Learn</a>
+        
+        <a class="c-menu__link" href="/network/">Network</a>
+        
+        <a class="c-menu__link" href="/links/">Links</a>
+        
+        <a class="c-menu__link" href="/docs/">Documents</a>
+        
+        <a class="c-menu__link" href="/dev/">Developers</a>
+        
+      </nav>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="Language: English">EN <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="Language">
+          
+          <a class="c-lang__item c-lang__item--active" href="/learn/" hreflang="en" lang="en" aria-current="true"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item" href="/de/learn/" hreflang="de" lang="de"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/learn/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item" href="/fr/learn/" hreflang="fr" lang="fr"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item" href="/zh/learn/" hreflang="zh-Hans" lang="zh-Hans"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">Learn about BTX</h1>
+        <p class="c-hero__lead">What BTX is, and what the next release brings.</p>
+      </section>
+
+      <section class="c-facts" id="about" aria-labelledby="about-title">
+        <h2 class="c-section-title" id="about-title">What is BTX?</h2>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact" id="fact-supply">
+            <h3 class="c-fact__title">Fixed supply</h3>
+            <p>At most 21 million BTX, as with Bitcoin. A block comes about every 90 seconds; its reward of 20 BTX halves every 525,000 blocks, roughly every 18 months.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/src/kernel/chainparams.cpp" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-matmul">
+            <h3 class="c-fact__title">Mining by matrix multiplication</h3>
+            <p>Instead of hashing, miners multiply large matrices, the work AI accelerators are built for. Since block 185,000 a node that checks blocks itself replays each one exactly on a qualified NVIDIA (CUDA) or Apple (Metal) GPU; nodes without one follow signed checks from others. There is no CPU mining.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-gpu-verified-network-transition.md" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-post-quantum">
+            <h3 class="c-fact__title">Post-quantum signatures</h3>
+            <p>Coins are locked with signatures meant to withstand quantum computers: ML-DSA-44 (NIST FIPS 204) for everyday spending, SLH-DSA (FIPS 205) as a hash-based fallback. These P2MR addresses start with btx1z.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-bitcoin-core">
+            <h3 class="c-fact__title">Built on Bitcoin Knots</h3>
+            <p>The node derives from Bitcoin Knots v29.2, a variant of Bitcoin Core. btxd, btx-cli, the RPC interface and PSBTs work the way Bitcoin users know them; what differs is the proof-of-work, the signatures and some network rules.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+        </div>
+      </section>
+
+      
+      <section class="c-upcoming" id="next" aria-labelledby="next-title">
+        <h2 class="c-section-title" id="next-title">New in pre-release v0.34.16</h2>
+        <p class="c-warning">Pre-release since 7 November 2026, Linux x86_64 only. It packages the 0.35 review branches; the 0.35 line stays open. The developers say it is not a release qualification. The current full release stays v0.34.15.</p>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Presigned swap claims from the wallet</h3>
+            <p>Since 0.34.13 a swap claim can be signed at funding and completed later by anyone who has the secret. htlc_presign and p2mr_leaf turn the hand-built transactions into a wallet step. The fee is fixed when you presign, and the claim must confirm before the refund height.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-htlc-presign.md" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Model network with fewer open ports</h3>
+            <p>The network for AI models is on by default and listens on TCP 29447. v0.34.16 no longer opens that port with -listen=0 or a proxy, finds model peers on the local network over UDP 29448, and adds a local security guard. -modelnet=0 turns all of it off; it does not spend coins.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Auto-update off behind a proxy</h3>
+            <p>A node behind a proxy, or with -onlynet excluding IPv4 and IPv6, no longer checks for updates by default. Every other mainnet node still polls btx.dev and installs a newer signed release by itself unless autoupdateseamless=0.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Atlas, a second desktop app</h3>
+            <p>The Linux archive adds btx-atlas beside btx-qt, which stays. Atlas needs glibc 2.39, WebKitGTK 4.1, GTK 3, the Ayatana tray library and zenity. btx-qt and ZeroMQ were already in v0.34.15.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Clearer backup warning</h3>
+            <p>Wallet bundle backups now say that the descriptor file inside spends without the wallet passphrase, and warn for an encrypted wallet. Backups made with earlier versions hold the same file.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+        </div>
+        
+        <h3 class="c-subtitle">Before you switch</h3>
+        <ul class="c-caveats">
+          
+          <li>No CUDA, macOS or Windows archive. A GPU, mining or signing node on v0.34.16 loses its GPU path; those nodes stay on v0.34.15.</li>
+          
+          <li>btx-qt in this archive needs glibc 2.43 and does not start on Ubuntu 24.04 or Debian 13; btxd and btx-cli need 2.38.</li>
+          
+          <li>Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.</li>
+          
+          <li>A sync from genesis still stops at block 126,978 (#272). Start from a snapshot.</li>
+          
+        </ul>
+        
+        <p class="c-muted">
+          Read from the release notes on 2026-11-12.
+          <a class="c-link" href="https://github.com/btxchain/btx/blob/release-0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Release notes ↗</a>
+        </p>
+      </section>
+      
+
+    </main>
+
+    <footer class="c-footer">
+      <p>Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+      
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a>
+      </p>
+      <p class="c-muted">6d84c5449266</p>
+    </footer>
+  </div>
+</body>
+</html>
