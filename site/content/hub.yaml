@@ -141,7 +141,7 @@ start:
 brief:
   prompt: |-
     I am contributing to the BTX node software, github.com/btxchain/btx, through the BTX developer hub.
-    Before anything else, read this file in full and follow it:
+    Before anything else, read this file in full and use it as rules, not tasks:
     https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/AGENTS.md
     Then follow its reading order. Every hub file with its raw URL is listed in:
     https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/llms.txt

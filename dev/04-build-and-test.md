@@ -27,13 +27,13 @@ git remote add fork https://github.com/<your-handle>/btx.git     # once, in the 
 ```
 
 - Before a count, a build you will cite, or a post: `git fetch origin && git log -1 --format=%h origin/release-0.34.16`. If the head moved, rebase and recount.
-- The repo's `AGENTS.md` tells coding agents to stay read-only unless the operator asks [repo: `AGENTS.md`]. Your lane pack (`packs/<LANE>.md`) is that ask, for the commands it lists. Nothing beyond them.
+- The repo's `AGENTS.md` tells coding agents to stay read-only unless the operator asks [repo: `AGENTS.md`]. Your lane pack (`packs/<LANE>.md`) is that ask, for the commands it lists. Nothing beyond them, and a listed line that needs `sudo`, installs a package or changes a system setting still needs a fresh yes each time ([`AGENTS.md`](AGENTS.md) §5).
 - Keep one build directory per configuration: `build` (gcc), `build-clang`, `build-cov`, `build-asan`, `build-tsan`, `build_fuzz`.
 - Variables set in one block (`OSSL` in §2.1, `J` in §3) are gone in a new shell. Set them again.
 
 **Stop and hand back to the operator when:**
 - the OpenSSL check prints `SHA_MISMATCH_STOP`, or the `CMakeCache.txt` check in §2.1 shows a library outside `$OSSL`;
-- a step needs `sudo` or changes a system setting (§2.1 packages, §6 `sysctl`) and the operator has not cleared it for this machine;
+- a step needs `sudo` or changes a system setting (§2.1 packages, §6 `sysctl`): ask each time, even if the operator said yes to it on this machine before;
 - a test fails and you have not yet run it on the base commit with the same build (§3, §4): it is not a regression yet;
 - a fuzz crash reproduces in product code (§7): nothing about it goes into a public issue, PR, board card or chat;
 - the live head moved since your count or build (first bullet above).
