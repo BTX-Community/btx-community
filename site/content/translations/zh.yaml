@@ -642,12 +642,12 @@ translations:
     signatures and some network rules.
   zh: >-
     节点源自 Bitcoin Knots v29.2（Bitcoin Core 的一个变体）。btxd、btx-cli、RPC 接口和 PSBT 的用法与比特币用户熟悉的一样；不同的是工作量证明、签名和部分网络规则。
-- en: >-
-    Two defaults to decide on: btxd installs newer signed releases from btx.dev by itself
-    (autoupdateseamless=0 only reports them, autoupdate=0 stops checking), and the model network listens
-    on port 29447 (modelnet=0 turns it off).
-  zh: >-
-    有两项默认设置需要你决定：btxd 会自行从 btx.dev 安装更新的签名版本（autoupdateseamless=0 只提示，autoupdate=0 不再检查）；模型网络监听端口 29447（modelnet=0 可关闭）。
+- en: 'Three defaults to decide on: btxd installs newer signed releases from btx.dev by itself (autoupdateseamless=0
+    only reports them, autoupdate=0 stops checking); the model network listens on port 29447 (modelnet=0
+    turns it off); and natpmp asks your router to open ports 19335 and 29447 to the internet (natpmp=0
+    stops it). With coins, mining or a signer, set both to 0.'
+  zh: 有三项默认设置需要你决定：btxd 会自行从 btx.dev 安装更新的签名版本（autoupdateseamless=0 只提示，autoupdate=0 不再检查）；模型网络监听端口 29447（modelnet=0
+    可关闭）；natpmp 会请求路由器把端口 19335 和 29447 向互联网开放（natpmp=0 可阻止）。持有资金、挖矿或运行签名者时，请把两者都设为 0。
 - en: Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.
   zh: 解压整个压缩包，并从中运行 bin/btxd。单独复制出来的 bin/btxd 会直接退出。
 - en: >-

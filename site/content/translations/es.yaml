@@ -842,14 +842,15 @@ translations:
     El nodo deriva de Bitcoin Knots v29.2, una variante de Bitcoin Core. btxd, btx-cli, la interfaz RPC
     y los PSBT funcionan como los conocen los usuarios de Bitcoin; lo que cambia es la prueba de
     trabajo, las firmas y algunas reglas de red.
-- en: >-
-    Two defaults to decide on: btxd installs newer signed releases from btx.dev by itself
-    (autoupdateseamless=0 only reports them, autoupdate=0 stops checking), and the model network listens
-    on port 29447 (modelnet=0 turns it off).
-  es: >-
-    Dos valores por defecto que debes decidir: btxd instala por sí mismo versiones firmadas más
-    recientes desde btx.dev (autoupdateseamless=0 solo las notifica, autoupdate=0 deja de buscarlas), y
-    la red de modelos escucha en el puerto 29447 (modelnet=0 la desactiva).
+- en: 'Three defaults to decide on: btxd installs newer signed releases from btx.dev by itself (autoupdateseamless=0
+    only reports them, autoupdate=0 stops checking); the model network listens on port 29447 (modelnet=0
+    turns it off); and natpmp asks your router to open ports 19335 and 29447 to the internet (natpmp=0
+    stops it). With coins, mining or a signer, set both to 0.'
+  es: 'Tres valores por defecto que debes decidir: btxd instala por sí mismo versiones firmadas más recientes
+    desde btx.dev (autoupdateseamless=0 solo avisa, autoupdate=0 no busca); la red de
+    modelos escucha en el puerto 29447 (modelnet=0 la desactiva); y natpmp pide a tu router que abra a
+    internet los puertos 19335 y 29447 (natpmp=0 lo evita). Con fondos, minería o firmante, pon ambos
+    a 0.'
 - en: Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.
   es: >-
     Descomprime el archivo completo y ejecuta bin/btxd desde él. Un bin/btxd copiado por separado se
