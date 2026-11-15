@@ -3,7 +3,7 @@
 **Working document — open for edits.** Add your name, change a line, add a row.
 Pull requests welcome; so is saying it in the Growth topic and someone else enters it.
 
-Last updated: 12 November 2026
+Last updated: 15 November 2026
 
 ---
 
@@ -37,12 +37,12 @@ column B should not be scheduled until it lands.
 | A1 | **One trading venue.** Agree on a single implementation between the people already building one, instead of four in parallel | Named as the highest-leverage missing piece in the Growth debate. Four to six finished or near-finished implementations exist and none is live | Several candidates built, none released | |
 | A2 | **Venue structure and licensing boundary.** Decide custodial vs non-custodial vs licensed operator, and document why the chosen model sits where it sits | This is the stated reason the finished implementations are not shipping. It is a structuring question, not a coding one | Structuring paper in draft: [`research/venue-structure.md`](research/venue-structure.md). Decision still open | dr.chambre |
 | A3 | **Community fund.** Multisig, published rules, published address, published spends | Repeatedly asked for since September. Needed before anyone pays for infrastructure or milestones | Discussion paper v0.1 in [`research/network-fund.md`](research/network-fund.md), not implemented | |
-| A4 | **btx-community.com.** Front door and maintained link directory, replacing the stale ones | A newcomer currently lands on outdated data and draws the obvious conclusion | Domain ordered, rebuild of btxlinks done, repo public | dr.chambre |
-| A5 | **Node and infrastructure.** Archives, signed snapshots, monitoring, alerting for stranded nodes | A stranded node went unnoticed for four days in October. Measurement is in place; alerting is not | Two archives, monitoring and public API live | dr.chambre |
+| A4 | **btx-community.com.** Front door and maintained link directory, replacing the stale ones | A newcomer currently lands on outdated data and draws the obvious conclusion | Live at [btx-community.com](https://btx-community.com) since 5 November 2026: start, learn, network, developers, links and docs pages in English, German, Spanish, French and Chinese (the last three AI-assisted, native-speaker review welcome). Built from this repo on every merge | dr.chambre |
+| A5 | **Node and infrastructure.** Archives, signed snapshots, monitoring, alerting for stranded nodes | A stranded node went unnoticed for four days in October. Measurement is in place; alerting is not | Two archives, daily signed datadir snapshots, monitoring and public API live. Since 13 November a nightly build and test run of the release branch (CI-0), published through the API and shown on the developers page | dr.chambre |
 | A6 | **Comms and marketing.** X account, community channel, a single place to send people | Nothing to point at today, and the existing channels are either dead or hostile | Discussed, not started | |
-| A7 | **Documentation.** The questions newcomers actually ask, answered once, in writing, with sources | First question is always the deployment reward. See `research/deployment-reward.md` | First document in draft | dr.chambre |
+| A7 | **Documentation.** The questions newcomers actually ask, answered once, in writing, with sources | First question is always the deployment reward. See `research/deployment-reward.md` | Deployment-reward write-up in draft. The learn page answers "What is BTX?", what the current release brings, and two checklists (before buying, before installing a node), each fact with a source | dr.chambre |
 | A8 | **Roles and continuity.** A name against each lane, and more than one person able to push everywhere | Every single-owner service in this ecosystem has failed the same way | This document | |
-| A9 | **Developer hub ("Become a BTX dev").** One place for people and their AI tools: method, build and test recipes, the gate before an upstream PR, open lanes, exam, lessons | 317 fix PRs since August, often the same bug class at a new site; 89 % of them have landed ([`dev/plan/MASTER-PLAN.md`](dev/plan/MASTER-PLAN.md) §0). Newcomers and their AI tools have had no shared way to build, test and file a change | First version in [`dev/`](dev/); a site card and two document cards link to it | |
+| A9 | **Developer hub ("Become a BTX dev").** One place for people and their AI tools: method, build and test recipes, the gate before an upstream PR, open lanes, exam, lessons | 317 fix PRs since August, often the same bug class at a new site; 89 % of them have landed ([`dev/plan/MASTER-PLAN.md`](dev/plan/MASTER-PLAN.md) §0). Newcomers and their AI tools have had no shared way to build, test and file a change | Live in [`dev/`](dev/) and on the [developers page](https://btx-community.com/dev/), with the nightly CI-0 run. 16 lanes; owners so far: I-OPS dr-chambre, A-HELPER jarekpiot, C-PORT sunnyriverr | |
 
 ---
 
@@ -50,9 +50,9 @@ column B should not be scheduled until it lands.
 
 | # | Item | Why it blocks us | Status | Who follows up |
 |---|---|---|---|---|
-| B1 | **Wallet support for presigned swap claims (`htlc_presign` / `p2mr_leaf`)** | Ergonomics, not a blocker. Claims can already be signed at funding and completed by anyone on 0.34.15, but only with hand-built transactions; these wallet options make that a normal wallet step | Not in v0.35.0-rc1. In the 0.35 branches and in the v0.34.16 pre-release of 7 November 2026, not release-qualified. What already works and what is still open (relay, fee bumping): [`research/venue-structure.md`](research/venue-structure.md) §2.2 | |
-| B2 | **btx.dev: website and whitepaper** | No outward push works while the official site shows a 20-week-old version. Promised repeatedly since September | Not delivered | |
-| B3 | **btx.dev: circulating supply figure** | The site states 3,647,340; the chain says 5,356,878.75 — understated by about 32 % on a page that leads with a fixed maximum supply | Reported 5 November 2026, no change | dr.chambre |
+| B1 | **Wallet support for presigned swap claims (`htlc_presign` / `p2mr_leaf`)** | Ergonomics, not a blocker. Claims can already be signed at funding and completed by anyone on 0.34.15, but only with hand-built transactions; these wallet options make that a normal wallet step | **Delivered** in the v0.34.16 release (a full release since 15 November 2026): `walletprocesspsbt` with `htlc_presign` and `p2mr_leaf`, `finalizepsbt` with `preimages`. Still open: relay and fee bumping, see [`research/venue-structure.md`](research/venue-structure.md) §2.2 | |
+| B2 | **btx.dev: website and whitepaper** | No outward push works while the official site shows a 20-week-old version. Promised repeatedly since September | Not delivered. On 15 November 2026 btx.dev still shows v0.33.2; the current release is v0.34.16 | |
+| B3 | **btx.dev: circulating supply figure** | The site states 3,647,340; the chain said 5,356,878.75 on 4 November and 5,565,158.75 at height 278,731 on 15 November — understated by about 34 %, and the gap grows with every block, on a page that leads with a fixed maximum supply. Measure: `curl -s https://network.btx-monitoring.com/api/v1/status.json` (`econ.supply_mined`) | Reported 5 November 2026; still unchanged on 15 November | dr.chambre |
 | B4 | **A statement on the deployment reward** | The first question every newcomer asks. The specification itself (§8) says the operating policy "should be documented separately and precisely" and it never was | Our own write-up in draft; nothing from the core team | dr.chambre |
 | B5 | **Core-team support for liquidity** | Explicitly deferred until there is "real volume" (quote above) | Deferred by the core team | — |
 
