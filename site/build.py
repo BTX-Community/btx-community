@@ -70,6 +70,7 @@ RAW_URL = "https://raw.githubusercontent.com/BTX-Community/btx-community/main/de
 """Raw files of the developer hub: the AI prompt and the two links an AI tool fetches point here."""
 ADD_PROJECT_URL = f"{REPO_URL}/blob/main/CONTRIBUTING.md#changing-the-website"
 RELEASES_URL = "https://github.com/btxchain/btx/releases"
+OBSERVATORY_URL = "https://explorer.btxbyronbay.com/observatory"
 STATUS_API = "https://network.btx-monitoring.com/api/v1/status.json"
 DEVELOPMENT_API = "https://network.btx-monitoring.com/api/v1/development.json"
 CI_API = "https://network.btx-monitoring.com/api/v1/ci.json"
@@ -1506,6 +1507,7 @@ def context(
         "repo_url": REPO_URL,
         "add_project_url": ADD_PROJECT_URL,
         "releases_url": RELEASES_URL,
+        "observatory_url": OBSERVATORY_URL,
         "version": version,
         "css_url": asset_url("css/community.css"),
         "js_url": asset_url("js/community.js"),

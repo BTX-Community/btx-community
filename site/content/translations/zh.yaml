@@ -6,6 +6,17 @@
 
 schema_version: 1
 translations:
+- en: 'Live view from the Byron Bay archive node: its chain progress, the heights of the nodes connected
+    to it, and a map of those connections (preview).'
+  zh: Byron Bay 归档节点的实时视图：其链进度、与其相连节点的高度，以及这些连接的地图（预览）。
+- en: 'The upstream Atlas desktop interface (btxchain/btx #273), hosted by the Byron Bay team as a demo.'
+  zh: '上游的 Atlas 桌面界面（btxchain/btx #273），由 Byron Bay 团队作为演示托管。'
+- en: 'A walk-through of SwapNet (btxchain/btx #630), built by the Byron Bay team from the open-source
+    code.'
+  zh: 'SwapNet（btxchain/btx #630）的演示，由 Byron Bay 团队基于开源代码制作。'
+- en: Unofficial demo with sample data only. The feature is not released; the page connects to no node
+    or wallet.
+  zh: 非官方演示，仅含示例数据。该功能尚未发布；页面不连接任何节点或钱包。
 - en: Describes MatMul v4.7, which the network runs since block 185,000, and keeps v3 as reference. Last
     updated 4 Aug 2026; its release notes still name v0.33.2.
   zh: 描述网络自区块 185,000 起使用的 MatMul v4.7，并保留 v3 作为参考。最后更新于 2026 年 8 月 4 日；其版本说明仍写着 v0.33.2。
