@@ -45,7 +45,7 @@ Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-S
    (code areas)           (one rule each)         (gates and runs)
    ---------------        ---------------         ---------------
    A-WALLET    [claim]    C-K01    [claim]        I-CI    [claim]
-   A-STORES    [claim]    C-PORT   [claim]        I-RC    [claim]
+   A-STORES    [claim]    C-PORT   sunnyriverr    I-RC    [claim]
    E-CONSENSUS [claim]    C-STATIC [claim]        I-OPS   dr-chambre
    A-NET       [claim]    C-PATHS  [claim]        I-XDEV  [claim]
    A-HELPER    jarekpiot
@@ -145,7 +145,7 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 **C-PORT: Windows, macOS, build and packaging, resource lifecycle**
 - Scope: K06 Windows/MinGW/MSVC (33 PRs), K07 macOS/libc++/Qt packaging, K22 build/packaging/release-gate drift (K19/K22 together 40 PRs), K16 pipe/pid/socket lifecycle; `src/compat/`, `scripts/release/package_release_archive.py`, the installer path (`install_prebuilt_release_tree`).
 - Why: K06 (33 PRs), K19/K22 (40), K10 (14) and K07 (6) are classes a CI matrix catches before filing; K06 kept finding new files.
-- Owner: (claimable) · Second pass: (claimable; never the owner); a macOS runner runs the macOS half when a PR has K07 content.
+- Owner: `sunnyriverr` · Second pass: (claimable; never the owner); a macOS runner runs the macOS half when a PR has K07 content.
 - Cadence: follows the first green Windows and macOS fork runs (I-CI), then one PR per class.
 - Done bar: the POSIX-outside-`#ifndef WIN32` grep as a lint in CI-4; the first green Windows and sharded macOS runs on the release line; `otool -L` on every packaged binary in CI-10; RAII wrappers for fork/socket/pipe with a pidfd identity check before every `kill`; zero new-site K06 after the lint; the release-gate job green (GLIBC ceiling, RUNPATH, `elfcheck.py`).
 - First three tasks: (1) the POSIX grep lint; (2) the `otool` step in the release gate; (3) the K16 RAII wrapper PR.
@@ -172,7 +172,7 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 ### Infrastructure lanes
 
 **I-CI: the fork CI gates**
-- Scope: the fork workflow (exists; never run on the release line; must be rebased onto `4c7840e9` with the upstream Atlas workflows kept): CI-0 build matrix (Linux, userns, mingw, Windows, macOS), CI-1 sharded unit + functional, CI-2 ASan/UBSan, CI-3 TSan + DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke (ClusterFuzzLite), CI-8 CodeQL weekly on a dedicated box, CI-9 coverage ratchet on a dedicated box, CI-10 release gate; `ci/known-failing.txt`; the nightly stage3 job for the 47 timing-out suites.
+- Scope: the fork workflow (exists; it ran on the release line on 12 Nov at `4c7840e9` and on 13 Nov at `88c9b49c`, red both times; the upstream Atlas workflows are kept): CI-0 build matrix (Linux, userns, mingw, Windows, macOS), CI-1 sharded unit + functional, CI-2 ASan/UBSan, CI-3 TSan + DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke (ClusterFuzzLite), CI-8 CodeQL weekly on a dedicated box, CI-9 coverage ratchet on a dedicated box, CI-10 release gate; `ci/known-failing.txt`; the nightly stage3 job for the 47 timing-out suites.
 - Why: upstream runs no hosted CI by choice (`.github/workflows/README.md`), so the contributor-side gate runs on a fork. Baselines: coverage 69.9 lines / 40.7 branches, TSan 41, cppcheck 372, CodeQL 260, tidy 1,033. The macOS test job ran out of time on the last fork run, so it is sharded.
 - Owner: (claimable) · Second pass: (claimable; never the owner; someone who reads fork CI output).
 - Cadence: CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4.
