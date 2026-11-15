@@ -161,12 +161,12 @@ translations:
     expirent.
 - en: >-
     The results of the last nightly build and test run that the status page's operator publishes as
-    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix in the table
-    above. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix listed under
+    Gates. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
   fr: >-
     Les résultats de la dernière exécution nocturne de compilation et de tests que l'opérateur de la
     page d'état publie comme job CI-0, lus en direct dans son API. C'est une seule exécution sous
-    Linux, pas la matrice de compilation du fork du tableau ci-dessus. L'exécution des tests
+    Linux, pas la matrice de compilation du fork listée sous Contrôles. L'exécution des tests
     unitaires laisse de côté les suites lentes matmul_v4_rc_stage3_*.
 - en: "This panel is filled in by JavaScript. The run as raw data: "
   fr: "Ce panneau est rempli par JavaScript. L'exécution en données brutes : "
@@ -950,11 +950,8 @@ translations:
     quel travail est ouvert.
 - en: The reference implementation and its own rules for agents.
   fr: L'implémentation de référence et ses propres règles pour les agents.
-- en: >-
-    Start on the developers page: where to begin, levels, test coverage and open lanes.
-  fr: >-
-    Commencer par la page des développeurs : premiers pas, niveaux, couverture de tests et chantiers
-    ouverts.
+- en: "Start here: where to begin, the prompt for your AI tool and the three levels."
+  fr: "Commencer ici : par où commencer, la consigne pour votre outil d'IA et les trois niveaux."
 - en: Read the hub's front page, written for people.
   fr: Lire la page d'accueil du hub, écrite pour des humains.
 - en: >-
@@ -2828,3 +2825,8 @@ translations:
     et vérifie les attestations des autres. Selon les notes de v0.34.16, ses binaires Linux exigent
     glibc 2.38 ou plus et ces scripts compilent contre glibc 2.31 : leurs hachages ne peuvent donc
     pas encore correspondre à une recompilation.
+# developers split: the start card's two steps
+- en: "Ongoing work: test coverage, the nightly CI-0 run and the lanes waiting for an owner."
+  fr: >-
+    Travaux en cours : couverture de tests, l'exécution nocturne de CI-0 et les chantiers en attente
+    d'un responsable.

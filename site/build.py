@@ -7,7 +7,7 @@ The content is validated before anything is written: a pull request with a broke
 missing translation or an unknown anchor fails here, not on the live site. English is served
 under ``/``, German under ``/de/``; every page in ``PAGES`` gets its own directory below that
 (``/links/``, ``/de/links/``) and its template ``<page>.html.j2``, which extends ``base.html.j2``
-with the menu. The live strip, the figures and the upgrade countdown are
+with the menu; a page in ``SUBPAGES`` sits below its menu page (``/dev/work/``). The live strip, the figures and the upgrade countdown are
 empty in the built page and filled by ``static/js/community.js`` from the public API of the
 status page; the nightly CI panel of the developers page likewise by ``static/js/ci.js``, which
 only that page loads.
@@ -66,6 +66,14 @@ PAGES = ("home", "learn", "network", "links", "docs", "infra", "dev")
 DRAFT_PAGES = ("fast-lane",)
 """Pages under review: English only, in no menu, sitemap or llms file, and marked noindex."""
 """The pages of the site, in menu order; each has a template ``<page>.html.j2`` and texts ``nav.<page>``."""
+SUBPAGES = {"dev-work": ("dev", "dev/work")}
+"""Pages below a menu page: id, then the menu page they belong to and their path below the language.
+Each has a template ``<id>.html.j2``; its menu page stays marked in the menu, and both carry the
+sub-menu ``SUBMENUS``."""
+SUBMENUS = {"dev": ("dev", "dev-work")}
+"""The sub-menu of a menu page, in order: the page itself and its sub-pages (texts ``subnav.<id>``)."""
+ALL_PAGES = PAGES + tuple(SUBPAGES)
+"""Every page the build writes: the menu pages, then the sub-pages."""
 MAX_YAML_BYTES = 256 * 1024
 REPO_URL = "https://github.com/BTX-Community/btx-community"
 RAW_URL = "https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/"
@@ -197,7 +205,7 @@ class Step(_Model):
         if sum(target is not None for target in (self.url, self.anchor, self.page)) > 1:
             msg = "a step has at most one of url, anchor and page"
             raise ValueError(msg)
-        if self.page is not None and self.page not in PAGES:
+        if self.page is not None and self.page not in ALL_PAGES:
             msg = f"unknown page {self.page!r}"
             raise ValueError(msg)
         return self
@@ -915,7 +923,7 @@ class Target(_Model):
         if self.anchor is not None and self.page is None:
             msg = "an anchor needs a page"
             raise ValueError(msg)
-        if self.page is not None and self.page not in PAGES:
+        if self.page is not None and self.page not in ALL_PAGES:
             msg = f"unknown page {self.page!r}"
             raise ValueError(msg)
         return self
@@ -954,7 +962,7 @@ class InfraRole(_Model):
         if self.ask_url is not None and self.ask_page is not None:
             msg = f"role {self.id}: ask_url or ask_page, not both"
             raise ValueError(msg)
-        if self.ask_page is not None and self.ask_page not in PAGES:
+        if self.ask_page is not None and self.ask_page not in ALL_PAGES:
             msg = f"role {self.id}: unknown page {self.ask_page!r}"
             raise ValueError(msg)
         for text in (self.hardware.en, self.hardware.de):
@@ -998,7 +1006,7 @@ class MapNode(_Model):
         if self.anchor is not None and self.page is None:
             msg = f"node {self.id}: an anchor needs a page"
             raise ValueError(msg)
-        if self.page is not None and self.page not in PAGES:
+        if self.page is not None and self.page not in ALL_PAGES:
             msg = f"node {self.id}: unknown page {self.page!r}"
             raise ValueError(msg)
         if self.narrow.col == "L":
@@ -2359,8 +2367,10 @@ def asset_url(path: str) -> str:
 
 
 def page_path(lang: str, page: str = "home") -> str:
-    """URL path of a page in a language: ``/``, ``/de/``, ``/links/``, ``/de/links/``."""
+    """URL path of a page in a language: ``/``, ``/de/``, ``/links/``, ``/de/links/``, ``/dev/work/``."""
     prefix = "/" if lang == "en" else f"/{lang}/"
+    if page in SUBPAGES:
+        return f"{prefix}{SUBPAGES[page][1]}/"
     return prefix if page == "home" else f"{prefix}{page}/"
 
 
@@ -2389,11 +2399,16 @@ def context(
         "alternates": [
             (code, HTML_LANG.get(code, code), texts[code]["lang_name"], page_path(code, page_id)) for code in LANGUAGES
         ],
-        "page": page_id,
+        "page": SUBPAGES[page_id][0] if page_id in SUBPAGES else page_id,
+        "subpage": page_id,
+        "subnav": [
+            (sub, ui[f"subnav.{sub}"], page_path(lang, sub))
+            for sub in SUBMENUS.get(SUBPAGES[page_id][0] if page_id in SUBPAGES else page_id, ())
+        ],
         "page_title": None if page_id == "home" else ui[f"page.{page_id}.title"],
         "page_lead": None if page_id == "home" else ui[f"page.{page_id}.lead"],
         "nav": [(p, ui[f"nav.{p}"], page_path(lang, p)) for p in PAGES],
-        "nav_href": {p: page_path(lang, p) for p in PAGES},
+        "nav_href": {p: page_path(lang, p) for p in ALL_PAGES},
         "status_page": STATUS_PAGE.get(lang, STATUS_PAGE["en"]),
         "status_api": STATUS_API,
         "development_api": DEVELOPMENT_API,
@@ -2478,7 +2493,7 @@ def llms_index(page: CommunityPage, hub: HubPage, texts: dict[str, dict[str, str
         "## Pages",
         "",
     ]
-    for page_id in PAGES:
+    for page_id in ALL_PAGES:
         lead = ui["meta_description"] if page_id == "home" else ui[f"page.{page_id}.lead"]
         lines.append(_llms_line(ui[f"nav.{page_id}"], _site_url(page_path("en", page_id)), lead))
     lines += [
@@ -2591,7 +2606,7 @@ def build(out: Path, version: str) -> None:
             context(page, guide, hub, texts, lang, version, page_id, sayers[lang], infra)
         )
         for lang in LANGUAGES
-        for page_id in PAGES
+        for page_id in ALL_PAGES
     }
 
     fast_lane = load_fast_lane(ROOT / "content" / "fast-lane.yaml")

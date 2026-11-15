@@ -129,9 +129,9 @@ translations:
     CI-10、已知失败列表，以及为 41 个超时的 stage3 测试套件设置的每晚作业。
 - en: >-
     The results of the last nightly build and test run that the status page's operator publishes as
-    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix in the table
-    above. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
-  zh: 状态页运营者以作业 CI-0 发布的最近一次夜间构建和测试运行的结果，实时读取自其 API。这只是在 Linux 上的一次运行，不是上表中 fork 上的构建矩阵。单元测试运行不包括较慢的 matmul_v4_rc_stage3_* 套件。
+    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix listed under
+    Gates. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+  zh: "状态页运营者以作业 CI-0 发布的最近一次夜间构建和测试运行的结果，实时读取自其 API。这只是在 Linux 上的一次运行，不是“关卡”一节中列出的 fork 构建矩阵。单元测试运行不包括较慢的 matmul_v4_rc_stage3_* 套件。"
 - en: "This panel is filled in by JavaScript. The run as raw data: "
   zh: 此面板由 JavaScript 填充。运行结果的原始数据：
 - en: build failed
@@ -711,9 +711,8 @@ translations:
   zh: 节点软件是开源的，任何人都可以在 GitHub 上向它提交拉取请求。开发者中心会告诉你以及你使用的 AI 工具，如何构建、测试一项更改并为其编写文档，使它能够被合并，以及哪些工作仍然开放。
 - en: The reference implementation and its own rules for agents.
   zh: 参考实现及其针对智能体的自有规则。
-- en: >-
-    Start on the developers page: where to begin, levels, test coverage and open lanes.
-  zh: 从开发者页面开始：入门步骤、级别、测试覆盖率和开放任务。
+- en: "Start here: where to begin, the prompt for your AI tool and the three levels."
+  zh: "从这里开始：从何入手、给你的 AI 工具的提示词，以及三个级别。"
 - en: Read the hub's front page, written for people.
   zh: 阅读开发者中心的首页，面向人类读者。
 - en: >-
@@ -2157,3 +2156,6 @@ translations:
     glibc 2.38 or newer and these scripts build against glibc 2.31, so their hashes cannot match a
     rebuild yet.
   zh: "复现构建者用 contrib/guix 构建某个版本打了标签的源代码，为结果出具证明，并核验其他构建者的证明。据 v0.34.16 的发布说明，其 Linux 二进制文件需要 glibc 2.38 或更新版本，而这些脚本基于 glibc 2.31 构建，因此它们的哈希值目前还不可能与复现构建的结果一致。"
+# developers split: the start card's two steps
+- en: "Ongoing work: test coverage, the nightly CI-0 run and the lanes waiting for an owner."
+  zh: "进行中的工作：测试覆盖率、CI-0 夜间运行，以及等待负责人的任务。"

@@ -19,8 +19,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import build  # noqa: E402
 from markupsafe import escape  # noqa: E402
 
-NAV = ("begin", "brief", "levels", "coverage", "classes", "lanes", "flow", "gates", "rhythm", "rules", "contribute")
-"""The sections of the developers page, in the order of its anchor bar."""
+NAV = ("begin", "brief", "levels", "rules", "contribute")
+"""The sections of the developers page ("Start here"), in the order of its anchor bar."""
+NAV_WORK = ("ci", "coverage", "lanes", "owner-rules", "classes", "flow", "gates", "rhythm")
+"""The sections of its sub-page "Ongoing work", in the order of its anchor bar."""
 STATUS_OF = {
     "worklist ready": "worklist",
     "baseline measured": "baseline",
@@ -120,26 +122,30 @@ class ContentTest(unittest.TestCase):
                 "infra": ('id="yourself"', 'id="managed"', 'id="roles"', 'id="role-full-node"', 'id="map"',
                           'class="c-map__svg c-map__svg--wide"', 'class="c-map__svg c-map__svg--narrow"',
                           'id="edge-1"', 'id="report"', 'href="https://github.com/MendeMatthias/easynode"'),
-                "dev": ('id="begin"', 'id="levels"', 'id="coverage"', 'id="lanes"', 'id="group-area"',
-                        '<span class="c-tag">A-WALLET</span>', 'id="level-basic"', 'id="brief"', 'id="classes"',
-                        'id="flow"', 'id="gates"', 'id="rhythm"', 'id="rules"', 'id="contribute"',
-                        'id="lane-A-WALLET"', 'id="class-K01"', 'id="area-wallet"', 'data-status="worklist"',
-                        '<meter class="c-bar', 'id="ai-prompt"', 'data-copy="ai-prompt"', 'data-kind="area"',
-                        'data-waiting="1"', 'data-sort="lowest"', 'data-template="', 'data-waiting-only',
-                        'data-expand', 'data-reset', 'data-label-expand="', 'data-label-collapse="',
-                        'data-copied="', 'data-copy-hint', 'data-copy-status', 'data-sort-column="lowest"',
-                        'data-sort-column="risk"', 'data-sort-column="size"', 'data-filter="registry"',
-                        'data-filter="lanes"', 'data-filter="areas"', 'class="c-link c-table__lane"',
-                        'id="ci"', f'data-api="{build.CI_API}"', f'data-repo="{build.UPSTREAM_REPO}"',
-                        f'data-job="{build.CI_JOB}"', 'data-ci="status"', 'data-ci="run" hidden',
-                        'data-times="', 'data-failed-functional="', '<noscript>'),
+                "dev": ('id="begin"', 'id="levels"', 'id="level-basic"', 'id="brief"', 'id="rules"',
+                        'id="contribute"', 'id="ai-prompt"', 'data-copy="ai-prompt"', 'data-copied="',
+                        'data-copy-hint', 'data-copy-status', 'href="/llms.txt"', 'href="/llms-full.txt"',
+                        'class="c-subnav"', 'href="{work}#lanes"'),
+                "dev-work": ('id="coverage"', 'id="coverage-weekly"', 'id="lanes"', 'id="group-area"',
+                             '<span class="c-tag">A-WALLET</span>', 'id="classes"', 'id="flow"', 'id="gates"',
+                             'id="rhythm"', 'id="lane-A-WALLET"', 'id="class-K01"', 'id="area-wallet"',
+                             'data-status="worklist"', '<meter class="c-bar', 'data-kind="area"',
+                             'data-waiting="1"', 'data-sort="lowest"', 'data-template="', 'data-waiting-only',
+                             'data-expand', 'data-reset', 'data-label-expand="', 'data-label-collapse="',
+                             'data-sort-column="lowest"', 'data-sort-column="risk"', 'data-sort-column="size"',
+                             'data-filter="registry"', 'data-filter="lanes"', 'data-filter="areas"',
+                             'class="c-link c-table__lane"', 'id="ci"', f'data-api="{build.CI_API}"',
+                             f'data-repo="{build.UPSTREAM_REPO}"', f'data-job="{build.CI_JOB}"', 'data-ci="status"',
+                             'data-ci="run" hidden', 'data-times="', 'data-failed-functional="', '<noscript>',
+                             'class="c-subnav"', 'href="{dev}"', 'id="owner-rules"', 'id="never"'),
             }
             for lang in build.LANGUAGES:
                 for page, needles in expected.items():
                     html = read(lang, page)
                     self.assertIn('aria-current="page"', html)
                     for needle in needles:
-                        hrefs = {"links": build.page_path(lang, "links"), "dev": build.page_path(lang, "dev")}
+                        hrefs = {"links": build.page_path(lang, "links"), "dev": build.page_path(lang, "dev"),
+                                 "work": build.page_path(lang, "dev-work")}
                         self.assertIn(needle.format(**hrefs), html, (lang, page))
                     for other in build.PAGES:
                         self.assertIn(f'href="{build.page_path(lang, other)}"', html)
@@ -148,9 +154,9 @@ class ContentTest(unittest.TestCase):
                         self.assertIn(f'href="{build.page_path(code, page)}" hreflang="{tag}"', html)
             self.assertNotIn('data-live="supply"', english)
             self.assertNotIn('id="development"', english)
-            # The CI panel and its script are on the developers page only.
-            for page in build.PAGES:
-                self.assertEqual("/static/js/ci.js?v=" in read("en", page), page == "dev", page)
+            # The CI panel and its script are on the developers' "Ongoing work" page only.
+            for page in build.ALL_PAGES:
+                self.assertEqual("/static/js/ci.js?v=" in read("en", page), page == "dev-work", page)
             self.assertTrue((out / "static" / "js" / "ci.js").is_file())
             self.assertIn('href="/de/links/"', read("en", "links").split('class="c-lang"')[1])
             chinese = read("zh", "learn")
@@ -159,13 +165,13 @@ class ContentTest(unittest.TestCase):
             self.assertIn("translations/zh.yaml", chinese)
             self.assertNotIn("translations/", english)
             self.assertNotIn('id="coverage"', english)
-            self.assertIn("16 lanes", read("en", "dev"))
-            self.assertIn("16 Arbeitsbereiche", read("de", "dev"))
+            self.assertIn("16 lanes", read("en", "dev-work"))
+            self.assertIn("16 Arbeitsbereiche", read("de", "dev-work"))
             for lang in build.LANGUAGES:
                 written, other = (",", r"\.") if lang in ("de", "es", "fr") else (r"\.", ",")
                 space = "\u202f" if lang == "fr" else "\u00a0"
-                self.assertRegex(read(lang, "dev"), rf"<dd>\d+{written}\d{space}%</dd>", lang)
-                self.assertNotRegex(read(lang, "dev"), rf"<dd>\d+{other}\d\s%</dd>", lang)
+                self.assertRegex(read(lang, "dev-work"), rf"<dd>\d+{written}\d{space}%</dd>", lang)
+                self.assertNotRegex(read(lang, "dev-work"), rf"<dd>\d+{other}\d\s%</dd>", lang)
 
     def test_every_content_text_is_translated(self) -> None:
         page = build.load_community(build.ROOT / "content" / "community.yaml")
@@ -203,7 +209,7 @@ class ContentTest(unittest.TestCase):
             return tuple(re.findall(r'"([^"]+)"', body))
 
         hub = build.load_hub(build.ROOT / "content" / "hub.yaml")
-        template = (build.ROOT / "templates" / "dev.html.j2").read_text(encoding="utf-8")
+        template = (build.ROOT / "templates" / "dev-work.html.j2").read_text(encoding="utf-8")
         sorts = re.search(r"\{% for key in \(([^)]*)\) %\}\s*<button[^>]*data-sort=", template).group(1)
         self.assertEqual(array("STATUSES"), build.STATUSES)
         self.assertEqual(array("KINDS"), get_args(build.LaneKind))
@@ -721,7 +727,7 @@ class PageTest(unittest.TestCase):
     def test_the_built_pages_obey_the_csp(self) -> None:
         # default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'
         pages = sorted(self.out.rglob("index.html"))
-        self.assertEqual(len(pages), len(build.LANGUAGES) * len(build.PAGES) + len(build.DRAFT_PAGES))
+        self.assertEqual(len(pages), len(build.LANGUAGES) * len(build.ALL_PAGES) + len(build.DRAFT_PAGES))
         for page in pages:
             html = page.read_text(encoding="utf-8")
             with self.subTest(page=str(page.relative_to(self.out))):
@@ -729,7 +735,7 @@ class PageTest(unittest.TestCase):
                 self.assertNotIn("javascript:", html)
                 scripts = re.findall(r'<script src="/static/js/([a-z]+)\.js\?v=[0-9a-f]{12}" defer></script>', html)
                 self.assertEqual(html.count("<script"), len(scripts))
-                developers = page.parent.name == "dev"
+                developers = page.parent.name == "work" and page.parent.parent.name == "dev"
                 self.assertEqual(scripts, ["community", "ci"] if developers else ["community"])
                 for tag, attrs in tags(html):
                     self.assertNotIn(tag, ("img", "iframe", "object", "embed", "base"))
@@ -741,7 +747,20 @@ class PageTest(unittest.TestCase):
                         self.assertTrue((attrs.get("href") or "").startswith("/"), attrs)
 
     def test_the_developers_page_is_usable_without_javascript(self) -> None:
-        html = (self.out / "dev" / "index.html").read_text(encoding="utf-8")
+        start = (self.out / "dev" / "index.html").read_text(encoding="utf-8")
+        html = (self.out / "dev" / "work" / "index.html").read_text(encoding="utf-8")
+        for page, nav in ((start, NAV), (html, NAV_WORK)):
+            found = tags(page)
+            ids = [attrs["id"] for _, attrs in found if attrs.get("id")]
+            self.assertEqual(len(ids), len(set(ids)), "duplicate ids")
+            bar = page.split('class="c-jump c-jump--page"')[1].split("</nav>")[0]
+            self.assertEqual(tuple(re.findall(r'href="#([^"]+)"', bar)), nav)
+            for anchor in re.findall(r'href="#([^"]+)"', page):
+                self.assertIn(anchor, ids)
+            levels = [int(tag[1]) for tag, _ in found if re.fullmatch(r"h[1-6]", tag)]
+            self.assertEqual(levels[0], 1)
+            for before, after in zip(levels, levels[1:]):
+                self.assertLessEqual(after, before + 1, "a heading level is skipped")
         found = tags(html)
         ids = [attrs["id"] for _, attrs in found if attrs.get("id")]
         self.assertEqual(len(ids), len(set(ids)), "duplicate ids")
@@ -758,11 +777,15 @@ class PageTest(unittest.TestCase):
         self.assertEqual(len(cards), 16)
         for attrs in rows + cards:
             self.assertNotIn("hidden", attrs)
-        prompt = re.search(r'<pre [^>]*id="ai-prompt"[^>]*>(.*?)</pre>', html, flags=re.S).group(1)
+        prompt = re.search(r'<pre [^>]*id="ai-prompt"[^>]*>(.*?)</pre>', start, flags=re.S).group(1)
         self.assertIn(f"{build.RAW_URL}AGENTS.md", prompt)
         self.assertIn(f"{build.RAW_URL}llms.txt", prompt)
         # The prompt is English on every page and is not machine-translated before it is copied.
-        pre = next(attrs for tag, attrs in found if tag == "pre" and attrs.get("id") == "ai-prompt")
+        pre = next(attrs for tag, attrs in tags(start) if tag == "pre" and attrs.get("id") == "ai-prompt")
+        for tag, attrs in tags(start):
+            if "c-btn--copy" in (attrs.get("class") or "").split():
+                self.assertIn("hidden", attrs)
+                self.assertIn(attrs["data-copy"], {a.get("id") for _, a in tags(start)})
         self.assertEqual((pre.get("lang"), pre.get("translate"), pre.get("role")), ("en", "no", "region"))
         for tag, attrs in found:
             classes = (attrs.get("class") or "").split()
@@ -774,18 +797,10 @@ class PageTest(unittest.TestCase):
             if tag in ("td", "th"):
                 self.assertNotIn("c-table__note", classes)
         self.assertEqual(html.count('class="c-steps__exit"'), 2)
-        bar = html.split('class="c-jump c-jump--page"')[1].split("</nav>")[0]
-        self.assertEqual(tuple(re.findall(r'href="#([^"]+)"', bar)), NAV)
-        for anchor in re.findall(r'href="#([^"]+)"', html):
-            self.assertIn(anchor, ids)
-        for start, end in (('id="area-wallet"', "</tr>"), ('id="lane-A-WALLET"', "</article>")):
-            part = html.split(start)[1].split(end)[0]
+        for first, end in (('id="area-wallet"', "</tr>"), ('id="lane-A-WALLET"', "</article>")):
+            part = html.split(first)[1].split(end)[0]
             self.assertEqual(re.findall(r'<meter class="c-bar[^"]*" min="0" max="100" value="([0-9.]+)"', part),
-                             ["37.4", "63.0"], start)
-        levels = [int(tag[1]) for tag, _ in found if re.fullmatch(r"h[1-6]", tag)]
-        self.assertEqual(levels[0], 1)
-        for before, after in zip(levels, levels[1:]):
-            self.assertLessEqual(after, before + 1, "a heading level is skipped")
+                             ["37.4", "63.0"], first)
 
     def test_the_developers_page_names_both_measured_commits(self) -> None:
         """Coverage and the other counts come from different runs; each caption names both commits."""
@@ -794,7 +809,7 @@ class PageTest(unittest.TestCase):
         m = hub.measured
         values = (m.coverage_commit, m.coverage_date.isoformat(), m.commit, m.date.isoformat(), m.head)
         for lang in build.LANGUAGES:
-            html = (self.out / build.page_path(lang, "dev").strip("/") / "index.html").read_text(encoding="utf-8")
+            html = (self.out / build.page_path(lang, "dev-work").strip("/") / "index.html").read_text(encoding="utf-8")
             caption = texts[lang]["hub.measured"].format(
                 coverage_commit=m.coverage_commit, coverage_date=m.coverage_date.isoformat(),
                 commit=m.commit, date=m.date.isoformat(), head=m.head,
@@ -858,6 +873,83 @@ class PageTest(unittest.TestCase):
         for checklist in guide.checklists:
             for item in checklist.items:
                 self.assertIn(f"- {item.en}", full)
+
+
+class DeveloperPagesTest(unittest.TestCase):
+    """The developers page split in two: "Start here" (/dev/) and "Ongoing work" (/dev/work/)."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls.out = Path(cls._tmp.name) / "site"
+        build.build(cls.out, "test")
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls._tmp.cleanup()
+
+    def read(self, lang: str, page: str) -> str:
+        return (self.out / build.page_path(lang, page).strip("/") / "index.html").read_text(encoding="utf-8")
+
+    def ids(self, html: str) -> set[str]:
+        main = html.split('<main id="main">')[1].split("</main>")[0]
+        return {attrs["id"] for _, attrs in tags(main) if attrs.get("id")}
+
+    def test_the_work_page_sits_below_the_developers_page(self) -> None:
+        self.assertEqual(build.SUBPAGES, {"dev-work": ("dev", "dev/work")})
+        self.assertNotIn("dev-work", build.PAGES)
+        self.assertEqual(build.page_path("en", "dev-work"), "/dev/work/")
+        self.assertEqual(build.page_path("zh", "dev-work"), "/zh/dev/work/")
+
+    def test_both_pages_carry_the_sub_menu_and_keep_developers_marked(self) -> None:
+        for lang in build.LANGUAGES:
+            for page in ("dev", "dev-work"):
+                html = self.read(lang, page)
+                with self.subTest(lang=lang, page=page):
+                    menu = html.split('class="c-menu"')[1].split("</nav>")[0]
+                    self.assertEqual(re.findall(r'href="([^"]+)" aria-current="page"', menu), [build.page_path(lang, "dev")])
+                    sub = html.split('class="c-subnav"')[1].split("</nav>")[0]
+                    links = re.findall(r'href="([^"]+)"', sub)
+                    self.assertEqual(links, [build.page_path(lang, "dev"), build.page_path(lang, "dev-work")])
+                    self.assertEqual(re.findall(r'href="([^"]+)" aria-current="page"', sub), [build.page_path(lang, page)])
+                    # Every language version of a sub-page points at the same sub-page in the others.
+                    for code in build.LANGUAGES:
+                        self.assertIn(f'href="{build.page_path(code, page)}" hreflang=', html)
+
+    def test_every_section_lives_on_one_of_the_two_pages(self) -> None:
+        start, work = self.ids(self.read("en", "dev")), self.ids(self.read("en", "dev-work"))
+        self.assertEqual(start & work, set())
+        self.assertTrue(set(NAV) <= start)
+        self.assertTrue(set(NAV_WORK) <= work)
+
+    def test_links_to_moved_sections_follow_them(self) -> None:
+        """An old link such as /dev/#lanes goes to /dev/work/#lanes: community.js knows every id that moved."""
+        script = (build.ROOT / "static" / "js" / "community.js").read_text(encoding="utf-8")
+        body = re.search(r"var DEV_MOVED = new RegExp\((.*?)\);", script, flags=re.S).group(1)
+        moved = re.compile("".join(re.findall(r'"((?:[^"\\]|\\.)*)"', body)))
+        for lang in build.LANGUAGES:
+            start, work = self.ids(self.read(lang, "dev")), self.ids(self.read(lang, "dev-work"))
+            with self.subTest(lang=lang):
+                self.assertEqual({i for i in work if not moved.fullmatch(i)}, set())
+                self.assertEqual({i for i in start if moved.fullmatch(i)}, set())
+
+    def test_the_start_page_points_ai_tools_at_the_files_for_them(self) -> None:
+        for lang in build.LANGUAGES:
+            html = self.read(lang, "dev")
+            files = html.split('class="c-ai-files"')[1].split("</ul>")[0]
+            for name in ("llms.txt", "llms-full.txt"):
+                self.assertIn(f'href="/{name}"', files)
+                self.assertTrue((self.out / name).is_file(), name)
+        index = (self.out / "llms.txt").read_text(encoding="utf-8")
+        self.assertIn(f"]({build.SITE_URL}/dev/work/)", index)
+
+    def test_the_coverage_section_says_where_its_figures_come_from(self) -> None:
+        texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
+        for lang in build.LANGUAGES:
+            html = self.read(lang, "dev-work")
+            note = html.split('id="coverage-weekly"')[1].split("</p>")[0]
+            self.assertIn("coverage.json", note)
+            self.assertIn(texts[lang]["hub.coverage.weekly"].replace("'", "&#39;"), html)
 
 
 class InfraTest(unittest.TestCase):

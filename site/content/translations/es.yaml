@@ -157,13 +157,13 @@ translations:
     trabajo nocturno para las 41 suites stage3 que agotan el tiempo.
 - en: >-
     The results of the last nightly build and test run that the status page's operator publishes as
-    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix in the table
-    above. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix listed under
+    Gates. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
   es: >-
     Los resultados de la última ejecución nocturna de compilación y pruebas que el operador de la
     página de estado publica como job CI-0, leídos en directo de su API. Es una sola ejecución en
-    Linux, no la matriz de compilación del fork de la tabla de arriba. La ejecución de las pruebas
-    unitarias deja fuera las suites lentas matmul_v4_rc_stage3_*.
+    Linux, no la matriz de compilación del fork que aparece en Controles. La ejecución de las
+    pruebas unitarias deja fuera las suites lentas matmul_v4_rc_stage3_*.
 - en: "This panel is filled in by JavaScript. The run as raw data: "
   es: "Este panel se rellena con JavaScript. La ejecución como datos sin procesar: "
 - en: build failed
@@ -936,11 +936,9 @@ translations:
     abierto.
 - en: The reference implementation and its own rules for agents.
   es: La implementación de referencia y sus propias reglas para agentes.
-- en: >-
-    Start on the developers page: where to begin, levels, test coverage and open lanes.
+- en: "Start here: where to begin, the prompt for your AI tool and the three levels."
   es: >-
-    Empieza por la página para desarrolladores: primeros pasos, niveles, cobertura de pruebas y
-    tareas abiertas.
+    Empieza aquí: por dónde empezar, la instrucción para tu herramienta de IA y los tres niveles.
 - en: Read the hub's front page, written for people.
   es: Lee la portada del centro, escrita para personas.
 - en: >-
@@ -2793,3 +2791,8 @@ translations:
     resultado y verifica las atestaciones de otros. Según las notas de v0.34.16, sus binarios Linux
     necesitan glibc 2.38 o posterior y estos scripts compilan contra glibc 2.31, así que sus hashes
     todavía no pueden coincidir con una recompilación.
+# developers split: the start card's two steps
+- en: "Ongoing work: test coverage, the nightly CI-0 run and the lanes waiting for an owner."
+  es: >-
+    Trabajo en curso: cobertura de pruebas, la ejecución nocturna de CI-0 y las tareas a la espera
+    de responsable.
