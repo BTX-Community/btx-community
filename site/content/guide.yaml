@@ -251,13 +251,17 @@ checklists:
           Block 126.978 stehen. Mit einem signierten Snapshot starten und kein -reindex, bis ein
           Release das behebt.
       - en: >-
-          Two defaults to decide on: btxd installs newer signed releases from btx.dev by itself
-          (autoupdateseamless=0 only reports them, autoupdate=0 stops checking), and the model
-          network listens on port 29447 (modelnet=0 turns it off).
+          Three defaults to decide on: btxd installs newer signed releases from btx.dev by itself
+          (autoupdateseamless=0 only reports them, autoupdate=0 stops checking); the model network
+          listens on port 29447 (modelnet=0 turns it off); and natpmp asks your router to open
+          ports 19335 and 29447 to the internet (natpmp=0 stops it). With coins, mining or a
+          signer, set both to 0.
         de: >-
-          Zwei Voreinstellungen bewusst wählen: btxd installiert neuere signierte Releases von
-          btx.dev selbst (autoupdateseamless=0 meldet sie nur, autoupdate=0 prüft gar nicht), und
-          das Modell-Netz lauscht auf Port 29447 (modelnet=0 schaltet es ab).
+          Drei Voreinstellungen bewusst wählen: btxd installiert neuere signierte Releases von
+          btx.dev selbst (autoupdateseamless=0 meldet sie nur, autoupdate=0 prüft gar nicht); das
+          Modell-Netz lauscht auf Port 29447 (modelnet=0 schaltet es ab); und natpmp bittet den
+          Router, die Ports 19335 und 29447 ins Internet zu öffnen (natpmp=0 stoppt das). Mit
+          Guthaben, Mining oder Signer beides auf 0.
       - en: >-
           Before an upgrade, stop with btx-cli stop and wait until btxd has exited; never kill it.
           Then back up the data directory and wallets.
