@@ -118,7 +118,8 @@ class ContentTest(unittest.TestCase):
                 "network": ('data-live="supply"', 'data-live="fork"', 'id="development" hidden',
                             f'data-api="{build.DEVELOPMENT_API}"', f'data-repo="{build.UPSTREAM_REPO}"'),
                 "links": ('id="links"', 'id="cat-'),
-                "docs": ('id="documents"', 'id="doc-venue-structure"'),
+                "docs": ('id="documents"', 'id="doc-venue-structure"', 'id="projects"', 'id="project-amd-mining"',
+                         'id="project-swapnet-tools"'),
                 "infra": ('id="yourself"', 'id="managed"', 'id="roles"', 'id="role-full-node"', 'id="map"',
                           'class="c-map__svg c-map__svg--wide"', 'class="c-map__svg c-map__svg--narrow"',
                           'id="edge-1"', 'id="report"', 'href="https://github.com/MendeMatthias/easynode"'),
@@ -178,12 +179,13 @@ class ContentTest(unittest.TestCase):
         guide = build.load_guide(build.ROOT / "content" / "guide.yaml")
         hub = build.load_hub(build.ROOT / "content" / "hub.yaml")
         infra = build.load_infra(build.ROOT / "content" / "infra.yaml")
+        projects = build.load_projects(build.ROOT / "content" / "projects.yaml")
         texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
         for lang in build.TRANSLATED:
             table = build.load_translations(build.ROOT / "content" / "translations" / f"{lang}.yaml", lang)
             say = build.Localizer(lang, table)
             for page_id in build.PAGES:
-                build.context(page, guide, hub, texts, lang, "test", page_id, say, infra)
+                build.context(page, guide, hub, texts, lang, "test", page_id, say, infra, projects)
             with self.subTest(lang=lang):
                 self.assertEqual(say.missing, set())
                 self.assertEqual(set(table) - say.used, set())
@@ -950,6 +952,82 @@ class DeveloperPagesTest(unittest.TestCase):
             note = html.split('id="coverage-weekly"')[1].split("</p>")[0]
             self.assertIn("coverage.json", note)
             self.assertIn(texts[lang]["hub.coverage.weekly"].replace("'", "&#39;"), html)
+
+
+class ProjectsTest(unittest.TestCase):
+    """The projects at the top of the Projects page (the menu slot that held Documents)."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls.out = Path(cls._tmp.name) / "site"
+        build.build(cls.out, "test")
+        cls.projects = build.load_projects(build.ROOT / "content" / "projects.yaml")
+        cls.raw = build.load_yaml(build.ROOT / "content" / "projects.yaml")
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls._tmp.cleanup()
+
+    def read(self, lang: str, page: str) -> str:
+        return (self.out / build.page_path(lang, page).strip("/") / "index.html").read_text(encoding="utf-8")
+
+    def test_projects_take_the_documents_slot_and_keep_the_papers(self) -> None:
+        texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
+        self.assertEqual(texts["en"]["nav.docs"], "Projects")
+        for lang in build.LANGUAGES:
+            html = self.read(lang, "docs")
+            with self.subTest(lang=lang):
+                self.assertLess(html.index('id="projects"'), html.index('id="documents"'))
+                cards = re.findall(r'<article class="c-audience c-role c-project" id="project-([a-z-]+)">', html)
+                self.assertEqual(cards, [p.id for p in self.projects.projects])
+                self.assertIn('id="doc-roadmap"', html)
+
+    def test_every_card_cites_its_sources_and_its_links_resolve(self) -> None:
+        html = self.read("en", "docs")
+        for project in self.projects.projects:
+            card = html.split(f'id="project-{project.id}"')[1].split("</article>")[0]
+            with self.subTest(project=project.id):
+                self.assertGreaterEqual(len(project.cites), 1)
+                for cite in project.cites:
+                    label = cite.split(":", 1)[1]
+                    self.assertIn(label, card.replace("btx-community/", ""), cite)
+                for href in re.findall(r'href="([^"]+)"', card):
+                    if href.startswith("/"):
+                        path, _, anchor = href.partition("#")
+                        target = self.out / path.strip("/") / "index.html"
+                        self.assertTrue(target.is_file(), href)
+                        if anchor:
+                            self.assertIn(f'id="{anchor}"', target.read_text(encoding="utf-8"), href)
+                    elif href.startswith(build.REPO_URL + "/blob/main/"):
+                        self.assertTrue(build.repo_file(href).exists(), href)
+                    elif href.startswith(build.BTX_REPO_URL + "/"):
+                        self.assertRegex(href, r"/((blob|tree)/(main|v[0-9.]+)/[A-Za-z0-9_./-]+|issues|releases/tag/v[0-9.]+)$")
+                    else:
+                        self.assertRegex(href, build.LINK_PATTERN)
+
+    def test_other_pages_point_at_the_new_pages(self) -> None:
+        for lang in build.LANGUAGES:
+            docs, infra, dev = (build.page_path(lang, p) for p in ("docs", "infra", "dev-work"))
+            with self.subTest(lang=lang):
+                self.assertIn(f'href="{docs}#projects"', self.read(lang, "infra"))
+                home = self.read(lang, "home")
+                nodes = home.split('id="nodes"')[1].split("</article>")[0]
+                self.assertIn(f'href="{infra}"', nodes)
+                devs = home.split('id="developers"')[1].split("</article>")[0]
+                self.assertIn(f'href="{docs}"', devs)
+                self.assertIn(f'href="{dev}"', devs)
+                newcomers = home.split('id="newcomers"')[1].split("</article>")[0]
+                links = re.findall(r'href="([^"]+)"', newcomers)
+                self.assertEqual(links[0], build.page_path(lang, "learn"))
+
+    def test_a_card_never_names_a_price_or_a_person(self) -> None:
+        data = json.loads(json.dumps(self.raw, default=str))
+        data["projects"][0]["missing"]["en"] = "A server at $20 a month."
+        with self.assertRaises(Exception):  # noqa: B017, PT027
+            build.ProjectsPage.model_validate(data)
+        community = (build.ROOT / "content" / "community.yaml").read_text(encoding="utf-8")
+        self.assertNotIn("(Mende and Jarek)", community)
 
 
 class InfraTest(unittest.TestCase):

@@ -1600,8 +1600,27 @@ a {
 
 .c-roles,
 .c-map,
-.c-report {
+.c-report,
+.c-projects {
   margin-top: 56px;
+}
+
+.c-project {
+  --accent: var(--a-docs);
+}
+
+.c-project__careful {
+  color: var(--yellow) !important;
+}
+
+.c-project__cites {
+  margin: auto 0 0;
+  padding-top: 12px;
+  color: var(--muted);
+}
+
+.c-roles__projects {
+  margin-top: 16px;
 }
 
 .c-role--network {

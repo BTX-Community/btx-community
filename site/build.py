@@ -1200,6 +1200,98 @@ def check_infra(infra: InfraPage, page: CommunityPage) -> None:
                 raise ContentError(f"infra.yaml: cite {cite} names a file that is not in this repository")
 
 
+# --- Content schema (content/projects.yaml) ---------------------------------------------------
+
+
+class ProjectTexts(_Model):
+    """The texts of the projects section."""
+
+    title: Text
+    lead: Text
+    caution: Text
+    today: Text
+    missing: Text
+    careful: Text
+    start: Text
+    ask: Text
+    source: Text
+    infra_link: Text
+
+
+class Project(_Model):
+    """A project the community can build and run as its own: what exists today, what is missing."""
+
+    id: Id
+    title: Text
+    idea: Text
+    today: Text
+    missing: Text
+    careful: Text | None = None
+    start: Annotated[list[GuideRef], Field(min_length=1, max_length=4)]
+    ask: Text
+    ask_url: Link | None = None
+    ask_page: Id | None = None
+    cites: Annotated[list[Annotated[StrictStr, Field(pattern=CITE_PATTERN)]], Field(min_length=1, max_length=8)]
+
+    @model_validator(mode="after")
+    def _rules(self) -> Self:
+        if self.ask_url is not None and self.ask_page is not None:
+            msg = f"project {self.id}: ask_url or ask_page, not both"
+            raise ValueError(msg)
+        if self.ask_page is not None and self.ask_page not in ALL_PAGES:
+            msg = f"project {self.id}: unknown page {self.ask_page!r}"
+            raise ValueError(msg)
+        for text in (self.idea, self.today, self.missing, self.careful):
+            if text is not None and (PRICE.search(text.en) or PRICE.search(text.de)):
+                msg = f"project {self.id}: a project card names a price"
+                raise ValueError(msg)
+        return self
+
+
+class ProjectsPage(_Model):
+    """``content/projects.yaml``: the projects at the top of the Projects page."""
+
+    schema_version: Literal[1]
+    checked: date
+    verified: Verified
+    texts: ProjectTexts
+    projects: Annotated[list[Project], Field(min_length=1, max_length=10)]
+
+    def links(self) -> list[str]:
+        """Every URL of the section."""
+        links = [ref.url for project in self.projects for ref in project.start if ref.url is not None]
+        return links + [project.ask_url for project in self.projects if project.ask_url is not None]
+
+    @model_validator(mode="after")
+    def _unique(self) -> Self:
+        ids = [project.id for project in self.projects]
+        if len(ids) != len(set(ids)):
+            msg = "duplicate project ids"
+            raise ValueError(msg)
+        return self
+
+
+def load_projects(path: Path) -> ProjectsPage:
+    """Load and validate ``projects.yaml``."""
+    try:
+        return ProjectsPage.model_validate(load_yaml(path))
+    except ValidationError as exc:
+        raise ContentError(f"{path.name} is invalid: {exc}") from exc
+
+
+def check_projects(projects: ProjectsPage) -> None:
+    """Links into this repository name files that exist, and so do the cited files of it."""
+    for url in projects.links():
+        path = repo_file(url)
+        if path is not None and not path.exists():
+            raise ContentError(f"projects.yaml: {url} names a file that is not in this repository")
+    for project in projects.projects:
+        for cite in project.cites:
+            repo, path = cite.split(":")[:2]
+            if repo == "community" and not (ROOT.parent / path).is_file():
+                raise ContentError(f"projects.yaml: cite {cite} names a file that is not in this repository")
+
+
 def load_texts(path: Path) -> dict[str, dict[str, str]]:
     """Load ``texts.yaml``: the same keys in every language, every value a non-empty string."""
     data = load_yaml(path)
@@ -2356,6 +2448,56 @@ def infra_view(infra: InfraPage, page: CommunityPage, say: Localizer) -> InfraVi
     )
 
 
+@dataclass(frozen=True)
+class ProjectView:
+    """A project card in one language."""
+
+    id: str
+    title: str
+    idea: str
+    today: str
+    missing: str
+    careful: str | None
+    start: tuple[LinkView, ...]
+    ask: str
+    ask_href: str | None
+    ask_external: bool
+    cites: tuple[CiteView, ...]
+
+
+@dataclass(frozen=True)
+class ProjectsView:
+    """The projects section in one language."""
+
+    texts: dict[str, str]
+    verified: str
+    projects: tuple[ProjectView, ...]
+
+
+def projects_view(projects: ProjectsPage, say: Localizer) -> ProjectsView:
+    """The projects section in one language."""
+    return ProjectsView(
+        texts={name: say(getattr(projects.texts, name)) for name in ProjectTexts.model_fields},
+        verified=say(projects.verified.text),
+        projects=tuple(
+            ProjectView(
+                id=p.id,
+                title=say(p.title),
+                idea=say(p.idea),
+                today=say(p.today),
+                missing=say(p.missing),
+                careful=say(p.careful) if p.careful else None,
+                start=tuple(_link_view(ref, say) for ref in p.start),
+                ask=say(p.ask),
+                ask_href=p.ask_url or (page_path(say.lang, p.ask_page) if p.ask_page else None),
+                ask_external=p.ask_url is not None,
+                cites=tuple(_cite_view(cite, projects.verified.tag) for cite in p.cites),
+            )
+            for p in projects.projects
+        ),
+    )
+
+
 def asset_url(path: str) -> str:
     """URL of a file under ``static/`` with a digest of its content as query.
 
@@ -2384,6 +2526,7 @@ def context(
     page_id: str = "home",
     say: Localizer | None = None,
     infra: InfraPage | None = None,
+    projects: ProjectsPage | None = None,
 ) -> dict[str, object]:
     """Everything the templates need for one page in one language."""
     say = say or Localizer(lang)
@@ -2425,6 +2568,7 @@ def context(
         "documents": documents,
         "hub": hub_view(hub, say),
         "infra": infra_view(infra, page, say) if infra is not None else None,
+        "projects": projects_view(projects, say) if projects is not None else None,
         "removed": tuple((r.name, say(r.reason)) for r in page.removed),
         "checked": page.checked.isoformat(),
         "entry_count": sum(len(c.entries) for c in categories),
@@ -2591,6 +2735,8 @@ def build(out: Path, version: str) -> None:
     hub = load_hub(ROOT / "content" / "hub.yaml")
     infra = load_infra(ROOT / "content" / "infra.yaml")
     check_infra(infra, page)
+    projects = load_projects(ROOT / "content" / "projects.yaml")
+    check_projects(projects)
     texts = load_texts(ROOT / "content" / "texts.yaml")
     sayers = {lang: Localizer(lang) for lang in INLINE_LANGUAGES}
     for lang in TRANSLATED:
@@ -2603,7 +2749,7 @@ def build(out: Path, version: str) -> None:
     )
     rendered = {
         page_path(lang, page_id): env.get_template(f"{page_id}.html.j2").render(
-            context(page, guide, hub, texts, lang, version, page_id, sayers[lang], infra)
+            context(page, guide, hub, texts, lang, version, page_id, sayers[lang], infra, projects)
         )
         for lang in LANGUAGES
         for page_id in ALL_PAGES

@@ -33,9 +33,10 @@ translations:
 - en: 'A walk-through of SwapNet (btxchain/btx #630), built by the Byron Bay team from the open-source
     code.'
   zh: 'SwapNet（btxchain/btx #630）的演示，由 Byron Bay 团队基于开源代码制作。'
-- en: Unofficial demo with sample data only. The feature is not released; the page connects to no node
-    or wallet.
-  zh: 非官方演示，仅含示例数据。该功能尚未发布；页面不连接任何节点或钱包。
+- en: >-
+    Unofficial demo with sample data only. Atlas is in the v0.34.16 source, but the release archives
+    leave it out; the page connects to no node or wallet.
+  zh: "非官方演示，仅含示例数据。Atlas 在 v0.34.16 的源代码中，但发布压缩包未包含它；页面不连接任何节点或钱包。"
 - en: Describes MatMul v4.7, which the network runs since block 185,000, and keeps v3 as reference. Last
     updated 4 Aug 2026; its release notes still name v0.33.2.
   zh: 描述网络自区块 185,000 起使用的 MatMul v4.7，并保留 v3 作为参考。最后更新于 2026 年 8 月 4 日；其版本说明仍写着 v0.33.2。
@@ -44,9 +45,10 @@ translations:
   zh: Byron Bay 团队的区块浏览器，提供 24 小时挖矿视图、统计页面、公开 API，以及位于 /ai 的 AI 助手工具（MCP、REST、llms.txt）。
 - en: 13 of the 16 AI tools are public with no key; 3 premium ones need a token from the operator.
   zh: 16 个 AI 工具中有 13 个公开且无需密钥；3 个高级工具需要向运营者申请令牌。
-- en: UTXO snapshot for loadtxoutset, confirmed by two operators (Mende and Jarek), with SHA-256 of the
-    file and the manifest.
-  zh: 用于 loadtxoutset 的 UTXO 快照，由两位运营者（Mende 和 Jarek）确认，附文件和清单的 SHA-256。
+- en: >-
+    UTXO snapshot for loadtxoutset, confirmed by two operators, with SHA-256 of the file and the
+    manifest.
+  zh: "用于 loadtxoutset 的 UTXO 快照，由两位运营者确认，附文件和清单的 SHA-256。"
 - en: Check the SHA-256 before use. The JSON names the height; it can lag the chain by a few thousand
     blocks.
   zh: 使用前请核对 SHA-256。JSON 中写明高度；它可能落后链几千个区块。
@@ -313,12 +315,11 @@ translations:
 - en: Official website with documentation, the browser wallet and the whitepaper.
   zh: 官方网站，含文档、浏览器钱包和白皮书。
 - en: >-
-    On a server - the official release for Linux needs glibc 2.38 or newer (Ubuntu 24.04, Debian
-    13); a GPU node takes the -cuda13 archive (Blackwell cards). The v0.34.16 pre-release has no
-    CUDA build, so GPU nodes stay on v0.34.15. The current release has no official Windows archive.
-  zh: >-
-    在服务器上：官方 Linux 版本需要 glibc 2.38 或更新版本（Ubuntu 24.04、Debian 13）；GPU 节点使用 -cuda13 压缩包（Blackwell
-    显卡）。v0.34.16 预发布版没有 CUDA 构建，因此 GPU 节点继续使用 v0.34.15。当前正式版没有官方 Windows 压缩包。
+    On a server - v0.34.16 has two Linux x86_64 archives, both for glibc 2.38 or newer (Ubuntu
+    24.04, Debian 13): a plain one, and a -cuda13 one for GPU nodes (sm_120: RTX 50 and RTX PRO
+    Blackwell cards; the NVIDIA driver is not included). There is no official Windows or macOS
+    archive.
+  zh: "在服务器上：v0.34.16 有两个 Linux x86_64 压缩包，都需要 glibc 2.38 或更新版本（Ubuntu 24.04、Debian 13）：一个普通版，一个供 GPU 节点使用的 -cuda13 版（sm_120：RTX 50 与 RTX PRO 系列 Blackwell 显卡；不含 NVIDIA 驱动）。没有官方的 Windows 或 macOS 压缩包。"
 - en: >-
     On mainnet it needs at least two pinned signers and a threshold of two. Pin only signers that
     are live today.
@@ -2159,3 +2160,151 @@ translations:
 # developers split: the start card's two steps
 - en: "Ongoing work: test coverage, the nightly CI-0 run and the lanes waiting for an owner."
   zh: "进行中的工作：测试覆盖率、CI-0 夜间运行，以及等待负责人的任务。"
+# start and links pages: fact fixes and new steps of the UX pass
+- en: >-
+    Unofficial demo with sample data only. SwapNet is in v0.34.16 for broader testing, off unless a
+    node starts with -swapnet=1; the page connects to no node or wallet.
+  zh: "非官方演示，仅含示例数据。SwapNet 已随 v0.34.16 提供以便更广泛地测试，默认关闭，除非节点以 -swapnet=1 启动；页面不连接任何节点或钱包。"
+- en: "What BTX is, in a few facts with their sources."
+  zh: "BTX 是什么：几条附出处的事实。"
+- en: "Choose a wallet from the list, after reading \"Before you buy or receive BTX\" below."
+  zh: "先阅读下方的“购买或接收 BTX 之前”，再从列表中选择钱包。"
+- en: "Have a spare machine? Seven ways to give BTX infrastructure, from a node to a fuzz box."
+  zh: "有闲置的机器？七种为 BTX 提供基础设施的方式，从节点到模糊测试机。"
+- en: "Community projects: things to build and run outside the node software."
+  zh: "社区项目：在节点软件之外可以构建和运营的东西。"
+# projects.yaml: the projects at the top of the Projects page
+- en: "Build something"
+  zh: "动手构建"
+- en: >-
+    All of it lies outside the node software. Nothing here is planned, promised or endorsed by the
+    node's developers. Each card says what exists today and what is missing, with the source of
+    every claim.
+  zh: "这一切都在节点软件之外。这里的一切都不是节点开发者计划、承诺或认可的。每张卡片说明今天已有什么、还缺什么，并为每条说法注明出处。"
+- en: "Anything that moves other people's coins starts on regtest or testnet."
+  zh: "任何会动用他人币的东西，都先在 regtest 或 testnet 上开始。"
+- en: "There today"
+  zh: "今天已有"
+- en: "Missing"
+  zh: "还缺什么"
+- en: "Careful"
+  zh: "注意"
+- en: "Start from"
+  zh: "从这里入手"
+- en: "Rather build something than run a machine? Community projects"
+  zh: "比起运行机器，更想动手构建？社区项目"
+- en: "Venues for trading BTX"
+  zh: "BTX 交易场所"
+- en: >-
+    A place where people trade BTX against other coins, run by its own operators: an order book, or
+    a front-end over SwapNet's swaps.
+  zh: "一个由自己的运营者经营、让人们用 BTX 与其他币交易的地方：订单簿，或基于 SwapNet 兑换的前端。"
+- en: >-
+    SwapNet in the node swaps BTX with BTC or ETH between two parties; AMM pools, wrapped balances
+    and partial fills are not part of it. This group's venue-structure paper compares four models
+    and where the licensing line runs.
+  zh: "节点中的 SwapNet 在双方之间用 BTX 兑换 BTC 或 ETH；AMM 池、包装余额和部分成交不在其中。本小组的交易场所结构文档比较了四种模式，以及许可的界线在哪里。"
+- en: >-
+    Operators, a model chosen from the paper, and legal advice where the venue will run. The paper
+    is a draft for discussion, not legal advice.
+  zh: "运营者、从文档中选定的模式，以及交易场所所在地的法律意见。该文档是供讨论的草稿，不构成法律意见。"
+- en: "The venue-structure paper"
+  zh: "交易场所结构文档"
+- en: "SwapNet overview (developers)"
+  zh: "SwapNet 概览（开发者文档）"
+- en: "Discussion of the paper as an issue in this repository."
+  zh: "在本仓库以 issue 讨论该文档。"
+- en: "SwapNet wallets and tools"
+  zh: "SwapNet 钱包与工具"
+- en: >-
+    Software around SwapNet: a wallet that shows quotes and runs swaps, tools that run a maker's
+    market, a front-end for the node's swap calls.
+  zh: "围绕 SwapNet 的软件：显示报价并执行兑换的钱包、运行做市方市场的工具、节点兑换调用的前端。"
+- en: >-
+    A node started with -swapnet=1 finds other SwapNet nodes over its peer links and offers 33 swap
+    RPC methods. v0.34.16 carries SwapNet for broader testing. There is no graphical trading panel:
+    the RPC console is the interface.
+  zh: "以 -swapnet=1 启动的节点会通过节点连接找到其他 SwapNet 节点，并提供 33 个兑换 RPC 方法。v0.34.16 带有 SwapNet，以便更广泛地测试。没有图形化交易面板：RPC 控制台就是界面。"
+- en: >-
+    Everything a non-developer would use. The package's own status page marks real-chain settlement
+    and an independent audit as not executed, the ETH leg needs a deployed contract that the node's
+    owner approves locally, and the release docs want external receipts before anyone calls it
+    mainnet-qualified.
+  zh: "非开发者会用到的一切。该软件包自己的状态页把真实链上的结算和独立审计标为未执行；ETH 一侧需要一个由节点所有者在本地批准的已部署合约；发布文档要求在称其具备主网资格之前先有外部凭证。"
+- en: >-
+    Once a taker has funded a swap, cancelling does not release it: the coins stay locked until the
+    agreed refund height or time.
+  zh: "一旦接受方为兑换注资，取消并不会释放它：这些币会一直锁定到约定的退款高度或时间。"
+- en: "The 33 swap RPC methods"
+  zh: "33 个兑换 RPC 方法"
+- en: "Running SwapNet on a node"
+  zh: "在节点上运行 SwapNet"
+- en: "Testing and release (developers)"
+  zh: "测试与发布（开发者文档）"
+- en: "Questions as an issue on btxchain/btx; security problems only through private reporting."
+  zh: "问题请在 btxchain/btx 提 issue；安全问题只能通过私密报告提交。"
+- en: "Mining on consumer AMD cards"
+  zh: "在消费级 AMD 显卡上挖矿"
+- en: "An exact INT8 MatMul path for consumer Radeon cards, so they can mine."
+  zh: "为消费级 Radeon 显卡提供精确的 INT8 MatMul 路径，使其能够挖矿。"
+- en: >-
+    The node's AMD (HIP) path admits six datacenter Instinct chips: gfx908, gfx90a, gfx940, gfx941,
+    gfx942 and gfx950 (MI100 to MI350). It is built automatically when a HIP clang and an AMD GPU
+    are found. Consumer Radeon cards (RDNA, gfx10 to gfx12) are used neither to mine nor to
+    validate; the source calls them verification-only until cross-vendor golden vectors qualify
+    them.
+  zh: "节点的 AMD（HIP）路径接纳六种数据中心 Instinct 芯片：gfx908、gfx90a、gfx940、gfx941、gfx942 和 gfx950（MI100 到 MI350）；当找到 HIP clang 和 AMD GPU 时会自动构建。消费级 Radeon 显卡（RDNA，gfx10 到 gfx12）既不用于挖矿也不用于验证；源代码称其为 verification-only，直到跨厂商的 golden 向量为其认证。"
+- en: >-
+    An exact INT8 path on RDNA that matches the CPU reference bit for bit, and the golden vectors
+    that show it. Whether such a path is admitted is the maintainer's decision.
+  zh: "在 RDNA 上与 CPU 参考逐位一致的精确 INT8 路径，以及证明这一点的 golden 向量。是否接纳这样的路径由维护者决定。"
+- en: "How the node admits a GPU (developers)"
+  zh: "节点如何接纳 GPU（开发者文档）"
+- en: "The HIP backend sources (developers)"
+  zh: "HIP 后端源代码（开发者文档）"
+- en: "Evidence as an issue on btxchain/btx; no lane of this hub covers AMD yet."
+  zh: "证据请在 btxchain/btx 提 issue；本 hub 目前还没有任务负责 AMD。"
+- en: "Testing on Apple Silicon"
+  zh: "在 Apple Silicon 上测试"
+- en: >-
+    Run the node's Metal self-test on more Apple chips and report the results, so the Metal path is
+    known to work beyond one device class.
+  zh: "在更多 Apple 芯片上运行节点的 Metal 自检并报告结果，以确认 Metal 路径不只在一类设备上可用。"
+- en: >-
+    Metal is built by default on Apple. A Metal device is admitted after the node's exactness
+    self-tests, through Metal 4 INT8 tensor ops or, for the current epoch's replay, an exact
+    integer-ALU path. A golden row, where one exists, is compared; without one the self-test decides
+    (the manifest has one row, for an M4-class device). The release has no macOS binaries.
+  zh: "在 Apple 上默认会构建 Metal。Metal 设备要先通过节点的精确性自检才被接纳，可走 Metal 4 INT8 张量运算，或在重算当前纪元时走精确的整数 ALU 路径。有 golden 行时会比对；没有时由自检决定（清单中有一行，适用于 M4 级设备）。发布版本没有 macOS 二进制文件。"
+- en: "Self-test reports from other Apple chips."
+  zh: "其他 Apple 芯片的自检报告。"
+- en: "Building on macOS (developers)"
+  zh: "在 macOS 上构建（开发者文档）"
+- en: "The cross-device lane: I-XDEV pack"
+  zh: "跨设备任务：I-XDEV 任务包"
+- en: "The I-XDEV lane, which replays blocks across devices; it has no owner yet."
+  zh: "在不同设备上重算区块的 I-XDEV 任务；它还没有负责人。"
+- en: "Explorers, monitoring and light wallets"
+  zh: "区块浏览器、监控与轻钱包"
+- en: >-
+    More independent views of the chain, alerts when something goes wrong, and wallets for people
+    who do not run a node all the time.
+  zh: "更多独立的链上视图、出问题时的告警，以及给不常运行节点的人用的钱包。"
+- en: >-
+    Several explorers and a status page are on the links page; the status page publishes its figures
+    as JSON. btx-cli lightwatch is a watch-only light client: it reads compact block filters from a
+    node it trusts (started with -blockfilterindex=1) and signs nothing. The node also reads and
+    writes a browser-wallet recovery format.
+  zh: "链接页上列有几个区块浏览器和一个状态页；状态页以 JSON 发布其数据。btx-cli lightwatch 是只读的轻客户端：它从一个它信任的节点（以 -blockfilterindex=1 启动）读取紧凑区块过滤器，不做任何签名。节点还能读写一种浏览器钱包恢复格式。"
+- en: >-
+    Explorers and monitors run by more independent operators, alerting, and light wallets that can
+    also sign.
+  zh: "由更多独立运营者运行的浏览器和监控、告警，以及也能签名的轻钱包。"
+- en: "Explorers and the status page in the link list"
+  zh: "链接列表中的浏览器和状态页"
+- en: "The status page's JSON"
+  zh: "状态页的 JSON"
+- en: "Browser wallet and node wallet formats (developers)"
+  zh: "浏览器钱包与节点钱包的格式（开发者文档）"
+- en: "The community chats on the links page."
+  zh: "链接页上的社区聊天群。"
