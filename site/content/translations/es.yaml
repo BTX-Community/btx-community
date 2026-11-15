@@ -8,22 +8,23 @@ translations:
 - en: Build result
   es: Resultado de la compilación
 - en: >-
-    The fork CI workflow (its first run on the release line, 12 Nov at 4c7840e9, was red and a fixed branch is pending; keep the upstream Atlas workflows): jobs CI-0 to CI-10,
-    the known-failing list, and a nightly job for the 47 unit suites that time out.
+    The fork CI workflow (it ran on the release line on 12 Nov at 4c7840e9 and on 13 Nov at
+    88c9b49c, red both times; keep the upstream Atlas workflows): jobs CI-0 to CI-10, the
+    known-failing list, and a nightly job for the 47 unit suites that time out.
   es: >-
-    El workflow de CI del fork (su primera ejecución en la rama de publicación, el 12 de noviembre
-    sobre 4c7840e9, terminó en rojo y hay una rama corregida
-    pendiente; hay que conservar los workflows de Atlas de upstream): trabajos CI-0 a CI-10, la
-    lista de fallos conocidos y un trabajo nocturno para las 47 suites unitarias que agotan el
-    tiempo.
+    El workflow de CI del fork (se ejecutó en la rama de publicación el 12 de noviembre sobre
+    4c7840e9 y el 13 de noviembre sobre 88c9b49c, ambas veces en rojo; hay que conservar los
+    workflows de Atlas de upstream): trabajos CI-0 a CI-10, la lista de fallos conocidos y un
+    trabajo nocturno para las 47 suites unitarias que agotan el tiempo.
 - en: >-
-    The last nightly Linux build with unit and functional tests that the status page's operator
-    publishes as job CI-0, read live from its API. It is one build, not the fork build matrix in the
-    table above.
+    The results of the last nightly build and test run that the status page's operator publishes as
+    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix in the table
+    above. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
   es: >-
-    La última compilación nocturna para Linux con pruebas unitarias y funcionales que el operador de
-    la página de estado publica como job CI-0, leída en directo de su API. Es una sola compilación,
-    no la matriz de compilación del fork de la tabla de arriba.
+    Los resultados de la última ejecución nocturna de compilación y pruebas que el operador de la
+    página de estado publica como job CI-0, leídos en directo de su API. Es una sola ejecución en
+    Linux, no la matriz de compilación del fork de la tabla de arriba. La ejecución de las pruebas
+    unitarias deja fuera las suites lentas matmul_v4_rc_stage3_*.
 - en: "This panel is filled in by JavaScript. The run as raw data: "
   es: "Este panel se rellena con JavaScript. La ejecución como datos sin procesar: "
 - en: build failed
@@ -31,12 +32,12 @@ translations:
 - en: build passed
   es: compilación correcta
 - en: >-
-    first ran 12 Nov at 4c7840e9, red; fixed branch pending; the status page's
-    operator publishes a nightly Linux build with unit and functional tests on release-0.34.16
+    ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator
+    publishes the results of a nightly build and test run on release-0.34.16
   es: >-
-    primera ejecución el 12 de noviembre sobre 4c7840e9, en rojo;
-    rama corregida pendiente; el operador de la página de estado publica una compilación nocturna
-    para Linux con pruebas unitarias y funcionales sobre release-0.34.16
+    se ejecutó el 12 de noviembre sobre 4c7840e9 y el 13 de noviembre sobre 88c9b49c, ambas veces
+    en rojo; el operador de la página de estado publica los resultados de una ejecución nocturna de
+    compilación y pruebas sobre release-0.34.16
 - en: tests not run
   es: pruebas no ejecutadas
 - en: >-
@@ -59,9 +60,9 @@ translations:
   es: La última ejecución tiene más de 36 h; las cifras de abajo pueden estar desactualizadas.
 - en: Loading the last run …
   es: Cargando la última ejecución …
-- en: Measured {measured} · finished {finished}
+- en: Started {measured} · finished {finished}
   es: >-
-    Medición: {measured} · fin: {finished}
+    Inicio: {measured} · fin: {finished}
 - en: Nightly CI-0 run
   es: Ejecución nocturna de CI-0
 - en: No current run.

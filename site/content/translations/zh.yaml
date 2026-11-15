@@ -9,16 +9,17 @@ translations:
 - en: Build result
   zh: 构建结果
 - en: >-
-    The fork CI workflow (its first run on the release line, 12 Nov at 4c7840e9, was red and a fixed branch is pending; keep the upstream Atlas workflows): jobs CI-0 to CI-10,
-    the known-failing list, and a nightly job for the 47 unit suites that time out.
+    The fork CI workflow (it ran on the release line on 12 Nov at 4c7840e9 and on 13 Nov at
+    88c9b49c, red both times; keep the upstream Atlas workflows): jobs CI-0 to CI-10, the
+    known-failing list, and a nightly job for the 47 unit suites that time out.
   zh: >-
-    fork 上的 CI 工作流（11 月 12 日在发布分支的 4c7840e9 上首次运行，结果失败，修复后的分支尚待完成；需保留上游的 Atlas 工作流）：作业 CI-0 至
+    fork 上的 CI 工作流（在发布分支上于 11 月 12 日在 4c7840e9 上、11 月 13 日在 88c9b49c 上各运行过一次，两次结果均失败；需保留上游的 Atlas 工作流）：作业 CI-0 至
     CI-10、已知失败列表，以及为 47 个超时的单元测试套件设置的每晚作业。
 - en: >-
-    The last nightly Linux build with unit and functional tests that the status page's operator
-    publishes as job CI-0, read live from its API. It is one build, not the fork build matrix in the
-    table above.
-  zh: 状态页运营者以作业 CI-0 发布的最近一次 Linux 夜间构建及单元测试和功能测试，实时读取自其 API。这只是一次构建，不是上表中 fork 上的构建矩阵。
+    The results of the last nightly build and test run that the status page's operator publishes as
+    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix in the table
+    above. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+  zh: 状态页运营者以作业 CI-0 发布的最近一次夜间构建和测试运行的结果，实时读取自其 API。这只是在 Linux 上的一次运行，不是上表中 fork 上的构建矩阵。单元测试运行不包括较慢的 matmul_v4_rc_stage3_* 套件。
 - en: "This panel is filled in by JavaScript. The run as raw data: "
   zh: 此面板由 JavaScript 填充。运行结果的原始数据：
 - en: build failed
@@ -26,9 +27,9 @@ translations:
 - en: build passed
   zh: 构建通过
 - en: >-
-    first ran 12 Nov at 4c7840e9, red; fixed branch pending; the status page's
-    operator publishes a nightly Linux build with unit and functional tests on release-0.34.16
-  zh: 11 月 12 日在 4c7840e9 上首次运行，结果失败；修复后的分支尚待完成；状态页运营者在 release-0.34.16 上发布每晚的 Linux 构建及单元测试和功能测试
+    ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator
+    publishes the results of a nightly build and test run on release-0.34.16
+  zh: 11 月 12 日在 4c7840e9 上、11 月 13 日在 88c9b49c 上各运行过一次，两次结果均失败；状态页运营者发布 release-0.34.16 上每晚构建和测试运行的结果
 - en: tests not run
   zh: 测试未运行
 - en: >-
@@ -51,8 +52,8 @@ translations:
   zh: 最近一次运行已超过 36 小时，下方数据可能已过时。
 - en: Loading the last run …
   zh: 正在加载最近一次运行 …
-- en: Measured {measured} · finished {finished}
-  zh: 测量于 {measured} · 完成于 {finished}
+- en: Started {measured} · finished {finished}
+  zh: 开始于 {measured} · 完成于 {finished}
 - en: Nightly CI-0 run
   zh: CI-0 夜间运行
 - en: No current run.

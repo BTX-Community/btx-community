@@ -8,21 +8,23 @@ translations:
 - en: Build result
   fr: Résultat de la compilation
 - en: >-
-    The fork CI workflow (its first run on the release line, 12 Nov at 4c7840e9, was red and a fixed branch is pending; keep the upstream Atlas workflows): jobs CI-0 to CI-10,
-    the known-failing list, and a nightly job for the 47 unit suites that time out.
+    The fork CI workflow (it ran on the release line on 12 Nov at 4c7840e9 and on 13 Nov at
+    88c9b49c, red both times; keep the upstream Atlas workflows): jobs CI-0 to CI-10, the
+    known-failing list, and a nightly job for the 47 unit suites that time out.
   fr: >-
-    Le workflow de CI du fork (sa première exécution sur la branche de version, le 12 nov. sur
-    4c7840e9, a échoué, et une branche corrigée est en
-    attente ; garder les workflows Atlas de l'amont) : jobs CI-0 à CI-10, la liste des échecs connus
-    et un job nocturne pour les 47 suites unitaires qui expirent.
+    Le workflow de CI du fork (il a tourné sur la branche de version le 12 nov. sur 4c7840e9 et le
+    13 nov. sur 88c9b49c, en échec les deux fois ; garder les workflows Atlas de l'amont) : jobs
+    CI-0 à CI-10, la liste des échecs connus et un job nocturne pour les 47 suites unitaires qui
+    expirent.
 - en: >-
-    The last nightly Linux build with unit and functional tests that the status page's operator
-    publishes as job CI-0, read live from its API. It is one build, not the fork build matrix in the
-    table above.
+    The results of the last nightly build and test run that the status page's operator publishes as
+    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix in the table
+    above. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
   fr: >-
-    La dernière compilation nocturne pour Linux, avec tests unitaires et fonctionnels, que
-    l'opérateur de la page d'état publie comme job CI-0, lue en direct dans son API. C'est une seule
-    compilation, pas la matrice de compilation du fork du tableau ci-dessus.
+    Les résultats de la dernière exécution nocturne de compilation et de tests que l'opérateur de la
+    page d'état publie comme job CI-0, lus en direct dans son API. C'est une seule exécution sous
+    Linux, pas la matrice de compilation du fork du tableau ci-dessus. L'exécution des tests
+    unitaires laisse de côté les suites lentes matmul_v4_rc_stage3_*.
 - en: "This panel is filled in by JavaScript. The run as raw data: "
   fr: "Ce panneau est rempli par JavaScript. L'exécution en données brutes : "
 - en: build failed
@@ -30,12 +32,12 @@ translations:
 - en: build passed
   fr: compilation réussie
 - en: >-
-    first ran 12 Nov at 4c7840e9, red; fixed branch pending; the status page's
-    operator publishes a nightly Linux build with unit and functional tests on release-0.34.16
+    ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator
+    publishes the results of a nightly build and test run on release-0.34.16
   fr: >-
-    première exécution le 12 nov. sur 4c7840e9, en échec ;
-    branche corrigée en attente ; l'opérateur de la page d'état publie une compilation nocturne pour
-    Linux avec tests unitaires et fonctionnels sur release-0.34.16
+    exécuté le 12 nov. sur 4c7840e9 et le 13 nov. sur 88c9b49c, en échec les deux fois ;
+    l'opérateur de la page d'état publie les résultats d'une exécution nocturne de compilation et de
+    tests sur release-0.34.16
 - en: tests not run
   fr: tests non exécutés
 - en: >-
@@ -58,9 +60,9 @@ translations:
   fr: La dernière exécution date de plus de 36 h ; les chiffres ci-dessous peuvent être dépassés.
 - en: Loading the last run …
   fr: Chargement de la dernière exécution …
-- en: Measured {measured} · finished {finished}
+- en: Started {measured} · finished {finished}
   fr: >-
-    Mesure : {measured} · fin : {finished}
+    Début : {measured} · fin : {finished}
 - en: Nightly CI-0 run
   fr: Exécution nocturne de CI-0
 - en: No current run.

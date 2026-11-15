@@ -1394,15 +1394,14 @@ lanes:
           title: { en: Fork CI gates, de: CI-Prüfungen auf dem Fork }
           scope:
             en: >-
-              The fork CI workflow (its first run on the release line, 12 Nov at 4c7840e9, was red and a fixed branch is pending; keep the upstream Atlas workflows):
-              jobs CI-0 to CI-10, the known-failing list, and a nightly job for the 47 unit suites
-              that time out.
+              The fork CI workflow (it ran on the release line on 12 Nov at 4c7840e9 and on 13 Nov
+              at 88c9b49c, red both times; keep the upstream Atlas workflows): jobs CI-0 to CI-10,
+              the known-failing list, and a nightly job for the 47 unit suites that time out.
             de: >-
-              Der Fork-CI-Workflow (sein erster Lauf auf der Release-Linie, am 12. Nov. auf
-              4c7840e9, war rot, ein korrigierter Branch steht aus;
-              die Atlas-Workflows von upstream bleiben): die Jobs CI-0 bis CI-10, die Liste
-              bekannter Fehlschläge und ein nächtlicher Job für die 47 Unit-Suites, die in einen
-              Timeout laufen.
+              Der Fork-CI-Workflow (er lief auf der Release-Linie am 12. Nov. auf 4c7840e9 und am
+              13. Nov. auf 88c9b49c, beide Male rot; die Atlas-Workflows von upstream bleiben): die
+              Jobs CI-0 bis CI-10, die Liste bekannter Fehlschläge und ein nächtlicher Job für die
+              47 Unit-Suites, die in einen Timeout laufen.
           why:
             en: >-
               upstream runs no hosted CI by choice; baselines: coverage 69.9/40.7, TSan 41, cppcheck
@@ -1730,12 +1729,12 @@ gates:
       de: Build-Matrix auf dem Fork (Linux, userns, mingw, Windows, macOS)
     state:
       en: >-
-        first ran 12 Nov at 4c7840e9, red; fixed branch pending; the status page's
-        operator publishes a nightly Linux build with unit and functional tests on release-0.34.16
+        ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator
+        publishes the results of a nightly build and test run on release-0.34.16
       de: >-
-        lief erstmals am 12. Nov. auf 4c7840e9, rot; korrigierter
-        Branch steht aus; der Betreiber der Statusseite veröffentlicht einen nächtlichen Linux-Build
-        mit Unit- und Funktionstests auf release-0.34.16
+        lief am 12. Nov. auf 4c7840e9 und am 13. Nov. auf 88c9b49c, beide Male rot; der Betreiber
+        der Statusseite veröffentlicht die Ergebnisse eines nächtlichen Build- und Testlaufs auf
+        release-0.34.16
     phase: 2a
   - id: CI-1
     name: { en: linux-unit-functional (sharded), de: linux-unit-functional (aufgeteilt) }
@@ -1839,18 +1838,20 @@ ci_pack: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-CI
 # site/static/js/ci.js. Placeholders in braces are filled in by the script and must stay as they are.
 # The noscript text carries its own punctuation and the space before the link (none after a
 # full-width colon). The labels are specific ("build passed", not "passed"), since translations are
-# keyed by the English text and a one-word key would be reused for other meanings.
+# keyed by the English text and a one-word key would be reused for other meanings. In times,
+# {measured} is the API's measured_at, the time the run started.
 ci:
   title: { en: Nightly CI-0 run, de: Nächtlicher CI-0-Lauf }
   lead:
     en: >-
-      The last nightly Linux build with unit and functional tests that the status page's operator
-      publishes as job CI-0, read live from its API. It is one build, not the fork build matrix in
-      the table above.
+      The results of the last nightly build and test run that the status page's operator
+      publishes as job CI-0, read live from its API. It is one run on Linux, not the fork build
+      matrix in the table above. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
     de: >-
-      Der letzte nächtliche Linux-Build mit Unit- und Funktionstests, den der Betreiber der
+      Die Ergebnisse des letzten nächtlichen Build- und Testlaufs, die der Betreiber der
       Statusseite als Job CI-0 veröffentlicht, live aus deren API gelesen. Es ist ein einzelner
-      Build, nicht die Build-Matrix auf dem Fork aus der Tabelle oben.
+      Lauf unter Linux, nicht die Build-Matrix auf dem Fork aus der Tabelle oben. Der
+      Unit-Testlauf lässt die langsamen Suites matmul_v4_rc_stage3_* aus.
   raw: { en: The run as JSON, de: Der Lauf als JSON }
   noscript:
     en: "This panel is filled in by JavaScript. The run as raw data: "
@@ -1879,7 +1880,7 @@ ci:
     de: "Fehlgeschlagene Skripte der Funktionstests ({count})"
   names_of: { en: "{listed} of {failed}", de: "{listed} von {failed}" }
   more: { en: "… and {count} more", de: "… und {count} weitere" }
-  times: { en: "Measured {measured} · finished {finished}", de: "Gemessen {measured} · fertig {finished}" }
+  times: { en: "Started {measured} · finished {finished}", de: "Gestartet {measured} · fertig {finished}" }
 
 phases:
   - id: 2a

@@ -22,7 +22,7 @@ const TEXTS = {
   failedFunctional: "Failed functional scripts ({count})",
   namesOf: "{listed} of {failed}",
   more: "… and {count} more",
-  times: "Measured {measured} · finished {finished}",
+  times: "Started {measured} · finished {finished}",
 };
 const NOW = Date.parse("2026-11-13T20:10:05Z");
 const OPTIONS = { repo: "btxchain/btx", job: "CI-0", lang: "en", texts: TEXTS, now: NOW };
@@ -90,7 +90,7 @@ test("a current run fills the panel without a status line", () => {
         more: null,
       },
     },
-    times: "Measured 2026-11-13 11:03 UTC · finished 2026-11-13 13:54 UTC",
+    times: "Started 2026-11-13 11:03 UTC · finished 2026-11-13 13:54 UTC",
   });
 });
 
