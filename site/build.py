@@ -74,10 +74,10 @@ UPSTREAM_REPO = "btxchain/btx"
 """Repository whose development activity the network page shows; the API must name the same one."""
 STATUS_PAGE = {"en":"https://network.btx-monitoring.com/", "de": "https://network.btx-monitoring.com/de/"}
 VERDICTS = ("stable", "performant", "secure")
+"""Headline verdicts of the status page, in its order; titles come from texts.yaml."""
 SITE_URL = "https://btx-community.com"
 """Base of the absolute links in llms.txt and llms-full.txt, which AI tools read outside the site."""
 METRICS_API = "https://network.btx-monitoring.com/api/v1/metrics.json"
-"""Headline verdicts of the status page, in its order; titles come from texts.yaml."""
 
 LINK_PATTERN = r"^https://[A-Za-z0-9.-]+(/[A-Za-z0-9._~/+-]*)?(\?[A-Za-z0-9=&_-]{1,60})?$"
 """Plain https URL; ``+`` in the path (Telegram invites) and a short plain query are allowed.
@@ -1456,6 +1456,18 @@ def _llms_line(name: str, url: str, text: str | None = None) -> str:
     return f"- [{name}]({url})" + (f": {text}" if text else "")
 
 
+def _llms_live_data() -> list[str]:
+    return [
+        "## Live data",
+        "",
+        _llms_line("Network status (JSON)", STATUS_API, "current values of the network, updated every few minutes"),
+        _llms_line("Metric descriptions (JSON)", METRICS_API, "title, unit, sources and thresholds of every value"),
+        _llms_line("Development activity (JSON)", DEVELOPMENT_API, f"commits, branches, pull requests and releases of {UPSTREAM_REPO}, hourly"),
+        _llms_line("Status page", STATUS_PAGE["en"], "the same data for people"),
+        "",
+    ]
+
+
 def llms_index(page: CommunityPage, hub: HubPage, texts: dict[str, dict[str, str]]) -> str:
     """The text of /llms.txt."""
     say = Localizer("en")
@@ -1468,8 +1480,9 @@ def llms_index(page: CommunityPage, hub: HubPage, texts: dict[str, dict[str, str
         "",
         f"{ui['lead']} {LLMS_NOTICE}",
         "",
-        "Languages: English at /, and " + ", ".join(f"{texts[lang]['lang_name']} at /{lang}/" for lang in LANGUAGES[1:])
-        + ". This file and llms-full.txt are in English.",
+        "Languages: " + ", ".join(
+            f"{texts[lang]['lang_name']} at {_site_url('/' if lang == 'en' else f'/{lang}/')}" for lang in LANGUAGES
+        ) + ". This file and llms-full.txt are in English.",
         "",
         "## Pages",
         "",
@@ -1484,13 +1497,7 @@ def llms_index(page: CommunityPage, hub: HubPage, texts: dict[str, dict[str, str
             "the checklists, the link directory with notes, and the removed entries with reasons",
         ),
         "",
-        "## Live data",
-        "",
-        _llms_line("Network status (JSON)", STATUS_API, "current values of the network, updated every few minutes"),
-        _llms_line("Metric descriptions (JSON)", METRICS_API, "title, unit, sources and thresholds of every value"),
-        _llms_line("Development activity (JSON)", DEVELOPMENT_API, f"commits, branches, pull requests and releases of {UPSTREAM_REPO}, hourly"),
-        _llms_line("Status page", STATUS_PAGE["en"], "the same data for people"),
-        "",
+        *_llms_live_data(),
         "## Documents",
         "",
     ]
@@ -1524,6 +1531,7 @@ def llms_full(page: CommunityPage, guide: GuidePage, texts: dict[str, dict[str, 
         f"{LLMS_NOTICE} Index: {_site_url('/llms.txt')}. The same content in other languages: "
         + ", ".join(_site_url(f"/{lang}/") for lang in LANGUAGES[1:]) + ".",
         "",
+        *_llms_live_data(),
         f"## {ui['facts.title']}",
         "",
     ]

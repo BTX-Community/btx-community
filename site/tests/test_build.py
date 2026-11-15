@@ -733,6 +733,8 @@ class PageTest(unittest.TestCase):
         for text in (index, full):
             self.assertTrue(text.startswith("# BTX Community"))
             self.assertIn(build.LLMS_NOTICE, text)
+            # The notice sends readers to the API for live figures, so both files list it.
+            self.assertIn(f"]({build.STATUS_API})", text)
             self.assertNotRegex(text, r"\{[a-z]+\}", "a placeholder was left unfilled")
             # Every link is absolute: these files are read outside the site.
             for url in re.findall(r"\]\(([^)]*)\)", text):
