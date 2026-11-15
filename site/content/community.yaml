@@ -363,18 +363,18 @@ categories:
             Schlüssel behandeln und temporäre Kopien löschen.
       - id: matmul-spec
         name: MatMul proof-of-work
-        url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-pow-spec.md
+        url: https://btx.dev/docs/specs/matmul-pow/
         tags: [spec, mining]
         description:
           en: How mining by matrix multiplication works and how blocks are checked.
           de: Wie Mining mit Matrixmultiplikation funktioniert und wie Blöcke geprüft werden.
         note:
           en: >-
-            The file is marked historical: it records the v3 design. Since block 185,000 the
-            network runs MatMul v4.7.
+            Describes MatMul v4.7, which the network runs since block 185,000, and keeps v3 as
+            reference. Last updated 4 Aug 2026; its release notes still name v0.33.2.
           de: >-
-            Die Datei ist als historisch markiert: Sie hält den Entwurf v3 fest. Seit Block 185.000
-            läuft das Netz mit MatMul v4.7.
+            Beschreibt MatMul v4.7, das das Netz seit Block 185.000 nutzt, und behält v3 als
+            Referenz. Zuletzt aktualisiert am 4.8.2026; die Release-Hinweise nennen noch v0.33.2.
       - id: trusted-mirrors
         name: Trusted MatMul mirrors
         url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md
@@ -449,11 +449,15 @@ categories:
         url: https://explorer.btxbyronbay.com/
         tags: [explorer, stats, api]
         description:
-          en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages and a public API.
-          de: Explorer des Byron-Bay-Teams, mit einer 24-h-Mining-Ansicht, Statistikseiten und öffentlicher API.
+          en: >-
+            Explorer of the Byron Bay team, with a 24 h mining view, stats pages, a public API and
+            tools for AI assistants (MCP, REST, llms.txt) at /ai.
+          de: >-
+            Explorer des Byron-Bay-Teams, mit einer 24-h-Mining-Ansicht, Statistikseiten, öffentlicher
+            API und Werkzeugen für KI-Assistenten (MCP, REST, llms.txt) unter /ai.
         note:
-          en: Some API endpoints need an access token.
-          de: Manche API-Endpunkte brauchen einen Zugangsschlüssel.
+          en: 13 of the 16 AI tools are public with no key; 3 premium ones need a token from the operator.
+          de: 13 der 16 KI-Werkzeuge sind ohne Schlüssel öffentlich; 3 Premium-Werkzeuge brauchen einen Token vom Betreiber.
       - id: ninjaraider-explorer
         name: ninjaraider explorer
         url: https://btxscan.ninjaraider.com
@@ -646,6 +650,34 @@ categories:
         note:
           en: Verify the signature and SHA-256 before use. Not for signers.
           de: Vor der Nutzung Signatur und SHA-256 prüfen. Nicht für Signer.
+      - id: easybtx-utxo-snapshots
+        name: easyBTX UTXO snapshots
+        url: https://easybtx.com/api/snapshots/latest
+        tags: [snapshot, utxo, signed]
+        description:
+          en: >-
+            UTXO snapshot for loadtxoutset, confirmed by two operators (Mende and Jarek), with
+            SHA-256 of the file and the manifest.
+          de: >-
+            UTXO-Snapshot für loadtxoutset, von zwei Betreibern bestätigt (Mende und Jarek), mit
+            SHA-256 von Datei und Manifest.
+        note:
+          en: Check the SHA-256 before use. The JSON names the height; it can lag the chain by a few thousand blocks.
+          de: Vor der Nutzung SHA-256 prüfen. Das JSON nennt die Höhe; sie kann einige tausend Blöcke hinter der Kette liegen.
+      - id: byron-utxo-snapshots
+        name: Byron Bay UTXO snapshots
+        url: https://api-explorer.btxbyronbay.com/snapshots/
+        tags: [snapshot, utxo]
+        description:
+          en: >-
+            UTXO snapshot every 1,000 blocks from the Byron Bay archive node, with SHA256SUMS; the
+            last seven are kept.
+          de: >-
+            UTXO-Snapshot alle 1.000 Blöcke vom Archive-Node in Byron Bay, mit SHA256SUMS; die
+            letzten sieben bleiben liegen.
+        note:
+          en: One signer, the operator. A height is sometimes skipped; then there is no file, not a wrong one.
+          de: Ein Signer, der Betreiber. Manchmal fällt eine Höhe aus; dann gibt es keine Datei, keine falsche.
       - id: node-help
         name: Node help
         url: https://network.btx-monitoring.com/help/
@@ -716,35 +748,36 @@ categories:
             .btxwallet-Export enthält den Seed im Klartext.
       - id: pq-wallet
         name: BTX PQ Wallet
-        url: https://easybtx.com/wallet
-        tags: [desktop, pq, mac, windows]
+        url: https://pq-wallet.com
+        tags: [desktop, pq, mac, windows, linux]
         description:
-          en: Post-quantum desktop wallet of the easyBTX team for macOS and Windows.
-          de: Post-Quanten-Desktop-Wallet des easyBTX-Teams für macOS und Windows.
+          en: Post-quantum desktop wallet of the easyBTX team for macOS, Windows and Linux.
+          de: Post-Quanten-Desktop-Wallet des easyBTX-Teams für macOS, Windows und Linux.
         note:
           en: >-
-            Early test build: internal security review, no independent audit; the source code is
-            not public and the direct downloads are unsigned. A 64-character master key is the
-            only backup; keep it offline.
+            No independent audit; the source code is not public. The Mac build is signed and
+            notarized (Bonuz Technology DMCC); Windows and Linux builds are unsigned, so check the
+            SHA-256. Keep the master key or the encrypted recovery file offline.
           de: >-
-            Frühe Testversion: interne Sicherheitsprüfung, kein unabhängiges Audit; der Quellcode
-            ist nicht öffentlich und die direkten Downloads sind unsigniert. Ein Master-Key mit 64
-            Zeichen ist das einzige Backup; offline aufbewahren.
+            Kein unabhängiges Audit; der Quellcode ist nicht öffentlich. Der Mac-Build ist signiert
+            und notarisiert (Bonuz Technology DMCC); Windows- und Linux-Builds sind unsigniert, also
+            SHA-256 prüfen. Master-Key oder verschlüsselte Recovery-Datei offline aufbewahren.
       - id: bonuz
         name: Bonuz
-        url: https://www.bonuz.xyz
+        url: https://www.bonuz.xyz/en/btx-wallet
         tags: [mobile, ios, android, seedless]
         description:
           en: Seedless mobile wallet for iOS and Android with BTX support.
           de: Mobile Wallet ohne Seed für iOS und Android, mit BTX-Unterstützung.
         note:
           en: >-
-            Seedless means there is no seed phrase you back up yourself; access and recovery go
-            through the Bonuz login. Check how recovery works before you rely on it.
+            Seedless means there is no seed phrase you back up yourself: the page says the key is
+            split by MPC, and access and recovery go through the Bonuz login. Check how recovery
+            works before you rely on it.
           de: >-
-            Seedless heißt: Es gibt keine Seed-Phrase, die man selbst sichert; Zugang und
-            Wiederherstellung laufen über das Bonuz-Login. Vor dem Einsatz prüfen, wie die
-            Wiederherstellung funktioniert.
+            Seedless heißt: Es gibt keine Seed-Phrase, die man selbst sichert. Laut Seite wird der
+            Schlüssel per MPC aufgeteilt; Zugang und Wiederherstellung laufen über das Bonuz-Login.
+            Vor dem Einsatz prüfen, wie die Wiederherstellung funktioniert.
 
   - id: bridges
     title: { en: Bridges and testnets, de: Bridges und Testnetze }

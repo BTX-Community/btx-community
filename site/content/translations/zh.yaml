@@ -6,6 +6,35 @@
 
 schema_version: 1
 translations:
+- en: Describes MatMul v4.7, which the network runs since block 185,000, and keeps v3 as reference. Last
+    updated 4 Aug 2026; its release notes still name v0.33.2.
+  zh: 描述网络自区块 185,000 起使用的 MatMul v4.7，并保留 v3 作为参考。最后更新于 2026 年 8 月 4 日；其版本说明仍写着 v0.33.2。
+- en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages, a public API and tools for
+    AI assistants (MCP, REST, llms.txt) at /ai.
+  zh: Byron Bay 团队的区块浏览器，提供 24 小时挖矿视图、统计页面、公开 API，以及位于 /ai 的 AI 助手工具（MCP、REST、llms.txt）。
+- en: 13 of the 16 AI tools are public with no key; 3 premium ones need a token from the operator.
+  zh: 16 个 AI 工具中有 13 个公开且无需密钥；3 个高级工具需要向运营者申请令牌。
+- en: UTXO snapshot for loadtxoutset, confirmed by two operators (Mende and Jarek), with SHA-256 of the
+    file and the manifest.
+  zh: 用于 loadtxoutset 的 UTXO 快照，由两位运营者（Mende 和 Jarek）确认，附文件和清单的 SHA-256。
+- en: Check the SHA-256 before use. The JSON names the height; it can lag the chain by a few thousand
+    blocks.
+  zh: 使用前请核对 SHA-256。JSON 中写明高度；它可能落后链几千个区块。
+- en: UTXO snapshot every 1,000 blocks from the Byron Bay archive node, with SHA256SUMS; the last seven
+    are kept.
+  zh: 来自 Byron Bay 归档节点的 UTXO 快照，每 1,000 个区块一份，附 SHA256SUMS；保留最近七份。
+- en: One signer, the operator. A height is sometimes skipped; then there is no file, not a wrong one.
+  zh: 只有一个签名者，即运营者。偶尔会跳过某个高度；那时没有文件，而不是错误的文件。
+- en: Post-quantum desktop wallet of the easyBTX team for macOS, Windows and Linux.
+  zh: easyBTX 团队的后量子桌面钱包，支持 macOS、Windows 和 Linux。
+- en: No independent audit; the source code is not public. The Mac build is signed and notarized (Bonuz
+    Technology DMCC); Windows and Linux builds are unsigned, so check the SHA-256. Keep the master key
+    or the encrypted recovery file offline.
+  zh: 没有独立审计；源代码未公开。Mac 版已签名并经过公证（Bonuz Technology DMCC）；Windows 和 Linux 版未签名，请核对 SHA-256。请离线保存主密钥或加密的恢复文件。
+- en: 'Seedless means there is no seed phrase you back up yourself: the page says the key is split by
+    MPC, and access and recovery go through the Bonuz login. Check how recovery works before you rely
+    on it.'
+  zh: 无助记词是指没有需要你自己备份的助记词：页面称密钥通过 MPC 拆分，访问和恢复都通过 Bonuz 登录进行。依赖它之前，请先了解恢复是如何运作的。
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   zh: 已不再上架 BTX；其 BTX/USDT 交易对自 2026 年 7 月起已下线。
 - en: >-
@@ -56,11 +85,6 @@ translations:
     so the MatMul work was accepted on signers' attestations.
   zh: 每日修剪后的数据目录快照，由第二个节点核验并签名。由受信任镜像生成，因此其中的 MatMul 工作是依据签名者的证明而被接受的。
 - en: >-
-    Early test build: internal security review, no independent audit; the source code is not public
-    and the direct downloads are unsigned. A 64-character master key is the only backup; keep it
-    offline.
-  zh: 早期测试版本：经过内部安全审查，没有独立审计；源代码未公开，直接下载的文件未签名。一个 64 字符的主密钥是唯一的备份；请离线保管。
-- en: >-
     Every node relays blocks and keeps the network reachable. A node checks every block itself only
     with a GPU that passes btxd's self-test. Without one, run it as a trusted mirror that follows
     signed checks from at least two signers; otherwise it stops syncing. Signers have the highest
@@ -68,8 +92,6 @@ translations:
   zh: >-
     每个节点都会转发区块，让网络保持可达。只有配备通过 btxd 自检的 GPU，节点才会自行验证每个区块。没有这样的
     GPU，就把它作为受信任镜像运行，跟随至少两个签名者签署的验证结果；否则它会停止同步。签名者的要求最高。
-- en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages and a public API.
-  zh: Byron Bay 团队的区块浏览器，带 24 小时挖矿视图、统计页面和公开 API。
 - en: How to report a vulnerability privately to the BTX Development Team. Not for support questions.
   zh: 如何私下向 BTX 开发团队报告漏洞。不用于技术支持问题。
 - en: >-
@@ -177,8 +199,6 @@ translations:
   zh: >-
     专门的 BTX 矿池，由 btx-pool-miner 的作者（GitHub lucasan123）运营。它在找到的每个区块内直接向矿工付款，按 30
     分钟窗口内的工作量分配。请在矿池页面查看其费率。
-- en: Post-quantum desktop wallet of the easyBTX team for macOS and Windows.
-  zh: easyBTX 团队的后量子桌面钱包，适用于 macOS 和 Windows。
 - en: >-
     Problems with an NVIDIA card? The official CUDA troubleshooting guide helps; parts of it
     describe the CUDA path from before block 185,000.
@@ -197,10 +217,6 @@ translations:
     Runs v0.34.15 without the model network. Without a qualified GPU the node follows signers'
     checks instead of checking the MatMul work itself.
   zh: 运行 v0.34.15，不含模型网络。没有合格的 GPU 时，节点跟随签名者的验证结果，而不是自行验证 MatMul 工作。
-- en: >-
-    Seedless means there is no seed phrase you back up yourself; access and recovery go through the
-    Bonuz login. Check how recovery works before you rely on it.
-  zh: 无助记词指没有需要你自己备份的助记词；访问和恢复都通过 Bonuz 登录完成。在依赖它之前，先弄清恢复是如何进行的。
 - en: Seedless mobile wallet for iOS and Android with BTX support.
   zh: 支持 BTX 的无助记词移动钱包，适用于 iOS 和 Android。
 - en: >-
@@ -210,8 +226,6 @@ translations:
   zh: >-
     签名者（GPU 证明者）需要一块通过 btxd 自检的 GPU，并且必须保持在线。官方 CUDA 压缩包支持 Blackwell 显卡（sm_120）；其他 NVIDIA
     显卡需要从源代码编译，而且可能不合格。请遵循开发者的运维手册。
-- en: Some API endpoints need an access token.
-  zh: 部分 API 端点需要访问令牌。
 - en: Telegram group of the easyBTX team, for questions about its miner, node app and wallet.
   zh: easyBTX 团队的 Telegram 群组，用于咨询其挖矿软件、节点应用和钱包。
 - en: Testnet only; it can be reset. Code unchanged since 2026-07-09.
@@ -224,10 +238,6 @@ translations:
     The developers' design for wrapped BTX on EVM chains: token rules, bridge models and reference
     contracts. A design, not a working bridge.
   zh: 开发者关于 EVM 链上封装 BTX 的设计：代币规则、跨链桥模型和参考合约。这是一份设计，不是可用的跨链桥。
-- en: >-
-    The file is marked historical: it records the v3 design. Since block 185,000 the network runs
-    MatMul v4.7.
-  zh: 该文件被标记为历史文档：它记录的是 v3 设计。自区块 185,000 起，网络运行 MatMul v4.7。
 - en: >-
     The miner's source is not published: the repository holds scripts and binary releases, with no
     licence. 2% dev fee, 0% on ninjaraider.
