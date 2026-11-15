@@ -22,8 +22,8 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 | Item | Value | Source |
 |---|---|---|
 | Area risk rank | 3 | [data] |
-| ModelNet line coverage, unit / unit + functional | 83.7% / 85.6%: high coverage, wrong edge cases | [data], at `c6f9678d` |
-| `modelnet/helper.cpp` | 12,944 lines; touched by 42 fix PRs; 65.9% / 74.1% lines | [data, hotspots] |
+| ModelNet line coverage, unit / unit + functional | 84.1% / 86.2%: high coverage, wrong edge cases | [data], at `a5d1637f` |
+| `modelnet/helper.cpp` | 12,944 lines; touched by 42 fix PRs; 69.5% / 79.2% lines | [data, hotspots] |
 | K20 / K21 / K02 pull requests | 33 / 10 / 9; 52 together | [PLAN §1.4; data] |
 | K20 recurrence | 18 of 32 PRs touch the same file again | [PLAN §1.4] |
 | Store fixes landed on 12 Nov | 7 (#550, #554, #556, #557, #558, #566, #568), each scoped to one site | [git: their commits on `release-0.34.16`] |

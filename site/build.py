@@ -412,11 +412,17 @@ class Brief(_Model):
 
 
 class Measured(_Model):
-    """The commit the hub's numbers were measured on, and the live head it was checked against."""
+    """The commits the hub's numbers were measured on, and the live head it was checked against.
+
+    Two clocks: the coverage figures and lane meters come from the coverage run at
+    ``coverage_commit``; the static, TSan, class and gate counts from ``commit``.
+    """
 
     commit: Annotated[StrictStr, Field(pattern=SHA_PATTERN)]
     date: date
     head: Annotated[StrictStr, Field(pattern=SHA_PATTERN)]
+    coverage_commit: Annotated[StrictStr, Field(pattern=SHA_PATTERN)]
+    coverage_date: date
 
 
 class Figure(_Model):
@@ -715,6 +721,9 @@ class HubPage(_Model):
                 raise ValueError(msg)
         if self.checked < self.measured.date:
             msg = "checked is before the date the numbers were measured"
+            raise ValueError(msg)
+        if self.checked < self.measured.coverage_date:
+            msg = "checked is before the date the coverage was measured"
             raise ValueError(msg)
         return self
 
@@ -1147,6 +1156,8 @@ class HubView:
     measured_commit: str
     measured_date: str
     measured_head: str
+    coverage_commit: str
+    coverage_date: str
     principles: tuple[CardView, ...]
     start: tuple[StepView, ...]
     brief_prompt: str
@@ -1292,6 +1303,8 @@ def hub_view(hub: HubPage, say: Localizer) -> HubView:
         measured_commit=hub.measured.commit,
         measured_date=hub.measured.date.isoformat(),
         measured_head=hub.measured.head,
+        coverage_commit=hub.measured.coverage_commit,
+        coverage_date=hub.measured.coverage_date.isoformat(),
         principles=tuple(CardView(p.id, say(p.title), say(p.text)) for p in hub.principles),
         start=tuple(StepView(say(s.text), s.url, external=True) for s in hub.start),
         brief_prompt=hub.brief.prompt,

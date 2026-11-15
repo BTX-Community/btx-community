@@ -78,9 +78,10 @@ otherwise ([`packs/C-STATIC.md`](packs/C-STATIC.md); the one-line brief in
 commit it was measured on.
 
 **How.**
-- Good: "65.8% of product lines with unit tests only, at `c6f9678d`, 2,625 ctest entries with
-  47 timed out at 3,600 s, counters cleared before the run [tested; plan §1.1]".
-- Bad: "coverage is about 66%".
+- Good: "67.4% of product lines with unit tests only, at `a5d1637f`, 2,629 ctest entries of
+  which 42 timed out or were stopped by the unit time budget, counters cleared before the run
+  [tested; plan §1.1]".
+- Bad: "coverage is about 67%".
 - Never put two numbers side by side that were measured on different commits, builds, suite sets
   or platforms without saying so. A coverage figure is only comparable with one taken on the same
   build, the same suite set and the same timeout (exam question 6).
@@ -220,10 +221,12 @@ ctest --test-dir ../base/build -R '^<suite>$' --output-on-failure
 ctest --test-dir build -R '^<suite>$' --timeout 3600 --output-on-failure
 ```
 
-Known state at `c6f9678d` [read: plan §1.1 and §8, from the 12 Nov coverage and TSan runs]:
-- Unit tests under coverage: 2,575 passed, 47 timed out, 2 failed, 1 skipped.
-- Functional tests on the coverage build: 82 of 208 scripts failed, 48 of them stalled with
-  "ExactReplay required". On a plain gcc build, 51 of 200 failed.
+Known state [read: plan §1.1 and §8, from the 14 Nov coverage run at `a5d1637f` and the 12 Nov
+TSan run at `c6f9678d`]:
+- Unit tests under coverage: 2,583 passed, 42 timed out, 3 failed, 1 skipped.
+- Functional tests on the coverage build: 14 of 220 scripts failed, none of them stalled with
+  "ExactReplay required" (48 of 82 did on 12 Nov). On a plain gcc build at `c6f9678d`, 51 of 200
+  failed.
 
 Show both runs, base and branch, in the PR.
 

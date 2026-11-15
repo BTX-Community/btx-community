@@ -1,6 +1,6 @@
 {% extends "base.html.j2" %}
 {% block content %}
-{% set measured = ui["hub.measured"].format(commit=hub.measured_commit, date=hub.measured_date, head=hub.measured_head) %}
+{% set measured = ui["hub.measured"].format(commit=hub.measured_commit, date=hub.measured_date, head=hub.measured_head, coverage_commit=hub.coverage_commit, coverage_date=hub.coverage_date) %}
 {% macro nodata() %}<span aria-hidden="true">–</span><span class="c-sr">{{ ui["hub.coverage.nodata"] }}</span>{% endmacro %}
       <section class="c-intro">
         <h1 class="c-page-title">{{ page_title }}</h1>

@@ -21,10 +21,11 @@ wherever this folder disagrees with them.
 
 > **Coverage is measured again.** The coverage build configures again on `release-0.34.16` since
 > [#578](https://github.com/btxchain/btx/pull/578) landed on 12 Nov (commit `7051507b`); v0.34.15 (`main`, `476f3f23`) does not have that fix.
-> Measured at `c6f9678d` with the same fix: 65.8% of product lines unit-only, 69.9% unit +
-> functional; branches 37.7% / 40.7%. All four numbers are floors: 47 unit suites timed out and 82
-> of 208 functional scripts failed in the coverage run, and a killed test writes no counts
-> ([`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md) §1.1). The recipe to reproduce it is in
+> Measured on `swapnet-v2` at `a5d1637f` (14 Nov), which contains the fix: 67.4% of product lines
+> unit-only, 72.3% unit + functional; branches 38.9% / 42.6%. In the coverage run 42 unit suites
+> timed out and 14 of 220 functional scripts failed, and a killed test writes no counts. The time
+> budgets were shorter than on 12 Nov, so the figures are floors and the comparison with that run
+> is indicative ([`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md) §1.1). The recipe to reproduce it is in
 > [`04-build-and-test.md`](04-build-and-test.md) §5. The numbers change only when a measured run
 > is published. The planned ratchet job on contributor forks (lane I-CI, job CI-9) fails any area
 > that drops by more than 0.2 points.

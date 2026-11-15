@@ -6,7 +6,7 @@ How to build `btxchain/btx` and run its unit, functional, coverage, sanitizer an
 
 Every command and flag below was checked against the tree at `4c7840e9` (`CMakeLists.txt`, `src/CMakeLists.txt`, `CMakePresets.json`, `cmake/script/`, `ci/test/`, `test/functional/test_runner.py`). Numbers live in [`01-state.md`](01-state.md).
 
-**Source tags.** `[C3]` = the 12 Nov unit + functional coverage run at `c6f9678d` (recipe in §5). `[C2]` = the 12 Nov clang-tidy, TSan and lock-order run at `c6f9678d`. `[C0]` = the 13 Nov unit + functional run at `88c9b49c` in rootless Podman (Ubuntu 24.04 container, 24 threads, 12 functional jobs). `[repo]` = a file in the tree at `4c7840e9`. `[plan]` = [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md). `[data]` = [`plan/plan-data.json`](plan/plan-data.json). `[read]` = taken from a source; `[tested]` = a command was run; `[inferred]` = judgement.
+**Source tags.** `[C3]` = the unit + functional coverage runs (recipe in §5): figures from the 14 Nov run on `swapnet-v2` at `a5d1637f`; recipe, timings and pitfalls from the 12 Nov run at `c6f9678d`. `[C2]` = the 12 Nov clang-tidy, TSan and lock-order run at `c6f9678d`. `[C0]` = the 13 Nov unit + functional run at `88c9b49c` in rootless Podman (Ubuntu 24.04 container, 24 threads, 12 functional jobs). `[repo]` = a file in the tree at `4c7840e9`. `[plan]` = [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md). `[data]` = [`plan/plan-data.json`](plan/plan-data.json). `[read]` = taken from a source; `[tested]` = a command was run; `[inferred]` = judgement.
 
 ## 1. Setup
 
@@ -120,7 +120,7 @@ Same as Linux. Clone and build inside the Linux file system (`~/`), not under `/
 ```bash
 export OMP_NUM_THREADS=2 OMP_WAIT_POLICY=PASSIVE    # libgomp pools default to every host CPU [C3]
 J=$(( $(nproc) / 2 )); [ "$J" -ge 1 ] || J=1        # macOS: $(( $(sysctl -n hw.ncpu) / 2 )); keep J <= RAM_GB / 2.5 [C3]
-ctest --test-dir build -N | tail -1                 # registered tests: 2,625 at c6f9678d [C3]
+ctest --test-dir build -N | tail -1                 # registered tests: 2,629 at a5d1637f [C3]
 ctest --test-dir build -j "$J" --timeout 900 -E 'matmul_v4_rc_stage3_' --output-on-failure
 ctest --test-dir build -R '^wallet_tests$' --output-on-failure        # one suite
 build/bin/test_btx --run_test=wallet_tests --log_level=test_suite      # one suite, case by case
@@ -142,8 +142,8 @@ gcc -shared -fPIC -O2 -o ~/btx-work/libhwc.so ~/btx-work/hwc.c
 BTX_HWC=2 LD_PRELOAD="$HOME/btx-work/libhwc.so" ctest --test-dir build -j "$J" --timeout 900 -E 'matmul_v4_rc_stage3_'
 ```
 
-- **Slow suites.** There are 191 `matmul_v4_rc_stage3_*` suites [tested: suite names at `4c7840e9`]. Under coverage they took 100-300 s each; 47 did not finish within 3,600 s each on 6 threads [C3; plan §1.1]. Leave them out of routine runs. A suite that times out on your machine: rerun it alone (`-R '^name$' --timeout 3600`) before you call it a failure. Outside the stage3 set, `smile2_audit_tests` and `smile2_membership_tests` need 17.5 and 21.7 min on one core, so they miss `--timeout 900` on a plain build; alone with `--timeout 3600` both pass [C0]. Never raise a timeout in a PR.
-- **Known state.** At `c6f9678d` under coverage: 2,575 passed, 47 timed out, 2 failed, 1 skipped [C3; plan §1.1]. A red suite is news only if it is green on the base commit with the same build. Show both.
+- **Slow suites.** There are 191 `matmul_v4_rc_stage3_*` suites [tested: suite names at `4c7840e9`]. Under coverage they took 100-300 s each. On 14 Nov, 41 of the 191 did not finish: 37 hit 3,600 s each on 6 threads and 4 were stopped by the unit time budget before that [C3; plan §1.1]. Leave them out of routine runs. A suite that times out on your machine: rerun it alone (`-R '^name$' --timeout 3600`) before you call it a failure. Outside the stage3 set, `smile2_audit_tests` and `smile2_membership_tests` need 17.5 and 21.7 min on one core, so they miss `--timeout 900` on a plain build; alone with `--timeout 3600` both pass [C0]. Never raise a timeout in a PR.
+- **Known state.** At `a5d1637f` under coverage: 2,583 passed, 42 timed out, 3 failed, 1 skipped [C3; plan §1.1]. A red suite is news only if it is green on the base commit with the same build. Show both.
 - **Registration.** A new suite must appear in `ctest --test-dir build -N`. Unregistered tests are class K19 ([`05-bug-classes.md`](05-bug-classes.md)).
 
 ## 4. Functional tests
@@ -158,7 +158,7 @@ python3 build/test/functional/test_runner.py --configfile=build/test/config.ini 
 ```
 
 - `--configfile` points at the build tree's `test/config.ini`; that file decides which components (wallet, modelnet, ZMQ) the runner thinks exist [repo: `test/config.ini.in`]. ZMQ tests need `python3-zmq`.
-- **Known state.** On the coverage build at `c6f9678d`, 82 of 208 scripts failed; 48 of them stalled with "ExactReplay required" in the node logs [plan §1.1]. Under TSan, 55 of a 200-script subset (the `feature_`, `wallet_`, `p2p_` and `rpc_` scripts) failed, and 51 of those 55 also fail on a plain gcc build [C2; plan §1.3]. A red functional run is not news by itself: compare the script on the base commit.
+- **Known state.** On the coverage build at `a5d1637f` (14 Nov), 14 of 220 scripts failed and none stalled with "ExactReplay required" in the node logs; at `c6f9678d` (12 Nov), 82 of 208 failed and 48 of them stalled [plan §1.1]. Under TSan, 55 of a 200-script subset (the `feature_`, `wallet_`, `p2p_` and `rpc_` scripts) failed, and 51 of those 55 also fail on a plain gcc build [C2; plan §1.3]. A red functional run is not news by itself: compare the script on the base commit.
 - **In a container (rootless Podman)** [C0]:
   - Rootless Podman caps a container at 2,048 processes and threads by default (`pids_limit` in `containers.conf`). With 12 functional jobs, nodes then fail to start threads (`std::system_error`, "Resource temporarily unavailable", EAGAIN). Start the container with `--pids-limit 65536` (or `-1` for none).
   - Keep `--tmpdirprefix` short, for example `/tmp/f`. `btx-modeld` puts a Unix socket under the node's datadir, and a long prefix pushes it past the 108-byte limit ("AF_UNIX path too long"). The runner only adds a short `XDG_RUNTIME_DIR` fallback when that variable is unset [repo: `test/functional/test_runner.py:970-977` at `88c9b49c`], and inside a container it often is set.
@@ -167,7 +167,7 @@ python3 build/test/functional/test_runner.py --configfile=build/test/config.ini 
 
 ## 5. Coverage (gcc, Linux)
 
-> **Coverage is measured again.** The coverage build (`-DCMAKE_BUILD_TYPE=Coverage`) configures again on `release-0.34.16` since #578 landed on 12 Nov (commit `7051507b`). The fix is not in v0.34.15 (`main`, `476f3f23`): the configure-time step that #578 removed is still there. Measured at `c6f9678d` with the same fix applied: product-code lines 65.8% unit-only and 69.9% unit + functional; branches 37.7% and 40.7%. All are floors: 47 unit suites timed out and 82 of 208 functional scripts failed in the coverage run. Details and per-area rows: [`01-state.md` §3](01-state.md#3-coverage).
+> **Coverage is measured again.** The coverage build (`-DCMAKE_BUILD_TYPE=Coverage`) configures again on `release-0.34.16` since #578 landed on 12 Nov (commit `7051507b`). The fix is not in v0.34.15 (`main`, `476f3f23`): the configure-time step that #578 removed is still there. Measured on `swapnet-v2` at `a5d1637f` (14 Nov), which contains the fix: product-code lines 67.4% unit-only and 72.3% unit + functional; branches 38.9% and 42.6%. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts failed. The time budgets were shorter than on 12 Nov, so the figures are floors and the comparison with that run is indicative. Details and per-area rows: [`01-state.md` §3](01-state.md#3-coverage).
 
 The one-shot `cmake -P build-cov/Coverage.cmake` [repo: `doc/developer-notes.md`] stops at the first failing ctest run (`COMMAND_ERROR_IS_FATAL ANY`), and some tests fail today, so it never writes a report [read: `cmake/script/Coverage.cmake`]. Use the measured recipe instead [C3]:
 
@@ -226,7 +226,7 @@ Pitfalls, all hit on 12 Nov [C3]:
 - **Threads.** Set `OMP_NUM_THREADS` and the `BTX_HWC` shim (§3) for coverage runs too; under coverage the stage3 suites run about ten times slower on 2 OpenMP threads.
 - **A killed test writes no data.** Timeouts produce no `.gcda`, so every number is a floor. Stop nodes with SIGTERM only; they write counters on a clean exit.
 - **Not in the numbers:** `secp256k1` (the capture command excludes it [repo: `cmake/script/CoverageInclude.cmake.in`]) and `libbitcoinpqc` (not instrumented in the C3 build) [C3].
-- **Scale.** Full unit + functional coverage took a 128-thread box most of a day [C3]. Owners measure their own files before and after; the full-baseline number comes from the coverage-ratchet box (I-CI lane, job CI-9). Baseline to compare with: 65.8% lines unit-only, 69.9% unit + functional, product code, at `c6f9678d` [plan §1.1].
+- **Scale.** Full unit + functional coverage took a 128-thread box most of a day [C3]. Owners measure their own files before and after; the full-baseline number comes from the coverage-ratchet box (I-CI lane, job CI-9). Baseline to compare with: 67.4% lines unit-only, 72.3% unit + functional, product code, at `a5d1637f` [plan §1.1].
 - macOS coverage with AppleClang is not verified.
 
 ## 6. Sanitizers [read: `ci/test/00_setup_env_native_asan.sh`, `ci/test/00_setup_env_native_tsan.sh`, `ci/test/03_test_script.sh`; TSan tested in C2]
@@ -257,7 +257,7 @@ export TSAN_OPTIONS="suppressions=$PWD/test/sanitizer_suppressions/tsan:halt_on_
 - **clang 20.** If your release does not package `clang-20`, LLVM's own apt repository (apt.llvm.org) does [inferred].
 - **TSan start-up.** On kernels with `vm.mmap_rnd_bits=32` the TSan runtime can abort at start. On your own machine, with the operator's OK (it is a system setting until the next reboot): `sudo sysctl vm.mmap_rnd_bits=28`. In a container where you cannot, C2 needed a retry launcher (mean 9.2 tries per start). The clang-18 runtime died at start where `personality(ADDR_NO_RANDOMIZE)` was blocked; use clang 20 [C2].
 - **Baselines.** TSan: 41 site pairs, 5 product classes. `-Wthread-safety`: 266 warnings. DEBUG_LOCKORDER: 1 known inversion in wallet code; it makes one shielded-wallet functional script abort under DEBUG_LOCKORDER. It is on the A-SHIELDED lane's done bar in [`07-lanes.md`](07-lanes.md); do not report it again [data; plan §1.3].
-- Do not re-run the baseline tools (CodeQL, cppcheck, clang-tidy, TSan, coverage at `c6f9678d`) to check the published numbers. Reuse those results and re-grep only the live head.
+- Do not re-run the baseline tools (CodeQL, cppcheck, clang-tidy and TSan at `c6f9678d`, coverage at `a5d1637f`) to check the published numbers. Reuse those results and re-grep only the live head.
 - 51 of the 55 functional failures under TSan also fail on a plain gcc build; under TSan, a failure counts only if it passes on the plain build [C2; plan §1.3].
 - Never mix `address` and `thread` in one build. macOS ASan has no leak detection.
 
@@ -282,4 +282,4 @@ FUZZ=matmul_rc_admission_store build_fuzz/bin/fuzz -max_total_time=600 ~/btx-wor
 - A native Windows build and a Metal build: read from the handbooks and the fork CI job, not run for this page.
 - macOS coverage with AppleClang.
 - The CUDA build lines: read from `doc/btx-cuda-mining-troubleshooting.md` and `src/CMakeLists.txt`, not rebuilt for this page.
-- The `[C2]` and `[C3]` numbers were measured at `c6f9678d`; the commands were re-checked against the tree at `4c7840e9`, not re-run end to end.
+- The `[C2]` numbers were measured at `c6f9678d` and the `[C3]` figures at `a5d1637f`; the commands were re-checked against the tree at `4c7840e9`, not re-run end to end.

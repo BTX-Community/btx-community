@@ -15,6 +15,7 @@ from typing import get_args
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import build  # noqa: E402
+from markupsafe import escape  # noqa: E402
 
 NAV = ("begin", "brief", "levels", "coverage", "classes", "lanes", "flow", "gates", "rhythm", "rules", "contribute")
 """The sections of the developers page, in the order of its anchor bar."""
@@ -280,7 +281,8 @@ class RulesTest(unittest.TestCase):
             "schema_version": 1,
             "checked": "2026-11-12",
             "source": url,
-            "measured": {"commit": "c6f9678d", "date": "2026-11-12", "head": "4c7840e9"},
+            "measured": {"commit": "c6f9678d", "date": "2026-11-12", "head": "4c7840e9",
+                         "coverage_commit": "a5d1637f", "coverage_date": "2026-11-12"},
             "principles": [{"id": f"p{i}", "title": text, "text": text} for i in range(4)],
             "start": [{"text": text, "url": url}],
             "brief": {"prompt": f"Read {agents} first.\nThen {llms}.\n{'Never post. ' * 20}",
@@ -343,9 +345,18 @@ class RulesTest(unittest.TestCase):
         def bug(**changed: object) -> dict[str, object]:
             return {"classes": [{**page["classes"][0], **changed}]}
 
+        def measured(**changed: object) -> dict[str, object]:
+            return {"measured": {k: v for k, v in {**page["measured"], **changed}.items() if v is not None}}
+
         broken = (
             {"schema_version": 2},
             {"checked": "2026-11-11"},
+            measured(coverage_date="2026-11-13"),
+            measured(coverage_date="12 Nov 2026"),
+            measured(coverage_commit="a5d1637"),
+            measured(coverage_commit="A5D1637F"),
+            measured(coverage_commit=None),
+            measured(coverage_date=None),
             {"levels": page["levels"][:2]},
             {"levels": [*page["levels"], {"id": "expert", **level}]},
             {"levels": [{"id": "basic", **level}] * 3},
@@ -408,10 +419,19 @@ class RulesTest(unittest.TestCase):
         page_lanes = [(group.id, lane) for group in hub.lanes.groups for lane in group.lanes]
 
         with self.subTest("measured"):
+            # Two clocks: coverage at coverage_commit, the static, TSan, class and gate counts at commit.
             measured = plan["measured_at"]
+            page_clocks = (hub.measured.commit, hub.measured.date.isoformat(), hub.measured.head,
+                           hub.measured.coverage_commit, hub.measured.coverage_date.isoformat())
             self.assertEqual(
-                (hub.measured.commit, hub.measured.date.isoformat(), hub.measured.head),
-                (measured["commit"], measured["date"], measured["live_head"]),
+                page_clocks,
+                (measured["commit"], measured["date"], measured["live_head"],
+                 measured["coverage_commit"], measured["coverage_date"]),
+            )
+            meta = lanes["meta"]
+            self.assertEqual(
+                page_clocks,
+                (meta["measured_at"], meta["date"], meta["live_head"], meta["coverage_commit"], meta["coverage_date"]),
             )
 
         with self.subTest("coverage figures"):
@@ -420,7 +440,8 @@ class RulesTest(unittest.TestCase):
                 [float(p) for p in re.findall(r"\*\*(\d+\.\d)%\*\*", coverage)],
                 [figure.percent for figure in hub.coverage.figures],
             )
-            for fact in ("c6f9678d", "#578", "47 unit suites timed out", "82 of 208 functional scripts failed in the coverage run"):
+            for fact in (hub.measured.coverage_commit, "#578", "42 unit suites timed out",
+                         "14 of 220 functional scripts failed", "time budgets were shorter"):
                 self.assertIn(fact, coverage, fact)
                 self.assertIn(fact, hub.coverage.text.en, fact)
 
@@ -718,11 +739,29 @@ class PageTest(unittest.TestCase):
         for start, end in (('id="area-wallet"', "</tr>"), ('id="lane-A-WALLET"', "</article>")):
             part = html.split(start)[1].split(end)[0]
             self.assertEqual(re.findall(r'<meter class="c-bar[^"]*" min="0" max="100" value="([0-9.]+)"', part),
-                             ["37.2", "50.5"], start)
+                             ["37.4", "63.0"], start)
         levels = [int(tag[1]) for tag, _ in found if re.fullmatch(r"h[1-6]", tag)]
         self.assertEqual(levels[0], 1)
         for before, after in zip(levels, levels[1:]):
             self.assertLessEqual(after, before + 1, "a heading level is skipped")
+
+    def test_the_developers_page_names_both_measured_commits(self) -> None:
+        """Coverage and the other counts come from different runs; each caption names both commits."""
+        hub = build.load_hub(build.ROOT / "content" / "hub.yaml")
+        texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
+        m = hub.measured
+        values = (m.coverage_commit, m.coverage_date.isoformat(), m.commit, m.date.isoformat(), m.head)
+        for lang in build.LANGUAGES:
+            html = (self.out / build.page_path(lang, "dev").strip("/") / "index.html").read_text(encoding="utf-8")
+            caption = texts[lang]["hub.measured"].format(
+                coverage_commit=m.coverage_commit, coverage_date=m.coverage_date.isoformat(),
+                commit=m.commit, date=m.date.isoformat(), head=m.head,
+            )
+            with self.subTest(lang=lang):
+                # Coverage tiles, classes, lanes and gates.
+                self.assertEqual(html.count(str(escape(caption))), 4)
+                for value in values:
+                    self.assertIn(value, caption)
 
 
 if __name__ == "__main__":

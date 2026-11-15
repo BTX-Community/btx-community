@@ -793,20 +793,21 @@ translations:
 - en: Living document - every page carries its last-verified date
   fr: >-
     Document vivant : chaque page indique la date de sa dernière vérification
-- en: Measured 12 November 2026 at commit c6f9678d
-  fr: Mesuré le 12 novembre 2026 au commit c6f9678d
+- en: Measured 12 November 2026 at commit c6f9678d; coverage 14 November at a5d1637f
+  fr: Mesuré le 12 novembre 2026 au commit c6f9678d ; couverture le 14 novembre au commit a5d1637f
 - en: Review and test programme - one pull request per bug class
   fr: >-
     Programme de revue et de test : une pull request par classe de bugs
 - en: >-
-    Test coverage measured on the release line, the recurring bug classes behind 317 fix pull
-    requests since August, one sweep per class that closes it with a rule, and checks before a final
-    release. A proposal by contributors; the maintainer decides what lands.
+    Test coverage measured on swapnet-v2 at a5d1637f (now part of the release line), the recurring
+    bug classes behind 317 fix pull requests since August, one sweep per class that closes it with a
+    rule, and checks before a final release. A proposal by contributors; the maintainer decides what
+    lands.
   fr: >-
-    La couverture de tests mesurée sur la branche de version, les classes de bugs récurrentes
-    derrière 317 pull requests de correction depuis août, un balayage par classe, qui la clôt par
-    une règle, et des vérifications avant une version finale. Une proposition de contributeurs ; le
-    mainteneur décide de ce qui est intégré.
+    La couverture de tests mesurée sur swapnet-v2 au commit a5d1637f (désormais intégré à la branche
+    de version), les classes de bugs récurrentes derrière 317 pull requests de correction depuis
+    août, un balayage par classe, qui la clôt par une règle, et des vérifications avant une version
+    finale. Une proposition de contributeurs ; le mainteneur décide de ce qui est intégré.
 - en: >-
     The node software is open source, and anyone can send it a pull request on GitHub. The developer
     hub tells you, and the AI tool you work with, how to build, test and document a change so that
@@ -935,16 +936,16 @@ translations:
     qualification des versions et le regroupement des pull requests de la semaine en un seul lot. Un
     fork avec GitHub Actions et du temps chaque semaine.
 - en: >-
-    Product code of release-0.34.16, measured at commit c6f9678d with the fix from btxchain/btx #578
-    applied. The coverage build configures again on release-0.34.16 since #578 (12 November 2026),
-    not in v0.34.15. All figures are floors: 47 unit suites timed out and 82 of 208 functional
-    scripts failed in the coverage run, and a test that is killed writes no counts.
+    Product code of swapnet-v2 at commit a5d1637f; the coverage build needs btxchain/btx #578, which
+    v0.34.15 lacks. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts
+    failed; a killed test writes no counts. The time budgets were shorter than on 12 November, so
+    the figures are floors and the comparison is indicative.
   fr: >-
-    Code de production de release-0.34.16, mesuré au commit c6f9678d avec le correctif de
-    btxchain/btx #578 appliqué. Le build de couverture se configure de nouveau sur release-0.34.16
-    depuis #578 (12 novembre 2026), pas sur v0.34.15. Tous les chiffres sont des minima : 47 suites
-    unitaires ont expiré et 82 des 208 scripts fonctionnels ont échoué lors de la mesure ; un test
-    tué n'écrit aucun compteur.
+    Code de production de swapnet-v2, mesuré au commit a5d1637f ; le build de couverture a besoin de
+    btxchain/btx #578, absent de v0.34.15. Lors de la mesure, 42 suites unitaires ont expiré et 14
+    des 220 scripts fonctionnels ont échoué ; un test tué n'écrit aucun compteur. Les budgets de
+    temps étaient plus courts que le 12 novembre : les chiffres sont des minima et la comparaison
+    est indicative.
 - en: Lines
   fr: Lignes
 - en: unit tests
@@ -1066,15 +1067,17 @@ translations:
 - en: 3.3, 3.4, 3.7, 3.8
   fr: 3.3, 3.4, 3.7, 3.8
 - en: >-
-    47 suites timed out: not measured
+    41 suites timed out: not measured
   fr: >-
-    47 suites ont expiré : non mesurées
+    41 suites ont expiré : non mesurées
 - en: 5 of 5 PRs landed; rule missing
   fr: 5 PR sur 5 intégrées ; la règle manque
 - en: 6 .cpp files at 0% with functional tests
   fr: 6 fichiers .cpp à 0 % avec les tests fonctionnels
-- en: 68 unexecuted consensus functions listed as tested or dead
-  fr: 68 fonctions de consensus jamais exécutées, listées comme testées ou comme code mort
+- en: 68 unexecuted consensus functions (measured 12 Nov at c6f9678d) listed as tested or dead
+  fr: >-
+    68 fonctions de consensus jamais exécutées (mesuré le 12 nov. au commit c6f9678d), listées comme
+    testées ou comme code mort
 - en: >-
     7 fix PRs on one release script; the Linux candidate at c6f9678d had one independent four-check
     run (#432, 11 Nov); no macOS, Windows or CUDA candidate has had one yet
@@ -1154,10 +1157,10 @@ translations:
   fr: CI-0 exécuté une fois sur 4c7840e9 ; nombre de partitions fixé à partir de cette exécution
 - en: CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4
   fr: CI-0, CI-4, CI-5, CI-6 en phase 2a ; CI-2, CI-9 en phase 2b ; le reste d'ici la phase 4
-- en: CI-9 fails any area that drops more than 0.2 points against the 69.9/40.7 baseline
+- en: CI-9 fails any area that drops more than 0.2 points against the 72.3/42.6 baseline
   fr: >-
     CI-9 échoue pour tout domaine qui baisse de plus de 0,2 point par rapport à la référence
-    69,9/40,7
+    72,3/42,6
 - en: CLI/RPC parameter conversion drift
   fr: divergence de conversion des paramètres entre CLI et RPC
 - en: Chain verifiable from genesis
@@ -1666,11 +1669,11 @@ translations:
 - en: >-
     The fork CI workflow (it exists but has never run on the release line; rebase onto 4c7840e9 and
     keep the upstream Atlas workflows): jobs CI-0 to CI-10, the known-failing list, and a nightly
-    job for the 47 unit suites that time out.
+    job for the 41 stage3 suites that time out.
   fr: >-
     Le workflow de CI du fork (il existe mais n'a jamais tourné sur la branche de version ; rebaser
     sur 4c7840e9 et garder les workflows Atlas de l'amont) : jobs CI-0 à CI-10, la liste des échecs
-    connus et un job nocturne pour les 47 suites unitaires qui expirent.
+    connus et un job nocturne pour les 41 suites stage3 qui expirent.
 - en: The sweeps
   fr: Les balayages
 - en: >-
@@ -1798,12 +1801,13 @@ translations:
 - en: ci/cppcheck.sh with fixed flags; shrinking baseline
   fr: ci/cppcheck.sh avec des options fixes ; référence décroissante
 - en: >-
-    ci/known-failing.txt written from that run (the unit failures, the 48 ExactReplay-stall scripts
-    [C3], gcc-baseline failures after triage) and only shrinking
+    ci/known-failing.txt written from that run (the unit failures; the functional failures, 14 in
+    the coverage run [C3], none an ExactReplay stall; gcc-baseline failures after triage) and only
+    shrinking
   fr: >-
-    ci/known-failing.txt rédigé à partir de cette exécution (les échecs unitaires, les 48 scripts
-    bloqués sur ExactReplay [C3], les échecs de la référence gcc après tri), et qui ne fait que
-    diminuer
+    ci/known-failing.txt rédigé à partir de cette exécution (les échecs unitaires ; les échecs
+    fonctionnels, 14 lors de la mesure de couverture [C3], aucun bloqué sur ExactReplay ; les échecs
+    de la référence gcc après tri), et qui ne fait que diminuer
 - en: clang-tidy warnings
   fr: avertissements clang-tidy
 - en: clang-tidy-diff + -Werror=thread-safety on clean files
@@ -1852,8 +1856,12 @@ translations:
   fr: >-
     chaque chantier choisit une classe ou un élément du tableau ; les responsables inscrivent la
     ligne de plan sur leur carte
-- en: each of the 927 unexecuted wallet functions tested or listed as dead
-  fr: chacune des 927 fonctions du portefeuille jamais exécutées testée ou listée comme code mort
+- en: >-
+    each of the 927 unexecuted wallet functions (measured 12 Nov at c6f9678d) tested or listed as
+    dead
+  fr: >-
+    chacune des 927 fonctions du portefeuille jamais exécutées (mesuré le 12 nov. au commit
+    c6f9678d) testée ou listée comme code mort
 - en: every baseline (TSan 41, cppcheck 372, CodeQL 260) only shrinks
   fr: chaque référence (TSan 41, cppcheck 372, CodeQL 260) ne fait que diminuer
 - en: every candidate; verify requests tagged on the board, answered within the week
@@ -1976,10 +1984,10 @@ translations:
 - en: macOS / libc++ / Qt packaging
   fr: empaquetage macOS / libc++ / Qt
 - en: >-
-    matmul 62.6/62.7 with 47 suites unmeasured; a CPU/CUDA corpus run exists; Metal never run; a
+    matmul 63.9/63.9 with 41 suites unmeasured; a CPU/CUDA corpus run exists; Metal never run; a
     backend disagreement is a consensus split
   fr: >-
-    matmul à 62,6/62,7 avec 47 suites non mesurées ; une exécution du corpus sur CPU/CUDA existe ;
+    matmul à 63,9/63,9 avec 41 suites non mesurées ; une exécution du corpus sur CPU/CUDA existe ;
     Metal jamais exécuté ; un désaccord entre backends est une scission du consensus
 - en: merged -> board card moved -> baseline shrinks
   fr: fusionnée -> carte déplacée sur le tableau -> la référence diminue
@@ -2004,12 +2012,13 @@ translations:
   fr: test « modifier -> rouvrir -> comparer » par magasin
 - en: >-
     net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63,
-    matmul_trusted_attestations.h 50; 68 consensus functions never executed; frozen for 0.34.16 by
-    #464, so only evidence lands
+    matmul_trusted_attestations.h 50; 68 consensus functions never executed (measured 12 Nov at
+    c6f9678d); frozen for 0.34.16 by #464, so only evidence lands
   fr: >-
     net/p2p au rang de risque 1, validation au rang 2 ; net_processing.cpp 113 commits de
     correction, validation.cpp 63, matmul_trusted_attestations.h 50 ; 68 fonctions de consensus
-    jamais exécutées ; gelé pour 0.34.16 par #464, donc seuls des éléments de preuve aboutissent
+    jamais exécutées (mesuré le 12 nov. au commit c6f9678d) ; gelé pour 0.34.16 par #464, donc seuls
+    des éléments de preuve aboutissent
 - en: net/p2p risk rank 1; gate G3 at 1 of about 13 parser targets; no container inventory exists
   fr: >-
     net/p2p au rang de risque 1 ; contrôle G3 à 1 cible de parseur sur environ 13 ; aucun inventaire
@@ -2115,8 +2124,8 @@ translations:
   fr: prévu ; référence 372
 - en: planned; baseline 41 pairs
   fr: prévu ; référence 41 paires
-- en: planned; baseline 69.9% lines; configure fix landed (#578)
-  fr: prévu ; référence 69,9 % des lignes ; correctif de configuration intégré (#578)
+- en: planned; baseline 72.3% lines; configure fix landed (#578)
+  fr: prévu ; référence 72,3 % des lignes ; correctif de configuration intégré (#578)
 - en: privacy leak to peers or restricted views
   fr: fuite de confidentialité vers des pairs ou des vues restreintes
 - en: >-
@@ -2205,8 +2214,8 @@ translations:
   fr: enregistrement des tests, fuzzing rapide, dérive de l'empaquetage
 - en: tests with a symlinked ancestor and a symlinked leaf
   fr: tests avec un ancêtre en lien symbolique et une feuille en lien symbolique
-- en: the 47 timeouts have a job and a number
-  fr: les 47 expirations ont un job et un chiffre
+- en: the 42 timeouts have a job and a number
+  fr: les 42 expirations ont un job et un chiffre
 - en: the baselines exist and are untriaged; each rule costs an afternoon and closes a class for good
   fr: >-
     les références existent et ne sont pas triées ; chaque règle coûte un après-midi et ferme une
@@ -2236,10 +2245,10 @@ translations:
 - en: unit test over the RPCHelpMan table vs vRPCConvertParams
   fr: test unitaire de la table RPCHelpMan face à vRPCConvertParams
 - en: >-
-    upstream runs no hosted CI by choice; baselines: coverage 69.9/40.7, TSan 41, cppcheck 372,
+    upstream runs no hosted CI by choice; baselines: coverage 72.3/42.6, TSan 41, cppcheck 372,
     CodeQL 260, tidy 1,033; macOS test job ran out of time on the last fork run, so it is sharded
   fr: >-
-    l'amont ne fait tourner aucune CI hébergée, par choix ; références : couverture 69,9/40,7, TSan
+    l'amont ne fait tourner aucune CI hébergée, par choix ; références : couverture 72,3/42,6, TSan
     41, cppcheck 372, CodeQL 260, tidy 1 033 ; le job de test macOS a manqué de temps lors de la
     dernière exécution sur le fork, il est donc partitionné
 - en: verification fuzz targets with cost limits
@@ -2254,21 +2263,22 @@ translations:
   fr: >-
     lignes du portefeuille >= 70 (fixé ici) ; règles K05/K11/K12 dans ctest ; la sonde «
     restauration sans phrase secrète » échoue ; aucun octet de la seed après walletlock
-- en: wallet lines from 50.5 to at least 70 (target set here)
-  fr: lignes du portefeuille de 50,5 à au moins 70 (cible fixée ici)
+- en: wallet lines from 63.0 to at least 70 (target set here)
+  fr: lignes du portefeuille de 63,0 à au moins 70 (cible fixée ici)
 - en: >-
-    wallet risk rank 4; 927 wallet functions never executed under unit+functional; K05 chain of 4
-    PRs in 4 days
+    wallet risk rank 4; 927 wallet functions never executed under unit+functional (measured 12 Nov
+    at c6f9678d); K05 chain of 4 PRs in 4 days
   fr: >-
     portefeuille au rang de risque 4 ; 927 fonctions du portefeuille jamais exécutées par les tests
-    unitaires + fonctionnels ; pour K05, une chaîne de 4 PR en 4 jours
+    unitaires + fonctionnels (mesuré le 12 nov. au commit c6f9678d) ; pour K05, une chaîne de 4 PR
+    en 4 jours
 - en: wallet-locked / passphrase ordering
   fr: portefeuille verrouillé / ordre de la phrase secrète
 - en: >-
-    wallet/shielded_rpc.cpp is file risk rank 4 at 15.8/24.3 with no test file; the one lock-order
+    wallet/shielded_rpc.cpp is file risk rank 4 at 15.8/52.7 with no test file; the one lock-order
     inversion is on the wallet side
   fr: >-
-    wallet/shielded_rpc.cpp est au rang de risque 4 des fichiers, à 15,8/24,3, sans fichier de test
+    wallet/shielded_rpc.cpp est au rang de risque 4 des fichiers, à 15,8/52,7, sans fichier de test
     ; l'unique inversion d'ordre de verrouillage est côté portefeuille
 - en: weekly CodeQL
   fr: CodeQL chaque semaine

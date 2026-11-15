@@ -32,7 +32,7 @@ This index lives in BTX-Community/btx-community under dev/. Last verified: 2026-
 - [packs/I-OPS.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/I-OPS.md): lane pack: operators, genesis sync, upgrades, interop
 - [packs/I-XDEV.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/I-XDEV.md): lane pack: MatMul cross-backend corpus on CPU, CUDA and Metal
 - [packs/E-CONSENSUS.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/E-CONSENSUS.md): lane pack: consensus, fork choice, attestation, MatMul frontier; evidence only, no PRs
-- [plan/MASTER-PLAN.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/plan/MASTER-PLAN.md): the review and test programme measured on the release line at c6f9678d: baseline, class sweeps, deep reviews, gates
+- [plan/MASTER-PLAN.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/plan/MASTER-PLAN.md): the review and test programme measured on the release line at c6f9678d (coverage again on swapnet-v2 at a5d1637f): baseline, class sweeps, deep reviews, gates
 - [plan/plan-data.json](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/plan/plan-data.json): the plan's numbers as JSON, with measured_at and sources
 - [plan/lanes.json](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/plan/lanes.json): the lanes as JSON; owner and second_pass handles are claimable
 - [tools/refresh-state.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/tools/refresh-state.sh): prints the head rows for 01-state.md with three anonymous GitHub API calls; never writes a file

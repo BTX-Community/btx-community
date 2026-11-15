@@ -22,9 +22,9 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 | Item | Value | Source |
 |---|---|---|
 | Area risk rank | 4 | [data] |
-| Wallet line coverage, unit / unit + functional | 37.2% / 50.5% (branches 30.7%), floors | [data], at `c6f9678d` |
-| RPC line coverage, unit / unit + functional | 51.6% / 72.9% | [data] |
-| Wallet functions never executed (unit + functional) | 927 | [PLAN §1.1] |
+| Wallet line coverage, unit / unit + functional | 37.4% / 63.0% (branches 36.6%), floors | [data], at `a5d1637f` |
+| RPC line coverage, unit / unit + functional | 52.0% / 76.5% | [data] |
+| Wallet functions never executed (unit + functional) | 927 (measured 12 Nov at `c6f9678d`) | [PLAN §1.1] |
 | K05 pull requests | 10, 9 landed at `c6f9678d`; the chain #456, #475, #488, #523 in four days | [PLAN §1.4]; the four PRs on `btxchain/btx` |
 | K11 / K12 pull requests | 8 | [data] |
 | K25 pull requests | 5, all landed; the rule is still missing | [data] |
@@ -39,8 +39,8 @@ The K05 chain is the reason this lane works in classes: each of those four PRs f
 - [ ] K12: an RAII reservation type plus a two-sender test.
 - [ ] K27: a log-scan assertion in the functional runner.
 - [ ] A restore-without-passphrase probe that fails; a memory scan after `walletlock` that finds no seed bytes.
-- [ ] Wallet lines from 50.5% to at least 70% (target set by the lane plan).
-- [ ] Each of the 927 unexecuted wallet functions tested or listed as dead.
+- [ ] Wallet lines from 63.0% to at least 70% (target set by the lane plan).
+- [ ] Each of the 927 unexecuted wallet functions (measured 12 Nov at `c6f9678d`) tested or listed as dead.
 
 ## 5. Read first
 

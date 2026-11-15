@@ -15,19 +15,19 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 
 - Upstream runs no hosted CI on purpose: `.github/workflows/README.md` says the repository does not use GitHub-hosted CI for validation and workflow files are intentionally absent [repo]. So contributors run CI on their own forks, and a fork run is the evidence a PR carries when it reaches the maintainer.
 - A draft fork workflow exists on a contributor fork; it has never run on the release line and must be rebased onto `4c7840e9`, keeping the three upstream workflows `atlas-native.yml`, `atlas-source.yml` and `release-atlas-binaries.yml` [lanes; repo: `.github/workflows/`]. Its location is on the board.
-- Jobs [PLAN §4.2]: CI-0 build matrix (Linux, Linux user namespaces, MinGW, Windows, macOS); CI-1 sharded unit + functional; CI-2 ASan/UBSan; CI-3 TSan + DEBUG_LOCKORDER nightly; CI-4 lint; CI-5 clang-tidy-diff; CI-6 cppcheck; CI-7 fuzz smoke (ClusterFuzzLite); CI-8 CodeQL weekly on a dedicated machine; CI-9 coverage ratchet on a dedicated machine; CI-10 release gate. Plus `ci/known-failing.txt` and a nightly job for the 47 slow `matmul_v4_rc_stage3_*` suites that time out.
+- Jobs [PLAN §4.2]: CI-0 build matrix (Linux, Linux user namespaces, MinGW, Windows, macOS); CI-1 sharded unit + functional; CI-2 ASan/UBSan; CI-3 TSan + DEBUG_LOCKORDER nightly; CI-4 lint; CI-5 clang-tidy-diff; CI-6 cppcheck; CI-7 fuzz smoke (ClusterFuzzLite); CI-8 CodeQL weekly on a dedicated machine; CI-9 coverage ratchet on a dedicated machine; CI-10 release gate. Plus `ci/known-failing.txt` and a nightly job for the 41 slow `matmul_v4_rc_stage3_*` suites that time out.
 
 ## 3. Why: current numbers
 
 | Item | Value | Source |
 |---|---|---|
-| Baselines to hold | coverage 69.9% lines / 40.7% branches (unit + functional, floors); TSan 41 site pairs; cppcheck 372; CodeQL 260; clang-tidy 1,033 | [data; lanes] |
+| Baselines to hold | coverage 72.3% lines / 42.6% branches (unit + functional, floors); TSan 41 site pairs; cppcheck 372; CodeQL 260; clang-tidy 1,033 | [data; lanes] |
 | Coverage build | configures again on `release-0.34.16` since #578 (12 Nov); not in v0.34.15 | [git: commit `7051507b`] |
-| Functional, coverage build at `c6f9678d` | 82 of 208 scripts failed; 48 of them in the "ExactReplay required" stall class | [PLAN §1.1] |
+| Functional, coverage build at `a5d1637f` | 14 of 220 scripts failed; none in the "ExactReplay required" stall class (48 of 82 on 12 Nov at `c6f9678d`) | [PLAN §1.1] |
 | Functional under TSan (a 200-script subset: `feature_`, `wallet_`, `p2p_`, `rpc_`) | 55 failed; 51 of those 55 also fail on a plain gcc build (not yet triaged) | [PLAN §1.3; C2] |
 | Last fork runs (3 Nov, an earlier branch, warm ccache) | `linux-build` 9 min; `linux-userns` 76 min; `mingw-cross` 35 min; `mingw-tests` failed after 100 min; `macos-arm64` out of time at 343 min; `windows-tests` failed after 4 min | [PLAN §4.1] |
 | Hosted runner limits | Linux/Windows 4 CPU, 16 GB RAM, 14 GB SSD; macOS 3 cores, 7 GB; 6 h per job; 20 concurrent jobs, 5 macOS; 10 GB cache | [PLAN §4.1, from GitHub's documentation on 12 Nov] |
-| Scale on a 128-thread machine | unit pass 40 min at `-j100`; 63 slow suites 2 h; 208 functional scripts 92 min at 42 jobs; coverage tree 27 GB | [PLAN §4.1; C3] |
+| Scale on a 128-thread machine (12 Nov run) | unit pass 40 min at `-j100`; 63 slow suites 2 h; 208 functional scripts 92 min at 42 jobs; coverage tree 27 GB | [PLAN §4.1; C3] |
 
 ## 4. Done bar [lanes]
 
@@ -35,7 +35,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 - [ ] `ci/known-failing.txt` built from that run (the unit failures, the ExactReplay stall scripts, the plain-gcc failures after triage), and only shrinking.
 - [ ] Every class PR links a run with fails-before and passes-after.
 - [ ] CI-9 fails any area that drops more than 0.2 points.
-- [ ] The 47 timeouts have a job and a number.
+- [ ] The 42 timeouts have a job and a number.
 - [ ] Every baseline only shrinks.
 
 ## 5. Read first
@@ -68,7 +68,7 @@ git diff --stat origin/release-0.34.16
 - The K04 lint (from C-STATIC), the K01, K08 and K17 greps (from C-K01 and C-PATHS), the K10 test, `-rpcdoccheck` in the functional runs (option defined in `src/init.cpp` [repo]), YAML lint and a secret scan.
 - Each check fails on a planted case and passes on the branch.
 
-### Task 3: triage the 82 functional failures
+### Task 3: triage the 14 functional failures
 
 - Inputs: the C3 per-script results and node logs (from the coverage-ratchet holder, via the board), plus one plain gcc run of the failing scripts on `4c7840e9`.
 - Classes: the ExactReplay stall (the node logs say "ExactReplay required"); fails on plain gcc too (pre-existing); coverage-only (timing); new.

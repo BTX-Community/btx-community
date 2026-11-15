@@ -22,8 +22,8 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 | Item | Value | Source |
 |---|---|---|
 | MatMul area risk rank | 9 | [data] |
-| MatMul line coverage, unit / unit + functional | 62.6% / 62.7%, with 47 suites unmeasured (timed out) | [data; PLAN §1.1] |
-| MatMul verification functions never executed | 507; 363 of them in files whose suite timed out | [PLAN §1.1] |
+| MatMul line coverage, unit / unit + functional | 63.9% / 63.9%, with 41 suites unmeasured (timed out) | [data; PLAN §1.1] |
+| MatMul verification functions never executed | 507 (measured 12 Nov at `c6f9678d`); 363 of them in files whose suite timed out then | [PLAN §1.1] |
 | Cross-backend runs so far | a CPU/CUDA run exists; Metal has never been run | [lanes; PLAN §3.6] |
 
 ## 4. Done bar [lanes]
