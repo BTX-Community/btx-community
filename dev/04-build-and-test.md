@@ -46,10 +46,12 @@ Disk: plan on about 15 GB for a normal build with tests [inferred]; the coverage
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y build-essential cmake pkgconf python3 python3-zmq libevent-dev \
-  libboost-dev libsqlite3-dev libzmq3-dev git curl binutils ccache
+sudo apt-get install -y build-essential cmake pkgconf python3 python3-dev python3-cryptography \
+  python3-zmq libevent-dev libboost-dev libsqlite3-dev libzmq3-dev git curl binutils ccache
 sudo apt-get install -y clang        # only for clang builds
 ```
+
+SwapNet is part of the tree since `074dac16` (v0.34.16, #630). Configure then needs Python 3.11 or newer with its development files, and that interpreter must import `cryptography` and `sqlite3` under `python -I`; otherwise it stops with "SwapNet requires the selected Python's cryptography and sqlite3 modules" [repo: `cmake/SwapNet.cmake`, `doc/release-notes-0.34.16.md` at `074dac16`]. On Ubuntu 24.04 that is `python3-dev` and `python3-cryptography` above [C0: configure on `swapnet-v2` @ `88aeaac9`, 13 Nov]. `btxd` links the Python library even when SwapNet is off (`-swapnet=0`, the default).
 
 The Native Model Network (`WITH_MODELNET=ON`, the default) needs OpenSSL 3.5 or newer. Ubuntu 22.04 and 24.04 ship 3.0, so build 3.5 into a prefix [repo: `doc/build-unix.md`; the configure check is `src/CMakeLists.txt:1905-1912`]:
 

@@ -352,7 +352,7 @@
       "target": "POSIX grep lint; first green Windows and sharded macOS runs; otool step in the release gate; RAII wrappers with pidfd check",
       "owner": {
         "role": "C-PORT owner",
-        "handle": null
+        "handle": "sunnyriverr"
       },
       "second_pass": {
         "role": "second pass (never the owner); a macOS runner runs the macOS half when a PR has K07 content",
@@ -454,7 +454,7 @@
       "id": "I-CI",
       "name": "Fork CI gates",
       "kind": "infra",
-      "scope": "the fork workflow (exists; never run on the release line; rebase onto 4c7840e9, keep the upstream Atlas workflows): CI-0 build matrix, CI-1 sharded unit+functional, CI-2 ASan/UBSan, CI-3 TSan+DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke, CI-8 CodeQL weekly on a box, CI-9 coverage ratchet on a box, CI-10 release gate; ci/known-failing.txt; nightly stage3 job for the 41 stage3 suites that time out",
+      "scope": "the fork workflow (exists; ran on the release line 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; keep the upstream Atlas workflows): CI-0 build matrix, CI-1 sharded unit+functional, CI-2 ASan/UBSan, CI-3 TSan+DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke, CI-8 CodeQL weekly on a box, CI-9 coverage ratchet on a box, CI-10 release gate; ci/known-failing.txt; nightly stage3 job for the 41 stage3 suites that time out",
       "why": "upstream runs no hosted CI by choice; baselines: coverage 72.3/42.6, TSan 41, cppcheck 372, CodeQL 260, tidy 1,033; macOS test job ran out of time on the last fork run, so it is sharded",
       "risk_rank": null,
       "coverage_now": {

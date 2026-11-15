@@ -5,6 +5,204 @@
 
 schema_version: 1
 translations:
+- en: 'Live view from the Byron Bay archive node: its chain progress, the heights of the nodes connected
+    to it, and a map of those connections (preview).'
+  fr: 'Vue en direct depuis le nœud d''archive de Byron Bay : la progression de sa chaîne, les hauteurs
+    des nœuds qui y sont connectés et une carte de ces connexions (aperçu).'
+- en: 'The upstream Atlas desktop interface (btxchain/btx #273), hosted by the Byron Bay team as a demo.'
+  fr: 'L''interface de bureau Atlas de l''amont (btxchain/btx #273), hébergée en démo par l''équipe de
+    Byron Bay.'
+- en: 'A walk-through of SwapNet (btxchain/btx #630), built by the Byron Bay team from the open-source
+    code.'
+  fr: 'Une visite de SwapNet (btxchain/btx #630), réalisée par l''équipe de Byron Bay à partir du code
+    open source.'
+- en: Unofficial demo with sample data only. The feature is not released; the page connects to no node
+    or wallet.
+  fr: Démo non officielle, uniquement avec des données d'exemple. La fonction n'est pas publiée ; la page
+    ne se connecte à aucun nœud ni portefeuille.
+- en: Describes MatMul v4.7, which the network runs since block 185,000, and keeps v3 as reference. Last
+    updated 4 Aug 2026; its release notes still name v0.33.2.
+  fr: Décrit MatMul v4.7, utilisé par le réseau depuis le bloc 185 000, et garde v3 comme référence. Dernière
+    mise à jour le 4 août 2026 ; ses notes de version citent encore v0.33.2.
+- en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages, a public API and tools for
+    AI assistants (MCP, REST, llms.txt) at /ai.
+  fr: Explorateur de l'équipe de Byron Bay, avec une vue du minage sur 24 h, des pages de statistiques,
+    une API publique et des outils pour assistants IA (MCP, REST, llms.txt) sous /ai.
+- en: 13 of the 16 AI tools are public with no key; 3 premium ones need a token from the operator.
+  fr: 13 des 16 outils IA sont publics et sans clé ; 3 outils premium demandent un jeton de l'opérateur.
+- en: UTXO snapshot for loadtxoutset, confirmed by two operators (Mende and Jarek), with SHA-256 of the
+    file and the manifest.
+  fr: Snapshot UTXO pour loadtxoutset, confirmé par deux opérateurs (Mende et Jarek), avec le SHA-256
+    du fichier et du manifeste.
+- en: Check the SHA-256 before use. The JSON names the height; it can lag the chain by a few thousand
+    blocks.
+  fr: Vérifiez le SHA-256 avant usage. Le JSON indique la hauteur ; elle peut avoir quelques milliers
+    de blocs de retard sur la chaîne.
+- en: UTXO snapshot every 1,000 blocks from the Byron Bay archive node, with SHA256SUMS; the last seven
+    are kept.
+  fr: Snapshot UTXO tous les 1 000 blocs depuis le nœud d'archive de Byron Bay, avec SHA256SUMS ; les
+    sept derniers sont conservés.
+- en: One signer, the operator. A height is sometimes skipped; then there is no file, not a wrong one.
+  fr: Un seul signataire, l'opérateur. Une hauteur est parfois sautée ; il n'y a alors pas de fichier,
+    pas un fichier faux.
+- en: Post-quantum desktop wallet of the easyBTX team for macOS, Windows and Linux.
+  fr: Portefeuille de bureau post-quantique de l'équipe easyBTX pour macOS, Windows et Linux.
+- en: No independent audit; the source code is not public. The Mac build is signed and notarized (Bonuz
+    Technology DMCC); Windows and Linux builds are unsigned, so check the SHA-256. Keep the master key
+    or the encrypted recovery file offline.
+  fr: Pas d'audit indépendant ; le code source n'est pas public. La version Mac est signée et notarisée
+    (Bonuz Technology DMCC) ; celles pour Windows et Linux ne sont pas signées, vérifiez donc le SHA-256.
+    Gardez la clé maître ou le fichier de récupération chiffré hors ligne.
+- en: 'Seedless means there is no seed phrase you back up yourself: the page says the key is split by
+    MPC, and access and recovery go through the Bonuz login. Check how recovery works before you rely
+    on it.'
+  fr: 'Sans seed signifie qu''il n''y a pas de phrase de récupération à sauvegarder soi-même : la page
+    indique que la clé est partagée par MPC, et l''accès comme la récupération passent par la connexion
+    Bonuz. Vérifiez comment fonctionne la récupération avant de vous y fier.'
+- en: >-
+    A full release since 15 November 2026, first published on 7 November as a pre-release. Archives
+    for Linux x86_64, with and without CUDA 13; none for macOS or Windows. It packages the 0.35
+    review branches; the 0.35 line stays open.
+  fr: >-
+    Version complète depuis le 15 novembre 2026, publiée d'abord le 7 novembre comme préversion.
+    Archives pour Linux x86_64, avec et sans CUDA 13 ; aucune pour macOS ni Windows. Elle regroupe
+    les branches de revue de 0.35 ; la ligne 0.35 reste ouverte.
+- en: Cross-chain swaps, off by default
+  fr: Échanges entre chaînes, désactivés par défaut
+- en: >-
+    SwapNet is built into btxd and starts only with -swapnet=1. Its keys for the other chains sit in
+    the data directory: back them up with exportswaprecovery, not by copying files. Turning it off
+    does not cancel a funded swap; refund deadlines keep running.
+  fr: >-
+    SwapNet est intégré à btxd et ne démarre qu'avec -swapnet=1. Ses clés pour les autres chaînes se
+    trouvent dans le répertoire de données : sauvegardez-les avec exportswaprecovery, pas en copiant
+    les fichiers. Le désactiver n'annule pas un échange financé ; les délais de remboursement
+    continuent de courir.
+- en: Signing keeps your timelocks
+  fr: La signature ne modifie plus les verrous temporels
+- en: >-
+    For a csv, cltv or refund leaf, v0.34.15 rewrote nLockTime, nSequence and version while signing.
+    signrawtransactionwithwallet and walletprocesspsbt now refuse and name the value they need,
+    unless adjust_timelocks is true.
+  fr: >-
+    Pour une feuille csv, cltv ou de remboursement, v0.34.15 réécrivait nLockTime, nSequence et la
+    version lors de la signature. signrawtransactionwithwallet et walletprocesspsbt refusent
+    désormais et indiquent la valeur requise, sauf avec adjust_timelocks=true.
+- en: >-
+    No macOS or Windows archive: a Mac node stays on v0.34.15. The CUDA archive is built for NVIDIA
+    Blackwell (sm_120) and does not include the NVIDIA driver.
+  fr: >-
+    Pas d'archive pour macOS ni Windows : un nœud sur Mac reste en v0.34.15. L'archive CUDA est
+    compilée pour NVIDIA Blackwell (sm_120) et n'inclut pas le pilote NVIDIA.
+- en: >-
+    No desktop app: both archives leave out btx-qt and btx-atlas, which need a newer glibc than
+    2.38. Use btxd and btx-cli.
+  fr: >-
+    Pas d'application de bureau : les deux archives omettent btx-qt et btx-atlas, qui demanderaient
+    une glibc plus récente que 2.38. Utilisez btxd et btx-cli.
+- en: >-
+    btxd uses a few system libraries the archive does not bundle (libevent, SQLite, ZeroMQ,
+    libgomp). If one is missing, bin/btxd names the packages to install.
+  fr: >-
+    btxd utilise quelques bibliothèques système que l'archive n'inclut pas (libevent, SQLite,
+    ZeroMQ, libgomp). S'il en manque une, bin/btxd indique les paquets à installer.
+- en: >-
+    Recent releases have no signed checksum file: the last SHA256SUMS.asc was for v0.34.6, and
+    v0.34.16 has an unsigned SHA256SUMS. Compare the SHA-256 that GitHub shows for each file with
+    "shasum -a 256 <file>" ("sha256sum" on Linux).
+  fr: >-
+    Les versions récentes n'ont pas de fichier de sommes de contrôle signé : le dernier
+    SHA256SUMS.asc concernait la v0.34.6, et la v0.34.16 a un SHA256SUMS non signé. Comparez le
+    SHA-256 que GitHub affiche pour chaque fichier avec « shasum -a 256 <fichier> » (« sha256sum »
+    sous Linux).
+- en: >-
+    Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.16 has archives for
+    Linux and Linux with CUDA; for Apple Silicon Macs the newest is v0.34.15. There is no official
+    Windows build.
+  fr: >-
+    Les binaires Linux nécessitent glibc 2.38 ou plus récent (Ubuntu 24.04, Debian 13). La v0.34.16
+    a des archives pour Linux et Linux avec CUDA ; pour les Mac Apple Silicon, la plus récente est
+    la v0.34.15. Il n'existe pas de version officielle pour Windows.
+- en: >-
+    Release candidates (rc) are for testing. A node that holds coins, mines or signs belongs on the
+    newest full release.
+  fr: >-
+    Les versions candidates (rc) servent aux tests. Un nœud qui détient des coins, mine ou signe
+    doit tourner sur la dernière version complète.
+- en: Build result
+  fr: Résultat de la compilation
+- en: >-
+    The fork CI workflow (it ran on the release line on 12 Nov at 4c7840e9 and on 13 Nov at
+    88c9b49c, red both times; keep the upstream Atlas workflows): jobs CI-0 to CI-10, the
+    known-failing list, and a nightly job for the 41 stage3 suites that time out.
+  fr: >-
+    Le workflow de CI du fork (il a tourné sur la branche de version le 12 nov. sur 4c7840e9 et le
+    13 nov. sur 88c9b49c, en échec les deux fois ; garder les workflows Atlas de l'amont) : jobs
+    CI-0 à CI-10, la liste des échecs connus et un job nocturne pour les 41 suites stage3 qui
+    expirent.
+- en: >-
+    The results of the last nightly build and test run that the status page's operator publishes as
+    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix in the table
+    above. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+  fr: >-
+    Les résultats de la dernière exécution nocturne de compilation et de tests que l'opérateur de la
+    page d'état publie comme job CI-0, lus en direct dans son API. C'est une seule exécution sous
+    Linux, pas la matrice de compilation du fork du tableau ci-dessus. L'exécution des tests
+    unitaires laisse de côté les suites lentes matmul_v4_rc_stage3_*.
+- en: "This panel is filled in by JavaScript. The run as raw data: "
+  fr: "Ce panneau est rempli par JavaScript. L'exécution en données brutes : "
+- en: build failed
+  fr: compilation en échec
+- en: build passed
+  fr: compilation réussie
+- en: >-
+    ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator
+    publishes the results of a nightly build and test run on release-0.34.16
+  fr: >-
+    exécuté le 12 nov. sur 4c7840e9 et le 13 nov. sur 88c9b49c, en échec les deux fois ;
+    l'opérateur de la page d'état publie les résultats d'une exécution nocturne de compilation et de
+    tests sur release-0.34.16
+- en: tests not run
+  fr: tests non exécutés
+- en: >-
+    {listed} of {failed}
+  fr: >-
+    {listed} sur {failed}
+- en: … and {count} more
+  fr: … et {count} de plus
+- en: Branch @ commit
+  fr: Branche @ commit
+- en: CI data unavailable.
+  fr: Données de CI indisponibles.
+- en: Failed functional scripts ({count})
+  fr: Scripts fonctionnels en échec ({count})
+- en: Failed unit suites ({count})
+  fr: Suites unitaires en échec ({count})
+- en: Functional tests
+  fr: Tests fonctionnels
+- en: Last run is older than 36 h; the figures below may be out of date.
+  fr: La dernière exécution date de plus de 36 h ; les chiffres ci-dessous peuvent être dépassés.
+- en: Loading the last run …
+  fr: Chargement de la dernière exécution …
+- en: Started {measured} · finished {finished}
+  fr: >-
+    Début : {measured} · fin : {finished}
+- en: Nightly CI-0 run
+  fr: Exécution nocturne de CI-0
+- en: No current run.
+  fr: Aucune exécution récente.
+- en: The run as JSON
+  fr: L'exécution en JSON
+- en: Unit tests
+  fr: Tests unitaires
+- en: passed · {failed} failed
+  fr: réussis · {failed} en échec
+- en: passed · {failed} failed · {skipped} skipped
+  fr: réussis · {failed} en échec · {skipped} ignorés
+- en: >-
+    {passed} of {run}
+  fr: >-
+    {passed} sur {run}
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   fr: Ne liste plus BTX ; son marché BTX/USDT a disparu en juillet 2026.
 - en: >-
@@ -74,14 +272,6 @@ translations:
     Produit sur un miroir de confiance : le travail MatMul a donc été accepté sur la base des
     attestations des signataires.
 - en: >-
-    Early test build: internal security review, no independent audit; the source code is not public
-    and the direct downloads are unsigned. A 64-character master key is the only backup; keep it
-    offline.
-  fr: >-
-    Version de test préliminaire : revue de sécurité interne, pas d'audit indépendant ; le code
-    source n'est pas public et les téléchargements directs ne sont pas signés. Une clé maîtresse de
-    64 caractères est la seule sauvegarde ; gardez-la hors ligne.
-- en: >-
     Every node relays blocks and keeps the network reachable. A node checks every block itself only
     with a GPU that passes btxd's self-test. Without one, run it as a trusted mirror that follows
     signed checks from at least two signers; otherwise it stops syncing. Signers have the highest
@@ -91,10 +281,6 @@ translations:
     bloc qu'avec un GPU qui réussit l'autotest de btxd. Sans un tel GPU, faites-le tourner comme
     miroir de confiance qui suit les vérifications signées d'au moins deux signataires ; sinon il
     cesse de se synchroniser. Les signataires ont les exigences les plus élevées.
-- en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages and a public API.
-  fr: >-
-    Explorateur de l'équipe de Byron Bay, avec une vue du minage sur 24 h, des pages de statistiques
-    et une API publique.
 - en: How to report a vulnerability privately to the BTX Development Team. Not for support questions.
   fr: >-
     Comment signaler une vulnérabilité en privé à l'équipe de développement de BTX. Pas pour les
@@ -247,8 +433,6 @@ translations:
     Pool dédié à BTX, exploité par l'auteur de btx-pool-miner (GitHub lucasan123). Il paie les
     mineurs directement dans chaque bloc qu'il trouve, au prorata du travail sur une fenêtre de 30
     minutes. Vérifiez ses frais sur la page du pool.
-- en: Post-quantum desktop wallet of the easyBTX team for macOS and Windows.
-  fr: Portefeuille de bureau post-quantique de l'équipe easyBTX pour macOS et Windows.
 - en: >-
     Problems with an NVIDIA card? The official CUDA troubleshooting guide helps; parts of it
     describe the CUDA path from before block 185,000.
@@ -275,13 +459,6 @@ translations:
   fr: >-
     Fonctionne avec la v0.34.15 sans le réseau de modèles. Sans GPU qualifié, le nœud suit les
     vérifications des signataires au lieu de vérifier lui-même le travail MatMul.
-- en: >-
-    Seedless means there is no seed phrase you back up yourself; access and recovery go through the
-    Bonuz login. Check how recovery works before you rely on it.
-  fr: >-
-    « Sans phrase de récupération » veut dire qu'il n'y a pas de phrase de récupération à
-    sauvegarder vous-même ; l'accès et la récupération passent par la connexion Bonuz. Vérifiez
-    comment fonctionne la récupération avant de vous y fier.
 - en: Seedless mobile wallet for iOS and Android with BTX support.
   fr: Portefeuille mobile sans phrase de récupération pour iOS et Android, compatible BTX.
 - en: >-
@@ -293,8 +470,6 @@ translations:
     rester en ligne. L'archive CUDA officielle couvre les cartes Blackwell (sm_120) ; les autres
     cartes NVIDIA exigent une compilation depuis les sources et peuvent ne pas être qualifiées.
     Suivez le guide d'exploitation des développeurs.
-- en: Some API endpoints need an access token.
-  fr: Certains points de terminaison de l'API exigent un jeton d'accès.
 - en: Telegram group of the easyBTX team, for questions about its miner, node app and wallet.
   fr: >-
     Groupe Telegram de l'équipe easyBTX, pour les questions sur son logiciel de minage, son appli de
@@ -314,12 +489,6 @@ translations:
   fr: >-
     La conception des développeurs pour du BTX encapsulé sur les chaînes EVM : règles du jeton,
     modèles de pont et contrats de référence. Une conception, pas un pont fonctionnel.
-- en: >-
-    The file is marked historical: it records the v3 design. Since block 185,000 the network runs
-    MatMul v4.7.
-  fr: >-
-    Le fichier est marqué comme historique : il documente la conception v3. Depuis le bloc 185 000,
-    le réseau tourne avec MatMul v4.7.
 - en: >-
     The miner's source is not published: the repository holds scripts and binary releases, with no
     licence. 2% dev fee, 0% on ninjaraider.
@@ -406,14 +575,6 @@ translations:
     de l'aide, une « récupération » ou des rendements garantis sont des arnaques.
 - en: Before you install a node release
   fr: Avant d'installer une version du nœud
-- en: >-
-    Recent releases come without a signed checksum file; the last one with SHA256SUMS.asc was v0.34.6.
-    GitHub shows a SHA-256 for each file on the release page: compare it with "shasum -a 256 <file>"
-    ("sha256sum" on Linux).
-  fr: >-
-    Les versions récentes arrivent sans fichier de sommes de contrôle signé ; la dernière avec SHA256SUMS.asc
-    était la v0.34.6. GitHub affiche un SHA-256 par fichier sur la page de la version : comparez-le
-    avec « shasum -a 256 <fichier> » (« sha256sum » sous Linux).
 - en: >-
     That proves the file is the one on GitHub, not who built it. If that matters to you, build the
     tagged source yourself.
@@ -627,8 +788,6 @@ translations:
   fr: >-
     Une synchronisation depuis la genèse s'arrête toujours au bloc 126 978 (#272). Commencez avec un
     instantané.
-- en: Atlas, a second desktop app
-  fr: Atlas, une deuxième application de bureau
 - en: Auto-update off behind a proxy
   fr: Mise à jour automatique désactivée derrière un proxy
 - en: >-
@@ -663,13 +822,6 @@ translations:
     blocs recalcule chacun exactement sur un GPU qualifié NVIDIA (CUDA) ou Apple (Metal) ; les nœuds
     sans GPU suivent des vérifications signées par d'autres. On ne peut pas miner avec le CPU.
 - en: >-
-    Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.15 has archives for Linux,
-    Linux with CUDA and Apple Silicon Macs; there is no official Windows build.
-  fr: >-
-    Les binaires Linux nécessitent glibc 2.38 ou plus récent (Ubuntu 24.04, Debian 13). La v0.34.15
-    propose des archives pour Linux, Linux avec CUDA et les Mac Apple Silicon ; il n'existe pas de
-    version officielle pour Windows.
-- en: >-
     Make a backup before money arrives. In btxd, backupwalletbundlearchive writes one encrypted file;
     keep it and its passphrase offline and apart. Any backup can spend your coins: plain exports at
     once, the archive once opened. Restore it once to test it.
@@ -681,31 +833,11 @@ translations:
 - en: Model network with fewer open ports
   fr: Réseau de modèles avec moins de ports ouverts
 - en: >-
-    No CUDA, macOS or Windows archive. A GPU, mining or signing node on v0.34.16 loses its GPU path;
-    those nodes stay on v0.34.15.
-  fr: >-
-    Pas d'archive pour CUDA, macOS ni Windows. Un nœud GPU, de minage ou de signature perd avec la
-    v0.34.16 son chemin GPU ; ces nœuds restent en v0.34.15.
-- en: >-
     Other coins also trade as BTX. A market is only for this chain if its deposit addresses start with
     btx1z.
   fr: >-
     D'autres cryptomonnaies s'échangent aussi sous le sigle BTX. Un marché ne concerne cette chaîne que
     si ses adresses de dépôt commencent par btx1z.
-- en: >-
-    Pre-release since 7 November 2026, Linux x86_64 only. It packages the 0.35 review branches; the 0.35
-    line stays open. The developers say it is not a release qualification. The current full release
-    stays v0.34.15.
-  fr: >-
-    Préversion depuis le 7 novembre 2026, uniquement pour Linux x86_64. Elle regroupe les branches de
-    revue de la 0.35 ; la ligne 0.35 reste ouverte. Les développeurs précisent que ce n'est pas une
-    version qualifiée. La version complète actuelle reste la v0.34.15.
-- en: >-
-    Pre-releases (rc, and v0.34.16) are for testing. v0.34.16 has no CUDA build: a GPU, mining or
-    signing node stays on v0.34.15.
-  fr: >-
-    Les préversions (rc et la v0.34.16) servent aux tests. La v0.34.16 n'a pas de version CUDA : un nœud
-    GPU, de minage ou de signature reste en v0.34.15.
 - en: >-
     Read the release notes before upgrading. Some releases change the rules at a fixed block height;
     this page shows a countdown when one is coming. Each release also stops working about two years
@@ -732,13 +864,6 @@ translations:
     construites à la main en une étape du portefeuille. Les frais sont fixés à la présignature, et la
     réclamation doit être confirmée avant la hauteur de remboursement.
 - en: >-
-    The Linux archive adds btx-atlas beside btx-qt, which stays. Atlas needs glibc 2.39, WebKitGTK 4.1,
-    GTK 3, the Ayatana tray library and zenity. btx-qt and ZeroMQ were already in v0.34.15.
-  fr: >-
-    L'archive Linux ajoute btx-atlas à côté de btx-qt, qui reste. Atlas nécessite glibc 2.39, WebKitGTK
-    4.1, GTK 3, la bibliothèque de barre d'état Ayatana et zenity. btx-qt et ZeroMQ étaient déjà dans la
-    v0.34.15.
-- en: >-
     The network for AI models is on by default and listens on TCP 29447. v0.34.16 no longer opens that
     port with -listen=0 or a proxy, finds model peers on the local network over UDP 29448, and adds a
     local security guard. -modelnet=0 turns all of it off; it does not spend coins.
@@ -754,14 +879,15 @@ translations:
     Le nœud dérive de Bitcoin Knots v29.2, une variante de Bitcoin Core. btxd, btx-cli, l'interface RPC
     et les PSBT fonctionnent comme les utilisateurs de Bitcoin les connaissent ; ce qui change, c'est la
     preuve de travail, les signatures et certaines règles du réseau.
-- en: >-
-    Two defaults to decide on: btxd installs newer signed releases from btx.dev by itself
-    (autoupdateseamless=0 only reports them, autoupdate=0 stops checking), and the model network listens
-    on port 29447 (modelnet=0 turns it off).
-  fr: >-
-    Deux réglages par défaut à décider : btxd installe lui-même les versions signées plus récentes
-    depuis btx.dev (autoupdateseamless=0 les signale seulement, autoupdate=0 cesse de vérifier), et le
-    réseau de modèles écoute sur le port 29447 (modelnet=0 le désactive).
+- en: 'Three defaults to decide on: btxd installs newer signed releases from btx.dev by itself (autoupdateseamless=0
+    only reports them, autoupdate=0 stops checking); the model network listens on port 29447 (modelnet=0
+    turns it off); and natpmp asks your router to open ports 19335 and 29447 to the internet (natpmp=0
+    stops it). With coins, mining or a signer, set both to 0.'
+  fr: 'Trois réglages par défaut à choisir : btxd installe seul les versions signées récentes de btx.dev
+    (autoupdateseamless=0 les signale, autoupdate=0 ne vérifie plus) ; le réseau de modèles écoute sur
+    le port 29447 (modelnet=0 le coupe) ; et natpmp demande au routeur d''ouvrir les ports 19335 et 29447
+    sur internet (natpmp=0 l''empêche). Avec des fonds, du minage ou un signataire, mettez les deux à
+    0.'
 - en: Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.
   fr: >-
     Décompressez toute l'archive et lancez bin/btxd depuis celle-ci. Un bin/btxd copié seul s'arrête.
@@ -773,12 +899,6 @@ translations:
     contiennent permet de dépenser sans la phrase de passe du portefeuille, et avertissent pour un
     portefeuille chiffré. Les sauvegardes faites avec des versions antérieures contiennent le même
     fichier.
-- en: >-
-    btx-qt in this archive needs glibc 2.43 and does not start on Ubuntu 24.04 or Debian 13; btxd and
-    btx-cli need 2.38.
-  fr: >-
-    btx-qt dans cette archive nécessite glibc 2.43 et ne démarre pas sous Ubuntu 24.04 ni Debian 13 ;
-    btxd et btx-cli nécessitent 2.38.
 - en: Become a BTX dev
   fr: Devenir développeur BTX
 - en: >-
@@ -1666,14 +1786,6 @@ translations:
     L'interface graphique Qt (aucune donnée de couverture dans aucune exécution), les arborescences
     Rust et npm d'Atlas (OSV et cargo-audit répertoriés, pas exécutés) et les listes d'autorisation
     RPC d'Atlas par écran.
-- en: >-
-    The fork CI workflow (it exists but has never run on the release line; rebase onto 4c7840e9 and
-    keep the upstream Atlas workflows): jobs CI-0 to CI-10, the known-failing list, and a nightly
-    job for the 41 stage3 suites that time out.
-  fr: >-
-    Le workflow de CI du fork (il existe mais n'a jamais tourné sur la branche de version ; rebaser
-    sur 4c7840e9 et garder les workflows Atlas de l'amont) : jobs CI-0 à CI-10, la liste des échecs
-    connus et un job nocturne pour les 41 suites stage3 qui expirent.
 - en: The sweeps
   fr: Les balayages
 - en: >-
@@ -2286,8 +2398,6 @@ translations:
   fr: chaque semaine à partir du 24 nov.
 - en: with the Thursday batch, only when a complete item exists; at most one short note
   fr: avec le lot du jeudi, seulement quand un élément complet existe ; au plus une courte note
-- en: workflow exists; never run on release-0.34.16; needs rebase to 4c7840e9
-  fr: le workflow existe ; jamais exécuté sur release-0.34.16 ; à rebaser sur 4c7840e9
 - en: >-
     worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); shared helper exists
     (#576)
