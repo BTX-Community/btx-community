@@ -64,6 +64,7 @@ What each level needs, and its first hour in five steps: [`08-levels.md`](08-lev
 | [`07-lanes.md`](07-lanes.md) | The lanes: scope, done bar, first tasks, a claimable owner and second pass, the weekly rhythm |
 | [`08-levels.md`](08-levels.md) | Basic, Advanced, Core: what each needs and its first hour |
 | [`exam/`](exam/) | Twelve cases with known answers, drawn from public PRs: questions, and a separate answer key with sources |
+| [`fuzz-box/`](fuzz-box/) | A continuous fuzz box for an infra owner: the guide, the scripts, the config example and the systemd unit; crash inputs stay private |
 | [`lessons/`](lessons/) | Lessons learned: the template, the index, two seed lessons |
 | [`packs/`](packs/) | One brief per lane for your AI, each ending in a prompt block |
 | [`plan/`](plan/) | The review and test programme measured on the release line, with its numbers and lanes as JSON |

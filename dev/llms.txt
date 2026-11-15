@@ -37,6 +37,15 @@ This index lives in BTX-Community/btx-community under dev/. Last verified: 2026-
 - [plan/lanes.json](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/plan/lanes.json): the lanes as JSON; owner and second_pass handles are claimable
 - [tools/refresh-state.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/tools/refresh-state.sh): prints the head rows for 01-state.md with three anonymous GitHub API calls; never writes a file
 - [tools/check_stale.py](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/tools/check_stale.py): checks the Last verified line on every page; warns at 30 days, fails at 90
+- [fuzz-box/README.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/README.md): the continuous fuzz box: what an infra owner needs, safety rules, install, the loop, daily checks, the private route for crashes
+- [fuzz-box/fuzzbox.conf.example](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox.conf.example): the fuzz box settings: branch (default main), workers, slice length, memory limit, priority targets
+- [fuzz-box/fuzzbox-setup.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-setup.sh): one-time setup as root: the btxfuzz user, build tools, OpenSSL (hash-checked), the clone
+- [fuzz-box/fuzzbox-build.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-build.sh): builds the libFuzzer + ASan + UBSan fuzz binary for the newest commit of the branch
+- [fuzz-box/fuzzbox-loop.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-loop.sh): the continuous loop: rebuild and replay, fuzz, triage, merge, disk stop
+- [fuzz-box/fuzzbox-one.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-one.sh): one target, one job (fuzz, replay or merge)
+- [fuzz-box/fuzzbox-triage.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-triage.sh): reproduces new crash files, groups them, writes private report drafts; never publishes anything
+- [fuzz-box/fuzzbox-env.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-env.sh): sourced by the other scripts: sanitizer settings and the CPU count
+- [fuzz-box/btxfuzz.service](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/btxfuzz.service): the hardened systemd unit for the loop
 
 ## Check yourself
 
