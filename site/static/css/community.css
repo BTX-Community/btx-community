@@ -588,6 +588,81 @@ a {
   text-align: right;
 }
 
+/* --- Nightly CI panel (developers page): filled by ci.js from ci.json ----------------------- */
+
+.c-ci {
+  margin: 18px 0 8px;
+}
+
+.c-ci__title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
+.c-ci__status {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.c-ci__status:empty {
+  margin: 0;
+}
+
+.c-ci__run[hidden],
+.c-ci__failed[hidden] {
+  display: none;
+}
+
+.c-ci__status--warn {
+  padding: 10px 14px;
+  border-left: 3px solid var(--yellow);
+  border-radius: 6px;
+  background: rgb(255 194 74 / 8%);
+  color: var(--text);
+}
+
+.c-tile dd.c-ci__ref {
+  font-size: 16px;
+}
+
+.c-tile dd.c-ci__bad {
+  color: var(--red);
+}
+
+.c-ci__failed {
+  margin: 12px 0 0;
+}
+
+.c-ci__failed > summary {
+  padding: 6px 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.c-ci__names {
+  margin: 4px 0 0;
+  padding: 10px 14px 10px 32px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  font-size: 13px;
+}
+
+.c-ci__names code {
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+
+.c-ci__names .c-ci__more {
+  color: var(--muted);
+  list-style: none;
+}
+
 .c-warning,
 .c-risk {
   margin: 0 0 14px;
@@ -1446,6 +1521,11 @@ a {
 
   .c-tile--wide {
     grid-column: auto;
+  }
+
+  /* Branch and commit on a line of their own. */
+  .c-ci__ref-tile {
+    grid-column: 1 / -1;
   }
 
   /* Name on its own line, date and count below it. */
