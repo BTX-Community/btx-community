@@ -5,6 +5,74 @@
 
 schema_version: 1
 translations:
+- en: >-
+    A full release since 15 November 2026, first published on 7 November as a pre-release. Archives
+    for Linux x86_64, with and without CUDA 13; none for macOS or Windows. It packages the 0.35
+    review branches; the 0.35 line stays open.
+  es: >-
+    Versión completa desde el 15 de noviembre de 2026; se publicó primero el 7 de noviembre como
+    versión preliminar. Archivos para Linux x86_64, con y sin CUDA 13; ninguno para macOS ni
+    Windows. Reúne las ramas de revisión de 0.35; la línea 0.35 sigue abierta.
+- en: Cross-chain swaps, off by default
+  es: Intercambios entre cadenas, desactivados por defecto
+- en: >-
+    SwapNet is built into btxd and starts only with -swapnet=1. Its keys for the other chains sit in
+    the data directory: back them up with exportswaprecovery, not by copying files. Turning it off
+    does not cancel a funded swap; refund deadlines keep running.
+  es: >-
+    SwapNet está integrado en btxd y solo arranca con -swapnet=1. Sus claves para las otras cadenas
+    están en el directorio de datos: haz la copia con exportswaprecovery, no copiando archivos.
+    Desactivarlo no cancela un intercambio ya financiado; los plazos de reembolso siguen corriendo.
+- en: Signing keeps your timelocks
+  es: Firmar ya no cambia los bloqueos de tiempo
+- en: >-
+    For a csv, cltv or refund leaf, v0.34.15 rewrote nLockTime, nSequence and version while signing.
+    signrawtransactionwithwallet and walletprocesspsbt now refuse and name the value they need,
+    unless adjust_timelocks is true.
+  es: >-
+    Con una hoja csv, cltv o de reembolso, v0.34.15 reescribía nLockTime, nSequence y la versión al
+    firmar. signrawtransactionwithwallet y walletprocesspsbt ahora se niegan e indican el valor
+    necesario, salvo con adjust_timelocks=true.
+- en: >-
+    No macOS or Windows archive: a Mac node stays on v0.34.15. The CUDA archive is built for NVIDIA
+    Blackwell (sm_120) and does not include the NVIDIA driver.
+  es: >-
+    No hay archivo para macOS ni Windows: un nodo en Mac se queda en v0.34.15. El archivo CUDA está
+    compilado para NVIDIA Blackwell (sm_120) y no incluye el controlador de NVIDIA.
+- en: >-
+    No desktop app: both archives leave out btx-qt and btx-atlas, which need a newer glibc than
+    2.38. Use btxd and btx-cli.
+  es: >-
+    Sin aplicación de escritorio: ambos archivos omiten btx-qt y btx-atlas, que necesitarían una
+    glibc más reciente que la 2.38. Usa btxd y btx-cli.
+- en: >-
+    btxd uses a few system libraries the archive does not bundle (libevent, SQLite, ZeroMQ,
+    libgomp). If one is missing, bin/btxd names the packages to install.
+  es: >-
+    btxd usa algunas bibliotecas del sistema que el archivo no incluye (libevent, SQLite, ZeroMQ,
+    libgomp). Si falta alguna, bin/btxd indica los paquetes que hay que instalar.
+- en: >-
+    Recent releases have no signed checksum file: the last SHA256SUMS.asc was for v0.34.6, and
+    v0.34.16 has an unsigned SHA256SUMS. Compare the SHA-256 that GitHub shows for each file with
+    "shasum -a 256 <file>" ("sha256sum" on Linux).
+  es: >-
+    Las versiones recientes no traen un archivo de sumas de control firmado: el último
+    SHA256SUMS.asc fue para v0.34.6, y v0.34.16 trae un SHA256SUMS sin firmar. Compara el SHA-256
+    que GitHub muestra para cada archivo con "shasum -a 256 <archivo>" ("sha256sum" en Linux).
+- en: >-
+    Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.16 has archives for
+    Linux and Linux with CUDA; for Apple Silicon Macs the newest is v0.34.15. There is no official
+    Windows build.
+  es: >-
+    Los binarios de Linux necesitan glibc 2.38 o posterior (Ubuntu 24.04, Debian 13). v0.34.16 tiene
+    archivos para Linux y Linux con CUDA; para Mac con Apple Silicon la más reciente es v0.34.15. No
+    hay compilación oficial para Windows.
+- en: >-
+    Release candidates (rc) are for testing. A node that holds coins, mines or signs belongs on the
+    newest full release.
+  es: >-
+    Las versiones candidatas (rc) son para pruebas. Un nodo con fondos, que mina o que firma debe
+    estar en la última versión completa.
 - en: Build result
   es: Resultado de la compilación
 - en: >-
@@ -477,14 +545,6 @@ translations:
 - en: Before you install a node release
   es: Antes de instalar una versión del nodo
 - en: >-
-    Recent releases come without a signed checksum file; the last one with SHA256SUMS.asc was v0.34.6.
-    GitHub shows a SHA-256 for each file on the release page: compare it with "shasum -a 256 <file>"
-    ("sha256sum" on Linux).
-  es: >-
-    Las versiones recientes vienen sin archivo de sumas de comprobación firmado; la última con SHA256SUMS.asc
-    fue la v0.34.6. GitHub muestra un SHA-256 por archivo en la página de la versión: compáralo con
-    "shasum -a 256 <archivo>" ("sha256sum" en Linux).
-- en: >-
     That proves the file is the one on GitHub, not who built it. If that matters to you, build the
     tagged source yourself.
   es: >-
@@ -694,8 +754,6 @@ translations:
   es: >-
     Una sincronización desde el génesis sigue deteniéndose en el bloque 126.978 (#272). Empieza con una
     instantánea.
-- en: Atlas, a second desktop app
-  es: Atlas, una segunda aplicación de escritorio
 - en: Auto-update off behind a proxy
   es: Actualización automática desactivada tras un proxy
 - en: >-
@@ -729,13 +787,6 @@ translations:
     mismo vuelve a calcular cada uno exactamente en una GPU homologada de NVIDIA (CUDA) o Apple (Metal);
     los nodos sin ella siguen comprobaciones firmadas por otros. No se puede minar con la CPU.
 - en: >-
-    Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.15 has archives for Linux,
-    Linux with CUDA and Apple Silicon Macs; there is no official Windows build.
-  es: >-
-    Los binarios de Linux necesitan glibc 2.38 o más reciente (Ubuntu 24.04, Debian 13). La v0.34.15
-    tiene archivos para Linux, Linux con CUDA y Mac con Apple Silicon; no hay versión oficial para
-    Windows.
-- en: >-
     Make a backup before money arrives. In btxd, backupwalletbundlearchive writes one encrypted file;
     keep it and its passphrase offline and apart. Any backup can spend your coins: plain exports at
     once, the archive once opened. Restore it once to test it.
@@ -747,31 +798,11 @@ translations:
 - en: Model network with fewer open ports
   es: Red de modelos con menos puertos abiertos
 - en: >-
-    No CUDA, macOS or Windows archive. A GPU, mining or signing node on v0.34.16 loses its GPU path;
-    those nodes stay on v0.34.15.
-  es: >-
-    No hay archivo para CUDA, macOS ni Windows. Un nodo con GPU, de minería o de firma pierde con la
-    v0.34.16 su ruta por GPU; esos nodos se quedan en la v0.34.15.
-- en: >-
     Other coins also trade as BTX. A market is only for this chain if its deposit addresses start with
     btx1z.
   es: >-
     Otras monedas también cotizan como BTX. Un mercado solo es de esta cadena si sus direcciones de
     depósito empiezan por btx1z.
-- en: >-
-    Pre-release since 7 November 2026, Linux x86_64 only. It packages the 0.35 review branches; the 0.35
-    line stays open. The developers say it is not a release qualification. The current full release
-    stays v0.34.15.
-  es: >-
-    Versión preliminar desde el 7 de noviembre de 2026, solo para Linux x86_64. Reúne las ramas de
-    revisión de la 0.35; la línea 0.35 sigue abierta. Los desarrolladores dicen que no es una versión
-    validada para publicación. La versión completa actual sigue siendo la v0.34.15.
-- en: >-
-    Pre-releases (rc, and v0.34.16) are for testing. v0.34.16 has no CUDA build: a GPU, mining or
-    signing node stays on v0.34.15.
-  es: >-
-    Las versiones preliminares (rc y la v0.34.16) son para pruebas. La v0.34.16 no tiene versión con
-    CUDA: un nodo con GPU, de minería o de firma se queda en la v0.34.15.
 - en: >-
     Read the release notes before upgrading. Some releases change the rules at a fixed block height;
     this page shows a countdown when one is coming. Each release also stops working about two years
@@ -795,13 +826,6 @@ translations:
     cualquiera que tenga el secreto. htlc_presign y p2mr_leaf convierten las transacciones construidas a
     mano en un paso del monedero. La comisión queda fijada al prefirmar, y la reclamación debe
     confirmarse antes de la altura de reembolso.
-- en: >-
-    The Linux archive adds btx-atlas beside btx-qt, which stays. Atlas needs glibc 2.39, WebKitGTK 4.1,
-    GTK 3, the Ayatana tray library and zenity. btx-qt and ZeroMQ were already in v0.34.15.
-  es: >-
-    El archivo de Linux añade btx-atlas junto a btx-qt, que se mantiene. Atlas necesita glibc 2.39,
-    WebKitGTK 4.1, GTK 3, la biblioteca de bandeja Ayatana y zenity. btx-qt y ZeroMQ ya estaban en la
-    v0.34.15.
 - en: >-
     The network for AI models is on by default and listens on TCP 29447. v0.34.16 no longer opens that
     port with -listen=0 or a proxy, finds model peers on the local network over UDP 29448, and adds a
@@ -837,12 +861,6 @@ translations:
     Las copias de seguridad en paquete del monedero ahora indican que el archivo de descriptores que
     contienen puede gastar sin la frase de contraseña del monedero, y avisan si el monedero está
     cifrado. Las copias hechas con versiones anteriores contienen el mismo archivo.
-- en: >-
-    btx-qt in this archive needs glibc 2.43 and does not start on Ubuntu 24.04 or Debian 13; btxd and
-    btx-cli need 2.38.
-  es: >-
-    btx-qt en este archivo necesita glibc 2.43 y no arranca en Ubuntu 24.04 ni en Debian 13; btxd y btx-
-    cli necesitan 2.38.
 - en: Become a BTX dev
   es: Hazte desarrollador de BTX
 - en: >-

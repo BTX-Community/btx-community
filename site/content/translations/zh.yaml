@@ -6,6 +6,64 @@
 
 schema_version: 1
 translations:
+- en: >-
+    A full release since 15 November 2026, first published on 7 November as a pre-release. Archives
+    for Linux x86_64, with and without CUDA 13; none for macOS or Windows. It packages the 0.35
+    review branches; the 0.35 line stays open.
+  zh: >-
+    自 2026 年 11 月 15 日起为正式版，最初于 11 月 7 日作为预发布版发布。提供 Linux x86_64 归档，含与不含 CUDA 13；没有 macOS 或 Windows
+    归档。它汇集了 0.35 的审查分支；0.35 系列仍在进行中。
+- en: Cross-chain swaps, off by default
+  zh: 跨链兑换，默认关闭
+- en: >-
+    SwapNet is built into btxd and starts only with -swapnet=1. Its keys for the other chains sit in
+    the data directory: back them up with exportswaprecovery, not by copying files. Turning it off
+    does not cancel a funded swap; refund deadlines keep running.
+  zh: >-
+    SwapNet 已内置于 btxd，只有设置 -swapnet=1 才会启动。它用于其他链的密钥保存在数据目录中：请用 exportswaprecovery
+    备份，不要直接复制文件。关闭它不会取消已注资的兑换；退款期限仍在继续。
+- en: Signing keeps your timelocks
+  zh: 签名不再改动时间锁
+- en: >-
+    For a csv, cltv or refund leaf, v0.34.15 rewrote nLockTime, nSequence and version while signing.
+    signrawtransactionwithwallet and walletprocesspsbt now refuse and name the value they need,
+    unless adjust_timelocks is true.
+  zh: >-
+    对于 csv、cltv 或退款叶，v0.34.15 在签名时会改写 nLockTime、nSequence 和版本号。现在 signrawtransactionwithwallet 和
+    walletprocesspsbt 会拒绝并给出所需的值，除非设置 adjust_timelocks=true。
+- en: >-
+    No macOS or Windows archive: a Mac node stays on v0.34.15. The CUDA archive is built for NVIDIA
+    Blackwell (sm_120) and does not include the NVIDIA driver.
+  zh: >-
+    没有 macOS 或 Windows 归档：Mac 上的节点继续使用 v0.34.15。CUDA 归档为 NVIDIA Blackwell（sm_120）编译，不包含 NVIDIA 驱动。
+- en: >-
+    No desktop app: both archives leave out btx-qt and btx-atlas, which need a newer glibc than
+    2.38. Use btxd and btx-cli.
+  zh: >-
+    没有桌面应用：两个归档都不含 btx-qt 和 btx-atlas，因为它们需要比 2.38 更新的 glibc。请使用 btxd 和 btx-cli。
+- en: >-
+    btxd uses a few system libraries the archive does not bundle (libevent, SQLite, ZeroMQ,
+    libgomp). If one is missing, bin/btxd names the packages to install.
+  zh: >-
+    btxd 需要一些归档未附带的系统库（libevent、SQLite、ZeroMQ、libgomp）。如果缺少，bin/btxd 会列出需要安装的软件包。
+- en: >-
+    Recent releases have no signed checksum file: the last SHA256SUMS.asc was for v0.34.6, and
+    v0.34.16 has an unsigned SHA256SUMS. Compare the SHA-256 that GitHub shows for each file with
+    "shasum -a 256 <file>" ("sha256sum" on Linux).
+  zh: >-
+    近期版本没有签名的校验和文件：最后一个 SHA256SUMS.asc 属于 v0.34.6，v0.34.16 附带未签名的 SHA256SUMS。请用 "shasum -a 256
+    <文件>"（Linux 上用 "sha256sum"）与 GitHub 为每个文件显示的 SHA-256 进行比较。
+- en: >-
+    Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.16 has archives for
+    Linux and Linux with CUDA; for Apple Silicon Macs the newest is v0.34.15. There is no official
+    Windows build.
+  zh: >-
+    Linux 程序需要 glibc 2.38 或更新版本（Ubuntu 24.04、Debian 13）。v0.34.16 提供 Linux 和带 CUDA 的 Linux 归档；Apple
+    Silicon Mac 的最新版本是 v0.34.15。没有官方 Windows 版本。
+- en: >-
+    Release candidates (rc) are for testing. A node that holds coins, mines or signs belongs on the
+    newest full release.
+  zh: 候选版本（rc）仅用于测试。持有币、挖矿或作为签名者的节点应使用最新的正式版。
 - en: Build result
   zh: 构建结果
 - en: >-
@@ -356,13 +414,6 @@ translations:
 - en: Before you install a node release
   zh: 安装节点版本之前
 - en: >-
-    Recent releases come without a signed checksum file; the last one with SHA256SUMS.asc was v0.34.6.
-    GitHub shows a SHA-256 for each file on the release page: compare it with "shasum -a 256 <file>"
-    ("sha256sum" on Linux).
-  zh: >-
-    最近的版本没有签名的校验和文件；最后一个带 SHA256SUMS.asc 的版本是 v0.34.6。GitHub 在发布页面为每个文件显示 SHA-256：用 “shasum -a 256
-    <文件>”（Linux 上用 “sha256sum”）进行比对。
-- en: >-
     That proves the file is the one on GitHub, not who built it. If that matters to you, build the
     tagged source yourself.
   zh: 这只能证明文件就是 GitHub 上的那个，而不能证明是谁构建的。如果你在意这一点，请自行编译带标签的源代码。
@@ -530,8 +581,6 @@ translations:
     A sync from genesis still stops at block 126,978 (#272). Start from a snapshot.
   zh: >-
     从创世区块开始同步仍会停在区块 126,978（#272）。请从快照开始。
-- en: Atlas, a second desktop app
-  zh: Atlas，第二个桌面应用
 - en: Auto-update off behind a proxy
   zh: 使用代理时关闭自动更新
 - en: >-
@@ -555,11 +604,6 @@ translations:
   zh: >-
     矿工不做哈希运算，而是计算大型矩阵乘法，这正是 AI 加速器擅长的工作。自区块 185,000 起，自行验证区块的节点要在合格的 NVIDIA（CUDA）或 Apple（Metal）GPU 上精确重算每个区块；没有这种 GPU 的节点依赖他人签名的验证结果。无法用 CPU 挖矿。
 - en: >-
-    Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.15 has archives for Linux,
-    Linux with CUDA and Apple Silicon Macs; there is no official Windows build.
-  zh: >-
-    Linux 程序需要 glibc 2.38 或更新版本（Ubuntu 24.04、Debian 13）。v0.34.15 提供 Linux、带 CUDA 的 Linux 和 Apple Silicon Mac 的压缩包；没有官方 Windows 版本。
-- en: >-
     Make a backup before money arrives. In btxd, backupwalletbundlearchive writes one encrypted file;
     keep it and its passphrase offline and apart. Any backup can spend your coins: plain exports at
     once, the archive once opened. Restore it once to test it.
@@ -568,23 +612,9 @@ translations:
 - en: Model network with fewer open ports
   zh: 开放端口更少的模型网络
 - en: >-
-    No CUDA, macOS or Windows archive. A GPU, mining or signing node on v0.34.16 loses its GPU path;
-    those nodes stay on v0.34.15.
-  zh: 没有 CUDA、macOS 或 Windows 压缩包。GPU、挖矿或签名节点升级到 v0.34.16 会失去 GPU 路径；这些节点请继续使用 v0.34.15。
-- en: >-
     Other coins also trade as BTX. A market is only for this chain if its deposit addresses start with
     btx1z.
   zh: 其他币也使用 BTX 这个代码交易。只有充值地址以 btx1z 开头的市场才属于这条链。
-- en: >-
-    Pre-release since 7 November 2026, Linux x86_64 only. It packages the 0.35 review branches; the 0.35
-    line stays open. The developers say it is not a release qualification. The current full release
-    stays v0.34.15.
-  zh: >-
-    自 2026 年 11 月 7 日起发布的预发布版，仅限 Linux x86_64。它打包了 0.35 的评审分支；0.35 版本线仍在继续。开发者表示这不是经过发布验证的版本。当前正式版仍为 v0.34.15。
-- en: >-
-    Pre-releases (rc, and v0.34.16) are for testing. v0.34.16 has no CUDA build: a GPU, mining or
-    signing node stays on v0.34.15.
-  zh: 预发布版（rc 以及 v0.34.16）仅供测试。v0.34.16 没有 CUDA 版本：GPU、挖矿或签名节点请继续使用 v0.34.15。
 - en: >-
     Read the release notes before upgrading. Some releases change the rules at a fixed block height;
     this page shows a countdown when one is coming. Each release also stops working about two years
@@ -600,11 +630,6 @@ translations:
     fixed when you presign, and the claim must confirm before the refund height.
   zh: >-
     自 0.34.13 起，互换的领取交易可以在注资时签好，之后由任何掌握秘密的人完成。htlc_presign 和 p2mr_leaf 把手工构造的交易变成钱包中的一个步骤。手续费在预签名时就已确定，领取交易必须在退款高度之前得到确认。
-- en: >-
-    The Linux archive adds btx-atlas beside btx-qt, which stays. Atlas needs glibc 2.39, WebKitGTK 4.1,
-    GTK 3, the Ayatana tray library and zenity. btx-qt and ZeroMQ were already in v0.34.15.
-  zh: >-
-    Linux 压缩包在保留 btx-qt 的同时新增 btx-atlas。Atlas 需要 glibc 2.39、WebKitGTK 4.1、GTK 3、Ayatana 托盘库和 zenity。btx-qt 和 ZeroMQ 在 v0.34.15 中就已提供。
 - en: >-
     The network for AI models is on by default and listens on TCP 29447. v0.34.16 no longer opens that
     port with -listen=0 or a proxy, finds model peers on the local network over UDP 29448, and adds a
@@ -629,10 +654,6 @@ translations:
     Wallet bundle backups now say that the descriptor file inside spends without the wallet passphrase,
     and warn for an encrypted wallet. Backups made with earlier versions hold the same file.
   zh: 钱包打包备份现在会说明，其中的描述符文件无需钱包密码即可花费，并对加密钱包发出警告。用早期版本制作的备份也包含同一个文件。
-- en: >-
-    btx-qt in this archive needs glibc 2.43 and does not start on Ubuntu 24.04 or Debian 13; btxd and
-    btx-cli need 2.38.
-  zh: 此压缩包中的 btx-qt 需要 glibc 2.43，无法在 Ubuntu 24.04 或 Debian 13 上启动；btxd 和 btx-cli 需要 2.38。
 - en: Become a BTX dev
   zh: 成为 BTX 开发者
 - en: >-
