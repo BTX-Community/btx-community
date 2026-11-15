@@ -1,4 +1,6 @@
 {% extends "base.html.j2" %}
+{% block scripts %}
+  <script src="{{ ci_js_url }}" defer></script>{% endblock %}
 {% block content %}
 {% set measured = ui["hub.measured"].format(commit=hub.measured_commit, date=hub.measured_date, head=hub.measured_head) %}
 {% macro nodata() %}<span aria-hidden="true">–</span><span class="c-sr">{{ ui["hub.coverage.nodata"] }}</span>{% endmacro %}
@@ -370,6 +372,54 @@
             </tbody>
           </table>
         </div>
+        {% set ci = hub.ci %}
+        <section class="c-live c-ci" id="ci" aria-labelledby="ci-title"
+          data-api="{{ ci_api }}" data-repo="{{ upstream_repo }}" data-job="{{ ci_job }}" data-lang="{{ lang }}"
+          data-loading="{{ ci['loading'] }}" data-none="{{ ci['none'] }}" data-stale="{{ ci['stale'] }}"
+          data-error="{{ ci['error'] }}" data-ok="{{ ci['ok'] }}" data-failed="{{ ci['failed'] }}"
+          data-not-run="{{ ci['not_run'] }}" data-count="{{ ci['count'] }}" data-unit-sub="{{ ci['unit_sub'] }}"
+          data-functional-sub="{{ ci['functional_sub'] }}" data-failed-unit="{{ ci['failed_unit'] }}"
+          data-failed-functional="{{ ci['failed_functional'] }}" data-names-of="{{ ci['names_of'] }}"
+          data-more="{{ ci['more'] }}" data-times="{{ ci['times'] }}">
+          <div class="c-live__head">
+            <h3 class="c-ci__title" id="ci-title">{{ ci["title"] }}</h3>
+            <a class="c-link" href="{{ ci_api }}" rel="noopener noreferrer">{{ ci["raw"] }} ↗</a>
+          </div>
+          <p class="c-dev__lead">{{ ci["lead"] }}</p>
+          <noscript><p class="c-ci__status">{{ ci["noscript"] }}<a class="c-link" href="{{ ci_api }}" rel="noopener noreferrer">ci.json ↗</a></p></noscript>
+          <p class="c-ci__status" data-ci="status" role="status"></p>
+          <div class="c-ci__run" data-ci="run" hidden>
+            <dl class="c-tiles">
+              <div class="c-tile c-tile--wide c-ci__ref-tile">
+                <dt>{{ ci["ref"] }}</dt>
+                <dd class="c-ci__ref" data-ci="ref">–</dd>
+              </div>
+              <div class="c-tile">
+                <dt>{{ ci["build"] }}</dt>
+                <dd data-ci="build">–</dd>
+              </div>
+              <div class="c-tile c-tile--wide">
+                <dt>{{ ci["unit"] }}</dt>
+                <dd data-ci="unit">–</dd>
+                <dd class="c-tile__sub" data-ci="unit-sub"></dd>
+              </div>
+              <div class="c-tile c-tile--wide">
+                <dt>{{ ci["functional"] }}</dt>
+                <dd data-ci="functional">–</dd>
+                <dd class="c-tile__sub" data-ci="functional-sub"></dd>
+              </div>
+            </dl>
+            <details class="c-ci__failed" data-ci="failed-unit" hidden>
+              <summary></summary>
+              <ul class="c-ci__names"></ul>
+            </details>
+            <details class="c-ci__failed" data-ci="failed-functional" hidden>
+              <summary></summary>
+              <ul class="c-ci__names"></ul>
+            </details>
+            <p class="c-updated" data-ci="times"></p>
+          </div>
+        </section>
         <h3 class="c-subtitle" id="gates-release-title">{{ ui["hub.gates.release"] }}</h3>
         <p class="c-muted">{{ ui["hub.gates.release_lead"] }}</p>
         <div class="c-table-wrap" tabindex="0" role="region" aria-labelledby="gates-release-title">
