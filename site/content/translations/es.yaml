@@ -5,6 +5,21 @@
 
 schema_version: 1
 translations:
+- en: Live census of BTX nodes and signer witness of the easyBTX team.
+  es: >-
+    Censo en directo de los nodos BTX y testigo de firmantes del equipo de easyBTX.
+- en: >-
+    The roles a node advertises are its own claim; the page marks separately which nodes answered a
+    real request ("serve-verified").
+  es: >-
+    Los roles que anuncia un nodo son su propia afirmación; la página marca aparte qué nodos
+    respondieron a una solicitud real ("serve-verified").
+- en: >-
+    The wallet in the official releases: btxd with btx-cli, open source, on your own node. The
+    desktop app btx-qt is in v0.34.15; the v0.34.16 archives leave it out.
+  es: >-
+    La cartera de las versiones oficiales: btxd con btx-cli, de código abierto, en tu propio nodo.
+    La aplicación de escritorio btx-qt está en v0.34.15; los archivos de v0.34.16 la omiten.
 - en: 'Live view from the Byron Bay archive node: its chain progress, the heights of the nodes connected
     to it, and a map of those connections (preview).'
   es: 'Vista en vivo desde el nodo de archivo de Byron Bay: el avance de su cadena, las alturas de los
@@ -496,12 +511,6 @@ translations:
   es: >-
     El mismo puente WBTX de prueba que btx.supply, en la red de prueba de Robinhood Chain. Los
     tokens de prueba no tienen valor.
-- en: >-
-    The wallet in the official releases for Linux and macOS: the desktop app btx-qt, or btxd with
-    btx-cli. Open source; it runs on your own node.
-  es: >-
-    El monedero de las versiones oficiales para Linux y macOS: la aplicación de escritorio btx-qt, o
-    btxd con btx-cli. Código abierto; funciona en tu propio nodo.
 - en: Verification gate; clearing it lets you into the main BTX Telegram groups.
   es: Filtro de verificación; si lo superas, entras en los grupos principales de Telegram de BTX.
 - en: Verify the signature and SHA-256 before use. Not for signers.
@@ -652,8 +661,6 @@ translations:
     y qué significa esa confianza.
 - en: Network and explorers
   es: Red y exploradores
-- en: Node census and signer witness of the easyBTX team.
-  es: Censo de nodos y testigo de firmantes del equipo easyBTX.
 - en: Supply, holders and rich list.
   es: Suministro, tenedores y lista de los más ricos.
 - en: >-
