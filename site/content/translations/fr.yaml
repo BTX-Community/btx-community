@@ -5,6 +5,45 @@
 
 schema_version: 1
 translations:
+- en: Describes MatMul v4.7, which the network runs since block 185,000, and keeps v3 as reference. Last
+    updated 4 Aug 2026; its release notes still name v0.33.2.
+  fr: Décrit MatMul v4.7, utilisé par le réseau depuis le bloc 185 000, et garde v3 comme référence. Dernière
+    mise à jour le 4 août 2026 ; ses notes de version citent encore v0.33.2.
+- en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages, a public API and tools for
+    AI assistants (MCP, REST, llms.txt) at /ai.
+  fr: Explorateur de l'équipe de Byron Bay, avec une vue du minage sur 24 h, des pages de statistiques,
+    une API publique et des outils pour assistants IA (MCP, REST, llms.txt) sous /ai.
+- en: 13 of the 16 AI tools are public with no key; 3 premium ones need a token from the operator.
+  fr: 13 des 16 outils IA sont publics et sans clé ; 3 outils premium demandent un jeton de l'opérateur.
+- en: UTXO snapshot for loadtxoutset, confirmed by two operators (Mende and Jarek), with SHA-256 of the
+    file and the manifest.
+  fr: Snapshot UTXO pour loadtxoutset, confirmé par deux opérateurs (Mende et Jarek), avec le SHA-256
+    du fichier et du manifeste.
+- en: Check the SHA-256 before use. The JSON names the height; it can lag the chain by a few thousand
+    blocks.
+  fr: Vérifiez le SHA-256 avant usage. Le JSON indique la hauteur ; elle peut avoir quelques milliers
+    de blocs de retard sur la chaîne.
+- en: UTXO snapshot every 1,000 blocks from the Byron Bay archive node, with SHA256SUMS; the last seven
+    are kept.
+  fr: Snapshot UTXO tous les 1 000 blocs depuis le nœud d'archive de Byron Bay, avec SHA256SUMS ; les
+    sept derniers sont conservés.
+- en: One signer, the operator. A height is sometimes skipped; then there is no file, not a wrong one.
+  fr: Un seul signataire, l'opérateur. Une hauteur est parfois sautée ; il n'y a alors pas de fichier,
+    pas un fichier faux.
+- en: Post-quantum desktop wallet of the easyBTX team for macOS, Windows and Linux.
+  fr: Portefeuille de bureau post-quantique de l'équipe easyBTX pour macOS, Windows et Linux.
+- en: No independent audit; the source code is not public. The Mac build is signed and notarized (Bonuz
+    Technology DMCC); Windows and Linux builds are unsigned, so check the SHA-256. Keep the master key
+    or the encrypted recovery file offline.
+  fr: Pas d'audit indépendant ; le code source n'est pas public. La version Mac est signée et notarisée
+    (Bonuz Technology DMCC) ; celles pour Windows et Linux ne sont pas signées, vérifiez donc le SHA-256.
+    Gardez la clé maître ou le fichier de récupération chiffré hors ligne.
+- en: 'Seedless means there is no seed phrase you back up yourself: the page says the key is split by
+    MPC, and access and recovery go through the Bonuz login. Check how recovery works before you rely
+    on it.'
+  fr: 'Sans seed signifie qu''il n''y a pas de phrase de récupération à sauvegarder soi-même : la page
+    indique que la clé est partagée par MPC, et l''accès comme la récupération passent par la connexion
+    Bonuz. Vérifiez comment fonctionne la récupération avant de vous y fier.'
 - en: >-
     A full release since 15 November 2026, first published on 7 November as a pre-release. Archives
     for Linux x86_64, with and without CUDA 13; none for macOS or Windows. It packages the 0.35
@@ -218,14 +257,6 @@ translations:
     Produit sur un miroir de confiance : le travail MatMul a donc été accepté sur la base des
     attestations des signataires.
 - en: >-
-    Early test build: internal security review, no independent audit; the source code is not public
-    and the direct downloads are unsigned. A 64-character master key is the only backup; keep it
-    offline.
-  fr: >-
-    Version de test préliminaire : revue de sécurité interne, pas d'audit indépendant ; le code
-    source n'est pas public et les téléchargements directs ne sont pas signés. Une clé maîtresse de
-    64 caractères est la seule sauvegarde ; gardez-la hors ligne.
-- en: >-
     Every node relays blocks and keeps the network reachable. A node checks every block itself only
     with a GPU that passes btxd's self-test. Without one, run it as a trusted mirror that follows
     signed checks from at least two signers; otherwise it stops syncing. Signers have the highest
@@ -235,10 +266,6 @@ translations:
     bloc qu'avec un GPU qui réussit l'autotest de btxd. Sans un tel GPU, faites-le tourner comme
     miroir de confiance qui suit les vérifications signées d'au moins deux signataires ; sinon il
     cesse de se synchroniser. Les signataires ont les exigences les plus élevées.
-- en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages and a public API.
-  fr: >-
-    Explorateur de l'équipe de Byron Bay, avec une vue du minage sur 24 h, des pages de statistiques
-    et une API publique.
 - en: How to report a vulnerability privately to the BTX Development Team. Not for support questions.
   fr: >-
     Comment signaler une vulnérabilité en privé à l'équipe de développement de BTX. Pas pour les
@@ -391,8 +418,6 @@ translations:
     Pool dédié à BTX, exploité par l'auteur de btx-pool-miner (GitHub lucasan123). Il paie les
     mineurs directement dans chaque bloc qu'il trouve, au prorata du travail sur une fenêtre de 30
     minutes. Vérifiez ses frais sur la page du pool.
-- en: Post-quantum desktop wallet of the easyBTX team for macOS and Windows.
-  fr: Portefeuille de bureau post-quantique de l'équipe easyBTX pour macOS et Windows.
 - en: >-
     Problems with an NVIDIA card? The official CUDA troubleshooting guide helps; parts of it
     describe the CUDA path from before block 185,000.
@@ -419,13 +444,6 @@ translations:
   fr: >-
     Fonctionne avec la v0.34.15 sans le réseau de modèles. Sans GPU qualifié, le nœud suit les
     vérifications des signataires au lieu de vérifier lui-même le travail MatMul.
-- en: >-
-    Seedless means there is no seed phrase you back up yourself; access and recovery go through the
-    Bonuz login. Check how recovery works before you rely on it.
-  fr: >-
-    « Sans phrase de récupération » veut dire qu'il n'y a pas de phrase de récupération à
-    sauvegarder vous-même ; l'accès et la récupération passent par la connexion Bonuz. Vérifiez
-    comment fonctionne la récupération avant de vous y fier.
 - en: Seedless mobile wallet for iOS and Android with BTX support.
   fr: Portefeuille mobile sans phrase de récupération pour iOS et Android, compatible BTX.
 - en: >-
@@ -437,8 +455,6 @@ translations:
     rester en ligne. L'archive CUDA officielle couvre les cartes Blackwell (sm_120) ; les autres
     cartes NVIDIA exigent une compilation depuis les sources et peuvent ne pas être qualifiées.
     Suivez le guide d'exploitation des développeurs.
-- en: Some API endpoints need an access token.
-  fr: Certains points de terminaison de l'API exigent un jeton d'accès.
 - en: Telegram group of the easyBTX team, for questions about its miner, node app and wallet.
   fr: >-
     Groupe Telegram de l'équipe easyBTX, pour les questions sur son logiciel de minage, son appli de
@@ -458,12 +474,6 @@ translations:
   fr: >-
     La conception des développeurs pour du BTX encapsulé sur les chaînes EVM : règles du jeton,
     modèles de pont et contrats de référence. Une conception, pas un pont fonctionnel.
-- en: >-
-    The file is marked historical: it records the v3 design. Since block 185,000 the network runs
-    MatMul v4.7.
-  fr: >-
-    Le fichier est marqué comme historique : il documente la conception v3. Depuis le bloc 185 000,
-    le réseau tourne avec MatMul v4.7.
 - en: >-
     The miner's source is not published: the repository holds scripts and binary releases, with no
     licence. 2% dev fee, 0% on ninjaraider.
