@@ -5,7 +5,7 @@
 
 **For an AI working a lane.** Read [`AGENTS.md`](AGENTS.md), [`06-pr-gate.md`](06-pr-gate.md) and the lane's pack in [`packs/`](packs/) first. §8 of this page is the stop list: if a step would break one of its rules, stop and hand the question to the human.
 
-This is the public version. Slots marked claimable are open. Companion to the plan, [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md); the machine-readable form is [`plan/lanes.json`](plan/lanes.json). Which lane fits which level: [`08-levels.md`](08-levels.md). Lanes with an AI pack have it in [`packs/`](packs/) (A-WALLET, A-STORES, C-K01, C-PORT, C-PATHS, C-STATIC, I-CI, I-RC and `I-RC-runner`, I-OPS, I-XDEV, E-CONSENSUS); the five lanes in §4 have none yet.
+This is the public version: roles, and a handle once someone has claimed a slot. Every slot without a handle below is open. Companion to the plan, [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md); the machine-readable form is [`plan/lanes.json`](plan/lanes.json). Which lane fits which level: [`08-levels.md`](08-levels.md). Lanes with an AI pack have it in [`packs/`](packs/) (A-WALLET, A-STORES, C-K01, C-PORT, C-PATHS, C-STATIC, I-CI, I-RC and `I-RC-runner`, I-OPS, I-XDEV, E-CONSENSUS); the five lanes in §4 have none yet.
 
 Every number below comes from [`plan/plan-data.json`](plan/plan-data.json) or the plan; [C3] marks a number from the coverage run. Coverage is product-code line coverage on `release-0.34.16` at `c6f9678d`, unit-only / unit + functional. All coverage numbers are floors: 47 unit suites timed out and 82 of 208 functional scripts failed in the coverage run. The coverage build configures again on `release-0.34.16` since #578 (merged into the release line on 12 Nov as `7051507b`); the fix is not in v0.34.15. The recipe is in [`04-build-and-test.md`](04-build-and-test.md) §5. The live head is `4c7840e9` (31 commits later; none touches `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus` or `script/interpreter.cpp`: `git diff --stat c6f9678d 4c7840e9 -- src/validation.cpp src/net_processing.cpp src/pow.cpp src/consensus src/script/interpreter.cpp` prints nothing).
 
@@ -29,7 +29,7 @@ Every number below comes from [`plan/plan-data.json`](plan/plan-data.json) or th
 
 Load rule: one person owns at most three lanes and second-passes at most three; someone taking a first lane owns one. Five lanes get no work until someone takes them (§4). That is stated, not hidden.
 
-Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-STORES; L3 = C-STATIC + I-CI (+ A-HELPER, which waits for an owner); L4 = E-CONSENSUS; L5 = I-OPS; L6 + L8 = I-RC; L7 = I-XDEV.
+Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-STORES; L3 = C-STATIC + I-CI (+ A-HELPER); L4 = E-CONSENSUS; L5 = I-OPS; L6 + L8 = I-RC; L7 = I-XDEV.
 
 ## 2. The lane map
 
@@ -45,10 +45,10 @@ Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-S
    (code areas)           (one rule each)         (gates and runs)
    ---------------        ---------------         ---------------
    A-WALLET    [claim]    C-K01    [claim]        I-CI    [claim]
-   A-STORES    [claim]    C-PORT   [claim]        I-RC    [claim]
-   E-CONSENSUS [claim]    C-STATIC [claim]        I-OPS   [claim]
+   A-STORES    [claim]    C-PORT   sunnyriverr    I-RC    [claim]
+   E-CONSENSUS [claim]    C-STATIC [claim]        I-OPS   dr-chambre
    A-NET       [claim]    C-PATHS  [claim]        I-XDEV  [claim]
-   A-HELPER    [claim]
+   A-HELPER    jarekpiot
    A-SHIELDED  [claim]    Runners: [claim] Windows, Linux, macOS, GPU
    A-PQ        [claim]    Second passes: see §3 (never the owner)
    A-GUI       [claim]
@@ -99,10 +99,10 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 - First three tasks: (1) the container inventory for the P2P handlers (semgrep rule from the master plan §2 row 1); (2) the DLTX fuzz target; (3) the K25 observing-peer test.
 - Route: PR for bounds and targets; anything in scheduling or fork choice goes to E-CONSENSUS.
 
-**A-HELPER: ModelNet helper network surface and `security_v2` (no work until claimed)**
+**A-HELPER: ModelNet helper network surface and `security_v2`**
 - Scope: the helper's native request dispatcher, the fuzz targets that have never run, the modelnet fuzz build that does not link by default, `src/modelnet/security_v2/`, the two-user layout under `-modelrpcsocket`, the jail escape suite. Master plan §3.7. K09 helper half, fs-trust results that sit in the helper (most of the 133 are in the helper and stores).
 - Why: modelnet is risk rank 3; `security_v2` is at 0.2 / 15.0 with 6 files at 0 even with functional tests; the dispatcher has no fuzz target.
-- Owner: (claimable) · Second pass: (claimable; never the owner). Interim: the phase-3 fuzz batch covers the dispatcher target and the `native.cmake` gate only.
+- Owner: jarekpiot · Second pass: (claimable; never the owner). Interim: the phase-3 fuzz batch covers the dispatcher target and the `native.cmake` gate only.
 - Done bar: `modelnet_native_dispatch` target runs 24 h clean under ASan; the never-run targets run 1 h clean; every `security_v2` file above 0; a functional test that no non-loopback listener opens on 29447 without `-modelbind` and no NAT-PMP mapping is requested; under `-modelrpcsocket` the helper runs as a different user and cannot open `.cookie` or `wallets/`; a malformed reply fails the request, not the helper.
 - First three tasks: (1) make the modelnet fuzz build link at default options; (2) the dispatcher fuzz target on a scratch catalog; (3) the listener/NAT-PMP functional test.
 - Route: PR; the helper user default is the maintainer's decision and goes with the release-scope note.
@@ -192,7 +192,7 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 **I-OPS: operators and whole-system runs**
 - Scope: archive mirrors and signed snapshots, the monitoring page as the health signal, IBD from genesis on a stock binary, staged upgrades, mixed-version interop (v0.34.15 against the release line), the operator safe profile in the guides (`-modelnet=0` and `-natpmp=0` on any node that holds a wallet or signer key; `-autoupdate` reviewed before enabling), which fixes a v0.34.15 node lacks (gate G1).
 - Why: gate G1 is "partly"; the release line is far ahead of what most nodes run; operator data has found real bugs before.
-- Owner: (claimable; an archive operator) · Second pass: (claimable; never the owner; a second operator); a second lane owner reads any technical claim before it goes public.
+- Owner: dr-chambre (an archive operator) · Second pass: (claimable; never the owner; a second operator); a second lane owner reads any technical claim before it goes public.
 - Cadence: one run line per candidate; the safe-profile text once, then kept current.
 - Done bar: the safe profile in the community guide and the status page; a genesis sync with `assumevalid=0` on a stock binary that reaches the tip, reported with the height; an upgrade from a saved datadir on every candidate; one interop run per candidate; UTC timelines on every report.
 - First three tasks: (1) the safe-profile paragraph; (2) the genesis-sync run on the current candidate; (3) the upgrade run from the saved datadir.
