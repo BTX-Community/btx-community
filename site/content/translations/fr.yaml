@@ -7,16 +7,19 @@ schema_version: 1
 translations:
 - en: 'Live view from the Byron Bay archive node: its chain progress, the heights of the nodes connected
     to it, and a map of those connections (preview).'
-  fr: 'Vue en direct du nœud d''archive de Byron Bay : la progression de sa chaîne, les hauteurs des nœuds
-    qui y sont connectés et une carte de ces connexions (aperçu).'
-- en: 'Clickable walk-throughs of two features in development: the Atlas desktop app (btxchain/btx #273)
-    and SwapNet (#630), built by the Byron Bay team.'
-  fr: 'Visites interactives de deux fonctions en développement : l''application de bureau Atlas (btxchain/btx
-    #273) et SwapNet (#630), réalisées par l''équipe de Byron Bay.'
-- en: Unofficial demos with sample data only. Neither feature is released; the pages connect to no node
+  fr: 'Vue en direct depuis le nœud d''archive de Byron Bay : la progression de sa chaîne, les hauteurs
+    des nœuds qui y sont connectés et une carte de ces connexions (aperçu).'
+- en: 'The upstream Atlas desktop interface (btxchain/btx #273), hosted by the Byron Bay team as a demo.'
+  fr: 'L''interface de bureau Atlas de l''amont (btxchain/btx #273), hébergée en démo par l''équipe de
+    Byron Bay.'
+- en: 'A walk-through of SwapNet (btxchain/btx #630), built by the Byron Bay team from the open-source
+    code.'
+  fr: 'Une visite de SwapNet (btxchain/btx #630), réalisée par l''équipe de Byron Bay à partir du code
+    open source.'
+- en: Unofficial demo with sample data only. The feature is not released; the page connects to no node
     or wallet.
-  fr: Démos non officielles, uniquement avec des données d'exemple. Aucune des deux fonctions n'est publiée
-    ; les pages ne se connectent à aucun nœud ni portefeuille.
+  fr: Démo non officielle, uniquement avec des données d'exemple. La fonction n'est pas publiée ; la page
+    ne se connecte à aucun nœud ni portefeuille.
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   fr: Ne liste plus BTX ; son marché BTX/USDT a disparu en juillet 2026.
 - en: >-

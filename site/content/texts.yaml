@@ -390,7 +390,7 @@ de:
   nav.docs: Dokumente
   nav.dev: Entwickeln
   live.more: BTX in Zahlen und Entwicklungsaktivität
-  network.observatory: Live-Ansicht und Node-Karte der Archive-Node von Byron Bay
+  network.observatory: Live-Ansicht und Node-Karte des Archive-Nodes von Byron Bay
   page.learn.title: BTX verstehen
   page.learn.lead: Was BTX ist und was das nächste Release bringt.
   page.network.title: Netz und Entwicklung
@@ -714,7 +714,7 @@ es:
   nav.docs: Documentos
   nav.dev: Desarrolladores
   live.more: BTX en cifras y actividad de desarrollo
-  network.observatory: Vista en vivo y mapa de nodos del nodo de archivo de Byron Bay
+  network.observatory: Vista en vivo y mapa de nodos desde el nodo de archivo de Byron Bay
   page.learn.title: Conocer BTX
   page.learn.lead: Qué es BTX y qué trae la próxima versión.
   page.network.title: Red y desarrollo
@@ -1040,7 +1040,7 @@ fr:
   nav.docs: Documents
   nav.dev: Développeurs
   live.more: BTX en chiffres et activité de développement
-  network.observatory: "Vue en direct et carte des nœuds du nœud d'archive de Byron Bay"
+  network.observatory: "Vue en direct et carte des nœuds depuis le nœud d'archive de Byron Bay"
   page.learn.title: Comprendre BTX
   page.learn.lead: Ce qu'est BTX, et ce qu'apporte la prochaine version.
   page.network.title: Réseau et développement
