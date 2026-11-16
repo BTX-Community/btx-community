@@ -5,6 +5,15 @@
 
 schema_version: 1
 translations:
+- en: >-
+    The archives were replaced several times under the same tag, last on 15 November 2026. The
+    current ones bundle libevent, SQLite, ZeroMQ and libgomp; only libc, libstdc++ and the NVIDIA
+    driver come from your system. Check your download against the release's SHA256SUMS.
+  fr: >-
+    Les archives ont été remplacées plusieurs fois sous la même étiquette, la dernière le 15
+    novembre 2026. Les actuelles incluent libevent, SQLite, ZeroMQ et libgomp ; seuls libc,
+    libstdc++ et le pilote NVIDIA viennent de votre système. Vérifiez votre téléchargement avec le
+    SHA256SUMS de la version.
 - en: Live census of BTX nodes and signer witness of the easyBTX team.
   fr: >-
     Recensement en direct des nœuds BTX et témoin des signataires de l'équipe easyBTX.
@@ -116,12 +125,6 @@ translations:
   fr: >-
     Pas d'application de bureau : les deux archives omettent btx-qt et btx-atlas, qui demanderaient
     une glibc plus récente que 2.38. Utilisez btxd et btx-cli.
-- en: >-
-    btxd uses a few system libraries the archive does not bundle (libevent, SQLite, ZeroMQ,
-    libgomp). If one is missing, bin/btxd names the packages to install.
-  fr: >-
-    btxd utilise quelques bibliothèques système que l'archive n'inclut pas (libevent, SQLite,
-    ZeroMQ, libgomp). S'il en manque une, bin/btxd indique les paquets à installer.
 - en: >-
     Recent releases have no signed checksum file: the last SHA256SUMS.asc was for v0.34.6, and
     v0.34.16 has an unsigned SHA256SUMS. Compare the SHA-256 that GitHub shows for each file with
