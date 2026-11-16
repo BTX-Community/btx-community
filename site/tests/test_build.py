@@ -1237,6 +1237,29 @@ class InfraTest(unittest.TestCase):
         with self.assertRaises(build.ContentError):
             build.check_infra(changed, page)
 
+    def test_the_home_node_box_sits_near_the_top_with_its_links(self) -> None:
+        self.assertIsNotNone(self.infra.home)
+        for lang in build.LANGUAGES:
+            html = self.read(lang)
+            with self.subTest(lang=lang):
+                self.assertLess(html.index('id="paths"'), html.index('id="home-node"'))
+                self.assertLess(html.index('id="home-node"'), html.index('id="roles"'))
+                box = html.split('id="home-node"')[1].split("</section>")[0]
+                self.assertEqual(re.findall(r'class="c-home__point" id="home-([a-z]+)"', box), ["privacy", "reach"])
+                # The facts that must survive translation: the mainnet port and the safe setting.
+                self.assertIn("19335", box)
+                self.assertIn("natpmp=0", box)
+                self.assertIn(f'href="{build.page_path(lang, "home")}#before-installing"', box)
+                self.assertIn('href="https://github.com/btxchain/btx/blob/main/doc/tor.md"', box)
+        home = (self.out / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="before-installing"', home)
+
+    def test_the_home_node_box_names_no_price(self) -> None:
+        data = json.loads(json.dumps(self.raw, default=str))
+        data["home"]["points"][0]["items"][0]["en"] = "A small box costs about $5 a month."
+        with self.assertRaises(Exception):  # noqa: B017, PT027
+            build.InfraPage.model_validate(data)
+
     def test_text_wraps_at_spaces_hyphens_and_between_cjk_characters(self) -> None:
         self.assertEqual(build.wrap("one two three", build.text_width("one two", 10), 10), ("one two", "three"))
         self.assertEqual(build.wrap("Peer-Verbindungen", build.text_width("Peer-", 10), 10), ("Peer-", "Verbindungen"))

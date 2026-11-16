@@ -2477,6 +2477,61 @@ translations:
   es: "Reportar una vulnerabilidad en privado"
 - en: "The security policy (SECURITY.md)"
   es: "La política de seguridad (SECURITY.md)"
+- en: "Before you run a node at home"
+  es: "Antes de operar un nodo en casa"
+- en: "Privacy"
+  es: "Privacidad"
+- en: >-
+    Your node shows its IP address to every peer it connects to. A node that accepts inbound
+    connections also announces its own address, and peers pass it on.
+  es: >-
+    Tu nodo muestra su dirección IP a cada par con el que se conecta. Un nodo que acepta conexiones
+    entrantes también anuncia su propia dirección, y los pares la difunden.
+- en: >-
+    btxd asks your router to open its port by default (NAT-PMP or PCP), so behind a router that
+    supports this it becomes reachable by itself.
+  es: >-
+    btxd pide por defecto a tu router que abra su puerto (NAT-PMP o PCP), así que detrás de un
+    router compatible queda accesible por sí solo.
+- en: >-
+    If your address matters, run the node behind Tor (-proxy, -onlynet=onion; the Tor guide advises
+    onlynet=onion only once Tor runs stably) or on a rented server instead.
+  es: >-
+    Si tu dirección importa, opera el nodo detrás de Tor (-proxy, -onlynet=onion; la guía de Tor
+    aconseja onlynet=onion solo cuando Tor funciona de forma estable) o, en su lugar, en un servidor
+    alquilado.
+- en: >-
+    On a machine with coins, mining or a signer key, set natpmp=0, as the install checklist says.
+  es: >-
+    En una máquina con monedas, minería o una clave de firmante, pon natpmp=0, como dice la lista de
+    instalación.
+- en: "Reachability"
+  es: "Accesibilidad"
+- en: >-
+    Outbound connections work by default. To accept inbound ones, TCP port 19335 must be reachable:
+    mapped by NAT-PMP, forwarded on the router by hand, or offered as a Tor onion service
+    (-listenonion). With -proxy, the node only listens if you also set -listen=1.
+  es: >-
+    Las conexiones salientes funcionan por defecto. Para aceptar entrantes, el puerto TCP 19335
+    tiene que ser accesible: abierto por NAT-PMP, reenviado a mano en el router u ofrecido como
+    servicio onion de Tor (-listenonion). Con -proxy, el nodo solo escucha si además pones
+    -listen=1.
+- en: >-
+    A node that only connects out stays in sync and relays to the peers it connects to, but new
+    nodes cannot reach it, so it does not help them sync.
+  es: >-
+    Un nodo que solo se conecta hacia fuera sigue sincronizado y retransmite a los pares con los que
+    se conecta, pero los nodos nuevos no pueden alcanzarlo, así que no les ayuda a sincronizar.
+- en: >-
+    To check: btx-cli getpeerinfo shows "inbound": true for peers that connected to you, and btx-cli
+    getnetworkinfo lists your node's localaddresses.
+  es: >-
+    Para comprobarlo: btx-cli getpeerinfo muestra "inbound": true para los pares que se conectaron a
+    ti, y btx-cli getnetworkinfo lista las localaddresses de tu nodo.
+- en: "Full node: the install checklist on the start page"
+  es: "Nodo completo: la lista de instalación de la página de inicio"
+- en: "Running the node with Tor (developers)"
+  es: "Operar el nodo con Tor (desarrolladores)"
 - en: "Full node"
   es: "Nodo completo"
 - en: >-
