@@ -1,0 +1,18 @@
+# fuzzbox.conf: copy to /etc/btxfuzz/fuzzbox.conf and edit. Read by every fuzzbox-*.sh script.
+FUZZ_HOME=/srv/btxfuzz                 # everything lives here (needs 80 GB or more free)
+REPO_URL=https://github.com/btxchain/btx.git
+BRANCH=main                            # the branch to fuzz. main is the newest release line. To fuzz the
+                                       # candidate under development, set the current release branch, for
+                                       # example BRANCH=release-0.34.17 (list: github.com/btxchain/btx/branches)
+JOBS=0                                 # parallel fuzz workers; 0 = number of CPUs minus 2. The CPU count
+                                       # ignores OMP_NUM_THREADS and honours a cgroup CPU quota. Set JOBS
+                                       # yourself if the box shows more CPUs than it gives you, and keep
+                                       # JOBS x RSS_MB below about 85% of the RAM.
+SLICE_SECS=300                         # time per target per round
+RSS_MB=2048                            # per-process memory limit (libFuzzer -rss_limit_mb), 2 GB
+MERGE_EVERY=12                         # minimise each corpus every N rounds
+PRIORITY_REGEX='matmul|pq|shielded|htlc|swapnet|modelnet|lightwatch|headers|block|tx|script|p2p|process_message'
+                                       # targets matching this run twice per round
+NOTIFY_CMD=                            # optional: a command that gets ONE line of text on stdin, e.g. a
+                                       # script that sends it to your own private chat. It never gets the input.
+OPENSSL_VERSION=3.5.4
