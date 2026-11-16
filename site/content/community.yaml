@@ -834,6 +834,39 @@ categories:
             Schlüssel per MPC aufgeteilt; Zugang und Wiederherstellung laufen über das Bonuz-Login.
             Vor dem Einsatz prüfen, wie die Wiederherstellung funktioniert.
 
+  - id: buying
+    title: { en: Buying BTX, de: BTX kaufen }
+    risk:
+      en: >-
+        There is no exchange for BTX. These are trades from person to person without escrow: you
+        pay first and rely on the seller. Not checked by us. Read the checklist "Before you buy or
+        receive BTX" on the start page first, and start with a small amount.
+      de: >-
+        Es gibt keine Börse für BTX. Das sind Geschäfte von Person zu Person ohne Treuhand: Du
+        zahlst zuerst und verlässt dich auf den Verkäufer. Von uns nicht geprüft. Vorher die
+        Checkliste „Bevor du BTX kaufst oder empfängst“ auf der Startseite lesen und mit einem
+        kleinen Betrag anfangen.
+    entries:
+      - id: easybtx-buy
+        name: easyBTX seller board
+        url: https://easybtx.com/buy
+        tags: [p2p, telegram, no escrow]
+        description:
+          en: >-
+            Sellers the easyBTX team says it has bought from itself. You agree amount and price with
+            a seller on Telegram and pay them directly, usually in USDT.
+          de: >-
+            Verkäufer, bei denen das easyBTX-Team nach eigener Aussage selbst gekauft hat. Menge und
+            Preis machst du per Telegram mit dem Verkäufer aus und zahlst ihm direkt, meist in USDT.
+        note:
+          en: >-
+            easyBTX says it holds no funds, is not a party to any trade and quotes no price. On 16
+            November 2026 the board listed one seller. A price agreed there is not a market price.
+          de: >-
+            Laut easyBTX verwahrt es kein Geld, ist an keinem Geschäft beteiligt und nennt keinen
+            Preis. Am 16. November 2026 stand ein Verkäufer auf dem Brett. Ein dort ausgemachter
+            Preis ist kein Marktpreis.
+
   - id: bridges
     title: { en: Bridges and testnets, de: Bridges und Testnetze }
     risk:

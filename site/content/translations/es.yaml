@@ -5,6 +5,29 @@
 
 schema_version: 1
 translations:
+- en: Buying BTX
+  es: Comprar BTX
+- en: >-
+    There is no exchange for BTX. These are trades from person to person without escrow: you pay
+    first and rely on the seller. Not checked by us. Read the checklist "Before you buy or receive
+    BTX" on the start page first, and start with a small amount.
+  es: >-
+    No existe una bolsa para BTX. Son operaciones de persona a persona sin depósito en garantía:
+    pagas primero y dependes del vendedor. No lo hemos comprobado. Lee antes la lista "Antes de
+    comprar o recibir BTX" de la página de inicio y empieza con una cantidad pequeña.
+- en: >-
+    Sellers the easyBTX team says it has bought from itself. You agree amount and price with a
+    seller on Telegram and pay them directly, usually in USDT.
+  es: >-
+    Vendedores a los que, según dice, el equipo de easyBTX ha comprado él mismo. Acuerdas la
+    cantidad y el precio con un vendedor por Telegram y le pagas directamente, normalmente en USDT.
+- en: >-
+    easyBTX says it holds no funds, is not a party to any trade and quotes no price. On 16 November
+    2026 the board listed one seller. A price agreed there is not a market price.
+  es: >-
+    Según easyBTX, no guarda fondos, no es parte de ninguna operación y no da ningún precio. El 16
+    de noviembre de 2026 había un vendedor en el tablón. Un precio acordado allí no es un precio de
+    mercado.
 - en: Live census of BTX nodes and signer witness of the easyBTX team.
   es: >-
     Censo en directo de los nodos BTX y testigo de firmantes del equipo de easyBTX.
