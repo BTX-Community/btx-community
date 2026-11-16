@@ -45,7 +45,7 @@ Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-S
    (code areas)           (one rule each)         (gates and runs)
    ---------------        ---------------         ---------------
    A-WALLET    [claim]    C-K01    [claim]        I-CI    [claim]
-   A-STORES    [claim]    C-PORT   sunnyriverr    I-RC    [claim]
+   A-STORES    sunnyriverr C-PORT   sunnyriverr    I-RC    [claim]
    E-CONSENSUS [claim]    C-STATIC [claim]        I-OPS   dr-chambre
    A-NET       [claim]    C-PATHS  [claim]        I-XDEV  [claim]
    A-HELPER    jarekpiot
@@ -76,7 +76,8 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 **A-STORES: ModelNet store, deposit and persistence logic**
 - Scope: the ModelNet stores (`src/modelnet/helper.cpp` and the bounty, campaign, mandate, feed, catalog stores), `src/wallet/rpc/bcp1.cpp` and the BCP/1 planners, non-MatMul persistence. Classes K20/K21/K02 (52 PRs). Not greppable: this lane writes test generators, not instance fixes.
 - Why: modelnet is risk rank 3; `modelnet/helper.cpp` was touched by 42 fix PRs; modelnet coverage 83.7 / 85.6 hides the logic slips (the tests pass, the edge cases are wrong).
-- Owner: (claimable) · Second pass: (claimable; never the owner).
+- Owner: `sunnyriverr` · Second pass: (claimable; never the owner).
+- Initial work: ModelNet store correctness, starting with FeedStore pagination completeness, duplicate observations, sequence monotonicity and save/reopen equivalence. Reuse the existing fixtures and incorporated fixes; add deterministic maintained tests with a deliberately broken control. Catalog lifecycle is the next candidate after checking existing coverage. BCP/1 wallet work is outside this initial work package; existing C-PORT and A-HELPER assignments stay as they are.
 - Cadence: one store per week from phase 2b.
 - Done bar: property tests per store (idempotency keys, pagination completeness, monotonic counters, restart = no restart) registered in ctest; one table-driven BCP/1 lifecycle test (new, mempool, confirmed, replaced, spent, consolidated) through every RPC that reports a deposit; a `mutate -> reopen -> compare` test per store; a `helper.cpp` split proposed to the maintainer with the tests in hand; zero new single-site K20/K21 PRs after the generators land.
 - First three tasks: (1) list every store with a `ToJson`/`Serialize` and a mutator, and the fields written by the mutator but absent from the serialiser (the K02 static form); (2) the BCP/1 lifecycle table test; (3) the first property-test generator on the bounty store.

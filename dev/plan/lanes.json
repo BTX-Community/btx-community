@@ -63,7 +63,7 @@
       "target": "property tests per store and a BCP/1 lifecycle table in ctest; helper.cpp split proposed; 0 new single-site K20/K21 PRs",
       "owner": {
         "role": "A-STORES owner",
-        "handle": null
+        "handle": "sunnyriverr"
       },
       "second_pass": {
         "role": "second pass (never the owner)",
