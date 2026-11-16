@@ -715,7 +715,7 @@ class PageTest(unittest.TestCase):
     def test_the_built_pages_obey_the_csp(self) -> None:
         # default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'
         pages = sorted(self.out.rglob("index.html"))
-        self.assertEqual(len(pages), len(build.LANGUAGES) * len(build.PAGES))
+        self.assertEqual(len(pages), len(build.LANGUAGES) * len(build.PAGES) + len(build.DRAFT_PAGES))
         for page in pages:
             html = page.read_text(encoding="utf-8")
             with self.subTest(page=str(page.relative_to(self.out))):
@@ -799,6 +799,21 @@ class PageTest(unittest.TestCase):
                 for value in values:
                     self.assertIn(value, caption)
 
+
+    def test_draft_pages_are_english_noindex_and_linked_from_nowhere(self) -> None:
+        pages = {page.relative_to(self.out): page.read_text(encoding="utf-8") for page in self.out.rglob("index.html")}
+        for draft in build.DRAFT_PAGES:
+            with self.subTest(draft=draft):
+                html = pages[Path(draft) / "index.html"]
+                self.assertIn('<meta name="robots" content="noindex, nofollow">', html)
+                for lang in build.LANGUAGES[1:]:
+                    self.assertFalse((self.out / lang / draft).exists())
+                for path, other in pages.items():
+                    if path.parts[-2:-1] != (draft,):
+                        self.assertNotIn(f'href="/{draft}/', other, str(path))
+                        self.assertNotIn("noindex", other, str(path))
+                for name in ("llms.txt", "llms-full.txt"):
+                    self.assertNotIn(draft, (self.out / name).read_text(encoding="utf-8"))
 
     def test_every_page_has_an_icon_that_exists(self) -> None:
         self.assertTrue((self.out / "favicon.ico").is_file())
