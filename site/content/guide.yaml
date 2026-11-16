@@ -68,7 +68,7 @@ facts:
 
 upcoming:
   version: "0.34.16"
-  checked: 2026-11-15
+  checked: 2026-11-16
   status:
     en: >-
       A full release since 15 November 2026, first published on 7 November as a pre-release.
@@ -165,11 +165,13 @@ upcoming:
         Keine Desktop-App: Beide Archive lassen btx-qt und btx-atlas weg, weil sie ein neueres
         glibc als 2.38 bräuchten. btxd und btx-cli benutzen.
     - en: >-
-        btxd uses a few system libraries the archive does not bundle (libevent, SQLite, ZeroMQ,
-        libgomp). If one is missing, bin/btxd names the packages to install.
+        The archives were replaced several times under the same tag, last on 15 November 2026.
+        The current ones bundle libevent, SQLite, ZeroMQ and libgomp; only libc, libstdc++ and the
+        NVIDIA driver come from your system. Check your download against the release's SHA256SUMS.
       de: >-
-        btxd nutzt einige Systembibliotheken, die das Archiv nicht mitbringt (libevent, SQLite,
-        ZeroMQ, libgomp). Fehlt eine, nennt bin/btxd die Pakete zum Installieren.
+        Die Archive wurden unter demselben Tag mehrmals ersetzt, zuletzt am 15. November 2026. Die
+        aktuellen bringen libevent, SQLite, ZeroMQ und libgomp mit; nur libc, libstdc++ und der
+        NVIDIA-Treiber kommen vom System. Den Download gegen die SHA256SUMS des Releases prüfen.
     - en: >-
         Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.
       de: >-
