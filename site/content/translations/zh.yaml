@@ -6,6 +6,18 @@
 
 schema_version: 1
 translations:
+- en: Live census of BTX nodes and signer witness of the easyBTX team.
+  zh: easyBTX 团队的 BTX 节点实时统计和签名者见证。
+- en: >-
+    The roles a node advertises are its own claim; the page marks separately which nodes answered a
+    real request ("serve-verified").
+  zh: >-
+    节点宣称的角色只是它自己的说法；页面会单独标出哪些节点对真实请求作出了响应（"serve-verified"）。
+- en: >-
+    The wallet in the official releases: btxd with btx-cli, open source, on your own node. The
+    desktop app btx-qt is in v0.34.15; the v0.34.16 archives leave it out.
+  zh: >-
+    官方版本中的钱包：btxd 搭配 btx-cli，开源，运行在你自己的节点上。桌面应用 btx-qt 在 v0.34.15 中提供；v0.34.16 的归档不包含它。
 - en: 'Live view from the Byron Bay archive node: its chain progress, the heights of the nodes connected
     to it, and a map of those connections (preview).'
   zh: Byron Bay 归档节点的实时视图：其链进度、与其相连节点的高度，以及这些连接的地图（预览）。
@@ -379,10 +391,6 @@ translations:
     The same WBTX test bridge as btx.supply, on the Robinhood Chain testnet. Test tokens have no
     value.
   zh: 与 btx.supply 相同的 WBTX 测试跨链桥，位于 Robinhood Chain 测试网上。测试代币没有价值。
-- en: >-
-    The wallet in the official releases for Linux and macOS: the desktop app btx-qt, or btxd with
-    btx-cli. Open source; it runs on your own node.
-  zh: Linux 和 macOS 官方版本中自带的钱包：桌面应用 btx-qt，或 btxd 配合 btx-cli。开源；它运行在你自己的节点上。
 - en: Verification gate; clearing it lets you into the main BTX Telegram groups.
   zh: 验证入口；通过验证后即可进入 BTX 的主要 Telegram 群组。
 - en: Verify the signature and SHA-256 before use. Not for signers.
@@ -502,8 +510,6 @@ translations:
   zh: 在没有合格 GPU 的情况下，通过信任签名者的重放证明来运行节点，以及这种信任意味着什么。
 - en: Network and explorers
   zh: 网络与区块浏览器
-- en: Node census and signer witness of the easyBTX team.
-  zh: easyBTX 团队的节点统计和签名者见证。
 - en: Supply, holders and rich list.
   zh: 供应量、持有人和富豪榜。
 - en: >-

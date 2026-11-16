@@ -514,11 +514,18 @@ categories:
           de: Block-Explorer des Pools ninjaraider, mit JSON-API für Adressen und Blöcke.
       - id: easybtx-census
         name: easyBTX network
-        url: https://easybtx.com/
+        url: https://easybtx.com/nodes
         tags: [census, signers]
         description:
-          en: Node census and signer witness of the easyBTX team.
-          de: Node-Zählung und Signer-Witness des easyBTX-Teams.
+          en: Live census of BTX nodes and signer witness of the easyBTX team.
+          de: Live-Zählung der BTX-Nodes und Signer-Witness des easyBTX-Teams.
+        note:
+          en: >-
+            The roles a node advertises are its own claim; the page marks separately which nodes
+            answered a real request ("serve-verified").
+          de: >-
+            Die Rollen, die ein Node angibt, sind seine eigene Aussage; die Seite markiert getrennt,
+            welche Nodes auf eine echte Anfrage geantwortet haben („serve-verified“).
       - id: btxinfo
         name: btxinfo
         url: https://btxinfo.com
@@ -779,11 +786,12 @@ categories:
         tags: [official, desktop, open source, pq]
         description:
           en: >-
-            The wallet in the official releases for Linux and macOS: the desktop app btx-qt, or
-            btxd with btx-cli. Open source; it runs on your own node.
+            The wallet in the official releases: btxd with btx-cli, open source, on your own node.
+            The desktop app btx-qt is in v0.34.15; the v0.34.16 archives leave it out.
           de: >-
-            Die Wallet in den offiziellen Releases für Linux und macOS: die Desktop-App btx-qt oder
-            btxd mit btx-cli. Open Source; sie läuft auf dem eigenen Node.
+            Die Wallet in den offiziellen Releases: btxd mit btx-cli, Open Source, auf dem eigenen
+            Node. Die Desktop-App btx-qt gibt es in v0.34.15; die Archive von v0.34.16 lassen sie
+            weg.
         note:
           en: >-
             Back up the whole wallet with backupwalletbundlearchive (one passphrase-encrypted
