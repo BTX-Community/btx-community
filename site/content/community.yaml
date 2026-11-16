@@ -861,11 +861,14 @@ categories:
         note:
           en: >-
             easyBTX says it holds no funds, is not a party to any trade and quotes no price. On 16
-            November 2026 the board listed one seller. A price agreed there is not a market price.
+            November 2026 the board listed one seller. Contact a seller only through the link on
+            easyBTX's own page. Anyone who messages you first is not that seller. A price agreed there
+            is not a market price.
           de: >-
             Laut easyBTX verwahrt es kein Geld, ist an keinem Geschäft beteiligt und nennt keinen
-            Preis. Am 16. November 2026 stand ein Verkäufer auf dem Brett. Ein dort ausgemachter
-            Preis ist kein Marktpreis.
+            Preis. Am 16. November 2026 stand ein Verkäufer auf dem Brett. Verkäufer nur über den Link
+            auf der Seite von easyBTX kontaktieren. Wer dich zuerst anschreibt, ist nicht dieser
+            Verkäufer. Ein dort ausgemachter Preis ist kein Marktpreis.
 
   - id: bridges
     title: { en: Bridges and testnets, de: Bridges und Testnetze }

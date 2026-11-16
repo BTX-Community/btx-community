@@ -5,6 +5,15 @@
 
 schema_version: 1
 translations:
+- en: >-
+    easyBTX says it holds no funds, is not a party to any trade and quotes no price. On 16 November
+    2026 the board listed one seller. Contact a seller only through the link on easyBTX's own page.
+    Anyone who messages you first is not that seller. A price agreed there is not a market price.
+  es: >-
+    Según easyBTX, no guarda fondos, no es parte de ninguna operación y no da ningún precio. El 16
+    de noviembre de 2026 había un vendedor en el tablón. Contacta con un vendedor solo a través del
+    enlace de la propia página de easyBTX. Quien te escriba primero no es ese vendedor. Un precio
+    acordado allí no es un precio de mercado.
 - en: Buying BTX
   es: Comprar BTX
 - en: >-
@@ -21,13 +30,6 @@ translations:
   es: >-
     Vendedores a los que, según dice, el equipo de easyBTX ha comprado él mismo. Acuerdas la
     cantidad y el precio con un vendedor por Telegram y le pagas directamente, normalmente en USDT.
-- en: >-
-    easyBTX says it holds no funds, is not a party to any trade and quotes no price. On 16 November
-    2026 the board listed one seller. A price agreed there is not a market price.
-  es: >-
-    Según easyBTX, no guarda fondos, no es parte de ninguna operación y no da ningún precio. El 16
-    de noviembre de 2026 había un vendedor en el tablón. Un precio acordado allí no es un precio de
-    mercado.
 - en: Live census of BTX nodes and signer witness of the easyBTX team.
   es: >-
     Censo en directo de los nodos BTX y testigo de firmantes del equipo de easyBTX.
