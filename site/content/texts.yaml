@@ -139,8 +139,9 @@ en:
   hub.nav.contribute: Contribute
   hub.principles.title: How we work
   hub.measured: >-
-    Measured at {commit} on {date}; live head {head}. Every number here is copied from the hub; the
-    hub is right if they differ.
+    Coverage measured at {coverage_commit} on {coverage_date}; the other counts at {commit} on
+    {date}; live head {head}. Every number here is copied from the hub; the hub is right if they
+    differ.
   hub.brief.title: Brief your AI
   hub.brief.lead: >-
     Paste this as the first message of a new session in your AI tool (Claude Code, Cursor, Codex or
@@ -459,8 +460,9 @@ de:
   hub.nav.contribute: Mitmachen
   hub.principles.title: Wie wir arbeiten
   hub.measured: >-
-    Gemessen an {commit} am {date}; aktueller Head {head}. Jede Zahl hier ist aus dem Hub
-    übernommen; weichen sie ab, gilt der Hub.
+    Abdeckung gemessen an {coverage_commit} am {coverage_date}; die übrigen Zahlen an {commit} am
+    {date}; aktueller Head {head}. Jede Zahl hier ist aus dem Hub übernommen; weichen sie ab, gilt
+    der Hub.
   hub.brief.title: Deine KI einweisen
   hub.brief.lead: >-
     Füge das als erste Nachricht einer neuen Sitzung in dein KI-Werkzeug ein (Claude Code, Cursor,
@@ -783,8 +785,9 @@ es:
   hub.nav.contribute: Contribuir
   hub.principles.title: Cómo trabajamos
   hub.measured: >-
-    Medido en {commit} el {date}; head actual {head}. Cada cifra de aquí está copiada del centro; si
-    difieren, vale lo que dice el centro.
+    Cobertura medida en {coverage_commit} el {coverage_date}; las demás cifras, en {commit} el
+    {date}; head actual {head}. Cada cifra de aquí está copiada del centro; si difieren, vale lo que
+    dice el centro.
   hub.brief.title: Instruye a tu IA
   hub.brief.lead: >-
     Pégalo como primer mensaje de una sesión nueva en tu herramienta de IA (Claude Code, Cursor,
@@ -1109,8 +1112,9 @@ fr:
   hub.nav.contribute: Contribuer
   hub.principles.title: Notre façon de travailler
   hub.measured: >-
-    Mesuré au commit {commit} le {date} ; tête actuelle : {head}. Chaque chiffre ici est copié du
-    hub ; en cas d'écart, c'est le hub qui fait foi.
+    Couverture mesurée au commit {coverage_commit} le {coverage_date} ; les autres chiffres au commit
+    {commit} le {date} ; tête actuelle : {head}. Chaque chiffre ici est copié du hub ; en cas d'écart,
+    c'est le hub qui fait foi.
   hub.brief.title: Briefer votre IA
   hub.brief.lead: >-
     Collez-le comme premier message d'une nouvelle session dans votre outil d'IA (Claude Code,
@@ -1418,7 +1422,7 @@ zh:
   hub.nav.rules: 规则
   hub.nav.contribute: 参与
   hub.principles.title: 我们如何工作
-  hub.measured: 于 {date} 在 {commit} 上测量；当前最新提交为 {head}。此处每个数字都复制自开发者中心；如有不同，以开发者中心为准。
+  hub.measured: 覆盖率于 {coverage_date} 在 {coverage_commit} 上测量，其他数字于 {date} 在 {commit} 上测量；当前最新提交为 {head}。此处每个数字都复制自开发者中心；如有不同，以开发者中心为准。
   hub.brief.title: 给你的 AI 下达简报
   hub.brief.lead: >-
     把它作为新会话的第一条消息粘贴到你的 AI 工具中（Claude Code、Cursor、Codex

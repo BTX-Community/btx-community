@@ -58,7 +58,7 @@ In four days, four pull requests dealt with locked wallets one step at a time: #
 On your coverage build (gcc, `CMAKE_BUILD_TYPE=Coverage`), a functional test hangs, and its node log contains `ExactReplay required`. Your AI proposes to add `-matmulvalidation=economic` to the test's node arguments, because then the test passes. Do you accept the change? What do you report instead?
 
 **Q6. A coverage gain.**
-A contributor reports that their pull request raised product-code line coverage, unit tests only, from 65.8% to 67.4%. The pull request adds one small test file. Their measured run also finished several unit suites that had timed out in the baseline run. Is the 1.6-point gain the pull request's? How should the number be stated?
+A contributor reports that their pull request raised product-code line coverage, unit tests only, from 67.4% to 69.0%. The pull request adds one small test file. Their measured run also finished several unit suites that had timed out in the baseline run. Is the 1.6-point gain the pull request's? How should the number be stated?
 
 **Q7. The committer line.**
 Before pushing to your fork you run

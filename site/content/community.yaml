@@ -1004,18 +1004,20 @@ documents:
       de: Review- und Testprogramm - ein Pull Request pro Fehlerklasse
     text:
       en: >-
-        Test coverage measured on the release line, the recurring bug classes behind 317 fix
-        pull requests since August, one sweep per class that closes it with a rule, and checks
-        before a final release. A proposal by contributors; the maintainer decides what lands.
+        Test coverage measured on swapnet-v2 at a5d1637f (now part of the release line), the
+        recurring bug classes behind 317 fix pull requests since August, one sweep per class that
+        closes it with a rule, and checks before a final release. A proposal by contributors; the
+        maintainer decides what lands.
       de: >-
-        Die auf dem Release-Zweig gemessene Testabdeckung, die wiederkehrenden Fehlerklassen
-        hinter 317 Fix-Pull-Requests seit August, ein Sammel-PR pro Klasse, der sie mit einer
-        Regel schließt, und Prüfungen vor einem endgültigen Release. Ein Vorschlag von
-        Mitwirkenden; was übernommen wird, entscheidet der Maintainer.
+        Die auf swapnet-v2 an Commit a5d1637f gemessene Testabdeckung (inzwischen Teil des
+        Release-Zweigs), die wiederkehrenden Fehlerklassen hinter 317 Fix-Pull-Requests seit
+        August, ein Sammel-PR pro Klasse, der sie mit einer Regel schließt, und Prüfungen vor einem
+        endgültigen Release. Ein Vorschlag von Mitwirkenden; was übernommen wird, entscheidet der
+        Maintainer.
     url: https://github.com/BTX-Community/btx-community/blob/main/dev/plan/MASTER-PLAN.md
     status:
-      en: Measured 12 November 2026 at commit c6f9678d
-      de: Gemessen am 12. November 2026 auf Commit c6f9678d
+      en: Measured 12 November 2026 at commit c6f9678d; coverage 14 November at a5d1637f
+      de: Gemessen am 12. November 2026 auf Commit c6f9678d; Abdeckung am 14. November auf a5d1637f
 
 
 removed:

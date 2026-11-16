@@ -1,9 +1,9 @@
-# Ending the drip-feed: one PR per bug class (public version, 12 Nov 2026; roles instead of handles; measured at `c6f9678d`, head `4c7840e9`)
+# Ending the drip-feed: one PR per bug class (public version, 12 Nov 2026; roles instead of handles; measured at `c6f9678d`, coverage at `a5d1637f`, head `4c7840e9`)
 > Last verified: 2026-11-12 · against: btxchain/btx release-0.34.16 @ 4c7840e9 · owner role: plan editor
 
 A plan by BTX contributors for sending pull requests the maintainer can merge. It covers how contributors stop filing one fix at a time, which classes to sweep, which gates keep them closed, and which items go to #464 as evidence instead of PRs. The maintainer decides what lands. The lanes that carry the work are in [`../07-lanes.md`](../07-lanes.md); the numbers behind this page are in [`plan-data.json`](plan-data.json) and the lanes in [`lanes.json`](lanes.json).
 
-**State.** Every measurement below was taken on `release-0.34.16` at `c6f9678d`. The live head is `4c7840e9`, 31 commits later. None of those commits touches `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus/` or `script/interpreter.cpp` (`git diff --stat c6f9678d 4c7840e9 -- src/validation.cpp src/net_processing.cpp src/pow.cpp src/consensus src/script/interpreter.cpp` prints nothing), so the consensus and `net_processing` figures still hold. Where the ModelNet, K01, K10 and fuzz numbers moved, the new value is given (§1.6). `main` is v0.34.15 (`476f3f23`); the release line is 1,194 commits ahead of it (`git rev-list --count 476f3f23..4c7840e9`).
+**State.** Every measurement below was taken on `release-0.34.16` at `c6f9678d`, except the coverage figures (§1.1), measured again on `swapnet-v2` at `a5d1637f` on 14 Nov. The live head is `4c7840e9`, 31 commits after `c6f9678d`. None of those commits touches `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus/` or `script/interpreter.cpp` (`git diff --stat c6f9678d 4c7840e9 -- src/validation.cpp src/net_processing.cpp src/pow.cpp src/consensus src/script/interpreter.cpp` prints nothing), so the consensus and `net_processing` results measured at `c6f9678d` still hold. `a5d1637f` is 177 commits after `4c7840e9`; of those paths, only `net_processing.cpp` differs between `c6f9678d` and `a5d1637f`. Where the ModelNet, K01, K10 and fuzz numbers moved, the new value is given (§1.6). `main` is v0.34.15 (`476f3f23`); the release line is 1,194 commits ahead of it (`git rev-list --count 476f3f23..4c7840e9`).
 
 **Labels.** [read] = taken from a source; [tested] = a script or command was run; [inferred] = judgement. Sources are the team's lane reports (working files; the numbers they gave are in [`plan-data.json`](plan-data.json), each with its source):
 - A: bug-class taxonomy of every fix PR since 1 Aug.
@@ -31,7 +31,7 @@ A plan by BTX contributors for sending pull requests the maintainer can merge. I
 
    These need a model-based test or a design change, not another PR.
 4. **No upstream gate, by choice.** `.github/workflows/README.md` says the repository "does not use GitHub-hosted CI for validation" and that workflow files are "intentionally absent" [read]. About 93 of the 317 fix PRs belong to classes a CI matrix catches before filing (Windows 33, test registration 26, packaging 14, RPC conversion 14, macOS 6) [A]. So the CI runs on a contributor fork and reports into each PR. Hosted CI upstream is not requested.
-5. **Coverage is measured again.** The coverage build configures again on `release-0.34.16` since #578 (merged into the release line on 12 Nov as `7051507b`); the fix is not in v0.34.15 (`main`, `476f3f23`). Measured at `c6f9678d` with the same fix: product-code line coverage is 65.8% with unit tests and 69.9% with unit + functional tests; branch coverage is 37.7% / 40.7% [C3]. All are floors: 47 unit suites timed out, and 82 of 208 functional scripts failed in the coverage run. The recipe to reproduce is in [`../04-build-and-test.md`](../04-build-and-test.md) §5. Functions never executed by the unit + functional runs: 102 in `net_processing.cpp`, 68 in consensus code, 927 in the wallet [C3].
+5. **Coverage is measured again.** The coverage build configures again on `release-0.34.16` since #578 (merged into the release line on 12 Nov as `7051507b`); the fix is not in v0.34.15 (`main`, `476f3f23`). Measured on `swapnet-v2` at `a5d1637f` (14 Nov), which contains the fix: product-code line coverage is 67.4% with unit tests and 72.3% with unit + functional tests; branch coverage is 38.9% / 42.6% [C3]. In the coverage run 42 unit suites timed out, and 14 of 220 functional scripts failed. The time budgets were shorter than on 12 Nov, so the figures are floors and the comparison with the 12 Nov run is indicative (§1.1). The recipe to reproduce is in [`../04-build-and-test.md`](../04-build-and-test.md) §5. Functions never executed by the unit + functional runs (measured 12 Nov at `c6f9678d`): 102 in `net_processing.cpp`, 68 in consensus code, 927 in the wallet [C3].
 6. **One static and dynamic baseline exists** [C1, C2; untriaged].
    - CodeQL: 260 product-code results outside the maintainability and documentation rules, 150 of them security-tagged. 133 of those 150 are one class (file-system and environment trust), 75 of them in the ModelNet helper and stores.
    - cppcheck: 26 errors.
@@ -39,48 +39,50 @@ A plan by BTX contributors for sending pull requests the maintainer can merge. I
    - `-Wthread-safety`: 266 warnings.
    - DEBUG_LOCKORDER: 1 lock-order inversion.
    - The repo's own clang-tidy config: 1,033 warnings.
-7. **Risk is concentrated.** 10 files hold 91.6% of LOC × churn × (1 − coverage). `net_processing.cpp` has 25,300 lines and 113 fix commits; its line coverage is 24.6% unit-only and 62.3% with functional tests [B, C3].
+7. **Risk is concentrated.** 10 files hold 91.6% of LOC × churn × (1 − coverage). `net_processing.cpp` has 25,300 lines and 113 fix commits; its line coverage is 59.8% unit-only and 72.1% with functional tests [B, C3].
 8. **The maintainer's rule is known and fast.** The maintainer (numair) on #464, 11 Nov: "The validation, fork-choice, and MatMul-frontier entries in this list stay out of `release-0.34.16`". The same comment invited standalone PRs for #309, #313, #333, #363 and #382. All five landed on 12 Nov as #579, #583, #580, #581 and #582, within hours [git]. #464's open list is now consensus only.
 9. **Core idea: file classes, not instances.** One PR per recurring class: the fix at every site a machine rule finds, plus the rule (unit test, lint, CI job) that keeps the class at zero.
 10. **Gates on the fork.** Fork CI runs every class rule. Each PR links its run: fails before, passes after.
 11. **Deep reviews by invariant**, only where tools cannot see (§3). Consensus items go to #464 as a measured result plus a ready test, never as a PR into 0.34.16.
 12. **Coordination.** One board, lane owners, a bug-class registry and a weekly batch. Target: under 10 class PRs per week, each closing a class, plus an evidence note when one is complete.
 
-## §1 The measured baseline (`c6f9678d`) and what moved
+## §1 The measured baseline (`c6f9678d`; coverage `a5d1637f`) and what moved
 
 ### 1.1 Coverage [C3, tested]
-Build: gcc 13.3 `-Og --coverage`, gcovr 8.8, with the #578 fix applied (it is on `release-0.34.16` only). To reproduce the run, follow [`../04-build-and-test.md`](../04-build-and-test.md) §5.
+Build: gcc 13.3 `-Og --coverage`, gcovr 8.8, on `swapnet-v2` at `a5d1637f` (14 Nov), which contains the #578 fix. To reproduce the run, follow [`../04-build-and-test.md`](../04-build-and-test.md) §5.
 
-Unit tests: all 2,625 ctest entries ran. 2,575 passed, 47 timed out at 3,600 s, 2 failed and 1 was skipped.
+Same procedure as the 12 Nov run at `c6f9678d` (#578 applied locally there), with shorter time budgets: unit tests 2.5 h instead of 3 h, functional tests 100 min instead of 3 h, and no economic-mode rerun. The figures are floors, and the comparison with 12 Nov is indicative.
 
-Functional tests: the 208 entries of the test_runner default list ran. 124 passed, 2 were skipped and 82 failed.
+Unit tests: all 2,629 ctest entries ran. 2,583 passed, 42 timed out or were stopped by the unit time budget (41 `matmul_v4_rc_stage3_*` suites and `smile2_membership_tests`; 37 at the 3,600 s limit, 5 stopped by the budget at 3,392 to 3,543 s), 3 failed and 1 was skipped.
 
-| Product code (5,519 files, 623,410 lines) | Unit | Unit + functional |
+Functional tests: the 220 entries of the test_runner default list ran. 204 passed, 2 were skipped and 14 failed.
+
+| Product code (5,530 files, 625,368 lines) | Unit | Unit + functional |
 |---|---:|---:|
-| Lines | 65.8% | 69.9% |
-| Branches | 37.7% | 40.7% |
-| Functions | 76.3% | 80.4% |
+| Lines | 67.4% | 72.3% |
+| Branches | 38.9% | 42.6% |
+| Functions | 77.7% | 82.7% |
 
 - **Per area, lines (unit → unit + functional):**
 
   | Area | Unit | + functional |
   |---|---:|---:|
-  | consensus | 95.7 | 96.6 |
-  | `validation.cpp` | 75.6 | 78.2 |
-  | script | 80.7 | 81.2 |
-  | wallet | 37.2 | 50.5 |
-  | `net_processing.cpp` | 24.6 | 62.3 |
-  | other net | 50.4 | 75.5 |
-  | rpc | 51.6 | 72.9 |
-  | node | 69.9 | 79.6 |
-  | matmul (47 suites time out: not measured) | 62.6 | 62.7 |
-  | shielded | 71.8 | 72.3 |
-  | modelnet | 83.7 | 85.6 |
+  | consensus | 95.7 | 97.7 |
+  | `validation.cpp` | 77.0 | 79.8 |
+  | script | 80.8 | 81.3 |
+  | wallet | 37.4 | 63.0 |
+  | `net_processing.cpp` | 59.8 | 72.1 |
+  | other net | 52.7 | 77.3 |
+  | rpc | 52.0 | 76.5 |
+  | node | 72.7 | 81.9 |
+  | matmul (41 suites time out: not measured) | 63.9 | 63.9 |
+  | shielded | 72.1 | 76.9 |
+  | modelnet | 84.1 | 86.2 |
   | pq | 92.7 | 92.7 |
 
-- **ExactReplay stall class.** 48 of the functional failures stall with "ExactReplay required" on the slow coverage build. 41 of those pass when every node runs `-matmulvalidation=economic`, a non-default setting. That rerun is a diagnostic only and is not part of the figures above. A functional gate has to settle this class first.
-- **`peerman_tests` timed out** and wrote no data, so the unit-only figure for `net_processing.cpp` understates its unit tests.
-- **Functions never executed:** consensus 68, `net_processing.cpp` 102, wallet 927, rpc 103, matmul verification 507. 363 of the 507 sit in files whose own suite timed out.
+- **ExactReplay stall class.** None of the 14 functional failures stalled with "ExactReplay required" in this run, and no economic-mode rerun was made. On 12 Nov at `c6f9678d`, 48 of the 82 failures stalled on the slow coverage build, and 41 of those passed when every node ran `-matmulvalidation=economic`, a non-default setting; that rerun was a diagnostic only and was not part of the figures. A functional gate still checks for this class first.
+- **`peerman_tests` passed** in the retry pass this time; on 12 Nov it timed out and wrote no data. That is the main reason the unit-only figure for `net_processing.cpp` rose from 24.6 to 59.8 [inferred]; the file also changed between the two commits (155 lines added, 12 removed).
+- **Functions never executed** (measured 12 Nov at `c6f9678d`); the 14 Nov run kept no trace data to recount them: consensus 68, `net_processing.cpp` 102, wallet 927, rpc 103, matmul verification 507. 363 of the 507 sat in files whose own suite timed out.
 
 ### 1.2 Static [C1, tested; every result is a lead until read]
 - **Totals.**
@@ -132,7 +134,7 @@ A sorts the 317 fix PRs into 26 named classes, plus "other" and one out-of-scope
   - `net_processing.cpp`
   - `validation.cpp` (63 fix commits)
   - `modelnet/helper.cpp`
-  - `wallet/shielded_rpc.cpp`: 16,911 lines, 15.8% unit / 24.3% with functional, no test file
+  - `wallet/shielded_rpc.cpp`: 16,911 lines, 15.8% unit / 52.7% with functional, no test file
   - `rpc/blockchain.cpp`
   - `node/matmul_trusted_attestations.h` (50 fix commits)
 - **No test file.** 52 of the top 200 files have no unit-test file.
@@ -210,7 +212,7 @@ The method with the best yield since August [S2]: a named invariant, one reader,
      - nullifiers are unique within a block and across the chain [Z3]
      - every rule enforced in mempool, RPC or template code is also enforced in ConnectBlock [C1, P3]
      - every `[[nodiscard]]` validation result is consumed (gcc's unused-result warning is the check)
-     - the 68 never-executed consensus functions are dead code or get a test
+     - the 68 never-executed consensus functions (measured 12 Nov at `c6f9678d`) are dead code or get a test
      - every hard-coded checkpoint names an on-chain block [S3]
    - Decisive tests:
      - genesis sync with `assumevalid=0` past 126,979, checked against every compiled UTXO pin
@@ -262,7 +264,7 @@ The method with the best yield since August [S2]: a named invariant, one reader,
      - a signer signs only what it validated itself [A1]
      - quorum arithmetic is tested exhaustively over (n, t, present) [A3]
      - mutated attestation data cannot poison hash-keyed caches [A2]
-   - Decisive tests: the cross-device corpus; the model-based attestation test as one artefact instead of five PRs; the 47 timing-out suites in their own job.
+   - Decisive tests: the cross-device corpus; the model-based attestation test as one artefact instead of five PRs; the 41 stage3 suites that time out in their own job.
 7. **ModelNet helper surface (PR).**
    - Invariants:
      - no non-loopback listener on 29447 without `-modelbind`
@@ -309,12 +311,12 @@ The method with the best yield since August [S2]: a named invariant, one reader,
   - windows-tests: failed after 4 min
 
   The macOS test job therefore has to be sharded.
-- **Box timings for scale** [C3]. Unit pass A took 40 min at `-j100` on 128 threads; the 63 slow suites took 2 h; the 208 functional scripts took 92 min at 42 jobs. The full suite cannot fit one 4-core job, so it is sharded.
+- **Box timings for scale** [C3, 12 Nov run]. Unit pass A took 40 min at `-j100` on 128 threads; the 63 slow suites took 2 h; the 208 functional scripts took 92 min at 42 jobs. The full suite cannot fit one 4-core job, so it is sharded.
 
 ### 4.2 Jobs
 1. **`linux-unit-functional`.** Six ctest shards over the cost-ordered list and four functional shards, each with C3's thread shim (`BTX_HWC=2`, `OMP_NUM_THREADS=2`) and a 900 s per-test timeout.
-   - The 63 slow suites run only in a nightly `stage3` job on a dedicated box. 47 of them did not finish in an hour each on 6 threads, which is at least 47 suite-hours.
-   - `ci/known-failing.txt` is written from the first run: the 2 unit failures, the ExactReplay stall class, and the gcc-baseline failures that remain after triage. The list may only shrink.
+   - The 63 slow suites (12 Nov pass A) run only in a nightly `stage3` job on a dedicated box. On 12 Nov, 47 of them did not finish in an hour each on 6 threads, which is at least 47 suite-hours; on 14 Nov, 41 stage3 suites did not finish.
+   - `ci/known-failing.txt` is written from the first run: the unit failures (3 in the 14 Nov coverage run), the ExactReplay stall class, and the gcc-baseline failures that remain after triage. The list may only shrink.
 2. **`linux-asan-ubsan`.** Unit and functional tests with the upstream `ci/test` sanitizer config.
 3. **`tsan-lockorder` (nightly).** clang-20 TSan with C2's retry launcher, plus a DEBUG_LOCKORDER run. Baseline: 41 site pairs; it may only shrink.
 4. **`lint`.** The K19 registration diff, the K04 UniValue lint, the K01/K08/K17 greps, the K10 conversion test, `-rpcdoccheck`, exec bits, YAML lint and a secret scan.
@@ -323,7 +325,7 @@ The method with the best yield since August [S2]: a named invariant, one reader,
 7. **`fuzz-smoke`.** ClusterFuzzLite (libFuzzer + ASan): 10 min per PR, 2 h nightly, and the `native.cmake` gate so the modelnet targets link.
 8. **`codeql`.** Weekly, on a dedicated box: the C++ database does not fit a hosted runner. The Rust and Python default setups run on hosted runners. Baseline: 260; it may only shrink.
 9. **`coverage-ratchet`.** On a dedicated box: the coverage build tree was 27 GB, against 14 GB of runner disk.
-   - Shards upload `.gcda` sets, and one merge job compares them with `ci/coverage-baseline.json` (69.9% lines, 40.7% branches, per-area rows).
+   - Shards upload `.gcda` sets, and one merge job compares them with `ci/coverage-baseline.json` (72.3% lines, 42.6% branches, per-area rows).
    - The job fails if any area drops more than 0.2 points.
 10. **`release-gate`.** `package_release_archive.py`, the GLIBC ceiling, RUNPATH, `elfcheck.py`, an SBOM present, sums signed.
 
@@ -333,11 +335,11 @@ Free external services: GitHub CodeQL (Rust and Python), ClusterFuzzLite, OSS-Fu
 | Area | Done when |
 |---|---|
 | net/p2p | every container in the bounds table; ASan + TSan clean; fuzz targets for the 5 missing message types run 24 h clean; `net_processing.cpp` ≥ 75% lines with functional tests; 0 open K09/K14 instances outside the evidence list |
-| validation/consensus | byte-diff proof per release; genesis-sync job green; 68 unexecuted functions tested or deleted; thread-safety annotations accepted by the maintainer |
+| validation/consensus | byte-diff proof per release; genesis-sync job green; 68 unexecuted functions (measured 12 Nov at `c6f9678d`) tested or deleted; thread-safety annotations accepted by the maintainer |
 | wallet | ≥ 70% lines; K05/K11/K12 rules in ctest; restore-without-passphrase probe fails; no plaintext seed material; TSan clean |
 | rpc/cli | K10 test green; `-rpcdoccheck` in CI; ≥ 80% lines |
 | modelnet helper | dispatcher fuzz 24 h clean; two-user layout tested; K01/K08/K16/K17/K20 rules in ctest; every `security_v2` file above 0%; `helper.cpp` split proposed with tests |
-| matmul | 47 timeouts given a job and a number; cross-device corpus run; K13 model test exists; CodeQL class 2 triaged for 0.35 |
+| matmul | 41 timeouts given a job and a number; cross-device corpus run; K13 model test exists; CodeQL class 2 triaged for 0.35 |
 | shielded | verification fuzz targets; K12 rule; anchor-window test (evidence) |
 | release/update | signed sums, tag = asset, two reproducers, installer test on the real archive, `elfcheck` green |
 
@@ -427,8 +429,8 @@ Owner slots, second passes and done bars per lane are in the lane plan, [`../07-
 
 ## §8 Risks and what this plan will not catch
 - **Class assignments are 10-15% noisy** [A], and the first tool counts were off for K01 and K10. Every sweep re-checks on code at the live head.
-- **The functional gate starts red.** 82 of 208 scripts fail on the coverage build, and 51 of 200 on a plain gcc build. Until triage, the gate is a known-failing list, and a long list teaches people to ignore it.
-- **matmul is unmeasured, not clean.** 47 suites time out, 363 of the 507 unexecuted verification functions sit in them, and the CodeQL class-2 results there wait for 0.35.
+- **The functional gate starts red.** 14 of 220 scripts fail on the coverage build (14 Nov), and 51 of 200 on a plain gcc build (12 Nov). Until triage, the gate is a known-failing list, and a long list teaches people to ignore it.
+- **matmul is unmeasured, not clean.** 41 suites time out, 363 of the 507 unexecuted verification functions (measured 12 Nov at `c6f9678d`) sat in the suites that timed out then, and the CodeQL class-2 results there wait for 0.35.
 - **Consensus, fork choice, signer liveness and release signing stay with the maintainer.** This plan turns them into evidence.
 - **Logic classes are not greppable.** K20, K21, K14 and K13 need generators, simulations or a redesign.
 - **No gate here sees:**
@@ -441,7 +443,7 @@ Owner slots, second passes and done bars per lane are in the lane plan, [`../07-
 
 ## Verification notes
 This version was checked against the raw lane outputs and the live tree on 12 Nov.
-- **Functional coverage run size:** 208 scripts, not 200.
+- **Functional coverage run size:** 208 scripts in the 12 Nov run, not 200 (220 in the 14 Nov run).
 - **K01:** 12 files left at the live head by the file-level rule (raw write, no atomic primitive anywhere in the file). An earlier count of 16 included 2 files that were already atomic; #576 and #577 fixed 2 more. The rule hides a raw write in a file that also fsyncs another file: `modelnet/capability_bytes.cpp:515` is the one such candidate found, so the lane pack's count reads 13.
 - **K10:** 1 candidate, not 4. Three were `also_string` rows the first parser missed.
 - **K04:** 0 real sites.

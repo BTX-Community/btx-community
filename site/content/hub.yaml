@@ -4,7 +4,9 @@
 # comes from the hub is compared with it by site/tests/test_build.py
 # (test_the_developers_page_matches_the_hub), so a drift fails the check:
 #
-#   measured            dev/plan/plan-data.json measured_at (commit, date, live_head)
+#   measured            dev/plan/plan-data.json measured_at (commit, date, live_head,
+#                       coverage_commit, coverage_date): coverage figures and lane meters at
+#                       coverage_commit, the static, TSan, class and gate counts at commit
 #   coverage.text       dev/01-state.md section 3, the "Coverage is measured again." line, and the
 #   coverage.figures    four figures in it; only change them when the hub does
 #   coverage.runs       dev/plan/MASTER-PLAN.md section 1.1, the unit and functional run sentences
@@ -44,12 +46,14 @@
 # url: plain https URL into this repository on GitHub; the two brief links are raw URLs of dev/.
 
 schema_version: 1
-checked: 2026-11-12
+checked: 2026-11-15
 source: https://github.com/BTX-Community/btx-community/tree/main/dev
 measured:
   commit: c6f9678d
   date: 2026-11-12
   head: 4c7840e9
+  coverage_commit: a5d1637f
+  coverage_date: 2026-11-14
 
 # Four principles: dev/plan/MASTER-PLAN.md section 0 items 9 and 10, dev/07-lanes.md sections 1 and 7.
 principles:
@@ -223,150 +227,150 @@ levels:
 coverage:
   text:
     en: >-
-      Product code of release-0.34.16, measured at commit c6f9678d with the fix from btxchain/btx
-      #578 applied. The coverage build configures again on release-0.34.16 since #578 (12 November
-      2026), not in v0.34.15. All figures are floors: 47 unit suites timed out and 82 of 208
-      functional scripts failed in the coverage run, and a test that is killed writes no counts.
+      Product code of swapnet-v2 at commit a5d1637f; the coverage build needs btxchain/btx #578,
+      which v0.34.15 lacks. In the coverage run 42 unit suites timed out and 14 of 220 functional
+      scripts failed; a killed test writes no counts. The time budgets were shorter than on 12
+      November, so the figures are floors and the comparison is indicative.
     de: >-
-      Produktcode von release-0.34.16, gemessen an Commit c6f9678d mit dem Fix aus btxchain/btx
-      #578. Der Coverage-Build ist auf release-0.34.16 seit #578 (12. November 2026) wieder
-      konfigurierbar, in v0.34.15 nicht. Alle Werte sind Untergrenzen: Im Coverage-Lauf liefen 47
-      Unit-Suites in einen Timeout und 82 von 208 Funktionstest-Skripten schlugen fehl; ein
-      abgebrochener Test schreibt keine Zählung.
+      Produktcode von swapnet-v2 an Commit a5d1637f; der Coverage-Build braucht btxchain/btx #578,
+      das v0.34.15 fehlt. Im Coverage-Lauf liefen 42 Unit-Suites in einen Timeout, 14 von 220
+      Funktionstest-Skripten schlugen fehl; ein abgebrochener Test schreibt keine Zählung. Die
+      Zeitbudgets waren kürzer als am 12. November, daher sind die Werte Untergrenzen und der
+      Vergleich ist nur ein Anhaltspunkt.
   source: https://github.com/BTX-Community/btx-community/blob/main/dev/01-state.md
   plan: https://github.com/BTX-Community/btx-community/blob/main/dev/plan/MASTER-PLAN.md
   figures:
     - id: lines-unit
       label: { en: Lines, de: Zeilen }
-      percent: 65.8
+      percent: 67.4
       note: { en: unit tests, de: Unit-Tests }
     - id: lines-functional
       label: { en: Lines, de: Zeilen }
-      percent: 69.9
+      percent: 72.3
       note: { en: unit and functional tests, de: Unit- und Funktionstests }
     - id: branches-unit
       label: { en: Branches, de: Verzweigungen }
-      percent: 37.7
+      percent: 38.9
       note: { en: unit tests, de: Unit-Tests }
     - id: branches-functional
       label: { en: Branches, de: Verzweigungen }
-      percent: 40.7
+      percent: 42.6
       note: { en: unit and functional tests, de: Unit- und Funktionstests }
   runs:
     - id: unit
-      total: 2625
-      passed: 2575
-      timed_out: 47
-      failed: 2
+      total: 2629
+      passed: 2583
+      timed_out: 42
+      failed: 3
       skipped: 1
     - id: functional
-      total: 208
-      passed: 124
+      total: 220
+      passed: 204
       timed_out: 0
-      failed: 82
+      failed: 14
       skipped: 2
   areas:
     - id: consensus
       name: consensus
       path: src/consensus/
       unit: 95.7
-      functional: 96.6
-      branches: 50.9
+      functional: 97.7
+      branches: 53.7
       loc: 2452
     - id: validation
       name: validation.cpp
-      unit: 75.6
-      functional: 78.2
-      branches: 46.5
+      unit: 77.0
+      functional: 79.8
+      branches: 48.0
       loc: 23687
       risk_rank: 2
     - id: pow
       name: pow.cpp
-      unit: 68.9
-      functional: 70.3
-      branches: 46.3
+      unit: 69.3
+      functional: 70.7
+      branches: 46.8
       loc: 9076
       risk_rank: 2
     - id: script
       name: script
-      unit: 80.7
-      functional: 81.2
-      branches: 53.6
+      unit: 80.8
+      functional: 81.3
+      branches: 54.0
       loc: 18019
       risk_rank: 11
     - id: wallet
       name: wallet
       path: src/wallet/
-      unit: 37.2
-      functional: 50.5
-      branches: 30.7
+      unit: 37.4
+      functional: 63.0
+      branches: 36.6
       loc: 76263
       risk_rank: 4
     - id: net-processing
       name: net_processing.cpp
-      unit: 24.6
-      functional: 62.3
-      branches: 37.0
+      unit: 59.8
+      functional: 72.1
+      branches: 44.6
       loc: 25300
       risk_rank: 1
     - id: other-net
       name: other net
-      unit: 50.4
-      functional: 75.5
-      branches: 45.3
+      unit: 52.7
+      functional: 77.3
+      branches: 49.4
       risk_rank: 1
     - id: rpc
       name: rpc
       path: src/rpc/
-      unit: 51.6
-      functional: 72.9
-      branches: 43.4
+      unit: 52.0
+      functional: 76.5
+      branches: 44.6
       loc: 33765
       risk_rank: 5
     - id: node
       name: node
-      unit: 69.9
-      functional: 79.6
-      branches: 49.8
+      unit: 72.7
+      functional: 81.9
+      branches: 51.4
       loc: 28129
       risk_rank: 7
     - id: matmul
       name: matmul
       path: src/matmul/
-      unit: 62.6
-      functional: 62.7
-      branches: 35.1
+      unit: 63.9
+      functional: 63.9
+      branches: 35.9
       loc: 468217
       risk_rank: 9
       note:
-        en: "47 suites timed out: not measured"
-        de: "47 Suites liefen in einen Timeout: nicht gemessen"
+        en: "41 suites timed out: not measured"
+        de: "41 Suites liefen in einen Timeout: nicht gemessen"
     - id: shielded
       name: shielded
       path: src/shielded/
-      unit: 71.8
-      functional: 72.3
-      branches: 47.1
+      unit: 72.1
+      functional: 76.9
+      branches: 49.0
       loc: 50060
     - id: modelnet
       name: modelnet
-      unit: 83.7
-      functional: 85.6
-      branches: 47.8
+      unit: 84.1
+      functional: 86.2
+      branches: 48.5
       loc: 369251
       risk_rank: 3
     - id: kernel
       name: kernel
-      unit: 88.6
-      functional: 90.5
-      branches: 49.7
+      unit: 88.8
+      functional: 90.9
+      branches: 53.8
       loc: 5400
       risk_rank: 12
     - id: policy
       name: policy
       unit: 69.7
-      functional: 80.8
-      branches: 49.2
+      functional: 81.7
+      branches: 50.9
       loc: 4695
     - id: pq
       name: pq
@@ -379,6 +383,7 @@ coverage:
       path: src/modelnet/security_v2/
       unit: 0.2
       functional: 15.0
+      branches: 4.9
       loc: 5365
       note:
         en: 6 .cpp files at 0% with functional tests
@@ -709,11 +714,11 @@ lanes:
               und K27; Tiefenprüfung 3.3 des Plans.
           why:
             en: >-
-              wallet risk rank 4; 927 wallet functions never executed under unit+functional; K05
-              chain of 4 PRs in 4 days
+              wallet risk rank 4; 927 wallet functions never executed under unit+functional
+              (measured 12 Nov at c6f9678d); K05 chain of 4 PRs in 4 days
             de: >-
-              Wallet auf Risikorang 4; 927 Wallet-Funktionen laufen in Unit- und Funktionstests nie;
-              bei K05 eine Kette von 4 PRs in 4 Tagen
+              Wallet auf Risikorang 4; 927 Wallet-Funktionen laufen in Unit- und Funktionstests nie
+              (gemessen am 12. Nov. an c6f9678d); bei K05 eine Kette von 4 PRs in 4 Tagen
           target:
             en: >-
               wallet lines >= 70 (set here); K05/K11/K12 rules in ctest; restore-without-passphrase
@@ -729,8 +734,8 @@ lanes:
             en: PR to release-0.34.16 (Thursday batch)
             de: PR an release-0.34.16 (Donnerstagspaket)
           coverage:
-            unit: 37.2
-            functional: 50.5
+            unit: 37.4
+            functional: 63.0
           risk_rank: 4
           pack: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/A-WALLET.md
           done_bar:
@@ -750,12 +755,14 @@ lanes:
               de: >-
                 die Probe „Wiederherstellen ohne Passphrase“ scheitert; ein Speicherscan nach
                 walletlock zeigt keine Seed-Bytes
-            - en: wallet lines from 50.5 to at least 70 (target set here)
-              de: Wallet-Zeilen von 50,5 auf mindestens 70 (Ziel hier festgelegt)
-            - en: each of the 927 unexecuted wallet functions tested or listed as dead
+            - en: wallet lines from 63.0 to at least 70 (target set here)
+              de: Wallet-Zeilen von 63,0 auf mindestens 70 (Ziel hier festgelegt)
+            - en: >-
+                each of the 927 unexecuted wallet functions (measured 12 Nov at c6f9678d) tested or
+                listed as dead
               de: >-
-                jede der 927 nie ausgeführten Wallet-Funktionen getestet oder als toter Code
-                gelistet
+                jede der 927 nie ausgeführten Wallet-Funktionen (gemessen am 12. Nov. an c6f9678d)
+                getestet oder als toter Code gelistet
         - id: A-STORES
           title:
             en: ModelNet store, deposit and persistence logic
@@ -790,8 +797,8 @@ lanes:
             en: PR to release-0.34.16 (Thursday batch)
             de: PR an release-0.34.16 (Donnerstagspaket)
           coverage:
-            unit: 83.7
-            functional: 85.6
+            unit: 84.1
+            functional: 86.2
           risk_rank: 3
           pack: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/A-STORES.md
           done_bar:
@@ -831,11 +838,13 @@ lanes:
             en: >-
               net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits,
               validation.cpp 63, matmul_trusted_attestations.h 50; 68 consensus functions never
-              executed; frozen for 0.34.16 by #464, so only evidence lands
+              executed (measured 12 Nov at c6f9678d); frozen for 0.34.16 by #464, so only evidence
+              lands
             de: >-
               net/p2p auf Risikorang 1, Validierung auf Rang 2; net_processing.cpp 113 Fix-Commits,
-              validation.cpp 63, matmul_trusted_attestations.h 50; 68 Konsensfunktionen laufen nie;
-              für 0.34.16 durch #464 eingefroren, daher kommen nur Belege an
+              validation.cpp 63, matmul_trusted_attestations.h 50; 68 Konsensfunktionen laufen nie
+              (gemessen am 12. Nov. an c6f9678d); für 0.34.16 durch #464 eingefroren, daher kommen
+              nur Belege an
           target:
             en: >-
               a #464 evidence list: one measured result + one ready test + one paragraph per item; 0
@@ -853,8 +862,8 @@ lanes:
             en: "EVIDENCE on #464; a PR only if the maintainer asks"
             de: "BELEG in #464; ein PR nur auf Bitte des Maintainers"
           coverage:
-            unit: 24.6
-            functional: 62.3
+            unit: 59.8
+            functional: 72.1
           risk_rank: 1
           pack: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/E-CONSENSUS.md
           done_bar:
@@ -876,8 +885,12 @@ lanes:
               de: >-
                 K14-Zustandsautomat des Downloads als deterministische Simulation mit feindlichem
                 Scheduler („jeder angekündigte Blockinhalt wird innerhalb von N Ticks angefordert“)
-            - en: 68 unexecuted consensus functions listed as tested or dead
-              de: 68 nie ausgeführte Konsensfunktionen als getestet oder tot gelistet
+            - en: >-
+                68 unexecuted consensus functions (measured 12 Nov at c6f9678d) listed as tested or
+                dead
+              de: >-
+                68 nie ausgeführte Konsensfunktionen (gemessen am 12. Nov. an c6f9678d) als getestet
+                oder tot gelistet
             - en: byte-diff proof of block validity between main and the release line
               de: Byte-Diff-Nachweis der Blockgültigkeit zwischen main und der Release-Linie
             - en: >-
@@ -926,8 +939,8 @@ lanes:
             en: PR for bounds and targets; scheduling or fork choice -> E-CONSENSUS
             de: PR für Grenzen und Targets; Download-Planung oder Fork-Wahl -> E-CONSENSUS
           coverage:
-            unit: 50.4
-            functional: 75.5
+            unit: 52.7
+            functional: 77.3
           risk_rank: 1
           waiting: true
           done_bar:
@@ -1033,10 +1046,10 @@ lanes:
               Korrektheit der Beweise ist Sache einer externen Prüfung, nicht dieses Bereichs.
           why:
             en: >-
-              wallet/shielded_rpc.cpp is file risk rank 4 at 15.8/24.3 with no test file; the one
+              wallet/shielded_rpc.cpp is file risk rank 4 at 15.8/52.7 with no test file; the one
               lock-order inversion is on the wallet side
             de: >-
-              wallet/shielded_rpc.cpp hat Dateirisikorang 4 bei 15,8/24,3 und keine Testdatei; die
+              wallet/shielded_rpc.cpp hat Dateirisikorang 4 bei 15,8/52,7 und keine Testdatei; die
               eine Lock-Order-Inversion liegt auf der Wallet-Seite
           target:
             en: >-
@@ -1053,8 +1066,8 @@ lanes:
             en: PR; anchor window -> E-CONSENSUS
             de: PR; Anchor-Fenster -> E-CONSENSUS
           coverage:
-            unit: 71.8
-            functional: 72.3
+            unit: 72.1
+            functional: 76.9
           risk_rank: 4
           waiting: true
           done_bar:
@@ -1310,8 +1323,8 @@ lanes:
             en: PR; anything under rule (c) -> EVIDENCE
             de: PR; alles unter Regel (c) -> BELEG
           coverage:
-            unit: 65.8
-            functional: 69.9
+            unit: 67.4
+            functional: 72.3
           pack: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/C-STATIC.md
           done_bar:
             - en: K10 unit test over the RPCHelpMan table in ctest
@@ -1396,19 +1409,19 @@ lanes:
             en: >-
               The fork CI workflow (it ran on the release line on 12 Nov at 4c7840e9 and on 13 Nov
               at 88c9b49c, red both times; keep the upstream Atlas workflows): jobs CI-0 to CI-10,
-              the known-failing list, and a nightly job for the 47 unit suites that time out.
+              the known-failing list, and a nightly job for the 41 stage3 suites that time out.
             de: >-
               Der Fork-CI-Workflow (er lief auf der Release-Linie am 12. Nov. auf 4c7840e9 und am
               13. Nov. auf 88c9b49c, beide Male rot; die Atlas-Workflows von upstream bleiben): die
               Jobs CI-0 bis CI-10, die Liste bekannter Fehlschläge und ein nächtlicher Job für die
-              47 Unit-Suites, die in einen Timeout laufen.
+              41 Stage3-Suites, die in einen Timeout laufen.
           why:
             en: >-
-              upstream runs no hosted CI by choice; baselines: coverage 69.9/40.7, TSan 41, cppcheck
+              upstream runs no hosted CI by choice; baselines: coverage 72.3/42.6, TSan 41, cppcheck
               372, CodeQL 260, tidy 1,033; macOS test job ran out of time on the last fork run, so
               it is sharded
             de: >-
-              upstream betreibt bewusst keine gehostete CI; Baselines: Abdeckung 69,9/40,7, TSan 41,
+              upstream betreibt bewusst keine gehostete CI; Baselines: Abdeckung 72,3/42,6, TSan 41,
               cppcheck 372, CodeQL 260, tidy 1.033; der macOS-Testjob lief beim letzten Fork-Lauf in
               die Zeitgrenze, daher wird er aufgeteilt
           target:
@@ -1429,28 +1442,29 @@ lanes:
               Branch auf dem Fork; eine Workflow-Datei geht nur upstream, wenn der Maintainer darum
               bittet
           coverage:
-            unit: 65.8
-            functional: 69.9
+            unit: 67.4
+            functional: 72.3
           pack: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-CI.md
           done_bar:
             - en: CI-0 run once on 4c7840e9; shard counts set from it
               de: CI-0 einmal auf 4c7840e9 gelaufen; die Zahl der Shards daraus festgelegt
             - en: >-
-                ci/known-failing.txt written from that run (the unit failures, the 48
-                ExactReplay-stall scripts [C3], gcc-baseline failures after triage) and only
-                shrinking
+                ci/known-failing.txt written from that run (the unit failures; the functional
+                failures, 14 in the coverage run [C3], none an ExactReplay stall; gcc-baseline
+                failures after triage) and only shrinking
               de: >-
-                ci/known-failing.txt aus diesem Lauf geschrieben (die Unit-Fehlschläge, die 48 an
-                ExactReplay hängenden Skripte [C3], die gcc-Baseline-Fehlschläge nach der Sichtung),
-                und die Liste schrumpft nur
+                ci/known-failing.txt aus diesem Lauf geschrieben (die Unit-Fehlschläge; die
+                Fehlschläge der Funktionstests, 14 im Coverage-Lauf [C3], keiner davon an
+                ExactReplay hängend; die gcc-Baseline-Fehlschläge nach der Sichtung), und die Liste
+                schrumpft nur
             - en: every class PR links a run with fails-before and passes-after
               de: jeder Klassen-PR verlinkt einen Lauf, der vorher fehlschlägt und danach besteht
-            - en: CI-9 fails any area that drops more than 0.2 points against the 69.9/40.7 baseline
+            - en: CI-9 fails any area that drops more than 0.2 points against the 72.3/42.6 baseline
               de: >-
-                CI-9 schlägt fehl, wenn ein Bereich gegenüber der Baseline 69,9/40,7 um mehr als 0,2
+                CI-9 schlägt fehl, wenn ein Bereich gegenüber der Baseline 72,3/42,6 um mehr als 0,2
                 Punkte fällt
-            - en: the 47 timeouts have a job and a number
-              de: die 47 Timeouts haben einen Job und eine Zahl
+            - en: the 42 timeouts have a job and a number
+              de: die 42 Timeouts haben einen Job und eine Zahl
             - en: every baseline (TSan 41, cppcheck 372, CodeQL 260) only shrinks
               de: jede Baseline (TSan 41, cppcheck 372, CodeQL 260) schrumpft nur
         - id: I-RC
@@ -1590,10 +1604,10 @@ lanes:
               Ergebnistabelle; die Testhälfte der Tiefenprüfung 3.6.
           why:
             en: >-
-              matmul 62.6/62.7 with 47 suites unmeasured; a CPU/CUDA corpus run exists; Metal never
+              matmul 63.9/63.9 with 41 suites unmeasured; a CPU/CUDA corpus run exists; Metal never
               run; a backend disagreement is a consensus split
             de: >-
-              MatMul bei 62,6/62,7, 47 Suites ungemessen; ein Korpuslauf auf CPU/CUDA existiert;
+              MatMul bei 63,9/63,9, 41 Suites ungemessen; ein Korpuslauf auf CPU/CUDA existiert;
               Metal lief nie; eine Abweichung zwischen Backends ist eine Konsensspaltung
           target:
             en: a verdict table with one row per (block, backend), no disagreement, a Metal row
@@ -1608,8 +1622,8 @@ lanes:
             en: RUN report; disagreements -> EVIDENCE
             de: LAUF-Bericht; Abweichungen -> BELEG
           coverage:
-            unit: 62.6
-            functional: 62.7
+            unit: 63.9
+            functional: 63.9
           risk_rank: 9
           pack: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-XDEV.md
           done_bar:
@@ -1785,8 +1799,8 @@ gates:
       en: coverage-ratchet on a dedicated box
       de: Coverage-Ratchet auf einem eigenen Rechner
     state:
-      en: planned; baseline 69.9% lines; configure fix landed (#578)
-      de: geplant; Baseline 69,9 % der Zeilen; Fix für die Konfiguration übernommen (#578)
+      en: planned; baseline 72.3% lines; configure fix landed (#578)
+      de: geplant; Baseline 72,3 % der Zeilen; Fix für die Konfiguration übernommen (#578)
     phase: 2b
   - id: CI-10
     name: { en: release-gate, de: Release-Gate }

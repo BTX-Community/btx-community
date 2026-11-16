@@ -23,22 +23,22 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 | Item | Value |
 |---|---|
 | Risk ranks | net/p2p 1 (61.9% of measured risk), validation/chain/mempool 2 (15.4%) |
-| `net_processing.cpp` | 25,300 lines, 113 fix commits; 24.6% / 62.3% lines (unit / unit + functional); 102 functions never executed |
-| `validation.cpp` | 63 fix commits; 75.6% / 78.2% lines |
+| `net_processing.cpp` | 25,300 lines, 113 fix commits; 59.8% / 72.1% lines (unit / unit + functional); 102 functions never executed (measured 12 Nov at `c6f9678d`) |
+| `validation.cpp` | 63 fix commits; 77.0% / 79.8% lines |
 | `node/matmul_trusted_attestations.h` | 50 fix commits |
-| Consensus code | 95.7% / 96.6% lines; 68 functions never executed |
+| Consensus code | 95.7% / 97.7% lines; 68 functions never executed (measured 12 Nov at `c6f9678d`) |
 | K13 | 15 PRs plus maintainer commits: 3 landed, 11 not taken; 11 of 12 touch the same file again |
 | K14 | 19 PRs (+145 maintainer commits): 12 landed, 6 not taken; 16 of 17 touch a file again |
 | `-Wthread-safety` warnings in the frozen files | `net_processing.cpp` 84, `validation.cpp` 42 |
 
-Coverage figures are floors at `c6f9678d` (47 unit suites timed out; 82 of 208 functional scripts failed on the coverage build). Of the 31 commits since then, none touches `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus/` or `script/interpreter.cpp`; one, `4c7840e9` (the attestation blocklist extension, #583), touches `node/matmul_trusted_attestations.*` and `src/matmul/trusted_exact_replay_attestation.*`, so re-read the attestation store on the live head before Task 2 [git: `git diff --stat c6f9678d 4c7840e9 -- <paths>`].
+Coverage figures are floors at `a5d1637f` (14 Nov: 42 unit suites timed out; 14 of 220 functional scripts failed on the coverage build; the time budgets were shorter than on 12 Nov, so the comparison with that run is indicative). The other numbers are from `c6f9678d`. Of the 31 commits from there to `4c7840e9`, none touches `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus/` or `script/interpreter.cpp`; one, `4c7840e9` (the attestation blocklist extension, #583), touches `node/matmul_trusted_attestations.*` and `src/matmul/trusted_exact_replay_attestation.*`, so re-read the attestation store on the live head before Task 2 [git: `git diff --stat c6f9678d 4c7840e9 -- <paths>`]. Between `c6f9678d` and `a5d1637f`, `net_processing.cpp` changed (155 lines added, 12 removed) [git: `git diff --stat c6f9678d a5d1637f -- src/net_processing.cpp`].
 
 ## 4. Done bar [lanes]
 
 - [ ] An evidence list where every item is one measured result, one ready test and one paragraph.
 - [ ] The K13 attestation state machine as one model-based test (vote, withdraw, restart, reorg, missing index) instead of five PRs.
 - [ ] The K14 download state machine as a deterministic simulation with an adversarial scheduler, asserting "every announced body is requested within N ticks".
-- [ ] The 68 unexecuted consensus functions listed as tested or dead.
+- [ ] The 68 unexecuted consensus functions (measured 12 Nov at `c6f9678d`) listed as tested or dead.
 - [ ] A byte-diff proof of block validity between `main` and the release line.
 - [ ] The `net_processing.cpp` and `validation.cpp` thread-safety warnings delivered as a measured result.
 - [ ] Zero re-filed pull requests that were not taken.
@@ -87,7 +87,7 @@ ls src/test | grep -E 'attestation|matmul_trusted'
 
 ```bash
 ls test/functional | grep -c '^p2p_'          # 89 p2p scripts at 4c7840e9
-ls src/test | grep peerman                     # peerman_tests.cpp timed out under coverage [PLAN §1.1]
+ls src/test | grep peerman                     # peerman_tests timed out under coverage on 12 Nov, passed on 14 Nov [PLAN §1.1]
 ```
 
 - A deterministic simulation of the download state machine with an adversarial scheduler (announce, withhold, reorder, disconnect), asserting that every announced body is requested within N ticks.

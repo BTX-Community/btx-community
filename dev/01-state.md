@@ -8,7 +8,7 @@ Labels: [read] = taken from a source; [tested] = a command was run for this page
 
 Two clocks run on this page:
 - The branch and release rows (§1) follow the live repository. `tools/refresh-state.sh` prints fresh rows for them.
-- The coverage and baseline rows (§3, §4) were measured once, at `c6f9678d`. They change only when a new measured run is published.
+- The coverage rows (§3) were measured at `a5d1637f` on 14 Nov 2026; the baseline rows (§4) once, at `c6f9678d`. They change only when a new measured run is published.
 
 ## 1. Branches and releases
 
@@ -33,37 +33,37 @@ Two clocks run on this page:
 
 ## 3. Coverage
 
-> **Coverage is measured again.** The coverage build (`-DCMAKE_BUILD_TYPE=Coverage`) configures again on `release-0.34.16` since #578 landed on 12 Nov (commit `7051507b`). The fix is not in v0.34.15 (`main`, `476f3f23`). Measured at `c6f9678d` with the same fix applied: product-code lines **65.8%** unit-only and **69.9%** unit + functional; branches **37.7%** and **40.7%**. All four numbers are floors: 47 unit suites timed out and 82 of 208 functional scripts failed in the coverage run, and a test that is killed writes no data. Reproduce it with the recipe in [`04-build-and-test.md` §5](04-build-and-test.md#5-coverage-gcc-linux).
+> **Coverage is measured again.** The coverage build (`-DCMAKE_BUILD_TYPE=Coverage`) configures again on `release-0.34.16` since #578 landed on 12 Nov (commit `7051507b`). The fix is not in v0.34.15 (`main`, `476f3f23`). Measured on `swapnet-v2` at `a5d1637f` on 14 Nov, which contains the fix: product-code lines **67.4%** unit-only and **72.3%** unit + functional; branches **38.9%** and **42.6%**. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts failed, and a test that is killed writes no data. The time budgets were shorter than in the 12 Nov run at `c6f9678d` (unit 2.5 h instead of 3 h, functional 100 min instead of 3 h), so the figures are floors and the comparison with that run is indicative. Reproduce it with the recipe in [`04-build-and-test.md` §5](04-build-and-test.md#5-coverage-gcc-linux).
 
 | Fact | Value | Source | Verified on |
 |---|---|---|---|
 | Fix on the release line | `7051507b` "cmake: build the coverage source mirror after the build only", cherry-picked from the #578 head `179fac37` [tested] | `git log -1 --format=%B 7051507b` | 2026-11-12 |
 | Fix absent from `main` | `git merge-base --is-ancestor 7051507b origin/main` exits 1; `main` still runs `CoverageSanitize.cmake` at configure time (`CMakeLists.txt` line 666 and lines 670-675 at `476f3f23`) [tested] | the command; `git show 476f3f23:CMakeLists.txt` | 2026-11-12 |
-| Build and tools | gcc 13.3, `-Og --coverage`, gcovr 8.8 [read] | `plan/MASTER-PLAN.md` §1.1 | 2026-11-12 |
-| Unit run | 2,625 ctest entries: 2,575 passed, 47 timed out at 3,600 s, 2 failed, 1 skipped [read] | `plan/MASTER-PLAN.md` §1.1 | 2026-11-12 |
-| Functional run | 208 scripts of the `test_runner.py` default list: 124 passed, 2 skipped, 82 failed. 48 of the 82 stall with "ExactReplay required" on the slow coverage build [read] | `plan/MASTER-PLAN.md` §1.1 | 2026-11-12 |
-| Scope | Product code: 5,519 files, 623,410 lines. Functions: 76.3% unit-only, 80.4% unit + functional [read] | `plan/plan-data.json` (`coverage.overall`) | 2026-11-12 |
+| Build and tools | gcc 13.3, `-Og --coverage`, gcovr 8.8 [read] | `plan/MASTER-PLAN.md` §1.1 | 2026-11-15 |
+| Unit run | 2,629 ctest entries: 2,583 passed, 42 timed out or were stopped by the unit time budget, 3 failed, 1 skipped [read] | `plan/MASTER-PLAN.md` §1.1 | 2026-11-15 |
+| Functional run | 220 scripts of the `test_runner.py` default list: 204 passed, 2 skipped, 14 failed. None of the 14 stalled with "ExactReplay required"; on 12 Nov at `c6f9678d`, 48 of 82 failures did [read] | `plan/MASTER-PLAN.md` §1.1 | 2026-11-15 |
+| Scope | Product code: 5,530 files, 625,368 lines. Functions: 77.7% unit-only, 82.7% unit + functional [read] | `plan/plan-data.json` (`coverage.overall`) | 2026-11-15 |
 
-Line coverage per area, product code, at `c6f9678d` [read: `plan/MASTER-PLAN.md` §1.1, `plan/plan-data.json`]:
+Line coverage per area, product code, at `a5d1637f` [read: `plan/MASTER-PLAN.md` §1.1, `plan/plan-data.json`]:
 
 | Area | Unit | Unit + functional |
 |---|---:|---:|
-| consensus | 95.7 | 96.6 |
-| `validation.cpp` | 75.6 | 78.2 |
-| script | 80.7 | 81.2 |
-| wallet | 37.2 | 50.5 |
-| `net_processing.cpp` | 24.6 | 62.3 |
-| other net | 50.4 | 75.5 |
-| rpc | 51.6 | 72.9 |
-| node | 69.9 | 79.6 |
-| matmul (47 suites time out: not measured) | 62.6 | 62.7 |
-| shielded | 71.8 | 72.3 |
-| modelnet | 83.7 | 85.6 |
+| consensus | 95.7 | 97.7 |
+| `validation.cpp` | 77.0 | 79.8 |
+| script | 80.8 | 81.3 |
+| wallet | 37.4 | 63.0 |
+| `net_processing.cpp` | 59.8 | 72.1 |
+| other net | 52.7 | 77.3 |
+| rpc | 52.0 | 76.5 |
+| node | 72.7 | 81.9 |
+| matmul (41 suites time out: not measured) | 63.9 | 63.9 |
+| shielded | 72.1 | 76.9 |
+| modelnet | 84.1 | 86.2 |
 | pq | 92.7 | 92.7 |
 
-- `peerman_tests` timed out and wrote no data, so the unit-only figure for `net_processing.cpp` understates its unit tests [read: plan §1.1].
-- Functions never executed by the unit + functional runs: consensus 68, `net_processing.cpp` 102, wallet 927, rpc 103, matmul verification 507 [read: plan §1.1].
-- The 31 commits from `c6f9678d` to `4c7840e9` do not touch `src/validation.cpp`, `src/net_processing.cpp`, `src/pow.cpp`, `src/consensus/` or `src/script/interpreter.cpp` [tested: `git diff --stat c6f9678d 4c7840e9 -- <those paths>` prints nothing]. The consensus and `net_processing.cpp` rows still hold.
+- `peerman_tests` passed this time, in the retry pass; on 12 Nov it timed out and wrote no data. That is the main reason the unit-only figure for `net_processing.cpp` rose from 24.6 to 59.8 [inferred]; the file also changed between the two commits (next item) [read: plan §1.1].
+- Functions never executed by the unit + functional runs (measured 12 Nov at `c6f9678d`); the 14 Nov run kept no trace data to recount them: consensus 68, `net_processing.cpp` 102, wallet 927, rpc 103, matmul verification 507 [read: plan §1.1].
+- The 31 commits from `c6f9678d` to `4c7840e9` do not touch `src/validation.cpp`, `src/net_processing.cpp`, `src/pow.cpp`, `src/consensus/` or `src/script/interpreter.cpp` [tested: `git diff --stat c6f9678d 4c7840e9 -- <those paths>` prints nothing]. The coverage run is later: `a5d1637f` is 177 commits after `4c7840e9` [tested: `git rev-list --count 4c7840e9..a5d1637f`], and from `c6f9678d` to `a5d1637f`, of those paths only `src/net_processing.cpp` changed (155 lines added, 12 removed) [tested: `git diff --stat c6f9678d a5d1637f -- <those paths>`].
 - Ratchet: the baseline only goes up. A later run states its commit and its suite set; a total that rose because more suites wrote data is not an improvement in tests.
 
 ## 4. Static and dynamic baselines
