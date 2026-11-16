@@ -800,6 +800,16 @@ class PageTest(unittest.TestCase):
                     self.assertIn(value, caption)
 
 
+    def test_every_page_has_an_icon_that_exists(self) -> None:
+        self.assertTrue((self.out / "favicon.ico").is_file())
+        for page in sorted(self.out.rglob("index.html")):
+            html = page.read_text(encoding="utf-8")
+            hrefs = re.findall(r'<link rel="(?:icon|apple-touch-icon)" href="([^"?]+)', html)
+            with self.subTest(page=str(page.relative_to(self.out))):
+                self.assertEqual(len(hrefs), 3)
+                for href in hrefs:
+                    self.assertTrue((self.out / href.lstrip("/")).is_file(), href)
+
     def test_the_files_for_ai_tools_carry_the_whole_content(self) -> None:
         index = (self.out / "llms.txt").read_text(encoding="utf-8")
         full = (self.out / "llms-full.txt").read_text(encoding="utf-8")

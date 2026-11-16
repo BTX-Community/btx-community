@@ -1525,6 +1525,8 @@ def context(
         "css_url": asset_url("css/community.css"),
         "js_url": asset_url("js/community.js"),
         "ci_js_url": asset_url("js/ci.js"),
+        "icon_url": asset_url("icons/favicon.svg"),
+        "touch_icon_url": asset_url("icons/apple-touch-icon.png"),
     }
 
 
@@ -1697,6 +1699,8 @@ def build(out: Path, version: str) -> None:
     if out.exists():
         shutil.rmtree(out)
     shutil.copytree(ROOT / "static", out / "static")
+    # Browsers that ignore the icon links of the page ask for /favicon.ico.
+    shutil.copy(ROOT / "static" / "icons" / "favicon.ico", out / "favicon.ico")
     for path, html in rendered.items():
         target = out / path.strip("/") / "index.html"
         target.parent.mkdir(parents=True, exist_ok=True)
