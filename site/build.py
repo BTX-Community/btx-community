@@ -63,6 +63,8 @@ PERCENT_SPACE = {"fr": "\u202f"}
 """The space before ``%``: a narrow no-break space in French, a no-break space in the others, so a
 figure never wraps away from its sign."""
 PAGES = ("home", "learn", "network", "links", "docs", "dev")
+DRAFT_PAGES = ("fast-lane",)
+"""Pages under review: English only, in no menu, sitemap or llms file, and marked noindex."""
 """The pages of the site, in menu order; each has a template ``<page>.html.j2`` and texts ``nav.<page>``."""
 MAX_YAML_BYTES = 256 * 1024
 REPO_URL = "https://github.com/BTX-Community/btx-community"
@@ -286,6 +288,52 @@ def load_community(path: Path) -> CommunityPage:
     """Load and validate ``community.yaml``."""
     try:
         return CommunityPage.model_validate(load_yaml(path))
+    except ValidationError as exc:
+        raise ContentError(f"{path.name} is invalid: {exc}") from exc
+
+
+# --- Content schema (content/fast-lane.yaml, draft page) ---------------------------------------
+
+EnText = Annotated[StrictStr, Field(min_length=1, max_length=MAX_TEXT)]
+Href = Annotated[StrictStr, Field(pattern=rf"{LINK_PATTERN}|^/[a-z0-9/-]*(#[a-z0-9-]+)?$", max_length=200)]
+
+
+class LaneFact(_Model):
+    """One fact of the fast lane, with the source a reader can check it against."""
+
+    title: Name
+    text: EnText
+    source: Link
+
+
+class LaneStep(_Model):
+    text: EnText
+    href: Href | None = None
+
+
+class LanePath(_Model):
+    """One thing a newcomer wants to do: get a wallet, buy, mine, run a node."""
+
+    id: Id
+    title: Name
+    text: EnText
+    steps: Annotated[list[LaneStep], Field(min_length=1, max_length=8)]
+
+
+class FastLane(_Model):
+    title: Name
+    lead: EnText
+    checked: date
+    facts: Annotated[list[LaneFact], Field(min_length=1, max_length=12)]
+    paths: Annotated[list[LanePath], Field(min_length=1, max_length=6)]
+    watch_out: Annotated[list[EnText], Field(min_length=1, max_length=10)]
+    ask: Annotated[list[LaneStep], Field(min_length=1, max_length=8)]
+
+
+def load_fast_lane(path: Path) -> FastLane:
+    """Load and validate ``fast-lane.yaml``."""
+    try:
+        return FastLane.model_validate(load_yaml(path))
     except ValidationError as exc:
         raise ContentError(f"{path.name} is invalid: {exc}") from exc
 
@@ -1695,6 +1743,16 @@ def build(out: Path, version: str) -> None:
         for lang in LANGUAGES
         for page_id in PAGES
     }
+
+    fast_lane = load_fast_lane(ROOT / "content" / "fast-lane.yaml")
+    for page_id in DRAFT_PAGES:
+        draft = context(page, guide, hub, texts, "en", version, "home", sayers["en"])
+        draft.update(
+            page=page_id, page_title=fast_lane.title, page_lead=fast_lane.lead, noindex=True,
+            alternates=[("en", "en", texts["en"]["lang_name"], page_path("en", page_id))],
+            lane=fast_lane, lane_checked=fast_lane.checked.isoformat(),
+        )
+        rendered[page_path("en", page_id)] = env.get_template(f"{page_id}.html.j2").render(draft)
 
     if out.exists():
         shutil.rmtree(out)

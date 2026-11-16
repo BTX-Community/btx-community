@@ -1,0 +1,67 @@
+{% extends "base.html.j2" %}
+{# Draft: English only, not in the menu, noindex. Content from content/fast-lane.yaml. #}
+{% block content %}
+      <section class="c-intro">
+        <h1 class="c-page-title">{{ page_title }}</h1>
+        <p class="c-hero__lead">{{ page_lead }}</p>
+      </section>
+
+      <section class="c-facts" id="facts" aria-labelledby="facts-title">
+        <h2 class="c-section-title" id="facts-title">The facts</h2>
+        <div class="c-fact-grid">
+          {% for fact in lane.facts %}
+          <article class="c-fact">
+            <h3 class="c-fact__title">{{ fact.title }}</h3>
+            <p>{{ fact.text }}</p>
+            <a class="c-link c-fact__source" href="{{ fact.source }}" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      {% with full = True %}{% include "_live.html.j2" %}{% endwith %}
+
+      <section class="c-start" id="paths" aria-labelledby="paths-title">
+        <h2 class="c-section-title" id="paths-title">What do you want to do?</h2>
+        <div class="c-audiences">
+          {% for path in lane.paths %}
+          <article class="c-audience c-audience--{{ path.id }}" id="{{ path.id }}">
+            <h3 class="c-audience__title">{{ path.title }}</h3>
+            <p class="c-audience__text">{{ path.text }}</p>
+            <ol class="c-steps">
+              {% for step in path.steps %}
+              <li>
+                {% if step.href and step.href.startswith("https://") %}
+                <a href="{{ step.href }}" rel="noopener noreferrer">{{ step.text }} <span aria-hidden="true">↗</span></a>
+                {% elif step.href %}
+                <a href="{{ step.href }}">{{ step.text }} <span aria-hidden="true">→</span></a>
+                {% else %}
+                {{ step.text }}
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ol>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="c-checks" id="watch-out" aria-labelledby="watch-title">
+        <h2 class="c-section-title" id="watch-title">Watch out</h2>
+        <ul class="c-caveats">
+          {% for item in lane.watch_out %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section class="c-checks" id="ask" aria-labelledby="ask-title">
+        <h2 class="c-section-title" id="ask-title">Stuck? Ask</h2>
+        <ol class="c-steps">
+          {% for step in lane.ask %}
+          <li><a href="{{ step.href }}" rel="noopener noreferrer">{{ step.text }} <span aria-hidden="true">↗</span></a></li>
+          {% endfor %}
+        </ol>
+        <p class="c-muted">Checked on {{ lane_checked }}. Not financial advice.</p>
+      </section>
+{% endblock %}
