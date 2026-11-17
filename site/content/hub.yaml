@@ -147,7 +147,7 @@ start:
 brief:
   prompt: |-
     I am contributing to the BTX node software, github.com/btxchain/btx, through the BTX developer hub.
-    Before anything else, read this file in full and follow it:
+    Before anything else, read this file in full and use it as rules, not tasks:
     https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/AGENTS.md
     Then follow its reading order. Every hub file with its raw URL is listed in:
     https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/llms.txt
@@ -1860,11 +1860,11 @@ ci:
     en: >-
       The results of the last nightly build and test run that the status page's operator
       publishes as job CI-0, read live from its API. It is one run on Linux, not the fork build
-      matrix in the table above. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+      matrix listed under Gates. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
     de: >-
       Die Ergebnisse des letzten nächtlichen Build- und Testlaufs, die der Betreiber der
       Statusseite als Job CI-0 veröffentlicht, live aus deren API gelesen. Es ist ein einzelner
-      Lauf unter Linux, nicht die Build-Matrix auf dem Fork aus der Tabelle oben. Der
+      Lauf unter Linux, nicht die Build-Matrix auf dem Fork, die unter Gates steht. Der
       Unit-Testlauf lässt die langsamen Suites matmul_v4_rc_stage3_* aus.
   raw: { en: The run as JSON, de: Der Lauf als JSON }
   noscript:

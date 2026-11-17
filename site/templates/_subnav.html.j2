@@ -1,0 +1,5 @@
+      <nav class="c-subnav" aria-label="{{ ui['subnav.label'] }}">
+        {% for id, label, href in subnav %}
+        <a class="c-subnav__link{% if id == subpage %} c-subnav__link--active{% endif %}" href="{{ href }}"{% if id == subpage %} aria-current="page"{% endif %}>{{ label }}</a>
+        {% endfor %}
+      </nav>

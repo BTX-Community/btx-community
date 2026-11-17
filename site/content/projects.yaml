@@ -1,0 +1,264 @@
+# The top of the "Projects" page (the menu slot that held Documents; the roadmap and papers follow
+# below): work the community can build and run as its own, outside the node software.
+#
+# Every card says what exists today and what is missing, and cites its sources: lines of
+# btxchain/btx at verified.tag (read at both verified.commits), a release page, or a file of this
+# repository. No prices, no promises, no endorsement: whether the node's developers admit anything
+# (a GPU path, a format) stays their decision, and the card says so.
+# Texts: English (default) and German, as in community.yaml.
+
+schema_version: 1
+checked: 2026-11-15
+verified:
+  tag: v0.34.16
+  commits: [074dac16, 8e7045b9]
+  text:
+    en: Checked on 15 Nov 2026 against the node software at v0.34.16 (074dac16) and the release-0.34.17 branch (8e7045b9).
+    de: Am 15. Nov. 2026 geprüft am Node-Code von v0.34.16 (074dac16) und am Branch release-0.34.17 (8e7045b9).
+
+texts:
+  title: { en: Build something, de: Etwas bauen }
+  lead:
+    en: >-
+      All of it lies outside the node software. Nothing here is planned, promised or endorsed by the
+      node's developers. Each card says what exists today and what is missing, with the source of
+      every claim.
+    de: >-
+      Alles davon liegt außerhalb der Node-Software. Nichts davon ist von den Entwicklern des Nodes
+      geplant, versprochen oder empfohlen. Jede Karte sagt, was es heute gibt und was fehlt, mit der
+      Quelle jeder Aussage.
+  caution:
+    en: Anything that moves other people's coins starts on regtest or testnet.
+    de: Alles, was die Coins anderer bewegt, beginnt auf Regtest oder Testnet.
+  today: { en: There today, de: Heute vorhanden }
+  missing: { en: Missing, de: Was fehlt }
+  careful: { en: Careful, de: Vorsicht }
+  start: { en: Start from, de: Ausgangspunkt }
+  ask: { en: Who to ask, de: Wen fragen }
+  source: { en: Source, de: Quelle }
+  infra_link:
+    en: "Rather build something than run a machine? Community projects"
+    de: "Lieber etwas bauen als einen Rechner betreiben? Community-Projekte"
+
+projects:
+  - id: venues
+    title: { en: Venues for trading BTX, de: Handelsplätze für BTX }
+    idea:
+      en: >-
+        A place where people trade BTX against other coins, run by its own operators: an order book,
+        or a front-end over SwapNet's swaps.
+      de: >-
+        Ein Ort, an dem man BTX gegen andere Coins handelt, betrieben von eigenen Betreibern: ein
+        Orderbuch oder eine Oberfläche über den Swaps von SwapNet.
+    today:
+      en: >-
+        SwapNet in the node swaps BTX with BTC or ETH between two parties; AMM pools, wrapped
+        balances and partial fills are not part of it. This group's venue-structure paper compares
+        four models and where the licensing line runs.
+      de: >-
+        SwapNet im Node tauscht BTX gegen BTC oder ETH zwischen zwei Parteien; AMM-Pools, gewrappte
+        Guthaben und Teilausführungen gehören nicht dazu. Das Venue-Structure-Papier dieser Gruppe
+        vergleicht vier Modelle und zeigt, wo die Lizenzgrenze verläuft.
+    missing:
+      en: >-
+        Operators, a model chosen from the paper, and legal advice where the venue will run. The
+        paper is a draft for discussion, not legal advice.
+      de: >-
+        Betreiber, ein aus dem Papier gewähltes Modell und Rechtsberatung dort, wo der Handelsplatz
+        laufen soll. Das Papier ist ein Diskussionsentwurf, keine Rechtsberatung.
+    start:
+      - text: { en: The venue-structure paper, de: Das Venue-Structure-Papier }
+        url: https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md
+      - text: { en: SwapNet overview (developers), de: SwapNet-Überblick (Entwickler) }
+        url: https://github.com/btxchain/btx/blob/main/doc/swapnet/README.md
+    ask:
+      en: Discussion of the paper as an issue in this repository.
+      de: Diskussion des Papiers als Issue in diesem Repository.
+    ask_url: https://github.com/BTX-Community/btx-community/issues
+    cites:
+      - "btx:doc/swapnet/IMPLEMENTATION_STATUS.md:9"
+      - "community:research/venue-structure.md:1-5"
+
+  - id: swapnet-tools
+    title: { en: SwapNet wallets and tools, de: Wallets und Werkzeuge für SwapNet }
+    idea:
+      en: >-
+        Software around SwapNet: a wallet that shows quotes and runs swaps, tools that run a maker's
+        market, a front-end for the node's swap calls.
+      de: >-
+        Software rund um SwapNet: eine Wallet, die Angebote zeigt und Swaps ausführt, Werkzeuge für
+        den Markt eines Makers, eine Oberfläche für die Swap-Aufrufe des Nodes.
+    today:
+      en: >-
+        A node started with -swapnet=1 finds other SwapNet nodes over its peer links and offers 33
+        swap RPC methods. v0.34.16 carries SwapNet for broader testing. There is no graphical trading
+        panel: the RPC console is the interface.
+      de: >-
+        Ein Node, der mit -swapnet=1 startet, findet andere SwapNet-Nodes über seine
+        Peer-Verbindungen und bietet 33 Swap-RPC-Methoden. v0.34.16 enthält SwapNet für breitere
+        Tests. Eine grafische Handelsoberfläche gibt es nicht: Die RPC-Konsole ist die Schnittstelle.
+    missing:
+      en: >-
+        Everything a non-developer would use. The package's own status page marks real-chain
+        settlement and an independent audit as not executed, the ETH leg needs a deployed contract
+        that the node's owner approves locally, and the release docs want external receipts before
+        anyone calls it mainnet-qualified.
+      de: >-
+        Alles, was jemand ohne Entwicklerwissen nutzen würde. Die Statusseite des Pakets führt
+        Abwicklung auf echten Chains und ein unabhängiges Audit als nicht ausgeführt, die ETH-Seite
+        braucht einen bereitgestellten Vertrag, den der Besitzer des Nodes lokal freigibt, und die
+        Release-Doku verlangt externe Belege, bevor jemand es für das Mainnet qualifiziert nennt.
+    careful:
+      en: >-
+        Once a taker has funded a swap, cancelling does not release it: the coins stay locked until
+        the agreed refund height or time.
+      de: >-
+        Sobald ein Taker einen Swap finanziert hat, gibt ein Abbruch ihn nicht frei: Die Coins bleiben
+        bis zur vereinbarten Refund-Höhe oder -Zeit gesperrt.
+    start:
+      - text: { en: The 33 swap RPC methods, de: Die 33 Swap-RPC-Methoden }
+        url: https://github.com/btxchain/btx/blob/main/doc/swapnet/RPC.md
+      - text: { en: Running SwapNet on a node, de: SwapNet auf einem Node betreiben }
+        url: https://github.com/btxchain/btx/blob/main/doc/swapnet/OPERATIONS.md
+      - text: { en: Testing and release (developers), de: Tests und Release (Entwickler) }
+        url: https://github.com/btxchain/btx/blob/main/doc/swapnet/TESTING_AND_RELEASE.md
+    ask:
+      en: Questions as an issue on btxchain/btx; security problems only through private reporting.
+      de: Fragen als Issue bei btxchain/btx; Sicherheitsprobleme nur über die vertrauliche Meldung.
+    ask_url: https://github.com/btxchain/btx/issues
+    cites:
+      - "btx:doc/swapnet/OPERATIONS.md:5"
+      - "btx:doc/swapnet/RPC.md:1"
+      - "release:v0.34.16"
+      - "btx:doc/swapnet/IMPLEMENTATION_STATUS.md:9"
+      - "btx:doc/swapnet/IMPLEMENTATION_STATUS.md:7"
+      - "btx:doc/swapnet/OPERATIONS.md:21"
+      - "btx:doc/swapnet/TESTING_AND_RELEASE.md:34"
+      - "btx:doc/swapnet/OPERATIONS.md:13"
+
+  - id: amd-mining
+    title: { en: Mining on consumer AMD cards, de: Mining auf AMD-Consumer-Karten }
+    idea:
+      en: An exact INT8 MatMul path for consumer Radeon cards, so they can mine.
+      de: Ein exakter INT8-MatMul-Pfad für Radeon-Consumer-Karten, damit sie minen können.
+    today:
+      en: >-
+        The node's AMD (HIP) path admits six datacenter Instinct chips: gfx908, gfx90a, gfx940,
+        gfx941, gfx942 and gfx950 (MI100 to MI350). It is built automatically when a HIP clang and an
+        AMD GPU are found. Consumer Radeon cards (RDNA, gfx10 to gfx12) are used neither to mine nor
+        to validate; the source calls them verification-only until cross-vendor golden vectors
+        qualify them.
+      de: >-
+        Der AMD-Pfad (HIP) lässt sechs Instinct-Chips fürs Rechenzentrum zu: gfx908, gfx90a, gfx940,
+        gfx941, gfx942 und gfx950 (MI100 bis MI350); er wird automatisch gebaut, wenn HIP-clang und
+        AMD-GPU da sind. Radeon-Consumer-Karten (RDNA, gfx10 bis gfx12) dienen weder zum Minen noch
+        zum Prüfen; der Quellcode nennt sie verification-only, bis herstellerübergreifende Golden
+        Vectors sie qualifizieren.
+    missing:
+      en: >-
+        An exact INT8 path on RDNA that matches the CPU reference bit for bit, and the golden vectors
+        that show it. Whether such a path is admitted is the maintainer's decision.
+      de: >-
+        Ein exakter INT8-Pfad auf RDNA, der Bit für Bit zur CPU-Referenz passt, und die Golden
+        Vectors, die das belegen. Ob ein solcher Pfad zugelassen wird, entscheidet der Maintainer.
+    start:
+      - text: { en: How the node admits a GPU (developers), de: Wie der Node eine GPU zulässt (Entwickler) }
+        url: https://github.com/btxchain/btx/blob/main/src/matmul/backend_capabilities_v4.cpp
+      - text: { en: The HIP backend sources (developers), de: Die Quellen des HIP-Backends (Entwickler) }
+        url: https://github.com/btxchain/btx/tree/main/src/hip
+    ask:
+      en: Evidence as an issue on btxchain/btx; no lane of this hub covers AMD yet.
+      de: Belege als Issue bei btxchain/btx; noch kein Bereich dieses Hubs deckt AMD ab.
+    ask_url: https://github.com/btxchain/btx/issues
+    cites:
+      - "btx:src/matmul/backend_capabilities_v4.cpp:475-491"
+      - "btx:src/matmul/backend_capabilities_v4.cpp:493-501"
+      - "btx:src/CMakeLists.txt:243-247"
+      - "btx:src/matmul/accel_v4.cpp:649-652"
+
+  - id: metal
+    title: { en: Testing on Apple Silicon, de: Tests auf Apple Silicon }
+    idea:
+      en: >-
+        Run the node's Metal self-test on more Apple chips and report the results, so the Metal path
+        is known to work beyond one device class.
+      de: >-
+        Den Metal-Selbsttest des Nodes auf weiteren Apple-Chips laufen lassen und die Ergebnisse
+        melden, damit der Metal-Pfad über eine Geräteklasse hinaus als funktionierend gilt.
+    today:
+      en: >-
+        Metal is built by default on Apple. A Metal device is admitted after the node's exactness
+        self-tests, through Metal 4 INT8 tensor ops or, for the current epoch's replay, an exact
+        integer-ALU path. A golden row, where one exists, is compared; without one the self-test
+        decides (the manifest has one row, for an M4-class device). The release has no macOS
+        binaries.
+      de: >-
+        Metal wird auf Apple standardmäßig gebaut. Ein Metal-Gerät wird nach den Exaktheits-
+        Selbsttests zugelassen, über Metal-4-INT8-Tensor-Ops oder, beim Nachrechnen der aktuellen
+        Epoche, über einen exakten Integer-ALU-Pfad. Wo es eine Golden-Zeile gibt, wird sie
+        verglichen, sonst entscheidet der Selbsttest (das Manifest hat eine, für die M4-Klasse). Das
+        Release hat keine macOS-Binärdateien.
+    missing:
+      en: Self-test reports from other Apple chips.
+      de: Selbsttest-Berichte von anderen Apple-Chips.
+    start:
+      - text: { en: Building on macOS (developers), de: Bauen unter macOS (Entwickler) }
+        url: https://github.com/btxchain/btx/blob/main/doc/build-osx.md
+      - text: { en: "The cross-device lane: I-XDEV pack", de: "Der geräteübergreifende Bereich: I-XDEV-Paket" }
+        url: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-XDEV.md
+    ask:
+      en: The I-XDEV lane, which replays blocks across devices; it has no owner yet.
+      de: Der Bereich I-XDEV, der Blöcke geräteübergreifend nachrechnet; er hat noch niemanden.
+    ask_url: https://github.com/BTX-Community/btx-community/blob/main/dev/07-lanes.md
+    cites:
+      - "btx:src/CMakeLists.txt:10-11"
+      - "btx:src/matmul/accel_v4.cpp:1058-1062"
+      - "btx:src/matmul/matmul_v4_rc_production_canary.cpp:655-656"
+      - "btx:src/matmul/accel_v4.cpp:843-844"
+      - "btx:src/matmul/matmul_v4_rc_production_golden_manifest.data:3"
+      - "release:v0.34.16"
+
+  - id: tooling
+    title: { en: "Explorers, monitoring and light wallets", de: "Explorer, Monitoring und leichte Wallets" }
+    idea:
+      en: >-
+        More independent views of the chain, alerts when something goes wrong, and wallets for people
+        who do not run a node all the time.
+      de: >-
+        Mehr unabhängige Sichten auf die Kette, Alarme, wenn etwas schiefläuft, und Wallets für Leute,
+        die nicht ständig einen Node laufen lassen.
+    today:
+      en: >-
+        Several explorers and a status page are on the links page; the status page publishes its
+        figures as JSON. btx-cli lightwatch is a watch-only light client: it reads compact block
+        filters from a node it trusts (started with -blockfilterindex=1) and signs nothing. The node
+        also reads and writes a browser-wallet recovery format.
+      de: >-
+        Mehrere Explorer und eine Statusseite stehen auf der Links-Seite; die Statusseite
+        veröffentlicht ihre Werte als JSON. btx-cli lightwatch ist ein Light-Client nur zum
+        Beobachten: Er liest kompakte Blockfilter von einem Node, dem er vertraut (gestartet mit
+        -blockfilterindex=1), und signiert nichts. Der Node liest und schreibt außerdem ein
+        Wiederherstellungsformat für Browser-Wallets.
+    missing:
+      en: >-
+        Explorers and monitors run by more independent operators, alerting, and light wallets that
+        can also sign.
+      de: >-
+        Explorer und Monitore von mehr unabhängigen Betreibern, Alarmierung und leichte Wallets, die
+        auch signieren können.
+    start:
+      - text: { en: Explorers and the status page in the link list, de: Explorer und Statusseite in der Linkliste }
+        page: links
+        anchor: cat-network
+      - text: { en: The status page's JSON, de: Das JSON der Statusseite }
+        url: https://network.btx-monitoring.com/api/v1/status.json
+      - text: { en: Browser wallet and node wallet formats (developers), de: Formate von Browser- und Node-Wallet (Entwickler) }
+        url: https://github.com/btxchain/btx/blob/main/doc/btxwallet-browser-node-interop.md
+    ask:
+      en: The community chats on the links page.
+      de: Die Community-Chats auf der Links-Seite.
+    ask_page: links
+    cites:
+      - "community:README.md:50"
+      - "btx:doc/balance-watch.md:44-46"
+      - "btx:doc/btxwallet-browser-node-interop.md:3-9"

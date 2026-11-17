@@ -1,5 +1,5 @@
 # Simplified Chinese translations of the content texts of btx-community.com (community.yaml,
-# guide.yaml and hub.yaml). Each entry pairs the English text exactly as it stands there with its
+# guide.yaml, hub.yaml and infra.yaml). Each entry pairs the English text exactly as it stands there with its
 # translation; when the English text changes, the old pair no longer matches, the page shows
 # English and the build prints a warning. Translated with AI help; corrections by native speakers
 # are welcome.
@@ -25,6 +25,13 @@ translations:
     Sellers the easyBTX team says it has bought from itself. You agree amount and price with a
     seller on Telegram and pay them directly, usually in USDT.
   zh: easyBTX 团队称自己曾向其购买过的卖家。你通过 Telegram 与卖家商定数量和价格，并直接付款给对方，通常用 USDT。
+- en: >-
+    The archives were replaced several times under the same tag, last on 15 November 2026. The
+    current ones bundle libevent, SQLite, ZeroMQ and libgomp; only libc, libstdc++ and the NVIDIA
+    driver come from your system. Check your download against the release's SHA256SUMS.
+  zh: >-
+    这些归档在同一标签下被替换过多次，最近一次是 2026 年 11 月 15 日。当前的归档自带 libevent、SQLite、ZeroMQ 和 libgomp；只有
+    libc、libstdc++ 和 NVIDIA 驱动来自你的系统。请用该版本的 SHA256SUMS 核对你的下载。
 - en: Live census of BTX nodes and signer witness of the easyBTX team.
   zh: easyBTX 团队的 BTX 节点实时统计和签名者见证。
 - en: >-
@@ -45,9 +52,10 @@ translations:
 - en: 'A walk-through of SwapNet (btxchain/btx #630), built by the Byron Bay team from the open-source
     code.'
   zh: 'SwapNet（btxchain/btx #630）的演示，由 Byron Bay 团队基于开源代码制作。'
-- en: Unofficial demo with sample data only. The feature is not released; the page connects to no node
-    or wallet.
-  zh: 非官方演示，仅含示例数据。该功能尚未发布；页面不连接任何节点或钱包。
+- en: >-
+    Unofficial demo with sample data only. Atlas is in the v0.34.16 source, but the release archives
+    leave it out; the page connects to no node or wallet.
+  zh: "非官方演示，仅含示例数据。Atlas 在 v0.34.16 的源代码中，但发布压缩包未包含它；页面不连接任何节点或钱包。"
 - en: Describes MatMul v4.7, which the network runs since block 185,000, and keeps v3 as reference. Last
     updated 4 Aug 2026; its release notes still name v0.33.2.
   zh: 描述网络自区块 185,000 起使用的 MatMul v4.7，并保留 v3 作为参考。最后更新于 2026 年 8 月 4 日；其版本说明仍写着 v0.33.2。
@@ -56,9 +64,10 @@ translations:
   zh: Byron Bay 团队的区块浏览器，提供 24 小时挖矿视图、统计页面、公开 API，以及位于 /ai 的 AI 助手工具（MCP、REST、llms.txt）。
 - en: 13 of the 16 AI tools are public with no key; 3 premium ones need a token from the operator.
   zh: 16 个 AI 工具中有 13 个公开且无需密钥；3 个高级工具需要向运营者申请令牌。
-- en: UTXO snapshot for loadtxoutset, confirmed by two operators (Mende and Jarek), with SHA-256 of the
-    file and the manifest.
-  zh: 用于 loadtxoutset 的 UTXO 快照，由两位运营者（Mende 和 Jarek）确认，附文件和清单的 SHA-256。
+- en: >-
+    UTXO snapshot for loadtxoutset, confirmed by two operators, with SHA-256 of the file and the
+    manifest.
+  zh: "用于 loadtxoutset 的 UTXO 快照，由两位运营者确认，附文件和清单的 SHA-256。"
 - en: Check the SHA-256 before use. The JSON names the height; it can lag the chain by a few thousand
     blocks.
   zh: 使用前请核对 SHA-256。JSON 中写明高度；它可能落后链几千个区块。
@@ -113,11 +122,6 @@ translations:
   zh: >-
     没有桌面应用：两个归档都不含 btx-qt 和 btx-atlas，因为它们需要比 2.38 更新的 glibc。请使用 btxd 和 btx-cli。
 - en: >-
-    btxd uses a few system libraries the archive does not bundle (libevent, SQLite, ZeroMQ,
-    libgomp). If one is missing, bin/btxd names the packages to install.
-  zh: >-
-    btxd 需要一些归档未附带的系统库（libevent、SQLite、ZeroMQ、libgomp）。如果缺少，bin/btxd 会列出需要安装的软件包。
-- en: >-
     Recent releases have no signed checksum file: the last SHA256SUMS.asc was for v0.34.6, and
     v0.34.16 has an unsigned SHA256SUMS. Compare the SHA-256 that GitHub shows for each file with
     "shasum -a 256 <file>" ("sha256sum" on Linux).
@@ -146,9 +150,9 @@ translations:
     CI-10、已知失败列表，以及为 41 个超时的 stage3 测试套件设置的每晚作业。
 - en: >-
     The results of the last nightly build and test run that the status page's operator publishes as
-    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix in the table
-    above. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
-  zh: 状态页运营者以作业 CI-0 发布的最近一次夜间构建和测试运行的结果，实时读取自其 API。这只是在 Linux 上的一次运行，不是上表中 fork 上的构建矩阵。单元测试运行不包括较慢的 matmul_v4_rc_stage3_* 套件。
+    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix listed under
+    Gates. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+  zh: "状态页运营者以作业 CI-0 发布的最近一次夜间构建和测试运行的结果，实时读取自其 API。这只是在 Linux 上的一次运行，不是“关卡”一节中列出的 fork 构建矩阵。单元测试运行不包括较慢的 matmul_v4_rc_stage3_* 套件。"
 - en: "This panel is filled in by JavaScript. The run as raw data: "
   zh: 此面板由 JavaScript 填充。运行结果的原始数据：
 - en: build failed
@@ -330,12 +334,11 @@ translations:
 - en: Official website with documentation, the browser wallet and the whitepaper.
   zh: 官方网站，含文档、浏览器钱包和白皮书。
 - en: >-
-    On a server - the official release for Linux needs glibc 2.38 or newer (Ubuntu 24.04, Debian
-    13); a GPU node takes the -cuda13 archive (Blackwell cards). The v0.34.16 pre-release has no
-    CUDA build, so GPU nodes stay on v0.34.15. The current release has no official Windows archive.
-  zh: >-
-    在服务器上：官方 Linux 版本需要 glibc 2.38 或更新版本（Ubuntu 24.04、Debian 13）；GPU 节点使用 -cuda13 压缩包（Blackwell
-    显卡）。v0.34.16 预发布版没有 CUDA 构建，因此 GPU 节点继续使用 v0.34.15。当前正式版没有官方 Windows 压缩包。
+    On a server - v0.34.16 has two Linux x86_64 archives, both for glibc 2.38 or newer (Ubuntu
+    24.04, Debian 13): a plain one, and a -cuda13 one for GPU nodes (sm_120: RTX 50 and RTX PRO
+    Blackwell cards; the NVIDIA driver is not included). There is no official Windows or macOS
+    archive.
+  zh: "在服务器上：v0.34.16 有两个 Linux x86_64 压缩包，都需要 glibc 2.38 或更新版本（Ubuntu 24.04、Debian 13）：一个普通版，一个供 GPU 节点使用的 -cuda13 版（sm_120：RTX 50 与 RTX PRO 系列 Blackwell 显卡；不含 NVIDIA 驱动）。没有官方的 Windows 或 macOS 压缩包。"
 - en: >-
     On mainnet it needs at least two pinned signers and a threshold of two. Pin only signers that
     are live today.
@@ -728,9 +731,8 @@ translations:
   zh: 节点软件是开源的，任何人都可以在 GitHub 上向它提交拉取请求。开发者中心会告诉你以及你使用的 AI 工具，如何构建、测试一项更改并为其编写文档，使它能够被合并，以及哪些工作仍然开放。
 - en: The reference implementation and its own rules for agents.
   zh: 参考实现及其针对智能体的自有规则。
-- en: >-
-    Start on the developers page: where to begin, levels, test coverage and open lanes.
-  zh: 从开发者页面开始：入门步骤、级别、测试覆盖率和开放任务。
+- en: "Start here: where to begin, the prompt for your AI tool and the three levels."
+  zh: "从这里开始：从何入手、给你的 AI 工具的提示词，以及三个级别。"
 - en: Read the hub's front page, written for people.
   zh: 阅读开发者中心的首页，面向人类读者。
 - en: >-
@@ -1875,3 +1877,491 @@ translations:
   zh: 工作清单已就绪（4c7840e9 上的 12 个文件，另有 1 个被过滤器漏掉的候选）；共享辅助函数已存在（#576）
 - en: worklist ready (consensus and matmul sites excluded)
   zh: 工作清单已就绪（不含共识和 matmul 中的位置）
+# infra.yaml: the Run infra page and its network map
+- en: >-
+    Checked on 15 Nov 2026 against the node software at v0.34.16 (074dac16) and the release-0.34.17
+    branch (8e7045b9).
+  zh: "2026 年 11 月 15 日对照 v0.34.16（074dac16）的节点软件和 release-0.34.17 分支（8e7045b9）核对。"
+- en: "Run it yourself"
+  zh: "自己运行"
+- en: >-
+    You keep a machine running and follow its guide. Seven roles, from a node at home to a fuzz box
+    in a rack; each card says what the network gets, what the machine needs and who to ask.
+  zh: "你让一台机器持续运行，并按它的指南操作。共七种角色，从家里的节点到机房里的模糊测试机；每张卡片说明网络能得到什么、机器需要什么以及该问谁。"
+- en: "Use a managed setup"
+  zh: "使用托管式方案"
+- en: >-
+    An app installs and supervises the node software for you, on a machine you own. The machine and
+    its uptime stay yours.
+  zh: "由一个应用替你在自己的机器上安装并看护节点软件。机器及其在线时间仍由你负责。"
+- en: "This site lists no hosted service that runs BTX infrastructure for you."
+  zh: "本站没有收录任何替你运行 BTX 基础设施的托管服务。"
+- en: "The roles"
+  zh: "角色"
+- en: "Network"
+  zh: "网络"
+- en: "Testing"
+  zh: "测试"
+- en: "What the network gets"
+  zh: "网络能得到什么"
+- en: "Machine"
+  zh: "机器"
+- en: "Guide"
+  zh: "指南"
+- en: "Guide coming."
+  zh: "指南即将推出。"
+- en: "Who to ask"
+  zh: "该问谁"
+- en: "Crashes and security problems go privately to the maintainers, never in public."
+  zh: "崩溃和安全问题应私下报告给维护者，切勿公开。"
+- en: "How it fits together"
+  zh: "各部分如何配合"
+- en: >-
+    Who sends what to whom. A box opens its guide or its card; the numbers on the arrows match the
+    list below the map, and each line of the list names its source in the node software.
+  zh: "谁向谁发送什么。点击方框打开它的指南或卡片；箭头上的编号对应图下方的列表，列表每一行都注明了它在节点软件中的出处。"
+- en: "Map of BTX infrastructure"
+  zh: "BTX 基础设施示意图"
+- en: >-
+    Boxes for the roles, arrows for what they send each other. The same connections are listed in
+    words below the map.
+  zh: "方框代表角色，箭头代表它们相互发送的内容。图下方用文字列出了同样的连接。"
+- en: "BTX peer-to-peer network"
+  zh: "BTX 点对点网络"
+- en: "The connections in words"
+  zh: "用文字说明的连接"
+- en: "Source"
+  zh: "出处"
+- en: "open the guide"
+  zh: "打开指南"
+- en: "go to its card"
+  zh: "转到其卡片"
+- en: "Found a crash or a security problem?"
+  zh: "发现了崩溃或安全问题？"
+- en: >-
+    Report it privately through GitHub private vulnerability reporting on btxchain/btx, as its
+    security policy asks. Never post a crash, a sanitizer report or a crashing input in a public
+    issue, pull request or chat: it can show an attacker how to crash running nodes.
+  zh: "请按照 btxchain/btx 安全策略的要求，通过 GitHub 的私密漏洞报告功能私下报告。切勿在公开的 issue、拉取请求或聊天中发布崩溃、sanitizer 报告或会导致崩溃的输入：这可能让攻击者学会如何让正在运行的节点崩溃。"
+- en: "Report a vulnerability privately"
+  zh: "私下报告漏洞"
+- en: "The security policy (SECURITY.md)"
+  zh: "安全策略（SECURITY.md）"
+- en: "Before you run a node at home"
+  zh: "在家运行节点之前"
+- en: "Privacy"
+  zh: "隐私"
+- en: >-
+    Your node shows its IP address to every peer it connects to. A node that accepts inbound
+    connections also announces its own address, and peers pass it on.
+  zh: "你的节点会向它连接的每个节点暴露自己的 IP 地址。接受入站连接的节点还会宣告自己的地址，其他节点会继续转发。"
+- en: >-
+    btxd asks your router to open its port by default (NAT-PMP or PCP), so behind a router that
+    supports this it becomes reachable by itself.
+  zh: "btxd 默认会请求你的路由器打开它的端口（NAT-PMP 或 PCP），因此在支持该功能的路由器后面，它会自行变得可达。"
+- en: >-
+    If your address matters, run the node behind Tor (-proxy, -onlynet=onion; the Tor guide advises
+    onlynet=onion only once Tor runs stably) or on a rented server instead.
+  zh: "如果你在意自己的地址，就在 Tor 之后运行节点（-proxy、-onlynet=onion；Tor 指南建议等 Tor 稳定运行后再用 onlynet=onion），或者改用租用的服务器。"
+- en: >-
+    On a machine with coins, mining or a signer key, set natpmp=0, as the install checklist says.
+  zh: "在持有币、用于挖矿或存有签名者密钥的机器上，设置 natpmp=0，正如安装检查清单所说。"
+- en: "Reachability"
+  zh: "可达性"
+- en: >-
+    Outbound connections work by default. To accept inbound ones, TCP port 19335 must be reachable:
+    mapped by NAT-PMP, forwarded on the router by hand, or offered as a Tor onion service
+    (-listenonion). With -proxy, the node only listens if you also set -listen=1.
+  zh: "出站连接默认可用。要接受入站连接，TCP 端口 19335 必须可达：由 NAT-PMP 映射、在路由器上手动转发，或作为 Tor onion 服务提供（-listenonion）。使用 -proxy 时，只有同时设置 -listen=1，节点才会监听。"
+- en: >-
+    A node that only connects out stays in sync and relays to the peers it connects to, but new
+    nodes cannot reach it, so it does not help them sync.
+  zh: "只向外连接的节点仍能保持同步，并向它所连接的节点转发，但新节点无法连上它，所以它帮不了新节点同步。"
+- en: >-
+    To check: btx-cli getpeerinfo shows "inbound": true for peers that connected to you, and btx-cli
+    getnetworkinfo lists your node's localaddresses.
+  zh: "检查方法：btx-cli getpeerinfo 会对主动连上你的节点显示 \"inbound\": true，btx-cli getnetworkinfo 会在 localaddresses 中列出你节点的地址。"
+- en: "Full node: the install checklist on the start page"
+  zh: "全节点：首页上的安装检查清单"
+- en: "Running the node with Tor (developers)"
+  zh: "通过 Tor 运行节点（开发者文档）"
+- en: "Full node"
+  zh: "全节点"
+- en: >-
+    Relays blocks and transactions and keeps the network reachable. With a qualified GPU it checks
+    the MatMul work itself; without one, set it up as a trusted mirror that follows signed checks
+    from its signers (on mainnet at least two, by default), or it stops syncing.
+  zh: "转发区块和交易，保持网络可达。配备合格 GPU 时，它自行验证 MatMul 工作；没有时，需把它配置为受信任镜像，跟随其签名者签署的验证结果（主网默认至少两个），否则它会停止同步。"
+- en: >-
+    An always-on computer or small server with an SSD and a steady connection. A GPU is optional.
+  zh: "一台常开的电脑或小型服务器，配 SSD 和稳定的网络连接。GPU 可选。"
+- en: "Before you install a node release: the checklist on the start page"
+  zh: "安装节点版本之前：首页上的检查清单"
+- en: "Running a node: the steps on the start page"
+  zh: "运行节点：首页上的步骤"
+- en: "Node help for stuck heights"
+  zh: "节点卡在某个高度时的帮助"
+- en: "How a trusted mirror works (developers)"
+  zh: "受信任镜像如何工作（开发者文档）"
+- en: "The node help first; for the rest, the community chats on the links page."
+  zh: "先看节点帮助；其他问题请到链接页上的社区聊天群。"
+- en: "Archive node and snapshot publisher"
+  zh: "归档节点与快照发布者"
+- en: >-
+    An archive node keeps every block (prune=0) and serves the whole chain to its peers; the status
+    page measures the chain from archive nodes. A snapshot publisher turns a node's data into a
+    signed file that saves a new node most of the sync. A sync from genesis currently stops at block
+    126,978 (#272), so new nodes start from a snapshot.
+  zh: "归档节点保留每一个区块（prune=0），并向其他节点提供整条链；状态页从归档节点测量这条链。快照发布者把一个节点的数据做成签名文件，省去新节点的大部分同步。从创世区块同步目前会停在第 126,978 号区块（#272），因此新节点从快照启动。"
+- en: >-
+    A server with a large disk (the whole chain, never pruned, plus room for snapshot files) and an
+    upload link that can serve them.
+  zh: "一台大容量磁盘的服务器（完整且从不修剪的链，加上存放快照文件的空间），以及足以对外提供这些文件的上行带宽。"
+- en: "Archival node runbook (developers)"
+  zh: "归档节点操作手册（开发者文档）"
+- en: >-
+    Its opening note still calls Epoch A a release candidate; the developers' docs index says it has
+    been live on mainnet since block 185,000.
+  zh: "其开头说明仍称 Epoch A 为发布候选；开发者的文档索引说它自第 185,000 号区块起已在主网生效。"
+- en: "No community guide yet for publishing a signed snapshot."
+  zh: "目前还没有发布签名快照的社区指南。"
+- en: "Signed snapshots in the link list"
+  zh: "链接列表中的签名快照"
+- en: "The developers' UTXO snapshot recipe"
+  zh: "开发者的 UTXO 快照步骤"
+- en: "The I-OPS lane owner, whose lane covers archive mirrors and signed snapshots."
+  zh: "I-OPS 任务的负责人；该任务涵盖归档镜像和签名快照。"
+- en: "Attestation signer"
+  zh: "证明签名者"
+- en: >-
+    Replays the MatMul work of new blocks on a qualified GPU (ExactReplay) and signs the result.
+    Trusted mirrors that pinned its key follow those signatures; a node that checks blocks itself
+    never uses them in place of its own check. The developers' docs call this role a GPU archive or
+    attestor.
+  zh: "在合格 GPU 上重算新区块的 MatMul 工作（ExactReplay）并对结果签名。固定了其密钥的受信任镜像会跟随这些签名；自行验证区块的节点从不用它们代替自己的验证。开发者文档把这个角色称为 GPU 归档或证明者。"
+- en: >-
+    A GPU that passes btxd's self-qualification in strict-device mode, the whole chain (prune=0),
+    online around the clock. The runbook reports RTX 5090 and RTX PRO 6000 passing on CUDA 13.2 with
+    cuBLASLt 13.4; other cards must pass the same self-test. One signing key per machine; never on a
+    miner.
+  zh: "一块能在 strict-device 模式下通过 btxd 自我资格检测的 GPU，完整的链（prune=0），全天候在线。操作手册记录 RTX 5090 和 RTX PRO 6000 在 CUDA 13.2 与 cuBLASLt 13.4 下通过；其他显卡须通过同样的自检。每台机器一把签名密钥；绝不放在矿机上。"
+- en: "GPU operator runbook (developers)"
+  zh: "GPU 运营者操作手册（开发者文档）"
+- en: >-
+    Its status lines still call Epoch A a release candidate; the developers' docs index says it has
+    been live on mainnet since block 185,000.
+  zh: "其状态说明仍称 Epoch A 为发布候选；开发者的文档索引说它自第 185,000 号区块起已在主网生效。"
+- en: "Signers and trusted mirrors (developers)"
+  zh: "签名者与受信任镜像（开发者文档）"
+- en: >-
+    Questions about the runbook as an issue on btxchain/btx. No lane of this hub covers signers yet.
+  zh: "关于操作手册的问题请在 btxchain/btx 提 issue。本 hub 目前还没有任务负责签名者。"
+- en: "Always-on fuzz box"
+  zh: "全天候模糊测试机"
+- en: >-
+    Runs BTX's more than 270 fuzz targets day and night and keeps every input that reaches new code,
+    so it finds bugs that need hours of mutation. A short CI run starts from nothing every time.
+  zh: "日夜不停地运行 BTX 的 270 多个模糊测试目标，并保留每个触及新代码的输入，从而找到需要数小时变异才能发现的缺陷。短时的 CI 运行每次都从零开始。"
+- en: >-
+    A dedicated Linux machine or VM (Ubuntu 24.04): many CPU threads, about 2 GB of RAM per fuzzing
+    process, 80 GB of free disk, no GPU. Nothing else on it: no node, wallet, miner or keys.
+  zh: "一台专用的 Linux 机器或虚拟机（Ubuntu 24.04）：CPU 线程多多益善，每个模糊测试进程约 2 GB 内存，80 GB 空闲磁盘，无需 GPU。上面不放别的：没有节点、钱包、矿机或密钥。"
+- en: "Running a continuous BTX fuzz box"
+  zh: "运行持续的 BTX 模糊测试机"
+- en: "The I-OPS lane owner, who keeps the fuzz-box guide."
+  zh: "I-OPS 负责人，负责维护模糊测试机指南。"
+- en: "CI runner"
+  zh: "CI 运行机"
+- en: >-
+    Builds and tests the newest commit of a branch every night and publishes the result, so a break
+    shows up within a day. The status page's operator publishes one such run as job CI-0; it is on
+    the developers page.
+  zh: "每晚构建并测试某个分支的最新提交并公布结果，让问题在一天内被发现。状态页的运营者把这样一次运行作为任务 CI-0 公布；它在开发者页面上。"
+- en: >-
+    A dedicated Linux server with many threads and tens of GB of free disk. The CI-0 run of 15 Nov
+    took about 70 minutes on 30 threads; a coverage build tree alone takes 27 GB.
+  zh: "一台专用的 Linux 服务器，线程多，空闲磁盘几十 GB。11 月 15 日的 CI-0 运行在 30 个线程上用了约 70 分钟；仅一个带覆盖率的构建目录就占 27 GB。"
+- en: >-
+    Until then: the I-CI pack lists the jobs, the build-and-test page has the recipes, and
+    ci/README.md in the btx tree runs a CI stage locally.
+  zh: "在此之前：I-CI 任务包列出了各项任务，构建与测试页面提供了具体步骤，btx 代码树中的 ci/README.md 可在本地运行某个 CI 阶段。"
+- en: "I-CI pack: the fork CI jobs"
+  zh: "I-CI 任务包：fork 上的 CI 任务"
+- en: "Build and test recipes"
+  zh: "构建与测试步骤"
+- en: "The CI scripts in the btx tree"
+  zh: "btx 代码树中的 CI 脚本"
+- en: >-
+    The status page's operator, who runs the nightly CI-0. The I-CI lane has no owner yet: claim it
+    in the lanes file.
+  zh: "状态页的运营者，他负责每晚的 CI-0。I-CI 任务还没有负责人：可在任务文件中认领。"
+- en: "Sanitizer runs"
+  zh: "Sanitizer 运行"
+- en: >-
+    Builds the node with AddressSanitizer and UndefinedBehaviorSanitizer, or with ThreadSanitizer,
+    and runs the tests. Memory and threading bugs that pass silently in a normal build turn into
+    reports.
+  zh: "用 AddressSanitizer 和 UndefinedBehaviorSanitizer，或用 ThreadSanitizer 构建节点并运行测试。在普通构建中悄无声息的内存和线程错误会变成报告。"
+- en: >-
+    A Linux machine with clang (clang 20 or newer for ThreadSanitizer), plenty of RAM and threads.
+    Runs are several times slower: functional tests get --timeout-factor=4.
+  zh: "一台装有 clang 的 Linux 机器（ThreadSanitizer 需 clang 20 或更新版本），内存和线程充足。运行速度会慢好几倍：功能测试需加 --timeout-factor=4。"
+- en: "Build and test, section 6: Sanitizers"
+  zh: "构建与测试，第 6 节：Sanitizer"
+- en: >-
+    The I-CI lane, which holds the ASan/UBSan and TSan jobs (CI-2, CI-3). It has no owner yet: until
+    someone claims it, open an issue in this repository.
+  zh: "I-CI 任务，ASan/UBSan 和 TSan 任务（CI-2、CI-3）归它管。它还没有负责人：在有人认领之前，请在本仓库提 issue。"
+- en: "Guix rebuilder"
+  zh: "Guix 复现构建"
+- en: >-
+    Rebuilds a release from its tagged source in a fixed Guix environment, so independent builders
+    can compare hashes and nobody has to trust a single build machine. The v0.34.16 release notes
+    say its Linux binaries need glibc 2.38 or newer, while these scripts build against glibc 2.31:
+    they were not made with them, so today rebuilders can only compare with each other.
+  zh: "在固定的 Guix 环境中，从打了标签的源代码重新构建一个版本，让独立构建者可以比对哈希值，任何人都不必信任某一台构建机器。据 v0.34.16 的发布说明，其 Linux 二进制文件需要 glibc 2.38 或更新版本，而这些脚本基于 glibc 2.31 构建：它们不是用这些脚本做出来的，所以目前复现构建者只能彼此比对。"
+- en: >-
+    A Linux machine with Guix: 16 GB free for the Guix store plus 8 GB per platform you build. More
+    cores build faster.
+  zh: "一台装有 Guix 的 Linux 机器：Guix 存储需 16 GB 空闲空间，每构建一个平台再加 8 GB。核心越多构建越快。"
+- en: >-
+    The scripts are in the btx tree (contrib/guix). Their README is Bitcoin Core's and points at
+    Bitcoin Core's signature repository; this site knows of no BTX one yet.
+  zh: "脚本位于 btx 代码树中（contrib/guix）。其 README 沿用 Bitcoin Core 的版本，指向 Bitcoin Core 的签名仓库；本站目前还不知道有 BTX 自己的签名仓库。"
+- en: "The Guix scripts in the btx tree"
+  zh: "btx 代码树中的 Guix 脚本"
+- en: "No lane covers reproducible builds yet; open an issue in this repository."
+  zh: "目前还没有任务负责可复现构建；请在本仓库提 issue。"
+- en: "Miners and pools"
+  zh: "矿工与矿池"
+- en: "Full nodes"
+  zh: "全节点"
+- en: "SwapNet peers"
+  zh: "SwapNet 节点"
+- en: "Discovery relays"
+  zh: "发现中继"
+- en: "Trusted mirrors"
+  zh: "受信任镜像"
+- en: "Attestation signers"
+  zh: "证明签名者"
+- en: "Snapshot publishers"
+  zh: "快照发布者"
+- en: "Archive nodes"
+  zh: "归档节点"
+- en: "Status page"
+  zh: "状态页"
+- en: "Releases"
+  zh: "发布版本"
+- en: "Guix rebuilders"
+  zh: "Guix 复现构建者"
+- en: "templates out, blocks back"
+  zh: "下发模板，回传区块"
+- en: >-
+    A full node hands out block templates; miners and pools send solved blocks back
+    (getblocktemplate, then a stratum job, then submitblock).
+  zh: "全节点下发区块模板；矿工和矿池把解出的区块送回（getblocktemplate，然后是 stratum 任务，然后是 submitblock）。"
+- en: "blocks and transactions"
+  zh: "区块与交易"
+- en: >-
+    Blocks and transactions travel between peers. A node that keeps every block serves the whole
+    chain; a trusted mirror still checks bodies, transactions, scripts and state itself, and for the
+    MatMul work it relies on its signers.
+  zh: "区块和交易在节点之间传递。保留全部区块的节点可提供整条链；受信任镜像仍会自行验证区块内容、交易、脚本和状态，在 MatMul 工作上则依靠它的签名者。"
+- en: "swap offers over the same peer links"
+  zh: "通过已有节点连接传递兑换报价"
+- en: >-
+    A node started with -swapnet=1 finds other SwapNet nodes over the peer connections it already
+    has: no new port, seed list or hosted service. SwapNet is off by default.
+  zh: "以 -swapnet=1 启动的节点会通过它已有的节点连接找到其他 SwapNet 节点：无需新端口、种子列表或托管服务。SwapNet 默认关闭。"
+- en: "peer addresses only"
+  zh: "仅节点地址"
+- en: >-
+    A discovery relay (-matmulvalidation=relay) is the mode meant for public DNS seeds and addnode
+    hosts. It only hands out peer addresses: it serves no blocks, is no authority on the chain and
+    never asks for or serves signatures.
+  zh: "发现中继（-matmulvalidation=relay）是为公共 DNS 种子和 addnode 主机设计的模式。它只分发节点地址：不提供区块，不是链的权威，也从不请求或提供签名。"
+- en: "signed attestations"
+  zh: "签名证明"
+- en: >-
+    A signer signs each block whose MatMul work it replayed (messages getmmattest and mmattest). On
+    mainnet a trusted mirror by default accepts that work only with signatures from at least two
+    keys it pinned itself; any peer may pass them on. A node that checks blocks itself never uses
+    them in place of its own check.
+  zh: "签名者会对每个它重算过 MatMul 工作的区块签名（消息 getmmattest 和 mmattest）。在主网上，受信任镜像默认只有在拿到至少两个它自己固定的密钥的签名时才接受这些工作；任何节点都可以转发这些签名。自行验证区块的节点从不用它们代替自己的验证。"
+- en: "a signed starting point"
+  zh: "签名的起点"
+- en: >-
+    A snapshot saves a new node most of the sync: a signed copy of a node's data, or a UTXO snapshot
+    at a height compiled into btxd (loadtxoutset). Check its SHA-256 and signature before you load
+    it. A node holding an attested UTXO snapshot can also offer it to peers over the P2P network.
+  zh: "快照省去新节点的大部分同步：可以是一个节点数据的签名副本，也可以是 btxd 中编入的某个高度的 UTXO 快照（loadtxoutset）。加载前请核对其 SHA-256 和签名。持有经证明的 UTXO 快照的节点也可以通过 P2P 网络把它提供给其他节点。"
+- en: "chain data from an archive node"
+  zh: "来自归档节点的链数据"
+- en: "The status page measures supply, chain height and network figures from an archive node."
+  zh: "状态页从一个归档节点测量供应量、链高度和网络数据。"
+- en: "release archives"
+  zh: "发布归档"
+- en: >-
+    Release archives are published on the releases page of btxchain/btx. For v0.34.16 there are two,
+    both for Linux x86_64 (one built with CUDA 13), and a SHA256SUMS file; on other platforms the
+    node is built from source.
+  zh: "发布归档发布在 btxchain/btx 的 releases 页面上。v0.34.16 有两个，都适用于 Linux x86_64（其中一个用 CUDA 13 构建），另有一个 SHA256SUMS 文件；其他平台需从源代码构建节点。"
+- en: "tagged source to rebuild"
+  zh: "供复现构建的标签源代码"
+- en: >-
+    A rebuilder builds a release's tagged source with contrib/guix, attests to the result and
+    verifies other rebuilders' attestations. The v0.34.16 release notes say its Linux binaries need
+    glibc 2.38 or newer and these scripts build against glibc 2.31, so their hashes cannot match a
+    rebuild yet.
+  zh: "复现构建者用 contrib/guix 构建某个版本打了标签的源代码，为结果出具证明，并核验其他构建者的证明。据 v0.34.16 的发布说明，其 Linux 二进制文件需要 glibc 2.38 或更新版本，而这些脚本基于 glibc 2.31 构建，因此它们的哈希值目前还不可能与复现构建的结果一致。"
+# developers split: the start card's two steps
+- en: "Ongoing work: test coverage, the nightly CI-0 run and the lanes waiting for an owner."
+  zh: "进行中的工作：测试覆盖率、CI-0 夜间运行，以及等待负责人的任务。"
+# start and links pages: fact fixes and new steps of the UX pass
+- en: >-
+    Unofficial demo with sample data only. SwapNet is in v0.34.16 for broader testing, off unless a
+    node starts with -swapnet=1; the page connects to no node or wallet.
+  zh: "非官方演示，仅含示例数据。SwapNet 已随 v0.34.16 提供以便更广泛地测试，默认关闭，除非节点以 -swapnet=1 启动；页面不连接任何节点或钱包。"
+- en: "What BTX is, in a few facts with their sources."
+  zh: "BTX 是什么：几条附出处的事实。"
+- en: "Choose a wallet from the list, after reading \"Before you buy or receive BTX\" below."
+  zh: "先阅读下方的“购买或接收 BTX 之前”，再从列表中选择钱包。"
+- en: "Have a spare machine? Seven ways to give BTX infrastructure, from a node to a fuzz box."
+  zh: "有闲置的机器？七种为 BTX 提供基础设施的方式，从节点到模糊测试机。"
+- en: "Community projects: things to build and run outside the node software."
+  zh: "社区项目：在节点软件之外可以构建和运营的东西。"
+# projects.yaml: the projects at the top of the Projects page
+- en: "Build something"
+  zh: "动手构建"
+- en: >-
+    All of it lies outside the node software. Nothing here is planned, promised or endorsed by the
+    node's developers. Each card says what exists today and what is missing, with the source of
+    every claim.
+  zh: "这一切都在节点软件之外。这里的一切都不是节点开发者计划、承诺或认可的。每张卡片说明今天已有什么、还缺什么，并为每条说法注明出处。"
+- en: "Anything that moves other people's coins starts on regtest or testnet."
+  zh: "任何会动用他人币的东西，都先在 regtest 或 testnet 上开始。"
+- en: "There today"
+  zh: "今天已有"
+- en: "Missing"
+  zh: "还缺什么"
+- en: "Careful"
+  zh: "注意"
+- en: "Start from"
+  zh: "从这里入手"
+- en: "Rather build something than run a machine? Community projects"
+  zh: "比起运行机器，更想动手构建？社区项目"
+- en: "Venues for trading BTX"
+  zh: "BTX 交易场所"
+- en: >-
+    A place where people trade BTX against other coins, run by its own operators: an order book, or
+    a front-end over SwapNet's swaps.
+  zh: "一个由自己的运营者经营、让人们用 BTX 与其他币交易的地方：订单簿，或基于 SwapNet 兑换的前端。"
+- en: >-
+    SwapNet in the node swaps BTX with BTC or ETH between two parties; AMM pools, wrapped balances
+    and partial fills are not part of it. This group's venue-structure paper compares four models
+    and where the licensing line runs.
+  zh: "节点中的 SwapNet 在双方之间用 BTX 兑换 BTC 或 ETH；AMM 池、包装余额和部分成交不在其中。本小组的交易场所结构文档比较了四种模式，以及许可的界线在哪里。"
+- en: >-
+    Operators, a model chosen from the paper, and legal advice where the venue will run. The paper
+    is a draft for discussion, not legal advice.
+  zh: "运营者、从文档中选定的模式，以及交易场所所在地的法律意见。该文档是供讨论的草稿，不构成法律意见。"
+- en: "The venue-structure paper"
+  zh: "交易场所结构文档"
+- en: "SwapNet overview (developers)"
+  zh: "SwapNet 概览（开发者文档）"
+- en: "Discussion of the paper as an issue in this repository."
+  zh: "在本仓库以 issue 讨论该文档。"
+- en: "SwapNet wallets and tools"
+  zh: "SwapNet 钱包与工具"
+- en: >-
+    Software around SwapNet: a wallet that shows quotes and runs swaps, tools that run a maker's
+    market, a front-end for the node's swap calls.
+  zh: "围绕 SwapNet 的软件：显示报价并执行兑换的钱包、运行做市方市场的工具、节点兑换调用的前端。"
+- en: >-
+    A node started with -swapnet=1 finds other SwapNet nodes over its peer links and offers 33 swap
+    RPC methods. v0.34.16 carries SwapNet for broader testing. There is no graphical trading panel:
+    the RPC console is the interface.
+  zh: "以 -swapnet=1 启动的节点会通过节点连接找到其他 SwapNet 节点，并提供 33 个兑换 RPC 方法。v0.34.16 带有 SwapNet，以便更广泛地测试。没有图形化交易面板：RPC 控制台就是界面。"
+- en: >-
+    Everything a non-developer would use. The package's own status page marks real-chain settlement
+    and an independent audit as not executed, the ETH leg needs a deployed contract that the node's
+    owner approves locally, and the release docs want external receipts before anyone calls it
+    mainnet-qualified.
+  zh: "非开发者会用到的一切。该软件包自己的状态页把真实链上的结算和独立审计标为未执行；ETH 一侧需要一个由节点所有者在本地批准的已部署合约；发布文档要求在称其具备主网资格之前先有外部凭证。"
+- en: >-
+    Once a taker has funded a swap, cancelling does not release it: the coins stay locked until the
+    agreed refund height or time.
+  zh: "一旦接受方为兑换注资，取消并不会释放它：这些币会一直锁定到约定的退款高度或时间。"
+- en: "The 33 swap RPC methods"
+  zh: "33 个兑换 RPC 方法"
+- en: "Running SwapNet on a node"
+  zh: "在节点上运行 SwapNet"
+- en: "Testing and release (developers)"
+  zh: "测试与发布（开发者文档）"
+- en: "Questions as an issue on btxchain/btx; security problems only through private reporting."
+  zh: "问题请在 btxchain/btx 提 issue；安全问题只能通过私密报告提交。"
+- en: "Mining on consumer AMD cards"
+  zh: "在消费级 AMD 显卡上挖矿"
+- en: "An exact INT8 MatMul path for consumer Radeon cards, so they can mine."
+  zh: "为消费级 Radeon 显卡提供精确的 INT8 MatMul 路径，使其能够挖矿。"
+- en: >-
+    The node's AMD (HIP) path admits six datacenter Instinct chips: gfx908, gfx90a, gfx940, gfx941,
+    gfx942 and gfx950 (MI100 to MI350). It is built automatically when a HIP clang and an AMD GPU
+    are found. Consumer Radeon cards (RDNA, gfx10 to gfx12) are used neither to mine nor to
+    validate; the source calls them verification-only until cross-vendor golden vectors qualify
+    them.
+  zh: "节点的 AMD（HIP）路径接纳六种数据中心 Instinct 芯片：gfx908、gfx90a、gfx940、gfx941、gfx942 和 gfx950（MI100 到 MI350）；当找到 HIP clang 和 AMD GPU 时会自动构建。消费级 Radeon 显卡（RDNA，gfx10 到 gfx12）既不用于挖矿也不用于验证；源代码称其为 verification-only，直到跨厂商的 golden 向量为其认证。"
+- en: >-
+    An exact INT8 path on RDNA that matches the CPU reference bit for bit, and the golden vectors
+    that show it. Whether such a path is admitted is the maintainer's decision.
+  zh: "在 RDNA 上与 CPU 参考逐位一致的精确 INT8 路径，以及证明这一点的 golden 向量。是否接纳这样的路径由维护者决定。"
+- en: "How the node admits a GPU (developers)"
+  zh: "节点如何接纳 GPU（开发者文档）"
+- en: "The HIP backend sources (developers)"
+  zh: "HIP 后端源代码（开发者文档）"
+- en: "Evidence as an issue on btxchain/btx; no lane of this hub covers AMD yet."
+  zh: "证据请在 btxchain/btx 提 issue；本 hub 目前还没有任务负责 AMD。"
+- en: "Testing on Apple Silicon"
+  zh: "在 Apple Silicon 上测试"
+- en: >-
+    Run the node's Metal self-test on more Apple chips and report the results, so the Metal path is
+    known to work beyond one device class.
+  zh: "在更多 Apple 芯片上运行节点的 Metal 自检并报告结果，以确认 Metal 路径不只在一类设备上可用。"
+- en: >-
+    Metal is built by default on Apple. A Metal device is admitted after the node's exactness
+    self-tests, through Metal 4 INT8 tensor ops or, for the current epoch's replay, an exact
+    integer-ALU path. A golden row, where one exists, is compared; without one the self-test decides
+    (the manifest has one row, for an M4-class device). The release has no macOS binaries.
+  zh: "在 Apple 上默认会构建 Metal。Metal 设备要先通过节点的精确性自检才被接纳，可走 Metal 4 INT8 张量运算，或在重算当前纪元时走精确的整数 ALU 路径。有 golden 行时会比对；没有时由自检决定（清单中有一行，适用于 M4 级设备）。发布版本没有 macOS 二进制文件。"
+- en: "Self-test reports from other Apple chips."
+  zh: "其他 Apple 芯片的自检报告。"
+- en: "Building on macOS (developers)"
+  zh: "在 macOS 上构建（开发者文档）"
+- en: "The cross-device lane: I-XDEV pack"
+  zh: "跨设备任务：I-XDEV 任务包"
+- en: "The I-XDEV lane, which replays blocks across devices; it has no owner yet."
+  zh: "在不同设备上重算区块的 I-XDEV 任务；它还没有负责人。"
+- en: "Explorers, monitoring and light wallets"
+  zh: "区块浏览器、监控与轻钱包"
+- en: >-
+    More independent views of the chain, alerts when something goes wrong, and wallets for people
+    who do not run a node all the time.
+  zh: "更多独立的链上视图、出问题时的告警，以及给不常运行节点的人用的钱包。"
+- en: >-
+    Several explorers and a status page are on the links page; the status page publishes its figures
+    as JSON. btx-cli lightwatch is a watch-only light client: it reads compact block filters from a
+    node it trusts (started with -blockfilterindex=1) and signs nothing. The node also reads and
+    writes a browser-wallet recovery format.
+  zh: "链接页上列有几个区块浏览器和一个状态页；状态页以 JSON 发布其数据。btx-cli lightwatch 是只读的轻客户端：它从一个它信任的节点（以 -blockfilterindex=1 启动）读取紧凑区块过滤器，不做任何签名。节点还能读写一种浏览器钱包恢复格式。"
+- en: >-
+    Explorers and monitors run by more independent operators, alerting, and light wallets that can
+    also sign.
+  zh: "由更多独立运营者运行的浏览器和监控、告警，以及也能签名的轻钱包。"
+- en: "Explorers and the status page in the link list"
+  zh: "链接列表中的浏览器和状态页"
+- en: "The status page's JSON"
+  zh: "状态页的 JSON"
+- en: "Browser wallet and node wallet formats (developers)"
+  zh: "浏览器钱包与节点钱包的格式（开发者文档）"
+- en: "The community chats on the links page."
+  zh: "链接页上的社区聊天群。"

@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{{ ui['meta_description'] }}">
   <meta name="color-scheme" content="dark">
+  {% if noindex is defined and noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
   <title>{% if page_title %}{{ page_title }} · {% endif %}{{ ui["title"] }}</title>
   {% for code, tag, name, href in alternates %}
   <link rel="alternate" hreflang="{{ tag }}" href="{{ href }}">
   {% endfor %}
   <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="{{ icon_url }}" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="{{ touch_icon_url }}">
   <link rel="stylesheet" href="{{ css_url }}">
   <script src="{{ js_url }}" defer></script>
 {%- block scripts %}{% endblock %}

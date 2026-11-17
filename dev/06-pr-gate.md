@@ -58,7 +58,8 @@ maintainer can still read it in the source):
    is a public maintainer comment that asks for a new PR: then file exactly that, standalone, and
    cite the comment ([`02-method.md`](02-method.md) rule 11).
 7. **Security-relevant** (a remote crash or hang, fund loss, a key or seed leak, a consensus
-   split)? GitHub private vulnerability reporting on `btxchain/btx`, never a public issue, PR,
+   split)? Privately: email `team@btx.dev` per btxchain/btx's `SECURITY.md`, or GitHub private
+   vulnerability reporting on `btxchain/btx`; never a public issue, PR,
    board card or chat post. The class goes on the registry without the detail. Stop here
    ([`03-guardrails.md`](03-guardrails.md) §8).
 8. **Does the PR stay in its class?** A sweep changes nothing beyond its class (plan §2 rule
