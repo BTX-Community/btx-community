@@ -234,9 +234,9 @@ Pitfalls, all hit on 12 Nov [C3]:
 ## 6. Sanitizers [read: `ci/test/00_setup_env_native_asan.sh`, `ci/test/00_setup_env_native_tsan.sh`, `ci/test/03_test_script.sh`; TSan tested in C2]
 
 ```bash
-# ASan + UBSan (clang): the SANITIZERS and APPEND_CPPFLAGS values of the upstream ci/test ASan config
+# ASan + UBSan (clang), main run: the upstream ci/test ASan config without `integer` (see the notes below)
 cmake -B build-asan -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
-  -DSANITIZERS=address,float-divide-by-zero,integer,undefined \
+  -DSANITIZERS=address,float-divide-by-zero,undefined \
   -DAPPEND_CPPFLAGS='-DARENA_DEBUG -DDEBUG_LOCKORDER' \
   -DBUILD_TESTS=ON -DBUILD_GUI=OFF -DBUILD_BENCH=OFF -DWITH_ZMQ=ON -DWITH_MODELNET=ON \
   -DOPENSSL_ROOT_DIR="$OSSL" -DOPENSSL_USE_STATIC_LIBS=ON -DBTX_ENABLE_CUDA_EXPERIMENTAL=OFF
@@ -244,6 +244,14 @@ cmake --build build-asan -j"$(nproc)"
 export ASAN_OPTIONS="detect_leaks=1:detect_stack_use_after_return=1:check_initialization_order=1:strict_init_order=1"
 export LSAN_OPTIONS="suppressions=$PWD/test/sanitizer_suppressions/lsan"
 export UBSAN_OPTIONS="suppressions=$PWD/test/sanitizer_suppressions/ubsan:print_stacktrace=1:halt_on_error=1:report_error_type=1"
+
+# integer: a separate report run, never halting; read the report, do not gate on it
+cmake -B build-int -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
+  -DSANITIZERS=integer \
+  -DBUILD_TESTS=ON -DBUILD_GUI=OFF -DBUILD_BENCH=OFF -DWITH_ZMQ=ON -DWITH_MODELNET=ON \
+  -DOPENSSL_ROOT_DIR="$OSSL" -DOPENSSL_USE_STATIC_LIBS=ON -DBTX_ENABLE_CUDA_EXPERIMENTAL=OFF
+cmake --build build-int -j"$(nproc)"
+export UBSAN_OPTIONS="suppressions=$PWD/test/sanitizer_suppressions/ubsan:print_stacktrace=1:halt_on_error=0:report_error_type=1"
 
 # TSan + lock-order checks (clang 20 or newer): the C2 configuration
 cmake -B build-tsan -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_COMPILER=clang-20 -DCMAKE_CXX_COMPILER=clang++-20 \
@@ -255,6 +263,8 @@ export TSAN_OPTIONS="suppressions=$PWD/test/sanitizer_suppressions/tsan:halt_on_
 ```
 
 - Run unit and functional tests on these trees as in §3 and §4, with `--timeout-factor=4` for functional runs. Set the `*_OPTIONS` from the worktree root, so `$PWD` points at `test/sanitizer_suppressions/`.
+- **Why `integer` runs apart.** The upstream ASan config adds `integer` [repo: `ci/test/00_setup_env_native_asan.sh`]. That check reports unsigned wrap-around, implicit conversions and shifts, which are defined behaviour; Bitcoin silences its own sites in `test/sanitizer_suppressions/ubsan`, but that list does not know the BTX code. With `halt_on_error=1` the first such report stops the run: whole unit suites abort, and the functional suite may not start at all, because `create_cache.py` fails [I-CI, CI-2 trial on `release-0.34.17`, 2026-11-15]. So the main run halts on `address`, `float-divide-by-zero` and `undefined`, and `integer` gets its own build with `halt_on_error=0`, read as a report.
+- **`DEBUG_LOCKORDER` aborts the node.** The ASan tree is built with `-DDEBUG_LOCKORDER`. A lock-order inversion then shows up as a node that dies mid-test: the functional script fails with a lost RPC connection, and the node's `debug.log` has `POTENTIAL DEADLOCK DETECTED` with the previous and the current lock order, followed by `abort()` [repo: `src/sync.cpp`]. That is not an ASan report, and the same script may pass on a plain build. Check the log before you file it as a flaky test. A new inversion in code a peer can drive goes the private route ([`03-guardrails.md`](03-guardrails.md) §8), not into a public issue.
 - The upstream `ci/test` TSan config differs from C2's: it builds an instrumented libc++ and uses `-DDEBUG_LOCKCONTENTION` [repo]. The C2 recipe above is the one the baseline was measured with.
 - **clang 20.** If your release does not package `clang-20`, LLVM's own apt repository (apt.llvm.org) does [inferred].
 - **TSan start-up.** On kernels with `vm.mmap_rnd_bits=32` the TSan runtime can abort at start. On your own machine, with the operator's OK (it is a system setting until the next reboot): `sudo sysctl vm.mmap_rnd_bits=28`. In a container where you cannot, C2 needed a retry launcher (mean 9.2 tries per start). The clang-18 runtime died at start where `personality(ADDR_NO_RANDOMIZE)` was blocked; use clang 20 [C2].
