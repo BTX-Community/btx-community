@@ -427,7 +427,7 @@ de:
   page.docs.title: "Community-Projekte"
   page.docs.lead: "Was die Community selbst bauen und betreiben kann, dann die Roadmap und die Research-Papiere, die diese Gruppe offen pflegt."
   page.infra.title: BTX-Infrastruktur betreiben
-  page.infra.lead: "Rechner, die du dem Netz geben kannst: was jeder tut, was er braucht, seine Anleitung und wen man fragt, dazu eine Karte, wie alles zusammenhängt."
+  page.infra.lead: "Rechner, die du dem Netz zur Verfügung stellen kannst: was jeder tut, was er braucht, seine Anleitung und wen du fragen kannst, dazu eine Karte, die zeigt, wie alles zusammenhängt."
   page.dev.title: BTX-Entwickler werden
   page.dev-work.title: "Laufende Arbeit"
   page.dev-work.lead: "Wo die Node-Software steht und wer woran arbeitet: Testabdeckung, der nächtliche CI-0-Lauf, Fehlerklassen, Arbeitsbereiche, Gates und der Wochenrhythmus."
@@ -483,7 +483,7 @@ de:
   hub.nav.lanes: Arbeitsbereiche
   hub.nav.flow: Ablauf
   hub.nav.gates: Gates
-  hub.nav.ci: "Nächtlicher CI-0"
+  hub.nav.ci: "Nächtlicher CI-0-Lauf"
   hub.nav.owner-rules: "Regeln für Verantwortliche"
   hub.nav.rhythm: Rhythmus
   hub.nav.rules: Regeln
@@ -587,7 +587,7 @@ de:
   hub.lane.target: Ziel
   hub.lane.cadence: Takt
   hub.lane.route: Weg
-  hub.lane.coverage: Zeilen jetzt
+  hub.lane.coverage: Zeilenabdeckung jetzt
   hub.lane.rank: Risikorang
   hub.lane.runners: Runner-Plätze
   hub.lane.done: Abschlusskriterien ({count} Punkte)
