@@ -164,9 +164,13 @@ audiences:
         Arbeit offen ist.
     steps:
       - text:
-          en: "Start on the developers page: where to begin, levels, test coverage and open lanes."
-          de: "Auf der Entwickler-Seite anfangen: Einstieg, Stufen, Testabdeckung und offene Arbeitsbereiche."
+          en: "Start here: where to begin, the prompt for your AI tool and the three levels."
+          de: "Hier anfangen: Einstieg, die Anweisung für dein KI-Werkzeug und die drei Stufen."
         page: dev
+      - text:
+          en: "Ongoing work: test coverage, the nightly CI-0 run and the lanes waiting for an owner."
+          de: "Laufende Arbeit: Testabdeckung, der nächtliche CI-0-Lauf und die Arbeitsbereiche ohne Verantwortliche."
+        page: dev-work
       - text:
           en: Give your AI tool (Claude Code, Cursor, Codex or another) the agent file.
           de: Dem eigenen KI-Werkzeug (Claude Code, Cursor, Codex oder einem anderen) die Agenten-Datei geben.

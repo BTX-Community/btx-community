@@ -246,6 +246,13 @@ test("links into the old single page lead to the page that holds the section now
   assert.equal(live.movedTarget("/", "#cat-pools"), "/links/#cat-pools");
   assert.equal(live.movedTarget("/de/", "#doc-venue-structure"), "/de/docs/#doc-venue-structure");
   assert.equal(live.movedTarget("/", "#about"), "/learn/#about");
+  assert.equal(live.movedTarget("/dev/", "#lanes"), "/dev/work/#lanes");
+  assert.equal(live.movedTarget("/de/dev/", "#coverage"), "/de/dev/work/#coverage");
+  assert.equal(live.movedTarget("/dev/", "#lane-A-WALLET"), "/dev/work/#lane-A-WALLET");
+  assert.equal(live.movedTarget("/zh/dev/", "#ci"), "/zh/dev/work/#ci");
+  assert.equal(live.movedTarget("/dev/", "#never"), "/dev/work/#never");
+  assert.equal(live.movedTarget("/dev/", "#brief"), null);
+  assert.equal(live.movedTarget("/dev/work/", "#lanes"), null);
   for (const [path, hash] of [["/", ""], ["/", "#start"], ["/", "#check"], ["/links/", "#development"],
     ["/", "#cat-<img>"], ["//evil.example/", "#links"], ["/", "#development/../x"]]) {
     assert.equal(live.movedTarget(path, hash), null, path + hash);

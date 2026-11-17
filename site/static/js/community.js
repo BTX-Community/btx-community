@@ -750,7 +750,6 @@
     enhanceRegistry();
     var reveal = enhanceLanes(lanes);
     enhanceAreas();
-    enhanceCopy();
     function fromHash() {
       openLane(window.location.hash.slice(1), reveal, true);
     }
@@ -771,10 +770,21 @@
     [/^(documents|doc-[a-z0-9-]+)$/, "docs/"],
   ];
 
+  // Sections of the developers page that moved to its sub-page "Ongoing work" (/dev/work/).
+  var DEV_MOVED = new RegExp(
+    "^((coverage|classes|lanes|flow|gates|ci|rhythm|owner-rules)(-title)?|coverage-weekly|never|sweeps-title|runs-title|areas(-title)?|" +
+    "baselines-title|registry|routes-title|escalation-title|week-title|gates-(ci|release)-title|" +
+    "(figure|run|area|baseline|class|group|lane|route|gate|day|phase)-[A-Za-z0-9_-]+)$"
+  );
+
   // Where a section of the old single page lives now; null if the hash is not one of them.
   function movedTarget(pathname, hash) {
-    var home = /^\/([a-z]{2}\/)?$/.exec(pathname);
     var id = hash.replace(/^#/, "");
+    var dev = /^\/([a-z]{2}\/)?dev\/$/.exec(pathname);
+    if (dev && id && DEV_MOVED.test(id)) {
+      return "/" + (dev[1] || "") + "dev/work/#" + id;
+    }
+    var home = /^\/([a-z]{2}\/)?$/.exec(pathname);
     if (!home || !id) {
       return null;
     }
@@ -821,5 +831,6 @@
     if (hub) {
       enhanceHub(hub);
     }
+    enhanceCopy();
   }
 }());
