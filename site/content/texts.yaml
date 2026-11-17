@@ -69,6 +69,7 @@ en:
   nav.network: Network
   nav.links: Links
   nav.docs: Documents
+  nav.infra: Run infra
   nav.dev: Developers
   live.more: BTX in numbers and development activity
   network.observatory: Live view and node map from the Byron Bay archive node
@@ -82,6 +83,8 @@ en:
   page.links.lead: Projects, tools and services around BTX, each one opened and checked by hand.
   page.docs.title: Documents
   page.docs.lead: The roadmap and the research papers this group maintains in the open.
+  page.infra.title: Run BTX infrastructure
+  page.infra.lead: "Machines you can give the network: what each one does, what it needs, its guide and who to ask, and a map of how they fit together."
   page.dev.title: Become a BTX dev
   page.dev.lead: >-
     How to send pull requests to the BTX node software that the maintainer can merge: for
@@ -389,6 +392,7 @@ de:
   nav.network: Netz
   nav.links: Links
   nav.docs: Dokumente
+  nav.infra: Infra betreiben
   nav.dev: Entwickeln
   live.more: BTX in Zahlen und Entwicklungsaktivität
   network.observatory: Live-Ansicht und Node-Karte des Archive-Nodes von Byron Bay
@@ -402,6 +406,8 @@ de:
   page.links.lead: Projekte, Werkzeuge und Dienste rund um BTX, jeder Eintrag von Hand geöffnet und geprüft.
   page.docs.title: Dokumente
   page.docs.lead: Die Roadmap und die Research-Papiere, die diese Gruppe offen pflegt.
+  page.infra.title: BTX-Infrastruktur betreiben
+  page.infra.lead: "Rechner, die du dem Netz geben kannst: was jeder tut, was er braucht, seine Anleitung und wen man fragt, dazu eine Karte, wie alles zusammenhängt."
   page.dev.title: BTX-Entwickler werden
   page.dev.lead: >-
     Wie man Pull Requests für die BTX-Node-Software so vorbereitet, dass der Maintainer sie
@@ -714,6 +720,7 @@ es:
   nav.network: Red
   nav.links: Enlaces
   nav.docs: Documentos
+  nav.infra: Operar infra
   nav.dev: Desarrolladores
   live.more: BTX en cifras y actividad de desarrollo
   network.observatory: Vista en vivo y mapa de nodos desde el nodo de archivo de Byron Bay
@@ -727,6 +734,8 @@ es:
   page.links.lead: Proyectos, herramientas y servicios en torno a BTX, cada uno abierto y revisado a mano.
   page.docs.title: Documentos
   page.docs.lead: La hoja de ruta y los documentos de investigación que este grupo mantiene en abierto.
+  page.infra.title: Operar infraestructura de BTX
+  page.infra.lead: "Máquinas que puedes aportar a la red: qué hace cada una, qué necesita, su guía y a quién preguntar, y un mapa de cómo encajan entre sí."
   page.dev.title: Hazte desarrollador de BTX
   page.dev.lead: >-
     Cómo enviar al software del nodo BTX pull requests que el mantenedor pueda integrar: para
@@ -1041,6 +1050,7 @@ fr:
   nav.network: Réseau
   nav.links: Liens
   nav.docs: Documents
+  nav.infra: Infra
   nav.dev: Développeurs
   live.more: BTX en chiffres et activité de développement
   network.observatory: "Vue en direct et carte des nœuds depuis le nœud d'archive de Byron Bay"
@@ -1054,6 +1064,8 @@ fr:
   page.links.lead: Projets, outils et services autour de BTX, chacun ouvert et vérifié à la main.
   page.docs.title: Documents
   page.docs.lead: La feuille de route et les documents de recherche que ce groupe tient à jour publiquement.
+  page.infra.title: "Faire tourner l'infrastructure de BTX"
+  page.infra.lead: "Les machines que vous pouvez apporter au réseau : ce que fait chacune, ce qu'il lui faut, son guide et à qui demander, avec une carte qui montre comment elles s'articulent."
   page.dev.title: Devenir développeur BTX
   page.dev.lead: >-
     Comment proposer au logiciel de nœud BTX des pull requests que le mainteneur peut fusionner :
@@ -1363,6 +1375,7 @@ zh:
   nav.network: 网络
   nav.links: 链接
   nav.docs: 文档
+  nav.infra: 运行基础设施
   nav.dev: 开发者
   live.more: BTX 数据与开发活动
   network.observatory: Byron Bay 归档节点的实时视图与节点地图
@@ -1374,6 +1387,8 @@ zh:
   page.links.lead: 围绕 BTX 的项目、工具和服务，每一项都经人工打开并核实。
   page.docs.title: 文档
   page.docs.lead: 本小组公开维护的路线图和研究文档。
+  page.infra.title: 运行 BTX 基础设施
+  page.infra.lead: 你可以为网络提供的机器：每台做什么、需要什么、对应的指南和该问谁，另附一张说明它们如何配合的图。
   page.dev.title: 成为 BTX 开发者
   page.dev.lead: >-
     如何向 BTX 节点软件提交维护者能够合并的拉取请求：写给人，也写给他们使用的 AI 工具。

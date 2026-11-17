@@ -8,6 +8,8 @@ import re
 import sys
 import tempfile
 import unittest
+from collections.abc import Callable
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import get_args
@@ -115,6 +117,9 @@ class ContentTest(unittest.TestCase):
                             f'data-api="{build.DEVELOPMENT_API}"', f'data-repo="{build.UPSTREAM_REPO}"'),
                 "links": ('id="links"', 'id="cat-'),
                 "docs": ('id="documents"', 'id="doc-venue-structure"'),
+                "infra": ('id="yourself"', 'id="managed"', 'id="roles"', 'id="role-full-node"', 'id="map"',
+                          'class="c-map__svg c-map__svg--wide"', 'class="c-map__svg c-map__svg--narrow"',
+                          'id="edge-1"', 'id="report"', 'href="https://github.com/MendeMatthias/easynode"'),
                 "dev": ('id="begin"', 'id="levels"', 'id="coverage"', 'id="lanes"', 'id="group-area"',
                         '<span class="c-tag">A-WALLET</span>', 'id="level-basic"', 'id="brief"', 'id="classes"',
                         'id="flow"', 'id="gates"', 'id="rhythm"', 'id="rules"', 'id="contribute"',
@@ -166,12 +171,13 @@ class ContentTest(unittest.TestCase):
         page = build.load_community(build.ROOT / "content" / "community.yaml")
         guide = build.load_guide(build.ROOT / "content" / "guide.yaml")
         hub = build.load_hub(build.ROOT / "content" / "hub.yaml")
+        infra = build.load_infra(build.ROOT / "content" / "infra.yaml")
         texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
         for lang in build.TRANSLATED:
             table = build.load_translations(build.ROOT / "content" / "translations" / f"{lang}.yaml", lang)
             say = build.Localizer(lang, table)
             for page_id in build.PAGES:
-                build.context(page, guide, hub, texts, lang, "test", page_id, say)
+                build.context(page, guide, hub, texts, lang, "test", page_id, say, infra)
             with self.subTest(lang=lang):
                 self.assertEqual(say.missing, set())
                 self.assertEqual(set(table) - say.used, set())
@@ -852,6 +858,219 @@ class PageTest(unittest.TestCase):
         for checklist in guide.checklists:
             for item in checklist.items:
                 self.assertIn(f"- {item.en}", full)
+
+
+class InfraTest(unittest.TestCase):
+    """The "Run infra" page: its links, its map and the rules of infra.yaml."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls.out = Path(cls._tmp.name) / "site"
+        build.build(cls.out, "test")
+        cls.infra = build.load_infra(build.ROOT / "content" / "infra.yaml")
+        cls.raw = build.load_yaml(build.ROOT / "content" / "infra.yaml")
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls._tmp.cleanup()
+
+    def read(self, lang: str, page: str = "infra") -> str:
+        return (self.out / build.page_path(lang, page).strip("/") / "index.html").read_text(encoding="utf-8")
+
+    def broken(self, change: Callable[[dict], None]) -> None:
+        """infra.yaml with one change applied must be rejected."""
+        data = json.loads(json.dumps(self.raw, default=str))
+        change(data)
+        with self.assertRaises(Exception):  # noqa: B017, PT027
+            build.InfraPage.model_validate(data)
+
+    def test_the_page_is_in_the_menu_next_to_the_developers(self) -> None:
+        self.assertEqual(build.PAGES[-2:], ("infra", "dev"))
+        for lang in build.LANGUAGES:
+            html = self.read(lang)
+            self.assertIn('aria-current="page"', html)
+            menu = html.split('class="c-menu"')[1].split("</nav>")[0]
+            hrefs = re.findall(r'href="([^"]+)"', menu)
+            self.assertEqual(hrefs, [build.page_path(lang, page) for page in build.PAGES], lang)
+
+    def test_every_link_resolves(self) -> None:
+        for lang in build.LANGUAGES:
+            html = self.read(lang)
+            found = tags(html)
+            ids = {attrs["id"] for _, attrs in found if attrs.get("id")}
+            with self.subTest(lang=lang):
+                for tag, attrs in found:
+                    href = attrs.get("href")
+                    if tag != "a" or not href:
+                        continue
+                    if href.startswith("#"):
+                        self.assertIn(href[1:], ids, href)
+                    elif href.startswith("/"):
+                        path, _, anchor = href.partition("#")
+                        target = self.out / path.strip("/") / "index.html"
+                        self.assertTrue(target.is_file(), href)
+                        if anchor:
+                            self.assertIn(f'id="{anchor}"', target.read_text(encoding="utf-8"), href)
+                    elif href.startswith(build.REPO_URL + "/"):
+                        if href.startswith(f"{build.REPO_URL}/blob/main/") or href.startswith(f"{build.REPO_URL}/tree/main/"):
+                            self.assertTrue(build.repo_file(href).exists(), href)
+                        else:
+                            self.assertEqual(href, f"{build.REPO_URL}/issues")
+                    elif href.startswith(build.BTX_REPO_URL + "/"):
+                        # The node software's docs on main, the cited lines at the tag they were read at.
+                        self.assertRegex(
+                            href,
+                            rf"^{re.escape(build.BTX_REPO_URL)}/((blob|tree)/(main|{re.escape(self.infra.verified.tag)})/"
+                            r"[A-Za-z0-9_./-]+|issues|releases(/tag/v[0-9.]+)?|security/advisories/new)$",
+                        )
+                    else:
+                        self.assertRegex(href, build.LINK_PATTERN)
+                        self.assertIn('rel="noopener noreferrer"', html.split(f'href="{href}"')[1].split(">")[0])
+
+    def test_the_fuzz_box_guide_and_the_hub_files_exist(self) -> None:
+        # The guides this page reuses are files of this repository; the build refuses a link to a missing one.
+        for url in self.infra.links():
+            path = build.repo_file(url)
+            if path is not None:
+                self.assertTrue(path.exists(), url)
+        self.assertIn(f"{build.REPO_URL}/blob/main/dev/fuzz-box/README.md", self.infra.links())
+
+    def test_the_map_has_text_alternatives(self) -> None:
+        edges = len(self.infra.map.edges)
+        for lang in build.LANGUAGES:
+            html = self.read(lang)
+            found = tags(html)
+            ids = {attrs["id"] for _, attrs in found if attrs.get("id")}
+            svgs = re.findall(r"<svg [^>]*>.*?</svg>", html, flags=re.S)
+            with self.subTest(lang=lang):
+                self.assertEqual(len(svgs), len(build.LAYOUTS))
+                for svg in svgs:
+                    head = tags(svg)[0][1]
+                    self.assertEqual(head.get("role"), "group")
+                    title_id, desc_id = head["aria-labelledby"].split()
+                    self.assertRegex(svg, rf'<title id="{title_id}">[^<]+</title>')
+                    self.assertRegex(svg, rf'<desc id="{desc_id}">[^<]+</desc>')
+                    self.assertIn('class="c-map__arrows" aria-hidden="true"', svg)
+                    for tag, attrs in tags(svg):
+                        if tag == "a":
+                            self.assertTrue(attrs.get("aria-label"), attrs)
+                    # Every numbered arrow is drawn and explained in the list below the map.
+                    numbers = {int(n) for n in re.findall(r'data-edge="(\d+)"', svg)}
+                    self.assertEqual(numbers, set(range(1, edges + 1)))
+                    self.assertEqual(svg.count("<a "), len(self.infra.map.nodes))
+                self.assertEqual(len(re.findall(r'<li id="edge-\d+">', html)), edges)
+                for number in range(1, edges + 1):
+                    self.assertIn(f"edge-{number}", ids)
+                self.assertRegex(html, r"<figcaption[^>]*>[^<]+</figcaption>")
+
+    def test_every_box_label_fits_in_every_language(self) -> None:
+        for lang in build.LANGUAGES:
+            table = {}
+            if lang in build.TRANSLATED:
+                table = build.load_translations(build.ROOT / "content" / "translations" / f"{lang}.yaml", lang)
+            say = build.Localizer(lang, table)
+            for layout in build.LAYOUTS:
+                view = build.map_view(self.infra, layout, say)
+                for box in view.boxes:
+                    with self.subTest(lang=lang, layout=layout.name, box=box.id):
+                        room = box.x + box.width - layout.pad + 1
+                        for line in box.title:
+                            self.assertLessEqual(line.x + build.text_width(line.text, layout.title_size, bold=True), room, line.text)
+                        for line in box.labels:
+                            self.assertLessEqual(line.x + build.text_width(line.text, layout.label_size), room, line.text)
+                        if box.code is not None:
+                            self.assertLessEqual(box.code.x + build.text_width(box.code.text, layout.code_size, mono=True), room)
+                        self.assertLessEqual(box.y + box.height, view.height)
+                x, _, width, _ = view.frame
+                for line in view.frame_label:
+                    self.assertLessEqual(line.x + build.text_width(line.text, layout.label_size, mono=True), x + width - 8, (lang, line.text))
+
+    def test_a_role_without_a_guide_says_so(self) -> None:
+        html = self.read("en")
+        coming = self.infra.texts.coming.en
+        without = {role.id for role in self.infra.roles if role.guide is None}
+        self.assertEqual(without, {"ci-runner", "guix"})
+        for role in self.infra.roles:
+            card = unescape(html.split(f'id="role-{role.id}"')[1].split("</article>")[0])
+            self.assertEqual(coming in card, role.guide is None, role.id)
+            if role.coming is not None:
+                self.assertIn(role.coming.en, card)
+
+    def test_security_roles_carry_the_private_route(self) -> None:
+        self.assertEqual(self.infra.private_route, "https://github.com/btxchain/btx/security/advisories/new")
+        for lang in build.LANGUAGES:
+            html = self.read(lang)
+            report = html.split('id="report"')[1].split("</section>")[0]
+            self.assertIn(f'href="{self.infra.private_route}"', report)
+            self.assertIn(f'href="{self.infra.policy}"', report)
+            for role in self.infra.roles:
+                card = html.split(f'id="role-{role.id}"')[1].split("</article>")[0]
+                self.assertEqual('href="#report"' in card, role.security, (lang, role.id))
+        self.assertTrue(all(role.security for role in self.infra.roles if role.kind == "testing"))
+        self.assertTrue(next(role for role in self.infra.roles if role.id == "signer").security)
+
+    def test_the_managed_side_shows_the_link_lists_own_words(self) -> None:
+        page = build.load_community(build.ROOT / "content" / "community.yaml")
+        entry = next(e for c in page.categories for e in c.entries if e.id == "easynode")
+        card = self.read("en").split('id="managed"')[1].split("</article>")[0]
+        self.assertIn(entry.description.en, unescape(card))
+        self.assertIn(entry.note.en, unescape(card))
+        self.assertEqual(self.infra.managed, ["easynode"])
+
+    def test_every_edge_cites_a_line_range(self) -> None:
+        html = self.read("en")
+        for number, edge in enumerate(self.infra.map.edges, start=1):
+            item = html.split(f'<li id="edge-{number}">')[1].split("</li>")[0]
+            for cite in edge.cites:
+                label = cite.split(":", 1)[1]
+                self.assertIn(label, item.replace("btx-community/", ""), cite)
+            if any(cite.startswith("btx:") for cite in edge.cites):
+                self.assertIn(f"/blob/{self.infra.verified.tag}/", item)
+
+    def test_broken_infra_content_is_rejected(self) -> None:
+        def price(data: dict) -> None:
+            data["roles"][0]["hardware"]["en"] = "A small server for about $10 a month."
+
+        def no_guide(data: dict) -> None:
+            del data["roles"][3]["guide"]
+
+        def unknown_role(data: dict) -> None:
+            data["map"]["nodes"][0] = {**data["map"]["nodes"][0], "page": None, "anchor": None, "role": "miner"}
+
+        def undrawable(data: dict) -> None:
+            data["map"]["edges"].append({**data["map"]["edges"][0], "from": "guix", "to": "status"})
+
+        def shared_place(data: dict) -> None:
+            data["map"]["nodes"][2]["wide"] = data["map"]["nodes"][0]["wide"]
+
+        def left_on_a_phone(data: dict) -> None:
+            data["map"]["nodes"][0]["narrow"] = {"col": "L", "row": 1}
+
+        def frame_outside_c(data: dict) -> None:
+            data["map"]["nodes"][1]["wide"] = {"col": "L", "row": 1}
+
+        def other_route(data: dict) -> None:
+            data["private_route"] = "https://example.com/report"
+
+        def bad_cite(data: dict) -> None:
+            data["map"]["edges"][0]["cites"] = ["btx:src/protocol.h"]
+
+        for change in (price, no_guide, unknown_role, undrawable, shared_place, left_on_a_phone, frame_outside_c,
+                       other_route, bad_cite):
+            with self.subTest(change=change.__name__):
+                self.broken(change)
+        # The real content passes, and a managed entry must exist in the link list.
+        build.InfraPage.model_validate(json.loads(json.dumps(self.raw, default=str)))
+        page = build.load_community(build.ROOT / "content" / "community.yaml")
+        changed = self.infra.model_copy(update={"managed": ["no-such-entry"]})
+        with self.assertRaises(build.ContentError):
+            build.check_infra(changed, page)
+
+    def test_text_wraps_at_spaces_hyphens_and_between_cjk_characters(self) -> None:
+        self.assertEqual(build.wrap("one two three", build.text_width("one two", 10), 10), ("one two", "three"))
+        self.assertEqual(build.wrap("Peer-Verbindungen", build.text_width("Peer-", 10), 10), ("Peer-", "Verbindungen"))
+        self.assertEqual(build.wrap("下发模板回传区块", 40, 10), ("下发模板", "回传区块"))
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
-# Spanish translations of the content texts of btx-community.com (community.yaml, guide.yaml and
-# hub.yaml). Each entry pairs the English text exactly as it stands there with its translation;
+# Spanish translations of the content texts of btx-community.com (community.yaml, guide.yaml,
+# hub.yaml and infra.yaml). Each entry pairs the English text exactly as it stands there with its translation;
 # when the English text changes, the old pair no longer matches, the page shows English and the
 # build prints a warning. Translated with AI help; corrections by native speakers are welcome.
 
@@ -2387,3 +2387,409 @@ translations:
     función auxiliar compartida existe (#576)
 - en: worklist ready (consensus and matmul sites excluded)
   es: lista de trabajo preparada (sin los sitios de consenso y matmul)
+# infra.yaml: the Run infra page and its network map
+- en: >-
+    Checked on 15 Nov 2026 against the node software at v0.34.16 (074dac16) and the release-0.34.17
+    branch (8e7045b9).
+  es: >-
+    Comprobado el 15 de nov. de 2026 contra el software del nodo en v0.34.16 (074dac16) y la rama
+    release-0.34.17 (8e7045b9).
+- en: "Run it yourself"
+  es: "Gestiónalo tú"
+- en: >-
+    You keep a machine running and follow its guide. Seven roles, from a node at home to a fuzz box
+    in a rack; each card says what the network gets, what the machine needs and who to ask.
+  es: >-
+    Mantienes una máquina en marcha y sigues su guía. Siete roles, desde un nodo en casa hasta una
+    caja de fuzzing en un rack; cada tarjeta dice qué gana la red, qué necesita la máquina y a quién
+    preguntar.
+- en: "Use a managed setup"
+  es: "Usar una solución gestionada"
+- en: >-
+    An app installs and supervises the node software for you, on a machine you own. The machine and
+    its uptime stay yours.
+  es: >-
+    Una aplicación instala y supervisa el software del nodo por ti, en una máquina tuya. La máquina
+    y su tiempo en línea siguen siendo cosa tuya.
+- en: "This site lists no hosted service that runs BTX infrastructure for you."
+  es: "Este sitio no incluye ningún servicio alojado que opere infraestructura de BTX por ti."
+- en: "The roles"
+  es: "Los roles"
+- en: "Network"
+  es: "Red"
+- en: "Testing"
+  es: "Pruebas"
+- en: "What the network gets"
+  es: "Qué gana la red"
+- en: "Machine"
+  es: "Máquina"
+- en: "Guide"
+  es: "Guía"
+- en: "Guide coming."
+  es: "Guía en preparación."
+- en: "Who to ask"
+  es: "A quién preguntar"
+- en: "Crashes and security problems go privately to the maintainers, never in public."
+  es: >-
+    Los fallos y los problemas de seguridad van en privado a los mantenedores, nunca en público.
+- en: "How it fits together"
+  es: "Cómo encaja todo"
+- en: >-
+    Who sends what to whom. A box opens its guide or its card; the numbers on the arrows match the
+    list below the map, and each line of the list names its source in the node software.
+  es: >-
+    Quién envía qué a quién. Cada caja abre su guía o su tarjeta; los números de las flechas
+    corresponden a la lista bajo el mapa, y cada línea de la lista cita su fuente en el software del
+    nodo.
+- en: "Map of BTX infrastructure"
+  es: "Mapa de la infraestructura de BTX"
+- en: >-
+    Boxes for the roles, arrows for what they send each other. The same connections are listed in
+    words below the map.
+  es: >-
+    Cajas para los roles, flechas para lo que se envían entre sí. Las mismas conexiones aparecen
+    descritas con palabras bajo el mapa.
+- en: "BTX peer-to-peer network"
+  es: "Red peer-to-peer de BTX"
+- en: "The connections in words"
+  es: "Las conexiones en palabras"
+- en: "Source"
+  es: "Fuente"
+- en: "open the guide"
+  es: "abrir la guía"
+- en: "go to its card"
+  es: "ir a su tarjeta"
+- en: "Found a crash or a security problem?"
+  es: "¿Has encontrado un fallo o un problema de seguridad?"
+- en: >-
+    Report it privately through GitHub private vulnerability reporting on btxchain/btx, as its
+    security policy asks. Never post a crash, a sanitizer report or a crashing input in a public
+    issue, pull request or chat: it can show an attacker how to crash running nodes.
+  es: >-
+    Repórtalo en privado mediante el aviso privado de vulnerabilidades de GitHub en btxchain/btx,
+    como pide su política de seguridad. Nunca publiques un fallo, un informe de sanitizer ni una
+    entrada que provoque un fallo en un issue, pull request o chat público: puede enseñar a un
+    atacante cómo tumbar nodos en marcha.
+- en: "Report a vulnerability privately"
+  es: "Reportar una vulnerabilidad en privado"
+- en: "The security policy (SECURITY.md)"
+  es: "La política de seguridad (SECURITY.md)"
+- en: "Full node"
+  es: "Nodo completo"
+- en: >-
+    Relays blocks and transactions and keeps the network reachable. With a qualified GPU it checks
+    the MatMul work itself; without one, set it up as a trusted mirror that follows signed checks
+    from its signers (on mainnet at least two, by default), or it stops syncing.
+  es: >-
+    Retransmite bloques y transacciones y mantiene la red accesible. Con una GPU apta comprueba él
+    mismo el trabajo MatMul; sin ella, configúralo como espejo de confianza que sigue las
+    comprobaciones firmadas de sus firmantes (en mainnet, al menos dos por defecto), o deja de
+    sincronizar.
+- en: >-
+    An always-on computer or small server with an SSD and a steady connection. A GPU is optional.
+  es: >-
+    Un ordenador o un servidor pequeño siempre encendido, con SSD y una conexión estable. La GPU es
+    opcional.
+- en: "Before you install a node release: the checklist on the start page"
+  es: "Antes de instalar una versión del nodo: la lista de la página de inicio"
+- en: "Running a node: the steps on the start page"
+  es: "Operar un nodo: los pasos de la página de inicio"
+- en: "Node help for stuck heights"
+  es: "Ayuda para nodos atascados en una altura"
+- en: "How a trusted mirror works (developers)"
+  es: "Cómo funciona un espejo de confianza (desarrolladores)"
+- en: "The node help first; for the rest, the community chats on the links page."
+  es: >-
+    Primero la ayuda para nodos; para lo demás, los chats de la comunidad en la página de enlaces.
+- en: "Archive node and snapshot publisher"
+  es: "Nodo de archivo y publicador de snapshots"
+- en: >-
+    An archive node keeps every block (prune=0) and serves the whole chain to its peers; the status
+    page measures the chain from archive nodes. A snapshot publisher turns a node's data into a
+    signed file that saves a new node most of the sync. A sync from genesis currently stops at block
+    126,978 (#272), so new nodes start from a snapshot.
+  es: >-
+    Un nodo de archivo guarda todos los bloques (prune=0) y sirve la cadena entera a sus pares; la
+    página de estado mide la cadena desde nodos de archivo. Un publicador de snapshots hace de los
+    datos de un nodo un archivo firmado que ahorra a un nodo nuevo casi toda la sincronización. Hoy,
+    sincronizar desde génesis se detiene en el bloque 126.978 (#272): los nodos nuevos arrancan
+    desde un snapshot.
+- en: >-
+    A server with a large disk (the whole chain, never pruned, plus room for snapshot files) and an
+    upload link that can serve them.
+  es: >-
+    Un servidor con un disco grande (la cadena entera, nunca podada, más espacio para los archivos
+    de snapshot) y una subida capaz de servirlos.
+- en: "Archival node runbook (developers)"
+  es: "Manual para nodos de archivo (desarrolladores)"
+- en: >-
+    Its opening note still calls Epoch A a release candidate; the developers' docs index says it has
+    been live on mainnet since block 185,000.
+  es: >-
+    Su nota inicial aún llama a Epoch A candidata de versión; el índice de documentación de los
+    desarrolladores dice que está activa en mainnet desde el bloque 185.000.
+- en: "No community guide yet for publishing a signed snapshot."
+  es: "Todavía no hay una guía de la comunidad para publicar un snapshot firmado."
+- en: "Signed snapshots in the link list"
+  es: "Snapshots firmados en la lista de enlaces"
+- en: "The developers' UTXO snapshot recipe"
+  es: "La receta de snapshot UTXO de los desarrolladores"
+- en: "The I-OPS lane owner, whose lane covers archive mirrors and signed snapshots."
+  es: >-
+    La persona responsable de la tarea I-OPS, que abarca espejos de archivo y snapshots firmados.
+- en: "Attestation signer"
+  es: "Firmante de atestaciones"
+- en: >-
+    Replays the MatMul work of new blocks on a qualified GPU (ExactReplay) and signs the result.
+    Trusted mirrors that pinned its key follow those signatures; a node that checks blocks itself
+    never uses them in place of its own check. The developers' docs call this role a GPU archive or
+    attestor.
+  es: >-
+    Repite en una GPU apta el trabajo MatMul de los bloques nuevos (ExactReplay) y firma el
+    resultado. Los espejos de confianza que fijaron su clave siguen esas firmas; un nodo que
+    comprueba los bloques por sí mismo nunca las usa en lugar de su propia comprobación. La
+    documentación de los desarrolladores llama a este rol archivo GPU o atestador.
+- en: >-
+    A GPU that passes btxd's self-qualification in strict-device mode, the whole chain (prune=0),
+    online around the clock. The runbook reports RTX 5090 and RTX PRO 6000 passing on CUDA 13.2 with
+    cuBLASLt 13.4; other cards must pass the same self-test. One signing key per machine; never on a
+    miner.
+  es: >-
+    Una GPU que supere la autocalificación de btxd en modo strict-device, la cadena entera (prune=0)
+    y conexión permanente. El manual indica que RTX 5090 y RTX PRO 6000 la superan con CUDA 13.2 y
+    cuBLASLt 13.4; otras tarjetas deben superar la misma autoprueba. Una clave de firma por máquina;
+    nunca en un minero.
+- en: "GPU operator runbook (developers)"
+  es: "Manual del operador de GPU (desarrolladores)"
+- en: >-
+    Its status lines still call Epoch A a release candidate; the developers' docs index says it has
+    been live on mainnet since block 185,000.
+  es: >-
+    Sus líneas de estado aún llaman a Epoch A candidata de versión; el índice de documentación de
+    los desarrolladores dice que está activa en mainnet desde el bloque 185.000.
+- en: "Signers and trusted mirrors (developers)"
+  es: "Firmantes y espejos de confianza (desarrolladores)"
+- en: >-
+    Questions about the runbook as an issue on btxchain/btx. No lane of this hub covers signers yet.
+  es: >-
+    Las dudas sobre el manual, como issue en btxchain/btx. Ninguna tarea de este hub cubre aún a los
+    firmantes.
+- en: "Always-on fuzz box"
+  es: "Caja de fuzzing permanente"
+- en: >-
+    Runs BTX's more than 270 fuzz targets day and night and keeps every input that reaches new code,
+    so it finds bugs that need hours of mutation. A short CI run starts from nothing every time.
+  es: >-
+    Ejecuta día y noche los más de 270 objetivos de fuzzing de BTX y conserva cada entrada que
+    alcanza código nuevo, así encuentra errores que necesitan horas de mutación. Una ejecución corta
+    de CI empieza de cero cada vez.
+- en: >-
+    A dedicated Linux machine or VM (Ubuntu 24.04): many CPU threads, about 2 GB of RAM per fuzzing
+    process, 80 GB of free disk, no GPU. Nothing else on it: no node, wallet, miner or keys.
+  es: >-
+    Una máquina Linux o VM dedicada (Ubuntu 24.04): muchos hilos de CPU, unos 2 GB de RAM por
+    proceso de fuzzing, 80 GB de disco libre, sin GPU. Nada más en ella: ni nodo, ni monedero, ni
+    minero, ni claves.
+- en: "Running a continuous BTX fuzz box"
+  es: "Operar una caja de fuzzing continuo para BTX"
+- en: "The I-OPS lane owner, who keeps the fuzz-box guide."
+  es: "La persona responsable de I-OPS, que mantiene la guía de la caja de fuzzing."
+- en: "CI runner"
+  es: "Ejecutor de CI"
+- en: >-
+    Builds and tests the newest commit of a branch every night and publishes the result, so a break
+    shows up within a day. The status page's operator publishes one such run as job CI-0; it is on
+    the developers page.
+  es: >-
+    Compila y prueba cada noche el commit más reciente de una rama y publica el resultado, para que
+    una rotura se vea en un día. El operador de la página de estado publica una de esas ejecuciones
+    como el trabajo CI-0; está en la página de desarrolladores.
+- en: >-
+    A dedicated Linux server with many threads and tens of GB of free disk. The CI-0 run of 15 Nov
+    took about 70 minutes on 30 threads; a coverage build tree alone takes 27 GB.
+  es: >-
+    Un servidor Linux dedicado con muchos hilos y varias decenas de GB de disco libre. La ejecución
+    de CI-0 del 15 de nov. tardó unos 70 minutos con 30 hilos; solo un árbol de compilación con
+    cobertura ocupa 27 GB.
+- en: >-
+    Until then: the I-CI pack lists the jobs, the build-and-test page has the recipes, and
+    ci/README.md in the btx tree runs a CI stage locally.
+  es: >-
+    Mientras tanto: el paquete I-CI enumera los trabajos, la página de compilación y pruebas tiene
+    las recetas, y ci/README.md en el árbol de btx ejecuta una etapa de CI en local.
+- en: "I-CI pack: the fork CI jobs"
+  es: "Paquete I-CI: los trabajos de CI en el fork"
+- en: "Build and test recipes"
+  es: "Recetas de compilación y pruebas"
+- en: "The CI scripts in the btx tree"
+  es: "Los scripts de CI en el árbol de btx"
+- en: >-
+    The status page's operator, who runs the nightly CI-0. The I-CI lane has no owner yet: claim it
+    in the lanes file.
+  es: >-
+    El operador de la página de estado, que ejecuta el CI-0 nocturno. La tarea I-CI aún no tiene
+    responsable: asúmela en el archivo de tareas.
+- en: "Sanitizer runs"
+  es: "Ejecuciones con sanitizers"
+- en: >-
+    Builds the node with AddressSanitizer and UndefinedBehaviorSanitizer, or with ThreadSanitizer,
+    and runs the tests. Memory and threading bugs that pass silently in a normal build turn into
+    reports.
+  es: >-
+    Compila el nodo con AddressSanitizer y UndefinedBehaviorSanitizer, o con ThreadSanitizer, y
+    ejecuta las pruebas. Los errores de memoria y de hilos que pasan en silencio en una compilación
+    normal se convierten en informes.
+- en: >-
+    A Linux machine with clang (clang 20 or newer for ThreadSanitizer), plenty of RAM and threads.
+    Runs are several times slower: functional tests get --timeout-factor=4.
+  es: >-
+    Una máquina Linux con clang (clang 20 o posterior para ThreadSanitizer), mucha RAM y muchos
+    hilos. Las ejecuciones son varias veces más lentas: las pruebas funcionales llevan
+    --timeout-factor=4.
+- en: "Build and test, section 6: Sanitizers"
+  es: "Compilación y pruebas, sección 6: sanitizers"
+- en: >-
+    The I-CI lane, which holds the ASan/UBSan and TSan jobs (CI-2, CI-3). It has no owner yet: until
+    someone claims it, open an issue in this repository.
+  es: >-
+    La tarea I-CI, a la que pertenecen los trabajos de ASan/UBSan y TSan (CI-2, CI-3). Aún no tiene
+    responsable: hasta que alguien la asuma, abre un issue en este repositorio.
+- en: "Guix rebuilder"
+  es: "Recompilador con Guix"
+- en: >-
+    Rebuilds a release from its tagged source in a fixed Guix environment, so independent builders
+    can compare hashes and nobody has to trust a single build machine. The v0.34.16 release notes
+    say its Linux binaries need glibc 2.38 or newer, while these scripts build against glibc 2.31:
+    they were not made with them, so today rebuilders can only compare with each other.
+  es: >-
+    Recompila una versión desde su código etiquetado en un entorno Guix fijo, para que compiladores
+    independientes comparen hashes y nadie dependa de una sola máquina. Según las notas de v0.34.16,
+    sus binarios Linux necesitan glibc 2.38 o posterior y estos scripts compilan contra glibc 2.31:
+    no salieron de ellos, así que hoy los recompiladores solo se comparan entre sí.
+- en: >-
+    A Linux machine with Guix: 16 GB free for the Guix store plus 8 GB per platform you build. More
+    cores build faster.
+  es: >-
+    Una máquina Linux con Guix: 16 GB libres para el almacén de Guix más 8 GB por cada plataforma
+    que compiles. Más núcleos compilan más rápido.
+- en: >-
+    The scripts are in the btx tree (contrib/guix). Their README is Bitcoin Core's and points at
+    Bitcoin Core's signature repository; this site knows of no BTX one yet.
+  es: >-
+    Los scripts están en el árbol de btx (contrib/guix). Su README es el de Bitcoin Core y remite al
+    repositorio de firmas de Bitcoin Core; este sitio aún no conoce uno de BTX.
+- en: "The Guix scripts in the btx tree"
+  es: "Los scripts de Guix en el árbol de btx"
+- en: "No lane covers reproducible builds yet; open an issue in this repository."
+  es: >-
+    Ninguna tarea cubre todavía las compilaciones reproducibles; abre un issue en este repositorio.
+- en: "Miners and pools"
+  es: "Mineros y pools"
+- en: "Full nodes"
+  es: "Nodos completos"
+- en: "SwapNet peers"
+  es: "Pares de SwapNet"
+- en: "Discovery relays"
+  es: "Relés de descubrimiento"
+- en: "Trusted mirrors"
+  es: "Espejos de confianza"
+- en: "Attestation signers"
+  es: "Firmantes de atestaciones"
+- en: "Snapshot publishers"
+  es: "Publicadores de snapshots"
+- en: "Archive nodes"
+  es: "Nodos de archivo"
+- en: "Status page"
+  es: "Página de estado"
+- en: "Releases"
+  es: "Versiones"
+- en: "Guix rebuilders"
+  es: "Recompiladores con Guix"
+- en: "templates out, blocks back"
+  es: "plantillas de ida, bloques de vuelta"
+- en: >-
+    A full node hands out block templates; miners and pools send solved blocks back
+    (getblocktemplate, then a stratum job, then submitblock).
+  es: >-
+    Un nodo completo reparte plantillas de bloque; mineros y pools devuelven los bloques resueltos
+    (getblocktemplate, luego un trabajo stratum, luego submitblock).
+- en: "blocks and transactions"
+  es: "bloques y transacciones"
+- en: >-
+    Blocks and transactions travel between peers. A node that keeps every block serves the whole
+    chain; a trusted mirror still checks bodies, transactions, scripts and state itself, and for the
+    MatMul work it relies on its signers.
+  es: >-
+    Los bloques y las transacciones viajan entre pares. Un nodo que guarda todos los bloques sirve
+    la cadena entera; un espejo de confianza sigue comprobando por sí mismo contenidos de bloque,
+    transacciones, scripts y estado, y para el trabajo MatMul se apoya en sus firmantes.
+- en: "swap offers over the same peer links"
+  es: "ofertas de intercambio por los mismos enlaces entre pares"
+- en: >-
+    A node started with -swapnet=1 finds other SwapNet nodes over the peer connections it already
+    has: no new port, seed list or hosted service. SwapNet is off by default.
+  es: >-
+    Un nodo arrancado con -swapnet=1 encuentra otros nodos SwapNet a través de las conexiones entre
+    pares que ya tiene: sin puerto nuevo, lista de semillas ni servicio alojado. SwapNet está
+    desactivado por defecto.
+- en: "peer addresses only"
+  es: "solo direcciones de pares"
+- en: >-
+    A discovery relay (-matmulvalidation=relay) is the mode meant for public DNS seeds and addnode
+    hosts. It only hands out peer addresses: it serves no blocks, is no authority on the chain and
+    never asks for or serves signatures.
+  es: >-
+    Un relé de descubrimiento (-matmulvalidation=relay) es el modo pensado para las semillas DNS
+    públicas y los hosts de addnode. Solo reparte direcciones de pares: no sirve bloques, no es
+    autoridad sobre la cadena y nunca pide ni sirve firmas.
+- en: "signed attestations"
+  es: "atestaciones firmadas"
+- en: >-
+    A signer signs each block whose MatMul work it replayed (messages getmmattest and mmattest). On
+    mainnet a trusted mirror by default accepts that work only with signatures from at least two
+    keys it pinned itself; any peer may pass them on. A node that checks blocks itself never uses
+    them in place of its own check.
+  es: >-
+    Un firmante firma cada bloque cuyo trabajo MatMul ha repetido (mensajes getmmattest y mmattest).
+    En mainnet, por defecto, un espejo de confianza solo acepta ese trabajo con firmas de al menos
+    dos claves que fijó él mismo; cualquier par puede retransmitirlas. Un nodo que comprueba los
+    bloques por sí mismo nunca las usa en lugar de su propia comprobación.
+- en: "a signed starting point"
+  es: "un punto de partida firmado"
+- en: >-
+    A snapshot saves a new node most of the sync: a signed copy of a node's data, or a UTXO snapshot
+    at a height compiled into btxd (loadtxoutset). Check its SHA-256 and signature before you load
+    it. A node holding an attested UTXO snapshot can also offer it to peers over the P2P network.
+  es: >-
+    Un snapshot ahorra a un nodo nuevo casi toda la sincronización: una copia firmada de los datos
+    de un nodo, o un snapshot UTXO a una altura compilada en btxd (loadtxoutset). Comprueba su
+    SHA-256 y su firma antes de cargarlo. Un nodo con un snapshot UTXO atestado también puede
+    ofrecerlo a sus pares por la red P2P.
+- en: "chain data from an archive node"
+  es: "datos de la cadena desde un nodo de archivo"
+- en: "The status page measures supply, chain height and network figures from an archive node."
+  es: >-
+    La página de estado mide el suministro, la altura de la cadena y las cifras de la red desde un
+    nodo de archivo.
+- en: "release archives"
+  es: "archivos de versión"
+- en: >-
+    Release archives are published on the releases page of btxchain/btx. For v0.34.16 there are two,
+    both for Linux x86_64 (one built with CUDA 13), and a SHA256SUMS file; on other platforms the
+    node is built from source.
+  es: >-
+    Los archivos de cada versión se publican en la página de releases de btxchain/btx. Para v0.34.16
+    hay dos, ambos para Linux x86_64 (uno compilado con CUDA 13), y un archivo SHA256SUMS; en otras
+    plataformas el nodo se compila desde el código fuente.
+- en: "tagged source to rebuild"
+  es: "código etiquetado para recompilar"
+- en: >-
+    A rebuilder builds a release's tagged source with contrib/guix, attests to the result and
+    verifies other rebuilders' attestations. The v0.34.16 release notes say its Linux binaries need
+    glibc 2.38 or newer and these scripts build against glibc 2.31, so their hashes cannot match a
+    rebuild yet.
+  es: >-
+    Un recompilador compila con contrib/guix el código etiquetado de una versión, da fe del
+    resultado y verifica las atestaciones de otros. Según las notas de v0.34.16, sus binarios Linux
+    necesitan glibc 2.38 o posterior y estos scripts compilan contra glibc 2.31, así que sus hashes
+    todavía no pueden coincidir con una recompilación.
