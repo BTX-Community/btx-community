@@ -14,16 +14,16 @@
     "git": "the tree at 4c7840e9",
     "note": "file names in src fields (A-TAXONOMY.md, C1-STATIC.md, ...) are the team's lane reports; the values they gave are the numbers in this file; labels are explained in MASTER-PLAN.md under 'Labels'"
   },
-  "coverage_statement": "The coverage build configures again since #578 (merged into the release line on 12 Nov as 7051507b); the fix is not in v0.34.15 (main, 476f3f23). Measured on swapnet-v2 at a5d1637f (14 Nov), which contains the fix: 67.4% product lines unit-only, 72.3% unit + functional; branches 38.9% / 42.6% (42 unit suites timed out and 14 of 220 functional scripts failed in the coverage run; a killed test writes no counts). The time budgets were shorter than on 12 Nov (unit 2.5 h instead of 3 h, functional 100 min instead of 3 h), so the figures are floors and the comparison with the 12 Nov run at c6f9678d is indicative. Recipe: ../04-build-and-test.md section 5.",
+  "coverage_statement": "The coverage build configures again since #578 (merged into the release line on 12 Nov as 7051507b); it shipped in v0.34.16 and is not in v0.34.15 (476f3f23). Measured on swapnet-v2 at a5d1637f (14 Nov), which contains the fix: 67.4% product lines unit-only, 72.3% unit + functional; branches 38.9% / 42.6% (42 unit suites timed out and 14 of 220 functional scripts failed in the coverage run; a killed test writes no counts). The time budgets were shorter than on 12 Nov (unit 2.5 h instead of 3 h, functional 100 min instead of 3 h), so the figures are floors and the comparison with the 12 Nov run at c6f9678d is indicative. Recipe: ../04-build-and-test.md section 5.",
   "measured_at": {
     "commit": "c6f9678d",
     "date": "2026-11-12",
     "coverage_commit": "a5d1637f",
     "coverage_date": "2026-11-14",
     "src": "C3 coverage run logs (swapnet-v2 at a5d1637f, 14 Nov); C1, C2 run logs (release-0.34.16 at c6f9678d, 12 Nov)",
-    "live_head": "4c7840e9",
-    "live_head_note": "release-0.34.16 head the hub was verified against on 12 Nov, 31 commits after c6f9678d (C1, C2); no change to validation.cpp, net_processing.cpp, pow.cpp, src/consensus, script/interpreter.cpp in those 31. a5d1637f (C3) is 177 commits after it; of those files only net_processing.cpp differs between c6f9678d and a5d1637f",
-    "live_head_src": "git rev-list / git diff c6f9678d..4c7840e9; git rev-list --count 4c7840e9..a5d1637f; git diff --stat c6f9678d a5d1637f"
+    "sites_head": "4c7840e9",
+    "sites_head_note": "release-0.34.16 head of 12 Nov: the site counts were taken and the hub was verified there, and they were not recounted since, except K01 (classes.K01). It is not the live head: since 15 Nov release-0.34.16 equals main and the v0.34.16 tag (074dac16), and new PRs go to release-0.34.17 (#714). 31 commits after c6f9678d (C1, C2); no change to validation.cpp, net_processing.cpp, pow.cpp, src/consensus, script/interpreter.cpp in those 31. a5d1637f (C3) is 177 commits after it and 48 before the v0.34.16 tag; of those files only net_processing.cpp differs between c6f9678d and a5d1637f",
+    "sites_head_src": "git rev-list / git diff c6f9678d..4c7840e9; git rev-list --count 4c7840e9..a5d1637f; git diff --stat c6f9678d a5d1637f; git rev-list --count a5d1637f..v0.34.16; GitHub API branches/release-0.34.16 and compare/release-0.34.16...main (17 Nov)"
   },
   "coverage": {
     "overall": {
@@ -201,10 +201,10 @@
       "id": "K01",
       "name": "non-atomic or short state-file write",
       "prs": 22,
-      "sites_open": 12,
+      "sites_open": 9,
       "rule": "lint against raw ofstream to datadir paths; truncated-file load tests",
-      "sweep_status": "worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped: capability_bytes.cpp); shared helper exists (#576)",
-      "src": "A-TAXONOMY.md; grep at 4c7840e9"
+      "sweep_status": "worklist ready (9 files at 1e2f8b5f, down from 12 at 4c7840e9: #606 moved package_channel.cpp, swarm_evolution.cpp and workspace_git.cpp onto the helper, and its lint lists each raw write left in the 9 files as an exception); shared helper exists (#576) and syncs file and directory since #606",
+      "src": "A-TAXONOMY.md; grep at 4c7840e9 and 1e2f8b5f (05-bug-classes.md section 2.2)"
     },
     {
       "id": "K03",
@@ -577,8 +577,8 @@
     {
       "id": "G6",
       "name": "Peer input charged and bounded",
-      "state": "open; #478 and #313 on the release line only",
-      "src": "master plan 4.4; git"
+      "state": "open; #478 and #313 are in v0.34.16 (on main since 15 Nov)",
+      "src": "master plan 4.4; git (c6a9bef1 and 4c7840e9 are ancestors of v0.34.16)"
     },
     {
       "id": "G7",

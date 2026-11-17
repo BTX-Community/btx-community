@@ -990,14 +990,16 @@ translations:
     Solo correcciones probadas: falla antes, pasa después, con commit, plataforma y comando. Di qué
     no se probó.
 - en: >-
-    Validation, fork choice, attestation and the MatMul frontier stay out of release-0.34.16
-    (btxchain/btx #464 and the pull requests closed on the same day, 11 November 2026). Findings
-    there go to the E-CONSENSUS lane as evidence, not as pull requests.
+    Validation, fork choice, attestation and the MatMul frontier stay out of the release branch
+    (release-0.34.17 since 15 November 2026): the maintainer kept them out of release-0.34.16
+    (btxchain/btx #464) and took onto release-0.34.17 the open pull requests that do not change
+    consensus or a spend (#714). Findings there go to E-CONSENSUS as evidence, not as pull requests.
   es: >-
-    La validación, la elección de fork, la atestación y la frontera MatMul quedan fuera de
-    release-0.34.16 (btxchain/btx #464 y los pull requests cerrados el mismo día, 11 de noviembre de
-    2026). Los hallazgos en esas áreas van a la tarea E-CONSENSUS como evidencias, no como pull
-    requests.
+    La validación, la elección de fork, la atestación y la frontera MatMul quedan fuera de la rama
+    de publicación (release-0.34.17 desde el 15 nov. de 2026): el mantenedor las dejó fuera de
+    release-0.34.16 (btxchain/btx #464) y llevó a release-0.34.17 los pull requests abiertos que no
+    cambian el consenso ni un gasto (#714). Los hallazgos ahí van a E-CONSENSUS como evidencias, no
+    como pull requests.
 - en: >-
     A second person who is not the author reviews before anything goes upstream. Lanes send their
     pull requests together once a week, so the maintainer gets one batch, not a stream.
@@ -1053,16 +1055,17 @@ translations:
     versiones y la recopilación de los pull requests de la semana en un solo lote. Un fork con
     GitHub Actions y tiempo cada semana.
 - en: >-
-    Product code of swapnet-v2 at commit a5d1637f; the coverage build needs btxchain/btx #578, which
-    v0.34.15 lacks. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts
-    failed; a killed test writes no counts. The time budgets were shorter than on 12 November, so
-    the figures are floors and the comparison is indicative.
+    Product code of swapnet-v2 at commit a5d1637f, now part of v0.34.16; the coverage build needs
+    btxchain/btx #578, which is in v0.34.16 but not in v0.34.15. In the coverage run 42 unit suites
+    timed out and 14 of 220 functional scripts failed; a killed test writes no counts. The time
+    budgets were shorter than on 12 November, so the figures are floors and the comparison is
+    indicative.
   es: >-
-    Código de producción de swapnet-v2 en el commit a5d1637f; la compilación de cobertura necesita
-    btxchain/btx #578, que falta en v0.34.15. En la medición, 42 suites unitarias agotaron el tiempo
-    y fallaron 14 de 220 scripts funcionales; una prueba interrumpida no deja datos. Los límites de
-    tiempo fueron más cortos que el 12 de noviembre: las cifras son mínimos y la comparación es
-    orientativa.
+    Código de producción de swapnet-v2 en a5d1637f, ya en v0.34.16; la compilación de cobertura
+    necesita btxchain/btx #578, que v0.34.16 incluye y v0.34.15 no. En la medición, 42 suites
+    unitarias agotaron el tiempo y fallaron 14 de 220 scripts funcionales; una prueba interrumpida
+    no deja datos. Con menos tiempo que el 12 de noviembre, las cifras son mínimos y la comparación
+    es orientativa.
 - en: Lines
   es: Líneas
 - en: unit tests
@@ -1151,12 +1154,18 @@ translations:
   es: 0 PR reenviados que no se aceptaron
 - en: 1 of about 13 targets exists
   es: existe 1 de unos 13 targets
-- en: 12 files to 0; fsync in the helper; lint in CI-4; truncated-file load test per store
+- en: >-
+    12 files to 0 (9 left at 1e2f8b5f); fsync in the helper (done: #606); lint in CI-4;
+    truncated-file load test per store
   es: >-
-    12 archivos a 0; fsync en la función auxiliar; regla de lint en CI-4; prueba de carga con
-    archivo truncado por almacén
-- en: 12 worklist files to 0
-  es: 12 archivos de la lista de trabajo a 0
+    12 archivos a 0 (quedan 9 en 1e2f8b5f); fsync en la función auxiliar (hecho: #606); regla de
+    lint en CI-4; prueba de carga con archivo truncado por almacén
+- en: >-
+    12 worklist files to 0 (9 left at 1e2f8b5f; #606's lint lists each raw write left in them as an
+    exception)
+  es: >-
+    12 archivos de la lista de trabajo a 0 (quedan 9 en 1e2f8b5f; la regla de lint de #606 registra
+    como excepción cada escritura directa que queda en ellos)
 - en: 12-14 Nov
   es: 12-14 nov.
 - en: 120 lifetime results initialised or documented
@@ -1196,19 +1205,22 @@ translations:
     68 funciones de consenso no ejecutadas (medido el 12 de noviembre en c6f9678d), listadas como
     probadas o como código muerto
 - en: >-
-    7 fix PRs on one release script; the Linux candidate at c6f9678d had one independent four-check
-    run (#432, 11 Nov); no macOS, Windows or CUDA candidate has had one yet
+    7 fix PRs on one release script; the four-check pass ran once, on the Linux candidate at
+    c6f9678d (#432, 11 Nov); v0.34.16 shipped on 15 Nov at 074dac16 with Linux and Linux CUDA
+    archives only, and the hub has no four-check run of them; the first Windows build report on
+    release-0.34.17 (1e2f8b5f, #714, 16 Nov) found the MSVC build failing
   es: >-
-    7 PR de corrección en un mismo script de publicación; la candidata de Linux en c6f9678d tuvo una
-    ejecución independiente de cuatro comprobaciones (#432, 11 de noviembre); ninguna candidata de
-    macOS, Windows o CUDA ha tenido una todavía
+    7 PR de corrección en un mismo script de publicación; las cuatro comprobaciones se hicieron una
+    vez, en la candidata de Linux en c6f9678d (#432, 11 nov.); v0.34.16 salió el 15 nov. en 074dac16
+    solo con archivos de Linux y Linux CUDA, sin esa ejecución en el centro; el primer informe de
+    compilación en Windows de release-0.34.17 (1e2f8b5f, #714, 16 nov.) vio fallar MSVC
 - en: A done bar for every lane
   es: Un criterio de finalización para cada tarea
 - en: >-
-    A normal pull request to release-0.34.16, sent in the Thursday batch with its fork CI run: fails
+    A normal pull request to release-0.34.17, sent in the Thursday batch with its fork CI run: fails
     before, passes after.
   es: >-
-    Un pull request normal a release-0.34.16, enviado en el lote del jueves con su ejecución de CI
+    Un pull request normal a release-0.34.17, enviado en el lote del jueves con su ejecución de CI
     en el fork: falla antes, pasa después.
 - en: >-
     A pull request the maintainer closed without taking it is never re-filed; it becomes an evidence
@@ -1241,13 +1253,15 @@ translations:
     clase entra en el registro sin el detalle.
 - en: >-
     A taxonomy of every fix pull request to btxchain/btx since 1 August: 317 fix PRs in 26 named
-    classes, plus "other". Class assignments are 10-15% noisy. Site counts are on the live head;
-    static and dynamic counts were measured at c6f9678d and are untriaged.
+    classes, plus "other". Class assignments are 10-15% noisy. Site counts were taken at 4c7840e9,
+    the release-0.34.16 head of 12 November, unless a count names another commit; static and dynamic
+    counts were measured at c6f9678d and are untriaged.
   es: >-
     Una taxonomía de todos los pull requests de corrección a btxchain/btx desde el 1 de agosto: 317
-    PR de corrección en 26 clases con nombre, más "otros". La asignación a clases tiene un 10-15 % de
-    ruido. Los sitios se cuentan en el head actual; las cifras estáticas y dinámicas se midieron en
-    c6f9678d y están sin revisar.
+    PR de corrección en 26 clases con nombre, más "otros". La asignación a clases tiene un 10-15 %
+    de ruido. Los sitios se contaron en 4c7840e9, head de release-0.34.16 del 12 de noviembre, salvo
+    que un recuento nombre otro commit; las cifras estáticas y dinámicas se midieron en c6f9678d,
+    sin revisar.
 - en: ACVP and Wycheproof vectors in ctest
   es: vectores ACVP y Wycheproof en ctest
 - en: An owner and a second pass
@@ -1258,21 +1272,26 @@ translations:
     Responde a cada pregunta con el formato fijo: veredicto, motivo, fuentes.
 - en: >-
     Archive mirrors and signed snapshots, monitoring as the health signal, IBD from genesis on a
-    stock binary, staged upgrades, mixed-version interop (v0.34.15 against the release line), the
-    operator safe profile in the guides, and which fixes a v0.34.15 node lacks (gate G1).
+    stock binary, staged upgrades, mixed-version interop (v0.34.15 and v0.34.16 against the release
+    line), the operator safe profile in the guides, and which fixes a v0.34.15 node lacks (gate G1).
   es: >-
     Espejos de los archivos de versiones e instantáneas firmadas, la monitorización como señal de
     salud, IBD desde el génesis con un binario sin modificar, actualizaciones escalonadas,
-    interoperabilidad entre versiones (v0.34.15 frente a la rama de publicación), el perfil seguro
-    del operador en las guías y qué correcciones le faltan a un nodo v0.34.15 (control G1).
+    interoperabilidad entre versiones (v0.34.15 y v0.34.16 frente a la rama de publicación), el
+    perfil seguro del operador en las guías y qué correcciones le faltan a un nodo v0.34.15 (control
+    G1).
 - en: >-
-    CI-0 run once on 4c7840e9; known-failing written and only shrinking; every class PR links a run;
-    ratchet fails any area dropping more than 0.2 points
+    CI-0 run once on the release-line head; known-failing written and only shrinking; every class PR
+    links a run; ratchet fails any area dropping more than 0.2 points
   es: >-
-    CI-0 ejecutado una vez en 4c7840e9; lista de fallos conocidos escrita y solo a la baja; cada PR
-    de clase enlaza una ejecución; el trinquete falla si un área baja más de 0,2 puntos
-- en: CI-0 run once on 4c7840e9; shard counts set from it
-  es: CI-0 ejecutado una vez en 4c7840e9; número de fragmentos fijado a partir de él
+    CI-0 ejecutado una vez en el head de la rama de publicación; lista de fallos conocidos escrita y
+    solo a la baja; cada PR de clase enlaza una ejecución; el trinquete falla si un área baja más de
+    0,2 puntos
+- en: >-
+    CI-0 run once on the release-line head; shard counts set from it
+  es: >-
+    CI-0 ejecutado una vez en el head de la rama de publicación; número de fragmentos fijado a
+    partir de él
 - en: CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4
   es: CI-0, CI-4, CI-5, CI-6 en la fase 2a; CI-2, CI-9 en la fase 2b; el resto para la fase 4
 - en: CI-9 fails any area that drops more than 0.2 points against the 72.3/42.6 baseline
@@ -1284,13 +1303,16 @@ translations:
 - en: Claim a lane
   es: Asume una tarea
 - en: >-
-    Class K01 across the code: the 12 files of the worklist at 4c7840e9 in ModelNet, the wallet and
-    the node, two more sites the file-level filter cannot see, and the shared atomic-write helper
-    (#576), which does not fsync yet.
+    Class K01 across the code: 9 worklist files at 1e2f8b5f in ModelNet, the wallet and the node,
+    down from 12 at 4c7840e9. #606 (in v0.34.16) moved three files onto the shared atomic-write
+    helper (#576), removed the two sites the file-level filter missed, made the helper sync file and
+    directory, and added a lint that lists each raw write left as an exception.
   es: >-
-    La clase K01 en todo el código: los 12 archivos de la lista de trabajo en 4c7840e9, repartidos
-    entre ModelNet, el monedero y el nodo, dos sitios más que el filtro por archivo no ve, y la
-    función auxiliar compartida de escritura atómica (#576), que aún no hace fsync.
+    La clase K01 en todo el código: 9 archivos de la lista de trabajo en 1e2f8b5f (ModelNet,
+    monedero y nodo), frente a 12 en 4c7840e9. #606 (en v0.34.16) pasó tres archivos a la función
+    auxiliar compartida de escritura atómica (#576), quitó los dos sitios que el filtro por archivo
+    no veía, hizo que sincronice archivo y directorio y añadió un lint con cada escritura directa
+    restante como excepción.
 - en: Classes swept
   es: Clases barridas
 - en: Classes, not instances
@@ -1346,8 +1368,11 @@ translations:
   es: Evidencia
 - en: File a lesson
   es: Registra una lección
-- en: FileCommit of file and directory inside WriteBinaryFileAtomically
-  es: FileCommit del archivo y del directorio dentro de WriteBinaryFileAtomically
+- en: >-
+    FileCommit of file and directory inside WriteBinaryFileAtomically (done: #606, in v0.34.16)
+  es: >-
+    FileCommit del archivo y del directorio dentro de WriteBinaryFileAtomically (hecho: #606, en
+    v0.34.16)
 - en: >-
     Fill in what happened, what was done, the rule now, the source, how it was verified (command,
     commit, platform) and which hub pages change.
@@ -1513,14 +1538,15 @@ translations:
     Nunca guarda claves, archivos de monedero, cookies RPC ni tokens en una máquina de pruebas o de
     runner; nunca prueba en la máquina que tiene un monedero.
 - en: >-
-    Never open a PR into release-0.34.16 that touches validation.cpp, pow.cpp, src/consensus/,
-    script/interpreter.cpp, fork choice or download scheduling in net_processing.cpp,
-    node/matmul_trusted_attestations.* rules, or src/matmul/. Those go to E-CONSENSUS.
+    Never open a PR into the release branch (release-0.34.17 since 15 Nov) that touches
+    validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, fork choice or download
+    scheduling in net_processing.cpp, node/matmul_trusted_attestations.* rules, or src/matmul/.
+    Those go to E-CONSENSUS.
   es: >-
-    Nunca abre un PR a release-0.34.16 que toque validation.cpp, pow.cpp, src/consensus/,
-    script/interpreter.cpp, la elección de fork o la planificación de descargas en
-    net_processing.cpp, las reglas de node/matmul_trusted_attestations.* o src/matmul/. Eso va a
-    E-CONSENSUS.
+    Nunca abre un PR a la rama de publicación (release-0.34.17 desde el 15 nov.) que toque
+    validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, la elección de fork o la
+    planificación de descargas en net_processing.cpp, las reglas de
+    node/matmul_trusted_attestations.* o src/matmul/. Eso va a E-CONSENSUS.
 - en: >-
     Never post, comment, push or open a PR on its own. The owner reads the full text and the diff
     first.
@@ -1611,8 +1637,10 @@ translations:
   es: PR para límites y targets; planificación o elección de fork -> E-CONSENSUS
 - en: PR for tests; any accept/reject disagreement -> EVIDENCE immediately
   es: PR para pruebas; cualquier discrepancia de aceptación/rechazo -> EVIDENCIA de inmediato
-- en: PR to release-0.34.16 (Thursday batch)
-  es: PR a release-0.34.16 (lote del jueves)
+- en: >-
+    PR to release-0.34.17 (Thursday batch)
+  es: >-
+    PR a release-0.34.17 (lote del jueves)
 - en: >-
     PR with the fork CI link: fails before, passes after
   es: >-
@@ -2069,8 +2097,12 @@ translations:
   es: >-
     regla de lint contra ofstream directo a rutas del directorio de datos; pruebas de carga con
     archivos truncados
-- en: lint against raw ofstream/fopen("w") to datadir paths in CI-4
-  es: regla de lint contra ofstream/fopen("w") directos a rutas del directorio de datos en CI-4
+- en: >-
+    lint against raw ofstream/fopen("w") to datadir paths in CI-4 (#606 added
+    test/lint/lint-k01-state-writes.py for the audited files)
+  es: >-
+    regla de lint contra ofstream/fopen("w") directos a rutas del directorio de datos en CI-4 (#606
+    añadió test/lint/lint-k01-state-writes.py para los archivos auditados)
 - en: linux-asan-ubsan
   es: linux-asan-ubsan
 - en: linux-unit-functional (sharded)
@@ -2111,12 +2143,14 @@ translations:
 - en: >-
     net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63,
     matmul_trusted_attestations.h 50; 68 consensus functions never executed (measured 12 Nov at
-    c6f9678d); frozen for 0.34.16 by #464, so only evidence lands
+    c6f9678d); frozen for 0.34.16 by #464, so only evidence lands; on 15 Nov the maintainer answered
+    on #464 that its list is not replayed into the 0.34.17 work (#714)
   es: >-
     net/p2p, puesto 1 en el ranking de riesgo, y validación, puesto 2; net_processing.cpp 113
     commits de corrección, validation.cpp 63, matmul_trusted_attestations.h 50; 68 funciones de
-    consenso nunca ejecutadas (medido el 12 de noviembre en c6f9678d); congelado para 0.34.16 por
-    #464, así que solo se incorporan evidencias
+    consenso nunca ejecutadas (medido el 12 nov. en c6f9678d); congelado para 0.34.16 por #464, así
+    que solo entran evidencias; el 15 nov. el mantenedor respondió en #464 que su lista no pasa al
+    trabajo de 0.34.17 (#714)
 - en: net/p2p risk rank 1; gate G3 at 1 of about 13 parser targets; no container inventory exists
   es: >-
     net/p2p, puesto 1 en el ranking de riesgo; control G3 en 1 de unos 13 targets de parsers; no
@@ -2191,9 +2225,9 @@ translations:
 - en: open
   es: abierto
 - en: >-
-    open; #478 and #313 on the release line only
+    open; #478 and #313 are in v0.34.16 (on main since 15 Nov)
   es: >-
-    abierto; #478 y #313 solo en la rama de publicación
+    abierto; #478 y #313 están en v0.34.16 (en main desde el 15 de noviembre)
 - en: open; worklists ready
   es: abierto; listas de trabajo preparadas
 - en: otool -L on every packaged binary in CI-10
@@ -2383,11 +2417,13 @@ translations:
 - en: with the Thursday batch, only when a complete item exists; at most one short note
   es: con el lote del jueves, solo cuando exista un punto completo; como mucho una nota breve
 - en: >-
-    worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); shared helper exists
-    (#576)
+    worklist ready (9 files at 1e2f8b5f, down from 12 at 4c7840e9; #606's lint lists each raw write
+    left in them as an exception); shared helper exists (#576) and syncs file and directory since
+    #606
   es: >-
-    lista de trabajo preparada (12 archivos en 4c7840e9, más 1 candidato que el filtro omitió); la
-    función auxiliar compartida existe (#576)
+    lista de trabajo preparada (9 archivos en 1e2f8b5f, frente a 12 en 4c7840e9; la regla de lint de
+    #606 registra como excepción cada escritura directa que queda en ellos); la función auxiliar
+    compartida existe (#576) y sincroniza archivo y directorio desde #606
 - en: worklist ready (consensus and matmul sites excluded)
   es: lista de trabajo preparada (sin los sitios de consenso y matmul)
 # infra.yaml: the Run infra page and its network map

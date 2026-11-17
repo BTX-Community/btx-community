@@ -4,7 +4,7 @@
     "measured_at": "c6f9678d",
     "coverage_commit": "a5d1637f",
     "coverage_date": "2026-11-14",
-    "live_head": "4c7840e9",
+    "sites_head": "4c7840e9",
     "numbers_src": "plan-data.json and MASTER-PLAN.md; coverage = product-code lines on swapnet-v2 at a5d1637f (14 Nov), unit / unit+functional, floors (42 unit suites timed out; 14 of 220 functional scripts failed in the coverage run; shorter time budgets than on 12 Nov, so the comparison with that run is indicative); the other counts at c6f9678d",
     "companion": "../07-lanes.md",
     "public": true,
@@ -48,7 +48,7 @@
         "enumerate RPCs with a path/file/secret_ref/destination argument; write the K11 allowlist test",
         "K12 UnlockSelected RAII type with the two-sender test"
       ],
-      "route": "PR to release-0.34.16 (Thursday batch)"
+      "route": "PR to release-0.34.17 (Thursday batch)"
     },
     {
       "id": "A-STORES",
@@ -84,14 +84,14 @@
         "the BCP/1 lifecycle table test",
         "the first property-test generator on the bounty store"
       ],
-      "route": "PR to release-0.34.16 (Thursday batch)"
+      "route": "PR to release-0.34.17 (Thursday batch)"
     },
     {
       "id": "E-CONSENSUS",
       "name": "Consensus, fork choice, attestation, MatMul frontier (evidence only)",
       "kind": "area",
       "scope": "validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, fork choice and download scheduling in net_processing.cpp, node/matmul_trusted_attestations.*, src/matmul/; classes K13, K14; master plan 3.1, 3.6 rules, 3.2b, 3.5b; the #464 list",
-      "why": "net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63, matmul_trusted_attestations.h 50; 68 consensus functions never executed (measured 12 Nov at c6f9678d); frozen for 0.34.16 by #464, so only evidence lands",
+      "why": "net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63, matmul_trusted_attestations.h 50; 68 consensus functions never executed (measured 12 Nov at c6f9678d); frozen for 0.34.16 by #464, so only evidence lands; on 15 Nov the maintainer answered on #464 that its list is not replayed into the 0.34.17 work (#714)",
       "risk_rank": 1,
       "coverage_now": {
         "unit_lines": 59.8,
@@ -305,15 +305,15 @@
       "id": "C-K01",
       "name": "Non-atomic or short state-file writes",
       "kind": "class",
-      "scope": "12 files at 4c7840e9: modelnet package_channel, import_coordinator, workspace_git, swarm_evolution, obs01, acc04; wallet/wallet.cpp, wallet/dump.cpp, wallet/rpc/labels.cpp; node/blockstorage.cpp, node/attested_utxo_snapshot.cpp; init.cpp; plus one direct write in realm_channel.cpp, and one candidate the file-level filter skipped (capability_bytes.cpp, a raw .gen sidecar write; the pack counts 13); the shared WriteBinaryFileAtomically helper (#576), which has no fsync",
+      "scope": "9 files at 1e2f8b5f (release-0.34.17, 16 Nov): modelnet import_coordinator, obs01, acc04; wallet/wallet.cpp, wallet/dump.cpp, wallet/rpc/labels.cpp; node/blockstorage.cpp, node/attested_utxo_snapshot.cpp; init.cpp. At 4c7840e9: 12 files (also package_channel, workspace_git, swarm_evolution), plus one direct write in realm_channel.cpp and one candidate the file-level filter skipped (capability_bytes.cpp, a raw .gen sidecar write; the pack counted 13). #606 (in v0.34.16) moved those three files onto the shared WriteBinaryFileAtomically helper (#576), removed the two extra raw writes, made the helper sync file and directory, and added test/lint/lint-k01-state-writes.py, which lists each raw write left in the 9 files as an exception",
       "why": "22 PRs, the class turning up module after module; a loader that reads a damaged file as empty starts from zero",
       "risk_rank": null,
       "coverage_now": {
         "unit_lines": null,
         "unitfunc_lines": null,
-        "src": "class, not an area; sites_open 12 from plan-data.json classes.K01"
+        "src": "class, not an area; sites_open 9 from plan-data.json classes.K01"
       },
-      "target": "12 files to 0; fsync in the helper; lint in CI-4; truncated-file load test per store",
+      "target": "12 files to 0 (9 left at 1e2f8b5f); fsync in the helper (done: #606); lint in CI-4; truncated-file load test per store",
       "owner": {
         "role": "C-K01 owner",
         "handle": null
@@ -324,15 +324,15 @@
       },
       "cadence": "phase 2a-2b, one PR",
       "done_bar": [
-        "12 worklist files to 0",
-        "FileCommit of file and directory inside WriteBinaryFileAtomically",
-        "lint against raw ofstream/fopen(\"w\") to datadir paths in CI-4",
+        "12 worklist files to 0 (9 left at 1e2f8b5f; #606's lint lists each raw write left in them as an exception)",
+        "FileCommit of file and directory inside WriteBinaryFileAtomically (done: #606, in v0.34.16)",
+        "lint against raw ofstream/fopen(\"w\") to datadir paths in CI-4 (#606 added test/lint/lint-k01-state-writes.py for the audited files)",
         "a truncated-file load test per store",
         "0 new K01 PRs after the sweep"
       ],
       "first_tasks": [
         "re-grep the worklist on the live head",
-        "fsync in the helper with a test",
+        "fsync in the helper with a test (done: #606)",
         "the sweep PR with the lint"
       ],
       "route": "PR; node/blockstorage.cpp and attested_utxo_snapshot.cpp sites checked for consensus adjacency first (if adjacent -> EVIDENCE)"
@@ -462,7 +462,7 @@
         "unitfunc_lines": 72.3,
         "src": "plan-data.json coverage.overall; gates CI-0..CI-10 from plan-data.json gates"
       },
-      "target": "CI-0 run once on 4c7840e9; known-failing written and only shrinking; every class PR links a run; ratchet fails any area dropping more than 0.2 points",
+      "target": "CI-0 run once on the release-line head; known-failing written and only shrinking; every class PR links a run; ratchet fails any area dropping more than 0.2 points",
       "owner": {
         "role": "I-CI owner",
         "handle": null
@@ -473,7 +473,7 @@
       },
       "cadence": "CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4",
       "done_bar": [
-        "CI-0 run once on 4c7840e9; shard counts set from it",
+        "CI-0 run once on the release-line head; shard counts set from it",
         "ci/known-failing.txt written from that run (the unit failures; the functional failures, 14 in the coverage run [C3], none an ExactReplay stall; gcc-baseline failures after triage) and only shrinking",
         "every class PR links a run with fails-before and passes-after",
         "CI-9 fails any area that drops more than 0.2 points against the 72.3/42.6 baseline",
@@ -492,7 +492,7 @@
       "name": "Release-candidate qualification and basic verify",
       "kind": "infra",
       "scope": "one archive per OS with a fixed checklist (the four-check pass posted on #432, 11 Nov: compatibility, desktop first use, restart, model download and recovery); install_prebuilt_release_tree on the real archive; the per-PR 're-run the stated test on your own hardware' service",
-      "why": "7 fix PRs on one release script; the Linux candidate at c6f9678d had one independent four-check run (#432, 11 Nov); no macOS, Windows or CUDA candidate has had one yet",
+      "why": "7 fix PRs on one release script; the four-check pass ran once, on the Linux candidate at c6f9678d (#432, 11 Nov); v0.34.16 shipped on 15 Nov at 074dac16 with Linux and Linux CUDA archives only, and the hub has no four-check run of them; the first Windows build report on release-0.34.17 (1e2f8b5f, #714, 16 Nov) found the MSVC build failing",
       "risk_rank": null,
       "coverage_now": {
         "unit_lines": null,
@@ -544,7 +544,7 @@
       "id": "I-OPS",
       "name": "Operators and whole-system runs",
       "kind": "infra",
-      "scope": "archive mirrors and signed snapshots, monitoring as the health signal, IBD from genesis on a stock binary, staged upgrades, mixed-version interop (v0.34.15 vs the release line), the operator safe profile in the guides (-modelnet=0 and -natpmp=0 on any node holding a wallet or signer key; -autoupdate reviewed), which fixes a v0.34.15 node lacks (gate G1)",
+      "scope": "archive mirrors and signed snapshots, monitoring as the health signal, IBD from genesis on a stock binary, staged upgrades, mixed-version interop (v0.34.15 and v0.34.16 vs the release line), the operator safe profile in the guides (-modelnet=0 and -natpmp=0 on any node holding a wallet or signer key; -autoupdate reviewed), which fixes a v0.34.15 node lacks (gate G1)",
       "why": "gate G1 is 'partly'; most nodes run v0.34.15 and the release line is far ahead; operator data has found real bugs before",
       "risk_rank": null,
       "coverage_now": {
@@ -649,7 +649,7 @@
     "Hot files (net_processing.cpp, modelnet/helper.cpp, node/matmul_trusted_attestations.*): no per-event PR without a model-based test or a split proposal first",
     "Escalation: gate red -> the lane stops new work and fixes the gate; a PR closed without being taken -> never re-filed, becomes evidence or is dropped; owner/second-pass disagreement -> the batch coordinator decides what goes into the batch, question into the Thursday batch; security-relevant finding -> GitHub private vulnerability reporting upstream, never a public issue or chat post; runner cannot reproduce -> the PR waits and the owner investigates",
     "Maintainer interface: one Thursday message per batch; each PR states class, rule, sites, run link and the invariant it keeps; tested fixes only; no stubs, fail-closed workarounds or disabled tests; nothing into #464's frozen set; CI stays on the fork and is offered upstream only on request; 'would the maintainer reject this?' defaults to yes until the PR says why not",
-    "AI never: posts, comments, pushes or opens a PR on its own; opens a PR into release-0.34.16 touching the rule (c) set; files a single-site fix for a registered class; puts a fix in a commit linked from a comment; claims a test ran without run link, SHA and platform; adds a stub, fail-closed workaround, skipped test or widened timeout; touches out-of-scope code (sweep rule b); re-runs a baseline tool already run; holds keys, wallets, cookies or tokens on a test box; quotes private chats, names people other than by handle, or states a figure without its source",
+    "AI never: posts, comments, pushes or opens a PR on its own; opens a PR into the release branch (release-0.34.17 since 15 Nov) touching the rule (c) set; files a single-site fix for a registered class; puts a fix in a commit linked from a comment; claims a test ran without run link, SHA and platform; adds a stub, fail-closed workaround, skipped test or widened timeout; touches out-of-scope code (sweep rule b); re-runs a baseline tool already run; holds keys, wallets, cookies or tokens on a test box; quotes private chats, names people other than by handle, or states a figure without its source",
     "Programme done when gates G2 (machines on), G3 (about 13 parser targets; 1 exists) and G4 (K10, K04, K15, K01, K05, K08/K16/K17, K06, K19 each with its rule) are true; then the batch shrinks to the weekly ratchet"
   ],
   "no_work_until_claimed": [

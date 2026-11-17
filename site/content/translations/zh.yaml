@@ -748,11 +748,12 @@ translations:
     not tested.
   zh: 只提交经过测试的修复：修复前失败，修复后通过，并注明提交、平台和命令。说明哪些没有测试。
 - en: >-
-    Validation, fork choice, attestation and the MatMul frontier stay out of release-0.34.16
-    (btxchain/btx #464 and the pull requests closed on the same day, 11 November 2026). Findings
-    there go to the E-CONSENSUS lane as evidence, not as pull requests.
+    Validation, fork choice, attestation and the MatMul frontier stay out of the release branch
+    (release-0.34.17 since 15 November 2026): the maintainer kept them out of release-0.34.16
+    (btxchain/btx #464) and took onto release-0.34.17 the open pull requests that do not change
+    consensus or a spend (#714). Findings there go to E-CONSENSUS as evidence, not as pull requests.
   zh: >-
-    验证、分叉选择、证明和 MatMul 前沿不进入 release-0.34.16（btxchain/btx #464 以及同一天关闭的拉取请求，2026 年 11 月 11 日）。这些方面的发现作为证据交给 E-CONSENSUS 任务，而不是作为拉取请求。
+    验证、分叉选择、证明和 MatMul 前沿不进入发布分支（自 2026 年 11 月 15 日起为 release-0.34.17）：维护者把它们挡在 release-0.34.16 之外（btxchain/btx #464），并把既不改变共识、也不改变花费的未合并拉取请求纳入 release-0.34.17（#714）。这些方面的发现作为证据交给 E-CONSENSUS，而不是作为拉取请求。
 - en: >-
     A second person who is not the author reviews before anything goes upstream. Lanes send their
     pull requests together once a week, so the maintainer gets one batch, not a stream.
@@ -788,12 +789,13 @@ translations:
     pull requests into one batch. A fork with GitHub Actions and time every week.
   zh: 运行其他人所依赖的检查：fork 上的 CI、版本发布资格验证，以及把一周的拉取请求汇总成一批。需要一个启用 GitHub Actions 的 fork，以及每周的时间。
 - en: >-
-    Product code of swapnet-v2 at commit a5d1637f; the coverage build needs btxchain/btx #578, which
-    v0.34.15 lacks. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts
-    failed; a killed test writes no counts. The time budgets were shorter than on 12 November, so
-    the figures are floors and the comparison is indicative.
+    Product code of swapnet-v2 at commit a5d1637f, now part of v0.34.16; the coverage build needs
+    btxchain/btx #578, which is in v0.34.16 but not in v0.34.15. In the coverage run 42 unit suites
+    timed out and 14 of 220 functional scripts failed; a killed test writes no counts. The time
+    budgets were shorter than on 12 November, so the figures are floors and the comparison is
+    indicative.
   zh: >-
-    swapnet-v2 的生产代码，在提交 a5d1637f 上测得；覆盖率构建需要 btxchain/btx #578，而 v0.34.15 中没有。覆盖率运行中有 42 个单元测试套件超时，220 个功能测试脚本中有 14 个失败；被终止的测试不会写入计数。时间预算比 11 月 12 日那次更短，因此这些数值都是下限，比较仅供参考。
+    swapnet-v2 的生产代码，在提交 a5d1637f 上测得，该提交现已包含在 v0.34.16 中；覆盖率构建需要 btxchain/btx #578，它在 v0.34.16 中，但不在 v0.34.15 中。覆盖率运行中有 42 个单元测试套件超时，220 个功能测试脚本中有 14 个失败；被终止的测试不会写入计数。时间预算比 11 月 12 日那次更短，因此这些数值都是下限，比较仅供参考。
 - en: Lines
   zh: 代码行
 - en: unit tests
@@ -874,10 +876,16 @@ translations:
   zh: 未被采纳后又重新提交的 PR 为 0
 - en: 1 of about 13 targets exists
   zh: 约 13 个目标中已有 1 个
-- en: 12 files to 0; fsync in the helper; lint in CI-4; truncated-file load test per store
-  zh: 12 个文件降到 0；辅助函数中加入 fsync；lint 规则纳入 CI-4；每个存储都有截断文件加载测试
-- en: 12 worklist files to 0
-  zh: 工作清单中的 12 个文件降到 0
+- en: >-
+    12 files to 0 (9 left at 1e2f8b5f); fsync in the helper (done: #606); lint in CI-4;
+    truncated-file load test per store
+  zh: >-
+    12 个文件降到 0（1e2f8b5f 上还剩 9 个）；辅助函数中加入 fsync（已完成：#606）；lint 规则纳入 CI-4；每个存储都有截断文件加载测试
+- en: >-
+    12 worklist files to 0 (9 left at 1e2f8b5f; #606's lint lists each raw write left in them as an
+    exception)
+  zh: >-
+    工作清单中的 12 个文件降到 0（1e2f8b5f 上还剩 9 个；#606 的 lint 规则把其中剩下的每处直接写入列为例外）
 - en: 12-14 Nov
   zh: 11 月 12-14 日
 - en: 120 lifetime results initialised or documented
@@ -912,17 +920,19 @@ translations:
 - en: 68 unexecuted consensus functions (measured 12 Nov at c6f9678d) listed as tested or dead
   zh: 68 个从未执行的共识函数（11 月 12 日在 c6f9678d 上测得）逐一标为已测试或死代码
 - en: >-
-    7 fix PRs on one release script; the Linux candidate at c6f9678d had one independent four-check
-    run (#432, 11 Nov); no macOS, Windows or CUDA candidate has had one yet
+    7 fix PRs on one release script; the four-check pass ran once, on the Linux candidate at
+    c6f9678d (#432, 11 Nov); v0.34.16 shipped on 15 Nov at 074dac16 with Linux and Linux CUDA
+    archives only, and the hub has no four-check run of them; the first Windows build report on
+    release-0.34.17 (1e2f8b5f, #714, 16 Nov) found the MSVC build failing
   zh: >-
-    同一个发布脚本上有 7 个修复 PR；c6f9678d 上的 Linux 候选版做过一次独立的四项检查运行（#432，11 月 11 日）；macOS、Windows 和 CUDA
-    候选版都还没有做过
+    同一个发布脚本上有 7 个修复 PR；四项检查只运行过一次，是在 c6f9678d 上的 Linux 候选版（#432，11 月 11 日）；v0.34.16 于 11 月 15 日在 074dac16 发布，只有 Linux 和 Linux CUDA 压缩包，开发者中心没有对它们做过四项检查；release-0.34.17 上的第一份 Windows 构建报告（1e2f8b5f，#714，11 月 16 日）发现 MSVC 构建失败
 - en: A done bar for every lane
   zh: 每项任务都有完成标准
 - en: >-
-    A normal pull request to release-0.34.16, sent in the Thursday batch with its fork CI run: fails
+    A normal pull request to release-0.34.17, sent in the Thursday batch with its fork CI run: fails
     before, passes after.
-  zh: 向 release-0.34.16 提交的普通拉取请求，随周四批次发出，并附上它在 fork 上的 CI 运行：修复前失败，修复后通过。
+  zh: >-
+    向 release-0.34.17 提交的普通拉取请求，随周四批次发出，并附上它在 fork 上的 CI 运行：修复前失败，修复后通过。
 - en: >-
     A pull request the maintainer closed without taking it is never re-filed; it becomes an evidence
     item or is dropped.
@@ -945,11 +955,11 @@ translations:
     或聊天中；登记表只记录其类别，不含细节。
 - en: >-
     A taxonomy of every fix pull request to btxchain/btx since 1 August: 317 fix PRs in 26 named
-    classes, plus "other". Class assignments are 10-15% noisy. Site counts are on the live head;
-    static and dynamic counts were measured at c6f9678d and are untriaged.
+    classes, plus "other". Class assignments are 10-15% noisy. Site counts were taken at 4c7840e9,
+    the release-0.34.16 head of 12 November, unless a count names another commit; static and dynamic
+    counts were measured at c6f9678d and are untriaged.
   zh: >-
-    自 8 月 1 日以来向 btxchain/btx 提交的全部修复拉取请求的分类：317 个修复 PR，分为 26 个有名称的类别，另加“其他”。类别归属有 10-15%
-    的误差。位置数在当前最新提交上统计；静态和动态计数在 c6f9678d 上测得，尚未排查。
+    自 8 月 1 日以来向 btxchain/btx 提交的全部修复拉取请求的分类：317 个修复 PR，分为 26 个有名称的类别，另加“其他”。类别归属有 10-15% 的误差。位置数在 4c7840e9（11 月 12 日 release-0.34.16 的最新提交）上统计，除非某项计数注明了其他提交；静态和动态计数在 c6f9678d 上测得，尚未排查。
 - en: ACVP and Wycheproof vectors in ctest
   zh: ACVP 和 Wycheproof 测试向量纳入 ctest
 - en: An owner and a second pass
@@ -959,17 +969,19 @@ translations:
   zh: 每道题都按固定格式回答：结论、理由、来源。
 - en: >-
     Archive mirrors and signed snapshots, monitoring as the health signal, IBD from genesis on a
-    stock binary, staged upgrades, mixed-version interop (v0.34.15 against the release line), the
-    operator safe profile in the guides, and which fixes a v0.34.15 node lacks (gate G1).
+    stock binary, staged upgrades, mixed-version interop (v0.34.15 and v0.34.16 against the release
+    line), the operator safe profile in the guides, and which fixes a v0.34.15 node lacks (gate G1).
   zh: >-
-    压缩包镜像和签名快照、以监控作为健康信号、用未经修改的二进制文件从创世区块开始 IBD、分阶段升级、混合版本互操作（v0.34.15 对发布分支）、指南中的运营者安全配置，以及
-    v0.34.15 节点缺少哪些修复（关卡 G1）。
+    压缩包镜像和签名快照、以监控作为健康信号、用未经修改的二进制文件从创世区块开始 IBD、分阶段升级、混合版本互操作（v0.34.15 和 v0.34.16 对发布分支）、指南中的运营者安全配置，以及 v0.34.15 节点缺少哪些修复（关卡 G1）。
 - en: >-
-    CI-0 run once on 4c7840e9; known-failing written and only shrinking; every class PR links a run;
-    ratchet fails any area dropping more than 0.2 points
-  zh: CI-0 在 4c7840e9 上运行过一次；已知失败列表已写好且只减不增；每个类别 PR 都链接一次运行；任何领域下降超过 0.2 个百分点时棘轮检查即失败
-- en: CI-0 run once on 4c7840e9; shard counts set from it
-  zh: CI-0 在 4c7840e9 上运行过一次；据此确定分片数量
+    CI-0 run once on the release-line head; known-failing written and only shrinking; every class PR
+    links a run; ratchet fails any area dropping more than 0.2 points
+  zh: >-
+    CI-0 在发布分支的最新提交上运行过一次；已知失败列表已写好且只减不增；每个类别 PR 都链接一次运行；任何领域下降超过 0.2 个百分点时棘轮检查即失败
+- en: >-
+    CI-0 run once on the release-line head; shard counts set from it
+  zh: >-
+    CI-0 在发布分支的最新提交上运行过一次；据此确定分片数量
 - en: CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4
   zh: 阶段 2a：CI-0、CI-4、CI-5、CI-6；阶段 2b：CI-2、CI-9；其余最迟在阶段 4 完成
 - en: CI-9 fails any area that drops more than 0.2 points against the 72.3/42.6 baseline
@@ -981,12 +993,12 @@ translations:
 - en: Claim a lane
   zh: 认领一项任务
 - en: >-
-    Class K01 across the code: the 12 files of the worklist at 4c7840e9 in ModelNet, the wallet and
-    the node, two more sites the file-level filter cannot see, and the shared atomic-write helper
-    (#576), which does not fsync yet.
+    Class K01 across the code: 9 worklist files at 1e2f8b5f in ModelNet, the wallet and the node,
+    down from 12 at 4c7840e9. #606 (in v0.34.16) moved three files onto the shared atomic-write
+    helper (#576), removed the two sites the file-level filter missed, made the helper sync file and
+    directory, and added a lint that lists each raw write left as an exception.
   zh: >-
-    整个代码库中的 K01 类缺陷：4c7840e9 上工作清单所列 ModelNet、钱包和节点中的 12
-    个文件，文件级过滤器看不到的另外两处，以及共享的原子写入辅助函数（#576），它目前还不执行 fsync。
+    整个代码库中的 K01 类缺陷：1e2f8b5f 上工作清单所列 ModelNet、钱包和节点中的 9 个文件，4c7840e9 上为 12 个。#606（已在 v0.34.16 中）把三个文件改用共享的原子写入辅助函数（#576），去掉了文件级过滤器看不到的两处，让该辅助函数同步文件和目录，并加入一条 lint 规则，把剩下的每处直接写入列为例外。
 - en: Classes swept
   zh: 缺陷类别已清理
 - en: Classes, not instances
@@ -1030,8 +1042,10 @@ translations:
   zh: 证据
 - en: File a lesson
   zh: 记录一条经验教训
-- en: FileCommit of file and directory inside WriteBinaryFileAtomically
-  zh: 在 WriteBinaryFileAtomically 内部对文件和目录执行 FileCommit
+- en: >-
+    FileCommit of file and directory inside WriteBinaryFileAtomically (done: #606, in v0.34.16)
+  zh: >-
+    在 WriteBinaryFileAtomically 内部对文件和目录执行 FileCommit（已完成：#606，已在 v0.34.16 中）
 - en: >-
     Fill in what happened, what was done, the rule now, the source, how it was verified (command,
     commit, platform) and which hub pages change.
@@ -1162,13 +1176,12 @@ translations:
     machine that holds a wallet.
   zh: 绝不在测试机或运行者机器上存放密钥、钱包文件、RPC cookie 或令牌；绝不在存有钱包的机器上测试。
 - en: >-
-    Never open a PR into release-0.34.16 that touches validation.cpp, pow.cpp, src/consensus/,
-    script/interpreter.cpp, fork choice or download scheduling in net_processing.cpp,
-    node/matmul_trusted_attestations.* rules, or src/matmul/. Those go to E-CONSENSUS.
+    Never open a PR into the release branch (release-0.34.17 since 15 Nov) that touches
+    validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, fork choice or download
+    scheduling in net_processing.cpp, node/matmul_trusted_attestations.* rules, or src/matmul/.
+    Those go to E-CONSENSUS.
   zh: >-
-    绝不向 release-0.34.16 提交涉及以下内容的
-    PR：validation.cpp、pow.cpp、src/consensus/、script/interpreter.cpp、net_processing.cpp
-    中的分叉选择或下载调度、node/matmul_trusted_attestations.* 中的规则，或 src/matmul/。这些交给 E-CONSENSUS。
+    绝不向发布分支（自 11 月 15 日起为 release-0.34.17）提交涉及以下内容的 PR：validation.cpp、pow.cpp、src/consensus/、script/interpreter.cpp、net_processing.cpp 中的分叉选择或下载调度、node/matmul_trusted_attestations.* 中的规则，或 src/matmul/。这些交给 E-CONSENSUS。
 - en: >-
     Never post, comment, push or open a PR on its own. The owner reads the full text and the diff
     first.
@@ -1232,8 +1245,10 @@ translations:
   zh: 上限和目标走 PR；调度或分叉选择 -> E-CONSENSUS
 - en: PR for tests; any accept/reject disagreement -> EVIDENCE immediately
   zh: 测试走 PR；任何接受/拒绝上的分歧 -> 立即作为证据
-- en: PR to release-0.34.16 (Thursday batch)
-  zh: 向 release-0.34.16 提交 PR（周四批次）
+- en: >-
+    PR to release-0.34.17 (Thursday batch)
+  zh: >-
+    向 release-0.34.17 提交 PR（周四批次）
 - en: >-
     PR with the fork CI link: fails before, passes after
   zh: 附 fork CI 运行链接的 PR：修复前失败，修复后通过
@@ -1601,8 +1616,11 @@ translations:
   zh: lint（注册差异、UniValue、K01/K08/K17 的 grep 检查、K10 测试、可执行权限位）
 - en: lint against raw ofstream to datadir paths; truncated-file load tests
   zh: 禁止直接用 ofstream 写数据目录路径的 lint 规则；截断文件加载测试
-- en: lint against raw ofstream/fopen("w") to datadir paths in CI-4
-  zh: CI-4 中禁止直接用 ofstream/fopen("w") 写数据目录路径的 lint 规则
+- en: >-
+    lint against raw ofstream/fopen("w") to datadir paths in CI-4 (#606 added
+    test/lint/lint-k01-state-writes.py for the audited files)
+  zh: >-
+    CI-4 中禁止直接用 ofstream/fopen("w") 写数据目录路径的 lint 规则（#606 已为审计过的文件加入 test/lint/lint-k01-state-writes.py）
 - en: linux-asan-ubsan
   zh: linux-asan-ubsan
 - en: linux-unit-functional (sharded)
@@ -1636,9 +1654,10 @@ translations:
 - en: >-
     net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63,
     matmul_trusted_attestations.h 50; 68 consensus functions never executed (measured 12 Nov at
-    c6f9678d); frozen for 0.34.16 by #464, so only evidence lands
+    c6f9678d); frozen for 0.34.16 by #464, so only evidence lands; on 15 Nov the maintainer answered
+    on #464 that its list is not replayed into the 0.34.17 work (#714)
   zh: >-
-    net/p2p 风险排名第 1，validation 第 2；net_processing.cpp 有 113 个修复提交，validation.cpp 63 个，matmul_trusted_attestations.h 50 个；68 个共识函数从未执行（11 月 12 日在 c6f9678d 上测得）；#464 已为 0.34.16 冻结这部分，因此只提交证据
+    net/p2p 风险排名第 1，validation 第 2；net_processing.cpp 有 113 个修复提交，validation.cpp 63 个，matmul_trusted_attestations.h 50 个；68 个共识函数从未执行（11 月 12 日在 c6f9678d 上测得）；#464 已为 0.34.16 冻结这部分，因此只提交证据；11 月 15 日维护者在 #464 中答复，该清单不会重新纳入 0.34.17 的工作（#714）
 - en: net/p2p risk rank 1; gate G3 at 1 of about 13 parser targets; no container inventory exists
   zh: net/p2p 风险排名第 1；关卡 G3 的进度为约 13 个解析器目标中的 1 个；还没有容器清单
 - en: net_processing and validation thread-safety warnings delivered as a measured result
@@ -1699,9 +1718,9 @@ translations:
 - en: open
   zh: 未完成
 - en: >-
-    open; #478 and #313 on the release line only
+    open; #478 and #313 are in v0.34.16 (on main since 15 Nov)
   zh: >-
-    未完成；#478 和 #313 只在发布分支上
+    未完成；#478 和 #313 已在 v0.34.16 中（自 11 月 15 日起在 main 上）
 - en: open; worklists ready
   zh: 未完成；工作清单已就绪
 - en: otool -L on every packaged binary in CI-10
@@ -1853,9 +1872,11 @@ translations:
 - en: with the Thursday batch, only when a complete item exists; at most one short note
   zh: 随周四批次，只在有完整条目时；最多一条简短说明
 - en: >-
-    worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); shared helper exists
-    (#576)
-  zh: 工作清单已就绪（4c7840e9 上的 12 个文件，另有 1 个被过滤器漏掉的候选）；共享辅助函数已存在（#576）
+    worklist ready (9 files at 1e2f8b5f, down from 12 at 4c7840e9; #606's lint lists each raw write
+    left in them as an exception); shared helper exists (#576) and syncs file and directory since
+    #606
+  zh: >-
+    工作清单已就绪（1e2f8b5f 上 9 个文件，4c7840e9 上为 12 个；#606 的 lint 规则把其中剩下的每处直接写入列为例外）；共享辅助函数已存在（#576），自 #606 起会同步文件和目录
 - en: worklist ready (consensus and matmul sites excluded)
   zh: 工作清单已就绪（不含共识和 matmul 中的位置）
 # infra.yaml: the Run infra page and its network map

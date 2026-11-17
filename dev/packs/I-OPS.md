@@ -23,7 +23,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 | Item | Value | Source |
 |---|---|---|
 | Gate G1 "operators safe now" | partly | [data; PLAN §4.4] |
-| Release line ahead of `main` (v0.34.15, what most nodes run) | 1,194 commits | [git: `git rev-list --count 476f3f23..4c7840e9`] |
+| Release line ahead of v0.34.15 (what most nodes run) on 12 Nov | 1,194 commits | [git: `git rev-list --count 476f3f23..4c7840e9`] |
 | Genesis-sync evidence wanted | `assumevalid=0` past height 126,979, checked against the compiled pins | [PLAN §3.1; #272] |
 | The candidate archive | `btx-0.34.16-x86_64-linux-gnu.tar.gz`, SHA-256 `0552bcbceef9fab5a6b9e24f26f4ccf7e615437e5d4c4af608a6247d5c21e6dc` | [read: v0.34.16 release notes; #432, 11 Nov] |
 

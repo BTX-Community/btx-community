@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Print fresh rows for the branch and release table in dev/01-state.md (section 1).
 #
-# Usage:   bash dev/tools/refresh-state.sh [release-branch]     (default: release-0.34.16)
+# Usage:   bash dev/tools/refresh-state.sh [release-branch]     (default: release-0.34.17)
 #
 # Three anonymous GitHub API calls, no token; no file in the repository is changed:
 #   1. compare main...<release-branch>  -> main head, commits ahead and behind
@@ -19,7 +19,7 @@
 set -euo pipefail
 
 repo=btxchain/btx
-rel_branch=${1:-release-0.34.16}
+rel_branch=${1:-release-0.34.17}
 api=https://api.github.com/repos/${repo}
 
 for tool in curl python3; do

@@ -6,7 +6,8 @@
 Requests für die BTX-Node-Software so vorbereitet, dass der Maintainer sie übernehmen kann. Drei
 Stufen: nachprüfen (Basic), einen Bereich mit Zweitprüfung übernehmen (Advanced), Prüfläufe
 betreiben (Core). Menschen lesen zuerst `01`, `02`, `03`, `06` und `07`; eine KI bekommt `AGENTS.md`.
-Der Coverage-Build lässt sich auf `release-0.34.16` seit #578 (12. Nov.) wieder konfigurieren, in v0.34.15 nicht.
+Der Coverage-Build lässt sich seit #578 (12. Nov.) wieder konfigurieren; der Fix ist in v0.34.16, in v0.34.15 nicht.
+Neue PRs gehen seit 15. Nov. an `release-0.34.17`; `release-0.34.16` entspricht dem Tag v0.34.16.
 
 This folder is about one thing: how to send pull requests to the BTX node software,
 [`btxchain/btx`](https://github.com/btxchain/btx), that the maintainer can merge. It is for
@@ -16,11 +17,11 @@ answers, and a lessons loop.
 
 It is not a fork, not a second project and not a place to argue. The maintainer decides what
 lands. The code's own rules are in the upstream
-[`AGENTS.md`](https://github.com/btxchain/btx/blob/release-0.34.16/AGENTS.md), and they win
+[`AGENTS.md`](https://github.com/btxchain/btx/blob/release-0.34.17/AGENTS.md), and they win
 wherever this folder disagrees with them.
 
-> **Coverage is measured again.** The coverage build configures again on `release-0.34.16` since
-> [#578](https://github.com/btxchain/btx/pull/578) landed on 12 Nov (commit `7051507b`); v0.34.15 (`main`, `476f3f23`) does not have that fix.
+> **Coverage is measured again.** The coverage build configures again since
+> [#578](https://github.com/btxchain/btx/pull/578) landed on 12 Nov (commit `7051507b`); the fix shipped in v0.34.16, and v0.34.15 (`476f3f23`) does not have it.
 > Measured on `swapnet-v2` at `a5d1637f` (14 Nov), which contains the fix: 67.4% of product lines
 > unit-only, 72.3% unit + functional; branches 38.9% / 42.6%. In the coverage run 42 unit suites
 > timed out and 14 of 220 functional scripts failed, and a killed test writes no counts. The time
@@ -113,7 +114,7 @@ becomes a question.
 | Network status, and its API | [network.btx-monitoring.com](https://network.btx-monitoring.com/), `https://network.btx-monitoring.com/api/v1/status.json` |
 | Daily signed datadir snapshots | [github.com/dr-chambre/btx-snapshots](https://github.com/dr-chambre/btx-snapshots) |
 | Releases and release notes | [github.com/btxchain/btx/releases](https://github.com/btxchain/btx/releases) |
-| Upstream rules for agents and for people | [`AGENTS.md`](https://github.com/btxchain/btx/blob/release-0.34.16/AGENTS.md), [`HUMANS.md`](https://github.com/btxchain/btx/blob/release-0.34.16/HUMANS.md) on `release-0.34.16` |
+| Upstream rules for agents and for people | [`AGENTS.md`](https://github.com/btxchain/btx/blob/release-0.34.17/AGENTS.md), [`HUMANS.md`](https://github.com/btxchain/btx/blob/release-0.34.17/HUMANS.md) on `release-0.34.17` |
 | The board (live state of the lanes) | *link added by pull request once it is public* |
 
 ## Rules of the house
@@ -125,11 +126,13 @@ becomes a question.
 2. Work in classes. Name the class, count every site on the live head, fix every site and add the
    rule (test, lint or CI job) that keeps the class at zero. No single-site PR for a registered
    class.
-3. Validation, fork choice, attestation and the MatMul frontier are out of scope for
-   `release-0.34.16`. The maintainer (numair) said so on
+3. Validation, fork choice, attestation and the MatMul frontier are out of scope for the
+   release branch. For `release-0.34.16` the maintainer (numair) said so on
    [#464](https://github.com/btxchain/btx/issues/464), 11 Nov, for validation, fork choice and the
    MatMul frontier; the same day #461, #462, #463, #479, #484 and #515 were closed because each
-   "changes validation, what a signer is told to attest, or MatMul frontier state". Findings there
+   "changes validation, what a signer is told to attest, or MatMul frontier state". On
+   `release-0.34.17`, the release branch since 15 Nov, he took the open PRs "that do not change
+   consensus or a spend" ([#714](https://github.com/btxchain/btx/pull/714), 16 Nov). Findings there
    become evidence for the E-CONSENSUS lane, never PRs.
 4. Tested fixes only: "fails before, passes after", with commit, platform and exact command. No
    stubs, no fail-closed workarounds, no skipped tests, no widened timeouts.

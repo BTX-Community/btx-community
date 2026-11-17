@@ -15,7 +15,8 @@ it; on any difference, upstream wins. Until then, this file is the registry.
 - PR counts: a taxonomy of every fix PR to `btxchain/btx` since 1 Aug: 317 fix PRs in 26 named
   classes plus "other". Class assignments are 10-15% noisy [read:
   [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md) §1.4, §8].
-- Site counts: on the live head `4c7840e9` unless marked. Static and dynamic counts: measured at
+- Site counts: at `4c7840e9`, the `release-0.34.16` head of 12 Nov, unless marked; not recounted
+  since, except K01 (at `1e2f8b5f`, §2.2). Static and dynamic counts: measured at
   `c6f9678d`, untriaged [read: plan §1.2, §1.3].
 - Example PRs: public PRs on `btxchain/btx`. "Landed 12 Nov" means the change is on
   `release-0.34.16` (cherry-picked by the maintainer) [tested 12 Nov: each PR title matched to a
@@ -35,7 +36,7 @@ line's frozen set and goes to #464 as evidence, never as a PR ([`06-pr-gate.md`]
 
 | Class | Name | S | Rule that keeps it at zero | Status 12 Nov | Lane | Example PRs |
 |---|---|---|---|---|---|---|
-| K01 | non-atomic or short state-file write | | every write through the shared atomic helper (with file and directory fsync); a lint against raw `ofstream` / `fopen("w")` to datadir paths; truncated-file load tests | counted: 12 files at `4c7840e9`, plus 2 candidates (§2.2); helper `WriteBinaryFileAtomically` exists (#576), without fsync | C-K01 | #565 #570 #572 #576 #577 (landed 12 Nov) |
+| K01 | non-atomic or short state-file write | | every write through the shared atomic helper (with file and directory fsync); a lint against raw `ofstream` / `fopen("w")` to datadir paths; truncated-file load tests | counted: 9 files at `1e2f8b5f` (`release-0.34.17`, 16 Nov), down from 12 plus 2 candidates at `4c7840e9` (§2.2); helper `WriteBinaryFileAtomically` (#576) syncs file and directory since #606, whose lint lists each raw write left in the 9 files as an exception | C-K01 | #565 #570 #572 #576 #577 (landed 12 Nov); #606 (landed 13 Nov) |
 | K02, K20, K21 | state lost across restart; ModelNet store logic slip; BCP/1 deposit-pool logic | | property tests per store (idempotency keys, pagination completeness, monotonic counters, restart = no restart); a table-driven BCP/1 lifecycle test; mutate → reopen → compare per store | not greppable: test generators, not instance fixes | A-STORES | K20: #550 #554 #556 #557 #558 #566 #568; K02: #553 (landed 12 Nov) |
 | K03 | lock order, self-deadlock, race | S | `-Wthread-safety` with `EXCLUSIVE_LOCKS_REQUIRED` annotations; a TSan + DEBUG_LOCKORDER nightly; baselines only shrink | baseline at `c6f9678d`: 41 TSan site pairs, 266 thread-safety warnings, 1 lock-order inversion (§2.3) | C-STATIC; `net_processing` / `validation` warnings: E-CONSENSUS | #478; #579 (landed 12 Nov) |
 | K04 | dangling reference, UniValue self-assignment | S | a UniValue self-member-assignment lint | 0 real sites at `4c7840e9`; rule only | C-STATIC | |
@@ -89,24 +90,34 @@ registration 26, packaging 14, RPC conversion 14, macOS 6) [read: plan §0 item 
 
 ### 2.2 K01 worklist (durability; sites listed)
 
-At `4c7840e9` the file-level rule (a raw write, and no atomic primitive anywhere in the file)
-finds 12 files [tested, 12 Nov]:
+At `1e2f8b5f` (`release-0.34.17`, 16 Nov) the file-level rule (a raw write, and no atomic
+primitive anywhere in the file) finds 9 files [tested, 17 Nov]:
 
-- ModelNet: `src/modelnet/package_channel.cpp`, `src/modelnet/import_coordinator.cpp`,
-  `src/modelnet/workspace_git.cpp`, `src/modelnet/swarm_evolution.cpp`,
-  `src/modelnet/obs01/obs01.cpp`, `src/modelnet/acc04/acc04.cpp`
+- ModelNet: `src/modelnet/import_coordinator.cpp`, `src/modelnet/obs01/obs01.cpp`,
+  `src/modelnet/acc04/acc04.cpp`
 - Wallet: `src/wallet/wallet.cpp`, `src/wallet/dump.cpp`, `src/wallet/rpc/labels.cpp`
 - Node: `src/node/blockstorage.cpp`, `src/node/attested_utxo_snapshot.cpp`, `src/init.cpp`
 
-Two more the file-level rule cannot see, because their files also contain an atomic primitive
-[read]:
-- `src/modelnet/realm_channel.cpp:1280`: one direct `std::ofstream` write left.
-- `src/modelnet/capability_bytes.cpp:515-516`: a raw `.gen` sidecar write (`std::ofstream`) after
-  an fsynced main file.
+At `4c7840e9` it found 12 [tested, 12 Nov]: these 9 plus `src/modelnet/package_channel.cpp`,
+`src/modelnet/workspace_git.cpp` and `src/modelnet/swarm_evolution.cpp`. #606 (on the release line
+at `88c9b49c` on 13 Nov, in v0.34.16) moved those three onto the shared helper. At `074dac16`
+(v0.34.16) the rule finds the same 9 as at `1e2f8b5f` [tested, 17 Nov].
 
-The shared helper is `WriteBinaryFileAtomically` (`src/util/readwritefile.h:30`, added by #576):
-temporary file, checked write and close, `RenameOver`. It has no fsync of the file or the
-directory yet; the sweep adds both [read: `src/util/readwritefile.cpp` at `4c7840e9`].
+At `4c7840e9` two more sites were invisible to the file-level rule, because their files also
+contain an atomic primitive [read]: one direct `std::ofstream` write in
+`src/modelnet/realm_channel.cpp:1280`, and a raw `.gen` sidecar write (`std::ofstream`) after an
+fsynced main file in `src/modelnet/capability_bytes.cpp:515-516`. #606 removed both: neither file
+holds a `std::ofstream` at `1e2f8b5f` [tested: `git grep -n ofstream 1e2f8b5f --
+src/modelnet/realm_channel.cpp src/modelnet/capability_bytes.cpp` prints nothing].
+
+The shared helper is `WriteBinaryFileAtomically` (`src/util/readwritefile.h`, added by #576):
+temporary file, checked write and close, `RenameOver`. Since #606 (`ba4711d9`, "util: sync atomic
+file replacements") it also calls `FileCommit` on the file and `DirectoryCommit` on its directory
+[read: `src/util/readwritefile.cpp` lines 81 and 97 at `1e2f8b5f`]. #606 also added
+`test/lint/lint-k01-state-writes.py` (`7b57c5a0`): it fails on a new raw writer in the audited files
+and lists each raw write left in the 9 files as an exact exception with its reason (a PID file, test
+fixtures, job-local markers, a streamed import, a scratch serialization, exclusive `wbx` creation)
+[read: the file at `1e2f8b5f`].
 `node/blockstorage.cpp` and `node/attested_utxo_snapshot.cpp` are checked for consensus adjacency
 before they go into a sweep; if adjacent, they are evidence ([`07-lanes.md`](07-lanes.md), C-K01).
 
@@ -114,8 +125,8 @@ The count command; paste it and its output into the sweep PR:
 
 ```bash
 # in a btxchain/btx clone: the K01 worklist at the live head
-git fetch origin release-0.34.16
-H=$(git rev-parse --short=8 origin/release-0.34.16)
+git fetch origin release-0.34.17
+H=$(git rev-parse --short=8 origin/release-0.34.17)
 git grep -l -E 'std::ofstream|fopen\([^)]*"w' "$H" -- src/modelnet src/wallet src/node src/rpc src/init.cpp \
   | sed "s/^$H://" | grep -v -E '/test/|_tests?\.cpp|/fuzz/' \
   | while read -r f; do
@@ -123,8 +134,9 @@ git grep -l -E 'std::ofstream|fopen\([^)]*"w' "$H" -- src/modelnet src/wallet sr
     done
 ```
 
-At `4c7840e9` it prints the 12 files above [tested]. It is a file-level filter: read every file it
-prints, and read the files it skips that still contain a raw write (the two above).
+At `1e2f8b5f` it prints the 9 files above, at `4c7840e9` the 12 [tested, 17 Nov, with
+`H=1e2f8b5f` and `H=4c7840e9`]. It is a file-level filter: read every file it prints, and read the
+files it skips that still contain a raw write.
 
 ### 2.3 Static and dynamic baselines (counts only)
 

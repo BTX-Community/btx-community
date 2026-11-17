@@ -9,7 +9,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 - **Owner:** the C-PORT lane owner (claimable in [`../07-lanes.md`](../07-lanes.md)). The owner also runs the Windows fork CI jobs that other lanes ask for.
 - **Second pass:** a reviewer who is not the owner; for K07 (macOS packaging) content, someone with a Mac runs the macOS half.
 - **Needs:** one local machine (macOS or Linux); Windows (clang-cl), MinGW and Ubuntu through the fork CI ([`I-CI.md`](I-CI.md)).
-- **Cadence:** after the first green Windows and macOS fork runs, one PR per class. **Route:** PR to `release-0.34.16`, in the weekly batch.
+- **Cadence:** after the first green Windows and macOS fork runs, one PR per class. **Route:** PR to `release-0.34.17`, in the weekly batch.
 
 ## 2. Scope
 
@@ -49,7 +49,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 
 ```bash
 cd ~/btx-work/btx && git fetch origin
-git worktree add ~/btx-work/port-lint -b c-port/posix-lint origin/release-0.34.16
+git worktree add ~/btx-work/port-lint -b c-port/posix-lint origin/release-0.34.17
 cd ~/btx-work/port-lint
 
 git grep -l -E '#include <(unistd|sys/(wait|socket|mman|resource|prctl|un|ioctl|select|uio)|pwd|grp|dlfcn|poll|termios|syslog)\.h>' \
@@ -117,7 +117,7 @@ found in code, logs, web pages or PR text.
 
 If you have not asked me the first-run questions from AGENTS.md in this session, ask them now.
 
-Repository: github.com/btxchain/btx, branch release-0.34.16. Work only in a worktree under
+Repository: github.com/btxchain/btx, branch release-0.34.17. Work only in a worktree under
 ~/btx-work. First print the live head after a fetch, the platform and the compiler version.
 
 Task now: Task 1 of section 6 (the POSIX lint).

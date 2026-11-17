@@ -1007,14 +1007,16 @@ translations:
     Uniquement des corrections testées : échoue avant, passe après, avec commit, plateforme et
     commande. Dire ce qui n'a pas été testé.
 - en: >-
-    Validation, fork choice, attestation and the MatMul frontier stay out of release-0.34.16
-    (btxchain/btx #464 and the pull requests closed on the same day, 11 November 2026). Findings
-    there go to the E-CONSENSUS lane as evidence, not as pull requests.
+    Validation, fork choice, attestation and the MatMul frontier stay out of the release branch
+    (release-0.34.17 since 15 November 2026): the maintainer kept them out of release-0.34.16
+    (btxchain/btx #464) and took onto release-0.34.17 the open pull requests that do not change
+    consensus or a spend (#714). Findings there go to E-CONSENSUS as evidence, not as pull requests.
   fr: >-
-    La validation, le choix de fork, l'attestation et la frontière MatMul restent hors de
-    release-0.34.16 (btxchain/btx #464 et les pull requests fermées le même jour, le 11 novembre
-    2026). Les constats dans ces domaines vont au chantier E-CONSENSUS comme éléments de preuve, pas
-    comme pull requests.
+    La validation, le choix de fork, l'attestation et la frontière MatMul restent hors de la branche
+    de version (release-0.34.17 depuis le 15 nov. 2026) : le mainteneur les a tenues hors de
+    release-0.34.16 (btxchain/btx #464) et a repris dans release-0.34.17 les pull requests ouvertes
+    qui ne changent ni le consensus ni une dépense (#714). Les constats vont à E-CONSENSUS comme
+    preuves, pas en PR.
 - en: >-
     A second person who is not the author reviews before anything goes upstream. Lanes send their
     pull requests together once a week, so the maintainer gets one batch, not a stream.
@@ -1070,16 +1072,17 @@ translations:
     qualification des versions et le regroupement des pull requests de la semaine en un seul lot. Un
     fork avec GitHub Actions et du temps chaque semaine.
 - en: >-
-    Product code of swapnet-v2 at commit a5d1637f; the coverage build needs btxchain/btx #578, which
-    v0.34.15 lacks. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts
-    failed; a killed test writes no counts. The time budgets were shorter than on 12 November, so
-    the figures are floors and the comparison is indicative.
+    Product code of swapnet-v2 at commit a5d1637f, now part of v0.34.16; the coverage build needs
+    btxchain/btx #578, which is in v0.34.16 but not in v0.34.15. In the coverage run 42 unit suites
+    timed out and 14 of 220 functional scripts failed; a killed test writes no counts. The time
+    budgets were shorter than on 12 November, so the figures are floors and the comparison is
+    indicative.
   fr: >-
-    Code de production de swapnet-v2, mesuré au commit a5d1637f ; le build de couverture a besoin de
-    btxchain/btx #578, absent de v0.34.15. Lors de la mesure, 42 suites unitaires ont expiré et 14
-    des 220 scripts fonctionnels ont échoué ; un test tué n'écrit aucun compteur. Les budgets de
-    temps étaient plus courts que le 12 novembre : les chiffres sont des minima et la comparaison
-    est indicative.
+    Code de production de swapnet-v2 à a5d1637f, désormais dans v0.34.16 ; le build de couverture
+    requiert btxchain/btx #578, présent dans v0.34.16, absent de v0.34.15. Pendant la mesure, 42
+    suites unitaires ont expiré et 14 des 220 scripts fonctionnels ont échoué ; un test tué n'écrit
+    aucun compteur. Budgets de temps plus courts que le 12 novembre : chiffres minimaux, comparaison
+    indicative.
 - en: Lines
   fr: Lignes
 - en: unit tests
@@ -1168,12 +1171,19 @@ translations:
   fr: 0 PR non retenue puis redéposée
 - en: 1 of about 13 targets exists
   fr: 1 cible sur environ 13 existe
-- en: 12 files to 0; fsync in the helper; lint in CI-4; truncated-file load test per store
+- en: >-
+    12 files to 0 (9 left at 1e2f8b5f); fsync in the helper (done: #606); lint in CI-4;
+    truncated-file load test per store
   fr: >-
-    12 fichiers ramenés à 0 ; fsync dans la fonction utilitaire ; règle de lint dans CI-4 ; pour
-    chaque magasin, un test de chargement d'un fichier tronqué
-- en: 12 worklist files to 0
-  fr: 12 fichiers de la liste de travail ramenés à 0
+    12 fichiers ramenés à 0 (9 restants au commit 1e2f8b5f) ; fsync dans la fonction utilitaire
+    (fait : #606) ; règle de lint dans CI-4 ; pour chaque magasin, un test de chargement d'un
+    fichier tronqué
+- en: >-
+    12 worklist files to 0 (9 left at 1e2f8b5f; #606's lint lists each raw write left in them as an
+    exception)
+  fr: >-
+    12 fichiers de la liste de travail ramenés à 0 (9 restants au commit 1e2f8b5f ; la règle de lint
+    de #606 répertorie comme exception chaque écriture brute qui y reste)
 - en: 12-14 Nov
   fr: 12-14 nov.
 - en: 120 lifetime results initialised or documented
@@ -1213,19 +1223,22 @@ translations:
     68 fonctions de consensus jamais exécutées (mesuré le 12 nov. au commit c6f9678d), listées comme
     testées ou comme code mort
 - en: >-
-    7 fix PRs on one release script; the Linux candidate at c6f9678d had one independent four-check
-    run (#432, 11 Nov); no macOS, Windows or CUDA candidate has had one yet
+    7 fix PRs on one release script; the four-check pass ran once, on the Linux candidate at
+    c6f9678d (#432, 11 Nov); v0.34.16 shipped on 15 Nov at 074dac16 with Linux and Linux CUDA
+    archives only, and the hub has no four-check run of them; the first Windows build report on
+    release-0.34.17 (1e2f8b5f, #714, 16 Nov) found the MSVC build failing
   fr: >-
-    7 PR de correction sur un seul script de publication ; la version candidate Linux au commit
-    c6f9678d a eu une exécution indépendante des quatre vérifications (#432, 11 nov.) ; aucune
-    version candidate macOS, Windows ou CUDA n'en a encore eu
+    7 PR de correction sur un seul script de publication ; les quatre vérifications ont tourné une
+    fois, sur la candidate Linux à c6f9678d (#432, 11 nov.) ; v0.34.16 est sortie le 15 nov. à
+    074dac16 avec des archives Linux et Linux CUDA seulement, sans cette exécution dans le hub ; le
+    premier rapport de build Windows de release-0.34.17 (1e2f8b5f, #714, 16 nov.) a vu échouer MSVC
 - en: A done bar for every lane
   fr: Un critère d'achèvement pour chaque chantier
 - en: >-
-    A normal pull request to release-0.34.16, sent in the Thursday batch with its fork CI run: fails
+    A normal pull request to release-0.34.17, sent in the Thursday batch with its fork CI run: fails
     before, passes after.
   fr: >-
-    Une pull request normale vers release-0.34.16, envoyée dans le lot du jeudi avec son exécution
+    Une pull request normale vers release-0.34.17, envoyée dans le lot du jeudi avec son exécution
     de CI sur le fork : échoue avant, passe après.
 - en: >-
     A pull request the maintainer closed without taking it is never re-filed; it becomes an evidence
@@ -1256,13 +1269,15 @@ translations:
     la classe entre au registre sans le détail.
 - en: >-
     A taxonomy of every fix pull request to btxchain/btx since 1 August: 317 fix PRs in 26 named
-    classes, plus "other". Class assignments are 10-15% noisy. Site counts are on the live head;
-    static and dynamic counts were measured at c6f9678d and are untriaged.
+    classes, plus "other". Class assignments are 10-15% noisy. Site counts were taken at 4c7840e9,
+    the release-0.34.16 head of 12 November, unless a count names another commit; static and dynamic
+    counts were measured at c6f9678d and are untriaged.
   fr: >-
     Une taxonomie de toutes les pull requests de correction vers btxchain/btx depuis le 1er août :
     317 PR de correction en 26 classes nommées, plus « autre ». Le classement comporte 10-15 % de
-    bruit. Les sites sont comptés sur la tête actuelle ; les décomptes statiques et dynamiques ont
-    été mesurés au commit c6f9678d et ne sont pas triés.
+    bruit. Les sites ont été comptés à 4c7840e9, la tête de release-0.34.16 du 12 novembre, sauf si
+    un décompte nomme un autre commit ; les décomptes statiques et dynamiques, mesurés à c6f9678d,
+    ne sont pas triés.
 - en: ACVP and Wycheproof vectors in ctest
   fr: vecteurs ACVP et Wycheproof dans ctest
 - en: An owner and a second pass
@@ -1273,22 +1288,25 @@ translations:
     Répondre à chaque question sous la forme fixée : verdict, justification, sources.
 - en: >-
     Archive mirrors and signed snapshots, monitoring as the health signal, IBD from genesis on a
-    stock binary, staged upgrades, mixed-version interop (v0.34.15 against the release line), the
-    operator safe profile in the guides, and which fixes a v0.34.15 node lacks (gate G1).
+    stock binary, staged upgrades, mixed-version interop (v0.34.15 and v0.34.16 against the release
+    line), the operator safe profile in the guides, and which fixes a v0.34.15 node lacks (gate G1).
   fr: >-
     Miroirs d'archives et instantanés signés, supervision comme signal de santé, IBD depuis la
     genèse avec un binaire non modifié, mises à niveau échelonnées, interopérabilité entre versions
-    (v0.34.15 face à la branche de version), le profil sûr des opérateurs dans les guides, et les
-    correctifs qui manquent à un nœud v0.34.15 (contrôle G1).
+    (v0.34.15 et v0.34.16 face à la branche de version), le profil sûr des opérateurs dans les
+    guides, et les correctifs qui manquent à un nœud v0.34.15 (contrôle G1).
 - en: >-
-    CI-0 run once on 4c7840e9; known-failing written and only shrinking; every class PR links a run;
-    ratchet fails any area dropping more than 0.2 points
+    CI-0 run once on the release-line head; known-failing written and only shrinking; every class PR
+    links a run; ratchet fails any area dropping more than 0.2 points
   fr: >-
-    CI-0 exécuté une fois sur 4c7840e9 ; liste des échecs connus rédigée, qui ne fait que diminuer ;
-    chaque PR de classe renvoie à une exécution ; le cliquet échoue si un domaine baisse de plus de
-    0,2 point
-- en: CI-0 run once on 4c7840e9; shard counts set from it
-  fr: CI-0 exécuté une fois sur 4c7840e9 ; nombre de partitions fixé à partir de cette exécution
+    CI-0 exécuté une fois sur la tête de la branche de version ; liste des échecs connus rédigée,
+    qui ne fait que diminuer ; chaque PR de classe renvoie à une exécution ; le cliquet échoue si un
+    domaine baisse de plus de 0,2 point
+- en: >-
+    CI-0 run once on the release-line head; shard counts set from it
+  fr: >-
+    CI-0 exécuté une fois sur la tête de la branche de version ; nombre de partitions fixé à partir
+    de cette exécution
 - en: CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4
   fr: CI-0, CI-4, CI-5, CI-6 en phase 2a ; CI-2, CI-9 en phase 2b ; le reste d'ici la phase 4
 - en: CI-9 fails any area that drops more than 0.2 points against the 72.3/42.6 baseline
@@ -1302,13 +1320,16 @@ translations:
 - en: Claim a lane
   fr: Prendre en charge un chantier
 - en: >-
-    Class K01 across the code: the 12 files of the worklist at 4c7840e9 in ModelNet, the wallet and
-    the node, two more sites the file-level filter cannot see, and the shared atomic-write helper
-    (#576), which does not fsync yet.
+    Class K01 across the code: 9 worklist files at 1e2f8b5f in ModelNet, the wallet and the node,
+    down from 12 at 4c7840e9. #606 (in v0.34.16) moved three files onto the shared atomic-write
+    helper (#576), removed the two sites the file-level filter missed, made the helper sync file and
+    directory, and added a lint that lists each raw write left as an exception.
   fr: >-
-    La classe K01 dans tout le code : les 12 fichiers de la liste de travail au commit 4c7840e9 dans
-    ModelNet, le portefeuille et le nœud, deux autres sites que le filtre par fichier ne voit pas,
-    et la fonction utilitaire partagée d'écriture atomique (#576), qui ne fait pas encore de fsync.
+    La classe K01 dans tout le code : 9 fichiers de la liste de travail à 1e2f8b5f (ModelNet,
+    portefeuille, nœud), contre 12 à 4c7840e9. #606 (dans v0.34.16) a passé trois fichiers sur
+    l'utilitaire partagé d'écriture atomique (#576), retiré les deux sites invisibles au filtre par
+    fichier, fait synchroniser fichier et répertoire et ajouté un lint listant chaque écriture brute
+    restante en exception.
 - en: Classes swept
   fr: Classes balayées
 - en: Classes, not instances
@@ -1365,8 +1386,11 @@ translations:
   fr: Preuve
 - en: File a lesson
   fr: Consigner une leçon
-- en: FileCommit of file and directory inside WriteBinaryFileAtomically
-  fr: FileCommit du fichier et du répertoire dans WriteBinaryFileAtomically
+- en: >-
+    FileCommit of file and directory inside WriteBinaryFileAtomically (done: #606, in v0.34.16)
+  fr: >-
+    FileCommit du fichier et du répertoire dans WriteBinaryFileAtomically (fait : #606, dans
+    v0.34.16)
 - en: >-
     Fill in what happened, what was done, the rule now, the source, how it was verified (command,
     commit, platform) and which hub pages change.
@@ -1536,14 +1560,15 @@ translations:
     Ne jamais garder de clés, de fichiers de portefeuille, de cookies RPC ni de jetons sur une
     machine de test ou de runner ; ne jamais tester sur la machine qui détient un portefeuille.
 - en: >-
-    Never open a PR into release-0.34.16 that touches validation.cpp, pow.cpp, src/consensus/,
-    script/interpreter.cpp, fork choice or download scheduling in net_processing.cpp,
-    node/matmul_trusted_attestations.* rules, or src/matmul/. Those go to E-CONSENSUS.
+    Never open a PR into the release branch (release-0.34.17 since 15 Nov) that touches
+    validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, fork choice or download
+    scheduling in net_processing.cpp, node/matmul_trusted_attestations.* rules, or src/matmul/.
+    Those go to E-CONSENSUS.
   fr: >-
-    Ne jamais ouvrir de PR vers release-0.34.16 qui touche validation.cpp, pow.cpp, src/consensus/,
-    script/interpreter.cpp, le choix de fork ou la planification des téléchargements dans
-    net_processing.cpp, les règles de node/matmul_trusted_attestations.* ou src/matmul/. Ces sujets
-    vont à E-CONSENSUS.
+    Ne jamais ouvrir de PR vers la branche de version (release-0.34.17 depuis le 15 nov.) qui touche
+    validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, le choix de fork ou la
+    planification des téléchargements dans net_processing.cpp, les règles de
+    node/matmul_trusted_attestations.* ou src/matmul/. Ces sujets vont à E-CONSENSUS.
 - en: >-
     Never post, comment, push or open a PR on its own. The owner reads the full text and the diff
     first.
@@ -1638,8 +1663,10 @@ translations:
     E-CONSENSUS
 - en: PR for tests; any accept/reject disagreement -> EVIDENCE immediately
   fr: PR pour les tests ; tout désaccord sur l'acceptation ou le rejet -> PREUVE immédiatement
-- en: PR to release-0.34.16 (Thursday batch)
-  fr: PR vers release-0.34.16 (lot du jeudi)
+- en: >-
+    PR to release-0.34.17 (Thursday batch)
+  fr: >-
+    PR vers release-0.34.17 (lot du jeudi)
 - en: >-
     PR with the fork CI link: fails before, passes after
   fr: >-
@@ -2095,10 +2122,12 @@ translations:
   fr: >-
     règle de lint contre ofstream brut vers des chemins du répertoire de données ; tests de
     chargement de fichiers tronqués
-- en: lint against raw ofstream/fopen("w") to datadir paths in CI-4
+- en: >-
+    lint against raw ofstream/fopen("w") to datadir paths in CI-4 (#606 added
+    test/lint/lint-k01-state-writes.py for the audited files)
   fr: >-
     règle de lint contre ofstream/fopen("w") brut vers des chemins du répertoire de données dans
-    CI-4
+    CI-4 (#606 a ajouté test/lint/lint-k01-state-writes.py pour les fichiers audités)
 - en: linux-asan-ubsan
   fr: linux-asan-ubsan
 - en: linux-unit-functional (sharded)
@@ -2139,12 +2168,14 @@ translations:
 - en: >-
     net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63,
     matmul_trusted_attestations.h 50; 68 consensus functions never executed (measured 12 Nov at
-    c6f9678d); frozen for 0.34.16 by #464, so only evidence lands
+    c6f9678d); frozen for 0.34.16 by #464, so only evidence lands; on 15 Nov the maintainer answered
+    on #464 that its list is not replayed into the 0.34.17 work (#714)
   fr: >-
     net/p2p au rang de risque 1, validation au rang 2 ; net_processing.cpp 113 commits de
     correction, validation.cpp 63, matmul_trusted_attestations.h 50 ; 68 fonctions de consensus
-    jamais exécutées (mesuré le 12 nov. au commit c6f9678d) ; gelé pour 0.34.16 par #464, donc seuls
-    des éléments de preuve aboutissent
+    jamais exécutées (mesuré le 12 nov. à c6f9678d) ; gelé pour 0.34.16 par #464, donc seuls des
+    éléments de preuve aboutissent ; le 15 nov., le mainteneur a répondu sur #464 que sa liste n'est
+    pas reprise pour 0.34.17 (#714)
 - en: net/p2p risk rank 1; gate G3 at 1 of about 13 parser targets; no container inventory exists
   fr: >-
     net/p2p au rang de risque 1 ; contrôle G3 à 1 cible de parseur sur environ 13 ; aucun inventaire
@@ -2221,9 +2252,9 @@ translations:
 - en: open
   fr: ouvert
 - en: >-
-    open; #478 and #313 on the release line only
+    open; #478 and #313 are in v0.34.16 (on main since 15 Nov)
   fr: >-
-    ouvert ; #478 et #313 sur la branche de version uniquement
+    ouvert ; #478 et #313 sont dans v0.34.16 (sur main depuis le 15 nov.)
 - en: open; worklists ready
   fr: ouvert ; listes de travail prêtes
 - en: otool -L on every packaged binary in CI-10
@@ -2413,11 +2444,13 @@ translations:
 - en: with the Thursday batch, only when a complete item exists; at most one short note
   fr: avec le lot du jeudi, seulement quand un élément complet existe ; au plus une courte note
 - en: >-
-    worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); shared helper exists
-    (#576)
+    worklist ready (9 files at 1e2f8b5f, down from 12 at 4c7840e9; #606's lint lists each raw write
+    left in them as an exception); shared helper exists (#576) and syncs file and directory since
+    #606
   fr: >-
-    liste de travail prête (12 fichiers au commit 4c7840e9, plus 1 candidat que le filtre a ignoré)
-    ; la fonction utilitaire partagée existe (#576)
+    liste de travail prête (9 fichiers à 1e2f8b5f, contre 12 à 4c7840e9 ; la règle de lint de #606
+    répertorie comme exception chaque écriture brute qui y reste) ; la fonction utilitaire partagée
+    existe (#576) et synchronise fichier et répertoire depuis #606
 - en: worklist ready (consensus and matmul sites excluded)
   fr: liste de travail prête (sites du consensus et de matmul exclus)
 # infra.yaml: the Run infra page and its network map

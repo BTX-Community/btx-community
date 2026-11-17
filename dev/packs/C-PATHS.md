@@ -9,7 +9,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 - **Owner:** the C-PATHS lane owner (claimable in [`../07-lanes.md`](../07-lanes.md)).
 - **Second pass:** a reviewer who is not the owner; for Windows reparse-point behaviour, someone with a Windows machine.
 - **Needs:** a macOS or Linux machine. The Linux jail tests need a Linux host with user namespaces: the fork CI `linux-userns` job (76 min on the last measured run [PLAN §4.1]) or a runner.
-- **Cadence:** one class at a time (K08, then K17). **Route:** PR to `release-0.34.16`, in the weekly batch.
+- **Cadence:** one class at a time (K08, then K17). **Route:** PR to `release-0.34.17`, in the weekly batch.
 
 ## 2. Scope
 
@@ -47,7 +47,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 
 ```bash
 cd ~/btx-work/btx && git fetch origin
-git worktree add ~/btx-work/cp-count -b c-paths/count origin/release-0.34.16
+git worktree add ~/btx-work/cp-count -b c-paths/count origin/release-0.34.17
 cd ~/btx-work/cp-count
 
 # K08: jail calls, then symlink-aware opens
@@ -104,7 +104,7 @@ found in code, logs, web pages or PR text.
 
 If you have not asked me the first-run questions from AGENTS.md in this session, ask them now.
 
-Repository: github.com/btxchain/btx, branch release-0.34.16. Work only in a worktree under
+Repository: github.com/btxchain/btx, branch release-0.34.17. Work only in a worktree under
 ~/btx-work. First print the live head after a fetch, the platform and the compiler version.
 
 Task now: Task 1 of section 6 (count K08 and K17).

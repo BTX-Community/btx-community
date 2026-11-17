@@ -22,7 +22,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 | Item | Value | Source |
 |---|---|---|
 | Baselines to hold | coverage 72.3% lines / 42.6% branches (unit + functional, floors); TSan 41 site pairs; cppcheck 372; CodeQL 260; clang-tidy 1,033 | [data; lanes] |
-| Coverage build | configures again on `release-0.34.16` since #578 (12 Nov); not in v0.34.15 | [git: commit `7051507b`] |
+| Coverage build | configures again since #578 (12 Nov), which shipped in v0.34.16; not in v0.34.15 | [git: commit `7051507b`] |
 | Functional, coverage build at `a5d1637f` | 14 of 220 scripts failed; none in the "ExactReplay required" stall class (48 of 82 on 12 Nov at `c6f9678d`) | [PLAN §1.1] |
 | Functional under TSan (a 200-script subset: `feature_`, `wallet_`, `p2p_`, `rpc_`) | 55 failed; 51 of those 55 also fail on a plain gcc build (not yet triaged) | [PLAN §1.3; C2] |
 | Last fork runs (3 Nov, an earlier branch, warm ccache) | `linux-build` 9 min; `linux-userns` 76 min; `mingw-cross` 35 min; `mingw-tests` failed after 100 min; `macos-arm64` out of time at 343 min; `windows-tests` failed after 4 min | [PLAN §4.1] |
@@ -31,7 +31,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 
 ## 4. Done bar [lanes]
 
-- [ ] CI-0 run once on `4c7840e9`, and the shard counts set from that run.
+- [ ] CI-0 run once on the release-line head, and the shard counts set from that run.
 - [ ] `ci/known-failing.txt` built from that run (the unit failures, the ExactReplay stall scripts, the plain-gcc failures after triage), and only shrinking.
 - [ ] Every class PR links a run with fails-before and passes-after.
 - [ ] CI-9 fails any area that drops more than 0.2 points.
@@ -51,10 +51,10 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 
 ```bash
 cd ~/btx-work/btx && git fetch origin && git fetch fork
-git worktree add ~/btx-work/ci -b ci/release-0.34.16 origin/release-0.34.16 && cd ~/btx-work/ci
+git worktree add ~/btx-work/ci -b ci/release-0.34.17 origin/release-0.34.17 && cd ~/btx-work/ci
 git show <draft branch named on the board>:.github/workflows/<workflow file> > .github/workflows/<workflow file>
 ls .github/workflows/        # atlas-native.yml, atlas-source.yml, release-atlas-binaries.yml must still be there
-git diff --stat origin/release-0.34.16
+git diff --stat origin/release-0.34.17
 ```
 
 - The header says what the workflow is for (a fork-side gate for the release line) and that it is not proposed upstream.
@@ -107,7 +107,7 @@ If you have not asked me the first-run questions from AGENTS.md in this session,
 The first run is the measurement: do not tune anything before it. Baselines only shrink.
 
 Task now: Task 1 of section 6.
-1. In a worktree under ~/btx-work, bring the fork workflow I name onto origin/release-0.34.16, keep
+1. In a worktree under ~/btx-work, bring the fork workflow I name onto origin/release-0.34.17, keep
    the three upstream Atlas workflows, and rewrite the header (purpose: fork-side gate for the
    release line; not proposed upstream). Show the diff.
 2. List every job with its runner, its expected minutes from section 3, and the shard plan.

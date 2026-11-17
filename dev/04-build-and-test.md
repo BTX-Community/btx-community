@@ -15,18 +15,18 @@ Every command and flag below was checked against the tree at `4c7840e9` (`CMakeL
 mkdir -p ~/btx-work && cd ~/btx-work
 git clone https://github.com/btxchain/btx.git btx
 cd btx
-git fetch origin release-0.34.16 main
-git log -1 --format='%h %cd %s' origin/release-0.34.16      # record this: it is "the live head"
+git fetch origin release-0.34.17 main
+git log -1 --format='%h %cd %s' origin/release-0.34.17      # record this: it is "the live head"
 
 # one worktree per task: <lane>/<topic>
-git worktree add ~/btx-work/<lane>-<topic> -b <lane>/<topic> origin/release-0.34.16
+git worktree add ~/btx-work/<lane>-<topic> -b <lane>/<topic> origin/release-0.34.17
 cd ~/btx-work/<lane>-<topic>
 
 # your fork, for the second pass and the fork CI run
 git remote add fork https://github.com/<your-handle>/btx.git     # once, in the clone
 ```
 
-- Before a count, a build you will cite, or a post: `git fetch origin && git log -1 --format=%h origin/release-0.34.16`. If the head moved, rebase and recount.
+- Before a count, a build you will cite, or a post: `git fetch origin && git log -1 --format=%h origin/release-0.34.17`. If the head moved, rebase and recount.
 - The repo's `AGENTS.md` tells coding agents to stay read-only unless the operator asks [repo: `AGENTS.md`]. Your lane pack (`packs/<LANE>.md`) is that ask, for the commands it lists. Nothing beyond them, and a listed line that needs `sudo`, installs a package or changes a system setting still needs a fresh yes each time ([`AGENTS.md`](AGENTS.md) §5).
 - Keep one build directory per configuration: `build` (gcc), `build-clang`, `build-cov`, `build-asan`, `build-tsan`, `build_fuzz`.
 - Variables set in one block (`OSSL` in §2.1, `J` in §3) are gone in a new shell. Set them again.
@@ -169,7 +169,7 @@ python3 build/test/functional/test_runner.py --configfile=build/test/config.ini 
 
 ## 5. Coverage (gcc, Linux)
 
-> **Coverage is measured again.** The coverage build (`-DCMAKE_BUILD_TYPE=Coverage`) configures again on `release-0.34.16` since #578 landed on 12 Nov (commit `7051507b`). The fix is not in v0.34.15 (`main`, `476f3f23`): the configure-time step that #578 removed is still there. Measured on `swapnet-v2` at `a5d1637f` (14 Nov), which contains the fix: product-code lines 67.4% unit-only and 72.3% unit + functional; branches 38.9% and 42.6%. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts failed. The time budgets were shorter than on 12 Nov, so the figures are floors and the comparison with that run is indicative. Details and per-area rows: [`01-state.md` §3](01-state.md#3-coverage).
+> **Coverage is measured again.** The coverage build (`-DCMAKE_BUILD_TYPE=Coverage`) configures again since #578 landed on the release line on 12 Nov (commit `7051507b`). The fix shipped in v0.34.16; it is not in v0.34.15 (`476f3f23`): the configure-time step that #578 removed is still there. Measured on `swapnet-v2` at `a5d1637f` (14 Nov), which contains the fix: product-code lines 67.4% unit-only and 72.3% unit + functional; branches 38.9% and 42.6%. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts failed. The time budgets were shorter than on 12 Nov, so the figures are floors and the comparison with that run is indicative. Details and per-area rows: [`01-state.md` §3](01-state.md#3-coverage).
 
 The one-shot `cmake -P build-cov/Coverage.cmake` [repo: `doc/developer-notes.md`] stops at the first failing ctest run (`COMMAND_ERROR_IS_FATAL ANY`), and some tests fail today, so it never writes a report [read: `cmake/script/Coverage.cmake`]. Use the measured recipe instead [C3]:
 

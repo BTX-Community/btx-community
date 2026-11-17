@@ -15,9 +15,9 @@
 Re-check the git facts in this key from any clone of `btxchain/btx`:
 
 ```bash
-git fetch origin main release-0.34.16
-git rev-parse --short=8 origin/main                                          # 476f3f23 = v0.34.15
-git merge-base --is-ancestor 7051507b origin/main && echo "#578 in v0.34.15" || echo "#578 not in v0.34.15"
+git fetch origin main release-0.34.16 --tags
+git rev-parse --short=8 'v0.34.15^{commit}' origin/main                      # 476f3f23 = v0.34.15; main is 074dac16 = v0.34.16 since 15 Nov
+git merge-base --is-ancestor 7051507b v0.34.15 && echo "#578 in v0.34.15" || echo "#578 not in v0.34.15"
 git merge-base --is-ancestor 7051507b origin/release-0.34.16 && echo "#578 on the release line"
 git log --oneline origin/release-0.34.16 | grep -i -e 'drop PQ seeds' -e 'ask for the passphrase'   # the K05 chain, landed
 ```
@@ -36,13 +36,13 @@ git log --oneline origin/release-0.34.16 | grep -i -e 'drop PQ seeds' -e 'ask fo
 
 ## Q2. Coverage on v0.34.15
 
-**Verdict.** No. The coverage build configures again on `release-0.34.16` since #578, which landed on 12 Nov as commit `7051507b`. It is not in v0.34.15 (`main`, `476f3f23`).
+**Verdict.** No. The coverage build configures again on `release-0.34.16` since #578, which landed on 12 Nov as commit `7051507b`. It is not in v0.34.15 (`476f3f23`); it shipped in v0.34.16, which is `main` since 15 Nov.
 
 **Why.** Before #578, `CMAKE_BUILD_TYPE=Coverage` ran a source-mirror step (`CoverageSanitize.cmake`) at configure time. A fresh configure stopped on a failed symbolic link, and an existing build directory sent build output into the source tree (commit message of `7051507b`). v0.34.15 still has that step: `CMakeLists.txt` line 666 and lines 670-675 at `476f3f23`, and its two coverage scripts are identical to the release line's before the fix (`git diff 476f3f23 7051507b^ -- cmake/script/CoverageSanitize.cmake.in cmake/script/CoverageInclude.cmake.in` is empty).
 
 Numbers to quote, measured on `swapnet-v2` at `a5d1637f` (14 Nov), which contains #578: product code 67.4% of lines with unit tests only and 72.3% with unit + functional tests; branches 38.9% and 42.6%. The caveat: all four are floors. 42 unit suites timed out and 14 of 220 functional scripts failed in the coverage run, a killed test writes no coverage data, and the time budgets were shorter than in the 12 Nov run, so a comparison with it is indicative. Also: the one-shot `cmake -P build/Coverage.cmake` from `doc/developer-notes.md` still stops at the first failing test (`COMMAND_ERROR_IS_FATAL ANY` in `cmake/script/Coverage.cmake`), so use the measured recipe.
 
-**Sources.** #578; commit `7051507b` on `release-0.34.16`; `git merge-base --is-ancestor 7051507b origin/main` (false); hub: `04-build-and-test.md` §5, `01-state.md` (coverage row), [lesson 2026-11-12-coverage-fresh-build-dir](../lessons/2026-11-12-coverage-fresh-build-dir.md).
+**Sources.** #578; commit `7051507b` on `release-0.34.16`; `git merge-base --is-ancestor 7051507b v0.34.15` (false); hub: `04-build-and-test.md` §5, `01-state.md` (coverage row), [lesson 2026-11-12-coverage-fresh-build-dir](../lessons/2026-11-12-coverage-fresh-build-dir.md).
 
 **Wrong answers.** "Yes, it was fixed on 12 Nov" without the branch. Quoting 67.4% / 72.3% as the real coverage without saying they are floors. Quoting the numbers without the commit they were measured on.
 
