@@ -52,7 +52,8 @@ Sources: [`AGENTS.md`](AGENTS.md) (the ten rules, stop conditions); [`07-lanes.m
 - The AI may read, build, run the tests and the commands the lane pack lists, and commit locally in
   a worktree. That is the operator's ask in the sense of upstream `AGENTS.md`, whose default
   posture for agents is read-only [read: `git show 4c7840e9:AGENTS.md`]. Anything beyond the pack
-  needs a fresh yes from the operator.
+  needs a fresh yes from the operator, and so does each line in it that needs `sudo`, installs a
+  package or changes a system setting (`AGENTS.md` §5).
 - Nothing leaves the machine through the AI: no `git push`, no write call to the GitHub API, no
   `gh` command that writes, no browser action on GitHub, no message in any group.
 - A browser or command-line tool on your machine acts as whatever account is signed in there. If

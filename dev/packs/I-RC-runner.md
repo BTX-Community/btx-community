@@ -25,7 +25,7 @@ This file is complete on its own: point your AI at it and nothing else. It runs 
 The AI stops, runs nothing further, and tells you which condition hit:
 
 - **S1** The machine holds a wallet with funds, a signer key, the RPC cookie or password of a node you use, or API tokens. Do not run anything on that machine. Use another machine or skip.
-- **S2** A command needs `sudo` or administrator rights beyond the package installs in section 3 and the CUDA toolkit install in section 5 after your yes. Ask first.
+- **S2** A command needs `sudo` or administrator rights, installs a package or changes a system setting. That includes the `apt-get install` lines in section 3 and the CUDA toolkit install in section 5: this file listing them is not enough. Ask first, each time.
 - **S3** Less than 40 GB free in your Linux home folder before a build (checks B and D), or less than 2 GB free on the Windows system drive (check C).
 - **S4** The same step fails twice the same way. Report FAIL or BLOCKED with the last 20 log lines, home path replaced by `~`.
 - **S5** A build runs longer than 3 hours.
@@ -386,8 +386,9 @@ How to work:
    a signer key, an RPC cookie or password of a node I use, or API tokens. If yes, stop.
 3. Ask me whether this is native Ubuntu, WSL2 on Windows 11 (then follow section 3b), or native
    Windows (check C only), and which handle to put in RUNNER (or none).
-4. Use sudo only for the apt-get install lines in section 3, and only for the CUDA toolkit install
-   in section 5 after I say yes. Never change security or system settings.
+4. Use sudo only for the apt-get install lines in section 3 and the CUDA toolkit install in
+   section 5, and only after I say yes to that line, each time. Never change security or system
+   settings.
 5. Never start a mainnet node, never use an existing data directory, never create or load a real
    wallet, never open ports, never post, upload or send anything.
 6. At the end print, for each check run: the RUN line exactly as the script printed it, and one

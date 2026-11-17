@@ -113,7 +113,9 @@ What it says that shapes every PR from this hub [read: `git show 4c7840e9:AGENTS
 
 - The default posture is read-only: no compiling, committing, pushing, spending or mutating
   unless the operator asked. The lane pack the operator hands you is that ask, for the commands
-  it lists and nothing beyond them. Anything else needs a fresh yes.
+  it lists and nothing beyond them, with one exception: a line that needs `sudo` or administrator
+  rights, installs a package or changes a system setting (`sysctl`, a keyring, a service) needs a
+  fresh yes each time, even when the pack lists it. Anything the pack does not list needs one too.
 - Three planes never mix: monetary (`btxd`), model (`btx-modeld`), hosted (`btx-hcpd` /
   `btx-hosted`). `btx-modeld` never holds wallet secrets.
 - `prepare` / `approve` / `sign` / `submit` stay distinct steps. `automatic_spend_atoms` stays 0.
@@ -177,8 +179,9 @@ Stop, run nothing further, and tell the operator which condition hit and why.
 
 - **S1 Keys or funds.** The machine holds a wallet with funds, a signer key, the RPC cookie or
   password of a node the operator uses, or API tokens. Use another machine.
-- **S2 Rights or money.** A step needs `sudo` or administrator rights beyond the package installs
-  the pack lists, or it would spend money beyond the stated cap (default 0). Ask first.
+- **S2 Rights or money.** A step needs `sudo` or administrator rights, a package install or a
+  system setting change (a pack listing it is not enough, see section 5), or it would spend
+  money beyond the stated cap (default 0). Ask first.
 - **S3 Disk.** Less free disk than the step needs: about 15 GB for a build with tests, 40 GB for
   a runner build, 27 GB for a coverage tree.
 - **S4 Same failure twice.** Report FAIL or BLOCKED with the last 20 log lines, home path
