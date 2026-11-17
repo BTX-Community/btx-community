@@ -40,10 +40,12 @@ translations:
     code.'
   es: 'Un recorrido por SwapNet (btxchain/btx #630), creado por el equipo de Byron Bay a partir del código
     abierto.'
-- en: Unofficial demo with sample data only. The feature is not released; the page connects to no node
-    or wallet.
-  es: Demo no oficial, solo con datos de ejemplo. La función no está publicada; la página no se conecta
-    a ningún nodo ni monedero.
+- en: >-
+    Unofficial demo with sample data only. Atlas is in the v0.34.16 source, but the release archives
+    leave it out; the page connects to no node or wallet.
+  es: >-
+    Demo no oficial, solo con datos de ejemplo. Atlas está en el código de v0.34.16, pero los
+    archivos de la versión lo dejan fuera; la página no se conecta a ningún nodo ni monedero.
 - en: Describes MatMul v4.7, which the network runs since block 185,000, and keeps v3 as reference. Last
     updated 4 Aug 2026; its release notes still name v0.33.2.
   es: Describe MatMul v4.7, que la red usa desde el bloque 185.000, y conserva v3 como referencia. Última
@@ -54,10 +56,12 @@ translations:
     API pública y herramientas para asistentes de IA (MCP, REST, llms.txt) en /ai.
 - en: 13 of the 16 AI tools are public with no key; 3 premium ones need a token from the operator.
   es: 13 de las 16 herramientas de IA son públicas y sin clave; 3 premium necesitan un token del operador.
-- en: UTXO snapshot for loadtxoutset, confirmed by two operators (Mende and Jarek), with SHA-256 of the
-    file and the manifest.
-  es: Snapshot UTXO para loadtxoutset, confirmado por dos operadores (Mende y Jarek), con SHA-256 del
-    archivo y del manifiesto.
+- en: >-
+    UTXO snapshot for loadtxoutset, confirmed by two operators, with SHA-256 of the file and the
+    manifest.
+  es: >-
+    Snapshot UTXO para loadtxoutset, confirmado por dos operadores, con SHA-256 del archivo y del
+    manifiesto.
 - en: Check the SHA-256 before use. The JSON names the height; it can lag the chain by a few thousand
     blocks.
   es: Comprueba el SHA-256 antes de usarlo. El JSON indica la altura; puede ir unos miles de bloques por
@@ -400,14 +404,15 @@ translations:
 - en: Official website with documentation, the browser wallet and the whitepaper.
   es: Web oficial con documentación, el monedero de navegador y el whitepaper.
 - en: >-
-    On a server - the official release for Linux needs glibc 2.38 or newer (Ubuntu 24.04, Debian
-    13); a GPU node takes the -cuda13 archive (Blackwell cards). The v0.34.16 pre-release has no
-    CUDA build, so GPU nodes stay on v0.34.15. The current release has no official Windows archive.
+    On a server - v0.34.16 has two Linux x86_64 archives, both for glibc 2.38 or newer (Ubuntu
+    24.04, Debian 13): a plain one, and a -cuda13 one for GPU nodes (sm_120: RTX 50 and RTX PRO
+    Blackwell cards; the NVIDIA driver is not included). There is no official Windows or macOS
+    archive.
   es: >-
-    En un servidor: la versión oficial para Linux necesita glibc 2.38 o más reciente (Ubuntu 24.04,
-    Debian 13); un nodo con GPU usa el archivo -cuda13 (tarjetas Blackwell). La versión preliminar
-    v0.34.16 no tiene compilación con CUDA, así que los nodos con GPU se quedan en la v0.34.15. La
-    versión actual no tiene archivo oficial para Windows.
+    En un servidor: v0.34.16 tiene dos archivos Linux x86_64, ambos para glibc 2.38 o posterior
+    (Ubuntu 24.04, Debian 13): uno normal y otro -cuda13 para nodos con GPU (sm_120: tarjetas
+    Blackwell RTX 50 y RTX PRO; el driver de NVIDIA no va incluido). No hay archivo oficial para
+    Windows ni macOS.
 - en: >-
     On mainnet it needs at least two pinned signers and a threshold of two. Pin only signers that
     are live today.
@@ -2796,3 +2801,201 @@ translations:
   es: >-
     Trabajo en curso: cobertura de pruebas, la ejecución nocturna de CI-0 y las tareas a la espera
     de responsable.
+# start and links pages: fact fixes and new steps of the UX pass
+- en: >-
+    Unofficial demo with sample data only. SwapNet is in v0.34.16 for broader testing, off unless a
+    node starts with -swapnet=1; the page connects to no node or wallet.
+  es: >-
+    Demo no oficial, solo con datos de ejemplo. SwapNet está en v0.34.16 para pruebas más amplias,
+    desactivado salvo que un nodo arranque con -swapnet=1; la página no se conecta a ningún nodo ni
+    monedero.
+- en: "What BTX is, in a few facts with their sources."
+  es: "Qué es BTX, en unos pocos hechos con sus fuentes."
+- en: "Choose a wallet from the list, after reading \"Before you buy or receive BTX\" below."
+  es: "Elige un monedero de la lista, después de leer «Antes de comprar o recibir BTX» más abajo."
+- en: "Have a spare machine? Seven ways to give BTX infrastructure, from a node to a fuzz box."
+  es: >-
+    ¿Tienes una máquina libre? Siete formas de aportar infraestructura a BTX, desde un nodo hasta
+    una caja de fuzzing.
+- en: "Community projects: things to build and run outside the node software."
+  es: "Proyectos de la comunidad: cosas que construir y operar fuera del software del nodo."
+# projects.yaml: the projects at the top of the Projects page
+- en: "Build something"
+  es: "Construir algo"
+- en: >-
+    All of it lies outside the node software. Nothing here is planned, promised or endorsed by the
+    node's developers. Each card says what exists today and what is missing, with the source of
+    every claim.
+  es: >-
+    Todo ello queda fuera del software del nodo. Nada de esto está planeado, prometido ni respaldado
+    por los desarrolladores del nodo. Cada tarjeta dice qué existe hoy y qué falta, con la fuente de
+    cada afirmación.
+- en: "Anything that moves other people's coins starts on regtest or testnet."
+  es: "Todo lo que mueva monedas de otras personas empieza en regtest o testnet."
+- en: "There today"
+  es: "Lo que hay hoy"
+- en: "Missing"
+  es: "Lo que falta"
+- en: "Careful"
+  es: "Cuidado"
+- en: "Start from"
+  es: "Punto de partida"
+- en: "Rather build something than run a machine? Community projects"
+  es: "¿Prefieres construir algo antes que operar una máquina? Proyectos de la comunidad"
+- en: "Venues for trading BTX"
+  es: "Lugares para negociar BTX"
+- en: >-
+    A place where people trade BTX against other coins, run by its own operators: an order book, or
+    a front-end over SwapNet's swaps.
+  es: >-
+    Un lugar donde la gente negocie BTX contra otras monedas, operado por sus propios operadores: un
+    libro de órdenes o una interfaz sobre los intercambios de SwapNet.
+- en: >-
+    SwapNet in the node swaps BTX with BTC or ETH between two parties; AMM pools, wrapped balances
+    and partial fills are not part of it. This group's venue-structure paper compares four models
+    and where the licensing line runs.
+  es: >-
+    SwapNet en el nodo intercambia BTX por BTC o ETH entre dos partes; los pools AMM, los saldos
+    envueltos y los llenados parciales no forman parte de él. El documento de estructura de mercados
+    de este grupo compara cuatro modelos y dónde pasa la línea de las licencias.
+- en: >-
+    Operators, a model chosen from the paper, and legal advice where the venue will run. The paper
+    is a draft for discussion, not legal advice.
+  es: >-
+    Operadores, un modelo elegido del documento y asesoramiento legal donde vaya a funcionar. El
+    documento es un borrador para discutir, no asesoramiento legal.
+- en: "The venue-structure paper"
+  es: "El documento de estructura de mercados"
+- en: "SwapNet overview (developers)"
+  es: "Resumen de SwapNet (desarrolladores)"
+- en: "Discussion of the paper as an issue in this repository."
+  es: "Discusión del documento como issue en este repositorio."
+- en: "SwapNet wallets and tools"
+  es: "Monederos y herramientas para SwapNet"
+- en: >-
+    Software around SwapNet: a wallet that shows quotes and runs swaps, tools that run a maker's
+    market, a front-end for the node's swap calls.
+  es: >-
+    Software en torno a SwapNet: un monedero que muestre cotizaciones y ejecute intercambios,
+    herramientas que lleven el mercado de un maker, una interfaz para las llamadas de intercambio
+    del nodo.
+- en: >-
+    A node started with -swapnet=1 finds other SwapNet nodes over its peer links and offers 33 swap
+    RPC methods. v0.34.16 carries SwapNet for broader testing. There is no graphical trading panel:
+    the RPC console is the interface.
+  es: >-
+    Un nodo arrancado con -swapnet=1 encuentra otros nodos SwapNet por sus conexiones entre pares y
+    ofrece 33 métodos RPC de intercambio. v0.34.16 incluye SwapNet para pruebas más amplias. No hay
+    panel gráfico de negociación: la consola RPC es la interfaz.
+- en: >-
+    Everything a non-developer would use. The package's own status page marks real-chain settlement
+    and an independent audit as not executed, the ETH leg needs a deployed contract that the node's
+    owner approves locally, and the release docs want external receipts before anyone calls it
+    mainnet-qualified.
+  es: >-
+    Todo lo que usaría alguien que no es desarrollador. La propia página de estado del paquete marca
+    la liquidación en cadenas reales y una auditoría independiente como no ejecutadas, la parte ETH
+    necesita un contrato desplegado que el dueño del nodo aprueba localmente, y la documentación de
+    la versión pide pruebas externas antes de llamarlo apto para mainnet.
+- en: >-
+    Once a taker has funded a swap, cancelling does not release it: the coins stay locked until the
+    agreed refund height or time.
+  es: >-
+    Cuando un taker ha financiado un intercambio, cancelar no lo libera: las monedas quedan
+    bloqueadas hasta la altura o el momento de reembolso acordados.
+- en: "The 33 swap RPC methods"
+  es: "Los 33 métodos RPC de intercambio"
+- en: "Running SwapNet on a node"
+  es: "Operar SwapNet en un nodo"
+- en: "Testing and release (developers)"
+  es: "Pruebas y versión (desarrolladores)"
+- en: "Questions as an issue on btxchain/btx; security problems only through private reporting."
+  es: >-
+    Las dudas, como issue en btxchain/btx; los problemas de seguridad, solo por el aviso privado.
+- en: "Mining on consumer AMD cards"
+  es: "Minería con tarjetas AMD de consumo"
+- en: "An exact INT8 MatMul path for consumer Radeon cards, so they can mine."
+  es: "Una ruta MatMul INT8 exacta para tarjetas Radeon de consumo, para que puedan minar."
+- en: >-
+    The node's AMD (HIP) path admits six datacenter Instinct chips: gfx908, gfx90a, gfx940, gfx941,
+    gfx942 and gfx950 (MI100 to MI350). It is built automatically when a HIP clang and an AMD GPU
+    are found. Consumer Radeon cards (RDNA, gfx10 to gfx12) are used neither to mine nor to
+    validate; the source calls them verification-only until cross-vendor golden vectors qualify
+    them.
+  es: >-
+    La ruta AMD (HIP) del nodo admite seis chips Instinct de centro de datos: gfx908, gfx90a,
+    gfx940, gfx941, gfx942 y gfx950 (MI100 a MI350); se compila sola cuando se encuentran un clang
+    HIP y una GPU AMD. Las Radeon de consumo (RDNA, gfx10 a gfx12) no se usan ni para minar ni para
+    validar; el código las llama verification-only hasta que vectores golden entre fabricantes las
+    califiquen.
+- en: >-
+    An exact INT8 path on RDNA that matches the CPU reference bit for bit, and the golden vectors
+    that show it. Whether such a path is admitted is the maintainer's decision.
+  es: >-
+    Una ruta INT8 exacta en RDNA que coincida bit a bit con la referencia de CPU, y los vectores
+    golden que lo demuestren. Si esa ruta se admite lo decide el mantenedor.
+- en: "How the node admits a GPU (developers)"
+  es: "Cómo admite el nodo una GPU (desarrolladores)"
+- en: "The HIP backend sources (developers)"
+  es: "Las fuentes del backend HIP (desarrolladores)"
+- en: "Evidence as an issue on btxchain/btx; no lane of this hub covers AMD yet."
+  es: "Las pruebas, como issue en btxchain/btx; ninguna tarea de este hub cubre aún AMD."
+- en: "Testing on Apple Silicon"
+  es: "Pruebas en Apple Silicon"
+- en: >-
+    Run the node's Metal self-test on more Apple chips and report the results, so the Metal path is
+    known to work beyond one device class.
+  es: >-
+    Ejecutar la autoprueba Metal del nodo en más chips de Apple y comunicar los resultados, para
+    saber que la ruta Metal funciona más allá de una clase de dispositivo.
+- en: >-
+    Metal is built by default on Apple. A Metal device is admitted after the node's exactness
+    self-tests, through Metal 4 INT8 tensor ops or, for the current epoch's replay, an exact
+    integer-ALU path. A golden row, where one exists, is compared; without one the self-test decides
+    (the manifest has one row, for an M4-class device). The release has no macOS binaries.
+  es: >-
+    Metal se compila por defecto en Apple. Un dispositivo Metal se admite tras las autopruebas de
+    exactitud del nodo, con operaciones tensoriales INT8 de Metal 4 o, al repetir la época actual,
+    con una ruta exacta de ALU entera. Donde hay una fila golden se compara; si no, decide la
+    autoprueba (el manifiesto tiene una, para la clase M4). La versión no trae binarios para macOS.
+- en: "Self-test reports from other Apple chips."
+  es: "Informes de autoprueba de otros chips de Apple."
+- en: "Building on macOS (developers)"
+  es: "Compilar en macOS (desarrolladores)"
+- en: "The cross-device lane: I-XDEV pack"
+  es: "La tarea entre dispositivos: paquete I-XDEV"
+- en: "The I-XDEV lane, which replays blocks across devices; it has no owner yet."
+  es: "La tarea I-XDEV, que repite bloques en distintos dispositivos; aún no tiene responsable."
+- en: "Explorers, monitoring and light wallets"
+  es: "Exploradores, monitorización y monederos ligeros"
+- en: >-
+    More independent views of the chain, alerts when something goes wrong, and wallets for people
+    who do not run a node all the time.
+  es: >-
+    Más vistas independientes de la cadena, alertas cuando algo falla y monederos para quien no
+    tiene un nodo en marcha todo el tiempo.
+- en: >-
+    Several explorers and a status page are on the links page; the status page publishes its figures
+    as JSON. btx-cli lightwatch is a watch-only light client: it reads compact block filters from a
+    node it trusts (started with -blockfilterindex=1) and signs nothing. The node also reads and
+    writes a browser-wallet recovery format.
+  es: >-
+    Varios exploradores y una página de estado están en la página de enlaces; la página de estado
+    publica sus cifras en JSON. btx-cli lightwatch es un cliente ligero solo de observación: lee
+    filtros compactos de bloque de un nodo de confianza (arrancado con -blockfilterindex=1) y no
+    firma nada. El nodo también lee y escribe un formato de recuperación para monederos de
+    navegador.
+- en: >-
+    Explorers and monitors run by more independent operators, alerting, and light wallets that can
+    also sign.
+  es: >-
+    Exploradores y monitores operados por más operadores independientes, alertas y monederos ligeros
+    que también puedan firmar.
+- en: "Explorers and the status page in the link list"
+  es: "Exploradores y página de estado en la lista de enlaces"
+- en: "The status page's JSON"
+  es: "El JSON de la página de estado"
+- en: "Browser wallet and node wallet formats (developers)"
+  es: "Formatos de monedero de navegador y de nodo (desarrolladores)"
+- en: "The community chats on the links page."
+  es: "Los chats de la comunidad en la página de enlaces."

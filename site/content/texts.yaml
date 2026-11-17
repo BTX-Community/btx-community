@@ -68,7 +68,7 @@ en:
   nav.learn: Learn
   nav.network: Network
   nav.links: Links
-  nav.docs: Documents
+  nav.docs: "Projects"
   nav.infra: Run infra
   nav.dev: Developers
   nav.dev-work: "Developers: ongoing work"
@@ -85,8 +85,8 @@ en:
     software as measured on GitHub.
   page.links.title: Links
   page.links.lead: Projects, tools and services around BTX, each one opened and checked by hand.
-  page.docs.title: Documents
-  page.docs.lead: The roadmap and the research papers this group maintains in the open.
+  page.docs.title: "Community projects"
+  page.docs.lead: "What the community can build and run as its own, then the roadmap and the research papers this group maintains in the open."
   page.infra.title: Run BTX infrastructure
   page.infra.lead: "Machines you can give the network: what each one does, what it needs, its guide and who to ask, and a map of how they fit together."
   page.dev.title: Become a BTX dev
@@ -104,7 +104,7 @@ en:
   upcoming.caveats: Before you switch
   upcoming.notes: Release notes
   checklists.title: Check first
-  documents.title: Documents
+  documents.title: "Roadmap and papers"
   documents.lead: >-
     What this community has written down. Every one of them lives in the repository, so each
     change is visible as a commit and anyone can correct a figure.
@@ -407,7 +407,7 @@ de:
   nav.learn: Lernen
   nav.network: Netz
   nav.links: Links
-  nav.docs: Dokumente
+  nav.docs: "Projekte"
   nav.infra: Infra betreiben
   nav.dev: Entwickeln
   nav.dev-work: "Entwickeln: laufende Arbeit"
@@ -424,8 +424,8 @@ de:
     Node-Software, gemessen auf GitHub.
   page.links.title: Links
   page.links.lead: Projekte, Werkzeuge und Dienste rund um BTX, jeder Eintrag von Hand geöffnet und geprüft.
-  page.docs.title: Dokumente
-  page.docs.lead: Die Roadmap und die Research-Papiere, die diese Gruppe offen pflegt.
+  page.docs.title: "Community-Projekte"
+  page.docs.lead: "Was die Community selbst bauen und betreiben kann, dann die Roadmap und die Research-Papiere, die diese Gruppe offen pflegt."
   page.infra.title: BTX-Infrastruktur betreiben
   page.infra.lead: "Rechner, die du dem Netz geben kannst: was jeder tut, was er braucht, seine Anleitung und wen man fragt, dazu eine Karte, wie alles zusammenhängt."
   page.dev.title: BTX-Entwickler werden
@@ -443,7 +443,7 @@ de:
   upcoming.caveats: Bevor du wechselst
   upcoming.notes: Release-Notes
   checklists.title: Erst prüfen
-  documents.title: Dokumente
+  documents.title: "Roadmap und Papiere"
   documents.lead: >-
     Was diese Community aufgeschrieben hat. Alles davon liegt im Repository, jede Änderung ist
     also als Commit sichtbar, und jeder kann eine Zahl korrigieren.
@@ -751,7 +751,7 @@ es:
   nav.learn: Aprender
   nav.network: Red
   nav.links: Enlaces
-  nav.docs: Documentos
+  nav.docs: "Proyectos"
   nav.infra: Operar infra
   nav.dev: Desarrolladores
   nav.dev-work: "Desarrolladores: trabajo en curso"
@@ -768,8 +768,8 @@ es:
     del nodo medido en GitHub.
   page.links.title: Enlaces
   page.links.lead: Proyectos, herramientas y servicios en torno a BTX, cada uno abierto y revisado a mano.
-  page.docs.title: Documentos
-  page.docs.lead: La hoja de ruta y los documentos de investigación que este grupo mantiene en abierto.
+  page.docs.title: "Proyectos de la comunidad"
+  page.docs.lead: "Lo que la comunidad puede construir y operar por su cuenta, y después la hoja de ruta y los documentos de investigación que este grupo mantiene en abierto."
   page.infra.title: Operar infraestructura de BTX
   page.infra.lead: "Máquinas que puedes aportar a la red: qué hace cada una, qué necesita, su guía y a quién preguntar, y un mapa de cómo encajan entre sí."
   page.dev.title: Hazte desarrollador de BTX
@@ -787,7 +787,7 @@ es:
   upcoming.caveats: Antes de cambiar
   upcoming.notes: Notas de versión
   checklists.title: Comprueba primero
-  documents.title: Documentos
+  documents.title: "Hoja de ruta y documentos"
   documents.lead: >-
     Lo que esta comunidad ha puesto por escrito. Todo está en el repositorio, así que cada cambio
     se ve como un commit y cualquiera puede corregir una cifra.
@@ -1097,7 +1097,7 @@ fr:
   nav.learn: Comprendre
   nav.network: Réseau
   nav.links: Liens
-  nav.docs: Documents
+  nav.docs: "Projets"
   nav.infra: Infra
   nav.dev: Développeurs
   nav.dev-work: "Développeurs : travaux en cours"
@@ -1114,8 +1114,8 @@ fr:
     nœud tel que mesuré sur GitHub.
   page.links.title: Liens
   page.links.lead: Projets, outils et services autour de BTX, chacun ouvert et vérifié à la main.
-  page.docs.title: Documents
-  page.docs.lead: La feuille de route et les documents de recherche que ce groupe tient à jour publiquement.
+  page.docs.title: "Projets de la communauté"
+  page.docs.lead: "Ce que la communauté peut construire et faire tourner elle-même, puis la feuille de route et les documents de recherche que ce groupe tient à jour publiquement."
   page.infra.title: "Faire tourner l'infrastructure de BTX"
   page.infra.lead: "Les machines que vous pouvez apporter au réseau : ce que fait chacune, ce qu'il lui faut, son guide et à qui demander, avec une carte qui montre comment elles s'articulent."
   page.dev.title: Devenir développeur BTX
@@ -1133,7 +1133,7 @@ fr:
   upcoming.caveats: Avant de changer
   upcoming.notes: Notes de version
   checklists.title: À vérifier d'abord
-  documents.title: Documents
+  documents.title: "Feuille de route et documents"
   documents.lead: >-
     Ce que cette communauté a mis par écrit. Tout se trouve dans le dépôt : chaque modification est
     visible comme un commit et chacun peut corriger un chiffre.
@@ -1438,7 +1438,7 @@ zh:
   nav.learn: 了解
   nav.network: 网络
   nav.links: 链接
-  nav.docs: 文档
+  nav.docs: "项目"
   nav.infra: 运行基础设施
   nav.dev: 开发者
   nav.dev-work: "开发者：进行中的工作"
@@ -1453,8 +1453,8 @@ zh:
   page.network.lead: 来自公开状态 API 的网络实时状态，以及在 GitHub 上测量的节点软件开发情况。
   page.links.title: 链接
   page.links.lead: 围绕 BTX 的项目、工具和服务，每一项都经人工打开并核实。
-  page.docs.title: 文档
-  page.docs.lead: 本小组公开维护的路线图和研究文档。
+  page.docs.title: "社区项目"
+  page.docs.lead: "社区可以自行构建和运营的项目，以及本小组公开维护的路线图和研究文档。"
   page.infra.title: 运行 BTX 基础设施
   page.infra.lead: 你可以为网络提供的机器：每台做什么、需要什么、对应的指南和该问谁，另附一张说明它们如何配合的图。
   page.dev.title: 成为 BTX 开发者
@@ -1471,7 +1471,7 @@ zh:
   upcoming.caveats: 切换之前
   upcoming.notes: 发布说明
   checklists.title: 先检查
-  documents.title: 文档
+  documents.title: "路线图与研究文档"
   documents.lead: >-
     这个社区写下的内容。所有文档都在代码仓库中，因此每次修改都以提交的形式可见，任何人都可以更正数字。
   documents.open: 阅读

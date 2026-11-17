@@ -88,6 +88,7 @@
           </article>
           {% endfor %}
         </div>
+        {% if projects %}<p class="c-links c-roles__projects"><a class="c-link" href="{{ nav_href.docs }}#projects">{{ projects.texts.infra_link }} →</a></p>{% endif %}
       </section>
 
       <section class="c-map" id="map" aria-labelledby="map-title">

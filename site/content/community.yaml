@@ -28,6 +28,10 @@ audiences:
         Proof-of-Work (MatMul). Getragen wird es von einer offenen Community, nicht von einer Firma.
     steps:
       - text:
+          en: What BTX is, in a few facts with their sources.
+          de: Was BTX ist, in wenigen Fakten mit ihren Quellen.
+        page: learn
+      - text:
           en: >-
             Read the official introduction and documentation. It was written for v0.33.2;
             newer releases differ in places.
@@ -43,6 +47,10 @@ audiences:
           en: Ask questions in the community chats (Discord, Telegram).
           de: Fragen in den Community-Chats stellen (Discord, Telegram).
         anchor: community
+      - text:
+          en: Choose a wallet from the list, after reading "Before you buy or receive BTX" below.
+          de: Eine Wallet aus der Liste wählen, nachdem du unten „Bevor du BTX kaufst oder empfängst“ gelesen hast.
+        anchor: wallets
       - text:
           en: >-
             Never share your seed or private key. Nobody from the community will ever ask for
@@ -116,15 +124,15 @@ audiences:
         url: https://github.com/MendeMatthias/easynode
       - text:
           en: >-
-            On a server - the official release for Linux needs glibc 2.38 or newer
-            (Ubuntu 24.04, Debian 13); a GPU node takes the -cuda13 archive (Blackwell cards).
-            The v0.34.16 pre-release has no CUDA build, so GPU nodes stay on v0.34.15. The
-            current release has no official Windows archive.
+            On a server - v0.34.16 has two Linux x86_64 archives, both for glibc 2.38 or newer
+            (Ubuntu 24.04, Debian 13): a plain one, and a -cuda13 one for GPU nodes (sm_120: RTX 50
+            and RTX PRO Blackwell cards; the NVIDIA driver is not included). There is no official
+            Windows or macOS archive.
           de: >-
-            Auf einem Server - das offizielle Linux-Release braucht glibc 2.38 oder neuer
-            (Ubuntu 24.04, Debian 13); ein GPU-Node nimmt das Archiv -cuda13 (Blackwell-Karten).
-            Das Pre-Release v0.34.16 hat keinen CUDA-Build, GPU-Nodes bleiben daher auf v0.34.15.
-            Für das aktuelle Release gibt es kein offizielles Windows-Archiv.
+            Auf einem Server - v0.34.16 hat zwei Linux-x86_64-Archive, beide für glibc 2.38 oder
+            neuer (Ubuntu 24.04, Debian 13): ein normales und eines mit -cuda13 für GPU-Nodes
+            (sm_120: Blackwell-Karten der Reihen RTX 50 und RTX PRO; der NVIDIA-Treiber ist nicht
+            dabei). Ein offizielles Windows- oder macOS-Archiv gibt es nicht.
         url: https://github.com/btxchain/btx/releases
       - text:
           en: >-
@@ -138,6 +146,10 @@ audiences:
           en: Node stuck at a height? The node help explains each known case and its fix.
           de: Node hängt bei einer Höhe? Die Node-Hilfe erklärt jeden bekannten Fall und die Lösung.
         url: https://network.btx-monitoring.com/help/
+      - text:
+          en: Have a spare machine? Seven ways to give BTX infrastructure, from a node to a fuzz box.
+          de: Einen Rechner übrig? Sieben Wege, BTX Infrastruktur zu geben, vom Node bis zur Fuzz-Box.
+        page: infra
       - text:
           en: >-
             Signers (GPU attestors) need a GPU that passes btxd's self-test and must stay
@@ -179,6 +191,10 @@ audiences:
           en: The reference implementation and its own rules for agents.
           de: Die Referenzimplementierung und ihre eigenen Regeln für Agenten.
         url: https://github.com/btxchain/btx
+      - text:
+          en: "Community projects: things to build and run outside the node software."
+          de: "Community-Projekte: Dinge, die man außerhalb der Node-Software baut und betreibt."
+        page: docs
 
 categories:
   - id: community
@@ -486,11 +502,12 @@ categories:
             bereitgestellt.
         note:
           en: >-
-            Unofficial demo with sample data only. The feature is not released; the page connects to
-            no node or wallet.
+            Unofficial demo with sample data only. Atlas is in the v0.34.16 source, but the release
+            archives leave it out; the page connects to no node or wallet.
           de: >-
-            Inoffizielle Demo, nur mit Beispieldaten. Die Funktion ist nicht veröffentlicht; die Seite
-            verbindet sich mit keinem Node und keinem Wallet.
+            Inoffizielle Demo, nur mit Beispieldaten. Atlas steckt im Quellcode von v0.34.16, die
+            Release-Archive lassen es aber weg; die Seite verbindet sich mit keinem Node und keinem
+            Wallet.
       - id: byron-swapnet-demo
         name: SwapNet demo
         url: https://explorer.btxbyronbay.com/observatory-swapnet/
@@ -504,11 +521,12 @@ categories:
             Quellcode gebaut.
         note:
           en: >-
-            Unofficial demo with sample data only. The feature is not released; the page connects to
-            no node or wallet.
+            Unofficial demo with sample data only. SwapNet is in v0.34.16 for broader testing, off
+            unless a node starts with -swapnet=1; the page connects to no node or wallet.
           de: >-
-            Inoffizielle Demo, nur mit Beispieldaten. Die Funktion ist nicht veröffentlicht; die Seite
-            verbindet sich mit keinem Node und keinem Wallet.
+            Inoffizielle Demo, nur mit Beispieldaten. SwapNet ist in v0.34.16 für breitere Tests
+            enthalten und aus, solange ein Node nicht mit -swapnet=1 startet; die Seite verbindet sich
+            mit keinem Node und keinem Wallet.
       - id: ninjaraider-explorer
         name: ninjaraider explorer
         url: https://btxscan.ninjaraider.com
@@ -714,11 +732,11 @@ categories:
         tags: [snapshot, utxo, signed]
         description:
           en: >-
-            UTXO snapshot for loadtxoutset, confirmed by two operators (Mende and Jarek), with
-            SHA-256 of the file and the manifest.
+            UTXO snapshot for loadtxoutset, confirmed by two operators, with SHA-256 of the file
+            and the manifest.
           de: >-
-            UTXO-Snapshot für loadtxoutset, von zwei Betreibern bestätigt (Mende und Jarek), mit
-            SHA-256 von Datei und Manifest.
+            UTXO-Snapshot für loadtxoutset, von zwei Betreibern bestätigt, mit SHA-256 von Datei
+            und Manifest.
         note:
           en: Check the SHA-256 before use. The JSON names the height; it can lag the chain by a few thousand blocks.
           de: Vor der Nutzung SHA-256 prüfen. Das JSON nennt die Höhe; sie kann einige tausend Blöcke hinter der Kette liegen.
