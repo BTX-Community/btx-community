@@ -160,16 +160,18 @@ translations:
     workflows de Atlas de upstream): trabajos CI-0 a CI-10, la lista de fallos conocidos y un
     trabajo nocturno para las 41 suites stage3 que agotan el tiempo.
 - en: >-
-    The results of the last nightly build and test run that the status page's operator publishes as
-    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix listed under
-    Gates. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+    The results of the last nightly build and test runs that the status page's operator publishes as
+    job CI-0, read live from its API: one run on Linux for each branch it builds, the newest release
+    first. They are not the fork build matrix listed under Gates. The unit runs leave out the slow
+    matmul_v4_rc_stage3_* suites.
   es: >-
-    Los resultados de la última ejecución nocturna de compilación y pruebas que el operador de la
-    página de estado publica como job CI-0, leídos en directo de su API. Es una sola ejecución en
-    Linux, no la matriz de compilación del fork que aparece en Controles. La ejecución de las
-    pruebas unitarias deja fuera las suites lentas matmul_v4_rc_stage3_*.
-- en: "This panel is filled in by JavaScript. The run as raw data: "
-  es: "Este panel se rellena con JavaScript. La ejecución como datos sin procesar: "
+    Los resultados de las últimas ejecuciones nocturnas de compilación y pruebas que el operador de
+    la página de estado publica como job CI-0, leídos en directo de su API: una ejecución en Linux
+    por cada rama que compila, la versión más reciente primero. No son la matriz de compilación del
+    fork que aparece en Controles. Las pruebas unitarias dejan fuera las suites lentas
+    matmul_v4_rc_stage3_*.
+- en: "This panel is filled in by JavaScript. The runs as raw data: "
+  es: "Este panel se rellena con JavaScript. Las ejecuciones como datos sin procesar: "
 - en: build failed
   es: compilación fallida
 - en: build passed
@@ -201,8 +203,8 @@ translations:
   es: Pruebas funcionales
 - en: Last run is older than 36 h; the figures below may be out of date.
   es: La última ejecución tiene más de 36 h; las cifras de abajo pueden estar desactualizadas.
-- en: Loading the last run …
-  es: Cargando la última ejecución …
+- en: Loading the last runs …
+  es: Cargando las últimas ejecuciones …
 - en: Started {measured} · finished {finished}
   es: >-
     Inicio: {measured} · fin: {finished}
@@ -210,8 +212,8 @@ translations:
   es: Ejecución nocturna de CI-0
 - en: No current run.
   es: No hay ninguna ejecución actual.
-- en: The run as JSON
-  es: La ejecución en JSON
+- en: The runs as JSON
+  es: Las ejecuciones en JSON
 - en: Unit tests
   es: Pruebas unitarias
 - en: passed · {failed} failed
@@ -222,6 +224,14 @@ translations:
     {passed} of {run}
   es: >-
     {passed} de {run}
+- en: This run is older than 36 h; its figures may be out of date.
+  es: Esta ejecución tiene más de 36 h; sus cifras pueden estar desactualizadas.
+- en: "{new} new · {known} known"
+  es: "fallos nuevos: {new} · conocidos: {known}"
+- en: "New failures, not on the branch's known-failing list ({count})"
+  es: "Fallos nuevos, fuera de la lista de fallos conocidos de la rama ({count})"
+- en: "Known-failing tests that passed this time ({count})"
+  es: "Pruebas con fallo conocido que esta vez se superaron ({count})"
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   es: Ya no lista BTX; su mercado BTX/USDT desapareció en julio de 2026.
 - en: >-

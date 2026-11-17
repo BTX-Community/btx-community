@@ -165,16 +165,18 @@ translations:
     CI-0 à CI-10, la liste des échecs connus et un job nocturne pour les 41 suites stage3 qui
     expirent.
 - en: >-
-    The results of the last nightly build and test run that the status page's operator publishes as
-    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix listed under
-    Gates. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+    The results of the last nightly build and test runs that the status page's operator publishes as
+    job CI-0, read live from its API: one run on Linux for each branch it builds, the newest release
+    first. They are not the fork build matrix listed under Gates. The unit runs leave out the slow
+    matmul_v4_rc_stage3_* suites.
   fr: >-
-    Les résultats de la dernière exécution nocturne de compilation et de tests que l'opérateur de la
-    page d'état publie comme job CI-0, lus en direct dans son API. C'est une seule exécution sous
-    Linux, pas la matrice de compilation du fork listée sous Contrôles. L'exécution des tests
-    unitaires laisse de côté les suites lentes matmul_v4_rc_stage3_*.
-- en: "This panel is filled in by JavaScript. The run as raw data: "
-  fr: "Ce panneau est rempli par JavaScript. L'exécution en données brutes : "
+    Les résultats des dernières exécutions nocturnes de compilation et de tests que l'opérateur de
+    la page d'état publie comme job CI-0, lus en direct dans son API : une exécution sous Linux par
+    branche compilée, la version la plus récente en premier. Ce n'est pas la matrice de compilation
+    du fork listée sous Contrôles. Les tests unitaires laissent de côté les suites lentes
+    matmul_v4_rc_stage3_*.
+- en: "This panel is filled in by JavaScript. The runs as raw data: "
+  fr: "Ce panneau est rempli par JavaScript. Les exécutions en données brutes : "
 - en: build failed
   fr: compilation en échec
 - en: build passed
@@ -206,8 +208,8 @@ translations:
   fr: Tests fonctionnels
 - en: Last run is older than 36 h; the figures below may be out of date.
   fr: La dernière exécution date de plus de 36 h ; les chiffres ci-dessous peuvent être dépassés.
-- en: Loading the last run …
-  fr: Chargement de la dernière exécution …
+- en: Loading the last runs …
+  fr: Chargement des dernières exécutions …
 - en: Started {measured} · finished {finished}
   fr: >-
     Début : {measured} · fin : {finished}
@@ -215,8 +217,8 @@ translations:
   fr: Exécution nocturne de CI-0
 - en: No current run.
   fr: Aucune exécution récente.
-- en: The run as JSON
-  fr: L'exécution en JSON
+- en: The runs as JSON
+  fr: Les exécutions en JSON
 - en: Unit tests
   fr: Tests unitaires
 - en: passed · {failed} failed
@@ -227,6 +229,14 @@ translations:
     {passed} of {run}
   fr: >-
     {passed} sur {run}
+- en: This run is older than 36 h; its figures may be out of date.
+  fr: Cette exécution date de plus de 36 h ; ses chiffres peuvent être dépassés.
+- en: "{new} new · {known} known"
+  fr: "nouveaux échecs : {new} · connus : {known}"
+- en: "New failures, not on the branch's known-failing list ({count})"
+  fr: "Nouveaux échecs, absents de la liste des échecs connus de la branche ({count})"
+- en: "Known-failing tests that passed this time ({count})"
+  fr: "Tests en échec connu réussis cette fois ({count})"
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   fr: Ne liste plus BTX ; son marché BTX/USDT a disparu en juillet 2026.
 - en: >-

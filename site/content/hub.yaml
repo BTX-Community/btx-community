@@ -1847,30 +1847,35 @@ gates:
 gates_source: https://github.com/BTX-Community/btx-community/blob/main/dev/plan/MASTER-PLAN.md
 ci_pack: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-CI.md
 
-# The panel with the last nightly CI-0 run, below the CI jobs. These are the page's own texts, not
-# from the hub; the run itself is read live from the status page's API (CI_API in site/build.py) by
-# site/static/js/ci.js. Placeholders in braces are filled in by the script and must stay as they are.
+# The panel with the last nightly CI-0 runs, below the CI jobs. These are the page's own texts, not
+# from the hub; the runs themselves are read live from the status page's API (CI_API in
+# site/build.py) by site/static/js/ci.js, one block per entry of its runs[]. Placeholders in braces
+# are filled in by the script and must stay as they are.
 # The noscript text carries its own punctuation and the space before the link (none after a
 # full-width colon). The labels are specific ("build passed", not "passed"), since translations are
 # keyed by the English text and a one-word key would be reused for other meanings. In times,
-# {measured} is the API's measured_at, the time the run started.
+# {measured} is the API's measured_at, the time the run started. In split, {new} counts the API's
+# new_failures of a suite and {known} the other failures of that suite; known_passed lists its
+# known_but_passed.
 ci:
   title: { en: Nightly CI-0 run, de: Nächtlicher CI-0-Lauf }
   lead:
     en: >-
-      The results of the last nightly build and test run that the status page's operator
-      publishes as job CI-0, read live from its API. It is one run on Linux, not the fork build
-      matrix listed under Gates. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+      The results of the last nightly build and test runs that the status page's operator
+      publishes as job CI-0, read live from its API: one run on Linux for each branch it builds,
+      the newest release first. They are not the fork build matrix listed under Gates. The unit
+      runs leave out the slow matmul_v4_rc_stage3_* suites.
     de: >-
-      Die Ergebnisse des letzten nächtlichen Build- und Testlaufs, die der Betreiber der
-      Statusseite als Job CI-0 veröffentlicht, live aus deren API gelesen. Es ist ein einzelner
-      Lauf unter Linux, nicht die Build-Matrix auf dem Fork, die unter Gates steht. Der
-      Unit-Testlauf lässt die langsamen Suites matmul_v4_rc_stage3_* aus.
-  raw: { en: The run as JSON, de: Der Lauf als JSON }
+      Die Ergebnisse der letzten nächtlichen Build- und Testläufe, die der Betreiber der
+      Statusseite als Job CI-0 veröffentlicht, live aus deren API gelesen: ein Lauf unter Linux für
+      jeden Branch, den er baut, das neueste Release zuerst. Sie sind nicht die Build-Matrix auf
+      dem Fork, die unter Gates steht. Die Unit-Testläufe lassen die langsamen Suites
+      matmul_v4_rc_stage3_* aus.
+  raw: { en: The runs as JSON, de: Die Läufe als JSON }
   noscript:
-    en: "This panel is filled in by JavaScript. The run as raw data: "
-    de: "Dieser Bereich wird per JavaScript gefüllt. Der Lauf als Rohdaten: "
-  loading: { en: Loading the last run …, de: Der letzte Lauf wird geladen … }
+    en: "This panel is filled in by JavaScript. The runs as raw data: "
+    de: "Dieser Bereich wird per JavaScript gefüllt. Die Läufe als Rohdaten: "
+  loading: { en: Loading the last runs …, de: Die letzten Läufe werden geladen … }
   none: { en: No current run., de: Kein aktueller Lauf. }
   stale:
     en: Last run is older than 36 h; the figures below may be out of date.
@@ -1895,6 +1900,16 @@ ci:
   names_of: { en: "{listed} of {failed}", de: "{listed} von {failed}" }
   more: { en: "… and {count} more", de: "… und {count} weitere" }
   times: { en: "Started {measured} · finished {finished}", de: "Gestartet {measured} · fertig {finished}" }
+  run_stale:
+    en: This run is older than 36 h; its figures may be out of date.
+    de: Dieser Lauf ist älter als 36 h; seine Zahlen sind womöglich veraltet.
+  split: { en: "{new} new · {known} known", de: "{new} neu · {known} bekannt" }
+  new_failures:
+    en: "New failures, not on the branch's known-failing list ({count})"
+    de: "Neue Fehlschläge, nicht auf der Liste bekannter Fehlschläge des Branches ({count})"
+  known_passed:
+    en: "Known-failing tests that passed this time ({count})"
+    de: "Als fehlschlagend bekannte Tests, die diesmal bestanden ({count})"
 
 phases:
   - id: 2a

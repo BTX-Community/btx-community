@@ -719,6 +719,9 @@ CI_PLACEHOLDERS = {
     "names_of": {"listed", "failed"},
     "more": {"count"},
     "times": {"measured", "finished"},
+    "split": {"new", "known"},
+    "new_failures": {"count"},
+    "known_passed": {"count"},
 }
 """The texts of the CI panel that ``static/js/ci.js`` fills in, with the placeholders each must keep."""
 
@@ -754,6 +757,10 @@ class CiPanel(_Model):
     names_of: Text
     more: Text
     times: Text
+    run_stale: Text
+    split: Text
+    new_failures: Text
+    known_passed: Text
 
     @model_validator(mode="after")
     def _placeholders(self) -> Self:

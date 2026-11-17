@@ -24,7 +24,9 @@
         data-not-run="{{ ci['not_run'] }}" data-count="{{ ci['count'] }}" data-unit-sub="{{ ci['unit_sub'] }}"
         data-functional-sub="{{ ci['functional_sub'] }}" data-failed-unit="{{ ci['failed_unit'] }}"
         data-failed-functional="{{ ci['failed_functional'] }}" data-names-of="{{ ci['names_of'] }}"
-        data-more="{{ ci['more'] }}" data-times="{{ ci['times'] }}">
+        data-more="{{ ci['more'] }}" data-times="{{ ci['times'] }}" data-run-stale="{{ ci['run_stale'] }}"
+        data-split="{{ ci['split'] }}" data-new-failures="{{ ci['new_failures'] }}"
+        data-known-passed="{{ ci['known_passed'] }}">
         <div class="c-live__head">
           <h2 class="c-ci__title" id="ci-title">{{ ci["title"] }}</h2>
           <a class="c-link" href="{{ ci_api }}" rel="noopener noreferrer">{{ ci["raw"] }} ↗</a>
@@ -32,7 +34,8 @@
         <p class="c-dev__lead">{{ ci["lead"] }}</p>
         <noscript><p class="c-ci__status">{{ ci["noscript"] }}<a class="c-link" href="{{ ci_api }}" rel="noopener noreferrer">ci.json ↗</a></p></noscript>
         <p class="c-ci__status" data-ci="status" role="status"></p>
-        <div class="c-ci__run" data-ci="run" hidden>
+        <div class="c-ci__run" data-ci="run" role="group" hidden>
+          <p class="c-ci__status c-ci__status--warn" data-ci="run-stale" hidden></p>
           <dl class="c-tiles">
             <div class="c-tile c-tile--wide c-ci__ref-tile">
               <dt>{{ ci["ref"] }}</dt>
@@ -46,13 +49,23 @@
               <dt>{{ ci["unit"] }}</dt>
               <dd data-ci="unit">–</dd>
               <dd class="c-tile__sub" data-ci="unit-sub"></dd>
+              <dd class="c-tile__sub" data-ci="unit-split"></dd>
             </div>
             <div class="c-tile c-tile--wide">
               <dt>{{ ci["functional"] }}</dt>
               <dd data-ci="functional">–</dd>
               <dd class="c-tile__sub" data-ci="functional-sub"></dd>
+              <dd class="c-tile__sub" data-ci="functional-split"></dd>
             </div>
           </dl>
+          <details class="c-ci__failed" data-ci="new-failures" hidden>
+            <summary></summary>
+            <ul class="c-ci__names"></ul>
+          </details>
+          <details class="c-ci__failed" data-ci="known-passed" hidden>
+            <summary></summary>
+            <ul class="c-ci__names"></ul>
+          </details>
           <details class="c-ci__failed" data-ci="failed-unit" hidden>
             <summary></summary>
             <ul class="c-ci__names"></ul>

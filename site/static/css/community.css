@@ -612,8 +612,16 @@ a {
 }
 
 .c-ci__run[hidden],
-.c-ci__failed[hidden] {
+.c-ci__failed[hidden],
+.c-ci__status[hidden] {
   display: none;
+}
+
+/* One block per run; from the second on, a rule separates them. */
+.c-ci__run + .c-ci__run {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
 }
 
 .c-ci__status--warn {
