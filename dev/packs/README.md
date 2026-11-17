@@ -61,13 +61,14 @@ Open a pull request to this repository that adds your GitHub handle to the lane'
 | Work branch | `release-0.34.16`, head `4c7840e9` on 12 Nov | `git log -1 origin/release-0.34.16` |
 | `main` | v0.34.15 at `476f3f23`, what most nodes run | `git log -1 origin/main` |
 | Release line ahead of `main` | 1,194 commits | `git rev-list --count 476f3f23..4c7840e9` |
-| Measurements (coverage, static, TSan) | taken at `c6f9678d`, 31 commits before `4c7840e9` | `git rev-list --count c6f9678d..4c7840e9` |
-| Consensus files changed since the measurement | none: `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus/`, `script/interpreter.cpp` are unchanged. The attestation store did change: `4c7840e9` (the attestation blocklist extension, #583) touches `node/matmul_trusted_attestations.*` and `src/matmul/trusted_exact_replay_attestation.*` | `git diff --stat c6f9678d 4c7840e9 -- <those paths>` |
+| Measurements (static, TSan) | taken at `c6f9678d`, 31 commits before `4c7840e9` | `git rev-list --count c6f9678d..4c7840e9` |
+| Coverage measurement | taken on `swapnet-v2` at `a5d1637f` (14 Nov), 177 commits after `4c7840e9` | `git rev-list --count 4c7840e9..a5d1637f` |
+| Consensus files changed from `c6f9678d` to `4c7840e9` | none: `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus/`, `script/interpreter.cpp` are unchanged. The attestation store did change: `4c7840e9` (the attestation blocklist extension, #583) touches `node/matmul_trusted_attestations.*` and `src/matmul/trusted_exact_replay_attestation.*` | `git diff --stat c6f9678d 4c7840e9 -- <those paths>` |
 | Release-line scope | changes to validation, fork choice, what a signer is told to attest, or MatMul frontier state stay out of `release-0.34.16`; details and what did land nearby in [`../06-pr-gate.md`](../06-pr-gate.md) §2 | #464, 11 Nov; the closing notes on #461, #462, #463, #479, #484, #515 (11 Nov) |
 
 Re-check the live head before you count, build or post: `git fetch origin && git log -1 --format=%h origin/release-0.34.16`. If it moved, rebase and recount.
 
-**Source tags used in the packs.** [PLAN] = [`../plan/MASTER-PLAN.md`](../plan/MASTER-PLAN.md). [data] = [`../plan/plan-data.json`](../plan/plan-data.json). [lanes] = `../07-lanes.md` and `../plan/lanes.json`. [C1] = the 12 Nov CodeQL and cppcheck run; [C2] = the 12 Nov clang-tidy, TSan and lock-order run; [C3] = the 12 Nov coverage run (recipe in `../04-build-and-test.md` §5). [repo] = a file in the tree at `4c7840e9`. [git] = a git command you can rerun. [read] = taken from a source; [tested] = a command was run; [inferred] = judgement.
+**Source tags used in the packs.** [PLAN] = [`../plan/MASTER-PLAN.md`](../plan/MASTER-PLAN.md). [data] = [`../plan/plan-data.json`](../plan/plan-data.json). [lanes] = `../07-lanes.md` and `../plan/lanes.json`. [C1] = the 12 Nov CodeQL and cppcheck run; [C2] = the 12 Nov clang-tidy, TSan and lock-order run; [C3] = the coverage runs (recipe in `../04-build-and-test.md` §5): figures from the 14 Nov run at `a5d1637f`, older notes from the 12 Nov run at `c6f9678d`. [repo] = a file in the tree at `4c7840e9`. [git] = a git command you can rerun. [read] = taken from a source; [tested] = a command was run; [inferred] = judgement.
 
 ## What the packs publish, and what they do not
 

@@ -5,9 +5,9 @@
 
 **For an AI working a lane.** Read [`AGENTS.md`](AGENTS.md), [`06-pr-gate.md`](06-pr-gate.md) and the lane's pack in [`packs/`](packs/) first. §8 of this page is the stop list: if a step would break one of its rules, stop and hand the question to the human.
 
-This is the public version: roles, not names. Every owner, second-pass and runner slot below is open. Companion to the plan, [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md); the machine-readable form is [`plan/lanes.json`](plan/lanes.json). Which lane fits which level: [`08-levels.md`](08-levels.md). Lanes with an AI pack have it in [`packs/`](packs/) (A-WALLET, A-STORES, C-K01, C-PORT, C-PATHS, C-STATIC, I-CI, I-RC and `I-RC-runner`, I-OPS, I-XDEV, E-CONSENSUS); the five lanes in §4 have none yet.
+This is the public version: roles, and a handle once someone has claimed a slot. Every slot without a handle below is open. Companion to the plan, [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md); the machine-readable form is [`plan/lanes.json`](plan/lanes.json). Which lane fits which level: [`08-levels.md`](08-levels.md). Lanes with an AI pack have it in [`packs/`](packs/) (A-WALLET, A-STORES, C-K01, C-PORT, C-PATHS, C-STATIC, I-CI, I-RC and `I-RC-runner`, I-OPS, I-XDEV, E-CONSENSUS); the five lanes in §4 have none yet.
 
-Every number below comes from [`plan/plan-data.json`](plan/plan-data.json) or the plan; [C3] marks a number from the coverage run. Coverage is product-code line coverage on `release-0.34.16` at `c6f9678d`, unit-only / unit + functional. All coverage numbers are floors: 47 unit suites timed out and 82 of 208 functional scripts failed in the coverage run. The coverage build configures again on `release-0.34.16` since #578 (merged into the release line on 12 Nov as `7051507b`); the fix is not in v0.34.15. The recipe is in [`04-build-and-test.md`](04-build-and-test.md) §5. The live head is `4c7840e9` (31 commits later; none touches `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus` or `script/interpreter.cpp`: `git diff --stat c6f9678d 4c7840e9 -- src/validation.cpp src/net_processing.cpp src/pow.cpp src/consensus src/script/interpreter.cpp` prints nothing).
+Every number below comes from [`plan/plan-data.json`](plan/plan-data.json) or the plan; [C3] marks a number from the coverage run. Coverage is product-code line coverage on `swapnet-v2` at `a5d1637f` (14 Nov), unit-only / unit + functional; the other numbers were measured at `c6f9678d`. All coverage numbers are floors: 42 unit suites timed out and 14 of 220 functional scripts failed in the coverage run, and the time budgets were shorter than on 12 Nov, so the comparison with that run is indicative. The coverage build configures again on `release-0.34.16` since #578 (merged into the release line on 12 Nov as `7051507b`); the fix is not in v0.34.15. The recipe is in [`04-build-and-test.md`](04-build-and-test.md) §5. The live head is `4c7840e9` (31 commits after `c6f9678d`; none touches `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus` or `script/interpreter.cpp`: `git diff --stat c6f9678d 4c7840e9 -- src/validation.cpp src/net_processing.cpp src/pow.cpp src/consensus src/script/interpreter.cpp` prints nothing).
 
 ## 0. The idea in five lines
 
@@ -29,7 +29,7 @@ Every number below comes from [`plan/plan-data.json`](plan/plan-data.json) or th
 
 Load rule: one person owns at most three lanes and second-passes at most three; someone taking a first lane owns one. Five lanes get no work until someone takes them (§4). That is stated, not hidden.
 
-Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-STORES; L3 = C-STATIC + I-CI (+ A-HELPER, which waits for an owner); L4 = E-CONSENSUS; L5 = I-OPS; L6 + L8 = I-RC; L7 = I-XDEV.
+Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-STORES; L3 = C-STATIC + I-CI (+ A-HELPER); L4 = E-CONSENSUS; L5 = I-OPS; L6 + L8 = I-RC; L7 = I-XDEV.
 
 ## 2. The lane map
 
@@ -45,10 +45,10 @@ Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-S
    (code areas)           (one rule each)         (gates and runs)
    ---------------        ---------------         ---------------
    A-WALLET    [claim]    C-K01    [claim]        I-CI    [claim]
-   A-STORES    [claim]    C-PORT   [claim]        I-RC    [claim]
-   E-CONSENSUS [claim]    C-STATIC [claim]        I-OPS   [claim]
+   A-STORES    [claim]    C-PORT   sunnyriverr    I-RC    [claim]
+   E-CONSENSUS [claim]    C-STATIC [claim]        I-OPS   dr-chambre
    A-NET       [claim]    C-PATHS  [claim]        I-XDEV  [claim]
-   A-HELPER    [claim]
+   A-HELPER    jarekpiot
    A-SHIELDED  [claim]    Runners: [claim] Windows, Linux, macOS, GPU
    A-PQ        [claim]    Second passes: see §3 (never the owner)
    A-GUI       [claim]
@@ -66,16 +66,16 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 
 **A-WALLET: wallet, RPC authorization, secrets**
 - Scope: `src/wallet/` (not `shielded_rpc.cpp`, see A-SHIELDED), `src/wallet/rpc/`, wallet-facing RPC auth in `src/rpc/`. Classes K05 (10 PRs), K11/K12 (8), K25 wallet half (5), K27 (3). Deep review §3.3 of the master plan (seed ownership, backups, locked-wallet user path, migration W1-W3).
-- Why: wallet is risk rank 4; coverage 37.2 / 50.5; rpc 51.6 / 72.9; 927 wallet functions never executed under unit + functional tests.
+- Why: wallet is risk rank 4; coverage 37.4 / 63.0; rpc 52.0 / 76.5; 927 wallet functions never executed under unit + functional tests (measured 12 Nov at `c6f9678d`).
 - Owner: (claimable) · Second pass: (claimable; never the owner).
 - Cadence: one class per week from phase 2b; §3.3 review in phase 3.
-- Done bar: K05 test enumerating every wallet RPC against a locked wallet, in ctest; K11 allowlist test per restricted-user RPC; K12 RAII reservation type plus a two-sender test; K27 log-scan assertion in the functional runner; a restore-without-passphrase probe that fails; a memory scan after `walletlock` with no seed bytes; wallet lines from 50.5 to at least 70 (target set here); each of the 927 unexecuted functions tested or listed as dead.
+- Done bar: K05 test enumerating every wallet RPC against a locked wallet, in ctest; K11 allowlist test per restricted-user RPC; K12 RAII reservation type plus a two-sender test; K27 log-scan assertion in the functional runner; a restore-without-passphrase probe that fails; a memory scan after `walletlock` with no seed bytes; wallet lines from 63.0 to at least 70 (target set here); each of the 927 unexecuted functions (measured 12 Nov at `c6f9678d`) tested or listed as dead.
 - First three tasks: (1) run the K05 dominance check over the src/wallet/rpc files that call funding primitives and file the test as one PR; (2) enumerate RPCs with a `path|file|secret_ref|destination` argument and write the K11 allowlist test; (3) the K12 `UnlockSelected` RAII type with the two-sender test.
 - Route: PR.
 
 **A-STORES: ModelNet store, deposit and persistence logic**
 - Scope: the ModelNet stores (`src/modelnet/helper.cpp` and the bounty, campaign, mandate, feed, catalog stores), `src/wallet/rpc/bcp1.cpp` and the BCP/1 planners, non-MatMul persistence. Classes K20/K21/K02 (52 PRs). Not greppable: this lane writes test generators, not instance fixes.
-- Why: modelnet is risk rank 3; `modelnet/helper.cpp` was touched by 42 fix PRs; modelnet coverage 83.7 / 85.6 hides the logic slips (the tests pass, the edge cases are wrong).
+- Why: modelnet is risk rank 3; `modelnet/helper.cpp` was touched by 42 fix PRs; modelnet coverage 84.1 / 86.2 hides the logic slips (the tests pass, the edge cases are wrong).
 - Owner: (claimable) · Second pass: (claimable; never the owner).
 - Cadence: one store per week from phase 2b.
 - Done bar: property tests per store (idempotency keys, pagination completeness, monotonic counters, restart = no restart) registered in ctest; one table-driven BCP/1 lifecycle test (new, mempool, confirmed, replaced, spent, consolidated) through every RPC that reports a deposit; a `mutate -> reopen -> compare` test per store; a `helper.cpp` split proposed to the maintainer with the tests in hand; zero new single-site K20/K21 PRs after the generators land.
@@ -84,32 +84,32 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 
 **E-CONSENSUS: consensus, fork choice, attestation, MatMul frontier (evidence only)**
 - Scope: `validation.cpp`, `pow.cpp`, `src/consensus/`, `script/interpreter.cpp`, fork choice and download scheduling in `net_processing.cpp`, `node/matmul_trusted_attestations.*`, `src/matmul/`. Classes K13 (15 PRs, 11 not taken) and K14 (19 PRs). Master plan §3.1, §3.6 (rules), §3.2b, §3.5b.
-- Why: net/p2p is risk rank 1 and validation rank 2; `net_processing.cpp` has 113 fix commits and 24.6 / 62.3 coverage; `validation.cpp` 63 fix commits, 75.6 / 78.2; `node/matmul_trusted_attestations.h` 50 fix commits; 68 consensus functions never executed. These areas are frozen for 0.34.16 (#464), so the only output that lands is evidence.
+- Why: net/p2p is risk rank 1 and validation rank 2; `net_processing.cpp` has 113 fix commits and 59.8 / 72.1 coverage; `validation.cpp` 63 fix commits, 77.0 / 79.8; `node/matmul_trusted_attestations.h` 50 fix commits; 68 consensus functions never executed (measured 12 Nov at `c6f9678d`). These areas are frozen for 0.34.16 (#464), so the only output that lands is evidence.
 - Owner: (claimable; prepares the evidence, the maintainer decides) · Second pass: (claimable; never the owner). Field data: I-OPS run reports (candidate runs, mirror timelines) and I-XDEV verdict tables.
 - Cadence: with the Thursday batch, only when a complete item exists; at most one short note.
-- Done bar: a #464 evidence list where every item is one measured result + one ready test + one paragraph; the K13 attestation state machine as one model-based test (vote, withdraw, restart, reorg, missing index) instead of five PRs; the K14 download state machine as a deterministic simulation with an adversarial scheduler asserting "every announced body is requested within N ticks"; the 68 unexecuted consensus functions listed as tested or dead; a byte-diff proof of block validity between `main` and the release line; the `net_processing` and `validation` thread-safety warnings delivered as a measured result; zero re-filed PRs that were not taken.
+- Done bar: a #464 evidence list where every item is one measured result + one ready test + one paragraph; the K13 attestation state machine as one model-based test (vote, withdraw, restart, reorg, missing index) instead of five PRs; the K14 download state machine as a deterministic simulation with an adversarial scheduler asserting "every announced body is requested within N ticks"; the 68 unexecuted consensus functions (measured 12 Nov at `c6f9678d`) listed as tested or dead; a byte-diff proof of block validity between `main` and the release line; the `net_processing` and `validation` thread-safety warnings delivered as a measured result; zero re-filed PRs that were not taken.
 - First three tasks: (1) turn the items on #464's list and the K13 list that were not taken into evidence items (one per invariant); (2) write the K13 model test; (3) the K14 simulation skeleton with the existing `p2p_*` fixtures.
 - Route: EVIDENCE. A PR is sent only if the maintainer asks for one.
 
 **A-NET: non-consensus P2P bounds and parsers (no work until claimed)**
 - Scope: `net.cpp`, `netbase`, `addrman`, message parsers outside fork choice and scheduling; the five message types with no fuzz target (DLTX, block chunks, mmsketch, mdpeers, mmatrefute); the ML-KEM hybrid handshake target; Dandelion stem limits. Class K09 P2P half (18 PRs across both halves); K25 observing-peer functional test (with A-WALLET).
-- Why: net/p2p is risk rank 1; `net_processing.cpp` 24.6 / 62.3, other net 50.4 / 75.5; the parser targets do not exist (gate G3: 1 of about 13 targets exists).
+- Why: net/p2p is risk rank 1; `net_processing.cpp` 59.8 / 72.1, other net 52.7 / 77.3; the parser targets do not exist (gate G3: 1 of about 13 targets exists).
 - Owner: (claimable) · Second pass: (claimable; never the owner). Interim: the phase-3 fuzz batch produces the targets only; nobody reviews the bounds table until the lane is owned.
 - Done bar: every peer-fed container in `doc/resource-bounds.md` with a bound, an eviction and a unit test; the five message-type targets plus the hybrid-handshake target link and run 24 h clean under ASan; K25 observing-peer test in the functional runner; `net_processing.cpp` at or above 75 lines with functional tests (target set here) through non-consensus tests.
 - First three tasks: (1) the container inventory for the P2P handlers (semgrep rule from the master plan §2 row 1); (2) the DLTX fuzz target; (3) the K25 observing-peer test.
 - Route: PR for bounds and targets; anything in scheduling or fork choice goes to E-CONSENSUS.
 
-**A-HELPER: ModelNet helper network surface and `security_v2` (no work until claimed)**
+**A-HELPER: ModelNet helper network surface and `security_v2`**
 - Scope: the helper's native request dispatcher, the fuzz targets that have never run, the modelnet fuzz build that does not link by default, `src/modelnet/security_v2/`, the two-user layout under `-modelrpcsocket`, the jail escape suite. Master plan §3.7. K09 helper half, fs-trust results that sit in the helper (most of the 133 are in the helper and stores).
 - Why: modelnet is risk rank 3; `security_v2` is at 0.2 / 15.0 with 6 files at 0 even with functional tests; the dispatcher has no fuzz target.
-- Owner: (claimable) · Second pass: (claimable; never the owner). Interim: the phase-3 fuzz batch covers the dispatcher target and the `native.cmake` gate only.
+- Owner: jarekpiot · Second pass: (claimable; never the owner). Interim: the phase-3 fuzz batch covers the dispatcher target and the `native.cmake` gate only.
 - Done bar: `modelnet_native_dispatch` target runs 24 h clean under ASan; the never-run targets run 1 h clean; every `security_v2` file above 0; a functional test that no non-loopback listener opens on 29447 without `-modelbind` and no NAT-PMP mapping is requested; under `-modelrpcsocket` the helper runs as a different user and cannot open `.cookie` or `wallets/`; a malformed reply fails the request, not the helper.
 - First three tasks: (1) make the modelnet fuzz build link at default options; (2) the dispatcher fuzz target on a scratch catalog; (3) the listener/NAT-PMP functional test.
 - Route: PR; the helper user default is the maintainer's decision and goes with the release-scope note.
 
 **A-SHIELDED: shielded pool integration (no work until claimed)**
 - Scope: `src/shielded/` integration, `wallet/shielded_rpc.cpp`, note reservation (K12, with A-WALLET), verification cost limits. Master plan §3.5a. The proof soundness is outside this programme (external review).
-- Why: shielded coverage 71.8 / 72.3, but `wallet/shielded_rpc.cpp` is risk rank 4 among files at 15.8 / 24.3 with no test file.
+- Why: shielded coverage 72.1 / 76.9, but `wallet/shielded_rpc.cpp` is risk rank 4 among files at 15.8 / 52.7 with no test file.
 - Owner: (claimable) · Second pass: (claimable; never the owner).
 - Done bar: a test file for `shielded_rpc.cpp` with the file above 50 lines (target set here); verification fuzz targets with cost limits; a disconnect-reconnect functional test; the wallet-side fix of the one lock-order inversion that DEBUG_LOCKORDER reports (plan §1.3). The anchor-window item (#317/#461) is EVIDENCE.
 - First three tasks: (1) the `shielded_rpc_tests` file over the RPCs that K12 touched; (2) the lock-order fix with a DEBUG_LOCKORDER test; (3) the disconnect-reconnect functional test.
@@ -145,7 +145,7 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 **C-PORT: Windows, macOS, build and packaging, resource lifecycle**
 - Scope: K06 Windows/MinGW/MSVC (33 PRs), K07 macOS/libc++/Qt packaging, K22 build/packaging/release-gate drift (K19/K22 together 40 PRs), K16 pipe/pid/socket lifecycle; `src/compat/`, `scripts/release/package_release_archive.py`, the installer path (`install_prebuilt_release_tree`).
 - Why: K06 (33 PRs), K19/K22 (40), K10 (14) and K07 (6) are classes a CI matrix catches before filing; K06 kept finding new files.
-- Owner: (claimable) · Second pass: (claimable; never the owner); a macOS runner runs the macOS half when a PR has K07 content.
+- Owner: `sunnyriverr` · Second pass: (claimable; never the owner); a macOS runner runs the macOS half when a PR has K07 content.
 - Cadence: follows the first green Windows and macOS fork runs (I-CI), then one PR per class.
 - Done bar: the POSIX-outside-`#ifndef WIN32` grep as a lint in CI-4; the first green Windows and sharded macOS runs on the release line; `otool -L` on every packaged binary in CI-10; RAII wrappers for fork/socket/pipe with a pidfd identity check before every `kill`; zero new-site K06 after the lint; the release-gate job green (GLIBC ceiling, RUNPATH, `elfcheck.py`).
 - First three tasks: (1) the POSIX grep lint; (2) the `otool` step in the release gate; (3) the K16 RAII wrapper PR.
@@ -172,12 +172,12 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 ### Infrastructure lanes
 
 **I-CI: the fork CI gates**
-- Scope: the fork workflow (exists; never run on the release line; must be rebased onto `4c7840e9` with the upstream Atlas workflows kept): CI-0 build matrix (Linux, userns, mingw, Windows, macOS), CI-1 sharded unit + functional, CI-2 ASan/UBSan, CI-3 TSan + DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke (ClusterFuzzLite), CI-8 CodeQL weekly on a dedicated box, CI-9 coverage ratchet on a dedicated box, CI-10 release gate; `ci/known-failing.txt`; the nightly stage3 job for the 47 timing-out suites.
-- Why: upstream runs no hosted CI by choice (`.github/workflows/README.md`), so the contributor-side gate runs on a fork. Baselines: coverage 69.9 lines / 40.7 branches, TSan 41, cppcheck 372, CodeQL 260, tidy 1,033. The macOS test job ran out of time on the last fork run, so it is sharded.
+- Scope: the fork workflow (exists; it ran on the release line on 12 Nov at `4c7840e9` and on 13 Nov at `88c9b49c`, red both times; the upstream Atlas workflows are kept): CI-0 build matrix (Linux, userns, mingw, Windows, macOS), CI-1 sharded unit + functional, CI-2 ASan/UBSan, CI-3 TSan + DEBUG_LOCKORDER nightly, CI-4 lint, CI-5 clang-tidy-diff, CI-6 cppcheck, CI-7 fuzz-smoke (ClusterFuzzLite), CI-8 CodeQL weekly on a dedicated box, CI-9 coverage ratchet on a dedicated box, CI-10 release gate; `ci/known-failing.txt`; the nightly stage3 job for the 41 stage3 suites that time out.
+- Why: upstream runs no hosted CI by choice (`.github/workflows/README.md`), so the contributor-side gate runs on a fork. Baselines: coverage 72.3 lines / 42.6 branches, TSan 41, cppcheck 372, CodeQL 260, tidy 1,033. The macOS test job ran out of time on the last fork run, so it is sharded.
 - Owner: (claimable) · Second pass: (claimable; never the owner; someone who reads fork CI output).
 - Cadence: CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4.
-- Done bar: CI-0 run once on `4c7840e9` and the shard counts set from it; `ci/known-failing.txt` written from that run (the unit failures, the 48 ExactReplay-stall scripts [C3], the gcc-baseline failures after triage) and only shrinking; every class PR links a run with fails-before and passes-after; CI-9 fails any area that drops more than 0.2 points; the 47 timeouts have a job and a number; every baseline only shrinks.
-- First three tasks: (1) rebase the workflow, restore the Atlas workflows, update its description, run it; (2) CI-4 lint with the K19 registration diff and exec bits; (3) triage the 82 functional failures into stall class vs real.
+- Done bar: CI-0 run once on `4c7840e9` and the shard counts set from it; `ci/known-failing.txt` written from that run (the unit failures; the functional failures, 14 in the coverage run [C3], none an ExactReplay stall; the gcc-baseline failures after triage) and only shrinking; every class PR links a run with fails-before and passes-after; CI-9 fails any area that drops more than 0.2 points; the 42 timeouts have a job and a number; every baseline only shrinks.
+- First three tasks: (1) rebase the workflow, restore the Atlas workflows, update its description, run it; (2) CI-4 lint with the K19 registration diff and exec bits; (3) triage the 14 functional failures into stall class vs real.
 - Route: fork branch; a workflow file goes upstream only if the maintainer asks.
 
 **I-RC: release-candidate qualification and basic verify**
@@ -192,7 +192,7 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 **I-OPS: operators and whole-system runs**
 - Scope: archive mirrors and signed snapshots, the monitoring page as the health signal, IBD from genesis on a stock binary, staged upgrades, mixed-version interop (v0.34.15 against the release line), the operator safe profile in the guides (`-modelnet=0` and `-natpmp=0` on any node that holds a wallet or signer key; `-autoupdate` reviewed before enabling), which fixes a v0.34.15 node lacks (gate G1).
 - Why: gate G1 is "partly"; the release line is far ahead of what most nodes run; operator data has found real bugs before.
-- Owner: (claimable; an archive operator) · Second pass: (claimable; never the owner; a second operator); a second lane owner reads any technical claim before it goes public.
+- Owner: dr-chambre (an archive operator) · Second pass: (claimable; never the owner; a second operator); a second lane owner reads any technical claim before it goes public.
 - Cadence: one run line per candidate; the safe-profile text once, then kept current.
 - Done bar: the safe profile in the community guide and the status page; a genesis sync with `assumevalid=0` on a stock binary that reaches the tip, reported with the height; an upgrade from a saved datadir on every candidate; one interop run per candidate; UTC timelines on every report.
 - First three tasks: (1) the safe-profile paragraph; (2) the genesis-sync run on the current candidate; (3) the upgrade run from the saved datadir.
@@ -200,7 +200,7 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 
 **I-XDEV: MatMul cross-backend corpus**
 - Scope: one mutated-block corpus replayed on CPU, CUDA and Metal; one script; one verdict table. Master plan §3.6 tests half.
-- Why: matmul is risk rank 9 but 62.6 / 62.7 with 47 suites unmeasured; a CPU/CUDA corpus run exists; Metal has never been run; a backend disagreement is a consensus split.
+- Why: matmul is risk rank 9 but 63.9 / 63.9 with 41 suites unmeasured; a CPU/CUDA corpus run exists; Metal has never been run; a backend disagreement is a consensus split.
 - Owner: (claimable; needs CUDA and Apple Silicon Metal hardware) · Second pass: (claimable; never the owner): an independent CUDA re-run on different hardware. The E-CONSENSUS owner reads the verdict table into the evidence list.
 - Cadence: once per candidate, and once after any matmul change lands.
 - Done bar: the corpus and script in the repo; a table with one row per (block, backend) and no disagreement; a Metal row exists; every disagreement filed as EVIDENCE within the week.

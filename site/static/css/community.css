@@ -588,6 +588,81 @@ a {
   text-align: right;
 }
 
+/* --- Nightly CI panel (developers page): filled by ci.js from ci.json ----------------------- */
+
+.c-ci {
+  margin: 18px 0 8px;
+}
+
+.c-ci__title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
+.c-ci__status {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.c-ci__status:empty {
+  margin: 0;
+}
+
+.c-ci__run[hidden],
+.c-ci__failed[hidden] {
+  display: none;
+}
+
+.c-ci__status--warn {
+  padding: 10px 14px;
+  border-left: 3px solid var(--yellow);
+  border-radius: 6px;
+  background: rgb(255 194 74 / 8%);
+  color: var(--text);
+}
+
+.c-tile dd.c-ci__ref {
+  font-size: 16px;
+}
+
+.c-tile dd.c-ci__bad {
+  color: var(--red);
+}
+
+.c-ci__failed {
+  margin: 12px 0 0;
+}
+
+.c-ci__failed > summary {
+  padding: 6px 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.c-ci__names {
+  margin: 4px 0 0;
+  padding: 10px 14px 10px 32px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  font-size: 13px;
+}
+
+.c-ci__names code {
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+
+.c-ci__names .c-ci__more {
+  color: var(--muted);
+  list-style: none;
+}
+
 .c-warning,
 .c-risk {
   margin: 0 0 14px;
@@ -1448,6 +1523,11 @@ a {
     grid-column: auto;
   }
 
+  /* Branch and commit on a line of their own. */
+  .c-ci__ref-tile {
+    grid-column: 1 / -1;
+  }
+
   /* Name on its own line, date and count below it. */
   .c-branch {
     grid-template-columns: minmax(0, 1fr) auto;
@@ -1480,4 +1560,483 @@ a {
   .c-lane__meta dd {
     margin-bottom: 6px;
   }
+}
+
+/* --- Run infra ---------------------------------------------------------------------------- */
+
+/* Top split: run it yourself, or let an app run it. */
+.c-split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 16px;
+}
+
+.c-split__card--yourself {
+  --accent: var(--a-community);
+}
+
+.c-split__card--managed {
+  --accent: var(--a-node-tools);
+}
+
+.c-split__entry {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-raised);
+}
+
+.c-split__entry p {
+  margin: 0;
+}
+
+.c-split__name {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.c-roles,
+.c-map,
+.c-report,
+.c-projects {
+  margin-top: 56px;
+}
+
+.c-project {
+  --accent: var(--a-docs);
+}
+
+.c-project__careful {
+  color: var(--yellow) !important;
+}
+
+.c-project__cites {
+  margin: auto 0 0;
+  padding-top: 12px;
+  color: var(--muted);
+}
+
+.c-roles__projects {
+  margin-top: 16px;
+}
+
+.c-role--network {
+  --accent: var(--a-network);
+}
+
+.c-role--testing {
+  --accent: var(--a-miners);
+}
+
+.c-role {
+  display: flex;
+  flex-direction: column;
+}
+
+.c-role__kind {
+  margin: 0 0 6px;
+}
+
+.c-role__facts {
+  margin: 0;
+  font-size: 14px;
+}
+
+.c-role__facts dt {
+  margin-top: 12px;
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.c-role__facts dd {
+  margin: 2px 0 0;
+  color: var(--muted);
+}
+
+.c-role__facts dd a,
+.c-role__coming {
+  color: var(--text);
+}
+
+.c-role__coming {
+  margin-right: 4px;
+  font-weight: 600;
+}
+
+.c-role__note {
+  display: block;
+  margin-top: 4px;
+}
+
+.c-role__coming + .c-role__note {
+  display: inline;
+}
+
+.c-role__related {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.c-role__report {
+  margin: auto 0 0;
+  padding-top: 14px;
+  font-size: 13px;
+}
+
+.c-role__report a {
+  display: block;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  color: var(--yellow);
+}
+
+/* The network map: one SVG per layout, the narrow one on phones. Colours come from the site's
+   tokens, so the map follows the page's theme; forced colours (high contrast) get system colours. */
+.c-map__lead {
+  max-width: 48rem;
+  margin: 0 0 16px;
+}
+
+.c-map__figure {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg-raised);
+}
+
+.c-map__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.c-map__svg--wide {
+  max-width: 960px;
+}
+
+.c-map__svg--narrow {
+  display: none;
+  max-width: 420px;
+}
+
+@media (max-width: 719px) {
+  .c-map__figure {
+    padding: 6px;
+  }
+
+  .c-map__svg--wide {
+    display: none;
+  }
+
+  .c-map__svg--narrow {
+    display: block;
+  }
+}
+
+.c-map__frame {
+  fill: rgb(130 180 255 / 4%);
+  stroke: color-mix(in srgb, var(--a-network) 45%, transparent);
+  stroke-dasharray: 6 5;
+  stroke-width: 1.5;
+}
+
+/* No letter spacing: the build measures this label as plain monospace to wrap it. */
+.c-map__frame-label {
+  fill: var(--a-network);
+  font-family: var(--font-mono);
+}
+
+.c-map__arrow line {
+  stroke: var(--muted);
+  stroke-width: 1.6;
+}
+
+.c-map__head {
+  fill: var(--muted);
+}
+
+.c-map__badge {
+  fill: var(--bg);
+  stroke: var(--text);
+  stroke-width: 1.2;
+}
+
+.c-map__badge-text {
+  fill: var(--text);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.c-map__node {
+  --tone: var(--a-node-tools);
+}
+
+.c-map__node--chain {
+  --tone: var(--a-network);
+}
+
+.c-map__node--build {
+  --tone: var(--a-docs);
+}
+
+.c-map__node rect {
+  fill: var(--surface);
+  stroke: color-mix(in srgb, var(--tone) 55%, transparent);
+  stroke-width: 1.5;
+  transition: fill 0.15s, stroke 0.15s;
+}
+
+.c-map__node:hover rect,
+.c-map__node:focus-visible rect {
+  fill: var(--surface-hover);
+  stroke: var(--tone);
+  stroke-width: 2.5;
+}
+
+.c-map__node:focus-visible {
+  outline: none;
+}
+
+.c-map__title {
+  fill: var(--text);
+}
+
+.c-map__code {
+  fill: var(--tone);
+}
+
+.c-map__label {
+  fill: var(--muted);
+}
+
+@media (forced-colors: active) {
+  .c-map__frame,
+  .c-map__arrow line,
+  .c-map__node rect,
+  .c-map__badge {
+    stroke: CanvasText;
+  }
+
+  .c-map__frame,
+  .c-map__node rect,
+  .c-map__badge {
+    fill: Canvas;
+  }
+
+  .c-map__head,
+  .c-map__frame-label,
+  .c-map__title,
+  .c-map__code,
+  .c-map__label,
+  .c-map__badge-text {
+    fill: CanvasText;
+  }
+
+  .c-map__node:focus-visible rect {
+    stroke: Highlight;
+  }
+}
+
+/* The connections in words: the map's text alternative, with the source of each arrow. */
+.c-map__details {
+  margin-top: 20px;
+}
+
+.c-map__list-title {
+  margin: 0 0 12px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.c-role__guide-note {
+  color: var(--yellow);
+  font-size: 13px;
+}
+
+.c-map__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+  gap: 10px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-map__list li {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+
+.c-map__list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.c-map__list .c-map__pair {
+  color: var(--text);
+}
+
+.c-map__number {
+  display: inline-grid;
+  width: 24px;
+  height: 24px;
+  border: 1.2px solid var(--text);
+  border-radius: 50%;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.c-map__cites {
+  margin-top: 4px !important;
+  font-size: 12px !important;
+}
+
+.c-map__cites-label {
+  margin-right: 2px;
+  color: var(--faint);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.c-map__cite {
+  display: inline-block;
+  max-width: 100%;
+  margin-right: 8px;
+}
+
+.c-map__cites code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.c-report {
+  padding: 18px 20px;
+  border-left: 3px solid var(--yellow);
+  border-radius: 10px;
+  background: rgb(255 194 74 / 8%);
+}
+
+.c-report p {
+  max-width: 48rem;
+  margin: 0 0 10px;
+}
+
+.c-report__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+/* --- Developers: sub-menu between "Start here" and "Ongoing work" ------------------------- */
+
+.c-subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 20px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-raised);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.c-subnav__link {
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.c-subnav__link:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.c-subnav__link--active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.c-ai-files {
+  margin: 0 0 6px;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.c-ai-files li {
+  margin-bottom: 4px;
+}
+
+.c-ai-files code {
+  font-family: var(--font-mono);
+}
+
+/* Run infra: what to know before running a node at home (privacy, reachability). */
+.c-home {
+  margin-top: 40px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--a-node-tools);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.c-home .c-section-title {
+  margin-bottom: 12px;
+}
+
+.c-home__points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 12px 28px;
+}
+
+.c-home__title {
+  margin: 0 0 6px;
+  color: var(--a-node-tools);
+  font-family: var(--font-mono);
+  font-size: 15px;
+}
+
+.c-home__items {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.c-home__items li {
+  margin-bottom: 6px;
+}
+
+.c-home__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 10px 0 0;
+  font-size: 14px;
 }

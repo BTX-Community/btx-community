@@ -1,10 +1,16 @@
-# French translations of the content texts of btx-community.com (community.yaml, guide.yaml and
-# hub.yaml). Each entry pairs the English text exactly as it stands there with its translation;
+# French translations of the content texts of btx-community.com (community.yaml, guide.yaml,
+# hub.yaml and infra.yaml). Each entry pairs the English text exactly as it stands there with its translation;
 # when the English text changes, the old pair no longer matches, the page shows English and the
 # build prints a warning. Translated with AI help; corrections by native speakers are welcome.
 
 schema_version: 1
 translations:
+- en: >-
+    Verification gate to the main BTX chat on compute and tech. Not run by the community; for
+    community questions use the group above.
+  fr: >-
+    Sas de vérification vers le chat principal de BTX sur le calcul et la technique. Non géré par la
+    communauté ; pour les questions de la communauté, utilisez le groupe ci-dessus.
 - en: A general mining chat rather than a BTX group; the list keeps to BTX channels.
   fr: Un chat de minage généraliste, pas un groupe BTX ; la liste s'en tient aux canaux BTX.
 - en: Ask questions in the community group on Telegram.
@@ -13,12 +19,230 @@ translations:
   fr: Presque plus d'activité ; la communauté discute sur Telegram.
 - en: No activity, and the miner has not changed since August 2026.
   fr: Aucune activité, et le mineur n'a pas changé depuis août 2026.
-- en: Now leads to a group the community does not run; the community group above replaces it.
-  fr: >-
-    Mène désormais à un groupe que la communauté ne gère pas ; le groupe de la communauté ci-dessus
-    le remplace.
 - en: The main community group on Telegram, open to everyone.
   fr: Le groupe principal de la communauté sur Telegram, ouvert à tous.
+- en: >-
+    The archives were replaced several times under the same tag, last on 15 November 2026. The
+    current ones bundle libevent, SQLite, ZeroMQ and libgomp; only libc, libstdc++ and the NVIDIA
+    driver come from your system. Check your download against the release's SHA256SUMS.
+  fr: >-
+    Les archives ont été remplacées plusieurs fois sous la même étiquette, la dernière le 15
+    novembre 2026. Les actuelles incluent libevent, SQLite, ZeroMQ et libgomp ; seuls libc,
+    libstdc++ et le pilote NVIDIA viennent de votre système. Vérifiez votre téléchargement avec le
+    SHA256SUMS de la version.
+- en: Live census of BTX nodes and signer witness of the easyBTX team.
+  fr: >-
+    Recensement en direct des nœuds BTX et témoin des signataires de l'équipe easyBTX.
+- en: >-
+    The roles a node advertises are its own claim; the page marks separately which nodes answered a
+    real request ("serve-verified").
+  fr: >-
+    Les rôles qu'un nœud annonce sont sa propre déclaration ; la page indique à part quels nœuds ont
+    répondu à une vraie requête (« serve-verified »).
+- en: >-
+    The wallet in the official releases: btxd with btx-cli, open source, on your own node. The
+    desktop app btx-qt is in v0.34.15; the v0.34.16 archives leave it out.
+  fr: >-
+    Le portefeuille des versions officielles : btxd avec btx-cli, open source, sur votre propre
+    nœud. L'application de bureau btx-qt est dans la v0.34.15 ; les archives de la v0.34.16
+    l'omettent.
+- en: 'Live view from the Byron Bay archive node: its chain progress, the heights of the nodes connected
+    to it, and a map of those connections (preview).'
+  fr: 'Vue en direct depuis le nœud d''archive de Byron Bay : la progression de sa chaîne, les hauteurs
+    des nœuds qui y sont connectés et une carte de ces connexions (aperçu).'
+- en: 'The upstream Atlas desktop interface (btxchain/btx #273), hosted by the Byron Bay team as a demo.'
+  fr: 'L''interface de bureau Atlas de l''amont (btxchain/btx #273), hébergée en démo par l''équipe de
+    Byron Bay.'
+- en: 'A walk-through of SwapNet (btxchain/btx #630), built by the Byron Bay team from the open-source
+    code.'
+  fr: 'Une visite de SwapNet (btxchain/btx #630), réalisée par l''équipe de Byron Bay à partir du code
+    open source.'
+- en: >-
+    Unofficial demo with sample data only. Atlas is in the v0.34.16 source, but the release archives
+    leave it out; the page connects to no node or wallet.
+  fr: >-
+    Démo non officielle, uniquement avec des données d'exemple. Atlas est dans le code source de
+    v0.34.16, mais les archives de la version le laissent de côté ; la page ne se connecte à aucun
+    nœud ni portefeuille.
+- en: Describes MatMul v4.7, which the network runs since block 185,000, and keeps v3 as reference. Last
+    updated 4 Aug 2026; its release notes still name v0.33.2.
+  fr: Décrit MatMul v4.7, utilisé par le réseau depuis le bloc 185 000, et garde v3 comme référence. Dernière
+    mise à jour le 4 août 2026 ; ses notes de version citent encore v0.33.2.
+- en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages, a public API and tools for
+    AI assistants (MCP, REST, llms.txt) at /ai.
+  fr: Explorateur de l'équipe de Byron Bay, avec une vue du minage sur 24 h, des pages de statistiques,
+    une API publique et des outils pour assistants IA (MCP, REST, llms.txt) sous /ai.
+- en: 13 of the 16 AI tools are public with no key; 3 premium ones need a token from the operator.
+  fr: 13 des 16 outils IA sont publics et sans clé ; 3 outils premium demandent un jeton de l'opérateur.
+- en: >-
+    UTXO snapshot for loadtxoutset, confirmed by two operators, with SHA-256 of the file and the
+    manifest.
+  fr: >-
+    Snapshot UTXO pour loadtxoutset, confirmé par deux opérateurs, avec le SHA-256 du fichier et du
+    manifeste.
+- en: Check the SHA-256 before use. The JSON names the height; it can lag the chain by a few thousand
+    blocks.
+  fr: Vérifiez le SHA-256 avant usage. Le JSON indique la hauteur ; elle peut avoir quelques milliers
+    de blocs de retard sur la chaîne.
+- en: UTXO snapshot every 1,000 blocks from the Byron Bay archive node, with SHA256SUMS; the last seven
+    are kept.
+  fr: Snapshot UTXO tous les 1 000 blocs depuis le nœud d'archive de Byron Bay, avec SHA256SUMS ; les
+    sept derniers sont conservés.
+- en: One signer, the operator. A height is sometimes skipped; then there is no file, not a wrong one.
+  fr: Un seul signataire, l'opérateur. Une hauteur est parfois sautée ; il n'y a alors pas de fichier,
+    pas un fichier faux.
+- en: Post-quantum desktop wallet of the easyBTX team for macOS, Windows and Linux.
+  fr: Portefeuille de bureau post-quantique de l'équipe easyBTX pour macOS, Windows et Linux.
+- en: No independent audit; the source code is not public. The Mac build is signed and notarized (Bonuz
+    Technology DMCC); Windows and Linux builds are unsigned, so check the SHA-256. Keep the master key
+    or the encrypted recovery file offline.
+  fr: Pas d'audit indépendant ; le code source n'est pas public. La version Mac est signée et notarisée
+    (Bonuz Technology DMCC) ; celles pour Windows et Linux ne sont pas signées, vérifiez donc le SHA-256.
+    Gardez la clé maître ou le fichier de récupération chiffré hors ligne.
+- en: 'Seedless means there is no seed phrase you back up yourself: the page says the key is split by
+    MPC, and access and recovery go through the Bonuz login. Check how recovery works before you rely
+    on it.'
+  fr: 'Sans seed signifie qu''il n''y a pas de phrase de récupération à sauvegarder soi-même : la page
+    indique que la clé est partagée par MPC, et l''accès comme la récupération passent par la connexion
+    Bonuz. Vérifiez comment fonctionne la récupération avant de vous y fier.'
+- en: >-
+    A full release since 15 November 2026, first published on 7 November as a pre-release. Archives
+    for Linux x86_64, with and without CUDA 13; none for macOS or Windows. It packages the 0.35
+    review branches; the 0.35 line stays open.
+  fr: >-
+    Version complète depuis le 15 novembre 2026, publiée d'abord le 7 novembre comme préversion.
+    Archives pour Linux x86_64, avec et sans CUDA 13 ; aucune pour macOS ni Windows. Elle regroupe
+    les branches de revue de 0.35 ; la ligne 0.35 reste ouverte.
+- en: Cross-chain swaps, off by default
+  fr: Échanges entre chaînes, désactivés par défaut
+- en: >-
+    SwapNet is built into btxd and starts only with -swapnet=1. Its keys for the other chains sit in
+    the data directory: back them up with exportswaprecovery, not by copying files. Turning it off
+    does not cancel a funded swap; refund deadlines keep running.
+  fr: >-
+    SwapNet est intégré à btxd et ne démarre qu'avec -swapnet=1. Ses clés pour les autres chaînes se
+    trouvent dans le répertoire de données : sauvegardez-les avec exportswaprecovery, pas en copiant
+    les fichiers. Le désactiver n'annule pas un échange financé ; les délais de remboursement
+    continuent de courir.
+- en: Signing keeps your timelocks
+  fr: La signature ne modifie plus les verrous temporels
+- en: >-
+    For a csv, cltv or refund leaf, v0.34.15 rewrote nLockTime, nSequence and version while signing.
+    signrawtransactionwithwallet and walletprocesspsbt now refuse and name the value they need,
+    unless adjust_timelocks is true.
+  fr: >-
+    Pour une feuille csv, cltv ou de remboursement, v0.34.15 réécrivait nLockTime, nSequence et la
+    version lors de la signature. signrawtransactionwithwallet et walletprocesspsbt refusent
+    désormais et indiquent la valeur requise, sauf avec adjust_timelocks=true.
+- en: >-
+    No macOS or Windows archive: a Mac node stays on v0.34.15. The CUDA archive is built for NVIDIA
+    Blackwell (sm_120) and does not include the NVIDIA driver.
+  fr: >-
+    Pas d'archive pour macOS ni Windows : un nœud sur Mac reste en v0.34.15. L'archive CUDA est
+    compilée pour NVIDIA Blackwell (sm_120) et n'inclut pas le pilote NVIDIA.
+- en: >-
+    No desktop app: both archives leave out btx-qt and btx-atlas, which need a newer glibc than
+    2.38. Use btxd and btx-cli.
+  fr: >-
+    Pas d'application de bureau : les deux archives omettent btx-qt et btx-atlas, qui demanderaient
+    une glibc plus récente que 2.38. Utilisez btxd et btx-cli.
+- en: >-
+    Recent releases have no signed checksum file: the last SHA256SUMS.asc was for v0.34.6, and
+    v0.34.16 has an unsigned SHA256SUMS. Compare the SHA-256 that GitHub shows for each file with
+    "shasum -a 256 <file>" ("sha256sum" on Linux).
+  fr: >-
+    Les versions récentes n'ont pas de fichier de sommes de contrôle signé : le dernier
+    SHA256SUMS.asc concernait la v0.34.6, et la v0.34.16 a un SHA256SUMS non signé. Comparez le
+    SHA-256 que GitHub affiche pour chaque fichier avec « shasum -a 256 <fichier> » (« sha256sum »
+    sous Linux).
+- en: >-
+    Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.16 has archives for
+    Linux and Linux with CUDA; for Apple Silicon Macs the newest is v0.34.15. There is no official
+    Windows build.
+  fr: >-
+    Les binaires Linux nécessitent glibc 2.38 ou plus récent (Ubuntu 24.04, Debian 13). La v0.34.16
+    a des archives pour Linux et Linux avec CUDA ; pour les Mac Apple Silicon, la plus récente est
+    la v0.34.15. Il n'existe pas de version officielle pour Windows.
+- en: >-
+    Release candidates (rc) are for testing. A node that holds coins, mines or signs belongs on the
+    newest full release.
+  fr: >-
+    Les versions candidates (rc) servent aux tests. Un nœud qui détient des coins, mine ou signe
+    doit tourner sur la dernière version complète.
+- en: Build result
+  fr: Résultat de la compilation
+- en: >-
+    The fork CI workflow (it ran on the release line on 12 Nov at 4c7840e9 and on 13 Nov at
+    88c9b49c, red both times; keep the upstream Atlas workflows): jobs CI-0 to CI-10, the
+    known-failing list, and a nightly job for the 41 stage3 suites that time out.
+  fr: >-
+    Le workflow de CI du fork (il a tourné sur la branche de version le 12 nov. sur 4c7840e9 et le
+    13 nov. sur 88c9b49c, en échec les deux fois ; garder les workflows Atlas de l'amont) : jobs
+    CI-0 à CI-10, la liste des échecs connus et un job nocturne pour les 41 suites stage3 qui
+    expirent.
+- en: >-
+    The results of the last nightly build and test run that the status page's operator publishes as
+    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix listed under
+    Gates. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
+  fr: >-
+    Les résultats de la dernière exécution nocturne de compilation et de tests que l'opérateur de la
+    page d'état publie comme job CI-0, lus en direct dans son API. C'est une seule exécution sous
+    Linux, pas la matrice de compilation du fork listée sous Contrôles. L'exécution des tests
+    unitaires laisse de côté les suites lentes matmul_v4_rc_stage3_*.
+- en: "This panel is filled in by JavaScript. The run as raw data: "
+  fr: "Ce panneau est rempli par JavaScript. L'exécution en données brutes : "
+- en: build failed
+  fr: compilation en échec
+- en: build passed
+  fr: compilation réussie
+- en: >-
+    ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator
+    publishes the results of a nightly build and test run on release-0.34.16
+  fr: >-
+    exécuté le 12 nov. sur 4c7840e9 et le 13 nov. sur 88c9b49c, en échec les deux fois ;
+    l'opérateur de la page d'état publie les résultats d'une exécution nocturne de compilation et de
+    tests sur release-0.34.16
+- en: tests not run
+  fr: tests non exécutés
+- en: >-
+    {listed} of {failed}
+  fr: >-
+    {listed} sur {failed}
+- en: … and {count} more
+  fr: … et {count} de plus
+- en: Branch @ commit
+  fr: Branche @ commit
+- en: CI data unavailable.
+  fr: Données de CI indisponibles.
+- en: Failed functional scripts ({count})
+  fr: Scripts fonctionnels en échec ({count})
+- en: Failed unit suites ({count})
+  fr: Suites unitaires en échec ({count})
+- en: Functional tests
+  fr: Tests fonctionnels
+- en: Last run is older than 36 h; the figures below may be out of date.
+  fr: La dernière exécution date de plus de 36 h ; les chiffres ci-dessous peuvent être dépassés.
+- en: Loading the last run …
+  fr: Chargement de la dernière exécution …
+- en: Started {measured} · finished {finished}
+  fr: >-
+    Début : {measured} · fin : {finished}
+- en: Nightly CI-0 run
+  fr: Exécution nocturne de CI-0
+- en: No current run.
+  fr: Aucune exécution récente.
+- en: The run as JSON
+  fr: L'exécution en JSON
+- en: Unit tests
+  fr: Tests unitaires
+- en: passed · {failed} failed
+  fr: réussis · {failed} en échec
+- en: passed · {failed} failed · {skipped} skipped
+  fr: réussis · {failed} en échec · {skipped} ignorés
+- en: >-
+    {passed} of {run}
+  fr: >-
+    {passed} sur {run}
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   fr: Ne liste plus BTX ; son marché BTX/USDT a disparu en juillet 2026.
 - en: >-
@@ -86,14 +310,6 @@ translations:
     Produit sur un miroir de confiance : le travail MatMul a donc été accepté sur la base des
     attestations des signataires.
 - en: >-
-    Early test build: internal security review, no independent audit; the source code is not public
-    and the direct downloads are unsigned. A 64-character master key is the only backup; keep it
-    offline.
-  fr: >-
-    Version de test préliminaire : revue de sécurité interne, pas d'audit indépendant ; le code
-    source n'est pas public et les téléchargements directs ne sont pas signés. Une clé maîtresse de
-    64 caractères est la seule sauvegarde ; gardez-la hors ligne.
-- en: >-
     Every node relays blocks and keeps the network reachable. A node checks every block itself only
     with a GPU that passes btxd's self-test. Without one, run it as a trusted mirror that follows
     signed checks from at least two signers; otherwise it stops syncing. Signers have the highest
@@ -103,10 +319,6 @@ translations:
     bloc qu'avec un GPU qui réussit l'autotest de btxd. Sans un tel GPU, faites-le tourner comme
     miroir de confiance qui suit les vérifications signées d'au moins deux signataires ; sinon il
     cesse de se synchroniser. Les signataires ont les exigences les plus élevées.
-- en: Explorer of the Byron Bay team, with a 24 h mining view, stats pages and a public API.
-  fr: >-
-    Explorateur de l'équipe de Byron Bay, avec une vue du minage sur 24 h, des pages de statistiques
-    et une API publique.
 - en: How to report a vulnerability privately to the BTX Development Team. Not for support questions.
   fr: >-
     Comment signaler une vulnérabilité en privé à l'équipe de développement de BTX. Pas pour les
@@ -211,14 +423,15 @@ translations:
 - en: Official website with documentation, the browser wallet and the whitepaper.
   fr: Site officiel avec la documentation, le portefeuille dans le navigateur et le livre blanc.
 - en: >-
-    On a server - the official release for Linux needs glibc 2.38 or newer (Ubuntu 24.04, Debian
-    13); a GPU node takes the -cuda13 archive (Blackwell cards). The v0.34.16 pre-release has no
-    CUDA build, so GPU nodes stay on v0.34.15. The current release has no official Windows archive.
+    On a server - v0.34.16 has two Linux x86_64 archives, both for glibc 2.38 or newer (Ubuntu
+    24.04, Debian 13): a plain one, and a -cuda13 one for GPU nodes (sm_120: RTX 50 and RTX PRO
+    Blackwell cards; the NVIDIA driver is not included). There is no official Windows or macOS
+    archive.
   fr: >-
-    Sur un serveur : la version officielle pour Linux exige glibc 2.38 ou plus récent (Ubuntu 24.04,
-    Debian 13) ; un nœud GPU prend l'archive -cuda13 (cartes Blackwell). La préversion v0.34.16 n'a
-    pas de build CUDA, les nœuds GPU restent donc sur la v0.34.15. La version actuelle n'a pas
-    d'archive Windows officielle.
+    Sur un serveur : v0.34.16 a deux archives Linux x86_64, toutes deux pour glibc 2.38 ou plus
+    récent (Ubuntu 24.04, Debian 13) : une normale et une -cuda13 pour les nœuds GPU (sm_120 :
+    cartes Blackwell RTX 50 et RTX PRO ; le pilote NVIDIA n'est pas inclus). Il n'y a pas d'archive
+    officielle pour Windows ni macOS.
 - en: >-
     On mainnet it needs at least two pinned signers and a threshold of two. Pin only signers that
     are live today.
@@ -257,8 +470,6 @@ translations:
     Pool dédié à BTX, exploité par l'auteur de btx-pool-miner (GitHub lucasan123). Il paie les
     mineurs directement dans chaque bloc qu'il trouve, au prorata du travail sur une fenêtre de 30
     minutes. Vérifiez ses frais sur la page du pool.
-- en: Post-quantum desktop wallet of the easyBTX team for macOS and Windows.
-  fr: Portefeuille de bureau post-quantique de l'équipe easyBTX pour macOS et Windows.
 - en: >-
     Problems with an NVIDIA card? The official CUDA troubleshooting guide helps; parts of it
     describe the CUDA path from before block 185,000.
@@ -285,13 +496,6 @@ translations:
   fr: >-
     Fonctionne avec la v0.34.15 sans le réseau de modèles. Sans GPU qualifié, le nœud suit les
     vérifications des signataires au lieu de vérifier lui-même le travail MatMul.
-- en: >-
-    Seedless means there is no seed phrase you back up yourself; access and recovery go through the
-    Bonuz login. Check how recovery works before you rely on it.
-  fr: >-
-    « Sans phrase de récupération » veut dire qu'il n'y a pas de phrase de récupération à
-    sauvegarder vous-même ; l'accès et la récupération passent par la connexion Bonuz. Vérifiez
-    comment fonctionne la récupération avant de vous y fier.
 - en: Seedless mobile wallet for iOS and Android with BTX support.
   fr: Portefeuille mobile sans phrase de récupération pour iOS et Android, compatible BTX.
 - en: >-
@@ -303,8 +507,6 @@ translations:
     rester en ligne. L'archive CUDA officielle couvre les cartes Blackwell (sm_120) ; les autres
     cartes NVIDIA exigent une compilation depuis les sources et peuvent ne pas être qualifiées.
     Suivez le guide d'exploitation des développeurs.
-- en: Some API endpoints need an access token.
-  fr: Certains points de terminaison de l'API exigent un jeton d'accès.
 - en: Telegram group of the easyBTX team, for questions about its miner, node app and wallet.
   fr: >-
     Groupe Telegram de l'équipe easyBTX, pour les questions sur son logiciel de minage, son appli de
@@ -325,12 +527,6 @@ translations:
     La conception des développeurs pour du BTX encapsulé sur les chaînes EVM : règles du jeton,
     modèles de pont et contrats de référence. Une conception, pas un pont fonctionnel.
 - en: >-
-    The file is marked historical: it records the v3 design. Since block 185,000 the network runs
-    MatMul v4.7.
-  fr: >-
-    Le fichier est marqué comme historique : il documente la conception v3. Depuis le bloc 185 000,
-    le réseau tourne avec MatMul v4.7.
-- en: >-
     The miner's source is not published: the repository holds scripts and binary releases, with no
     licence. 2% dev fee, 0% on ninjaraider.
   fr: >-
@@ -342,12 +538,6 @@ translations:
   fr: >-
     Le même pont de test WBTX que btx.supply, sur le réseau de test de Robinhood Chain. Les jetons
     de test n'ont aucune valeur.
-- en: >-
-    The wallet in the official releases for Linux and macOS: the desktop app btx-qt, or btxd with
-    btx-cli. Open source; it runs on your own node.
-  fr: >-
-    Le portefeuille des versions officielles pour Linux et macOS : l'application de bureau btx-qt,
-    ou btxd avec btx-cli. Open source ; il fonctionne sur votre propre nœud.
 - en: Verify the signature and SHA-256 before use. Not for signers.
   fr: Vérifiez la signature et le SHA-256 avant usage. Pas pour les signataires.
 - en: >-
@@ -414,14 +604,6 @@ translations:
     de l'aide, une « récupération » ou des rendements garantis sont des arnaques.
 - en: Before you install a node release
   fr: Avant d'installer une version du nœud
-- en: >-
-    Recent releases come without a signed checksum file; the last one with SHA256SUMS.asc was v0.34.6.
-    GitHub shows a SHA-256 for each file on the release page: compare it with "shasum -a 256 <file>"
-    ("sha256sum" on Linux).
-  fr: >-
-    Les versions récentes arrivent sans fichier de sommes de contrôle signé ; la dernière avec SHA256SUMS.asc
-    était la v0.34.6. GitHub affiche un SHA-256 par fichier sur la page de la version : comparez-le
-    avec « shasum -a 256 <fichier> » (« sha256sum » sous Linux).
 - en: >-
     That proves the file is the one on GitHub, not who built it. If that matters to you, build the
     tagged source yourself.
@@ -502,8 +684,6 @@ translations:
     et ce que cette confiance implique.
 - en: Network and explorers
   fr: Réseau et explorateurs
-- en: Node census and signer witness of the easyBTX team.
-  fr: Recensement des nœuds et témoin des signataires de l'équipe easyBTX.
 - en: Supply, holders and rich list.
   fr: Offre, détenteurs et classement des plus gros portefeuilles.
 - en: >-
@@ -629,8 +809,6 @@ translations:
   fr: >-
     Une synchronisation depuis la genèse s'arrête toujours au bloc 126 978 (#272). Commencez avec un
     instantané.
-- en: Atlas, a second desktop app
-  fr: Atlas, une deuxième application de bureau
 - en: Auto-update off behind a proxy
   fr: Mise à jour automatique désactivée derrière un proxy
 - en: >-
@@ -665,13 +843,6 @@ translations:
     blocs recalcule chacun exactement sur un GPU qualifié NVIDIA (CUDA) ou Apple (Metal) ; les nœuds
     sans GPU suivent des vérifications signées par d'autres. On ne peut pas miner avec le CPU.
 - en: >-
-    Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). v0.34.15 has archives for Linux,
-    Linux with CUDA and Apple Silicon Macs; there is no official Windows build.
-  fr: >-
-    Les binaires Linux nécessitent glibc 2.38 ou plus récent (Ubuntu 24.04, Debian 13). La v0.34.15
-    propose des archives pour Linux, Linux avec CUDA et les Mac Apple Silicon ; il n'existe pas de
-    version officielle pour Windows.
-- en: >-
     Make a backup before money arrives. In btxd, backupwalletbundlearchive writes one encrypted file;
     keep it and its passphrase offline and apart. Any backup can spend your coins: plain exports at
     once, the archive once opened. Restore it once to test it.
@@ -683,31 +854,11 @@ translations:
 - en: Model network with fewer open ports
   fr: Réseau de modèles avec moins de ports ouverts
 - en: >-
-    No CUDA, macOS or Windows archive. A GPU, mining or signing node on v0.34.16 loses its GPU path;
-    those nodes stay on v0.34.15.
-  fr: >-
-    Pas d'archive pour CUDA, macOS ni Windows. Un nœud GPU, de minage ou de signature perd avec la
-    v0.34.16 son chemin GPU ; ces nœuds restent en v0.34.15.
-- en: >-
     Other coins also trade as BTX. A market is only for this chain if its deposit addresses start with
     btx1z.
   fr: >-
     D'autres cryptomonnaies s'échangent aussi sous le sigle BTX. Un marché ne concerne cette chaîne que
     si ses adresses de dépôt commencent par btx1z.
-- en: >-
-    Pre-release since 7 November 2026, Linux x86_64 only. It packages the 0.35 review branches; the 0.35
-    line stays open. The developers say it is not a release qualification. The current full release
-    stays v0.34.15.
-  fr: >-
-    Préversion depuis le 7 novembre 2026, uniquement pour Linux x86_64. Elle regroupe les branches de
-    revue de la 0.35 ; la ligne 0.35 reste ouverte. Les développeurs précisent que ce n'est pas une
-    version qualifiée. La version complète actuelle reste la v0.34.15.
-- en: >-
-    Pre-releases (rc, and v0.34.16) are for testing. v0.34.16 has no CUDA build: a GPU, mining or
-    signing node stays on v0.34.15.
-  fr: >-
-    Les préversions (rc et la v0.34.16) servent aux tests. La v0.34.16 n'a pas de version CUDA : un nœud
-    GPU, de minage ou de signature reste en v0.34.15.
 - en: >-
     Read the release notes before upgrading. Some releases change the rules at a fixed block height;
     this page shows a countdown when one is coming. Each release also stops working about two years
@@ -734,13 +885,6 @@ translations:
     construites à la main en une étape du portefeuille. Les frais sont fixés à la présignature, et la
     réclamation doit être confirmée avant la hauteur de remboursement.
 - en: >-
-    The Linux archive adds btx-atlas beside btx-qt, which stays. Atlas needs glibc 2.39, WebKitGTK 4.1,
-    GTK 3, the Ayatana tray library and zenity. btx-qt and ZeroMQ were already in v0.34.15.
-  fr: >-
-    L'archive Linux ajoute btx-atlas à côté de btx-qt, qui reste. Atlas nécessite glibc 2.39, WebKitGTK
-    4.1, GTK 3, la bibliothèque de barre d'état Ayatana et zenity. btx-qt et ZeroMQ étaient déjà dans la
-    v0.34.15.
-- en: >-
     The network for AI models is on by default and listens on TCP 29447. v0.34.16 no longer opens that
     port with -listen=0 or a proxy, finds model peers on the local network over UDP 29448, and adds a
     local security guard. -modelnet=0 turns all of it off; it does not spend coins.
@@ -756,14 +900,15 @@ translations:
     Le nœud dérive de Bitcoin Knots v29.2, une variante de Bitcoin Core. btxd, btx-cli, l'interface RPC
     et les PSBT fonctionnent comme les utilisateurs de Bitcoin les connaissent ; ce qui change, c'est la
     preuve de travail, les signatures et certaines règles du réseau.
-- en: >-
-    Two defaults to decide on: btxd installs newer signed releases from btx.dev by itself
-    (autoupdateseamless=0 only reports them, autoupdate=0 stops checking), and the model network listens
-    on port 29447 (modelnet=0 turns it off).
-  fr: >-
-    Deux réglages par défaut à décider : btxd installe lui-même les versions signées plus récentes
-    depuis btx.dev (autoupdateseamless=0 les signale seulement, autoupdate=0 cesse de vérifier), et le
-    réseau de modèles écoute sur le port 29447 (modelnet=0 le désactive).
+- en: 'Three defaults to decide on: btxd installs newer signed releases from btx.dev by itself (autoupdateseamless=0
+    only reports them, autoupdate=0 stops checking); the model network listens on port 29447 (modelnet=0
+    turns it off); and natpmp asks your router to open ports 19335 and 29447 to the internet (natpmp=0
+    stops it). With coins, mining or a signer, set both to 0.'
+  fr: 'Trois réglages par défaut à choisir : btxd installe seul les versions signées récentes de btx.dev
+    (autoupdateseamless=0 les signale, autoupdate=0 ne vérifie plus) ; le réseau de modèles écoute sur
+    le port 29447 (modelnet=0 le coupe) ; et natpmp demande au routeur d''ouvrir les ports 19335 et 29447
+    sur internet (natpmp=0 l''empêche). Avec des fonds, du minage ou un signataire, mettez les deux à
+    0.'
 - en: Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.
   fr: >-
     Décompressez toute l'archive et lancez bin/btxd depuis celle-ci. Un bin/btxd copié seul s'arrête.
@@ -775,12 +920,6 @@ translations:
     contiennent permet de dépenser sans la phrase de passe du portefeuille, et avertissent pour un
     portefeuille chiffré. Les sauvegardes faites avec des versions antérieures contiennent le même
     fichier.
-- en: >-
-    btx-qt in this archive needs glibc 2.43 and does not start on Ubuntu 24.04 or Debian 13; btxd and
-    btx-cli need 2.38.
-  fr: >-
-    btx-qt dans cette archive nécessite glibc 2.43 et ne démarre pas sous Ubuntu 24.04 ni Debian 13 ;
-    btxd et btx-cli nécessitent 2.38.
 - en: Become a BTX dev
   fr: Devenir développeur BTX
 - en: >-
@@ -795,20 +934,21 @@ translations:
 - en: Living document - every page carries its last-verified date
   fr: >-
     Document vivant : chaque page indique la date de sa dernière vérification
-- en: Measured 12 November 2026 at commit c6f9678d
-  fr: Mesuré le 12 novembre 2026 au commit c6f9678d
+- en: Measured 12 November 2026 at commit c6f9678d; coverage 14 November at a5d1637f
+  fr: Mesuré le 12 novembre 2026 au commit c6f9678d ; couverture le 14 novembre au commit a5d1637f
 - en: Review and test programme - one pull request per bug class
   fr: >-
     Programme de revue et de test : une pull request par classe de bugs
 - en: >-
-    Test coverage measured on the release line, the recurring bug classes behind 317 fix pull
-    requests since August, one sweep per class that closes it with a rule, and checks before a final
-    release. A proposal by contributors; the maintainer decides what lands.
+    Test coverage measured on swapnet-v2 at a5d1637f (now part of the release line), the recurring
+    bug classes behind 317 fix pull requests since August, one sweep per class that closes it with a
+    rule, and checks before a final release. A proposal by contributors; the maintainer decides what
+    lands.
   fr: >-
-    La couverture de tests mesurée sur la branche de version, les classes de bugs récurrentes
-    derrière 317 pull requests de correction depuis août, un balayage par classe, qui la clôt par
-    une règle, et des vérifications avant une version finale. Une proposition de contributeurs ; le
-    mainteneur décide de ce qui est intégré.
+    La couverture de tests mesurée sur swapnet-v2 au commit a5d1637f (désormais intégré à la branche
+    de version), les classes de bugs récurrentes derrière 317 pull requests de correction depuis
+    août, un balayage par classe, qui la clôt par une règle, et des vérifications avant une version
+    finale. Une proposition de contributeurs ; le mainteneur décide de ce qui est intégré.
 - en: >-
     The node software is open source, and anyone can send it a pull request on GitHub. The developer
     hub tells you, and the AI tool you work with, how to build, test and document a change so that
@@ -820,11 +960,8 @@ translations:
     quel travail est ouvert.
 - en: The reference implementation and its own rules for agents.
   fr: L'implémentation de référence et ses propres règles pour les agents.
-- en: >-
-    Start on the developers page: where to begin, levels, test coverage and open lanes.
-  fr: >-
-    Commencer par la page des développeurs : premiers pas, niveaux, couverture de tests et chantiers
-    ouverts.
+- en: "Start here: where to begin, the prompt for your AI tool and the three levels."
+  fr: "Commencer ici : par où commencer, la consigne pour votre outil d'IA et les trois niveaux."
 - en: Read the hub's front page, written for people.
   fr: Lire la page d'accueil du hub, écrite pour des humains.
 - en: >-
@@ -937,16 +1074,16 @@ translations:
     qualification des versions et le regroupement des pull requests de la semaine en un seul lot. Un
     fork avec GitHub Actions et du temps chaque semaine.
 - en: >-
-    Product code of release-0.34.16, measured at commit c6f9678d with the fix from btxchain/btx #578
-    applied. The coverage build configures again on release-0.34.16 since #578 (12 November 2026),
-    not in v0.34.15. All figures are floors: 47 unit suites timed out and 82 of 208 functional
-    scripts failed in the coverage run, and a test that is killed writes no counts.
+    Product code of swapnet-v2 at commit a5d1637f; the coverage build needs btxchain/btx #578, which
+    v0.34.15 lacks. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts
+    failed; a killed test writes no counts. The time budgets were shorter than on 12 November, so
+    the figures are floors and the comparison is indicative.
   fr: >-
-    Code de production de release-0.34.16, mesuré au commit c6f9678d avec le correctif de
-    btxchain/btx #578 appliqué. Le build de couverture se configure de nouveau sur release-0.34.16
-    depuis #578 (12 novembre 2026), pas sur v0.34.15. Tous les chiffres sont des minima : 47 suites
-    unitaires ont expiré et 82 des 208 scripts fonctionnels ont échoué lors de la mesure ; un test
-    tué n'écrit aucun compteur.
+    Code de production de swapnet-v2, mesuré au commit a5d1637f ; le build de couverture a besoin de
+    btxchain/btx #578, absent de v0.34.15. Lors de la mesure, 42 suites unitaires ont expiré et 14
+    des 220 scripts fonctionnels ont échoué ; un test tué n'écrit aucun compteur. Les budgets de
+    temps étaient plus courts que le 12 novembre : les chiffres sont des minima et la comparaison
+    est indicative.
 - en: Lines
   fr: Lignes
 - en: unit tests
@@ -1068,15 +1205,17 @@ translations:
 - en: 3.3, 3.4, 3.7, 3.8
   fr: 3.3, 3.4, 3.7, 3.8
 - en: >-
-    47 suites timed out: not measured
+    41 suites timed out: not measured
   fr: >-
-    47 suites ont expiré : non mesurées
+    41 suites ont expiré : non mesurées
 - en: 5 of 5 PRs landed; rule missing
   fr: 5 PR sur 5 intégrées ; la règle manque
 - en: 6 .cpp files at 0% with functional tests
   fr: 6 fichiers .cpp à 0 % avec les tests fonctionnels
-- en: 68 unexecuted consensus functions listed as tested or dead
-  fr: 68 fonctions de consensus jamais exécutées, listées comme testées ou comme code mort
+- en: 68 unexecuted consensus functions (measured 12 Nov at c6f9678d) listed as tested or dead
+  fr: >-
+    68 fonctions de consensus jamais exécutées (mesuré le 12 nov. au commit c6f9678d), listées comme
+    testées ou comme code mort
 - en: >-
     7 fix PRs on one release script; the Linux candidate at c6f9678d had one independent four-check
     run (#432, 11 Nov); no macOS, Windows or CUDA candidate has had one yet
@@ -1156,10 +1295,10 @@ translations:
   fr: CI-0 exécuté une fois sur 4c7840e9 ; nombre de partitions fixé à partir de cette exécution
 - en: CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4
   fr: CI-0, CI-4, CI-5, CI-6 en phase 2a ; CI-2, CI-9 en phase 2b ; le reste d'ici la phase 4
-- en: CI-9 fails any area that drops more than 0.2 points against the 69.9/40.7 baseline
+- en: CI-9 fails any area that drops more than 0.2 points against the 72.3/42.6 baseline
   fr: >-
     CI-9 échoue pour tout domaine qui baisse de plus de 0,2 point par rapport à la référence
-    69,9/40,7
+    72,3/42,6
 - en: CLI/RPC parameter conversion drift
   fr: divergence de conversion des paramètres entre CLI et RPC
 - en: Chain verifiable from genesis
@@ -1665,14 +1804,6 @@ translations:
     L'interface graphique Qt (aucune donnée de couverture dans aucune exécution), les arborescences
     Rust et npm d'Atlas (OSV et cargo-audit répertoriés, pas exécutés) et les listes d'autorisation
     RPC d'Atlas par écran.
-- en: >-
-    The fork CI workflow (it exists but has never run on the release line; rebase onto 4c7840e9 and
-    keep the upstream Atlas workflows): jobs CI-0 to CI-10, the known-failing list, and a nightly
-    job for the 47 unit suites that time out.
-  fr: >-
-    Le workflow de CI du fork (il existe mais n'a jamais tourné sur la branche de version ; rebaser
-    sur 4c7840e9 et garder les workflows Atlas de l'amont) : jobs CI-0 à CI-10, la liste des échecs
-    connus et un job nocturne pour les 47 suites unitaires qui expirent.
 - en: The sweeps
   fr: Les balayages
 - en: >-
@@ -1800,12 +1931,13 @@ translations:
 - en: ci/cppcheck.sh with fixed flags; shrinking baseline
   fr: ci/cppcheck.sh avec des options fixes ; référence décroissante
 - en: >-
-    ci/known-failing.txt written from that run (the unit failures, the 48 ExactReplay-stall scripts
-    [C3], gcc-baseline failures after triage) and only shrinking
+    ci/known-failing.txt written from that run (the unit failures; the functional failures, 14 in
+    the coverage run [C3], none an ExactReplay stall; gcc-baseline failures after triage) and only
+    shrinking
   fr: >-
-    ci/known-failing.txt rédigé à partir de cette exécution (les échecs unitaires, les 48 scripts
-    bloqués sur ExactReplay [C3], les échecs de la référence gcc après tri), et qui ne fait que
-    diminuer
+    ci/known-failing.txt rédigé à partir de cette exécution (les échecs unitaires ; les échecs
+    fonctionnels, 14 lors de la mesure de couverture [C3], aucun bloqué sur ExactReplay ; les échecs
+    de la référence gcc après tri), et qui ne fait que diminuer
 - en: clang-tidy warnings
   fr: avertissements clang-tidy
 - en: clang-tidy-diff + -Werror=thread-safety on clean files
@@ -1854,8 +1986,12 @@ translations:
   fr: >-
     chaque chantier choisit une classe ou un élément du tableau ; les responsables inscrivent la
     ligne de plan sur leur carte
-- en: each of the 927 unexecuted wallet functions tested or listed as dead
-  fr: chacune des 927 fonctions du portefeuille jamais exécutées testée ou listée comme code mort
+- en: >-
+    each of the 927 unexecuted wallet functions (measured 12 Nov at c6f9678d) tested or listed as
+    dead
+  fr: >-
+    chacune des 927 fonctions du portefeuille jamais exécutées (mesuré le 12 nov. au commit
+    c6f9678d) testée ou listée comme code mort
 - en: every baseline (TSan 41, cppcheck 372, CodeQL 260) only shrinks
   fr: chaque référence (TSan 41, cppcheck 372, CodeQL 260) ne fait que diminuer
 - en: every candidate; verify requests tagged on the board, answered within the week
@@ -1978,10 +2114,10 @@ translations:
 - en: macOS / libc++ / Qt packaging
   fr: empaquetage macOS / libc++ / Qt
 - en: >-
-    matmul 62.6/62.7 with 47 suites unmeasured; a CPU/CUDA corpus run exists; Metal never run; a
+    matmul 63.9/63.9 with 41 suites unmeasured; a CPU/CUDA corpus run exists; Metal never run; a
     backend disagreement is a consensus split
   fr: >-
-    matmul à 62,6/62,7 avec 47 suites non mesurées ; une exécution du corpus sur CPU/CUDA existe ;
+    matmul à 63,9/63,9 avec 41 suites non mesurées ; une exécution du corpus sur CPU/CUDA existe ;
     Metal jamais exécuté ; un désaccord entre backends est une scission du consensus
 - en: merged -> board card moved -> baseline shrinks
   fr: fusionnée -> carte déplacée sur le tableau -> la référence diminue
@@ -2006,12 +2142,13 @@ translations:
   fr: test « modifier -> rouvrir -> comparer » par magasin
 - en: >-
     net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63,
-    matmul_trusted_attestations.h 50; 68 consensus functions never executed; frozen for 0.34.16 by
-    #464, so only evidence lands
+    matmul_trusted_attestations.h 50; 68 consensus functions never executed (measured 12 Nov at
+    c6f9678d); frozen for 0.34.16 by #464, so only evidence lands
   fr: >-
     net/p2p au rang de risque 1, validation au rang 2 ; net_processing.cpp 113 commits de
     correction, validation.cpp 63, matmul_trusted_attestations.h 50 ; 68 fonctions de consensus
-    jamais exécutées ; gelé pour 0.34.16 par #464, donc seuls des éléments de preuve aboutissent
+    jamais exécutées (mesuré le 12 nov. au commit c6f9678d) ; gelé pour 0.34.16 par #464, donc seuls
+    des éléments de preuve aboutissent
 - en: net/p2p risk rank 1; gate G3 at 1 of about 13 parser targets; no container inventory exists
   fr: >-
     net/p2p au rang de risque 1 ; contrôle G3 à 1 cible de parseur sur environ 13 ; aucun inventaire
@@ -2117,8 +2254,8 @@ translations:
   fr: prévu ; référence 372
 - en: planned; baseline 41 pairs
   fr: prévu ; référence 41 paires
-- en: planned; baseline 69.9% lines; configure fix landed (#578)
-  fr: prévu ; référence 69,9 % des lignes ; correctif de configuration intégré (#578)
+- en: planned; baseline 72.3% lines; configure fix landed (#578)
+  fr: prévu ; référence 72,3 % des lignes ; correctif de configuration intégré (#578)
 - en: privacy leak to peers or restricted views
   fr: fuite de confidentialité vers des pairs ou des vues restreintes
 - en: >-
@@ -2207,8 +2344,8 @@ translations:
   fr: enregistrement des tests, fuzzing rapide, dérive de l'empaquetage
 - en: tests with a symlinked ancestor and a symlinked leaf
   fr: tests avec un ancêtre en lien symbolique et une feuille en lien symbolique
-- en: the 47 timeouts have a job and a number
-  fr: les 47 expirations ont un job et un chiffre
+- en: the 42 timeouts have a job and a number
+  fr: les 42 expirations ont un job et un chiffre
 - en: the baselines exist and are untriaged; each rule costs an afternoon and closes a class for good
   fr: >-
     les références existent et ne sont pas triées ; chaque règle coûte un après-midi et ferme une
@@ -2238,10 +2375,10 @@ translations:
 - en: unit test over the RPCHelpMan table vs vRPCConvertParams
   fr: test unitaire de la table RPCHelpMan face à vRPCConvertParams
 - en: >-
-    upstream runs no hosted CI by choice; baselines: coverage 69.9/40.7, TSan 41, cppcheck 372,
+    upstream runs no hosted CI by choice; baselines: coverage 72.3/42.6, TSan 41, cppcheck 372,
     CodeQL 260, tidy 1,033; macOS test job ran out of time on the last fork run, so it is sharded
   fr: >-
-    l'amont ne fait tourner aucune CI hébergée, par choix ; références : couverture 69,9/40,7, TSan
+    l'amont ne fait tourner aucune CI hébergée, par choix ; références : couverture 72,3/42,6, TSan
     41, cppcheck 372, CodeQL 260, tidy 1 033 ; le job de test macOS a manqué de temps lors de la
     dernière exécution sur le fork, il est donc partitionné
 - en: verification fuzz targets with cost limits
@@ -2256,21 +2393,22 @@ translations:
   fr: >-
     lignes du portefeuille >= 70 (fixé ici) ; règles K05/K11/K12 dans ctest ; la sonde «
     restauration sans phrase secrète » échoue ; aucun octet de la seed après walletlock
-- en: wallet lines from 50.5 to at least 70 (target set here)
-  fr: lignes du portefeuille de 50,5 à au moins 70 (cible fixée ici)
+- en: wallet lines from 63.0 to at least 70 (target set here)
+  fr: lignes du portefeuille de 63,0 à au moins 70 (cible fixée ici)
 - en: >-
-    wallet risk rank 4; 927 wallet functions never executed under unit+functional; K05 chain of 4
-    PRs in 4 days
+    wallet risk rank 4; 927 wallet functions never executed under unit+functional (measured 12 Nov
+    at c6f9678d); K05 chain of 4 PRs in 4 days
   fr: >-
     portefeuille au rang de risque 4 ; 927 fonctions du portefeuille jamais exécutées par les tests
-    unitaires + fonctionnels ; pour K05, une chaîne de 4 PR en 4 jours
+    unitaires + fonctionnels (mesuré le 12 nov. au commit c6f9678d) ; pour K05, une chaîne de 4 PR
+    en 4 jours
 - en: wallet-locked / passphrase ordering
   fr: portefeuille verrouillé / ordre de la phrase secrète
 - en: >-
-    wallet/shielded_rpc.cpp is file risk rank 4 at 15.8/24.3 with no test file; the one lock-order
+    wallet/shielded_rpc.cpp is file risk rank 4 at 15.8/52.7 with no test file; the one lock-order
     inversion is on the wallet side
   fr: >-
-    wallet/shielded_rpc.cpp est au rang de risque 4 des fichiers, à 15,8/24,3, sans fichier de test
+    wallet/shielded_rpc.cpp est au rang de risque 4 des fichiers, à 15,8/52,7, sans fichier de test
     ; l'unique inversion d'ordre de verrouillage est côté portefeuille
 - en: weekly CodeQL
   fr: CodeQL chaque semaine
@@ -2278,8 +2416,6 @@ translations:
   fr: chaque semaine à partir du 24 nov.
 - en: with the Thursday batch, only when a complete item exists; at most one short note
   fr: avec le lot du jeudi, seulement quand un élément complet existe ; au plus une courte note
-- en: workflow exists; never run on release-0.34.16; needs rebase to 4c7840e9
-  fr: le workflow existe ; jamais exécuté sur release-0.34.16 ; à rebaser sur 4c7840e9
 - en: >-
     worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); shared helper exists
     (#576)
@@ -2288,3 +2424,682 @@ translations:
     ; la fonction utilitaire partagée existe (#576)
 - en: worklist ready (consensus and matmul sites excluded)
   fr: liste de travail prête (sites du consensus et de matmul exclus)
+# infra.yaml: the Run infra page and its network map
+- en: >-
+    Checked on 15 Nov 2026 against the node software at v0.34.16 (074dac16) and the release-0.34.17
+    branch (8e7045b9).
+  fr: >-
+    Vérifié le 15 nov. 2026 sur le logiciel du nœud en v0.34.16 (074dac16) et sur la branche
+    release-0.34.17 (8e7045b9).
+- en: "Run it yourself"
+  fr: "Le faire tourner soi-même"
+- en: >-
+    You keep a machine running and follow its guide. Seven roles, from a node at home to a fuzz box
+    in a rack; each card says what the network gets, what the machine needs and who to ask.
+  fr: >-
+    Vous faites tourner une machine et suivez son guide. Sept rôles, du nœud à la maison à la
+    machine de fuzzing en baie ; chaque carte dit ce que le réseau y gagne, ce qu'il faut à la
+    machine et à qui demander.
+- en: "Use a managed setup"
+  fr: "Utiliser une solution gérée"
+- en: >-
+    An app installs and supervises the node software for you, on a machine you own. The machine and
+    its uptime stay yours.
+  fr: >-
+    Une application installe et surveille le logiciel du nœud pour vous, sur une machine qui vous
+    appartient. La machine et sa disponibilité restent votre affaire.
+- en: "This site lists no hosted service that runs BTX infrastructure for you."
+  fr: >-
+    Ce site ne répertorie aucun service hébergé qui fasse tourner une infrastructure BTX à votre
+    place.
+- en: "The roles"
+  fr: "Les rôles"
+- en: "Network"
+  fr: "Réseau"
+- en: "Testing"
+  fr: "Tests"
+- en: "What the network gets"
+  fr: "Ce que le réseau y gagne"
+- en: "Machine"
+  fr: "Machine"
+- en: "Guide"
+  fr: "Guide"
+- en: "Guide coming."
+  fr: "Guide à venir."
+- en: "Who to ask"
+  fr: "À qui demander"
+- en: "Crashes and security problems go privately to the maintainers, never in public."
+  fr: >-
+    Les plantages et les problèmes de sécurité vont en privé aux mainteneurs, jamais en public.
+- en: "How it fits together"
+  fr: "Comment tout s'articule"
+- en: >-
+    Who sends what to whom. A box opens its guide or its card; the numbers on the arrows match the
+    list below the map, and each line of the list names its source in the node software.
+  fr: >-
+    Qui envoie quoi à qui. Chaque case ouvre son guide ou sa carte ; les numéros des flèches
+    renvoient à la liste sous la carte, et chaque ligne de la liste cite sa source dans le logiciel
+    du nœud.
+- en: "Map of BTX infrastructure"
+  fr: "Carte de l'infrastructure BTX"
+- en: >-
+    Boxes for the roles, arrows for what they send each other. The same connections are listed in
+    words below the map.
+  fr: >-
+    Des cases pour les rôles, des flèches pour ce qu'ils s'envoient. Les mêmes liaisons sont
+    décrites en mots sous la carte.
+- en: "BTX peer-to-peer network"
+  fr: "Réseau pair-à-pair BTX"
+- en: "The connections in words"
+  fr: "Les liaisons en mots"
+- en: "Source"
+  fr: "Source"
+- en: "open the guide"
+  fr: "ouvrir le guide"
+- en: "go to its card"
+  fr: "aller à sa carte"
+- en: "Found a crash or a security problem?"
+  fr: "Vous avez trouvé un plantage ou un problème de sécurité ?"
+- en: >-
+    Report it privately through GitHub private vulnerability reporting on btxchain/btx, as its
+    security policy asks. Never post a crash, a sanitizer report or a crashing input in a public
+    issue, pull request or chat: it can show an attacker how to crash running nodes.
+  fr: >-
+    Signalez-le en privé via le signalement privé de vulnérabilités de GitHub sur btxchain/btx,
+    comme le demande sa politique de sécurité. Ne publiez jamais un plantage, un rapport de
+    sanitizer ou une entrée qui fait planter dans une issue, une pull request ou un chat publics :
+    cela peut montrer à un attaquant comment faire planter des nœuds en service.
+- en: "Report a vulnerability privately"
+  fr: "Signaler une vulnérabilité en privé"
+- en: "The security policy (SECURITY.md)"
+  fr: "La politique de sécurité (SECURITY.md)"
+- en: "Before you run a node at home"
+  fr: "Avant de faire tourner un nœud chez soi"
+- en: "Privacy"
+  fr: "Vie privée"
+- en: >-
+    Your node shows its IP address to every peer it connects to. A node that accepts inbound
+    connections also announces its own address, and peers pass it on.
+  fr: >-
+    Votre nœud montre son adresse IP à chaque pair auquel il se connecte. Un nœud qui accepte des
+    connexions entrantes annonce aussi sa propre adresse, et les pairs la relaient.
+- en: >-
+    btxd asks your router to open its port by default (NAT-PMP or PCP), so behind a router that
+    supports this it becomes reachable by itself.
+  fr: >-
+    Par défaut, btxd demande à votre routeur d'ouvrir son port (NAT-PMP ou PCP) : derrière un
+    routeur qui le permet, il devient joignable tout seul.
+- en: >-
+    If your address matters, run the node behind Tor (-proxy, -onlynet=onion; the Tor guide advises
+    onlynet=onion only once Tor runs stably) or on a rented server instead.
+  fr: >-
+    Si votre adresse compte, faites tourner le nœud derrière Tor (-proxy, -onlynet=onion ; le guide
+    Tor conseille onlynet=onion seulement une fois Tor stable) ou plutôt sur un serveur loué.
+- en: >-
+    On a machine with coins, mining or a signer key, set natpmp=0, as the install checklist says.
+  fr: >-
+    Sur une machine avec des coins, du minage ou une clé de signataire, mettez natpmp=0, comme le
+    dit la liste d'installation.
+- en: "Reachability"
+  fr: "Joignabilité"
+- en: >-
+    Outbound connections work by default. To accept inbound ones, TCP port 19335 must be reachable:
+    mapped by NAT-PMP, forwarded on the router by hand, or offered as a Tor onion service
+    (-listenonion). With -proxy, the node only listens if you also set -listen=1.
+  fr: >-
+    Les connexions sortantes fonctionnent par défaut. Pour en accepter d'entrantes, le port TCP
+    19335 doit être joignable : ouvert par NAT-PMP, redirigé à la main sur le routeur, ou proposé
+    comme service onion Tor (-listenonion). Avec -proxy, le nœud n'écoute que si vous ajoutez
+    -listen=1.
+- en: >-
+    A node that only connects out stays in sync and relays to the peers it connects to, but new
+    nodes cannot reach it, so it does not help them sync.
+  fr: >-
+    Un nœud qui ne fait que se connecter vers l'extérieur reste synchronisé et relaie vers les pairs
+    auxquels il se connecte, mais les nouveaux nœuds ne peuvent pas l'atteindre : il ne les aide
+    donc pas à se synchroniser.
+- en: >-
+    To check: btx-cli getpeerinfo shows "inbound": true for peers that connected to you, and btx-cli
+    getnetworkinfo lists your node's localaddresses.
+  fr: >-
+    Pour vérifier : btx-cli getpeerinfo affiche "inbound": true pour les pairs qui se sont connectés
+    à vous, et btx-cli getnetworkinfo liste les localaddresses de votre nœud.
+- en: "Full node: the install checklist on the start page"
+  fr: "Nœud complet : la liste d'installation de la page d'accueil"
+- en: "Running the node with Tor (developers)"
+  fr: "Faire tourner le nœud avec Tor (développeurs)"
+- en: "Full node"
+  fr: "Nœud complet"
+- en: >-
+    Relays blocks and transactions and keeps the network reachable. With a qualified GPU it checks
+    the MatMul work itself; without one, set it up as a trusted mirror that follows signed checks
+    from its signers (on mainnet at least two, by default), or it stops syncing.
+  fr: >-
+    Relaie blocs et transactions et garde le réseau joignable. Avec un GPU qualifié, il vérifie
+    lui-même le travail MatMul ; sans lui, configurez-le en miroir de confiance qui suit les
+    vérifications signées de ses signataires (sur le mainnet, au moins deux par défaut), sinon il
+    cesse de se synchroniser.
+- en: >-
+    An always-on computer or small server with an SSD and a steady connection. A GPU is optional.
+  fr: >-
+    Un ordinateur ou un petit serveur toujours allumé, avec un SSD et une connexion stable. Le GPU
+    est facultatif.
+- en: "Before you install a node release: the checklist on the start page"
+  fr: "Avant d'installer une version du nœud : la liste de la page d'accueil"
+- en: "Running a node: the steps on the start page"
+  fr: "Faire tourner un nœud : les étapes de la page d'accueil"
+- en: "Node help for stuck heights"
+  fr: "Aide pour les nœuds bloqués à une hauteur"
+- en: "How a trusted mirror works (developers)"
+  fr: "Fonctionnement d'un miroir de confiance (développeurs)"
+- en: "The node help first; for the rest, the community chats on the links page."
+  fr: >-
+    D'abord l'aide aux nœuds ; pour le reste, les chats de la communauté sur la page des liens.
+- en: "Archive node and snapshot publisher"
+  fr: "Nœud d'archive et éditeur de snapshots"
+- en: >-
+    An archive node keeps every block (prune=0) and serves the whole chain to its peers; the status
+    page measures the chain from archive nodes. A snapshot publisher turns a node's data into a
+    signed file that saves a new node most of the sync. A sync from genesis currently stops at block
+    126,978 (#272), so new nodes start from a snapshot.
+  fr: >-
+    Un nœud d'archive garde chaque bloc (prune=0) et sert toute la chaîne à ses pairs ; la page
+    d'état mesure la chaîne sur des nœuds d'archive. Un éditeur de snapshots fait des données d'un
+    nœud un fichier signé qui épargne à un nouveau nœud l'essentiel de la synchronisation. Depuis la
+    genèse, la synchronisation s'arrête au bloc 126 978 (#272) : les nouveaux nœuds partent d'un
+    snapshot.
+- en: >-
+    A server with a large disk (the whole chain, never pruned, plus room for snapshot files) and an
+    upload link that can serve them.
+  fr: >-
+    Un serveur avec un grand disque (toute la chaîne, jamais élaguée, plus de la place pour les
+    fichiers de snapshot) et un débit montant capable de les servir.
+- en: "Archival node runbook (developers)"
+  fr: "Runbook des nœuds d'archive (développeurs)"
+- en: >-
+    Its opening note still calls Epoch A a release candidate; the developers' docs index says it has
+    been live on mainnet since block 185,000.
+  fr: >-
+    Sa note d'ouverture appelle encore Epoch A une version candidate ; l'index de la documentation
+    des développeurs dit qu'elle est active sur le mainnet depuis le bloc 185 000.
+- en: "No community guide yet for publishing a signed snapshot."
+  fr: "Pas encore de guide de la communauté pour publier un snapshot signé."
+- en: "Signed snapshots in the link list"
+  fr: "Snapshots signés dans la liste de liens"
+- en: "The developers' UTXO snapshot recipe"
+  fr: "La recette de snapshot UTXO des développeurs"
+- en: "The I-OPS lane owner, whose lane covers archive mirrors and signed snapshots."
+  fr: >-
+    Le ou la responsable du chantier I-OPS, qui couvre les miroirs d'archive et les snapshots
+    signés.
+- en: "Attestation signer"
+  fr: "Signataire d'attestations"
+- en: >-
+    Replays the MatMul work of new blocks on a qualified GPU (ExactReplay) and signs the result.
+    Trusted mirrors that pinned its key follow those signatures; a node that checks blocks itself
+    never uses them in place of its own check. The developers' docs call this role a GPU archive or
+    attestor.
+  fr: >-
+    Rejoue sur un GPU qualifié le travail MatMul des nouveaux blocs (ExactReplay) et signe le
+    résultat. Les miroirs de confiance qui ont épinglé sa clé suivent ces signatures ; un nœud qui
+    vérifie lui-même les blocs ne les met jamais à la place de sa propre vérification. La
+    documentation des développeurs appelle ce rôle archive GPU ou attestateur.
+- en: >-
+    A GPU that passes btxd's self-qualification in strict-device mode, the whole chain (prune=0),
+    online around the clock. The runbook reports RTX 5090 and RTX PRO 6000 passing on CUDA 13.2 with
+    cuBLASLt 13.4; other cards must pass the same self-test. One signing key per machine; never on a
+    miner.
+  fr: >-
+    Un GPU qui réussit l'autoqualification de btxd en mode strict-device, toute la chaîne (prune=0),
+    en ligne jour et nuit. Le runbook indique que les RTX 5090 et RTX PRO 6000 la réussissent avec
+    CUDA 13.2 et cuBLASLt 13.4 ; les autres cartes doivent réussir le même autotest. Une clé de
+    signature par machine ; jamais sur un mineur.
+- en: "GPU operator runbook (developers)"
+  fr: "Runbook des opérateurs GPU (développeurs)"
+- en: >-
+    Its status lines still call Epoch A a release candidate; the developers' docs index says it has
+    been live on mainnet since block 185,000.
+  fr: >-
+    Ses lignes d'état appellent encore Epoch A une version candidate ; l'index de la documentation
+    des développeurs dit qu'elle est active sur le mainnet depuis le bloc 185 000.
+- en: "Signers and trusted mirrors (developers)"
+  fr: "Signataires et miroirs de confiance (développeurs)"
+- en: >-
+    Questions about the runbook as an issue on btxchain/btx. No lane of this hub covers signers yet.
+  fr: >-
+    Les questions sur le runbook, en issue sur btxchain/btx. Aucun chantier de ce hub ne couvre
+    encore les signataires.
+- en: "Always-on fuzz box"
+  fr: "Machine de fuzzing permanente"
+- en: >-
+    Runs BTX's more than 270 fuzz targets day and night and keeps every input that reaches new code,
+    so it finds bugs that need hours of mutation. A short CI run starts from nothing every time.
+  fr: >-
+    Fait tourner jour et nuit les plus de 270 cibles de fuzzing de BTX et garde chaque entrée qui
+    atteint du code nouveau ; elle trouve ainsi des bugs qui demandent des heures de mutation. Une
+    courte exécution de CI repart de zéro à chaque fois.
+- en: >-
+    A dedicated Linux machine or VM (Ubuntu 24.04): many CPU threads, about 2 GB of RAM per fuzzing
+    process, 80 GB of free disk, no GPU. Nothing else on it: no node, wallet, miner or keys.
+  fr: >-
+    Une machine Linux ou une VM dédiée (Ubuntu 24.04) : beaucoup de threads CPU, environ 2 Go de RAM
+    par processus de fuzzing, 80 Go de disque libre, pas de GPU. Rien d'autre dessus : ni nœud, ni
+    portefeuille, ni mineur, ni clés.
+- en: "Running a continuous BTX fuzz box"
+  fr: "Faire tourner une machine de fuzzing continu pour BTX"
+- en: "The I-OPS lane owner, who keeps the fuzz-box guide."
+  fr: "Le ou la responsable d'I-OPS, qui tient à jour le guide de la machine de fuzzing."
+- en: "CI runner"
+  fr: "Exécuteur de CI"
+- en: >-
+    Builds and tests the newest commit of a branch every night and publishes the result, so a break
+    shows up within a day. The status page's operator publishes one such run as job CI-0; it is on
+    the developers page.
+  fr: >-
+    Compile et teste chaque nuit le dernier commit d'une branche et publie le résultat, pour qu'une
+    casse se voie en un jour. L'opérateur de la page d'état publie une telle exécution comme tâche
+    CI-0 ; elle figure sur la page des développeurs.
+- en: >-
+    A dedicated Linux server with many threads and tens of GB of free disk. The CI-0 run of 15 Nov
+    took about 70 minutes on 30 threads; a coverage build tree alone takes 27 GB.
+  fr: >-
+    Un serveur Linux dédié avec beaucoup de threads et quelques dizaines de Go de disque libre.
+    L'exécution CI-0 du 15 nov. a pris environ 70 minutes sur 30 threads ; un arbre de compilation
+    avec couverture occupe à lui seul 27 Go.
+- en: >-
+    Until then: the I-CI pack lists the jobs, the build-and-test page has the recipes, and
+    ci/README.md in the btx tree runs a CI stage locally.
+  fr: >-
+    En attendant : le paquet I-CI liste les tâches, la page de compilation et de tests donne les
+    recettes, et ci/README.md dans l'arborescence de btx lance une étape de CI en local.
+- en: "I-CI pack: the fork CI jobs"
+  fr: "Paquet I-CI : les tâches de CI sur le fork"
+- en: "Build and test recipes"
+  fr: "Recettes de compilation et de tests"
+- en: "The CI scripts in the btx tree"
+  fr: "Les scripts de CI dans l'arborescence de btx"
+- en: >-
+    The status page's operator, who runs the nightly CI-0. The I-CI lane has no owner yet: claim it
+    in the lanes file.
+  fr: >-
+    L'opérateur de la page d'état, qui fait tourner le CI-0 nocturne. Le chantier I-CI n'a pas
+    encore de responsable : prenez-le dans le fichier des chantiers.
+- en: "Sanitizer runs"
+  fr: "Exécutions avec sanitizers"
+- en: >-
+    Builds the node with AddressSanitizer and UndefinedBehaviorSanitizer, or with ThreadSanitizer,
+    and runs the tests. Memory and threading bugs that pass silently in a normal build turn into
+    reports.
+  fr: >-
+    Compile le nœud avec AddressSanitizer et UndefinedBehaviorSanitizer, ou avec ThreadSanitizer, et
+    lance les tests. Les bugs de mémoire et de threads qui passent inaperçus dans une compilation
+    normale deviennent des rapports.
+- en: >-
+    A Linux machine with clang (clang 20 or newer for ThreadSanitizer), plenty of RAM and threads.
+    Runs are several times slower: functional tests get --timeout-factor=4.
+  fr: >-
+    Une machine Linux avec clang (clang 20 ou plus récent pour ThreadSanitizer), beaucoup de RAM et
+    de threads. Les exécutions sont plusieurs fois plus lentes : les tests fonctionnels prennent
+    --timeout-factor=4.
+- en: "Build and test, section 6: Sanitizers"
+  fr: "Compilation et tests, section 6 : sanitizers"
+- en: >-
+    The I-CI lane, which holds the ASan/UBSan and TSan jobs (CI-2, CI-3). It has no owner yet: until
+    someone claims it, open an issue in this repository.
+  fr: >-
+    Le chantier I-CI, auquel appartiennent les tâches ASan/UBSan et TSan (CI-2, CI-3). Il n'a pas
+    encore de responsable : tant que personne ne le prend, ouvrez une issue dans ce dépôt.
+- en: "Guix rebuilder"
+  fr: "Recompilation avec Guix"
+- en: >-
+    Rebuilds a release from its tagged source in a fixed Guix environment, so independent builders
+    can compare hashes and nobody has to trust a single build machine. The v0.34.16 release notes
+    say its Linux binaries need glibc 2.38 or newer, while these scripts build against glibc 2.31:
+    they were not made with them, so today rebuilders can only compare with each other.
+  fr: >-
+    Recompile une version à partir de son code étiqueté dans un environnement Guix fixe : des
+    personnes indépendantes comparent les hachages, nul ne dépend d'une seule machine. Selon les
+    notes de v0.34.16, ses binaires Linux exigent glibc 2.38 ou plus, ces scripts compilent contre
+    glibc 2.31 : ils n'en sont pas issus, et les recompilateurs ne se comparent qu'entre eux.
+- en: >-
+    A Linux machine with Guix: 16 GB free for the Guix store plus 8 GB per platform you build. More
+    cores build faster.
+  fr: >-
+    Une machine Linux avec Guix : 16 Go libres pour le store Guix plus 8 Go par plateforme compilée.
+    Plus de cœurs compilent plus vite.
+- en: >-
+    The scripts are in the btx tree (contrib/guix). Their README is Bitcoin Core's and points at
+    Bitcoin Core's signature repository; this site knows of no BTX one yet.
+  fr: >-
+    Les scripts sont dans l'arborescence de btx (contrib/guix). Leur README est celui de Bitcoin
+    Core et renvoie au dépôt de signatures de Bitcoin Core ; ce site n'en connaît pas encore pour
+    BTX.
+- en: "The Guix scripts in the btx tree"
+  fr: "Les scripts Guix dans l'arborescence de btx"
+- en: "No lane covers reproducible builds yet; open an issue in this repository."
+  fr: >-
+    Aucun chantier ne couvre encore les compilations reproductibles ; ouvrez une issue dans ce
+    dépôt.
+- en: "Miners and pools"
+  fr: "Mineurs et pools"
+- en: "Full nodes"
+  fr: "Nœuds complets"
+- en: "SwapNet peers"
+  fr: "Pairs SwapNet"
+- en: "Discovery relays"
+  fr: "Relais de découverte"
+- en: "Trusted mirrors"
+  fr: "Miroirs de confiance"
+- en: "Attestation signers"
+  fr: "Signataires d'attestations"
+- en: "Snapshot publishers"
+  fr: "Éditeurs de snapshots"
+- en: "Archive nodes"
+  fr: "Nœuds d'archive"
+- en: "Status page"
+  fr: "Page d'état"
+- en: "Releases"
+  fr: "Versions"
+- en: "Guix rebuilders"
+  fr: "Recompilateurs Guix"
+- en: "templates out, blocks back"
+  fr: "modèles à l'aller, blocs au retour"
+- en: >-
+    A full node hands out block templates; miners and pools send solved blocks back
+    (getblocktemplate, then a stratum job, then submitblock).
+  fr: >-
+    Un nœud complet distribue des modèles de bloc ; mineurs et pools renvoient les blocs résolus
+    (getblocktemplate, puis une tâche stratum, puis submitblock).
+- en: "blocks and transactions"
+  fr: "blocs et transactions"
+- en: >-
+    Blocks and transactions travel between peers. A node that keeps every block serves the whole
+    chain; a trusted mirror still checks bodies, transactions, scripts and state itself, and for the
+    MatMul work it relies on its signers.
+  fr: >-
+    Blocs et transactions circulent entre pairs. Un nœud qui garde chaque bloc sert toute la chaîne
+    ; un miroir de confiance vérifie toujours lui-même le contenu des blocs, les transactions, les
+    scripts et l'état, et pour le travail MatMul il s'appuie sur ses signataires.
+- en: "swap offers over the same peer links"
+  fr: "offres d'échange par les mêmes liens entre pairs"
+- en: >-
+    A node started with -swapnet=1 finds other SwapNet nodes over the peer connections it already
+    has: no new port, seed list or hosted service. SwapNet is off by default.
+  fr: >-
+    Un nœud démarré avec -swapnet=1 trouve d'autres nœuds SwapNet par les connexions entre pairs
+    qu'il a déjà : pas de nouveau port, pas de liste de seeds, pas de service hébergé. SwapNet est
+    désactivé par défaut.
+- en: "peer addresses only"
+  fr: "adresses de pairs uniquement"
+- en: >-
+    A discovery relay (-matmulvalidation=relay) is the mode meant for public DNS seeds and addnode
+    hosts. It only hands out peer addresses: it serves no blocks, is no authority on the chain and
+    never asks for or serves signatures.
+  fr: >-
+    Un relais de découverte (-matmulvalidation=relay) est le mode prévu pour les seeds DNS publics
+    et les hôtes addnode. Il ne distribue que des adresses de pairs : il ne sert aucun bloc, ne fait
+    pas autorité sur la chaîne et ne demande ni ne sert jamais de signatures.
+- en: "signed attestations"
+  fr: "attestations signées"
+- en: >-
+    A signer signs each block whose MatMul work it replayed (messages getmmattest and mmattest). On
+    mainnet a trusted mirror by default accepts that work only with signatures from at least two
+    keys it pinned itself; any peer may pass them on. A node that checks blocks itself never uses
+    them in place of its own check.
+  fr: >-
+    Un signataire signe chaque bloc dont il a rejoué le travail MatMul (messages getmmattest et
+    mmattest). Sur le mainnet, par défaut, un miroir de confiance n'accepte ce travail qu'avec les
+    signatures d'au moins deux clés qu'il a épinglées ; tout pair peut les relayer. Un nœud qui
+    vérifie lui-même les blocs ne les met jamais à la place de sa propre vérification.
+- en: "a signed starting point"
+  fr: "un point de départ signé"
+- en: >-
+    A snapshot saves a new node most of the sync: a signed copy of a node's data, or a UTXO snapshot
+    at a height compiled into btxd (loadtxoutset). Check its SHA-256 and signature before you load
+    it. A node holding an attested UTXO snapshot can also offer it to peers over the P2P network.
+  fr: >-
+    Un snapshot épargne à un nouveau nœud l'essentiel de la synchronisation : une copie signée des
+    données d'un nœud, ou un snapshot UTXO à une hauteur compilée dans btxd (loadtxoutset). Vérifiez
+    son SHA-256 et sa signature avant de le charger. Un nœud qui détient un snapshot UTXO attesté
+    peut aussi le proposer à ses pairs sur le réseau P2P.
+- en: "chain data from an archive node"
+  fr: "données de chaîne d'un nœud d'archive"
+- en: "The status page measures supply, chain height and network figures from an archive node."
+  fr: >-
+    La page d'état mesure l'offre, la hauteur de la chaîne et les chiffres du réseau à partir d'un
+    nœud d'archive.
+- en: "release archives"
+  fr: "archives des versions"
+- en: >-
+    Release archives are published on the releases page of btxchain/btx. For v0.34.16 there are two,
+    both for Linux x86_64 (one built with CUDA 13), and a SHA256SUMS file; on other platforms the
+    node is built from source.
+  fr: >-
+    Les archives des versions sont publiées sur la page des releases de btxchain/btx. Pour v0.34.16
+    il y en a deux, toutes deux pour Linux x86_64 (l'une compilée avec CUDA 13), et un fichier
+    SHA256SUMS ; sur les autres plateformes, le nœud se compile depuis les sources.
+- en: "tagged source to rebuild"
+  fr: "code étiqueté à recompiler"
+- en: >-
+    A rebuilder builds a release's tagged source with contrib/guix, attests to the result and
+    verifies other rebuilders' attestations. The v0.34.16 release notes say its Linux binaries need
+    glibc 2.38 or newer and these scripts build against glibc 2.31, so their hashes cannot match a
+    rebuild yet.
+  fr: >-
+    Un recompilateur compile avec contrib/guix le code étiqueté d'une version, atteste le résultat
+    et vérifie les attestations des autres. Selon les notes de v0.34.16, ses binaires Linux exigent
+    glibc 2.38 ou plus et ces scripts compilent contre glibc 2.31 : leurs hachages ne peuvent donc
+    pas encore correspondre à une recompilation.
+# developers split: the start card's two steps
+- en: "Ongoing work: test coverage, the nightly CI-0 run and the lanes waiting for an owner."
+  fr: >-
+    Travaux en cours : couverture de tests, l'exécution nocturne de CI-0 et les chantiers en attente
+    d'un responsable.
+# start and links pages: fact fixes and new steps of the UX pass
+- en: >-
+    Unofficial demo with sample data only. SwapNet is in v0.34.16 for broader testing, off unless a
+    node starts with -swapnet=1; the page connects to no node or wallet.
+  fr: >-
+    Démo non officielle, uniquement avec des données d'exemple. SwapNet est dans v0.34.16 pour des
+    tests plus larges, désactivé sauf si un nœud démarre avec -swapnet=1 ; la page ne se connecte à
+    aucun nœud ni portefeuille.
+- en: "What BTX is, in a few facts with their sources."
+  fr: "Ce qu'est BTX, en quelques faits avec leurs sources."
+- en: "Choose a wallet from the list, after reading \"Before you buy or receive BTX\" below."
+  fr: >-
+    Choisissez un portefeuille dans la liste, après avoir lu « Avant d'acheter ou de recevoir des
+    BTX » plus bas.
+- en: "Have a spare machine? Seven ways to give BTX infrastructure, from a node to a fuzz box."
+  fr: >-
+    Une machine en trop ? Sept façons d'apporter de l'infrastructure à BTX, du nœud à la machine de
+    fuzzing.
+- en: "Community projects: things to build and run outside the node software."
+  fr: >-
+    Projets de la communauté : ce qu'on peut construire et faire tourner en dehors du logiciel du
+    nœud.
+# projects.yaml: the projects at the top of the Projects page
+- en: "Build something"
+  fr: "Construire quelque chose"
+- en: >-
+    All of it lies outside the node software. Nothing here is planned, promised or endorsed by the
+    node's developers. Each card says what exists today and what is missing, with the source of
+    every claim.
+  fr: >-
+    Tout cela se situe en dehors du logiciel du nœud. Rien ici n'est prévu, promis ni approuvé par
+    les développeurs du nœud. Chaque carte dit ce qui existe aujourd'hui et ce qui manque, avec la
+    source de chaque affirmation.
+- en: "Anything that moves other people's coins starts on regtest or testnet."
+  fr: "Tout ce qui déplace les coins d'autres personnes commence sur regtest ou testnet."
+- en: "There today"
+  fr: "Ce qui existe"
+- en: "Missing"
+  fr: "Ce qui manque"
+- en: "Careful"
+  fr: "Attention"
+- en: "Start from"
+  fr: "Point de départ"
+- en: "Rather build something than run a machine? Community projects"
+  fr: "Plutôt construire quelque chose que faire tourner une machine ? Projets de la communauté"
+- en: "Venues for trading BTX"
+  fr: "Plateformes d'échange de BTX"
+- en: >-
+    A place where people trade BTX against other coins, run by its own operators: an order book, or
+    a front-end over SwapNet's swaps.
+  fr: >-
+    Un lieu où l'on échange des BTX contre d'autres coins, tenu par ses propres opérateurs : un
+    carnet d'ordres, ou une interface au-dessus des swaps de SwapNet.
+- en: >-
+    SwapNet in the node swaps BTX with BTC or ETH between two parties; AMM pools, wrapped balances
+    and partial fills are not part of it. This group's venue-structure paper compares four models
+    and where the licensing line runs.
+  fr: >-
+    SwapNet dans le nœud échange des BTX contre des BTC ou des ETH entre deux parties ; les pools
+    AMM, les soldes encapsulés et les exécutions partielles n'en font pas partie. Le document de ce
+    groupe sur la structure des plateformes compare quatre modèles et situe la limite des licences.
+- en: >-
+    Operators, a model chosen from the paper, and legal advice where the venue will run. The paper
+    is a draft for discussion, not legal advice.
+  fr: >-
+    Des opérateurs, un modèle choisi dans le document, et un conseil juridique là où la plateforme
+    fonctionnera. Le document est un brouillon pour la discussion, pas un conseil juridique.
+- en: "The venue-structure paper"
+  fr: "Le document sur la structure des plateformes"
+- en: "SwapNet overview (developers)"
+  fr: "Présentation de SwapNet (développeurs)"
+- en: "Discussion of the paper as an issue in this repository."
+  fr: "Discussion du document en issue dans ce dépôt."
+- en: "SwapNet wallets and tools"
+  fr: "Portefeuilles et outils pour SwapNet"
+- en: >-
+    Software around SwapNet: a wallet that shows quotes and runs swaps, tools that run a maker's
+    market, a front-end for the node's swap calls.
+  fr: >-
+    Des logiciels autour de SwapNet : un portefeuille qui affiche les cotations et exécute les
+    swaps, des outils qui font tourner le marché d'un maker, une interface pour les appels de swap
+    du nœud.
+- en: >-
+    A node started with -swapnet=1 finds other SwapNet nodes over its peer links and offers 33 swap
+    RPC methods. v0.34.16 carries SwapNet for broader testing. There is no graphical trading panel:
+    the RPC console is the interface.
+  fr: >-
+    Un nœud démarré avec -swapnet=1 trouve d'autres nœuds SwapNet par ses liens entre pairs et offre
+    33 méthodes RPC de swap. v0.34.16 inclut SwapNet pour des tests plus larges. Il n'y a pas de
+    panneau graphique d'échange : la console RPC est l'interface.
+- en: >-
+    Everything a non-developer would use. The package's own status page marks real-chain settlement
+    and an independent audit as not executed, the ETH leg needs a deployed contract that the node's
+    owner approves locally, and the release docs want external receipts before anyone calls it
+    mainnet-qualified.
+  fr: >-
+    Tout ce qu'utiliserait quelqu'un qui n'est pas développeur. La page d'état du paquet marque le
+    règlement sur de vraies chaînes et un audit indépendant comme non exécutés, le côté ETH exige un
+    contrat déployé que le propriétaire du nœud approuve localement, et la documentation de version
+    veut des preuves externes avant de le dire qualifié pour le mainnet.
+- en: >-
+    Once a taker has funded a swap, cancelling does not release it: the coins stay locked until the
+    agreed refund height or time.
+  fr: >-
+    Une fois qu'un taker a financé un swap, l'annuler ne le libère pas : les coins restent bloqués
+    jusqu'à la hauteur ou l'heure de remboursement convenue.
+- en: "The 33 swap RPC methods"
+  fr: "Les 33 méthodes RPC de swap"
+- en: "Running SwapNet on a node"
+  fr: "Faire tourner SwapNet sur un nœud"
+- en: "Testing and release (developers)"
+  fr: "Tests et publication (développeurs)"
+- en: "Questions as an issue on btxchain/btx; security problems only through private reporting."
+  fr: >-
+    Les questions en issue sur btxchain/btx ; les problèmes de sécurité uniquement par le
+    signalement privé.
+- en: "Mining on consumer AMD cards"
+  fr: "Minage sur cartes AMD grand public"
+- en: "An exact INT8 MatMul path for consumer Radeon cards, so they can mine."
+  fr: >-
+    Un chemin MatMul INT8 exact pour les cartes Radeon grand public, pour qu'elles puissent miner.
+- en: >-
+    The node's AMD (HIP) path admits six datacenter Instinct chips: gfx908, gfx90a, gfx940, gfx941,
+    gfx942 and gfx950 (MI100 to MI350). It is built automatically when a HIP clang and an AMD GPU
+    are found. Consumer Radeon cards (RDNA, gfx10 to gfx12) are used neither to mine nor to
+    validate; the source calls them verification-only until cross-vendor golden vectors qualify
+    them.
+  fr: >-
+    Le chemin AMD (HIP) du nœud admet six puces Instinct de centre de données : gfx908, gfx90a,
+    gfx940, gfx941, gfx942 et gfx950 (MI100 à MI350) ; il se compile tout seul quand un clang HIP et
+    un GPU AMD sont trouvés. Les Radeon grand public (RDNA, gfx10 à gfx12) ne servent ni à miner ni
+    à valider ; le code les dit verification-only tant que des vecteurs golden inter-fabricants ne
+    les qualifient pas.
+- en: >-
+    An exact INT8 path on RDNA that matches the CPU reference bit for bit, and the golden vectors
+    that show it. Whether such a path is admitted is the maintainer's decision.
+  fr: >-
+    Un chemin INT8 exact sur RDNA qui corresponde bit à bit à la référence CPU, et les vecteurs
+    golden qui le montrent. L'admission d'un tel chemin est la décision du mainteneur.
+- en: "How the node admits a GPU (developers)"
+  fr: "Comment le nœud admet un GPU (développeurs)"
+- en: "The HIP backend sources (developers)"
+  fr: "Les sources du backend HIP (développeurs)"
+- en: "Evidence as an issue on btxchain/btx; no lane of this hub covers AMD yet."
+  fr: >-
+    Les éléments de preuve en issue sur btxchain/btx ; aucun chantier de ce hub ne couvre encore
+    AMD.
+- en: "Testing on Apple Silicon"
+  fr: "Tests sur Apple Silicon"
+- en: >-
+    Run the node's Metal self-test on more Apple chips and report the results, so the Metal path is
+    known to work beyond one device class.
+  fr: >-
+    Faire tourner l'autotest Metal du nœud sur d'autres puces Apple et en rapporter les résultats,
+    pour savoir que le chemin Metal fonctionne au-delà d'une classe d'appareil.
+- en: >-
+    Metal is built by default on Apple. A Metal device is admitted after the node's exactness
+    self-tests, through Metal 4 INT8 tensor ops or, for the current epoch's replay, an exact
+    integer-ALU path. A golden row, where one exists, is compared; without one the self-test decides
+    (the manifest has one row, for an M4-class device). The release has no macOS binaries.
+  fr: >-
+    Metal est compilé par défaut sur Apple. Un appareil Metal est admis après les autotests
+    d'exactitude du nœud, via les opérations tensorielles INT8 de Metal 4 ou, pour rejouer l'époque
+    actuelle, un chemin exact en ALU entière. Là où une ligne golden existe, elle est comparée ;
+    sinon l'autotest décide (le manifeste en a une, pour la classe M4). La version n'a pas de
+    binaires macOS.
+- en: "Self-test reports from other Apple chips."
+  fr: "Des rapports d'autotest d'autres puces Apple."
+- en: "Building on macOS (developers)"
+  fr: "Compiler sous macOS (développeurs)"
+- en: "The cross-device lane: I-XDEV pack"
+  fr: "Le chantier inter-appareils : paquet I-XDEV"
+- en: "The I-XDEV lane, which replays blocks across devices; it has no owner yet."
+  fr: >-
+    Le chantier I-XDEV, qui rejoue les blocs sur différents appareils ; il n'a pas encore de
+    responsable.
+- en: "Explorers, monitoring and light wallets"
+  fr: "Explorateurs, surveillance et portefeuilles légers"
+- en: >-
+    More independent views of the chain, alerts when something goes wrong, and wallets for people
+    who do not run a node all the time.
+  fr: >-
+    Davantage de vues indépendantes sur la chaîne, des alertes quand quelque chose ne va pas, et des
+    portefeuilles pour qui ne fait pas tourner un nœud en permanence.
+- en: >-
+    Several explorers and a status page are on the links page; the status page publishes its figures
+    as JSON. btx-cli lightwatch is a watch-only light client: it reads compact block filters from a
+    node it trusts (started with -blockfilterindex=1) and signs nothing. The node also reads and
+    writes a browser-wallet recovery format.
+  fr: >-
+    Plusieurs explorateurs et une page d'état figurent sur la page des liens ; la page d'état publie
+    ses chiffres en JSON. btx-cli lightwatch est un client léger en lecture seule : il lit les
+    filtres de blocs compacts d'un nœud de confiance (démarré avec -blockfilterindex=1) et ne signe
+    rien. Le nœud lit et écrit aussi un format de récupération pour portefeuilles de navigateur.
+- en: >-
+    Explorers and monitors run by more independent operators, alerting, and light wallets that can
+    also sign.
+  fr: >-
+    Des explorateurs et des moniteurs tenus par davantage d'opérateurs indépendants, des alertes, et
+    des portefeuilles légers qui puissent aussi signer.
+- en: "Explorers and the status page in the link list"
+  fr: "Explorateurs et page d'état dans la liste de liens"
+- en: "The status page's JSON"
+  fr: "Le JSON de la page d'état"
+- en: "Browser wallet and node wallet formats (developers)"
+  fr: "Formats des portefeuilles de navigateur et de nœud (développeurs)"
+- en: "The community chats on the links page."
+  fr: "Les chats de la communauté sur la page des liens."

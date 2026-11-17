@@ -14,143 +14,145 @@
     "git": "the tree at 4c7840e9",
     "note": "file names in src fields (A-TAXONOMY.md, C1-STATIC.md, ...) are the team's lane reports; the values they gave are the numbers in this file; labels are explained in MASTER-PLAN.md under 'Labels'"
   },
-  "coverage_statement": "The coverage build configures again on release-0.34.16 since #578 (merged into the release line on 12 Nov as 7051507b); the fix is not in v0.34.15 (main, 476f3f23). Measured at c6f9678d with the same fix: 65.8% product lines unit-only, 69.9% unit + functional; branches 37.7% / 40.7%; all floors (47 unit suites timed out, 82 of 208 functional scripts failed in the coverage run). Recipe: ../04-build-and-test.md section 5.",
+  "coverage_statement": "The coverage build configures again since #578 (merged into the release line on 12 Nov as 7051507b); the fix is not in v0.34.15 (main, 476f3f23). Measured on swapnet-v2 at a5d1637f (14 Nov), which contains the fix: 67.4% product lines unit-only, 72.3% unit + functional; branches 38.9% / 42.6% (42 unit suites timed out and 14 of 220 functional scripts failed in the coverage run; a killed test writes no counts). The time budgets were shorter than on 12 Nov (unit 2.5 h instead of 3 h, functional 100 min instead of 3 h), so the figures are floors and the comparison with the 12 Nov run at c6f9678d is indicative. Recipe: ../04-build-and-test.md section 5.",
   "measured_at": {
     "commit": "c6f9678d",
     "date": "2026-11-12",
-    "src": "C1, C2, C3 run logs (release-0.34.16 at c6f9678d)",
+    "coverage_commit": "a5d1637f",
+    "coverage_date": "2026-11-14",
+    "src": "C3 coverage run logs (swapnet-v2 at a5d1637f, 14 Nov); C1, C2 run logs (release-0.34.16 at c6f9678d, 12 Nov)",
     "live_head": "4c7840e9",
-    "live_head_note": "31 commits later; no change to validation.cpp, net_processing.cpp, pow.cpp, src/consensus, script/interpreter.cpp",
-    "live_head_src": "git rev-list / git diff c6f9678d..4c7840e9"
+    "live_head_note": "release-0.34.16 head the hub was verified against on 12 Nov, 31 commits after c6f9678d (C1, C2); no change to validation.cpp, net_processing.cpp, pow.cpp, src/consensus, script/interpreter.cpp in those 31. a5d1637f (C3) is 177 commits after it; of those files only net_processing.cpp differs between c6f9678d and a5d1637f",
+    "live_head_src": "git rev-list / git diff c6f9678d..4c7840e9; git rev-list --count 4c7840e9..a5d1637f; git diff --stat c6f9678d a5d1637f"
   },
   "coverage": {
     "overall": {
-      "unit_lines": 65.8,
-      "unitfunc_lines": 69.9,
-      "branches": 40.7,
-      "branches_unit": 37.7,
-      "functions_unit": 76.3,
-      "functions_unitfunc": 80.4,
-      "scope": "product code, 5,519 files, 623,410 lines",
+      "unit_lines": 67.4,
+      "unitfunc_lines": 72.3,
+      "branches": 42.6,
+      "branches_unit": 38.9,
+      "functions_unit": 77.7,
+      "functions_unitfunc": 82.7,
+      "scope": "product code, 5,530 files, 625,368 lines",
       "basis": "branches = unit + functional",
-      "caveat": "floors: 47 unit suites timed out; 82 of 208 functional scripts failed",
+      "caveat": "floors: 42 unit suites timed out; 14 of 220 functional scripts failed; shorter time budgets than on 12 Nov, so the comparison with that run is indicative",
       "src": "C3 overall coverage summary"
     },
     "areas": [
       {
         "area": "consensus",
         "unit_lines": 95.7,
-        "unitfunc_lines": 96.6,
-        "branches": 50.9,
+        "unitfunc_lines": 97.7,
+        "branches": 53.7,
         "loc": 2452,
         "risk_rank": null,
         "src": "C3 per-area coverage table; loc B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "validation.cpp",
-        "unit_lines": 75.6,
-        "unitfunc_lines": 78.2,
-        "branches": 46.5,
+        "unit_lines": 77.0,
+        "unitfunc_lines": 79.8,
+        "branches": 48.0,
         "loc": 23687,
         "risk_rank": 2,
         "src": "C3 per-area coverage table; loc and rank (validation/chain/mempool) B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "pow.cpp",
-        "unit_lines": 68.9,
-        "unitfunc_lines": 70.3,
-        "branches": 46.3,
+        "unit_lines": 69.3,
+        "unitfunc_lines": 70.7,
+        "branches": 46.8,
         "loc": 9076,
         "risk_rank": 2,
         "src": "C3 per-area coverage table; loc and rank (validation/chain/mempool) B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "script",
-        "unit_lines": 80.7,
-        "unitfunc_lines": 81.2,
-        "branches": 53.6,
+        "unit_lines": 80.8,
+        "unitfunc_lines": 81.3,
+        "branches": 54.0,
         "loc": 18019,
         "risk_rank": 11,
         "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "wallet",
-        "unit_lines": 37.2,
-        "unitfunc_lines": 50.5,
-        "branches": 30.7,
+        "unit_lines": 37.4,
+        "unitfunc_lines": 63.0,
+        "branches": 36.6,
         "loc": 76263,
         "risk_rank": 4,
         "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "net_processing.cpp",
-        "unit_lines": 24.6,
-        "unitfunc_lines": 62.3,
-        "branches": 37.0,
+        "unit_lines": 59.8,
+        "unitfunc_lines": 72.1,
+        "branches": 44.6,
         "loc": 25300,
         "risk_rank": 1,
         "src": "C3 per-area coverage table; loc and rank (net/p2p) B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "other net",
-        "unit_lines": 50.4,
-        "unitfunc_lines": 75.5,
-        "branches": 45.3,
+        "unit_lines": 52.7,
+        "unitfunc_lines": 77.3,
+        "branches": 49.4,
         "loc": null,
         "risk_rank": 1,
         "src": "C3 per-area coverage table; rank (net/p2p) B-RISKMAP.md / B-files.tsv; no matching LOC row"
       },
       {
         "area": "rpc",
-        "unit_lines": 51.6,
-        "unitfunc_lines": 72.9,
-        "branches": 43.4,
+        "unit_lines": 52.0,
+        "unitfunc_lines": 76.5,
+        "branches": 44.6,
         "loc": 33765,
         "risk_rank": 5,
         "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "node",
-        "unit_lines": 69.9,
-        "unitfunc_lines": 79.6,
-        "branches": 49.8,
+        "unit_lines": 72.7,
+        "unitfunc_lines": 81.9,
+        "branches": 51.4,
         "loc": 28129,
         "risk_rank": 7,
         "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "matmul",
-        "unit_lines": 62.6,
-        "unitfunc_lines": 62.7,
-        "branches": 35.1,
+        "unit_lines": 63.9,
+        "unitfunc_lines": 63.9,
+        "branches": 35.9,
         "loc": 468217,
         "risk_rank": 9,
-        "note": "47 suites timed out: not measured",
+        "note": "41 suites timed out: not measured",
         "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "shielded",
-        "unit_lines": 71.8,
-        "unitfunc_lines": 72.3,
-        "branches": 47.1,
+        "unit_lines": 72.1,
+        "unitfunc_lines": 76.9,
+        "branches": 49.0,
         "loc": 50060,
         "risk_rank": null,
         "src": "C3 per-area coverage table; loc B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "modelnet",
-        "unit_lines": 83.7,
-        "unitfunc_lines": 85.6,
-        "branches": 47.8,
+        "unit_lines": 84.1,
+        "unitfunc_lines": 86.2,
+        "branches": 48.5,
         "loc": 369251,
         "risk_rank": 3,
         "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
       },
       {
         "area": "kernel",
-        "unit_lines": 88.6,
-        "unitfunc_lines": 90.5,
-        "branches": 49.7,
+        "unit_lines": 88.8,
+        "unitfunc_lines": 90.9,
+        "branches": 53.8,
         "loc": 5400,
         "risk_rank": 12,
         "src": "C3 per-area coverage table; loc and rank B-RISKMAP.md / B-files.tsv"
@@ -158,8 +160,8 @@
       {
         "area": "policy",
         "unit_lines": 69.7,
-        "unitfunc_lines": 80.8,
-        "branches": 49.2,
+        "unitfunc_lines": 81.7,
+        "branches": 50.9,
         "loc": 4695,
         "risk_rank": null,
         "src": "C3 per-area coverage table; loc B-RISKMAP.md / B-files.tsv"
@@ -177,11 +179,11 @@
         "area": "modelnet/security_v2",
         "unit_lines": 0.2,
         "unitfunc_lines": 15.0,
-        "branches": null,
+        "branches": 4.9,
         "loc": 5365,
         "risk_rank": null,
         "note": "6 .cpp files at 0% with functional tests",
-        "src": "B-files.tsv + C3-perfile.csv, recomputed 12 Nov"
+        "src": "B-files.tsv (loc) + C3-perfile.csv (lines and branches, 18 files, recomputed from the 14 Nov run)"
       }
     ]
   },
@@ -375,8 +377,8 @@
       "file": "net_processing.cpp",
       "loc": 25300,
       "fix_commits": 113,
-      "coverage": 62.3,
-      "coverage_unit": 24.6,
+      "coverage": 72.1,
+      "coverage_unit": 59.8,
       "risk_rank": 1,
       "src": "B rank 1; C3-perfile.csv"
     },
@@ -384,8 +386,8 @@
       "file": "validation.cpp",
       "loc": 23687,
       "fix_commits": 63,
-      "coverage": 78.2,
-      "coverage_unit": 75.6,
+      "coverage": 79.8,
+      "coverage_unit": 77.0,
       "risk_rank": 2,
       "src": "B rank 2; C3-perfile.csv"
     },
@@ -394,8 +396,8 @@
       "loc": 12944,
       "fix_commits": 5,
       "fix_prs": 42,
-      "coverage": 74.1,
-      "coverage_unit": 65.9,
+      "coverage": 79.2,
+      "coverage_unit": 69.5,
       "risk_rank": 3,
       "src": "B rank 3 (fix_commits = maintainer fix-subject commits); A section 4 (fix PRs); C3-perfile.csv"
     },
@@ -403,7 +405,7 @@
       "file": "wallet/shielded_rpc.cpp",
       "loc": 16911,
       "fix_commits": 2,
-      "coverage": 24.3,
+      "coverage": 52.7,
       "coverage_unit": 15.8,
       "risk_rank": 4,
       "src": "B rank 4; C3-perfile.csv"
@@ -412,8 +414,8 @@
       "file": "rpc/blockchain.cpp",
       "loc": 5678,
       "fix_commits": 7,
-      "coverage": 57.4,
-      "coverage_unit": 29.5,
+      "coverage": 57.9,
+      "coverage_unit": 30.1,
       "risk_rank": 5,
       "src": "B rank 5; C3-perfile.csv"
     },
@@ -421,8 +423,8 @@
       "file": "node/matmul_trusted_attestations.h",
       "loc": 3477,
       "fix_commits": 50,
-      "coverage": 83.8,
-      "coverage_unit": 56.1,
+      "coverage": 90.0,
+      "coverage_unit": 78.7,
       "risk_rank": 6,
       "src": "B rank 6; C3-perfile.csv"
     },
@@ -440,8 +442,8 @@
       "file": "init.cpp",
       "loc": 4605,
       "fix_commits": 29,
-      "coverage": 77.7,
-      "coverage_unit": 29.4,
+      "coverage": 77.9,
+      "coverage_unit": 30.2,
       "risk_rank": 8,
       "src": "B rank 8; C3-perfile.csv"
     },
@@ -449,8 +451,8 @@
       "file": "rpc/modelnet.cpp",
       "loc": 2883,
       "fix_commits": 3,
-      "coverage": 87.0,
-      "coverage_unit": 54.1,
+      "coverage": 95.1,
+      "coverage_unit": 54.5,
       "risk_rank": 9,
       "src": "B rank 9; C3-perfile.csv"
     },
@@ -458,8 +460,8 @@
       "file": "matmul/matmul_v4_rc_gkr.cpp",
       "loc": 6186,
       "fix_commits": 4,
-      "coverage": 79.1,
-      "coverage_unit": 78.6,
+      "coverage": 85.1,
+      "coverage_unit": 84.7,
       "risk_rank": 10,
       "src": "B rank 10; C3-perfile.csv"
     }
@@ -527,7 +529,7 @@
     {
       "id": "CI-9",
       "name": "coverage-ratchet on a dedicated box",
-      "state": "planned; baseline 69.9% lines; configure fix landed (#578)",
+      "state": "planned; baseline 72.3% lines; configure fix landed (#578)",
       "src": "master plan 4.2; C3; git"
     },
     {
@@ -539,8 +541,8 @@
     {
       "id": "CI-0",
       "name": "fork build matrix (Linux, userns, mingw, Windows, macOS)",
-      "state": "workflow exists; never run on release-0.34.16; needs rebase to 4c7840e9",
-      "src": "fork CI workflow read 12 Nov; fork run list (GitHub API)"
+      "state": "ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator publishes the results of a nightly build and test run on release-0.34.16",
+      "src": "fork CI workflow read 12 Nov; fork run list (GitHub API); status page API ci.json read 13 Nov"
     },
     {
       "id": "G1",
@@ -655,7 +657,7 @@
     {
       "id": "3.1",
       "subsystem": "Consensus and validation",
-      "why": "frozen for 0.34.16 (#464); 68 consensus functions never executed under unit + functional tests",
+      "why": "frozen for 0.34.16 (#464); 68 consensus functions never executed under unit + functional tests (measured 12 Nov at c6f9678d)",
       "mode": "evidence for #464",
       "src": "#464; C3-UNEXECUTED-FUNCTIONS.md"
     },
@@ -676,7 +678,7 @@
     {
       "id": "3.3",
       "subsystem": "Wallet secrets and backups",
-      "why": "wallet 37.2% unit / 50.5% with functional; 927 wallet functions never executed",
+      "why": "wallet 37.4% unit / 63.0% with functional; 927 wallet functions never executed (measured 12 Nov at c6f9678d)",
       "mode": "PR",
       "src": "C3"
     },
@@ -704,7 +706,7 @@
     {
       "id": "3.6a",
       "subsystem": "MatMul cross-backend corpus and attestation model test",
-      "why": "K13 15 PRs, 11 refused; Metal never run; 47 suites time out",
+      "why": "K13 15 PRs, 11 refused; Metal never run; 41 suites time out",
       "mode": "evidence for #464",
       "src": "A-TAXONOMY.md; C3"
     },

@@ -5,6 +5,45 @@
         <p class="c-hero__lead">{{ page_lead }}</p>
       </section>
 
+      {% if projects %}
+      {% set t = projects.texts %}
+      <section class="c-projects" id="projects" aria-labelledby="projects-title">
+        <h2 class="c-section-title" id="projects-title">{{ t.title }}</h2>
+        <p class="c-muted c-map__lead">{{ t.lead }}</p>
+        <p class="c-warning">{{ t.caution }}</p>
+        <div class="c-audiences">
+          {% for project in projects.projects %}
+          <article class="c-audience c-role c-project" id="project-{{ project.id }}">
+            <h3 class="c-audience__title">{{ project.title }}</h3>
+            <p class="c-audience__text">{{ project.idea }}</p>
+            <dl class="c-role__facts">
+              <dt>{{ t.today }}</dt>
+              <dd>{{ project.today }}</dd>
+              <dt>{{ t.missing }}</dt>
+              <dd>{{ project.missing }}</dd>
+              {% if project.careful %}
+              <dt>{{ t.careful }}</dt>
+              <dd class="c-project__careful">{{ project.careful }}</dd>
+              {% endif %}
+              <dt>{{ t.start }}</dt>
+              <dd>
+                <ul class="c-role__related">
+                  {% for link in project.start %}
+                  <li><a class="c-link" href="{{ link.href }}"{% if link.external %} rel="noopener noreferrer"{% endif %}>{{ link.text }} {% if link.external %}↗{% else %}→{% endif %}</a></li>
+                  {% endfor %}
+                </ul>
+              </dd>
+              <dt>{{ t.ask }}</dt>
+              <dd>{% if project.ask_href %}<a class="c-link" href="{{ project.ask_href }}"{% if project.ask_external %} rel="noopener noreferrer"{% endif %}>{{ project.ask }} {% if project.ask_external %}↗{% else %}→{% endif %}</a>{% else %}{{ project.ask }}{% endif %}</dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">{{ t.source }}</span>{% for cite in project.cites %} <a class="c-link c-map__cite" href="{{ cite.href }}" rel="noopener noreferrer"><code>{{ cite.label }}</code></a>{% endfor %}</p>
+          </article>
+          {% endfor %}
+        </div>
+        <p class="c-muted c-note">{{ projects.verified }}</p>
+      </section>
+      {% endif %}
+
       {% if documents %}
       <section class="c-docs" id="documents" aria-labelledby="documents-title">
         <h2 class="c-section-title" id="documents-title">{{ ui["documents.title"] }}</h2>

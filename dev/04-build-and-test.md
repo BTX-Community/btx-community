@@ -6,7 +6,7 @@ How to build `btxchain/btx` and run its unit, functional, coverage, sanitizer an
 
 Every command and flag below was checked against the tree at `4c7840e9` (`CMakeLists.txt`, `src/CMakeLists.txt`, `CMakePresets.json`, `cmake/script/`, `ci/test/`, `test/functional/test_runner.py`). Numbers live in [`01-state.md`](01-state.md).
 
-**Source tags.** `[C3]` = the 12 Nov unit + functional coverage run at `c6f9678d` (recipe in §5). `[C2]` = the 12 Nov clang-tidy, TSan and lock-order run at `c6f9678d`. `[repo]` = a file in the tree at `4c7840e9`. `[plan]` = [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md). `[data]` = [`plan/plan-data.json`](plan/plan-data.json). `[read]` = taken from a source; `[tested]` = a command was run; `[inferred]` = judgement.
+**Source tags.** `[C3]` = the unit + functional coverage runs (recipe in §5): figures from the 14 Nov run on `swapnet-v2` at `a5d1637f`; recipe, timings and pitfalls from the 12 Nov run at `c6f9678d`. `[C2]` = the 12 Nov clang-tidy, TSan and lock-order run at `c6f9678d`. `[C0]` = the 13 Nov unit + functional run at `88c9b49c` in rootless Podman (Ubuntu 24.04 container, 24 threads, 12 functional jobs). `[repo]` = a file in the tree at `4c7840e9`. `[plan]` = [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md). `[data]` = [`plan/plan-data.json`](plan/plan-data.json). `[read]` = taken from a source; `[tested]` = a command was run; `[inferred]` = judgement.
 
 ## 1. Setup
 
@@ -27,13 +27,13 @@ git remote add fork https://github.com/<your-handle>/btx.git     # once, in the 
 ```
 
 - Before a count, a build you will cite, or a post: `git fetch origin && git log -1 --format=%h origin/release-0.34.16`. If the head moved, rebase and recount.
-- The repo's `AGENTS.md` tells coding agents to stay read-only unless the operator asks [repo: `AGENTS.md`]. Your lane pack (`packs/<LANE>.md`) is that ask, for the commands it lists. Nothing beyond them.
+- The repo's `AGENTS.md` tells coding agents to stay read-only unless the operator asks [repo: `AGENTS.md`]. Your lane pack (`packs/<LANE>.md`) is that ask, for the commands it lists. Nothing beyond them, and a listed line that needs `sudo`, installs a package or changes a system setting still needs a fresh yes each time ([`AGENTS.md`](AGENTS.md) §5).
 - Keep one build directory per configuration: `build` (gcc), `build-clang`, `build-cov`, `build-asan`, `build-tsan`, `build_fuzz`.
 - Variables set in one block (`OSSL` in §2.1, `J` in §3) are gone in a new shell. Set them again.
 
 **Stop and hand back to the operator when:**
 - the OpenSSL check prints `SHA_MISMATCH_STOP`, or the `CMakeCache.txt` check in §2.1 shows a library outside `$OSSL`;
-- a step needs `sudo` or changes a system setting (§2.1 packages, §6 `sysctl`) and the operator has not cleared it for this machine;
+- a step needs `sudo` or changes a system setting (§2.1 packages, §6 `sysctl`): ask each time, even if the operator said yes to it on this machine before;
 - a test fails and you have not yet run it on the base commit with the same build (§3, §4): it is not a regression yet;
 - a fuzz crash reproduces in product code (§7): nothing about it goes into a public issue, PR, board card or chat;
 - the live head moved since your count or build (first bullet above).
@@ -46,10 +46,12 @@ Disk: plan on about 15 GB for a normal build with tests [inferred]; the coverage
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y build-essential cmake pkgconf python3 python3-zmq libevent-dev \
-  libboost-dev libsqlite3-dev libzmq3-dev git curl binutils ccache
+sudo apt-get install -y build-essential cmake pkgconf python3 python3-dev python3-cryptography \
+  python3-zmq libevent-dev libboost-dev libsqlite3-dev libzmq3-dev git curl binutils ccache
 sudo apt-get install -y clang        # only for clang builds
 ```
+
+SwapNet is part of the tree since `074dac16` (v0.34.16, #630). Configure then needs Python 3.11 or newer with its development files, and that interpreter must import `cryptography` and `sqlite3` under `python -I`; otherwise it stops with "SwapNet requires the selected Python's cryptography and sqlite3 modules" [repo: `cmake/SwapNet.cmake`, `doc/release-notes-0.34.16.md` at `074dac16`]. On Ubuntu 24.04 that is `python3-dev` and `python3-cryptography` above [C0: configure on `swapnet-v2` @ `88aeaac9`, 13 Nov]. `btxd` links the Python library even when SwapNet is off (`-swapnet=0`, the default).
 
 The Native Model Network (`WITH_MODELNET=ON`, the default) needs OpenSSL 3.5 or newer. Ubuntu 22.04 and 24.04 ship 3.0, so build 3.5 into a prefix [repo: `doc/build-unix.md`; the configure check is `src/CMakeLists.txt:1905-1912`]:
 
@@ -83,7 +85,7 @@ cmake --build build -j"$(nproc)"
 - Check the cache line after configure. `doc/build-unix.md` warns that `OPENSSL_ROOT_DIR` alone can pair 3.5 headers with the distro's 3.0 `libssl` [repo]. The `no-shared` build above leaves only static libraries in the prefix, which is what `-DOPENSSL_USE_STATIC_LIBS=ON` looks for. If the cache still points at a system library, pin both with `-DOPENSSL_SSL_LIBRARY=` and `-DOPENSSL_CRYPTO_LIBRARY=`, as that document does.
 - `-DBTX_ENABLE_CUDA_EXPERIMENTAL=OFF` matters on any box with `nvcc`: the CUDA backend turns itself on when a CUDA compiler is found, and configure then fails unless `BTX_CUDA_ARCHITECTURES` (or `CMAKE_CUDA_ARCHITECTURES`) is set [repo: `src/CMakeLists.txt:93-158`].
 - CUDA builds: add `-DBTX_ENABLE_CUDA_EXPERIMENTAL=ON -DCMAKE_CUDA_COMPILER="$(command -v nvcc)" -DBTX_CUDA_ARCHITECTURES=<cc> -DCMAKE_CUDA_ARCHITECTURES=<cc>`, where `<cc>` is `nvidia-smi --query-gpu=compute_cap --format=csv,noheader` without the dot (RTX 50-series: 120; RTX 30-series: 86). CUDA 12.8 and earlier crash compiling for 80/86/89/90; use 12.9 or newer there. 120 compiles on 12.8 [repo: `doc/btx-cuda-mining-troubleshooting.md` §5].
-- Tests that mint ML-DSA certificates need the 3.5 binary at run time: `export BTX_OPENSSL="$OSSL/bin/openssl" OPENSSL_CONF="$OSSL/ssl/openssl.cnf"` [C3].
+- Tests that mint ML-DSA certificates need the 3.5 binary at run time: `export BTX_OPENSSL="$OSSL/bin/openssl" OPENSSL_CONF="$OSSL/ssl/openssl.cnf"` [C3]. The BCP/1 mock signer used by `feature_bcp1.py` does not read `BTX_OPENSSL`: it takes `BTX_BCP1_OPENSSL`, then `OPENSSL`, then the first `openssl` on `PATH` [repo: `contrib/bcp1/mock_signer.py:136-137` at `88c9b49c`]. With the distro's 3.0 first on `PATH`, the whole test skips at its first step ("openssl does not advertise ML-DSA-44") [repo: `test/functional/feature_bcp1.py:583-585`], so a run looks clean while it tested nothing. Add `export BTX_BCP1_OPENSSL="$OSSL/bin/openssl"`, or put `$OSSL/bin` first on `PATH` [C0].
 - Headless box with no login session: `mkdir -p -m 700 "$HOME/.xdg" && export XDG_RUNTIME_DIR="$HOME/.xdg"` [C3].
 
 ### 2.2 macOS (Apple Silicon, AppleClang) [read: `doc/build-osx.md`; configure checked on Apple clang 21 with Metal off, 12 Nov]
@@ -120,7 +122,7 @@ Same as Linux. Clone and build inside the Linux file system (`~/`), not under `/
 ```bash
 export OMP_NUM_THREADS=2 OMP_WAIT_POLICY=PASSIVE    # libgomp pools default to every host CPU [C3]
 J=$(( $(nproc) / 2 )); [ "$J" -ge 1 ] || J=1        # macOS: $(( $(sysctl -n hw.ncpu) / 2 )); keep J <= RAM_GB / 2.5 [C3]
-ctest --test-dir build -N | tail -1                 # registered tests: 2,625 at c6f9678d [C3]
+ctest --test-dir build -N | tail -1                 # registered tests: 2,629 at a5d1637f [C3]
 ctest --test-dir build -j "$J" --timeout 900 -E 'matmul_v4_rc_stage3_' --output-on-failure
 ctest --test-dir build -R '^wallet_tests$' --output-on-failure        # one suite
 build/bin/test_btx --run_test=wallet_tests --log_level=test_suite      # one suite, case by case
@@ -142,8 +144,8 @@ gcc -shared -fPIC -O2 -o ~/btx-work/libhwc.so ~/btx-work/hwc.c
 BTX_HWC=2 LD_PRELOAD="$HOME/btx-work/libhwc.so" ctest --test-dir build -j "$J" --timeout 900 -E 'matmul_v4_rc_stage3_'
 ```
 
-- **Slow suites.** There are 191 `matmul_v4_rc_stage3_*` suites [tested: suite names at `4c7840e9`]. Under coverage they took 100-300 s each; 47 did not finish within 3,600 s each on 6 threads [C3; plan §1.1]. Leave them out of routine runs. A suite that times out on your machine: rerun it alone (`-R '^name$' --timeout 3600`) before you call it a failure. Never raise a timeout in a PR.
-- **Known state.** At `c6f9678d` under coverage: 2,575 passed, 47 timed out, 2 failed, 1 skipped [C3; plan §1.1]. A red suite is news only if it is green on the base commit with the same build. Show both.
+- **Slow suites.** There are 191 `matmul_v4_rc_stage3_*` suites [tested: suite names at `4c7840e9`]. Under coverage they took 100-300 s each. On 14 Nov, 41 of the 191 did not finish: 37 hit 3,600 s each on 6 threads and 4 were stopped by the unit time budget before that [C3; plan §1.1]. Leave them out of routine runs. A suite that times out on your machine: rerun it alone (`-R '^name$' --timeout 3600`) before you call it a failure. Outside the stage3 set, `smile2_audit_tests` and `smile2_membership_tests` need 17.5 and 21.7 min on one core, so they miss `--timeout 900` on a plain build; alone with `--timeout 3600` both pass [C0]. Never raise a timeout in a PR.
+- **Known state.** At `a5d1637f` under coverage: 2,583 passed, 42 timed out, 3 failed, 1 skipped [C3; plan §1.1]. A red suite is news only if it is green on the base commit with the same build. Show both.
 - **Registration.** A new suite must appear in `ctest --test-dir build -N`. Unregistered tests are class K19 ([`05-bug-classes.md`](05-bug-classes.md)).
 
 ## 4. Functional tests
@@ -158,12 +160,16 @@ python3 build/test/functional/test_runner.py --configfile=build/test/config.ini 
 ```
 
 - `--configfile` points at the build tree's `test/config.ini`; that file decides which components (wallet, modelnet, ZMQ) the runner thinks exist [repo: `test/config.ini.in`]. ZMQ tests need `python3-zmq`.
-- **Known state.** On the coverage build at `c6f9678d`, 82 of 208 scripts failed; 48 of them stalled with "ExactReplay required" in the node logs [plan §1.1]. Under TSan, 55 of a 200-script subset (the `feature_`, `wallet_`, `p2p_` and `rpc_` scripts) failed, and 51 of those 55 also fail on a plain gcc build [C2; plan §1.3]. A red functional run is not news by itself: compare the script on the base commit.
+- **Known state.** On the coverage build at `a5d1637f` (14 Nov), 14 of 220 scripts failed and none stalled with "ExactReplay required" in the node logs; at `c6f9678d` (12 Nov), 82 of 208 failed and 48 of them stalled [plan §1.1]. Under TSan, 55 of a 200-script subset (the `feature_`, `wallet_`, `p2p_` and `rpc_` scripts) failed, and 51 of those 55 also fail on a plain gcc build [C2; plan §1.3]. A red functional run is not news by itself: compare the script on the base commit.
+- **In a container (rootless Podman)** [C0]:
+  - Rootless Podman caps a container at 2,048 processes and threads by default (`pids_limit` in `containers.conf`). With 12 functional jobs, nodes then fail to start threads (`std::system_error`, "Resource temporarily unavailable", EAGAIN). Start the container with `--pids-limit 65536` (or `-1` for none).
+  - Keep `--tmpdirprefix` short, for example `/tmp/f`. `btx-modeld` puts a Unix socket under the node's datadir, and a long prefix pushes it past the 108-byte limit ("AF_UNIX path too long"). The runner only adds a short `XDG_RUNTIME_DIR` fallback when that variable is unset [repo: `test/functional/test_runner.py:970-977` at `88c9b49c`], and inside a container it often is set.
+  - The OpenSSL 3.5 binary has to be found inside the container too: set `BTX_BCP1_OPENSSL` or `PATH` there (see §2.1).
 - **Stall check:** `grep -l 'ExactReplay required' ~/btx-work/func-tmp/test_runner_*/<script>_*/node*/regtest/debug.log`, where `<script>` is the name without `.py` [repo: `test/functional/test_runner.py`]. A stall is the known class, not your bug. Never "fix" it in a PR with `-matmulvalidation=economic`: that setting is a non-default diagnostic [plan §1.1]. Tests that do not need MatMul can follow the `MATMUL_OFF` argument pattern in `test/functional/rpc_bounty_secret_ref_wallet_restriction.py` [repo].
 
 ## 5. Coverage (gcc, Linux)
 
-> **Coverage is measured again.** The coverage build (`-DCMAKE_BUILD_TYPE=Coverage`) configures again on `release-0.34.16` since #578 landed on 12 Nov (commit `7051507b`). The fix is not in v0.34.15 (`main`, `476f3f23`): the configure-time step that #578 removed is still there. Measured at `c6f9678d` with the same fix applied: product-code lines 65.8% unit-only and 69.9% unit + functional; branches 37.7% and 40.7%. All are floors: 47 unit suites timed out and 82 of 208 functional scripts failed in the coverage run. Details and per-area rows: [`01-state.md` §3](01-state.md#3-coverage).
+> **Coverage is measured again.** The coverage build (`-DCMAKE_BUILD_TYPE=Coverage`) configures again on `release-0.34.16` since #578 landed on 12 Nov (commit `7051507b`). The fix is not in v0.34.15 (`main`, `476f3f23`): the configure-time step that #578 removed is still there. Measured on `swapnet-v2` at `a5d1637f` (14 Nov), which contains the fix: product-code lines 67.4% unit-only and 72.3% unit + functional; branches 38.9% and 42.6%. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts failed. The time budgets were shorter than on 12 Nov, so the figures are floors and the comparison with that run is indicative. Details and per-area rows: [`01-state.md` §3](01-state.md#3-coverage).
 
 The one-shot `cmake -P build-cov/Coverage.cmake` [repo: `doc/developer-notes.md`] stops at the first failing ctest run (`COMMAND_ERROR_IS_FATAL ANY`), and some tests fail today, so it never writes a report [read: `cmake/script/Coverage.cmake`]. Use the measured recipe instead [C3]:
 
@@ -222,7 +228,7 @@ Pitfalls, all hit on 12 Nov [C3]:
 - **Threads.** Set `OMP_NUM_THREADS` and the `BTX_HWC` shim (§3) for coverage runs too; under coverage the stage3 suites run about ten times slower on 2 OpenMP threads.
 - **A killed test writes no data.** Timeouts produce no `.gcda`, so every number is a floor. Stop nodes with SIGTERM only; they write counters on a clean exit.
 - **Not in the numbers:** `secp256k1` (the capture command excludes it [repo: `cmake/script/CoverageInclude.cmake.in`]) and `libbitcoinpqc` (not instrumented in the C3 build) [C3].
-- **Scale.** Full unit + functional coverage took a 128-thread box most of a day [C3]. Owners measure their own files before and after; the full-baseline number comes from the coverage-ratchet box (I-CI lane, job CI-9). Baseline to compare with: 65.8% lines unit-only, 69.9% unit + functional, product code, at `c6f9678d` [plan §1.1].
+- **Scale.** Full unit + functional coverage took a 128-thread box most of a day [C3]. Owners measure their own files before and after; the full-baseline number comes from the coverage-ratchet box (I-CI lane, job CI-9). Baseline to compare with: 67.4% lines unit-only, 72.3% unit + functional, product code, at `a5d1637f` [plan §1.1].
 - macOS coverage with AppleClang is not verified.
 
 ## 6. Sanitizers [read: `ci/test/00_setup_env_native_asan.sh`, `ci/test/00_setup_env_native_tsan.sh`, `ci/test/03_test_script.sh`; TSan tested in C2]
@@ -253,7 +259,7 @@ export TSAN_OPTIONS="suppressions=$PWD/test/sanitizer_suppressions/tsan:halt_on_
 - **clang 20.** If your release does not package `clang-20`, LLVM's own apt repository (apt.llvm.org) does [inferred].
 - **TSan start-up.** On kernels with `vm.mmap_rnd_bits=32` the TSan runtime can abort at start. On your own machine, with the operator's OK (it is a system setting until the next reboot): `sudo sysctl vm.mmap_rnd_bits=28`. In a container where you cannot, C2 needed a retry launcher (mean 9.2 tries per start). The clang-18 runtime died at start where `personality(ADDR_NO_RANDOMIZE)` was blocked; use clang 20 [C2].
 - **Baselines.** TSan: 41 site pairs, 5 product classes. `-Wthread-safety`: 266 warnings. DEBUG_LOCKORDER: 1 known inversion in wallet code; it makes one shielded-wallet functional script abort under DEBUG_LOCKORDER. It is on the A-SHIELDED lane's done bar in [`07-lanes.md`](07-lanes.md); do not report it again [data; plan §1.3].
-- Do not re-run the baseline tools (CodeQL, cppcheck, clang-tidy, TSan, coverage at `c6f9678d`) to check the published numbers. Reuse those results and re-grep only the live head.
+- Do not re-run the baseline tools (CodeQL, cppcheck, clang-tidy and TSan at `c6f9678d`, coverage at `a5d1637f`) to check the published numbers. Reuse those results and re-grep only the live head.
 - 51 of the 55 functional failures under TSan also fail on a plain gcc build; under TSan, a failure counts only if it passes on the plain build [C2; plan §1.3].
 - Never mix `address` and `thread` in one build. macOS ASan has no leak detection.
 
@@ -278,4 +284,4 @@ FUZZ=matmul_rc_admission_store build_fuzz/bin/fuzz -max_total_time=600 ~/btx-wor
 - A native Windows build and a Metal build: read from the handbooks and the fork CI job, not run for this page.
 - macOS coverage with AppleClang.
 - The CUDA build lines: read from `doc/btx-cuda-mining-troubleshooting.md` and `src/CMakeLists.txt`, not rebuilt for this page.
-- The `[C2]` and `[C3]` numbers were measured at `c6f9678d`; the commands were re-checked against the tree at `4c7840e9`, not re-run end to end.
+- The `[C2]` numbers were measured at `c6f9678d` and the `[C3]` figures at `a5d1637f`; the commands were re-checked against the tree at `4c7840e9`, not re-run end to end.

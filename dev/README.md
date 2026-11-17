@@ -21,10 +21,11 @@ wherever this folder disagrees with them.
 
 > **Coverage is measured again.** The coverage build configures again on `release-0.34.16` since
 > [#578](https://github.com/btxchain/btx/pull/578) landed on 12 Nov (commit `7051507b`); v0.34.15 (`main`, `476f3f23`) does not have that fix.
-> Measured at `c6f9678d` with the same fix: 65.8% of product lines unit-only, 69.9% unit +
-> functional; branches 37.7% / 40.7%. All four numbers are floors: 47 unit suites timed out and 82
-> of 208 functional scripts failed in the coverage run, and a killed test writes no counts
-> ([`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md) §1.1). The recipe to reproduce it is in
+> Measured on `swapnet-v2` at `a5d1637f` (14 Nov), which contains the fix: 67.4% of product lines
+> unit-only, 72.3% unit + functional; branches 38.9% / 42.6%. In the coverage run 42 unit suites
+> timed out and 14 of 220 functional scripts failed, and a killed test writes no counts. The time
+> budgets were shorter than on 12 Nov, so the figures are floors and the comparison with that run
+> is indicative ([`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md) §1.1). The recipe to reproduce it is in
 > [`04-build-and-test.md`](04-build-and-test.md) §5. The numbers change only when a measured run
 > is published. The planned ratchet job on contributor forks (lane I-CI, job CI-9) fails any area
 > that drops by more than 0.2 points.
@@ -64,6 +65,7 @@ What each level needs, and its first hour in five steps: [`08-levels.md`](08-lev
 | [`07-lanes.md`](07-lanes.md) | The lanes: scope, done bar, first tasks, a claimable owner and second pass, the weekly rhythm |
 | [`08-levels.md`](08-levels.md) | Basic, Advanced, Core: what each needs and its first hour |
 | [`exam/`](exam/) | Twelve cases with known answers, drawn from public PRs: questions, and a separate answer key with sources |
+| [`fuzz-box/`](fuzz-box/) | A continuous fuzz box for an infra owner: the guide, the scripts, the config example and the systemd unit; crash inputs stay private |
 | [`lessons/`](lessons/) | Lessons learned: the template, the index, two seed lessons |
 | [`packs/`](packs/) | One brief per lane for your AI, each ending in a prompt block |
 | [`plan/`](plan/) | The review and test programme measured on the release line, with its numbers and lanes as JSON |
@@ -157,8 +159,10 @@ a change to both, in the same pull request.
 ### Security findings
 
 A remote crash, a path to lost funds or exposed keys is not a pull request, an issue, a board card
-or a chat post. It goes through GitHub private vulnerability reporting on `btxchain/btx` (the
-repository's Security tab). The class goes on the registry without the detail
+or a chat post. It goes privately: email `team@btx.dev` per btxchain/btx's
+[`SECURITY.md`](https://github.com/btxchain/btx/blob/main/SECURITY.md), or GitHub private
+vulnerability reporting on `btxchain/btx` (the repository's Security tab). The
+class goes on the registry without the detail
 ([`03-guardrails.md`](03-guardrails.md) §8).
 
 ### Keeping it true

@@ -8,6 +8,8 @@ import re
 import sys
 import tempfile
 import unittest
+from collections.abc import Callable
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import get_args
@@ -15,9 +17,12 @@ from typing import get_args
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import build  # noqa: E402
+from markupsafe import escape  # noqa: E402
 
-NAV = ("begin", "brief", "levels", "coverage", "classes", "lanes", "flow", "gates", "rhythm", "rules", "contribute")
-"""The sections of the developers page, in the order of its anchor bar."""
+NAV = ("begin", "brief", "levels", "rules", "contribute")
+"""The sections of the developers page ("Start here"), in the order of its anchor bar."""
+NAV_WORK = ("ci", "coverage", "lanes", "owner-rules", "classes", "flow", "gates", "rhythm")
+"""The sections of its sub-page "Ongoing work", in the order of its anchor bar."""
 STATUS_OF = {
     "worklist ready": "worklist",
     "baseline measured": "baseline",
@@ -78,6 +83,15 @@ def numbered_items(markdown: str) -> list[str]:
     return items
 
 
+def ci_panel() -> dict[str, dict[str, str]]:
+    """The texts of the CI panel with the placeholders each needs, in both inline languages."""
+    panel = {}
+    for name in build.CiPanel.model_fields:
+        text = " ".join(f"{{{p}}}" for p in sorted(build.CI_PLACEHOLDERS.get(name, ()))) or name
+        panel[name] = {"en": text, "de": text}
+    return panel
+
+
 class ContentTest(unittest.TestCase):
     def test_the_real_content_builds(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -104,24 +118,35 @@ class ContentTest(unittest.TestCase):
                 "network": ('data-live="supply"', 'data-live="fork"', 'id="development" hidden',
                             f'data-api="{build.DEVELOPMENT_API}"', f'data-repo="{build.UPSTREAM_REPO}"'),
                 "links": ('id="links"', 'id="cat-'),
-                "docs": ('id="documents"', 'id="doc-venue-structure"'),
-                "dev": ('id="begin"', 'id="levels"', 'id="coverage"', 'id="lanes"', 'id="group-area"',
-                        '<span class="c-tag">A-WALLET</span>', 'id="level-basic"', 'id="brief"', 'id="classes"',
-                        'id="flow"', 'id="gates"', 'id="rhythm"', 'id="rules"', 'id="contribute"',
-                        'id="lane-A-WALLET"', 'id="class-K01"', 'id="area-wallet"', 'data-status="worklist"',
-                        '<meter class="c-bar', 'id="ai-prompt"', 'data-copy="ai-prompt"', 'data-kind="area"',
-                        'data-waiting="1"', 'data-sort="lowest"', 'data-template="', 'data-waiting-only',
-                        'data-expand', 'data-reset', 'data-label-expand="', 'data-label-collapse="',
-                        'data-copied="', 'data-copy-hint', 'data-copy-status', 'data-sort-column="lowest"',
-                        'data-sort-column="risk"', 'data-sort-column="size"', 'data-filter="registry"',
-                        'data-filter="lanes"', 'data-filter="areas"', 'class="c-link c-table__lane"'),
+                "docs": ('id="documents"', 'id="doc-venue-structure"', 'id="projects"', 'id="project-amd-mining"',
+                         'id="project-swapnet-tools"'),
+                "infra": ('id="yourself"', 'id="managed"', 'id="roles"', 'id="role-full-node"', 'id="map"',
+                          'class="c-map__svg c-map__svg--wide"', 'class="c-map__svg c-map__svg--narrow"',
+                          'id="edge-1"', 'id="report"', 'href="https://github.com/MendeMatthias/easynode"'),
+                "dev": ('id="begin"', 'id="levels"', 'id="level-basic"', 'id="brief"', 'id="rules"',
+                        'id="contribute"', 'id="ai-prompt"', 'data-copy="ai-prompt"', 'data-copied="',
+                        'data-copy-hint', 'data-copy-status', 'href="/llms.txt"', 'href="/llms-full.txt"',
+                        'class="c-subnav"', 'href="{work}#lanes"'),
+                "dev-work": ('id="coverage"', 'id="coverage-weekly"', 'id="lanes"', 'id="group-area"',
+                             '<span class="c-tag">A-WALLET</span>', 'id="classes"', 'id="flow"', 'id="gates"',
+                             'id="rhythm"', 'id="lane-A-WALLET"', 'id="class-K01"', 'id="area-wallet"',
+                             'data-status="worklist"', '<meter class="c-bar', 'data-kind="area"',
+                             'data-waiting="1"', 'data-sort="lowest"', 'data-template="', 'data-waiting-only',
+                             'data-expand', 'data-reset', 'data-label-expand="', 'data-label-collapse="',
+                             'data-sort-column="lowest"', 'data-sort-column="risk"', 'data-sort-column="size"',
+                             'data-filter="registry"', 'data-filter="lanes"', 'data-filter="areas"',
+                             'class="c-link c-table__lane"', 'id="ci"', f'data-api="{build.CI_API}"',
+                             f'data-repo="{build.UPSTREAM_REPO}"', f'data-job="{build.CI_JOB}"', 'data-ci="status"',
+                             'data-ci="run" hidden', 'data-times="', 'data-failed-functional="', '<noscript>',
+                             'class="c-subnav"', 'href="{dev}"', 'id="owner-rules"', 'id="never"'),
             }
             for lang in build.LANGUAGES:
                 for page, needles in expected.items():
                     html = read(lang, page)
                     self.assertIn('aria-current="page"', html)
                     for needle in needles:
-                        hrefs = {"links": build.page_path(lang, "links"), "dev": build.page_path(lang, "dev")}
+                        hrefs = {"links": build.page_path(lang, "links"), "dev": build.page_path(lang, "dev"),
+                                 "work": build.page_path(lang, "dev-work")}
                         self.assertIn(needle.format(**hrefs), html, (lang, page))
                     for other in build.PAGES:
                         self.assertIn(f'href="{build.page_path(lang, other)}"', html)
@@ -130,6 +155,10 @@ class ContentTest(unittest.TestCase):
                         self.assertIn(f'href="{build.page_path(code, page)}" hreflang="{tag}"', html)
             self.assertNotIn('data-live="supply"', english)
             self.assertNotIn('id="development"', english)
+            # The CI panel and its script are on the developers' "Ongoing work" page only.
+            for page in build.ALL_PAGES:
+                self.assertEqual("/static/js/ci.js?v=" in read("en", page), page == "dev-work", page)
+            self.assertTrue((out / "static" / "js" / "ci.js").is_file())
             self.assertIn('href="/de/links/"', read("en", "links").split('class="c-lang"')[1])
             chinese = read("zh", "learn")
             self.assertIn('<html lang="zh-Hans">', chinese)
@@ -137,24 +166,26 @@ class ContentTest(unittest.TestCase):
             self.assertIn("translations/zh.yaml", chinese)
             self.assertNotIn("translations/", english)
             self.assertNotIn('id="coverage"', english)
-            self.assertIn("16 lanes", read("en", "dev"))
-            self.assertIn("16 Arbeitsbereiche", read("de", "dev"))
+            self.assertIn("16 lanes", read("en", "dev-work"))
+            self.assertIn("16 Arbeitsbereiche", read("de", "dev-work"))
             for lang in build.LANGUAGES:
                 written, other = (",", r"\.") if lang in ("de", "es", "fr") else (r"\.", ",")
                 space = "\u202f" if lang == "fr" else "\u00a0"
-                self.assertRegex(read(lang, "dev"), rf"<dd>\d+{written}\d{space}%</dd>", lang)
-                self.assertNotRegex(read(lang, "dev"), rf"<dd>\d+{other}\d\s%</dd>", lang)
+                self.assertRegex(read(lang, "dev-work"), rf"<dd>\d+{written}\d{space}%</dd>", lang)
+                self.assertNotRegex(read(lang, "dev-work"), rf"<dd>\d+{other}\d\s%</dd>", lang)
 
     def test_every_content_text_is_translated(self) -> None:
         page = build.load_community(build.ROOT / "content" / "community.yaml")
         guide = build.load_guide(build.ROOT / "content" / "guide.yaml")
         hub = build.load_hub(build.ROOT / "content" / "hub.yaml")
+        infra = build.load_infra(build.ROOT / "content" / "infra.yaml")
+        projects = build.load_projects(build.ROOT / "content" / "projects.yaml")
         texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
         for lang in build.TRANSLATED:
             table = build.load_translations(build.ROOT / "content" / "translations" / f"{lang}.yaml", lang)
             say = build.Localizer(lang, table)
             for page_id in build.PAGES:
-                build.context(page, guide, hub, texts, lang, "test", page_id, say)
+                build.context(page, guide, hub, texts, lang, "test", page_id, say, infra, projects)
             with self.subTest(lang=lang):
                 self.assertEqual(say.missing, set())
                 self.assertEqual(set(table) - say.used, set())
@@ -180,7 +211,7 @@ class ContentTest(unittest.TestCase):
             return tuple(re.findall(r'"([^"]+)"', body))
 
         hub = build.load_hub(build.ROOT / "content" / "hub.yaml")
-        template = (build.ROOT / "templates" / "dev.html.j2").read_text(encoding="utf-8")
+        template = (build.ROOT / "templates" / "dev-work.html.j2").read_text(encoding="utf-8")
         sorts = re.search(r"\{% for key in \(([^)]*)\) %\}\s*<button[^>]*data-sort=", template).group(1)
         self.assertEqual(array("STATUSES"), build.STATUSES)
         self.assertEqual(array("KINDS"), get_args(build.LaneKind))
@@ -268,6 +299,23 @@ class RulesTest(unittest.TestCase):
         self.assertEqual(build.format_count(468217, "en"), "468,217")
         self.assertEqual(build.format_count(26, "fr"), "26")
 
+    def test_the_ci_panel_texts_keep_their_placeholders(self) -> None:
+        build.CiPanel.model_validate(ci_panel())
+        for name, wanted in build.CI_PLACEHOLDERS.items():
+            for lang, text in (("en", "{passed}"), ("de", "no placeholder")):
+                broken = {**ci_panel(), name: {**ci_panel()[name], lang: text}}
+                with self.subTest(name=name, lang=lang), self.assertRaises(Exception):  # noqa: B017, PT027
+                    build.CiPanel.model_validate(broken)
+            self.assertTrue(wanted)
+        with self.assertRaises(Exception):  # noqa: B017, PT027
+            build.CiPanel.model_validate({**ci_panel(), "title": {"en": "a", "de": "{x}"}})
+        # A translation that loses a placeholder fails the build instead of showing "{failed}".
+        panel = build.CiPanel.model_validate(ci_panel())
+        self.assertEqual(build.ci_texts(panel, build.Localizer("es", {}))["times"], "{finished} {measured}")
+        say = build.Localizer("es", {"{finished} {measured}": "{measured}"})
+        with self.assertRaisesRegex(build.ContentError, r"ci\.times"):
+            build.ci_texts(panel, say)
+
     def _developers_page(self) -> dict[str, object]:
         """The smallest developers page that validates."""
         text = {"en": "a", "de": "b"}
@@ -280,7 +328,8 @@ class RulesTest(unittest.TestCase):
             "schema_version": 1,
             "checked": "2026-11-12",
             "source": url,
-            "measured": {"commit": "c6f9678d", "date": "2026-11-12", "head": "4c7840e9"},
+            "measured": {"commit": "c6f9678d", "date": "2026-11-12", "head": "4c7840e9",
+                         "coverage_commit": "a5d1637f", "coverage_date": "2026-11-12"},
             "principles": [{"id": f"p{i}", "title": text, "text": text} for i in range(4)],
             "start": [{"text": text, "url": url}],
             "brief": {"prompt": f"Read {agents} first.\nThen {llms}.\n{'Never post. ' * 20}",
@@ -308,6 +357,7 @@ class RulesTest(unittest.TestCase):
                       {"id": "G2", "name": text, "state": text, "done_bar": True}],
             "gates_source": url,
             "ci_pack": url,
+            "ci": ci_panel(),
             "phases": [{"id": "2a", "name": text, "window": text, "deliverables": [text]}],
             "week": [{"id": day, "what": text, "who": text} for day in build.DAYS],
             "rhythm_source": url,
@@ -343,9 +393,18 @@ class RulesTest(unittest.TestCase):
         def bug(**changed: object) -> dict[str, object]:
             return {"classes": [{**page["classes"][0], **changed}]}
 
+        def measured(**changed: object) -> dict[str, object]:
+            return {"measured": {k: v for k, v in {**page["measured"], **changed}.items() if v is not None}}
+
         broken = (
             {"schema_version": 2},
             {"checked": "2026-11-11"},
+            measured(coverage_date="2026-11-13"),
+            measured(coverage_date="12 Nov 2026"),
+            measured(coverage_commit="a5d1637"),
+            measured(coverage_commit="A5D1637F"),
+            measured(coverage_commit=None),
+            measured(coverage_date=None),
             {"levels": page["levels"][:2]},
             {"levels": [*page["levels"], {"id": "expert", **level}]},
             {"levels": [{"id": "basic", **level}] * 3},
@@ -408,10 +467,19 @@ class RulesTest(unittest.TestCase):
         page_lanes = [(group.id, lane) for group in hub.lanes.groups for lane in group.lanes]
 
         with self.subTest("measured"):
+            # Two clocks: coverage at coverage_commit, the static, TSan, class and gate counts at commit.
             measured = plan["measured_at"]
+            page_clocks = (hub.measured.commit, hub.measured.date.isoformat(), hub.measured.head,
+                           hub.measured.coverage_commit, hub.measured.coverage_date.isoformat())
             self.assertEqual(
-                (hub.measured.commit, hub.measured.date.isoformat(), hub.measured.head),
-                (measured["commit"], measured["date"], measured["live_head"]),
+                page_clocks,
+                (measured["commit"], measured["date"], measured["live_head"],
+                 measured["coverage_commit"], measured["coverage_date"]),
+            )
+            meta = lanes["meta"]
+            self.assertEqual(
+                page_clocks,
+                (meta["measured_at"], meta["date"], meta["live_head"], meta["coverage_commit"], meta["coverage_date"]),
             )
 
         with self.subTest("coverage figures"):
@@ -420,7 +488,8 @@ class RulesTest(unittest.TestCase):
                 [float(p) for p in re.findall(r"\*\*(\d+\.\d)%\*\*", coverage)],
                 [figure.percent for figure in hub.coverage.figures],
             )
-            for fact in ("c6f9678d", "#578", "47 unit suites timed out", "82 of 208 functional scripts failed in the coverage run"):
+            for fact in (hub.measured.coverage_commit, "#578", "42 unit suites timed out",
+                         "14 of 220 functional scripts failed", "time budgets were shorter"):
                 self.assertIn(fact, coverage, fact)
                 self.assertIn(fact, hub.coverage.text.en, fact)
 
@@ -660,14 +729,16 @@ class PageTest(unittest.TestCase):
     def test_the_built_pages_obey_the_csp(self) -> None:
         # default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'
         pages = sorted(self.out.rglob("index.html"))
-        self.assertEqual(len(pages), len(build.LANGUAGES) * len(build.PAGES))
+        self.assertEqual(len(pages), len(build.LANGUAGES) * len(build.ALL_PAGES) + len(build.DRAFT_PAGES))
         for page in pages:
             html = page.read_text(encoding="utf-8")
             with self.subTest(page=str(page.relative_to(self.out))):
                 self.assertNotIn("<style", html)
                 self.assertNotIn("javascript:", html)
-                self.assertEqual(html.count("<script"), 1)
-                self.assertRegex(html, r'<script src="/static/js/community\.js\?v=[0-9a-f]{12}" defer></script>')
+                scripts = re.findall(r'<script src="/static/js/([a-z]+)\.js\?v=[0-9a-f]{12}" defer></script>', html)
+                self.assertEqual(html.count("<script"), len(scripts))
+                developers = page.parent.name == "work" and page.parent.parent.name == "dev"
+                self.assertEqual(scripts, ["community", "ci"] if developers else ["community"])
                 for tag, attrs in tags(html):
                     self.assertNotIn(tag, ("img", "iframe", "object", "embed", "base"))
                     self.assertNotIn("style", attrs, tag)
@@ -678,7 +749,20 @@ class PageTest(unittest.TestCase):
                         self.assertTrue((attrs.get("href") or "").startswith("/"), attrs)
 
     def test_the_developers_page_is_usable_without_javascript(self) -> None:
-        html = (self.out / "dev" / "index.html").read_text(encoding="utf-8")
+        start = (self.out / "dev" / "index.html").read_text(encoding="utf-8")
+        html = (self.out / "dev" / "work" / "index.html").read_text(encoding="utf-8")
+        for page, nav in ((start, NAV), (html, NAV_WORK)):
+            found = tags(page)
+            ids = [attrs["id"] for _, attrs in found if attrs.get("id")]
+            self.assertEqual(len(ids), len(set(ids)), "duplicate ids")
+            bar = page.split('class="c-jump c-jump--page"')[1].split("</nav>")[0]
+            self.assertEqual(tuple(re.findall(r'href="#([^"]+)"', bar)), nav)
+            for anchor in re.findall(r'href="#([^"]+)"', page):
+                self.assertIn(anchor, ids)
+            levels = [int(tag[1]) for tag, _ in found if re.fullmatch(r"h[1-6]", tag)]
+            self.assertEqual(levels[0], 1)
+            for before, after in zip(levels, levels[1:]):
+                self.assertLessEqual(after, before + 1, "a heading level is skipped")
         found = tags(html)
         ids = [attrs["id"] for _, attrs in found if attrs.get("id")]
         self.assertEqual(len(ids), len(set(ids)), "duplicate ids")
@@ -695,11 +779,15 @@ class PageTest(unittest.TestCase):
         self.assertEqual(len(cards), 16)
         for attrs in rows + cards:
             self.assertNotIn("hidden", attrs)
-        prompt = re.search(r'<pre [^>]*id="ai-prompt"[^>]*>(.*?)</pre>', html, flags=re.S).group(1)
+        prompt = re.search(r'<pre [^>]*id="ai-prompt"[^>]*>(.*?)</pre>', start, flags=re.S).group(1)
         self.assertIn(f"{build.RAW_URL}AGENTS.md", prompt)
         self.assertIn(f"{build.RAW_URL}llms.txt", prompt)
         # The prompt is English on every page and is not machine-translated before it is copied.
-        pre = next(attrs for tag, attrs in found if tag == "pre" and attrs.get("id") == "ai-prompt")
+        pre = next(attrs for tag, attrs in tags(start) if tag == "pre" and attrs.get("id") == "ai-prompt")
+        for tag, attrs in tags(start):
+            if "c-btn--copy" in (attrs.get("class") or "").split():
+                self.assertIn("hidden", attrs)
+                self.assertIn(attrs["data-copy"], {a.get("id") for _, a in tags(start)})
         self.assertEqual((pre.get("lang"), pre.get("translate"), pre.get("role")), ("en", "no", "region"))
         for tag, attrs in found:
             classes = (attrs.get("class") or "").split()
@@ -711,18 +799,471 @@ class PageTest(unittest.TestCase):
             if tag in ("td", "th"):
                 self.assertNotIn("c-table__note", classes)
         self.assertEqual(html.count('class="c-steps__exit"'), 2)
-        bar = html.split('class="c-jump c-jump--page"')[1].split("</nav>")[0]
-        self.assertEqual(tuple(re.findall(r'href="#([^"]+)"', bar)), NAV)
-        for anchor in re.findall(r'href="#([^"]+)"', html):
-            self.assertIn(anchor, ids)
-        for start, end in (('id="area-wallet"', "</tr>"), ('id="lane-A-WALLET"', "</article>")):
-            part = html.split(start)[1].split(end)[0]
+        for first, end in (('id="area-wallet"', "</tr>"), ('id="lane-A-WALLET"', "</article>")):
+            part = html.split(first)[1].split(end)[0]
             self.assertEqual(re.findall(r'<meter class="c-bar[^"]*" min="0" max="100" value="([0-9.]+)"', part),
-                             ["37.2", "50.5"], start)
-        levels = [int(tag[1]) for tag, _ in found if re.fullmatch(r"h[1-6]", tag)]
-        self.assertEqual(levels[0], 1)
-        for before, after in zip(levels, levels[1:]):
-            self.assertLessEqual(after, before + 1, "a heading level is skipped")
+                             ["37.4", "63.0"], first)
+
+    def test_the_developers_page_names_both_measured_commits(self) -> None:
+        """Coverage and the other counts come from different runs; each caption names both commits."""
+        hub = build.load_hub(build.ROOT / "content" / "hub.yaml")
+        texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
+        m = hub.measured
+        values = (m.coverage_commit, m.coverage_date.isoformat(), m.commit, m.date.isoformat(), m.head)
+        for lang in build.LANGUAGES:
+            html = (self.out / build.page_path(lang, "dev-work").strip("/") / "index.html").read_text(encoding="utf-8")
+            caption = texts[lang]["hub.measured"].format(
+                coverage_commit=m.coverage_commit, coverage_date=m.coverage_date.isoformat(),
+                commit=m.commit, date=m.date.isoformat(), head=m.head,
+            )
+            with self.subTest(lang=lang):
+                # Coverage tiles, classes, lanes and gates.
+                self.assertEqual(html.count(str(escape(caption))), 4)
+                for value in values:
+                    self.assertIn(value, caption)
+
+
+    def test_draft_pages_are_english_noindex_and_linked_from_nowhere(self) -> None:
+        pages = {page.relative_to(self.out): page.read_text(encoding="utf-8") for page in self.out.rglob("index.html")}
+        for draft in build.DRAFT_PAGES:
+            with self.subTest(draft=draft):
+                html = pages[Path(draft) / "index.html"]
+                self.assertIn('<meta name="robots" content="noindex, nofollow">', html)
+                for lang in build.LANGUAGES[1:]:
+                    self.assertFalse((self.out / lang / draft).exists())
+                for path, other in pages.items():
+                    if path.parts[-2:-1] != (draft,):
+                        self.assertNotIn(f'href="/{draft}/', other, str(path))
+                        self.assertNotIn("noindex", other, str(path))
+                for name in ("llms.txt", "llms-full.txt"):
+                    self.assertNotIn(draft, (self.out / name).read_text(encoding="utf-8"))
+
+    def test_every_page_has_an_icon_that_exists(self) -> None:
+        self.assertTrue((self.out / "favicon.ico").is_file())
+        for page in sorted(self.out.rglob("index.html")):
+            html = page.read_text(encoding="utf-8")
+            hrefs = re.findall(r'<link rel="(?:icon|apple-touch-icon)" href="([^"?]+)', html)
+            with self.subTest(page=str(page.relative_to(self.out))):
+                self.assertEqual(len(hrefs), 3)
+                for href in hrefs:
+                    self.assertTrue((self.out / href.lstrip("/")).is_file(), href)
+
+    def test_the_files_for_ai_tools_carry_the_whole_content(self) -> None:
+        index = (self.out / "llms.txt").read_text(encoding="utf-8")
+        full = (self.out / "llms-full.txt").read_text(encoding="utf-8")
+        page = build.load_community(build.ROOT / "content" / "community.yaml")
+        guide = build.load_guide(build.ROOT / "content" / "guide.yaml")
+        for text in (index, full):
+            self.assertTrue(text.startswith("# BTX Community"))
+            self.assertIn(build.LLMS_NOTICE, text)
+            # The notice sends readers to the API for live figures, so both files list it.
+            self.assertIn(f"]({build.STATUS_API})", text)
+            self.assertNotRegex(text, r"\{[a-z]+\}", "a placeholder was left unfilled")
+            # Every link is absolute: these files are read outside the site.
+            for url in re.findall(r"\]\(([^)]*)\)", text):
+                self.assertTrue(url.startswith("https://"), url)
+        for page_id in build.PAGES:
+            self.assertIn(f"]({build.SITE_URL}{build.page_path('en', page_id)})", index)
+        self.assertIn(f"]({build.SITE_URL}/llms-full.txt)", index)
+        for category in page.categories:
+            for entry in category.entries:
+                self.assertIn(f"- [{entry.name}]({entry.url}): {entry.description.en}", full)
+        for removed in page.removed:
+            self.assertIn(f"- {removed.name}: {removed.reason.en}", full)
+        for fact in guide.facts:
+            self.assertIn(fact.text.en, full)
+        for checklist in guide.checklists:
+            for item in checklist.items:
+                self.assertIn(f"- {item.en}", full)
+
+
+class DeveloperPagesTest(unittest.TestCase):
+    """The developers page split in two: "Start here" (/dev/) and "Ongoing work" (/dev/work/)."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls.out = Path(cls._tmp.name) / "site"
+        build.build(cls.out, "test")
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls._tmp.cleanup()
+
+    def read(self, lang: str, page: str) -> str:
+        return (self.out / build.page_path(lang, page).strip("/") / "index.html").read_text(encoding="utf-8")
+
+    def ids(self, html: str) -> set[str]:
+        main = html.split('<main id="main">')[1].split("</main>")[0]
+        return {attrs["id"] for _, attrs in tags(main) if attrs.get("id")}
+
+    def test_the_work_page_sits_below_the_developers_page(self) -> None:
+        self.assertEqual(build.SUBPAGES, {"dev-work": ("dev", "dev/work")})
+        self.assertNotIn("dev-work", build.PAGES)
+        self.assertEqual(build.page_path("en", "dev-work"), "/dev/work/")
+        self.assertEqual(build.page_path("zh", "dev-work"), "/zh/dev/work/")
+
+    def test_both_pages_carry_the_sub_menu_and_keep_developers_marked(self) -> None:
+        for lang in build.LANGUAGES:
+            for page in ("dev", "dev-work"):
+                html = self.read(lang, page)
+                with self.subTest(lang=lang, page=page):
+                    menu = html.split('class="c-menu"')[1].split("</nav>")[0]
+                    self.assertEqual(re.findall(r'href="([^"]+)" aria-current="page"', menu), [build.page_path(lang, "dev")])
+                    sub = html.split('class="c-subnav"')[1].split("</nav>")[0]
+                    links = re.findall(r'href="([^"]+)"', sub)
+                    self.assertEqual(links, [build.page_path(lang, "dev"), build.page_path(lang, "dev-work")])
+                    self.assertEqual(re.findall(r'href="([^"]+)" aria-current="page"', sub), [build.page_path(lang, page)])
+                    # Every language version of a sub-page points at the same sub-page in the others.
+                    for code in build.LANGUAGES:
+                        self.assertIn(f'href="{build.page_path(code, page)}" hreflang=', html)
+
+    def test_every_section_lives_on_one_of_the_two_pages(self) -> None:
+        start, work = self.ids(self.read("en", "dev")), self.ids(self.read("en", "dev-work"))
+        self.assertEqual(start & work, set())
+        self.assertTrue(set(NAV) <= start)
+        self.assertTrue(set(NAV_WORK) <= work)
+
+    def test_links_to_moved_sections_follow_them(self) -> None:
+        """An old link such as /dev/#lanes goes to /dev/work/#lanes: community.js knows every id that moved."""
+        script = (build.ROOT / "static" / "js" / "community.js").read_text(encoding="utf-8")
+        body = re.search(r"var DEV_MOVED = new RegExp\((.*?)\);", script, flags=re.S).group(1)
+        moved = re.compile("".join(re.findall(r'"((?:[^"\\]|\\.)*)"', body)))
+        for lang in build.LANGUAGES:
+            start, work = self.ids(self.read(lang, "dev")), self.ids(self.read(lang, "dev-work"))
+            with self.subTest(lang=lang):
+                self.assertEqual({i for i in work if not moved.fullmatch(i)}, set())
+                self.assertEqual({i for i in start if moved.fullmatch(i)}, set())
+
+    def test_the_start_page_points_ai_tools_at_the_files_for_them(self) -> None:
+        for lang in build.LANGUAGES:
+            html = self.read(lang, "dev")
+            files = html.split('class="c-ai-files"')[1].split("</ul>")[0]
+            for name in ("llms.txt", "llms-full.txt"):
+                self.assertIn(f'href="/{name}"', files)
+                self.assertTrue((self.out / name).is_file(), name)
+        index = (self.out / "llms.txt").read_text(encoding="utf-8")
+        self.assertIn(f"]({build.SITE_URL}/dev/work/)", index)
+
+    def test_the_coverage_section_says_where_its_figures_come_from(self) -> None:
+        texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
+        for lang in build.LANGUAGES:
+            html = self.read(lang, "dev-work")
+            note = html.split('id="coverage-weekly"')[1].split("</p>")[0]
+            self.assertIn("coverage.json", note)
+            self.assertIn(texts[lang]["hub.coverage.weekly"].replace("'", "&#39;"), html)
+
+
+class ProjectsTest(unittest.TestCase):
+    """The projects at the top of the Projects page (the menu slot that held Documents)."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls.out = Path(cls._tmp.name) / "site"
+        build.build(cls.out, "test")
+        cls.projects = build.load_projects(build.ROOT / "content" / "projects.yaml")
+        cls.raw = build.load_yaml(build.ROOT / "content" / "projects.yaml")
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls._tmp.cleanup()
+
+    def read(self, lang: str, page: str) -> str:
+        return (self.out / build.page_path(lang, page).strip("/") / "index.html").read_text(encoding="utf-8")
+
+    def test_projects_take_the_documents_slot_and_keep_the_papers(self) -> None:
+        texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
+        self.assertEqual(texts["en"]["nav.docs"], "Projects")
+        for lang in build.LANGUAGES:
+            html = self.read(lang, "docs")
+            with self.subTest(lang=lang):
+                self.assertLess(html.index('id="projects"'), html.index('id="documents"'))
+                cards = re.findall(r'<article class="c-audience c-role c-project" id="project-([a-z-]+)">', html)
+                self.assertEqual(cards, [p.id for p in self.projects.projects])
+                self.assertIn('id="doc-roadmap"', html)
+
+    def test_every_card_cites_its_sources_and_its_links_resolve(self) -> None:
+        html = self.read("en", "docs")
+        for project in self.projects.projects:
+            card = html.split(f'id="project-{project.id}"')[1].split("</article>")[0]
+            with self.subTest(project=project.id):
+                self.assertGreaterEqual(len(project.cites), 1)
+                for cite in project.cites:
+                    label = cite.split(":", 1)[1]
+                    self.assertIn(label, card.replace("btx-community/", ""), cite)
+                for href in re.findall(r'href="([^"]+)"', card):
+                    if href.startswith("/"):
+                        path, _, anchor = href.partition("#")
+                        target = self.out / path.strip("/") / "index.html"
+                        self.assertTrue(target.is_file(), href)
+                        if anchor:
+                            self.assertIn(f'id="{anchor}"', target.read_text(encoding="utf-8"), href)
+                    elif href.startswith(build.REPO_URL + "/blob/main/"):
+                        self.assertTrue(build.repo_file(href).exists(), href)
+                    elif href.startswith(build.BTX_REPO_URL + "/"):
+                        self.assertRegex(href, r"/((blob|tree)/(main|v[0-9.]+)/[A-Za-z0-9_./-]+|issues|releases/tag/v[0-9.]+)$")
+                    else:
+                        self.assertRegex(href, build.LINK_PATTERN)
+
+    def test_other_pages_point_at_the_new_pages(self) -> None:
+        for lang in build.LANGUAGES:
+            docs, infra, dev = (build.page_path(lang, p) for p in ("docs", "infra", "dev-work"))
+            with self.subTest(lang=lang):
+                self.assertIn(f'href="{docs}#projects"', self.read(lang, "infra"))
+                home = self.read(lang, "home")
+                nodes = home.split('id="nodes"')[1].split("</article>")[0]
+                self.assertIn(f'href="{infra}"', nodes)
+                devs = home.split('id="developers"')[1].split("</article>")[0]
+                self.assertIn(f'href="{docs}"', devs)
+                self.assertIn(f'href="{dev}"', devs)
+                newcomers = home.split('id="newcomers"')[1].split("</article>")[0]
+                links = re.findall(r'href="([^"]+)"', newcomers)
+                self.assertEqual(links[0], build.page_path(lang, "learn"))
+
+    def test_a_card_never_names_a_price_or_a_person(self) -> None:
+        data = json.loads(json.dumps(self.raw, default=str))
+        data["projects"][0]["missing"]["en"] = "A server at $20 a month."
+        with self.assertRaises(Exception):  # noqa: B017, PT027
+            build.ProjectsPage.model_validate(data)
+        community = (build.ROOT / "content" / "community.yaml").read_text(encoding="utf-8")
+        self.assertNotIn("(Mende and Jarek)", community)
+
+
+class InfraTest(unittest.TestCase):
+    """The "Run infra" page: its links, its map and the rules of infra.yaml."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls.out = Path(cls._tmp.name) / "site"
+        build.build(cls.out, "test")
+        cls.infra = build.load_infra(build.ROOT / "content" / "infra.yaml")
+        cls.raw = build.load_yaml(build.ROOT / "content" / "infra.yaml")
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls._tmp.cleanup()
+
+    def read(self, lang: str, page: str = "infra") -> str:
+        return (self.out / build.page_path(lang, page).strip("/") / "index.html").read_text(encoding="utf-8")
+
+    def broken(self, change: Callable[[dict], None]) -> None:
+        """infra.yaml with one change applied must be rejected."""
+        data = json.loads(json.dumps(self.raw, default=str))
+        change(data)
+        with self.assertRaises(Exception):  # noqa: B017, PT027
+            build.InfraPage.model_validate(data)
+
+    def test_the_page_is_in_the_menu_next_to_the_developers(self) -> None:
+        self.assertEqual(build.PAGES[-2:], ("infra", "dev"))
+        for lang in build.LANGUAGES:
+            html = self.read(lang)
+            self.assertIn('aria-current="page"', html)
+            menu = html.split('class="c-menu"')[1].split("</nav>")[0]
+            hrefs = re.findall(r'href="([^"]+)"', menu)
+            self.assertEqual(hrefs, [build.page_path(lang, page) for page in build.PAGES], lang)
+
+    def test_every_link_resolves(self) -> None:
+        for lang in build.LANGUAGES:
+            html = self.read(lang)
+            found = tags(html)
+            ids = {attrs["id"] for _, attrs in found if attrs.get("id")}
+            with self.subTest(lang=lang):
+                for tag, attrs in found:
+                    href = attrs.get("href")
+                    if tag != "a" or not href:
+                        continue
+                    if href.startswith("#"):
+                        self.assertIn(href[1:], ids, href)
+                    elif href.startswith("/"):
+                        path, _, anchor = href.partition("#")
+                        target = self.out / path.strip("/") / "index.html"
+                        self.assertTrue(target.is_file(), href)
+                        if anchor:
+                            self.assertIn(f'id="{anchor}"', target.read_text(encoding="utf-8"), href)
+                    elif href.startswith(build.REPO_URL + "/"):
+                        if href.startswith(f"{build.REPO_URL}/blob/main/") or href.startswith(f"{build.REPO_URL}/tree/main/"):
+                            self.assertTrue(build.repo_file(href).exists(), href)
+                        else:
+                            self.assertEqual(href, f"{build.REPO_URL}/issues")
+                    elif href.startswith(build.BTX_REPO_URL + "/"):
+                        # The node software's docs on main, the cited lines at the tag they were read at.
+                        self.assertRegex(
+                            href,
+                            rf"^{re.escape(build.BTX_REPO_URL)}/((blob|tree)/(main|{re.escape(self.infra.verified.tag)})/"
+                            r"[A-Za-z0-9_./-]+|issues|releases(/tag/v[0-9.]+)?|security/advisories/new)$",
+                        )
+                    else:
+                        self.assertRegex(href, build.LINK_PATTERN)
+                        self.assertIn('rel="noopener noreferrer"', html.split(f'href="{href}"')[1].split(">")[0])
+
+    def test_the_fuzz_box_guide_and_the_hub_files_exist(self) -> None:
+        # The guides this page reuses are files of this repository; the build refuses a link to a missing one.
+        for url in self.infra.links():
+            path = build.repo_file(url)
+            if path is not None:
+                self.assertTrue(path.exists(), url)
+        self.assertIn(f"{build.REPO_URL}/blob/main/dev/fuzz-box/README.md", self.infra.links())
+
+    def test_the_map_has_text_alternatives(self) -> None:
+        edges = len(self.infra.map.edges)
+        for lang in build.LANGUAGES:
+            html = self.read(lang)
+            found = tags(html)
+            ids = {attrs["id"] for _, attrs in found if attrs.get("id")}
+            svgs = re.findall(r"<svg [^>]*>.*?</svg>", html, flags=re.S)
+            with self.subTest(lang=lang):
+                self.assertEqual(len(svgs), len(build.LAYOUTS))
+                for svg in svgs:
+                    head = tags(svg)[0][1]
+                    self.assertEqual(head.get("role"), "group")
+                    title_id, desc_id = head["aria-labelledby"].split()
+                    self.assertRegex(svg, rf'<title id="{title_id}">[^<]+</title>')
+                    self.assertRegex(svg, rf'<desc id="{desc_id}">[^<]+</desc>')
+                    self.assertIn('class="c-map__arrows" aria-hidden="true"', svg)
+                    for tag, attrs in tags(svg):
+                        if tag == "a":
+                            self.assertTrue(attrs.get("aria-label"), attrs)
+                    # Every numbered arrow is drawn and explained in the list below the map.
+                    numbers = {int(n) for n in re.findall(r'data-edge="(\d+)"', svg)}
+                    self.assertEqual(numbers, set(range(1, edges + 1)))
+                    self.assertEqual(svg.count("<a "), len(self.infra.map.nodes))
+                self.assertEqual(len(re.findall(r'<li id="edge-\d+">', html)), edges)
+                for number in range(1, edges + 1):
+                    self.assertIn(f"edge-{number}", ids)
+                self.assertRegex(html, r"<figcaption[^>]*>[^<]+</figcaption>")
+
+    def test_every_box_label_fits_in_every_language(self) -> None:
+        for lang in build.LANGUAGES:
+            table = {}
+            if lang in build.TRANSLATED:
+                table = build.load_translations(build.ROOT / "content" / "translations" / f"{lang}.yaml", lang)
+            say = build.Localizer(lang, table)
+            for layout in build.LAYOUTS:
+                view = build.map_view(self.infra, layout, say)
+                for box in view.boxes:
+                    with self.subTest(lang=lang, layout=layout.name, box=box.id):
+                        room = box.x + box.width - layout.pad + 1
+                        for line in box.title:
+                            self.assertLessEqual(line.x + build.text_width(line.text, layout.title_size, bold=True), room, line.text)
+                        for line in box.labels:
+                            self.assertLessEqual(line.x + build.text_width(line.text, layout.label_size), room, line.text)
+                        if box.code is not None:
+                            self.assertLessEqual(box.code.x + build.text_width(box.code.text, layout.code_size, mono=True), room)
+                        self.assertLessEqual(box.y + box.height, view.height)
+                x, _, width, _ = view.frame
+                for line in view.frame_label:
+                    self.assertLessEqual(line.x + build.text_width(line.text, layout.label_size, mono=True), x + width - 8, (lang, line.text))
+
+    def test_a_role_without_a_guide_says_so(self) -> None:
+        html = self.read("en")
+        coming = self.infra.texts.coming.en
+        without = {role.id for role in self.infra.roles if role.guide is None}
+        self.assertEqual(without, {"ci-runner", "guix"})
+        for role in self.infra.roles:
+            card = unescape(html.split(f'id="role-{role.id}"')[1].split("</article>")[0])
+            self.assertEqual(coming in card, role.guide is None, role.id)
+            if role.coming is not None:
+                self.assertIn(role.coming.en, card)
+
+    def test_security_roles_carry_the_private_route(self) -> None:
+        self.assertEqual(self.infra.private_route, "https://github.com/btxchain/btx/security/advisories/new")
+        for lang in build.LANGUAGES:
+            html = self.read(lang)
+            report = html.split('id="report"')[1].split("</section>")[0]
+            self.assertIn(f'href="{self.infra.private_route}"', report)
+            self.assertIn(f'href="{self.infra.policy}"', report)
+            for role in self.infra.roles:
+                card = html.split(f'id="role-{role.id}"')[1].split("</article>")[0]
+                self.assertEqual('href="#report"' in card, role.security, (lang, role.id))
+        self.assertTrue(all(role.security for role in self.infra.roles if role.kind == "testing"))
+        self.assertTrue(next(role for role in self.infra.roles if role.id == "signer").security)
+
+    def test_the_managed_side_shows_the_link_lists_own_words(self) -> None:
+        page = build.load_community(build.ROOT / "content" / "community.yaml")
+        entry = next(e for c in page.categories for e in c.entries if e.id == "easynode")
+        card = self.read("en").split('id="managed"')[1].split("</article>")[0]
+        self.assertIn(entry.description.en, unescape(card))
+        self.assertIn(entry.note.en, unescape(card))
+        self.assertEqual(self.infra.managed, ["easynode"])
+
+    def test_every_edge_cites_a_line_range(self) -> None:
+        html = self.read("en")
+        for number, edge in enumerate(self.infra.map.edges, start=1):
+            item = html.split(f'<li id="edge-{number}">')[1].split("</li>")[0]
+            for cite in edge.cites:
+                label = cite.split(":", 1)[1]
+                self.assertIn(label, item.replace("btx-community/", ""), cite)
+            if any(cite.startswith("btx:") for cite in edge.cites):
+                self.assertIn(f"/blob/{self.infra.verified.tag}/", item)
+
+    def test_broken_infra_content_is_rejected(self) -> None:
+        def price(data: dict) -> None:
+            data["roles"][0]["hardware"]["en"] = "A small server for about $10 a month."
+
+        def no_guide(data: dict) -> None:
+            del data["roles"][3]["guide"]
+
+        def unknown_role(data: dict) -> None:
+            data["map"]["nodes"][0] = {**data["map"]["nodes"][0], "page": None, "anchor": None, "role": "miner"}
+
+        def undrawable(data: dict) -> None:
+            data["map"]["edges"].append({**data["map"]["edges"][0], "from": "guix", "to": "status"})
+
+        def shared_place(data: dict) -> None:
+            data["map"]["nodes"][2]["wide"] = data["map"]["nodes"][0]["wide"]
+
+        def left_on_a_phone(data: dict) -> None:
+            data["map"]["nodes"][0]["narrow"] = {"col": "L", "row": 1}
+
+        def frame_outside_c(data: dict) -> None:
+            data["map"]["nodes"][1]["wide"] = {"col": "L", "row": 1}
+
+        def other_route(data: dict) -> None:
+            data["private_route"] = "https://example.com/report"
+
+        def bad_cite(data: dict) -> None:
+            data["map"]["edges"][0]["cites"] = ["btx:src/protocol.h"]
+
+        for change in (price, no_guide, unknown_role, undrawable, shared_place, left_on_a_phone, frame_outside_c,
+                       other_route, bad_cite):
+            with self.subTest(change=change.__name__):
+                self.broken(change)
+        # The real content passes, and a managed entry must exist in the link list.
+        build.InfraPage.model_validate(json.loads(json.dumps(self.raw, default=str)))
+        page = build.load_community(build.ROOT / "content" / "community.yaml")
+        changed = self.infra.model_copy(update={"managed": ["no-such-entry"]})
+        with self.assertRaises(build.ContentError):
+            build.check_infra(changed, page)
+
+    def test_the_home_node_box_sits_near_the_top_with_its_links(self) -> None:
+        self.assertIsNotNone(self.infra.home)
+        for lang in build.LANGUAGES:
+            html = self.read(lang)
+            with self.subTest(lang=lang):
+                self.assertLess(html.index('id="paths"'), html.index('id="home-node"'))
+                self.assertLess(html.index('id="home-node"'), html.index('id="roles"'))
+                box = html.split('id="home-node"')[1].split("</section>")[0]
+                self.assertEqual(re.findall(r'class="c-home__point" id="home-([a-z]+)"', box), ["privacy", "reach"])
+                # The facts that must survive translation: the mainnet port and the safe setting.
+                self.assertIn("19335", box)
+                self.assertIn("natpmp=0", box)
+                self.assertIn(f'href="{build.page_path(lang, "home")}#before-installing"', box)
+                self.assertIn('href="https://github.com/btxchain/btx/blob/main/doc/tor.md"', box)
+        home = (self.out / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="before-installing"', home)
+
+    def test_the_home_node_box_names_no_price(self) -> None:
+        data = json.loads(json.dumps(self.raw, default=str))
+        data["home"]["points"][0]["items"][0]["en"] = "A small box costs about $5 a month."
+        with self.assertRaises(Exception):  # noqa: B017, PT027
+            build.InfraPage.model_validate(data)
+
+    def test_text_wraps_at_spaces_hyphens_and_between_cjk_characters(self) -> None:
+        self.assertEqual(build.wrap("one two three", build.text_width("one two", 10), 10), ("one two", "three"))
+        self.assertEqual(build.wrap("Peer-Verbindungen", build.text_width("Peer-", 10), 10), ("Peer-", "Verbindungen"))
+        self.assertEqual(build.wrap("下发模板回传区块", 40, 10), ("下发模板", "回传区块"))
 
 
 if __name__ == "__main__":

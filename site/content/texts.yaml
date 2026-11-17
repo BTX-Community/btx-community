@@ -68,9 +68,15 @@ en:
   nav.learn: Learn
   nav.network: Network
   nav.links: Links
-  nav.docs: Documents
+  nav.docs: "Projects"
+  nav.infra: Run infra
   nav.dev: Developers
+  nav.dev-work: "Developers: ongoing work"
+  subnav.label: "Developer pages"
+  subnav.dev: "Start here"
+  subnav.dev-work: "Ongoing work"
   live.more: BTX in numbers and development activity
+  network.observatory: Live view and node map from the Byron Bay archive node
   page.learn.title: Learn about BTX
   page.learn.lead: What BTX is, and what the next release brings.
   page.network.title: Network and development
@@ -79,9 +85,13 @@ en:
     software as measured on GitHub.
   page.links.title: Links
   page.links.lead: Projects, tools and services around BTX, each one opened and checked by hand.
-  page.docs.title: Documents
-  page.docs.lead: The roadmap and the research papers this group maintains in the open.
+  page.docs.title: "Community projects"
+  page.docs.lead: "What the community can build and run as its own, then the roadmap and the research papers this group maintains in the open."
+  page.infra.title: Run BTX infrastructure
+  page.infra.lead: "Machines you can give the network: what each one does, what it needs, its guide and who to ask, and a map of how they fit together."
   page.dev.title: Become a BTX dev
+  page.dev-work.title: "Ongoing work"
+  page.dev-work.lead: "Where the node software stands and who works on what: test coverage, the nightly CI-0 run, bug classes, lanes, gates and the weekly rhythm."
   page.dev.lead: >-
     How to send pull requests to the BTX node software that the maintainer can merge: for
     people, and for the AI tools they work with.
@@ -89,12 +99,12 @@ en:
   translation.fix: Correct the translation
   facts.title: What is BTX?
   facts.source: Source
-  upcoming.title: "New in pre-release v{version}"
+  upcoming.title: "New in v{version}"
   upcoming.checked: "Read from the release notes on {date}."
   upcoming.caveats: Before you switch
   upcoming.notes: Release notes
   checklists.title: Check first
-  documents.title: Documents
+  documents.title: "Roadmap and papers"
   documents.lead: >-
     What this community has written down. Every one of them lives in the repository, so each
     change is visible as a commit and anyone can correct a figure.
@@ -133,13 +143,24 @@ en:
   hub.nav.lanes: Lanes
   hub.nav.flow: Flow
   hub.nav.gates: Gates
+  hub.nav.ci: "Nightly CI-0"
+  hub.nav.owner-rules: "Owner rules"
   hub.nav.rhythm: Rhythm
   hub.nav.rules: Rules
   hub.nav.contribute: Contribute
+  hub.ai.title: "This site for AI tools"
+  hub.ai.index: "an index of this site's pages, documents and live data, with links"
+  hub.ai.full: "the whole content of these pages as plain text, for an AI tool to read in one go"
+  hub.ai.english: "Both files are in English."
+  hub.coverage.weekly: "From Sunday 22 Nov the status page's operator plans to publish these figures weekly as coverage.json; this section will then read them from there. Until then it shows the hub's figures."
+  hub.owner.title: "Rules for lane owners"
+  hub.owner.lead: "What applies once you own a lane: what your AI never does, and how a sweep works."
+  hub.begin.open_lanes: "See the lanes waiting for an owner on Ongoing work"
   hub.principles.title: How we work
   hub.measured: >-
-    Measured at {commit} on {date}; live head {head}. Every number here is copied from the hub; the
-    hub is right if they differ.
+    Coverage measured at {coverage_commit} on {coverage_date}; the other counts at {commit} on
+    {date}; live head {head}. Every number here is copied from the hub; the hub is right if they
+    differ.
   hub.brief.title: Brief your AI
   hub.brief.lead: >-
     Paste this as the first message of a new session in your AI tool (Claude Code, Cursor, Codex or
@@ -386,9 +407,15 @@ de:
   nav.learn: Lernen
   nav.network: Netz
   nav.links: Links
-  nav.docs: Dokumente
+  nav.docs: "Projekte"
+  nav.infra: Infra betreiben
   nav.dev: Entwickeln
+  nav.dev-work: "Entwickeln: laufende Arbeit"
+  subnav.label: "Entwicklerseiten"
+  subnav.dev: "Hier anfangen"
+  subnav.dev-work: "Laufende Arbeit"
   live.more: BTX in Zahlen und Entwicklungsaktivität
+  network.observatory: Live-Ansicht und Node-Karte des Archive-Nodes von Byron Bay
   page.learn.title: BTX verstehen
   page.learn.lead: Was BTX ist und was das nächste Release bringt.
   page.network.title: Netz und Entwicklung
@@ -397,9 +424,13 @@ de:
     Node-Software, gemessen auf GitHub.
   page.links.title: Links
   page.links.lead: Projekte, Werkzeuge und Dienste rund um BTX, jeder Eintrag von Hand geöffnet und geprüft.
-  page.docs.title: Dokumente
-  page.docs.lead: Die Roadmap und die Research-Papiere, die diese Gruppe offen pflegt.
+  page.docs.title: "Community-Projekte"
+  page.docs.lead: "Was die Community selbst bauen und betreiben kann, dann die Roadmap und die Research-Papiere, die diese Gruppe offen pflegt."
+  page.infra.title: BTX-Infrastruktur betreiben
+  page.infra.lead: "Rechner, die du dem Netz geben kannst: was jeder tut, was er braucht, seine Anleitung und wen man fragt, dazu eine Karte, wie alles zusammenhängt."
   page.dev.title: BTX-Entwickler werden
+  page.dev-work.title: "Laufende Arbeit"
+  page.dev-work.lead: "Wo die Node-Software steht und wer woran arbeitet: Testabdeckung, der nächtliche CI-0-Lauf, Fehlerklassen, Arbeitsbereiche, Gates und der Wochenrhythmus."
   page.dev.lead: >-
     Wie man Pull Requests für die BTX-Node-Software so vorbereitet, dass der Maintainer sie
     übernehmen kann: für Menschen und für die KI-Werkzeuge, mit denen sie arbeiten.
@@ -407,12 +438,12 @@ de:
   translation.fix: Übersetzung korrigieren
   facts.title: Was ist BTX?
   facts.source: Quelle
-  upcoming.title: "Neu im Pre-Release v{version}"
+  upcoming.title: "Neu in v{version}"
   upcoming.checked: "Aus den Release-Notes gelesen am {date}."
   upcoming.caveats: Bevor du wechselst
   upcoming.notes: Release-Notes
   checklists.title: Erst prüfen
-  documents.title: Dokumente
+  documents.title: "Roadmap und Papiere"
   documents.lead: >-
     Was diese Community aufgeschrieben hat. Alles davon liegt im Repository, jede Änderung ist
     also als Commit sichtbar, und jeder kann eine Zahl korrigieren.
@@ -452,13 +483,24 @@ de:
   hub.nav.lanes: Arbeitsbereiche
   hub.nav.flow: Ablauf
   hub.nav.gates: Gates
+  hub.nav.ci: "Nächtlicher CI-0"
+  hub.nav.owner-rules: "Regeln für Verantwortliche"
   hub.nav.rhythm: Rhythmus
   hub.nav.rules: Regeln
   hub.nav.contribute: Mitmachen
+  hub.ai.title: "Diese Seite für KI-Werkzeuge"
+  hub.ai.index: "ein Verzeichnis der Seiten, Dokumente und Live-Daten dieser Website, mit Links"
+  hub.ai.full: "der ganze Inhalt dieser Seiten als reiner Text, damit ein KI-Werkzeug ihn in einem Zug liest"
+  hub.ai.english: "Beide Dateien sind englisch."
+  hub.coverage.weekly: "Ab Sonntag, 22. Nov., will der Betreiber der Statusseite diese Werte wöchentlich als coverage.json veröffentlichen; dieser Abschnitt liest sie dann von dort. Bis dahin zeigt er die Werte des Hubs."
+  hub.owner.title: "Regeln für Verantwortliche eines Bereichs"
+  hub.owner.lead: "Was gilt, sobald du einen Bereich verantwortest: was deine KI nie tut und wie ein Durchgang abläuft."
+  hub.begin.open_lanes: "Die Arbeitsbereiche ohne Verantwortliche unter Laufende Arbeit ansehen"
   hub.principles.title: Wie wir arbeiten
   hub.measured: >-
-    Gemessen an {commit} am {date}; aktueller Head {head}. Jede Zahl hier ist aus dem Hub
-    übernommen; weichen sie ab, gilt der Hub.
+    Abdeckung gemessen an {coverage_commit} am {coverage_date}; die übrigen Zahlen an {commit} am
+    {date}; aktueller Head {head}. Jede Zahl hier ist aus dem Hub übernommen; weichen sie ab, gilt
+    der Hub.
   hub.brief.title: Deine KI einweisen
   hub.brief.lead: >-
     Füge das als erste Nachricht einer neuen Sitzung in dein KI-Werkzeug ein (Claude Code, Cursor,
@@ -709,9 +751,15 @@ es:
   nav.learn: Aprender
   nav.network: Red
   nav.links: Enlaces
-  nav.docs: Documentos
+  nav.docs: "Proyectos"
+  nav.infra: Operar infra
   nav.dev: Desarrolladores
+  nav.dev-work: "Desarrolladores: trabajo en curso"
+  subnav.label: "Páginas para desarrolladores"
+  subnav.dev: "Empieza aquí"
+  subnav.dev-work: "Trabajo en curso"
   live.more: BTX en cifras y actividad de desarrollo
+  network.observatory: Vista en vivo y mapa de nodos desde el nodo de archivo de Byron Bay
   page.learn.title: Conocer BTX
   page.learn.lead: Qué es BTX y qué trae la próxima versión.
   page.network.title: Red y desarrollo
@@ -720,9 +768,13 @@ es:
     del nodo medido en GitHub.
   page.links.title: Enlaces
   page.links.lead: Proyectos, herramientas y servicios en torno a BTX, cada uno abierto y revisado a mano.
-  page.docs.title: Documentos
-  page.docs.lead: La hoja de ruta y los documentos de investigación que este grupo mantiene en abierto.
+  page.docs.title: "Proyectos de la comunidad"
+  page.docs.lead: "Lo que la comunidad puede construir y operar por su cuenta, y después la hoja de ruta y los documentos de investigación que este grupo mantiene en abierto."
+  page.infra.title: Operar infraestructura de BTX
+  page.infra.lead: "Máquinas que puedes aportar a la red: qué hace cada una, qué necesita, su guía y a quién preguntar, y un mapa de cómo encajan entre sí."
   page.dev.title: Hazte desarrollador de BTX
+  page.dev-work.title: "Trabajo en curso"
+  page.dev-work.lead: "Dónde está el software del nodo y quién trabaja en qué: cobertura de pruebas, la ejecución nocturna de CI-0, clases de errores, tareas, controles y el ritmo semanal."
   page.dev.lead: >-
     Cómo enviar al software del nodo BTX pull requests que el mantenedor pueda integrar: para
     personas, y para las herramientas de IA con las que trabajan.
@@ -730,12 +782,12 @@ es:
   translation.fix: Corregir la traducción
   facts.title: ¿Qué es BTX?
   facts.source: Fuente
-  upcoming.title: "Novedades de la versión preliminar v{version}"
+  upcoming.title: "Novedades de la v{version}"
   upcoming.checked: "Leído en las notas de versión el {date}."
   upcoming.caveats: Antes de cambiar
   upcoming.notes: Notas de versión
   checklists.title: Comprueba primero
-  documents.title: Documentos
+  documents.title: "Hoja de ruta y documentos"
   documents.lead: >-
     Lo que esta comunidad ha puesto por escrito. Todo está en el repositorio, así que cada cambio
     se ve como un commit y cualquiera puede corregir una cifra.
@@ -775,13 +827,24 @@ es:
   hub.nav.lanes: Tareas
   hub.nav.flow: Flujo
   hub.nav.gates: Controles
+  hub.nav.ci: "CI-0 nocturno"
+  hub.nav.owner-rules: "Reglas de responsables"
   hub.nav.rhythm: Ritmo
   hub.nav.rules: Reglas
   hub.nav.contribute: Contribuir
+  hub.ai.title: "Este sitio para herramientas de IA"
+  hub.ai.index: "un índice de las páginas, documentos y datos en vivo de este sitio, con enlaces"
+  hub.ai.full: "todo el contenido de estas páginas como texto plano, para que una herramienta de IA lo lea de una vez"
+  hub.ai.english: "Ambos archivos están en inglés."
+  hub.coverage.weekly: "A partir del domingo 22 de nov., el operador de la página de estado prevé publicar estas cifras cada semana como coverage.json; esta sección las leerá entonces de ahí. Hasta entonces muestra las cifras del hub."
+  hub.owner.title: "Reglas para responsables de tareas"
+  hub.owner.lead: "Lo que rige cuando eres responsable de una tarea: lo que tu IA nunca hace y cómo funciona un barrido."
+  hub.begin.open_lanes: "Ver las tareas a la espera de responsable en Trabajo en curso"
   hub.principles.title: Cómo trabajamos
   hub.measured: >-
-    Medido en {commit} el {date}; head actual {head}. Cada cifra de aquí está copiada del centro; si
-    difieren, vale lo que dice el centro.
+    Cobertura medida en {coverage_commit} el {coverage_date}; las demás cifras, en {commit} el
+    {date}; head actual {head}. Cada cifra de aquí está copiada del centro; si difieren, vale lo que
+    dice el centro.
   hub.brief.title: Instruye a tu IA
   hub.brief.lead: >-
     Pégalo como primer mensaje de una sesión nueva en tu herramienta de IA (Claude Code, Cursor,
@@ -1034,9 +1097,15 @@ fr:
   nav.learn: Comprendre
   nav.network: Réseau
   nav.links: Liens
-  nav.docs: Documents
+  nav.docs: "Projets"
+  nav.infra: Infra
   nav.dev: Développeurs
+  nav.dev-work: "Développeurs : travaux en cours"
+  subnav.label: "Pages pour les développeurs"
+  subnav.dev: "Commencer ici"
+  subnav.dev-work: "Travaux en cours"
   live.more: BTX en chiffres et activité de développement
+  network.observatory: "Vue en direct et carte des nœuds depuis le nœud d'archive de Byron Bay"
   page.learn.title: Comprendre BTX
   page.learn.lead: Ce qu'est BTX, et ce qu'apporte la prochaine version.
   page.network.title: Réseau et développement
@@ -1045,9 +1114,13 @@ fr:
     nœud tel que mesuré sur GitHub.
   page.links.title: Liens
   page.links.lead: Projets, outils et services autour de BTX, chacun ouvert et vérifié à la main.
-  page.docs.title: Documents
-  page.docs.lead: La feuille de route et les documents de recherche que ce groupe tient à jour publiquement.
+  page.docs.title: "Projets de la communauté"
+  page.docs.lead: "Ce que la communauté peut construire et faire tourner elle-même, puis la feuille de route et les documents de recherche que ce groupe tient à jour publiquement."
+  page.infra.title: "Faire tourner l'infrastructure de BTX"
+  page.infra.lead: "Les machines que vous pouvez apporter au réseau : ce que fait chacune, ce qu'il lui faut, son guide et à qui demander, avec une carte qui montre comment elles s'articulent."
   page.dev.title: Devenir développeur BTX
+  page.dev-work.title: "Travaux en cours"
+  page.dev-work.lead: "Où en est le logiciel de nœud et qui travaille sur quoi : couverture de tests, exécution nocturne de CI-0, classes de bugs, chantiers, contrôles et rythme hebdomadaire."
   page.dev.lead: >-
     Comment proposer au logiciel de nœud BTX des pull requests que le mainteneur peut fusionner :
     pour les humains, et pour les outils d'IA avec lesquels ils travaillent.
@@ -1055,12 +1128,12 @@ fr:
   translation.fix: Corriger la traduction
   facts.title: Qu'est-ce que BTX ?
   facts.source: Source
-  upcoming.title: "Nouveautés de la préversion v{version}"
+  upcoming.title: "Nouveautés de la v{version}"
   upcoming.checked: "Lu dans les notes de version le {date}."
   upcoming.caveats: Avant de changer
   upcoming.notes: Notes de version
   checklists.title: À vérifier d'abord
-  documents.title: Documents
+  documents.title: "Feuille de route et documents"
   documents.lead: >-
     Ce que cette communauté a mis par écrit. Tout se trouve dans le dépôt : chaque modification est
     visible comme un commit et chacun peut corriger un chiffre.
@@ -1100,13 +1173,24 @@ fr:
   hub.nav.lanes: Chantiers
   hub.nav.flow: Parcours
   hub.nav.gates: Contrôles
+  hub.nav.ci: "CI-0 nocturne"
+  hub.nav.owner-rules: "Règles des responsables"
   hub.nav.rhythm: Rythme
   hub.nav.rules: Règles
   hub.nav.contribute: Contribuer
+  hub.ai.title: "Ce site pour les outils d'IA"
+  hub.ai.index: "un index des pages, documents et données en direct de ce site, avec des liens"
+  hub.ai.full: "tout le contenu de ces pages en texte brut, qu'un outil d'IA lit d'un seul coup"
+  hub.ai.english: "Les deux fichiers sont en anglais."
+  hub.coverage.weekly: "À partir du dimanche 22 nov., l'opérateur de la page d'état prévoit de publier ces chiffres chaque semaine dans coverage.json ; cette section les lira alors de là. D'ici là, elle montre les chiffres du hub."
+  hub.owner.title: "Règles pour les responsables de chantier"
+  hub.owner.lead: "Ce qui s'applique dès que vous êtes responsable d'un chantier : ce que votre IA ne fait jamais, et comment se déroule un balayage."
+  hub.begin.open_lanes: "Voir les chantiers en attente d'un responsable dans Travaux en cours"
   hub.principles.title: Notre façon de travailler
   hub.measured: >-
-    Mesuré au commit {commit} le {date} ; tête actuelle : {head}. Chaque chiffre ici est copié du
-    hub ; en cas d'écart, c'est le hub qui fait foi.
+    Couverture mesurée au commit {coverage_commit} le {coverage_date} ; les autres chiffres au commit
+    {commit} le {date} ; tête actuelle : {head}. Chaque chiffre ici est copié du hub ; en cas d'écart,
+    c'est le hub qui fait foi.
   hub.brief.title: Briefer votre IA
   hub.brief.lead: >-
     Collez-le comme premier message d'une nouvelle session dans votre outil d'IA (Claude Code,
@@ -1354,30 +1438,40 @@ zh:
   nav.learn: 了解
   nav.network: 网络
   nav.links: 链接
-  nav.docs: 文档
+  nav.docs: "项目"
+  nav.infra: 运行基础设施
   nav.dev: 开发者
+  nav.dev-work: "开发者：进行中的工作"
+  subnav.label: "开发者页面"
+  subnav.dev: "从这里开始"
+  subnav.dev-work: "进行中的工作"
   live.more: BTX 数据与开发活动
+  network.observatory: Byron Bay 归档节点的实时视图与节点地图
   page.learn.title: 了解 BTX
   page.learn.lead: BTX 是什么，以及下一个版本会带来什么。
   page.network.title: 网络与开发
   page.network.lead: 来自公开状态 API 的网络实时状态，以及在 GitHub 上测量的节点软件开发情况。
   page.links.title: 链接
   page.links.lead: 围绕 BTX 的项目、工具和服务，每一项都经人工打开并核实。
-  page.docs.title: 文档
-  page.docs.lead: 本小组公开维护的路线图和研究文档。
+  page.docs.title: "社区项目"
+  page.docs.lead: "社区可以自行构建和运营的项目，以及本小组公开维护的路线图和研究文档。"
+  page.infra.title: 运行 BTX 基础设施
+  page.infra.lead: 你可以为网络提供的机器：每台做什么、需要什么、对应的指南和该问谁，另附一张说明它们如何配合的图。
   page.dev.title: 成为 BTX 开发者
+  page.dev-work.title: "进行中的工作"
+  page.dev-work.lead: "节点软件的现状以及谁在做什么：测试覆盖率、CI-0 夜间运行、缺陷类别、任务、关卡和每周节奏。"
   page.dev.lead: >-
     如何向 BTX 节点软件提交维护者能够合并的拉取请求：写给人，也写给他们使用的 AI 工具。
   translation.note: 本页由英文借助 AI 翻译。
   translation.fix: 修正翻译
   facts.title: BTX 是什么？
   facts.source: 来源
-  upcoming.title: "预发布版 v{version} 的新内容"
+  upcoming.title: "v{version} 的新内容"
   upcoming.checked: "于 {date} 从发布说明读取。"
   upcoming.caveats: 切换之前
   upcoming.notes: 发布说明
   checklists.title: 先检查
-  documents.title: 文档
+  documents.title: "路线图与研究文档"
   documents.lead: >-
     这个社区写下的内容。所有文档都在代码仓库中，因此每次修改都以提交的形式可见，任何人都可以更正数字。
   documents.open: 阅读
@@ -1409,11 +1503,21 @@ zh:
   hub.nav.lanes: 任务
   hub.nav.flow: 流程
   hub.nav.gates: 关卡
+  hub.nav.ci: "CI-0 夜间运行"
+  hub.nav.owner-rules: "负责人规则"
   hub.nav.rhythm: 节奏
   hub.nav.rules: 规则
   hub.nav.contribute: 参与
+  hub.ai.title: "供 AI 工具读取的本站文件"
+  hub.ai.index: "本站页面、文档和实时数据的索引，附链接"
+  hub.ai.full: "这些页面的全部内容（纯文本），供 AI 工具一次读完"
+  hub.ai.english: "这两个文件均为英文。"
+  hub.coverage.weekly: "从 11 月 22 日（星期日）起，状态页的运营者计划每周以 coverage.json 发布这些数据；届时本节将从那里读取。在此之前，这里显示的是 hub 中的数据。"
+  hub.owner.title: "任务负责人规则"
+  hub.owner.lead: "成为任务负责人后适用的规则：你的 AI 绝不会做的事，以及一次集中清理如何进行。"
+  hub.begin.open_lanes: "在“进行中的工作”中查看等待负责人的任务"
   hub.principles.title: 我们如何工作
-  hub.measured: 于 {date} 在 {commit} 上测量；当前最新提交为 {head}。此处每个数字都复制自开发者中心；如有不同，以开发者中心为准。
+  hub.measured: 覆盖率于 {coverage_date} 在 {coverage_commit} 上测量，其他数字于 {date} 在 {commit} 上测量；当前最新提交为 {head}。此处每个数字都复制自开发者中心；如有不同，以开发者中心为准。
   hub.brief.title: 给你的 AI 下达简报
   hub.brief.lead: >-
     把它作为新会话的第一条消息粘贴到你的 AI 工具中（Claude Code、Cursor、Codex
