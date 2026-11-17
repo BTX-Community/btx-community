@@ -1928,6 +1928,44 @@ translations:
   zh: "私下报告漏洞"
 - en: "The security policy (SECURITY.md)"
   zh: "安全策略（SECURITY.md）"
+- en: "Before you run a node at home"
+  zh: "在家运行节点之前"
+- en: "Privacy"
+  zh: "隐私"
+- en: >-
+    Your node shows its IP address to every peer it connects to. A node that accepts inbound
+    connections also announces its own address, and peers pass it on.
+  zh: "你的节点会向它连接的每个节点暴露自己的 IP 地址。接受入站连接的节点还会宣告自己的地址，其他节点会继续转发。"
+- en: >-
+    btxd asks your router to open its port by default (NAT-PMP or PCP), so behind a router that
+    supports this it becomes reachable by itself.
+  zh: "btxd 默认会请求你的路由器打开它的端口（NAT-PMP 或 PCP），因此在支持该功能的路由器后面，它会自行变得可达。"
+- en: >-
+    If your address matters, run the node behind Tor (-proxy, -onlynet=onion; the Tor guide advises
+    onlynet=onion only once Tor runs stably) or on a rented server instead.
+  zh: "如果你在意自己的地址，就在 Tor 之后运行节点（-proxy、-onlynet=onion；Tor 指南建议等 Tor 稳定运行后再用 onlynet=onion），或者改用租用的服务器。"
+- en: >-
+    On a machine with coins, mining or a signer key, set natpmp=0, as the install checklist says.
+  zh: "在持有币、用于挖矿或存有签名者密钥的机器上，设置 natpmp=0，正如安装检查清单所说。"
+- en: "Reachability"
+  zh: "可达性"
+- en: >-
+    Outbound connections work by default. To accept inbound ones, TCP port 19335 must be reachable:
+    mapped by NAT-PMP, forwarded on the router by hand, or offered as a Tor onion service
+    (-listenonion). With -proxy, the node only listens if you also set -listen=1.
+  zh: "出站连接默认可用。要接受入站连接，TCP 端口 19335 必须可达：由 NAT-PMP 映射、在路由器上手动转发，或作为 Tor onion 服务提供（-listenonion）。使用 -proxy 时，只有同时设置 -listen=1，节点才会监听。"
+- en: >-
+    A node that only connects out stays in sync and relays to the peers it connects to, but new
+    nodes cannot reach it, so it does not help them sync.
+  zh: "只向外连接的节点仍能保持同步，并向它所连接的节点转发，但新节点无法连上它，所以它帮不了新节点同步。"
+- en: >-
+    To check: btx-cli getpeerinfo shows "inbound": true for peers that connected to you, and btx-cli
+    getnetworkinfo lists your node's localaddresses.
+  zh: "检查方法：btx-cli getpeerinfo 会对主动连上你的节点显示 \"inbound\": true，btx-cli getnetworkinfo 会在 localaddresses 中列出你节点的地址。"
+- en: "Full node: the install checklist on the start page"
+  zh: "全节点：首页上的安装检查清单"
+- en: "Running the node with Tor (developers)"
+  zh: "通过 Tor 运行节点（开发者文档）"
 - en: "Full node"
   zh: "全节点"
 - en: >-

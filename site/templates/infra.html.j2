@@ -57,6 +57,29 @@
         </article>
       </section>
 
+      {% if infra.home %}
+      <section class="c-home" id="home-node" aria-labelledby="home-node-title">
+        <h2 class="c-section-title" id="home-node-title">{{ infra.home.title }}</h2>
+        <div class="c-home__points">
+          {% for id, title, items in infra.home.points %}
+          <div class="c-home__point" id="home-{{ id }}">
+            <h3 class="c-home__title">{{ title }}</h3>
+            <ul class="c-home__items">
+              {% for item in items %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endfor %}
+        </div>
+        <p class="c-home__links">
+          {% for link in infra.home.links %}
+          <a class="c-link" href="{{ link.href }}"{% if link.external %} rel="noopener noreferrer"{% endif %}>{{ link.text }} {% if link.external %}↗{% else %}→{% endif %}</a>
+          {% endfor %}
+        </p>
+      </section>
+      {% endif %}
+
       <section class="c-roles" id="roles" aria-labelledby="roles-title">
         <h2 class="c-section-title" id="roles-title">{{ t.roles_title }}</h2>
         <div class="c-audiences">

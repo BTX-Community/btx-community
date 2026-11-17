@@ -92,6 +92,74 @@ texts:
   report_link: { en: Report a vulnerability privately, de: Schwachstelle vertraulich melden }
   policy_link: { en: The security policy (SECURITY.md), de: Die Sicherheitsrichtlinie (SECURITY.md) }
 
+# home: the box near the top for anyone about to run a node at home. Short lines, no prices; every
+# fact is checked against btxchain/btx (release-0.34.17) and cited in the pull request.
+home:
+  title: { en: Before you run a node at home, de: Bevor du einen Node zu Hause betreibst }
+  points:
+    - id: privacy
+      title: { en: Privacy, de: Privatsphäre }
+      items:
+        - en: >-
+            Your node shows its IP address to every peer it connects to. A node that accepts
+            inbound connections also announces its own address, and peers pass it on.
+          de: >-
+            Dein Node zeigt jedem Peer, mit dem er sich verbindet, seine IP-Adresse. Ein Node, der
+            eingehende Verbindungen annimmt, kündigt zudem seine eigene Adresse an, und Peers geben
+            sie weiter.
+        - en: >-
+            btxd asks your router to open its port by default (NAT-PMP or PCP), so behind a router
+            that supports this it becomes reachable by itself.
+          de: >-
+            btxd bittet deinen Router standardmäßig, seinen Port zu öffnen (NAT-PMP oder PCP);
+            hinter einem Router, der das unterstützt, wird er so von selbst erreichbar.
+        - en: >-
+            If your address matters, run the node behind Tor (-proxy, -onlynet=onion; the Tor
+            guide advises onlynet=onion only once Tor runs stably) or on a rented server instead.
+          de: >-
+            Wenn deine Adresse zählt, den Node hinter Tor betreiben (-proxy, -onlynet=onion; die
+            Tor-Anleitung rät zu onlynet=onion erst, wenn Tor stabil läuft) oder stattdessen auf
+            einem gemieteten Server.
+        - en: >-
+            On a machine with coins, mining or a signer key, set natpmp=0, as the install checklist
+            says.
+          de: >-
+            Auf einem Rechner mit Guthaben, Mining oder Signer-Schlüssel natpmp=0 setzen, wie es die
+            Installations-Checkliste sagt.
+    - id: reach
+      title: { en: Reachability, de: Erreichbarkeit }
+      items:
+        - en: >-
+            Outbound connections work by default. To accept inbound ones, TCP port 19335 must be
+            reachable: mapped by NAT-PMP, forwarded on the router by hand, or offered as a Tor
+            onion service (-listenonion). With -proxy, the node only listens if you also set
+            -listen=1.
+          de: >-
+            Ausgehende Verbindungen funktionieren von selbst. Für eingehende muss TCP-Port 19335
+            erreichbar sein: per NAT-PMP freigegeben, am Router von Hand weitergeleitet oder als
+            Tor-Onion-Dienst angeboten (-listenonion). Mit -proxy lauscht der Node nur, wenn du
+            zusätzlich -listen=1 setzt.
+        - en: >-
+            A node that only connects out stays in sync and relays to the peers it connects to,
+            but new nodes cannot reach it, so it does not help them sync.
+          de: >-
+            Ein Node, der sich nur nach außen verbindet, bleibt synchron und leitet an die Peers
+            weiter, mit denen er verbunden ist; neue Nodes erreichen ihn aber nicht, er hilft ihnen
+            also nicht beim Synchronisieren.
+        - en: >-
+            To check: btx-cli getpeerinfo shows "inbound": true for peers that connected to you,
+            and btx-cli getnetworkinfo lists your node's localaddresses.
+          de: >-
+            Zum Prüfen: btx-cli getpeerinfo zeigt "inbound": true für Peers, die sich mit dir
+            verbunden haben, und btx-cli getnetworkinfo listet unter localaddresses die Adressen
+            deines Nodes.
+  links:
+    - text: { en: "Full node: the install checklist on the start page", de: "Full Node: die Installations-Checkliste auf der Startseite" }
+      page: home
+      anchor: before-installing
+    - text: { en: Running the node with Tor (developers), de: Den Node mit Tor betreiben (Entwickler) }
+      url: https://github.com/btxchain/btx/blob/main/doc/tor.md
+
 private_route: https://github.com/btxchain/btx/security/advisories/new
 policy: https://github.com/btxchain/btx/blob/main/SECURITY.md
 

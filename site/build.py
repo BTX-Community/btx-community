@@ -1126,6 +1126,31 @@ class Verified(_Model):
     text: Text
 
 
+class HomePoint(_Model):
+    """One point of the home-node box: a heading and a few short lines."""
+
+    id: Id
+    title: Text
+    items: Annotated[list[Text], Field(min_length=1, max_length=5)]
+
+
+class HomeBox(_Model):
+    """The "before you run a node at home" box near the top of the Run infra page."""
+
+    title: Text
+    points: Annotated[list[HomePoint], Field(min_length=1, max_length=3)]
+    links: Annotated[list[GuideRef], Field(min_length=1, max_length=3)]
+
+    @model_validator(mode="after")
+    def _no_price(self) -> Self:
+        for point in self.points:
+            for item in point.items:
+                if PRICE.search(item.en) or PRICE.search(item.de):
+                    msg = f"home box, {point.id}: a line names a price"
+                    raise ValueError(msg)
+        return self
+
+
 class InfraPage(_Model):
     """``content/infra.yaml``: the "Run infra" page."""
 
@@ -1136,6 +1161,7 @@ class InfraPage(_Model):
     private_route: Link
     policy: Link
     managed: Annotated[list[Id], Field(min_length=1, max_length=4)]
+    home: HomeBox | None = None
     roles: Annotated[list[InfraRole], Field(min_length=1, max_length=10)]
     map: InfraMap
 
@@ -1145,6 +1171,8 @@ class InfraPage(_Model):
         links = [ref.url for ref in refs if ref.url is not None]
         links += [role.ask_url for role in self.roles if role.ask_url is not None]
         links += [node.url for node in self.map.nodes if node.url is not None]
+        if self.home is not None:
+            links += [ref.url for ref in self.home.links if ref.url is not None]
         return [self.private_route, self.policy, *links]
 
     @model_validator(mode="after")
@@ -2059,6 +2087,15 @@ class MapView:
 
 
 @dataclass(frozen=True)
+class HomeView:
+    """The home-node box in one language: (id, title, lines) per point, then the links."""
+
+    title: str
+    points: tuple[tuple[str, str, tuple[str, ...]], ...]
+    links: tuple[LinkView, ...]
+
+
+@dataclass(frozen=True)
 class InfraView:
     """The "Run infra" page in one language."""
 
@@ -2067,6 +2104,7 @@ class InfraView:
     private_route: str
     policy: str
     managed: tuple[EntryView, ...]
+    home: HomeView | None
     roles: tuple[RoleView, ...]
     edges: tuple[EdgeView, ...]
     maps: tuple[MapView, ...]
@@ -2442,6 +2480,13 @@ def infra_view(infra: InfraPage, page: CommunityPage, say: Localizer) -> InfraVi
         private_route=infra.private_route,
         policy=infra.policy,
         managed=tuple(entries[entry] for entry in infra.managed),
+        home=HomeView(
+            title=say(infra.home.title),
+            points=tuple((p.id, say(p.title), tuple(say(item) for item in p.items)) for p in infra.home.points),
+            links=tuple(_link_view(ref, say) for ref in infra.home.links),
+        )
+        if infra.home is not None
+        else None,
         roles=roles,
         edges=edges,
         maps=tuple(map_view(infra, layout, say) for layout in LAYOUTS),
