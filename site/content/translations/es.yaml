@@ -2488,34 +2488,51 @@ translations:
     Tu nodo muestra su dirección IP a cada par con el que se conecta. Un nodo que acepta conexiones
     entrantes también anuncia su propia dirección, y los pares la difunden.
 - en: >-
-    btxd asks your router to open its port by default (NAT-PMP or PCP), so behind a router that
-    supports this it becomes reachable by itself.
+    By default btxd asks your router (NAT-PMP or PCP) to open two ports: TCP 19335 for peers and TCP
+    29447 for the model network, which btxd starts by itself. The model network also looks for peers
+    on your local network over UDP 29448.
   es: >-
-    btxd pide por defecto a tu router que abra su puerto (NAT-PMP o PCP), así que detrás de un
-    router compatible queda accesible por sí solo.
+    Por defecto, btxd pide a tu router (NAT-PMP o PCP) que abra dos puertos: TCP 19335 para los
+    pares y TCP 29447 para la red de modelos, que btxd arranca por sí mismo. La red de modelos busca
+    además pares en tu red local por UDP 29448.
+- en: >-
+    btxd also checks btx.dev for updates every 30 minutes, directly and not through -proxy, and
+    sends its version, platform, architecture and rollout group. It installs newer signed releases
+    by itself (autoupdateseamless=0 only reports them, autoupdatetelemetry=0 leaves out those
+    details, autoupdate=0 stops the checks).
+  es: >-
+    btxd también consulta btx.dev cada 30 minutos en busca de actualizaciones, de forma directa y no
+    a través de -proxy, y envía su versión, plataforma, arquitectura y grupo de despliegue. Instala
+    por sí mismo las versiones firmadas más recientes (autoupdateseamless=0 solo avisa de ellas,
+    autoupdatetelemetry=0 omite esos datos, autoupdate=0 detiene las consultas).
 - en: >-
     If your address matters, run the node behind Tor (-proxy, -onlynet=onion; the Tor guide advises
-    onlynet=onion only once Tor runs stably) or on a rented server instead.
+    onlynet=onion only once Tor runs stably) or on a rented server instead. With -proxy, or an
+    -onlynet without ipv4 and ipv6, btxd keeps port 29447 closed and skips the update checks unless
+    you turn them on.
   es: >-
     Si tu dirección importa, opera el nodo detrás de Tor (-proxy, -onlynet=onion; la guía de Tor
     aconseja onlynet=onion solo cuando Tor funciona de forma estable) o, en su lugar, en un servidor
-    alquilado.
+    alquilado. Con -proxy, o con un -onlynet sin ipv4 ni ipv6, btxd mantiene cerrado el puerto 29447
+    y no busca actualizaciones, salvo que tú lo actives.
 - en: >-
-    On a machine with coins, mining or a signer key, set natpmp=0, as the install checklist says.
+    On a machine with coins, mining or a signer key, set modelnet=0 and natpmp=0, as the install
+    checklist says.
   es: >-
-    En una máquina con monedas, minería o una clave de firmante, pon natpmp=0, como dice la lista de
-    instalación.
+    En una máquina con monedas, minería o una clave de firmante, pon modelnet=0 y natpmp=0, como
+    dice la lista de instalación.
 - en: "Reachability"
   es: "Accesibilidad"
 - en: >-
     Outbound connections work by default. To accept inbound ones, TCP port 19335 must be reachable:
     mapped by NAT-PMP, forwarded on the router by hand, or offered as a Tor onion service
-    (-listenonion). With -proxy, the node only listens if you also set -listen=1.
+    (-listenonion). With -proxy, the node only listens if you also set -listen=1. Port 29447 is only
+    for the model network; modelnet=0 closes it.
   es: >-
     Las conexiones salientes funcionan por defecto. Para aceptar entrantes, el puerto TCP 19335
     tiene que ser accesible: abierto por NAT-PMP, reenviado a mano en el router u ofrecido como
     servicio onion de Tor (-listenonion). Con -proxy, el nodo solo escucha si además pones
-    -listen=1.
+    -listen=1. El puerto 29447 solo sirve a la red de modelos; modelnet=0 lo cierra.
 - en: >-
     A node that only connects out stays in sync and relays to the peers it connects to, but new
     nodes cannot reach it, so it does not help them sync.
@@ -2536,13 +2553,15 @@ translations:
   es: "Nodo completo"
 - en: >-
     Relays blocks and transactions and keeps the network reachable. With a qualified GPU it checks
-    the MatMul work itself; without one, set it up as a trusted mirror that follows signed checks
-    from its signers (on mainnet at least two, by default), or it stops syncing.
+    the MatMul work itself. Without one, run it as a trusted mirror or it stops syncing: btxd ships
+    no signer keys, so pin at least two you trust and set matmultrustedthreshold=2 (default 1). On
+    mainnet it will not start with fewer unless you explicitly override that.
   es: >-
     Retransmite bloques y transacciones y mantiene la red accesible. Con una GPU apta comprueba él
-    mismo el trabajo MatMul; sin ella, configúralo como espejo de confianza que sigue las
-    comprobaciones firmadas de sus firmantes (en mainnet, al menos dos por defecto), o deja de
-    sincronizar.
+    mismo el trabajo MatMul. Sin ella, ejecútalo como espejo de confianza o deja de sincronizar:
+    btxd no trae claves de firmante, así que fija al menos dos en las que confíes y pon
+    matmultrustedthreshold=2 (por defecto 1). En mainnet no arranca con menos, salvo que lo fuerces
+    de forma explícita.
 - en: >-
     An always-on computer or small server with an SSD and a steady connection. A GPU is optional.
   es: >-

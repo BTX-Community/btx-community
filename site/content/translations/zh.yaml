@@ -1937,23 +1937,34 @@ translations:
     connections also announces its own address, and peers pass it on.
   zh: "你的节点会向它连接的每个节点暴露自己的 IP 地址。接受入站连接的节点还会宣告自己的地址，其他节点会继续转发。"
 - en: >-
-    btxd asks your router to open its port by default (NAT-PMP or PCP), so behind a router that
-    supports this it becomes reachable by itself.
-  zh: "btxd 默认会请求你的路由器打开它的端口（NAT-PMP 或 PCP），因此在支持该功能的路由器后面，它会自行变得可达。"
+    By default btxd asks your router (NAT-PMP or PCP) to open two ports: TCP 19335 for peers and TCP
+    29447 for the model network, which btxd starts by itself. The model network also looks for peers
+    on your local network over UDP 29448.
+  zh: "btxd 默认会请求你的路由器（NAT-PMP 或 PCP）打开两个端口：TCP 19335 供节点之间连接，TCP 29447 供 btxd 自行启动的模型网络使用。模型网络还会通过 UDP 29448 在你的本地网络中寻找节点。"
+- en: >-
+    btxd also checks btx.dev for updates every 30 minutes, directly and not through -proxy, and
+    sends its version, platform, architecture and rollout group. It installs newer signed releases
+    by itself (autoupdateseamless=0 only reports them, autoupdatetelemetry=0 leaves out those
+    details, autoupdate=0 stops the checks).
+  zh: "btxd 还会每 30 分钟直接向 btx.dev 检查更新（不经过 -proxy），并附上它的版本、平台、架构和分批发布组。它会自行安装更新的签名版本（autoupdateseamless=0 只提示，autoupdatetelemetry=0 不附这些信息，autoupdate=0 停止检查）。"
 - en: >-
     If your address matters, run the node behind Tor (-proxy, -onlynet=onion; the Tor guide advises
-    onlynet=onion only once Tor runs stably) or on a rented server instead.
-  zh: "如果你在意自己的地址，就在 Tor 之后运行节点（-proxy、-onlynet=onion；Tor 指南建议等 Tor 稳定运行后再用 onlynet=onion），或者改用租用的服务器。"
+    onlynet=onion only once Tor runs stably) or on a rented server instead. With -proxy, or an
+    -onlynet without ipv4 and ipv6, btxd keeps port 29447 closed and skips the update checks unless
+    you turn them on.
+  zh: "如果你在意自己的地址，就在 Tor 之后运行节点（-proxy、-onlynet=onion；Tor 指南建议等 Tor 稳定运行后再用 onlynet=onion），或者改用租用的服务器。使用 -proxy，或 -onlynet 不含 ipv4 和 ipv6 时，btxd 会保持端口 29447 关闭，也不检查更新，除非你自己打开。"
 - en: >-
-    On a machine with coins, mining or a signer key, set natpmp=0, as the install checklist says.
-  zh: "在持有币、用于挖矿或存有签名者密钥的机器上，设置 natpmp=0，正如安装检查清单所说。"
+    On a machine with coins, mining or a signer key, set modelnet=0 and natpmp=0, as the install
+    checklist says.
+  zh: "在持有币、用于挖矿或存有签名者密钥的机器上，设置 modelnet=0 和 natpmp=0，正如安装检查清单所说。"
 - en: "Reachability"
   zh: "可达性"
 - en: >-
     Outbound connections work by default. To accept inbound ones, TCP port 19335 must be reachable:
     mapped by NAT-PMP, forwarded on the router by hand, or offered as a Tor onion service
-    (-listenonion). With -proxy, the node only listens if you also set -listen=1.
-  zh: "出站连接默认可用。要接受入站连接，TCP 端口 19335 必须可达：由 NAT-PMP 映射、在路由器上手动转发，或作为 Tor onion 服务提供（-listenonion）。使用 -proxy 时，只有同时设置 -listen=1，节点才会监听。"
+    (-listenonion). With -proxy, the node only listens if you also set -listen=1. Port 29447 is only
+    for the model network; modelnet=0 closes it.
+  zh: "出站连接默认可用。要接受入站连接，TCP 端口 19335 必须可达：由 NAT-PMP 映射、在路由器上手动转发，或作为 Tor onion 服务提供（-listenonion）。使用 -proxy 时，只有同时设置 -listen=1，节点才会监听。端口 29447 只用于模型网络；modelnet=0 会将其关闭。"
 - en: >-
     A node that only connects out stays in sync and relays to the peers it connects to, but new
     nodes cannot reach it, so it does not help them sync.
@@ -1970,9 +1981,10 @@ translations:
   zh: "全节点"
 - en: >-
     Relays blocks and transactions and keeps the network reachable. With a qualified GPU it checks
-    the MatMul work itself; without one, set it up as a trusted mirror that follows signed checks
-    from its signers (on mainnet at least two, by default), or it stops syncing.
-  zh: "转发区块和交易，保持网络可达。配备合格 GPU 时，它自行验证 MatMul 工作；没有时，需把它配置为受信任镜像，跟随其签名者签署的验证结果（主网默认至少两个），否则它会停止同步。"
+    the MatMul work itself. Without one, run it as a trusted mirror or it stops syncing: btxd ships
+    no signer keys, so pin at least two you trust and set matmultrustedthreshold=2 (default 1). On
+    mainnet it will not start with fewer unless you explicitly override that.
+  zh: "转发区块和交易，保持网络可达。配备合格 GPU 时，它自行验证 MatMul 工作。没有的话，要以受信任镜像方式运行，否则它会停止同步：btxd 不附带签名者密钥，所以要固定至少两个你信任的密钥，并设置 matmultrustedthreshold=2（默认为 1）。少于两个时，除非你明确强制覆盖，它在主网上不会启动。"
 - en: >-
     An always-on computer or small server with an SSD and a steady connection. A GPU is optional.
   zh: "一台常开的电脑或小型服务器，配 SSD 和稳定的网络连接。GPU 可选。"

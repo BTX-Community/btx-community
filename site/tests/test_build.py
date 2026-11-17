@@ -1246,9 +1246,10 @@ class InfraTest(unittest.TestCase):
                 self.assertLess(html.index('id="home-node"'), html.index('id="roles"'))
                 box = html.split('id="home-node"')[1].split("</section>")[0]
                 self.assertEqual(re.findall(r'class="c-home__point" id="home-([a-z]+)"', box), ["privacy", "reach"])
-                # The facts that must survive translation: the mainnet port and the safe setting.
-                self.assertIn("19335", box)
-                self.assertIn("natpmp=0", box)
+                # The facts that must survive translation: the two ports btxd maps, the safe
+                # settings and the switch for the update checks.
+                for fact in ("19335", "29447", "natpmp=0", "modelnet=0", "autoupdate=0"):
+                    self.assertIn(fact, box)
                 self.assertIn(f'href="{build.page_path(lang, "home")}#before-installing"', box)
                 self.assertIn('href="https://github.com/btxchain/btx/blob/main/doc/tor.md"', box)
         home = (self.out / "index.html").read_text(encoding="utf-8")
