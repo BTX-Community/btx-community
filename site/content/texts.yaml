@@ -229,8 +229,8 @@ en:
   hub.status.generators: Generators
   hub.status.evidence: Evidence
   hub.lanes.waiting_lead: >-
-    Every lane is claimable. {count} have a scope and a done bar but no brief yet, and get no work
-    until someone takes them.
+    {open} wait for an owner. {count} have a scope and a done bar but no brief yet; {idle} of them
+    get no work until someone takes them.
   hub.lanes.kind.area: Area
   hub.lanes.kind.class: Class
   hub.lanes.kind.infra: Infra
@@ -241,6 +241,9 @@ en:
   hub.lanes.reset: Reset
   hub.lanes.shown: "{shown} of {total} lanes"
   hub.lanes.json: The lanes as JSON
+  hub.lane.owner: Owner
+  hub.lane.second: Second pass
+  hub.lane.open: open
   hub.lane.scope: Scope
   hub.lane.why: Why
   hub.lane.target: Target
@@ -252,7 +255,7 @@ en:
   hub.lane.done: Done bar ({count} items)
   hub.lane.nodata: not a coverage lane
   hub.lane.pack: The brief for this lane
-  hub.lane.nopack: No brief yet; claim the lane and one follows.
+  hub.lane.nopack: No brief yet; the first tasks are in the hub.
   hub.route.pr: PR
   hub.route.evidence: Evidence
   hub.route.run: Run report
@@ -570,8 +573,8 @@ de:
   hub.status.generators: Generatoren
   hub.status.evidence: Beleg
   hub.lanes.waiting_lead: >-
-    Jeder Arbeitsbereich kann übernommen werden. {count} haben Umfang und Abschlusskriterien, aber
-    noch kein Briefing, und bekommen keine Arbeit, bis jemand sie übernimmt.
+    {open} warten auf eine verantwortliche Person. {count} haben Umfang und Abschlusskriterien, aber
+    noch kein Briefing; {idle} davon bekommen keine Arbeit, bis jemand sie übernimmt.
   hub.lanes.kind.area: Code-Bereich
   hub.lanes.kind.class: Fehlerklasse
   hub.lanes.kind.infra: Infrastruktur
@@ -582,6 +585,9 @@ de:
   hub.lanes.reset: Zurücksetzen
   hub.lanes.shown: "{shown} von {total} Arbeitsbereichen"
   hub.lanes.json: Die Arbeitsbereiche als JSON
+  hub.lane.owner: Verantwortlich
+  hub.lane.second: Zweitprüfung
+  hub.lane.open: offen
   hub.lane.scope: Umfang
   hub.lane.why: Warum
   hub.lane.target: Ziel
@@ -593,7 +599,7 @@ de:
   hub.lane.done: Abschlusskriterien ({count} Punkte)
   hub.lane.nodata: kein Abdeckungsbereich
   hub.lane.pack: Das Briefing für diesen Bereich
-  hub.lane.nopack: Noch kein Briefing; wer den Bereich übernimmt, bekommt eins.
+  hub.lane.nopack: Noch kein Briefing; die ersten Aufgaben stehen im Hub.
   hub.route.pr: PR
   hub.route.evidence: Beleg
   hub.route.run: Laufbericht
@@ -916,8 +922,9 @@ es:
   hub.status.generators: Generadores
   hub.status.evidence: Evidencia
   hub.lanes.waiting_lead: >-
-    Todas las tareas se pueden asumir. {count} tienen alcance y criterio de finalización, pero aún
-    no tienen documento de partida, y no reciben trabajo hasta que alguien las asuma.
+    {open} están a la espera de un responsable. {count} tienen alcance y criterio de finalización,
+    pero aún no tienen documento de partida; {idle} de ellas no reciben trabajo hasta que alguien
+    las asuma.
   hub.lanes.kind.area: Área
   hub.lanes.kind.class: Clase
   hub.lanes.kind.infra: Infraestructura
@@ -928,6 +935,9 @@ es:
   hub.lanes.reset: Restablecer
   hub.lanes.shown: "{shown} de {total} tareas"
   hub.lanes.json: Las tareas en JSON
+  hub.lane.owner: Responsable
+  hub.lane.second: Segundo revisor
+  hub.lane.open: sin asignar
   hub.lane.scope: Alcance
   hub.lane.why: Por qué
   hub.lane.target: Objetivo
@@ -939,7 +949,7 @@ es:
   hub.lane.done: Criterio de finalización ({count} puntos)
   hub.lane.nodata: no es una tarea de cobertura
   hub.lane.pack: El documento de partida de esta tarea
-  hub.lane.nopack: Aún no hay documento de partida; asume la tarea y llegará uno.
+  hub.lane.nopack: Aún no hay documento de partida; los primeros trabajos están en el centro.
   hub.route.pr: PR
   hub.route.evidence: Evidencia
   hub.route.run: Informe de ejecución
@@ -1264,8 +1274,8 @@ fr:
   hub.status.generators: Générateurs
   hub.status.evidence: Preuve
   hub.lanes.waiting_lead: >-
-    Chaque chantier peut être pris en charge. {count} ont un périmètre et un critère d'achèvement
-    mais pas encore de brief, et ne reçoivent aucun travail tant que personne ne les prend.
+    {open} attendent un responsable. {count} ont un périmètre et un critère d'achèvement mais pas
+    encore de brief ; {idle} d'entre eux ne reçoivent aucun travail tant que personne ne les prend.
   hub.lanes.kind.area: Domaine
   hub.lanes.kind.class: Classe
   hub.lanes.kind.infra: Infrastructure
@@ -1276,6 +1286,9 @@ fr:
   hub.lanes.reset: Réinitialiser
   hub.lanes.shown: "{shown} chantiers sur {total}"
   hub.lanes.json: Les chantiers en JSON
+  hub.lane.owner: Responsable
+  hub.lane.second: Second relecteur
+  hub.lane.open: à pourvoir
   hub.lane.scope: Périmètre
   hub.lane.why: Pourquoi
   hub.lane.target: Objectif
@@ -1287,7 +1300,7 @@ fr:
   hub.lane.done: Critère d'achèvement ({count} points)
   hub.lane.nodata: pas un chantier de couverture
   hub.lane.pack: Le brief de ce chantier
-  hub.lane.nopack: Pas encore de brief ; prenez le chantier en charge et il suivra.
+  hub.lane.nopack: Pas encore de brief ; les premières tâches sont dans le hub.
   hub.route.pr: PR
   hub.route.evidence: Preuve
   hub.route.run: Rapport d'exécution
@@ -1577,7 +1590,7 @@ zh:
   hub.status.needs-ci: 需要 fork 上的 CI
   hub.status.generators: 生成器
   hub.status.evidence: 证据
-  hub.lanes.waiting_lead: 每项任务都可以认领。其中 {count} 项已有范围和完成标准，但还没有简报，在有人认领之前不会分配工作。
+  hub.lanes.waiting_lead: 其中 {open} 项在等待负责人。{count} 项已有范围和完成标准，但还没有简报；其中 {idle} 项在有人认领之前不会分配工作。
   hub.lanes.kind.area: 代码领域
   hub.lanes.kind.class: 缺陷类别
   hub.lanes.kind.infra: 基础设施
@@ -1588,6 +1601,9 @@ zh:
   hub.lanes.reset: 重置
   hub.lanes.shown: 共 {total} 项任务，显示 {shown} 项
   hub.lanes.json: 任务的 JSON 数据
+  hub.lane.owner: 负责人
+  hub.lane.second: 第二审阅人
+  hub.lane.open: 空缺
   hub.lane.scope: 范围
   hub.lane.why: 原因
   hub.lane.target: 目标
@@ -1599,7 +1615,7 @@ zh:
   hub.lane.done: 完成标准（{count} 项）
   hub.lane.nodata: 非覆盖率任务
   hub.lane.pack: 本任务的简报
-  hub.lane.nopack: 尚无简报；认领该任务后会补上。
+  hub.lane.nopack: 尚无简报；首批工作见开发者中心。
   hub.route.pr: PR
   hub.route.evidence: 证据
   hub.route.run: 运行报告
