@@ -7,6 +7,25 @@
 schema_version: 1
 translations:
 - en: >-
+    easyBTX says it holds no funds, is not a party to any trade and quotes no price. On 16 November
+    2026 the board listed one seller. Contact a seller only through the link on easyBTX's own page.
+    Anyone who messages you first is not that seller. A price agreed there is not a market price.
+  zh: >-
+    据 easyBTX 称，它不持有资金，不参与任何交易，也不报价。2026 年 11 月 16 日，该页面上有一位卖家。只通过 easyBTX
+    自己页面上的链接联系卖家。主动先来联系你的人不是那位卖家。在那里商定的价格不是市场价格。
+- en: Buying BTX
+  zh: 购买 BTX
+- en: >-
+    There is no exchange for BTX. These are trades from person to person without escrow: you pay
+    first and rely on the seller. Not checked by us. Read the checklist "Before you buy or receive
+    BTX" on the start page first, and start with a small amount.
+  zh: >-
+    BTX 没有交易所。这里是个人之间的交易，没有托管：你先付款，只能依靠卖家。我们未作核查。请先阅读首页上的清单“购买或接收 BTX 之前”，并从小额开始。
+- en: >-
+    Sellers the easyBTX team says it has bought from itself. You agree amount and price with a
+    seller on Telegram and pay them directly, usually in USDT.
+  zh: easyBTX 团队称自己曾向其购买过的卖家。你通过 Telegram 与卖家商定数量和价格，并直接付款给对方，通常用 USDT。
+- en: >-
     Verification gate to the main BTX chat on compute and tech. Not run by the community; for
     community questions use the group above.
   zh: 通往 BTX 主聊天群（算力与技术）的验证入口。不由社区运营；社区问题请到上面的群组提问。
