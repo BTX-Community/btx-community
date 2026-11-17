@@ -76,8 +76,13 @@ ALL_PAGES = PAGES + tuple(SUBPAGES)
 """Every page the build writes: the menu pages, then the sub-pages."""
 MAX_YAML_BYTES = 256 * 1024
 REPO_URL = "https://github.com/BTX-Community/btx-community"
-RAW_URL = "https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/"
+HUB_REF = "hub-v1"
+"""The tag every hub link points at, never ``main``: an AI fetches the files a maintainer last reviewed.
+A maintainer moves the tag on purpose after a reviewed change to ``dev/`` (dev/README.md, "Keeping it true")."""
+RAW_URL = f"https://raw.githubusercontent.com/BTX-Community/btx-community/{HUB_REF}/dev/"
 """Raw files of the developer hub: the AI prompt and the two links an AI tool fetches point here."""
+HUB_URL = f"{REPO_URL}/blob/{HUB_REF}/dev/"
+"""The developer hub on GitHub, at the same tag as ``RAW_URL``."""
 ADD_PROJECT_URL = f"{REPO_URL}/blob/main/CONTRIBUTING.md#changing-the-website"
 RELEASES_URL = "https://github.com/btxchain/btx/releases"
 OBSERVATORY_URL = "https://explorer.btxbyronbay.com/observatory"
@@ -616,7 +621,7 @@ class Lane(_Model):
         if self.waiting == (self.pack is not None):
             msg = f"lane {self.id}: a lane has a pack, or it waits for an owner; not both, not neither"
             raise ValueError(msg)
-        if self.pack is not None and self.pack != f"{REPO_URL}/blob/main/dev/packs/{self.id}.md":
+        if self.pack is not None and self.pack != f"{HUB_URL}packs/{self.id}.md":
             msg = f"lane {self.id}: the pack of a lane is dev/packs/{self.id}.md"
             raise ValueError(msg)
         return self
@@ -1203,11 +1208,12 @@ def load_infra(path: Path) -> InfraPage:
 
 
 def repo_file(url: str) -> Path | None:
-    """The file or folder of this repository that a ``blob/main`` or ``tree/main`` link names."""
+    """The file or folder of this repository that a ``blob`` or ``tree`` link on ``main`` or ``HUB_REF`` names."""
     for kind in ("blob", "tree"):
-        prefix = f"{REPO_URL}/{kind}/main/"
-        if url.startswith(prefix):
-            return ROOT.parent / url.removeprefix(prefix)
+        for ref in ("main", HUB_REF):
+            prefix = f"{REPO_URL}/{kind}/{ref}/"
+            if url.startswith(prefix):
+                return ROOT.parent / url.removeprefix(prefix)
     return None
 
 
