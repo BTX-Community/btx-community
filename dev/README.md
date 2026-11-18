@@ -48,7 +48,7 @@ What each level needs, and its first hour in five steps: [`08-levels.md`](08-lev
   [`07-lanes.md`](07-lanes.md). Then the pack for your lane.
 - **Your AI tool** (Claude Code, Cursor, Codex or another): point it at [`AGENTS.md`](AGENTS.md)
   and let it ask its first-run questions. Its raw URL is
-  `https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/AGENTS.md`.
+  `https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/AGENTS.md`.
   [`llms.txt`](llms.txt) lists every file in this folder with its raw URL.
 
 ## Map
@@ -179,6 +179,14 @@ python3 -I dev/tools/check_stale.py --warn 30 --fail 90 dev/
 
 The head rows in `01-state.md` refresh with `bash dev/tools/refresh-state.sh` (three anonymous
 GitHub API calls); it prints rows to paste and never writes the file.
+
+The site, [`llms.txt`](llms.txt) and the AI prompt link to this folder at the tag `hub-v1`, not at
+`main`, so an AI tool reads the files a maintainer last reviewed. A merge into `dev/` reaches
+those readers only when a maintainer moves the tag on purpose, after reviewing the change:
+`git tag -f hub-v1 <reviewed commit>`, then `git push -f origin hub-v1`. Only repo admins and the
+`maintainers` team can create, move or delete a `hub-*` tag. A PR that adds a file under `dev/` is
+followed by moving the tag; until then the site links to the new file are dead. The site tests
+fail if a hub link points at `main/dev/` again.
 
 ### Licence
 

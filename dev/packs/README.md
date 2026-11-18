@@ -9,7 +9,7 @@ The AI drafts and runs commands. The person who owns the lane reads every diff a
 ## How to use a pack
 
 1. Read the lane in [`../07-lanes.md`](../07-lanes.md). Claim it there first (below), or ask its owner on the board whether you can help.
-2. Give your AI `../AGENTS.md` and the pack. The easiest way: clone this repository and point the AI at the two files. Or paste the raw URLs, for example `https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/C-K01.md`.
+2. Give your AI `../AGENTS.md` and the pack. The easiest way: clone this repository and point the AI at the two files. Or paste the raw URLs, for example `https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/C-K01.md`.
 3. Paste the prompt block at the end of the pack. It names the first task. Answer the first-run questions from `../AGENTS.md` (level, machine, hours, spend cap, what is off limits on this machine).
 4. Read everything the AI produces. Run the second pass with someone who is not you. Then post, yourself, in the weekly batch (see `../07-lanes.md`).
 

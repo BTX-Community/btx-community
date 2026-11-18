@@ -267,7 +267,7 @@ roles:
     ask:
       en: The I-OPS lane owner, whose lane covers archive mirrors and signed snapshots.
       de: Die Person, die den Bereich I-OPS betreut; er umfasst Archiv-Mirrors und signierte Snapshots.
-    ask_url: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-OPS.md
+    ask_url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-OPS.md
     security: true
 
   - id: signer
@@ -337,11 +337,11 @@ roles:
         Wallet, kein Miner, keine Schlüssel.
     guide:
       text: { en: Running a continuous BTX fuzz box, de: Eine BTX-Fuzz-Box im Dauerbetrieb }
-      url: https://github.com/BTX-Community/btx-community/blob/main/dev/fuzz-box/README.md
+      url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/fuzz-box/README.md
     ask:
       en: The I-OPS lane owner, who keeps the fuzz-box guide.
       de: Die Person, die I-OPS betreut und die Fuzz-Box-Anleitung pflegt.
-    ask_url: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-OPS.md
+    ask_url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-OPS.md
     security: true
 
   - id: ci-runner
@@ -374,9 +374,9 @@ roles:
         Rezepte, und ci/README.md im btx-Baum zeigt, wie man eine CI-Stufe lokal ausführt.
     related:
       - text: { en: "I-CI pack: the fork CI jobs", de: "Briefing für I-CI: die CI-Jobs auf dem Fork" }
-        url: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-CI.md
+        url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-CI.md
       - text: { en: Build and test recipes, de: Rezepte für Build und Tests }
-        url: https://github.com/BTX-Community/btx-community/blob/main/dev/04-build-and-test.md
+        url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/04-build-and-test.md
       - text: { en: The CI scripts in the btx tree, de: Die CI-Skripte im btx-Baum }
         url: https://github.com/btxchain/btx/blob/main/ci/README.md
     ask:
@@ -386,7 +386,7 @@ roles:
       de: >-
         Den Betreiber der Statusseite, der den nächtlichen CI-0-Lauf ausführt. Der Bereich I-CI ist
         noch unbesetzt: Du kannst ihn in der Liste der Bereiche übernehmen.
-    ask_url: https://github.com/BTX-Community/btx-community/blob/main/dev/07-lanes.md
+    ask_url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md
     security: true
 
   - id: sanitizers
@@ -411,7 +411,7 @@ roles:
         --timeout-factor=4.
     guide:
       text: { en: "Build and test, section 6: Sanitizers", de: "Build und Tests, Abschnitt 6: Sanitizer" }
-      url: https://github.com/BTX-Community/btx-community/blob/main/dev/04-build-and-test.md
+      url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/04-build-and-test.md
     ask:
       en: >-
         The I-CI lane, which holds the ASan/UBSan and TSan jobs (CI-2, CI-3). It has no owner yet:
