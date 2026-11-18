@@ -1105,12 +1105,11 @@ translations:
 - en: >-
     One area of the code each. E-CONSENSUS prepares evidence and files a pull request only when the
     maintainer asks for one. A-NET, A-HELPER, A-SHIELDED, A-PQ and A-GUI have a scope and a done bar
-    but no brief yet, and wait for an owner.
+    but no brief yet.
   es: >-
     Cada una cubre un área del código. E-CONSENSUS prepara evidencias y solo abre un pull request
     cuando el mantenedor lo pide. A-NET, A-HELPER, A-SHIELDED, A-PQ y A-GUI tienen alcance y
-    criterio de finalización, pero aún no tienen documento de partida y están a la espera de un
-    responsable.
+    criterio de finalización, pero aún no tienen documento de partida.
 - en: Wallet, RPC authorization, secrets
   es: Monedero, autorización RPC, secretos
 - en: ModelNet store, deposit and persistence logic
@@ -1358,11 +1357,12 @@ translations:
     controles G2 (máquinas en marcha), G3 (parsers cubiertos) y G4 (clases barridas); después, el
     lote semanal se reduce al trinquete.
 - en: >-
-    Every lane is claimable, including the five that wait for an owner. A claim is a small pull
-    request to this repository.
+    Every owner and second-pass slot without a handle is open. Four lanes get no work until someone
+    takes them. A claim is a small pull request to this repository.
   es: >-
-    Todas las tareas se pueden asumir, incluidas las cinco que están a la espera de un responsable.
-    Una tarea se asume con un pequeño pull request a este repositorio.
+    Todo puesto de responsable o de segundo revisor que aún no tiene un usuario está libre. Cuatro
+    tareas no reciben trabajo hasta que alguien las asuma. Una tarea se asume con un pequeño pull
+    request a este repositorio.
 - en: >-
     Every verify call site for ML-DSA-44, SLH-DSA and the P2MR evaluation, sigop accounting for
     post-quantum signatures, the ML-KEM transport and the build flags for constant-time code; deep
@@ -2166,9 +2166,11 @@ translations:
   es: escritura no atómica o incompleta de archivos de estado
 - en: none until owned
   es: ninguna hasta que tenga responsable
-- en: none until owned; phase-3 fuzz batch covers the dispatcher target and the native.cmake gate only
+- en: >-
+    set by the owner; until then the phase-3 fuzz batch covers the dispatcher target and the
+    native.cmake gate only
   es: >-
-    ninguna hasta que tenga responsable; el lote de fuzzing de la fase 3 solo cubre el target del
+    la fija el responsable; hasta entonces, el lote de fuzzing de la fase 3 solo cubre el target del
     dispatcher y el control de native.cmake
 - en: none until owned; the phase-3 fuzz batch produces the targets only
   es: ninguna hasta que tenga responsable; el lote de fuzzing de la fase 3 solo produce los targets

@@ -828,8 +828,8 @@ translations:
 - en: >-
     One area of the code each. E-CONSENSUS prepares evidence and files a pull request only when the
     maintainer asks for one. A-NET, A-HELPER, A-SHIELDED, A-PQ and A-GUI have a scope and a done bar
-    but no brief yet, and wait for an owner.
-  zh: 每项负责一个代码领域。E-CONSENSUS 准备证据，只有在维护者要求时才提交拉取请求。A-NET、A-HELPER、A-SHIELDED、A-PQ 和 A-GUI 已有范围和完成标准，但还没有简报，正在等待负责人。
+    but no brief yet.
+  zh: 每项负责一个代码领域。E-CONSENSUS 准备证据，只有在维护者要求时才提交拉取请求。A-NET、A-HELPER、A-SHIELDED、A-PQ 和 A-GUI 已有范围和完成标准，但还没有简报。
 - en: Wallet, RPC authorization, secrets
   zh: 钱包、RPC 授权、机密
 - en: ModelNet store, deposit and persistence logic
@@ -1039,9 +1039,9 @@ translations:
     (parsers covered) and G4 (classes swept) hold; then the weekly batch shrinks to the ratchet.
   zh: 每项任务都有可衡量的完成标准。当关卡 G2（机器检查已开启）、G3（解析器已覆盖）和 G4（缺陷类别已清理）都满足时，整个计划即告完成；此后每周批次缩减为只剩棘轮检查。
 - en: >-
-    Every lane is claimable, including the five that wait for an owner. A claim is a small pull
-    request to this repository.
-  zh: 每项任务都可以认领，包括正在等待负责人的五项。认领就是向本代码仓库提交一个小的拉取请求。
+    Every owner and second-pass slot without a handle is open. Four lanes get no work until someone
+    takes them. A claim is a small pull request to this repository.
+  zh: 凡是还没有填写用户名的负责人或第二审阅人位置都是空缺的，可以认领。有四项任务在有人认领之前不会分配工作。认领就是向本代码仓库提交一个小的拉取请求。
 - en: >-
     Every verify call site for ML-DSA-44, SLH-DSA and the P2MR evaluation, sigop accounting for
     post-quantum signatures, the ML-KEM transport and the build flags for constant-time code; deep
@@ -1676,8 +1676,10 @@ translations:
   zh: 非原子或不完整的状态文件写入
 - en: none until owned
   zh: 有人认领前暂无
-- en: none until owned; phase-3 fuzz batch covers the dispatcher target and the native.cmake gate only
-  zh: 有人认领前暂无；阶段 3 的 fuzz 批次只涵盖分发器目标和 native.cmake 关卡
+- en: >-
+    set by the owner; until then the phase-3 fuzz batch covers the dispatcher target and the
+    native.cmake gate only
+  zh: 由负责人确定；在此之前，阶段 3 的 fuzz 批次只涵盖分发器目标和 native.cmake 关卡
 - en: none until owned; the phase-3 fuzz batch produces the targets only
   zh: 有人认领前暂无；阶段 3 的 fuzz 批次只产出这些目标
 - en: not counted

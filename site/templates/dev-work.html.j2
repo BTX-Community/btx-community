@@ -167,7 +167,7 @@
         <h2 class="c-section-title" id="lanes-title">{{ ui["hub.lanes.title"] }}</h2>
         <p class="c-muted">
           {{ ui["hub.lanes.lead"].format(count=hub.lane_count) }}
-          {{ ui["hub.lanes.waiting_lead"].format(count=hub.waiting_count) }}
+          {{ ui["hub.lanes.waiting_lead"].format(open=hub.waiting_count, count=hub.nobrief_count, idle=hub.idle_count) }}
         </p>
         <div class="c-filter" data-filter="lanes" role="group" aria-label="{{ ui['hub.filter.lanes'] }}" hidden>
           <button type="button" class="c-btn c-filter__chip" data-kind="all" aria-pressed="true">{{ ui["hub.filter.all"] }} <span class="c-filter__count">{{ hub.lane_count }}</span></button>
@@ -193,6 +193,10 @@
               </p>
               <h4 class="c-audience__title" id="lane-{{ lane.id }}-title">{{ lane.title }}</h4>
               <dl class="c-lane__meta">
+                <dt>{{ ui["hub.lane.owner"] }}</dt>
+                <dd>{% if lane.owner %}{{ lane.owner }}{% else %}{{ ui["hub.lane.open"] }}{% endif %}</dd>
+                <dt>{{ ui["hub.lane.second"] }}</dt>
+                <dd>{% if lane.second_pass %}{{ lane.second_pass }}{% else %}{{ ui["hub.lane.open"] }}{% endif %}</dd>
                 <dt>{{ ui["hub.lane.scope"] }}</dt>
                 <dd>{{ lane.scope }}</dd>
                 <dt>{{ ui["hub.lane.why"] }}</dt>

@@ -1124,11 +1124,11 @@ translations:
 - en: >-
     One area of the code each. E-CONSENSUS prepares evidence and files a pull request only when the
     maintainer asks for one. A-NET, A-HELPER, A-SHIELDED, A-PQ and A-GUI have a scope and a done bar
-    but no brief yet, and wait for an owner.
+    but no brief yet.
   fr: >-
     Chacun couvre une partie du code. E-CONSENSUS prépare des éléments de preuve et ne dépose une
     pull request que si le mainteneur en demande une. A-NET, A-HELPER, A-SHIELDED, A-PQ et A-GUI ont
-    un périmètre et un critère d'achèvement mais pas encore de brief, et attendent un responsable.
+    un périmètre et un critère d'achèvement mais pas encore de brief.
 - en: Wallet, RPC authorization, secrets
   fr: Portefeuille, autorisations RPC, secrets
 - en: ModelNet store, deposit and persistence logic
@@ -1379,11 +1379,12 @@ translations:
     G2 (machines en marche), G3 (parseurs couverts) et G4 (classes balayées) sont satisfaits ; le
     lot hebdomadaire se réduit alors au cliquet (ratchet).
 - en: >-
-    Every lane is claimable, including the five that wait for an owner. A claim is a small pull
-    request to this repository.
+    Every owner and second-pass slot without a handle is open. Four lanes get no work until someone
+    takes them. A claim is a small pull request to this repository.
   fr: >-
-    Chaque chantier peut être pris en charge, y compris les cinq qui attendent un responsable. Une
-    prise en charge est une petite pull request vers ce dépôt.
+    Toute place de responsable ou de second relecteur sans identifiant est libre. Quatre chantiers
+    ne reçoivent aucun travail tant que personne ne les prend. Une prise en charge est une petite
+    pull request vers ce dépôt.
 - en: >-
     Every verify call site for ML-DSA-44, SLH-DSA and the P2MR evaluation, sigop accounting for
     post-quantum signatures, the ML-KEM transport and the build flags for constant-time code; deep
@@ -2196,10 +2197,12 @@ translations:
   fr: écriture de fichier d'état non atomique ou incomplète
 - en: none until owned
   fr: aucune tant que le chantier n'a pas de responsable
-- en: none until owned; phase-3 fuzz batch covers the dispatcher target and the native.cmake gate only
+- en: >-
+    set by the owner; until then the phase-3 fuzz batch covers the dispatcher target and the
+    native.cmake gate only
   fr: >-
-    aucune tant que le chantier n'a pas de responsable ; le lot de fuzzing de la phase 3 ne couvre
-    que la cible du dispatcher et le contrôle native.cmake
+    fixée par le responsable ; d'ici là, le lot de fuzzing de la phase 3 ne couvre que la cible du
+    dispatcher et le contrôle native.cmake
 - en: none until owned; the phase-3 fuzz batch produces the targets only
   fr: >-
     aucune tant que le chantier n'a pas de responsable ; le lot de fuzzing de la phase 3 ne produit

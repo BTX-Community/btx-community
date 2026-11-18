@@ -105,6 +105,8 @@ MAX_TEXT = 400
 TAG_PATTERN = r"^[a-z0-9 /.-]{1,20}$"
 LANE_PATTERN = r"^[A-Z]-[A-Z0-9-]{1,20}$"
 """A lane of the developer hub: its kind letter and a name, e.g. ``A-WALLET``, ``C-K01``, ``I-RC``."""
+HANDLE_PATTERN = r"^[A-Za-z0-9][A-Za-z0-9-]{0,38}$"
+"""A GitHub handle as the hub writes it in a lane's owner or second-pass slot, without ``@``."""
 CLASS_PATTERN = r"^(K[0-9]{2}(/K[0-9]{2}){0,2}|C1-[0-9])$"
 """A bug class of the hub's registry, e.g. ``K01``, ``K16/K17``, ``C1-1``."""
 AREA_PATTERN = r"^[a-z0-9_./ -]{1,30}$"
@@ -131,6 +133,7 @@ Id = Annotated[StrictStr, Field(pattern=ID_PATTERN)]
 Name = Annotated[StrictStr, Field(min_length=1, max_length=60)]
 Link = Annotated[StrictStr, Field(pattern=LINK_PATTERN, max_length=200)]
 LaneId = Annotated[StrictStr, Field(pattern=LANE_PATTERN)]
+Handle = Annotated[StrictStr, Field(pattern=HANDLE_PATTERN)]
 Count = Annotated[StrictInt, Field(ge=0, le=10_000_000)]
 Rank = Annotated[StrictInt, Field(ge=1, le=20)]
 
@@ -593,7 +596,8 @@ class LaneCoverage(_Model):
 
 
 class Lane(_Model):
-    """A lane of the hub. Owners are claimed in the hub, not here."""
+    """A lane of the hub. ``owner`` and ``second_pass`` are the handles claimed in the hub
+    (``dev/plan/lanes.json``); a slot nobody has claimed is left out."""
 
     id: LaneId
     title: Text
@@ -605,16 +609,17 @@ class Lane(_Model):
     route_text: Text
     coverage: LaneCoverage | None = None
     risk_rank: Rank | None = None
-    waiting: StrictBool = False
-    """No work until someone claims the lane; such a lane has no pack yet."""
+    owner: Handle | None = None
+    second_pass: Handle | None = None
     pack: Link | None = None
+    """The lane's brief in ``dev/packs/``; a lane can have an owner and no brief yet."""
     done_bar: Annotated[list[Text], Field(min_length=1, max_length=10)]
     runners: Annotated[list[Text], Field(max_length=6)] = []
 
     @model_validator(mode="after")
-    def _pack_or_waiting(self) -> Self:
-        if self.waiting == (self.pack is not None):
-            msg = f"lane {self.id}: a lane has a pack, or it waits for an owner; not both, not neither"
+    def _people_and_pack(self) -> Self:
+        if self.owner is not None and self.owner == self.second_pass:
+            msg = f"lane {self.id}: the second pass is never the owner"
             raise ValueError(msg)
         if self.pack is not None and self.pack != f"{REPO_URL}/blob/main/dev/packs/{self.id}.md":
             msg = f"lane {self.id}: the pack of a lane is dev/packs/{self.id}.md"
@@ -1674,7 +1679,10 @@ class LaneView:
     coverage: str | None
     coverage_values: tuple[str, str] | None
     risk_rank: str | None
+    owner: str | None
+    second_pass: str | None
     waiting: bool
+    """The lane has no owner yet: the tag on its card and the filter "waiting for an owner"."""
     pack: str | None
     done_bar: tuple[str, ...]
     runners: tuple[str, ...]
@@ -1765,6 +1773,11 @@ class HubView:
     lane_groups: tuple[LaneGroupView, ...]
     lane_count: int
     waiting_count: int
+    """Lanes without an owner."""
+    nobrief_count: int
+    """Lanes without a brief (pack) yet."""
+    idle_count: int
+    """Lanes without an owner and without a brief: the hub's ``no_work_until_claimed``."""
     flow: tuple[tuple[str, bool], ...]
     routes: tuple[CardView, ...]
     escalation: tuple[str, ...]
@@ -1856,7 +1869,9 @@ def _lane_view(lane: Lane, kind: str, say: Localizer) -> LaneView:
         coverage=coverage,
         coverage_values=values,
         risk_rank=str(lane.risk_rank) if lane.risk_rank is not None else None,
-        waiting=lane.waiting,
+        owner=lane.owner,
+        second_pass=lane.second_pass,
+        waiting=lane.owner is None,
         pack=lane.pack,
         done_bar=tuple(say(item) for item in lane.done_bar),
         runners=tuple(say(runner) for runner in lane.runners),
@@ -1935,6 +1950,8 @@ def hub_view(hub: HubPage, say: Localizer) -> HubView:
         lane_groups=groups,
         lane_count=len(lanes),
         waiting_count=sum(lane.waiting for lane in lanes),
+        nobrief_count=sum(lane.pack is None for lane in lanes),
+        idle_count=sum(lane.waiting and lane.pack is None for lane in lanes),
         flow=tuple((say(step.text), step.exit) for step in hub.flow),
         routes=tuple(CardView(r.id, say(r.title), say(r.text)) for r in hub.routes),
         escalation=tuple(say(item) for item in hub.escalation),
