@@ -1780,11 +1780,12 @@ gates:
     state:
       en: >-
         ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator
-        publishes the results of a nightly build and test run on release-0.34.16
+        publishes the results of nightly build and test runs on release-0.34.16 and
+        release-0.34.17, one per branch
       de: >-
         lief am 12. Nov. auf 4c7840e9 und am 13. Nov. auf 88c9b49c, beide Male rot; der Betreiber
-        der Statusseite veröffentlicht die Ergebnisse eines nächtlichen Build- und Testlaufs auf
-        release-0.34.16
+        der Statusseite veröffentlicht die Ergebnisse nächtlicher Build- und Testläufe auf
+        release-0.34.16 und release-0.34.17, einen je Branch
     phase: 2a
   - id: CI-1
     name: { en: linux-unit-functional (sharded), de: linux-unit-functional (aufgeteilt) }

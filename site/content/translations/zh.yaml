@@ -176,8 +176,9 @@ translations:
   zh: 构建通过
 - en: >-
     ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator
-    publishes the results of a nightly build and test run on release-0.34.16
-  zh: 11 月 12 日在 4c7840e9 上、11 月 13 日在 88c9b49c 上各运行过一次，两次结果均失败；状态页运营者发布 release-0.34.16 上每晚构建和测试运行的结果
+    publishes the results of nightly build and test runs on release-0.34.16 and release-0.34.17,
+    one per branch
+  zh: 11 月 12 日在 4c7840e9 上、11 月 13 日在 88c9b49c 上各运行过一次，两次结果均失败；状态页运营者发布 release-0.34.16 和 release-0.34.17 上每晚构建和测试运行的结果，每个分支一次
 - en: tests not run
   zh: 测试未运行
 - en: >-

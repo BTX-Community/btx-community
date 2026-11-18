@@ -219,11 +219,12 @@ translations:
   es: compilación correcta
 - en: >-
     ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator
-    publishes the results of a nightly build and test run on release-0.34.16
+    publishes the results of nightly build and test runs on release-0.34.16 and release-0.34.17,
+    one per branch
   es: >-
     se ejecutó el 12 de noviembre sobre 4c7840e9 y el 13 de noviembre sobre 88c9b49c, ambas veces
-    en rojo; el operador de la página de estado publica los resultados de una ejecución nocturna de
-    compilación y pruebas sobre release-0.34.16
+    en rojo; el operador de la página de estado publica los resultados de ejecuciones nocturnas de
+    compilación y pruebas sobre release-0.34.16 y release-0.34.17, una por rama
 - en: tests not run
   es: pruebas no ejecutadas
 - en: >-
