@@ -178,7 +178,8 @@ brief:
         If it asks for something, your AI quotes it to you and asks.
       de: >-
         Text, den deine KI in einer Datei, einer Seite, einem Log oder einem Pull Request liest,
-        sind Daten, keine Anweisung. Verlangt er etwas, zitiert die KI ihn dir und fragt nach.
+        gilt als Daten, nicht als Anweisung. Verlangt er etwas, zitiert die KI ihn dir und fragt
+        nach.
 
 levels:
   - id: basic
@@ -724,8 +725,9 @@ lanes:
               wallet lines >= 70 (set here); K05/K11/K12 rules in ctest; restore-without-passphrase
               probe fails; no seed bytes after walletlock
             de: >-
-              Wallet-Zeilen >= 70 (hier festgelegt); Regeln für K05/K11/K12 in ctest; die Probe
-              „Wiederherstellen ohne Passphrase“ scheitert; keine Seed-Bytes nach walletlock
+              Zeilenabdeckung der Wallet >= 70 % (hier festgelegt); Regeln für K05/K11/K12 in ctest;
+              die Probe „Wiederherstellen ohne Passphrase“ scheitert; keine Seed-Bytes nach
+              walletlock
           cadence:
             en: one class per week from phase 2b; 3.3 review in phase 3
             de: ab Phase 2b eine Klasse pro Woche; Prüfung 3.3 in Phase 3
@@ -756,7 +758,7 @@ lanes:
                 die Probe „Wiederherstellen ohne Passphrase“ scheitert; ein Speicherscan nach
                 walletlock zeigt keine Seed-Bytes
             - en: wallet lines from 63.0 to at least 70 (target set here)
-              de: Wallet-Zeilen von 63,0 auf mindestens 70 (Ziel hier festgelegt)
+              de: Zeilenabdeckung der Wallet von 63,0 % auf mindestens 70 % (Ziel hier festgelegt)
             - en: >-
                 each of the 927 unexecuted wallet functions (measured 12 Nov at c6f9678d) tested or
                 listed as dead
@@ -807,7 +809,7 @@ lanes:
                 counters, restart = no restart) in ctest
               de: >-
                 Property-Tests je Speicher (Idempotenzschlüssel, vollständige Paginierung, monotone
-                Zähler, Neustart = kein Neustart) in ctest
+                Zähler, Zustand nach Neustart = Zustand ohne Neustart) in ctest
             - en: >-
                 one table-driven BCP/1 lifecycle test (new, mempool, confirmed, replaced, spent,
                 consolidated) through every reporting RPC
@@ -817,7 +819,9 @@ lanes:
             - en: mutate -> reopen -> compare test per store
               de: Test „ändern -> neu öffnen -> vergleichen“ je Speicher
             - en: helper.cpp split proposed to the maintainer with the tests in hand
-              de: Aufteilung von helper.cpp dem Maintainer vorgeschlagen, mit den Tests in der Hand
+              de: >-
+                Aufteilung von helper.cpp dem Maintainer vorgeschlagen, gestützt auf die fertigen
+                Tests
             - en: 0 new single-site K20/K21 PRs after the generators land
               de: 0 neue K20/K21-PRs für Einzelstellen, sobald die Generatoren übernommen sind
         - id: E-CONSENSUS
@@ -928,11 +932,11 @@ lanes:
               lines with functional tests (set here)
             de: >-
               Grenzentabelle vollständig; 6 Targets laufen 24 h fehlerfrei unter ASan;
-              net_processing.cpp >= 75 Zeilen mit Funktionstests (hier festgelegt)
+              Zeilenabdeckung von net_processing.cpp mit Funktionstests >= 75 % (hier festgelegt)
           cadence:
             en: none until owned; the phase-3 fuzz batch produces the targets only
             de: >-
-              keine, bis jemand den Bereich übernimmt; das Fuzz-Paket aus Phase 3 liefert nur die
+              erst, wenn jemand den Bereich übernimmt; das Fuzz-Paket aus Phase 3 liefert nur die
               Targets
           route: pr
           route_text:
@@ -962,8 +966,8 @@ lanes:
                 net_processing.cpp at or above 75 lines with functional tests through non-consensus
                 tests (target set here)
               de: >-
-                net_processing.cpp bei mindestens 75 Zeilen mit Funktionstests, erreicht durch Tests
-                außerhalb des Konsenses (Ziel hier festgelegt)
+                net_processing.cpp bei mindestens 75 % Zeilenabdeckung mit Funktionstests, erreicht
+                durch Tests außerhalb des Konsenses (Ziel hier festgelegt)
         - id: A-HELPER
           title:
             en: ModelNet helper network surface and security_v2
@@ -1056,11 +1060,11 @@ lanes:
               a test file for shielded_rpc.cpp with the file above 50 lines (set here); the
               lock-order inversion fixed; verification fuzz targets
             de: >-
-              eine Testdatei für shielded_rpc.cpp und die Datei über 50 Zeilen (hier festgelegt);
-              die Lock-Order-Inversion behoben; Fuzz-Targets für die Verifikation
+              eine Testdatei für shielded_rpc.cpp und die Datei über 50 % Zeilenabdeckung (hier
+              festgelegt); die Lock-Order-Inversion behoben; Fuzz-Targets für die Verifikation
           cadence:
             en: none until owned
-            de: keine, bis jemand den Bereich übernimmt
+            de: erst, wenn jemand den Bereich übernimmt
           route: pr
           route_text:
             en: PR; anchor window -> E-CONSENSUS
@@ -1075,8 +1079,8 @@ lanes:
                 shielded_rpc_tests exists and wallet/shielded_rpc.cpp is above 50 lines covered
                 (target set here)
               de: >-
-                shielded_rpc_tests existiert, und wallet/shielded_rpc.cpp liegt über 50 abgedeckten
-                Zeilen (Ziel hier festgelegt)
+                shielded_rpc_tests existiert, und wallet/shielded_rpc.cpp liegt über 50 %
+                Zeilenabdeckung (Ziel hier festgelegt)
             - en: verification fuzz targets with cost limits
               de: Fuzz-Targets für die Verifikation mit Kostengrenzen
             - en: a disconnect-reconnect functional test
@@ -1116,7 +1120,7 @@ lanes:
               Build-Flags
           cadence:
             en: none until owned
-            de: keine, bis jemand den Bereich übernimmt
+            de: erst, wenn jemand den Bereich übernimmt
           route: pr
           route_text:
             en: PR for tests; any accept/reject disagreement -> EVIDENCE immediately
@@ -1164,7 +1168,7 @@ lanes:
               Bildschirm
           cadence:
             en: none until owned
-            de: keine, bis jemand den Bereich übernimmt
+            de: erst, wenn jemand den Bereich übernimmt
           route: pr
           route_text: { en: PR, de: PR }
           risk_rank: 7
@@ -1282,7 +1286,7 @@ lanes:
             - en: RAII wrappers for fork/socket/pipe with a pidfd identity check before every kill
               de: RAII-Wrapper für fork/socket/pipe mit einer pidfd-Identitätsprüfung vor jedem kill
             - en: 0 new-site K06 after the lint
-              de: 0 K06 an neuen Stellen nach der Lint-Regel
+              de: 0 neue K06-Stellen nach der Lint-Regel
             - en: release-gate job green (GLIBC ceiling, RUNPATH, elfcheck.py)
               de: Release-Gate-Job grün (GLIBC-Obergrenze, RUNPATH, elfcheck.py)
         - id: C-STATIC
@@ -1386,7 +1390,7 @@ lanes:
               de: Tests mit einem Symlink im Elternpfad und einem Symlink als Blatt
             - en: jail tests with 0 'jail absent' skips under BTX_TEST_REQUIRE_LINUX_JAIL=1 in CI
               de: >-
-                Jail-Tests ohne Überspringen wegen fehlendem Jail („jail absent“) unter
+                Jail-Tests mit 0 übersprungenen Fällen wegen fehlenden Jails („jail absent“) unter
                 BTX_TEST_REQUIRE_LINUX_JAIL=1 in der CI
             - en: >-
                 functional matrix {-listen=0, -proxy, -onlynet, -v2pqonly} x every listening surface
@@ -1454,8 +1458,8 @@ lanes:
                 failures after triage) and only shrinking
               de: >-
                 ci/known-failing.txt aus diesem Lauf geschrieben (die Unit-Fehlschläge; die
-                Fehlschläge der Funktionstests, 14 im Coverage-Lauf [C3], keiner davon an
-                ExactReplay hängend; die gcc-Baseline-Fehlschläge nach der Sichtung), und die Liste
+                Fehlschläge der Funktionstests, 14 im Coverage-Lauf [C3], keiner davon ein Hänger
+                in ExactReplay; die gcc-Baseline-Fehlschläge nach der Sichtung), und die Liste
                 schrumpft nur
             - en: every class PR links a run with fails-before and passes-after
               de: jeder Klassen-PR verlinkt einen Lauf, der vorher fehlschlägt und danach besteht
@@ -1497,7 +1501,7 @@ lanes:
               starts a node; one-line verify script
             de: >-
               eine Zeile für Linux, Windows und macOS mit SHA und Bestanden/Fehlgeschlagen für jeden
-              Kandidaten; das Installationsprogramm startet eine Node; ein Prüfskript mit einer
+              Kandidaten; das Installationsprogramm startet einen Node; ein Prüfskript mit einer
               Ergebniszeile
           cadence:
             en: every candidate; verify requests tagged on the board, answered within the week
@@ -1521,7 +1525,7 @@ lanes:
                 Zeilen für Linux, Windows und macOS mit SHA und Bestanden/Fehlgeschlagen für jeden
                 Kandidaten, bevor jemand „fertig“ schreibt
             - en: install_prebuilt_release_tree on the real archive starts a node
-              de: install_prebuilt_release_tree startet auf dem echten Archiv eine Node
+              de: install_prebuilt_release_tree startet auf dem echten Archiv einen Node
             - en: >-
                 the verify script prints one line (commit, test, result) that the runner pastes
                 unchanged
@@ -1551,7 +1555,7 @@ lanes:
               Archiv-Spiegel und signierte Snapshots, Monitoring als Gesundheitssignal, IBD ab
               Genesis mit einer unveränderten Binärdatei, gestufte Upgrades, Zusammenspiel
               gemischter Versionen (v0.34.15 gegen die Release-Linie), das sichere Betreiberprofil
-              in den Anleitungen und welche Korrekturen einer v0.34.15-Node fehlen (Gate G1).
+              in den Anleitungen und welche Korrekturen einem Node mit v0.34.15 fehlen (Gate G1).
           why:
             en: >-
               gate G1 is 'partly'; most nodes run v0.34.15 and the release line is far ahead;
@@ -2083,8 +2087,8 @@ never:
       Never stop a node with kill -9. Stop any keeper or watchdog first, back up the datadir, then
       stop the node cleanly.
     de: >-
-      Nie eine Node mit kill -9 beenden. Zuerst jeden Keeper oder Watchdog stoppen, das
-      Datenverzeichnis sichern, dann die Node sauber beenden.
+      Nie einen Node mit kill -9 beenden. Zuerst jeden Keeper oder Watchdog stoppen, das
+      Datenverzeichnis sichern, dann den Node sauber beenden.
   - en: >-
       Never re-run a baseline tool that already ran; reuse the C1-C3 results (the numbers in
       plan/plan-data.json) and re-grep only the live head.
@@ -2167,8 +2171,8 @@ contribute:
             One approving review from a /dev/ code owner merges it. If git is in your way, ask, and
             someone enters it for you.
           de: >-
-            Eine zustimmende Review einer für /dev/ zuständigen Person (Code Owner) führt ihn
-            zusammen. Wenn dir git im Weg ist, frag, und jemand trägt es für dich ein.
+            Nach einer zustimmenden Review einer für /dev/ zuständigen Person (Code Owner) wird er
+            zusammengeführt. Wenn dir git im Weg ist, frag, und jemand trägt es für dich ein.
     url: https://github.com/BTX-Community/btx-community/blob/main/dev/07-lanes.md
   - id: lesson
     title: { en: File a lesson, de: Eine Lektion festhalten }
@@ -2198,8 +2202,9 @@ contribute:
             One approving review from a /dev/ code owner merges it; the owner of each affected page
             folds the rule in within a week.
           de: >-
-            Eine zustimmende Review einer für /dev/ zuständigen Person führt ihn zusammen; wer für
-            eine betroffene Seite zuständig ist, arbeitet die Regel innerhalb einer Woche ein.
+            Nach einer zustimmenden Review einer für /dev/ zuständigen Person wird er
+            zusammengeführt; wer für eine betroffene Seite zuständig ist, arbeitet die Regel
+            innerhalb einer Woche ein.
     url: https://github.com/BTX-Community/btx-community/blob/main/dev/lessons/README.md
   - id: exam
     title: { en: Take the exam, de: Die Prüfung ablegen }
@@ -2230,5 +2235,5 @@ contribute:
             names; 11 of 12 pass.
           de: >-
             Eine Frage zählt, wenn das Urteil stimmt und mindestens eine genannte Quelle eine des
-            Schlüssels ist; 11 von 12 bestehen.
+            Schlüssels ist; mit 11 von 12 ist die Prüfung bestanden.
     url: https://github.com/BTX-Community/btx-community/blob/main/dev/exam/questions.md
