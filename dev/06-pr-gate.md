@@ -70,11 +70,18 @@ Source: the class-check rules of the lanes ([`07-lanes.md`](07-lanes.md) §5, §
 
 ## 2. What the release line takes
 
-`release-0.34.16` takes no validation, fork-choice, attestation or MatMul-frontier changes. The
+The release line takes no validation, fork-choice, attestation or MatMul-frontier changes. The
 maintainer (numair) on #464 (11 Nov): the validation, fork-choice and MatMul-frontier entries stay
 out of `release-0.34.16`. The closing notes on #461, #462, #463, #479, #484 and #515 (11 Nov) give
 the same reason in one line each: the change alters validation, what a signer is told to attest, or
 MatMul frontier state.
+
+Since 15 Nov the release branch is `release-0.34.17`; `release-0.34.16` equals `main` and the
+v0.34.16 tag (`074dac16`) and has not moved since. The maintainer cherry-picks PRs onto
+`release-0.34.17` in rounds and leaves each PR open with a note. On 16 Nov he took "the open pull
+requests through #792 that do not change consensus or a spend" (#714). On 15 Nov he said the #464
+list was taken against an older `release-0.34.16` and "the closed set from 2026-11-03 is not being
+replayed into this branch" (#464). This hub keeps the frozen set below out of `release-0.34.17`.
 
 In files, this hub reads that as [inferred, conservative]:
 - `src/validation.cpp`, `src/pow.cpp`, `src/consensus/`, `src/script/interpreter.cpp`
@@ -93,14 +100,14 @@ non-consensus items that the #464 comment said could come back as standalone PRs
 
 **The evidence item.** A finding in the frozen set takes this shape and goes to the
 E-CONSENSUS lane, which offers it on #464 with the weekly batch: at most one short note, and only
-when an item is complete. The maintainer decides what, if anything, changes; no `release-0.34.16`
+when an item is complete. The maintainer decides what, if anything, changes; no release-branch
 change is requested.
 
 ```text
 Evidence item: <the invariant, one sentence>
 Measured: <what ran, on which commit and platform, the result>
 Ready test: <path; how to run; fails on <sha8>, passes with <change>>
-Paragraph: <why it matters; what change would satisfy it; no 0.34.16 change requested>
+Paragraph: <why it matters; what change would satisfy it; no release-branch change requested>
 ```
 
 ## 3. The PR body template
@@ -111,7 +118,7 @@ Paragraph: <why it matters; what change would satisfy it; no 0.34.16 change requ
 
 ```markdown
 ## Problem
-<what goes wrong and who sees it>. At `<sha8>` on release-0.34.16: `src/<file>.cpp:<line>` (and N more sites, listed below).
+<what goes wrong and who sees it>. At `<sha8>` on release-0.34.17: `src/<file>.cpp:<line>` (and N more sites, listed below).
 
 ## Class
 <Kxx name>. Status before this PR: <swept / rule only / not counted>. Sites counted on `<sha8>` with:
@@ -135,7 +142,7 @@ Invariant kept: <one sentence; quote AGENTS.md where it applies>.
 <platforms, suites, paths not run; and why>
 
 ## Base
-release-0.34.16 at `<full sha>`
+release-0.34.17 at `<full sha>`
 ```
 
 - One class per PR. No unrelated changes. No tool-advert footer in the body.
@@ -196,7 +203,7 @@ The AI fills this in and stops. The person ticks it.
 
 - [ ] The eight questions are answered in writing (§1).
 - [ ] The live head was re-checked just before posting
-      (`git fetch origin && git log -1 --format=%h origin/release-0.34.16`); the branch is rebased
+      (`git fetch origin && git log -1 --format=%h origin/release-0.34.17`); the branch is rebased
       onto it and the sites were recounted if it moved.
 - [ ] The class is named; the sites were counted with a command that is pasted in the PR.
 - [ ] Fails before and passes after, with both SHAs, the platform and the exact commands; the fork

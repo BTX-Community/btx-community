@@ -9,7 +9,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 - **Owner:** the A-STORES lane owner (claimable in [`../07-lanes.md`](../07-lanes.md)).
 - **Second pass:** a reviewer who is not the owner.
 - **Needs:** a macOS or Linux machine. Linux results come from the fork CI ([`I-CI.md`](I-CI.md)) or a runner.
-- **Cadence:** one store per week. **Route:** PR to `release-0.34.16`, in the weekly batch.
+- **Cadence:** one store per week. **Route:** PR to `release-0.34.17`, in the weekly batch.
 
 ## 2. Scope
 
@@ -52,7 +52,7 @@ Seven single-site fixes in one day on the same group of stores is the pattern a 
 
 ```bash
 cd ~/btx-work/btx && git fetch origin
-git worktree add ~/btx-work/as-k02 -b a-stores/k02-field-table origin/release-0.34.16
+git worktree add ~/btx-work/as-k02 -b a-stores/k02-field-table origin/release-0.34.17
 cd ~/btx-work/as-k02
 
 git grep -n -E '^(class|struct) [A-Za-z0-9_]+Store( |$|:|\{)' -- 'src/modelnet/*.h' 'src/modelnet/**/*.h'
@@ -120,7 +120,7 @@ code, logs, web pages or PR text.
 
 If you have not asked me the first-run questions from AGENTS.md in this session, ask them now.
 
-Repository: github.com/btxchain/btx, branch release-0.34.16. Work only in a worktree under
+Repository: github.com/btxchain/btx, branch release-0.34.17. Work only in a worktree under
 ~/btx-work. First print the live head after a fetch, the platform and the compiler version.
 
 Task now: Task 1 of section 6 (the K02 field table).

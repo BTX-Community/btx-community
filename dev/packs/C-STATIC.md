@@ -9,7 +9,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 - **Owner:** the C-STATIC lane owner (claimable in [`../07-lanes.md`](../07-lanes.md)). Agents do the mechanical part; the owner reads every result in code before anything is called a fix.
 - **Second pass:** a reviewer who is not the owner.
 - **Needs:** a Linux machine with clang 20 or newer for the TSan and thread-safety work; any OS for the lint and unit-test work.
-- **Cadence:** the rule-only items first (K10, K04, K15), then K03, fs-trust and lifetime. **Route:** PR to `release-0.34.16`, in the weekly batch. Anything under rule (c) below is EVIDENCE.
+- **Cadence:** the rule-only items first (K10, K04, K15), then K03, fs-trust and lifetime. **Route:** PR to `release-0.34.17`, in the weekly batch. Anything under rule (c) below is EVIDENCE.
 
 ## 2. Scope
 
@@ -61,7 +61,7 @@ All of these are untriaged results: leads until someone reads the code.
 
 ```bash
 cd ~/btx-work/btx && git fetch origin
-git worktree add ~/btx-work/cs-k10 -b c-static/k10-conversion-test origin/release-0.34.16 && cd ~/btx-work/cs-k10
+git worktree add ~/btx-work/cs-k10 -b c-static/k10-conversion-test origin/release-0.34.17 && cd ~/btx-work/cs-k10
 git grep -n 'vRPCConvertParams\[\] =' -- src/rpc/client.cpp            # the table (line 45 at 4c7840e9)
 git grep -n 'GetWalletRPCCommands' -- src/wallet/rpc/wallet.cpp        # the wallet table
 ls test/lint/                                                            # where the K04 lint goes

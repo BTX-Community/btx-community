@@ -488,10 +488,11 @@ class Brief(_Model):
 
 
 class Measured(_Model):
-    """The commits the hub's numbers were measured on, and the live head it was checked against.
+    """The commits the hub's numbers were measured on, and the commit its sites were counted at.
 
     Two clocks: the coverage figures and lane meters come from the coverage run at
-    ``coverage_commit``; the static, TSan, class and gate counts from ``commit``.
+    ``coverage_commit``; the static, TSan, class and gate counts from ``commit``. ``head`` is the
+    hub's ``sites_head``, where the site counts were taken (unless a count names another commit).
     """
 
     commit: Annotated[StrictStr, Field(pattern=SHA_PATTERN)]

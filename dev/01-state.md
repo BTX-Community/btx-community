@@ -1,6 +1,6 @@
 # Where things stand
 
-> Last verified: 2026-11-12 · against: btxchain/btx release-0.34.16 @ 4c7840e9 · owner role: state editor
+> Last verified: 2026-11-17 · against: btxchain/btx release-0.34.17 @ 23ee567e · owner role: state editor
 
 This page holds the hub's living numbers. Every row gives a value, its source (a commit, a path, a PR number or a command you can run) and the day it was last checked. Other pages link here instead of repeating a number.
 
@@ -14,31 +14,34 @@ Two clocks run on this page:
 
 | Fact | Value | Source | Verified on |
 |---|---|---|---|
-| `main` head | `476f3f23`, the commit of tag `v0.34.15` (committed 6 Oct 2026) [tested] | `git rev-parse origin/main 'v0.34.15^{commit}'` | 2026-11-12 |
-| `release-0.34.16` head | `4c7840e9`, committed 12 Nov 2026, 12:46 UTC [tested] | `TZ=UTC git log -1 --date=iso-strict-local --format='%h %cd' origin/release-0.34.16`; `tools/refresh-state.sh` | 2026-11-12 |
-| Release line vs `main` | 1,194 commits ahead, 0 behind [tested] | `git rev-list --count origin/main..origin/release-0.34.16` and the reverse range | 2026-11-12 |
-| Latest release | `v0.34.16`, published 7 Nov 2026 as a **pre-release**. One asset: a Linux x86_64 archive. No signed sums file; the release notes say so. The tag points at `d27530af`; the release-line head is 161 commits past it [read, tested] | [release page](https://github.com/btxchain/btx/releases/tag/v0.34.16); `git rev-list --count d27530af..4c7840e9` | 2026-11-12 |
-| v0.34.16 system floor | `btxd` and `btx-cli` need GLIBC 2.38 (Ubuntu 24.04, Debian 13). `btx-qt` needs GLIBC 2.43 [read] | v0.34.16 release notes | 2026-11-12 |
-| Latest full release | `v0.34.15`, 6 Oct 2026: macOS arm64, Linux x86_64 and Linux x86_64 CUDA 13 archives [read] | [release page](https://github.com/btxchain/btx/releases/tag/v0.34.15) | 2026-11-12 |
-| Other pre-releases | `v0.35.0-rc1` (13 Oct) and lab builds are listed on the releases page. This hub works against `release-0.34.16` [read] | [releases](https://github.com/btxchain/btx/releases) | 2026-11-12 |
+| `main` head | `074dac16`, the commit of tag `v0.34.16` (committed 15 Nov 2026, 05:54 UTC) [tested] | `git rev-parse origin/main 'v0.34.16^{commit}'`; `tools/refresh-state.sh` | 2026-11-17 |
+| `release-0.34.16` head | `074dac16`, the same commit as `main` and the v0.34.16 tag; the branch has not moved since 15 Nov [tested] | `git rev-parse origin/release-0.34.16` | 2026-11-17 |
+| `release-0.34.17` head | `23ee567e`, committed 17 Nov 2026, 18:42 UTC [tested] | `TZ=UTC git log -1 --date=iso-strict-local --format='%h %cd' origin/release-0.34.17`; `tools/refresh-state.sh` | 2026-11-17 |
+| Release line vs `main` | `release-0.34.17` is 167 commits ahead of `main`, 0 behind [tested] | `git rev-list --count origin/main..origin/release-0.34.17` and the reverse range | 2026-11-17 |
+| Where PRs go | All 135 PRs from #717 (15 Nov, 11:09 UTC) to #851 (17 Nov, 16:20 UTC) have `release-0.34.17` as their base; the last PRs into `release-0.34.16` were #693 to #696, opened on 14 Nov [tested]. The maintainer cherry-picks PRs onto `release-0.34.17` in rounds, keeps their authors, notes each on its PR and leaves the PR open [read: #714, 16 and 17 Nov; #781, 16 Nov] | GitHub API `repos/btxchain/btx/pulls?state=all` (`base.ref`); #714 | 2026-11-17 |
+| Latest release | `v0.34.16`, a full release (on 12 Nov it was listed as a pre-release). The tag points at `074dac16` (tagged 15 Nov). Three assets: a Linux x86_64 archive, a Linux x86_64 CUDA 13 archive and `SHA256SUMS`, which is not signed; the archives were replaced on 15 Nov. No macOS or Windows archive [read, tested] | [release page](https://github.com/btxchain/btx/releases/tag/v0.34.16); `git rev-parse 'v0.34.16^{commit}'` | 2026-11-17 |
+| v0.34.16 system floor | Both archives leave out `btx-qt` and `btx-atlas`, which need a newer glibc on that build; every bundled library is within GLIBC 2.38 [read] | v0.34.16 release notes | 2026-11-17 |
+| Latest full release | `v0.34.16` (row above). Before it, `v0.34.15`, 6 Oct 2026: macOS arm64, Linux x86_64 and Linux x86_64 CUDA 13 archives; for macOS it is still the newest [read] | [release page](https://github.com/btxchain/btx/releases/tag/v0.34.15) | 2026-11-17 |
+| Other pre-releases | `v0.35.0-rc1` (13 Oct) and lab builds are listed on the releases page. This hub works against `release-0.34.17` [read] | [releases](https://github.com/btxchain/btx/releases) | 2026-11-17 |
 
 ## 2. What the release line takes
 
 | Fact | Value | Source | Verified on |
 |---|---|---|---|
 | Frozen set | The maintainer (numair) on #464: the validation, fork-choice and MatMul-frontier entries stay out of `release-0.34.16`, and `src/validation.cpp` is unchanged [read] | #464, 11 Nov | 2026-11-12 |
-| How this hub applies it | Changes to the rules in `src/validation.cpp`, `src/pow.cpp`, `src/consensus/`, `src/script/interpreter.cpp`, fork choice and download scheduling in `src/net_processing.cpp`, the attestation rules in `src/node/matmul_trusted_attestations.*`, and `src/matmul/` go to #464 as evidence items, not as pull requests into `release-0.34.16`. The attestation entry is this hub's own conservative reading [inferred]. A fix near these files that changes none of those rules can land: the PQ attestation lock order (#478, `c6a9bef1`) and the attestation blocklist extension (#583) did [read: #464, 11 Nov; `git log` on the release line] | `06-pr-gate.md` §2; `07-lanes.md` (E-CONSENSUS) | 2026-11-12 |
+| Since 15 Nov | The release branch is `release-0.34.17`. The maintainer on #714 (16 Nov): "The open pull requests through #792 that do not change consensus or a spend are on this branch as well." The later rounds (#793 to #808 and #809 to #816, 17 Nov) are noted the same way: "Authors are unchanged on the cherry-picks" [read] | #714, 16 and 17 Nov | 2026-11-17 |
+| How this hub applies it | Changes to the rules in `src/validation.cpp`, `src/pow.cpp`, `src/consensus/`, `src/script/interpreter.cpp`, fork choice and download scheduling in `src/net_processing.cpp`, the attestation rules in `src/node/matmul_trusted_attestations.*`, and `src/matmul/` go to #464 as evidence items, not as pull requests into a release branch (`release-0.34.17` since 15 Nov). The attestation entry is this hub's own conservative reading [inferred]. A fix near these files that changes none of those rules can land: the PQ attestation lock order (#478, `c6a9bef1`) and the attestation blocklist extension (#583) did; both are in v0.34.16 [read: #464, 11 Nov; `git log` on the release line; tested: `git merge-base --is-ancestor c6a9bef1 v0.34.16`, the same for `4c7840e9`] | `06-pr-gate.md` §2; `07-lanes.md` (E-CONSENSUS) | 2026-11-17 |
 | The five invited items | #464 named #309, #313, #333, #363 and #382 as non-consensus and said a new standalone PR is the way to bring each in. All five landed on 12 Nov, cherry-picked by the maintainer within hours of being opened: #579 (`d4012aea`), #583 (`4c7840e9`, an attestation blocklist extension), #580 (`f213e4d1`), #581 (`1c4da270`), #582 (`27c07c18`) [tested] | `git log -1 --format=%B <commit>` names each PR head as the cherry-pick source; compare with `git ls-remote https://github.com/btxchain/btx.git 'refs/pull/579/head' 'refs/pull/58[0-3]/head'` | 2026-11-12 |
-| #464 now | Open [read: #464]. With the five non-consensus items landed, what is left on its list is the set the maintainer kept out of the release line [inferred] | #464 | 2026-11-12 |
+| #464 now | Open [read: #464]. With the five non-consensus items landed, what is left on its list is the set the maintainer kept out of the release line [inferred]. On 15 Nov the maintainer answered there: "This list was taken against an older `release-0.34.16` and `btx-035/swarm`. `main` is now `074dac16`, and the 0.34.17 work is #714. The closed set from 2026-11-03 is not being replayed into this branch." [read]. Where evidence items go for 0.34.17 is not settled in this hub [inferred] | #464, 15 Nov | 2026-11-17 |
 
 ## 3. Coverage
 
-> **Coverage is measured again.** The coverage build (`-DCMAKE_BUILD_TYPE=Coverage`) configures again on `release-0.34.16` since #578 landed on 12 Nov (commit `7051507b`). The fix is not in v0.34.15 (`main`, `476f3f23`). Measured on `swapnet-v2` at `a5d1637f` on 14 Nov, which contains the fix: product-code lines **67.4%** unit-only and **72.3%** unit + functional; branches **38.9%** and **42.6%**. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts failed, and a test that is killed writes no data. The time budgets were shorter than in the 12 Nov run at `c6f9678d` (unit 2.5 h instead of 3 h, functional 100 min instead of 3 h), so the figures are floors and the comparison with that run is indicative. Reproduce it with the recipe in [`04-build-and-test.md` §5](04-build-and-test.md#5-coverage-gcc-linux).
+> **Coverage is measured again.** The coverage build (`-DCMAKE_BUILD_TYPE=Coverage`) configures again since #578 landed on the release line on 12 Nov (commit `7051507b`). The fix shipped in v0.34.16 and is not in v0.34.15 (`476f3f23`). Measured on `swapnet-v2` at `a5d1637f` on 14 Nov, which contains the fix and is part of v0.34.16: product-code lines **67.4%** unit-only and **72.3%** unit + functional; branches **38.9%** and **42.6%**. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts failed, and a test that is killed writes no data. The time budgets were shorter than in the 12 Nov run at `c6f9678d` (unit 2.5 h instead of 3 h, functional 100 min instead of 3 h), so the figures are floors and the comparison with that run is indicative. Reproduce it with the recipe in [`04-build-and-test.md` §5](04-build-and-test.md#5-coverage-gcc-linux).
 
 | Fact | Value | Source | Verified on |
 |---|---|---|---|
 | Fix on the release line | `7051507b` "cmake: build the coverage source mirror after the build only", cherry-picked from the #578 head `179fac37` [tested] | `git log -1 --format=%B 7051507b` | 2026-11-12 |
-| Fix absent from `main` | `git merge-base --is-ancestor 7051507b origin/main` exits 1; `main` still runs `CoverageSanitize.cmake` at configure time (`CMakeLists.txt` line 666 and lines 670-675 at `476f3f23`) [tested] | the command; `git show 476f3f23:CMakeLists.txt` | 2026-11-12 |
+| Fix absent from v0.34.15 | `git merge-base --is-ancestor 7051507b v0.34.15` exits 1; v0.34.15 still runs `CoverageSanitize.cmake` at configure time (`CMakeLists.txt` line 666 and lines 670-675 at `476f3f23`). The fix is in v0.34.16, which is `main` since 15 Nov [tested] | the command; `git show 476f3f23:CMakeLists.txt`; `git merge-base --is-ancestor 7051507b v0.34.16` | 2026-11-17 |
 | Build and tools | gcc 13.3, `-Og --coverage`, gcovr 8.8 [read] | `plan/MASTER-PLAN.md` §1.1 | 2026-11-15 |
 | Unit run | 2,629 ctest entries: 2,583 passed, 42 timed out or were stopped by the unit time budget, 3 failed, 1 skipped [read] | `plan/MASTER-PLAN.md` §1.1 | 2026-11-15 |
 | Functional run | 220 scripts of the `test_runner.py` default list: 204 passed, 2 skipped, 14 failed. None of the 14 stalled with "ExactReplay required"; on 12 Nov at `c6f9678d`, 48 of 82 failures did [read] | `plan/MASTER-PLAN.md` §1.1 | 2026-11-15 |
@@ -63,7 +66,7 @@ Line coverage per area, product code, at `a5d1637f` [read: `plan/MASTER-PLAN.md`
 
 - `peerman_tests` passed this time, in the retry pass; on 12 Nov it timed out and wrote no data. That is the main reason the unit-only figure for `net_processing.cpp` rose from 24.6 to 59.8 [inferred]; the file also changed between the two commits (next item) [read: plan §1.1].
 - Functions never executed by the unit + functional runs (measured 12 Nov at `c6f9678d`); the 14 Nov run kept no trace data to recount them: consensus 68, `net_processing.cpp` 102, wallet 927, rpc 103, matmul verification 507 [read: plan §1.1].
-- The 31 commits from `c6f9678d` to `4c7840e9` do not touch `src/validation.cpp`, `src/net_processing.cpp`, `src/pow.cpp`, `src/consensus/` or `src/script/interpreter.cpp` [tested: `git diff --stat c6f9678d 4c7840e9 -- <those paths>` prints nothing]. The coverage run is later: `a5d1637f` is 177 commits after `4c7840e9` [tested: `git rev-list --count 4c7840e9..a5d1637f`], and from `c6f9678d` to `a5d1637f`, of those paths only `src/net_processing.cpp` changed (155 lines added, 12 removed) [tested: `git diff --stat c6f9678d a5d1637f -- <those paths>`].
+- The 31 commits from `c6f9678d` to `4c7840e9` do not touch `src/validation.cpp`, `src/net_processing.cpp`, `src/pow.cpp`, `src/consensus/` or `src/script/interpreter.cpp` [tested: `git diff --stat c6f9678d 4c7840e9 -- <those paths>` prints nothing]. The coverage run is later: `a5d1637f` is 177 commits after `4c7840e9` [tested: `git rev-list --count 4c7840e9..a5d1637f`] and 48 commits before the v0.34.16 tag [tested: `git rev-list --count a5d1637f..v0.34.16`], and from `c6f9678d` to `a5d1637f`, of those paths only `src/net_processing.cpp` changed (155 lines added, 12 removed) [tested: `git diff --stat c6f9678d a5d1637f -- <those paths>`].
 - Ratchet: the baseline only goes up. A later run states its commit and its suite set; a total that rose because more suites wrote data is not an improvement in tests.
 
 ## 4. Static and dynamic baselines
@@ -95,7 +98,7 @@ Each baseline may only shrink. Do not re-run these tools to "check" them; reuse 
 
 | Fact | Value | Source | Verified on |
 |---|---|---|---|
-| Upstream hosted CI | None for node validation, by policy: the repository "does not use GitHub-hosted CI for validation". The only workflow files on `release-0.34.16` are three Atlas workflows: `atlas-native.yml` and `atlas-source.yml` run on pull requests that touch the Atlas tree, and `release-atlas-binaries.yml` runs only by hand (`workflow_dispatch`). On `main` the folder holds only that README [read] | `.github/workflows/README.md` and `git ls-tree --name-only 4c7840e9 .github/workflows/` | 2026-11-12 |
+| Upstream hosted CI | None for node validation, by policy: the repository "does not use GitHub-hosted CI for validation". The only workflow files on `release-0.34.17`, and on `main` since v0.34.16, are three Atlas workflows: `atlas-native.yml` and `atlas-source.yml` run on pull requests that touch the Atlas tree, and `release-atlas-binaries.yml` runs only by hand (`workflow_dispatch`). v0.34.15 has only the README there [read] | `.github/workflows/README.md`; `git ls-tree --name-only v0.34.16 .github/workflows/`, the same on `release-0.34.17` and on `v0.34.15` | 2026-11-17 |
 | Contributor gates | Run on contributor forks; every class PR links its fork run (fails before, passes after). The fork workflow ran on 12 Nov at `4c7840e9` and on 13 Nov at `88c9b49c`, red both times. Separately, the status page's operator publishes the results of a nightly build and test run of `release-0.34.16` on Linux (its API calls the job CI-0; it is not the fork build matrix) [read] | `plan/MASTER-PLAN.md` §4.1; `07-lanes.md` (I-CI); fork run list (GitHub API); `https://network.btx-monitoring.com/api/v1/ci.json` | 2026-11-15 |
 | Agent rules upstream | `AGENTS.md` and `HUMANS.md` sit at the repo root. `AGENTS.md`: default posture is read-only unless the operator asked [read] | `git show 4c7840e9:AGENTS.md` | 2026-11-12 |
 
@@ -113,15 +116,14 @@ Each baseline may only shrink. Do not re-run these tools to "check" them; reuse 
 
 ```bash
 git clone https://github.com/btxchain/btx.git && cd btx
-git fetch origin main release-0.34.16 --tags
-git rev-parse origin/main 'v0.34.15^{commit}'                 # the same commit twice
-TZ=UTC git log -1 --date=iso-strict-local --format='%h %cd' origin/release-0.34.16   # time in UTC
-git rev-list --count origin/main..origin/release-0.34.16      # ahead
-git rev-list --count origin/release-0.34.16..origin/main      # behind
-git merge-base --is-ancestor 7051507b origin/release-0.34.16 && echo "coverage fix: on the release line"
-git merge-base --is-ancestor 7051507b origin/main || echo "coverage fix: not on main"
-git rev-list --count d27530af..origin/release-0.34.16          # commits past the v0.34.16 tag
-git grep -h -E '^FUZZ_TARGET\(' origin/release-0.34.16 -- src | wc -l
+git fetch origin main release-0.34.16 release-0.34.17 --tags
+git rev-parse origin/main origin/release-0.34.16 'v0.34.16^{commit}'   # the same commit three times
+TZ=UTC git log -1 --date=iso-strict-local --format='%h %cd' origin/release-0.34.17   # time in UTC
+git rev-list --count origin/main..origin/release-0.34.17      # ahead
+git rev-list --count origin/release-0.34.17..origin/main      # behind
+git merge-base --is-ancestor 7051507b v0.34.16 && echo "coverage fix: in v0.34.16"
+git merge-base --is-ancestor 7051507b v0.34.15 || echo "coverage fix: not in v0.34.15"
+git grep -h -E '^FUZZ_TARGET\(' 4c7840e9 -- src | wc -l      # the section 5 count, at 4c7840e9
 ```
 
 If any line prints something other than the tables above, the page is stale. Stop citing the old value: open a pull request that updates the row, its "Verified on" date and the "Last verified" line at the top.

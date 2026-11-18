@@ -75,11 +75,13 @@ repository or into any file that could be committed.
 2. Work in classes. Name the class, count every site on the live head, fix every site and add
    the rule (test, lint or CI job) that keeps the class at zero. No single-site PR for a
    registered class.
-3. Validation, fork choice, attestation and the MatMul frontier are out of scope for
-   `release-0.34.16`. The maintainer (numair) said so on
+3. Validation, fork choice, attestation and the MatMul frontier are out of scope for the
+   release branch. For `release-0.34.16` the maintainer (numair) said so on
    [#464](https://github.com/btxchain/btx/issues/464), 11 Nov, for validation, fork choice and the
    MatMul frontier; the same day #461, #462, #463, #479, #484 and #515 were closed because each
-   "changes validation, what a signer is told to attest, or MatMul frontier state". Findings there
+   "changes validation, what a signer is told to attest, or MatMul frontier state". On
+   `release-0.34.17`, the release branch since 15 Nov, he took the open PRs "that do not change
+   consensus or a spend" ([#714](https://github.com/btxchain/btx/pull/714), 16 Nov). Findings there
    become evidence for the E-CONSENSUS lane, never PRs.
 4. Tested fixes only: "fails before, passes after", with commit, platform and exact command. No
    stubs, no fail-closed workarounds, no skipped tests, no widened timeouts.
@@ -106,8 +108,8 @@ Read it from the tree at the live head, not from memory or a web copy (the clone
 [`04-build-and-test.md`](04-build-and-test.md) §1):
 
 ```bash
-git -C ~/btx-work/btx fetch origin release-0.34.16
-git -C ~/btx-work/btx show origin/release-0.34.16:AGENTS.md
+git -C ~/btx-work/btx fetch origin release-0.34.17
+git -C ~/btx-work/btx show origin/release-0.34.17:AGENTS.md
 ```
 
 What it says that shapes every PR from this hub [read: `git show 4c7840e9:AGENTS.md`]:
@@ -144,7 +146,7 @@ This hub adds process: classes, the gate, the batch. It never relaxes an upstrea
 - **Labels.** Mark every claim [read], [tested] or [inferred]. Every number carries its source and
   the commit it was measured on.
 - **Live head.** Before you count, build or hand over:
-  `git fetch origin && git log -1 --format='%h %cd' origin/release-0.34.16`. If it moved, rebase
+  `git fetch origin && git log -1 --format='%h %cd' origin/release-0.34.17`. If it moved, rebase
   and recount.
 - **Known state.** A red test is news only if it is green on the base commit with the same build.
   Rerun a timeout alone before you call it a failure ([`04-build-and-test.md`](04-build-and-test.md) §3-§4).
@@ -237,5 +239,5 @@ on.
 - Before any push, ask the operator to check author and committer, not only the author:
 
 ```bash
-git log --format='%h | %an <%ae> %ad | %cn <%ce> %cd' origin/release-0.34.16..HEAD
+git log --format='%h | %an <%ae> %ad | %cn <%ce> %cd' origin/release-0.34.17..HEAD
 ```

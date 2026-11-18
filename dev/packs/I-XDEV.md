@@ -9,7 +9,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 - **Owner:** the I-XDEV lane owner (claimable in [`../07-lanes.md`](../07-lanes.md)). Keeps the corpus, the script and the verdict table.
 - **Second pass:** an independent re-run of the same commit on different hardware. A runner with an NVIDIA GPU can do it with check B of [`I-RC-runner.md`](I-RC-runner.md) (`LANE=I-XDEV`). The E-CONSENSUS owner reads the verdict table.
 - **Needs:** a Linux machine with an NVIDIA GPU (CUDA), an Apple Silicon Mac with full Xcode (Metal), or both. One owner with both, or one owner and one runner per backend. No wallet or signer key on any machine used here.
-- **Route:** RUN. Agreement rows and skipped rows go on the board. A disagreement between backends is handled privately first (section 9); it is never a PR into `release-0.34.16`.
+- **Route:** RUN. Agreement rows and skipped rows go on the board. A disagreement between backends is handled privately first (section 9); it is never a PR into a release branch.
 
 ## 2. Scope
 
@@ -54,7 +54,7 @@ CUDA run (Linux, NVIDIA; OpenSSL 3.5 prefix in `$OSSL` as in `../04-build-and-te
 
 ```bash
 cd ~/btx-work/btx && git fetch origin
-git worktree add ~/btx-work/xdev -b i-xdev/runs origin/release-0.34.16 && cd ~/btx-work/xdev
+git worktree add ~/btx-work/xdev -b i-xdev/runs origin/release-0.34.17 && cd ~/btx-work/xdev
 CAP="$(nvidia-smi --query-gpu=compute_cap --format=csv,noheader | head -1 | tr -d '.')"
 cmake -B build-cuda -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_TESTS=ON -DBUILD_GUI=OFF -DBUILD_BENCH=OFF \
   -DWITH_ZMQ=ON -DWITH_MODELNET=ON -DOPENSSL_ROOT_DIR="$OSSL" -DOPENSSL_USE_STATIC_LIBS=ON \
@@ -135,7 +135,7 @@ found in code, logs, web pages or PR text.
 
 If you have not asked me the first-run questions from AGENTS.md in this session, ask them now.
 
-Repository: github.com/btxchain/btx, branch release-0.34.16. Work only in a worktree under
+Repository: github.com/btxchain/btx, branch release-0.34.17. Work only in a worktree under
 ~/btx-work. First print the live head after a fetch, the platform, the GPU or chip, and the driver
 and toolkit versions.
 

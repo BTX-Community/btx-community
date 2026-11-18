@@ -9,7 +9,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 - **Owner:** the A-WALLET lane owner (claimable in [`../07-lanes.md`](../07-lanes.md)).
 - **Second pass:** a reviewer who is not the owner, ideally on a different OS from the owner.
 - **Needs:** a macOS or Linux machine that holds no wallet with funds and no signer key. Linux and Windows results come from the fork CI ([`I-CI.md`](I-CI.md)) or from a runner ([`I-RC-runner.md`](I-RC-runner.md), check D).
-- **Cadence:** one class per week. **Route:** PR to `release-0.34.16`, in the weekly batch.
+- **Cadence:** one class per week. **Route:** PR to `release-0.34.17`, in the weekly batch.
 
 ## 2. Scope
 
@@ -55,7 +55,7 @@ The K05 chain is the reason this lane works in classes: each of those four PRs f
 
 ```bash
 cd ~/btx-work/btx && git fetch origin
-git worktree add ~/btx-work/aw-k05 -b a-wallet/k05-locked-wallet origin/release-0.34.16
+git worktree add ~/btx-work/aw-k05 -b a-wallet/k05-locked-wallet origin/release-0.34.17
 cd ~/btx-work/aw-k05 && git log -1 --format='%h %cd'
 
 # where funding happens, where the unlock check is, and the RPC table to enumerate
@@ -68,7 +68,7 @@ git grep -n 'GetWalletRPCCommands' -- src/wallet/rpc/wallet.cpp
 
 - The AI writes `k05-worklist.md` in the worktree (not for publishing): one row per wallet RPC with the first funding or reservation call, the unlock check (or "none") and a verdict (dominated on every path / not).
 - The test: in `src/wallet/test/`, iterate `GetWalletRPCCommands()` (in `src/wallet/rpc/wallet.cpp`), call each RPC against an encrypted, locked wallet, and assert that it either touches no secret or fails with `RPC_WALLET_UNLOCK_NEEDED` (-13, in `src/rpc/protocol.h`) before any coin selection or reservation side effect [repo].
-- Show fails-before: put the test commit alone on `origin/release-0.34.16` in a second worktree and run it. It must fail on any RPC the worklist marks "not dominated".
+- Show fails-before: put the test commit alone on `origin/release-0.34.17` in a second worktree and run it. It must fail on any RPC the worklist marks "not dominated".
 
 ```bash
 # build directory "build" configured as in ../04-build-and-test.md §2; J set as in §3
@@ -139,9 +139,9 @@ code, logs, web pages or PR text.
 
 If you have not asked me the first-run questions from AGENTS.md in this session, ask them now.
 
-Repository: github.com/btxchain/btx, branch release-0.34.16. Work only in a worktree under
+Repository: github.com/btxchain/btx, branch release-0.34.17. Work only in a worktree under
 ~/btx-work created as in dev/04-build-and-test.md section 1. First print: the live head
-(git log -1 --format='%h %cd' origin/release-0.34.16 after a fetch), the platform, the compiler
+(git log -1 --format='%h %cd' origin/release-0.34.17 after a fetch), the platform, the compiler
 version.
 
 Task now: Task 1 of section 6 (K05). Steps:

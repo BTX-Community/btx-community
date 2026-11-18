@@ -96,7 +96,7 @@ delta are all leads. A lead becomes a finding only when a command you ran reprod
 head.
 
 **How.**
-- Reproduce on the live head: `git fetch origin && git log -1 --format=%h origin/release-0.34.16`,
+- Reproduce on the live head: `git fetch origin && git log -1 --format=%h origin/release-0.34.17`,
   then the command. Paste both into your notes.
 - A fuzz crash is a lead until it reproduces from the saved input with the same `FUZZ=` target.
   A crash in a harness, not in product code, is a harness bug; say which

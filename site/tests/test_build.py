@@ -479,13 +479,13 @@ class RulesTest(unittest.TestCase):
                            hub.measured.coverage_commit, hub.measured.coverage_date.isoformat())
             self.assertEqual(
                 page_clocks,
-                (measured["commit"], measured["date"], measured["live_head"],
+                (measured["commit"], measured["date"], measured["sites_head"],
                  measured["coverage_commit"], measured["coverage_date"]),
             )
             meta = lanes["meta"]
             self.assertEqual(
                 page_clocks,
-                (meta["measured_at"], meta["date"], meta["live_head"], meta["coverage_commit"], meta["coverage_date"]),
+                (meta["measured_at"], meta["date"], meta["sites_head"], meta["coverage_commit"], meta["coverage_date"]),
             )
 
         with self.subTest("coverage figures"):
@@ -538,8 +538,9 @@ class RulesTest(unittest.TestCase):
 
         with self.subTest("classes"):
             # K01's sweep status names a file; the page gives the class and the count only.
-            stated = {"K01": "worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); "
-                             "shared helper exists (#576)"}
+            stated = {"K01": "worklist ready (9 files at 1e2f8b5f, down from 12 at 4c7840e9; #606's lint lists each "
+                             "raw write left in them as an exception); shared helper exists (#576) and syncs file "
+                             "and directory since #606"}
             self.assertEqual(
                 [
                     (c["id"], c["name"], c["rule"], c["prs"], c["sites_open"], c.get("sites_unit"),

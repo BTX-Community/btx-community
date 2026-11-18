@@ -78,9 +78,9 @@ live head. You settle it, and the second pass checks you ([`02-method.md`](02-me
    LANE=C-K01 TOPIC=first-sweep
    mkdir -p ~/btx-work && cd ~/btx-work
    git clone https://github.com/btxchain/btx.git btx && cd btx
-   git fetch origin release-0.34.16 main
-   git log -1 --format='%h %cd %s' origin/release-0.34.16
-   git worktree add ~/btx-work/"$LANE-$TOPIC" -b "$LANE/$TOPIC" origin/release-0.34.16
+   git fetch origin release-0.34.17 main
+   git log -1 --format='%h %cd %s' origin/release-0.34.17
+   git worktree add ~/btx-work/"$LANE-$TOPIC" -b "$LANE/$TOPIC" origin/release-0.34.17
    ```
 2. **Set your git identity** in the clone you commit from: your GitHub handle and your GitHub
    noreply address (GitHub > Settings > Emails shows it). Replace both placeholders. Check the

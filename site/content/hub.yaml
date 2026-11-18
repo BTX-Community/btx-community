@@ -4,9 +4,10 @@
 # comes from the hub is compared with it by site/tests/test_build.py
 # (test_the_developers_page_matches_the_hub), so a drift fails the check:
 #
-#   measured            dev/plan/plan-data.json measured_at (commit, date, live_head,
+#   measured            dev/plan/plan-data.json measured_at (commit, date, sites_head,
 #                       coverage_commit, coverage_date): coverage figures and lane meters at
-#                       coverage_commit, the static, TSan, class and gate counts at commit
+#                       coverage_commit, the static, TSan, class and gate counts at commit, the
+#                       site counts at sites_head (head here)
 #   coverage.text       dev/01-state.md section 3, the "Coverage is measured again." line, and the
 #   coverage.figures    four figures in it; only change them when the hub does
 #   coverage.runs       dev/plan/MASTER-PLAN.md section 1.1, the unit and functional run sentences
@@ -231,16 +232,17 @@ levels:
 coverage:
   text:
     en: >-
-      Product code of swapnet-v2 at commit a5d1637f; the coverage build needs btxchain/btx #578,
-      which v0.34.15 lacks. In the coverage run 42 unit suites timed out and 14 of 220 functional
-      scripts failed; a killed test writes no counts. The time budgets were shorter than on 12
-      November, so the figures are floors and the comparison is indicative.
+      Product code of swapnet-v2 at commit a5d1637f, now part of v0.34.16; the coverage build needs
+      btxchain/btx #578, which is in v0.34.16 but not in v0.34.15. In the coverage run 42 unit
+      suites timed out and 14 of 220 functional scripts failed; a killed test writes no counts. The
+      time budgets were shorter than on 12 November, so the figures are floors and the comparison
+      is indicative.
     de: >-
-      Produktcode von swapnet-v2 an Commit a5d1637f; der Coverage-Build braucht btxchain/btx #578,
-      das v0.34.15 fehlt. Im Coverage-Lauf liefen 42 Unit-Suites in einen Timeout, 14 von 220
-      Funktionstest-Skripten schlugen fehl; ein abgebrochener Test schreibt keine Zählung. Die
-      Zeitbudgets waren kürzer als am 12. November, daher sind die Werte Untergrenzen und der
-      Vergleich ist nur ein Anhaltspunkt.
+      Produktcode von swapnet-v2 an a5d1637f (in v0.34.16); der Coverage-Build braucht
+      btxchain/btx #578, das in v0.34.16 ist, nicht in v0.34.15. Im Coverage-Lauf liefen 42
+      Unit-Suites in einen Timeout, 14 von 220 Funktionstests schlugen fehl; ein abgebrochener Test
+      schreibt keine Zählung. Die Zeitbudgets waren kürzer als am 12. November: Die Werte sind
+      Untergrenzen, der Vergleich ein Anhaltspunkt.
   source: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/01-state.md
   plan: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/MASTER-PLAN.md
   figures:
@@ -425,12 +427,14 @@ coverage:
 classes_text:
   en: >-
     A taxonomy of every fix pull request to btxchain/btx since 1 August: 317 fix PRs in 26 named
-    classes, plus "other". Class assignments are 10-15% noisy. Site counts are on the live head;
-    static and dynamic counts were measured at c6f9678d and are untriaged.
+    classes, plus "other". Class assignments are 10-15% noisy. Site counts were taken at 4c7840e9,
+    the release-0.34.16 head of 12 November, unless a count names another commit; static and
+    dynamic counts were measured at c6f9678d and are untriaged.
   de: >-
     Eine Einordnung jedes Fix-Pull-Requests an btxchain/btx seit dem 1. August: 317 Fix-PRs in 26
     benannten Klassen, dazu „Sonstige“. Die Zuordnung zu Klassen ist zu 10–15 % unscharf. Stellen
-    sind am aktuellen Head gezählt; statische und dynamische Zahlen wurden an c6f9678d gemessen und
+    wurden an 4c7840e9 gezählt, dem Head von release-0.34.16 am 12. November, sofern eine Zählung
+    keinen anderen Commit nennt; statische und dynamische Zahlen wurden an c6f9678d gemessen und
     sind nicht gesichtet.
 classes_source: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/05-bug-classes.md
 classes:
@@ -458,15 +462,17 @@ classes:
         Lint-Regel gegen rohes ofstream auf Pfade im Datenverzeichnis; Ladetests mit abgeschnittenen
         Dateien
     prs: 22
-    sites_open: 12
+    sites_open: 9
     status: worklist
     status_text:
       en: >-
-        worklist ready (12 files at 4c7840e9, plus 1 candidate the filter skipped); shared helper
-        exists (#576)
+        worklist ready (9 files at 1e2f8b5f, down from 12 at 4c7840e9; #606's lint lists each raw
+        write left in them as an exception); shared helper exists (#576) and syncs file and
+        directory since #606
       de: >-
-        Arbeitsliste fertig (12 Dateien an 4c7840e9, dazu 1 Kandidat, den der Filter übersprang);
-        gemeinsamer Helfer vorhanden (#576)
+        Arbeitsliste fertig (9 Dateien an 1e2f8b5f, vorher 12 an 4c7840e9; die Lint-Regel aus #606
+        führt jedes verbliebene rohe Schreiben darin als Ausnahme); gemeinsamer Helfer vorhanden
+        (#576), der seit #606 Datei und Verzeichnis synchronisiert
     lanes: [C-K01]
   - id: K03
     name: { en: lock order / self-deadlock / race, de: Lock-Reihenfolge / Self-Deadlock / Race }
@@ -735,8 +741,8 @@ lanes:
             de: ab Phase 2b eine Klasse pro Woche; Prüfung 3.3 in Phase 3
           route: pr
           route_text:
-            en: PR to release-0.34.16 (Thursday batch)
-            de: PR an release-0.34.16 (Donnerstagspaket)
+            en: PR to release-0.34.17 (Thursday batch)
+            de: PR an release-0.34.17 (Donnerstagspaket)
           coverage:
             unit: 37.4
             functional: 63.0
@@ -798,8 +804,8 @@ lanes:
           cadence: { en: one store per week from phase 2b, de: ab Phase 2b ein Speicher pro Woche }
           route: pr
           route_text:
-            en: PR to release-0.34.16 (Thursday batch)
-            de: PR an release-0.34.16 (Donnerstagspaket)
+            en: PR to release-0.34.17 (Thursday batch)
+            de: PR an release-0.34.17 (Donnerstagspaket)
           coverage:
             unit: 84.1
             functional: 86.2
@@ -845,12 +851,14 @@ lanes:
               net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits,
               validation.cpp 63, matmul_trusted_attestations.h 50; 68 consensus functions never
               executed (measured 12 Nov at c6f9678d); frozen for 0.34.16 by #464, so only evidence
-              lands
+              lands; on 15 Nov the maintainer answered on #464 that its list is not replayed into the
+              0.34.17 work (#714)
             de: >-
               net/p2p auf Risikorang 1, Validierung auf Rang 2; net_processing.cpp 113 Fix-Commits,
               validation.cpp 63, matmul_trusted_attestations.h 50; 68 Konsensfunktionen laufen nie
               (gemessen am 12. Nov. an c6f9678d); für 0.34.16 durch #464 eingefroren, daher kommen
-              nur Belege an
+              nur Belege an; am 15. Nov. schrieb der Maintainer in #464, dass deren Liste nicht in
+              die Arbeit an 0.34.17 (#714) übernommen wird
           target:
             en: >-
               a #464 evidence list: one measured result + one ready test + one paragraph per item; 0
@@ -1194,14 +1202,17 @@ lanes:
             de: Nicht atomares oder unvollständiges Schreiben von Zustandsdateien
           scope:
             en: >-
-              Class K01 across the code: the 12 files of the worklist at 4c7840e9 in ModelNet, the
-              wallet and the node, two more sites the file-level filter cannot see, and the shared
-              atomic-write helper (#576), which does not fsync yet.
+              Class K01 across the code: 9 worklist files at 1e2f8b5f in ModelNet, the wallet and the
+              node, down from 12 at 4c7840e9. #606 (in v0.34.16) moved three files onto the shared
+              atomic-write helper (#576), removed the two sites the file-level filter missed, made the
+              helper sync file and directory, and added a lint that lists each raw write left as an
+              exception.
             de: >-
-              Die Klasse K01 im ganzen Code: die 12 Dateien der Arbeitsliste an 4c7840e9 in
-              ModelNet, Wallet und Node, zwei weitere Stellen, die der Filter auf Dateiebene nicht
-              sieht, und der gemeinsame Helfer für atomares Schreiben (#576), der noch kein fsync
-              macht.
+              Klasse K01 im Code: 9 Dateien der Arbeitsliste an 1e2f8b5f in ModelNet, Wallet und
+              Node, vorher 12 an 4c7840e9. #606 (in v0.34.16) stellte drei Dateien auf den
+              gemeinsamen Helfer für atomares Schreiben (#576) um, entfernte die zwei vom Dateifilter
+              übersehenen Stellen, ließ den Helfer Datei und Verzeichnis synchronisieren und ergänzte
+              eine Lint-Regel mit jedem übrigen rohen Schreiben als Ausnahme.
           why:
             en: >-
               22 PRs, the class turning up module after module; a loader that reads a damaged file
@@ -1210,10 +1221,12 @@ lanes:
               22 PRs, die Klasse taucht Modul für Modul auf; ein Ladevorgang, der eine beschädigte
               Datei als leer liest, fängt bei null an
           target:
-            en: 12 files to 0; fsync in the helper; lint in CI-4; truncated-file load test per store
+            en: >-
+              12 files to 0 (9 left at 1e2f8b5f); fsync in the helper (done: #606); lint in CI-4;
+              truncated-file load test per store
             de: >-
-              12 Dateien auf 0; fsync im Helfer; Lint-Regel in CI-4; Ladetest mit abgeschnittener
-              Datei je Speicher
+              12 Dateien auf 0 (9 übrig an 1e2f8b5f); fsync im Helfer (erledigt: #606); Lint-Regel in
+              CI-4; Ladetest mit abgeschnittener Datei je Speicher
           cadence:
             en: phase 2a-2b, one PR
             de: Phase 2a bis 2b, ein PR
@@ -1227,12 +1240,24 @@ lanes:
               Konsensnähe geprüft (falls nah -> BELEG)
           pack: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/C-K01.md
           done_bar:
-            - en: 12 worklist files to 0
-              de: 12 Dateien der Arbeitsliste auf 0
-            - en: FileCommit of file and directory inside WriteBinaryFileAtomically
-              de: FileCommit von Datei und Verzeichnis in WriteBinaryFileAtomically
-            - en: lint against raw ofstream/fopen("w") to datadir paths in CI-4
-              de: Lint-Regel gegen rohes ofstream/fopen("w") auf Pfade im Datenverzeichnis in CI-4
+            - en: >-
+                12 worklist files to 0 (9 left at 1e2f8b5f; #606's lint lists each raw write left
+                in them as an exception)
+              de: >-
+                12 Dateien der Arbeitsliste auf 0 (9 übrig an 1e2f8b5f; die Lint-Regel aus #606
+                führt jedes verbliebene rohe Schreiben darin als Ausnahme)
+            - en: >-
+                FileCommit of file and directory inside WriteBinaryFileAtomically (done: #606, in
+                v0.34.16)
+              de: >-
+                FileCommit von Datei und Verzeichnis in WriteBinaryFileAtomically (erledigt: #606,
+                in v0.34.16)
+            - en: >-
+                lint against raw ofstream/fopen("w") to datadir paths in CI-4 (#606 added
+                test/lint/lint-k01-state-writes.py for the audited files)
+              de: >-
+                Lint-Regel gegen rohes ofstream/fopen("w") auf Pfade im Datenverzeichnis in CI-4
+                (#606 hat test/lint/lint-k01-state-writes.py für die geprüften Dateien ergänzt)
             - en: a truncated-file load test per store
               de: ein Ladetest mit abgeschnittener Datei je Speicher
             - en: 0 new K01 PRs after the sweep
@@ -1429,12 +1454,12 @@ lanes:
               die Zeitgrenze, daher wird er aufgeteilt
           target:
             en: >-
-              CI-0 run once on 4c7840e9; known-failing written and only shrinking; every class PR
-              links a run; ratchet fails any area dropping more than 0.2 points
+              CI-0 run once on the release-line head; known-failing written and only shrinking;
+              every class PR links a run; ratchet fails any area dropping more than 0.2 points
             de: >-
-              CI-0 einmal auf 4c7840e9 gelaufen; die Liste bekannter Fehlschläge geschrieben, und
-              sie schrumpft nur; jeder Klassen-PR verlinkt einen Lauf; der Ratchet schlägt fehl,
-              wenn ein Bereich um mehr als 0,2 Punkte fällt
+              CI-0 einmal auf dem Head der Release-Linie gelaufen; die Liste bekannter Fehlschläge
+              geschrieben, und sie schrumpft nur; jeder Klassen-PR verlinkt einen Lauf; der Ratchet
+              schlägt fehl, wenn ein Bereich um mehr als 0,2 Punkte fällt
           cadence:
             en: CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4
             de: CI-0, CI-4, CI-5, CI-6 in Phase 2a; CI-2, CI-9 in Phase 2b; der Rest bis Phase 4
@@ -1449,8 +1474,10 @@ lanes:
             functional: 72.3
           pack: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-CI.md
           done_bar:
-            - en: CI-0 run once on 4c7840e9; shard counts set from it
-              de: CI-0 einmal auf 4c7840e9 gelaufen; die Zahl der Shards daraus festgelegt
+            - en: CI-0 run once on the release-line head; shard counts set from it
+              de: >-
+                CI-0 einmal auf dem Head der Release-Linie gelaufen; die Zahl der Shards daraus
+                festgelegt
             - en: >-
                 ci/known-failing.txt written from that run (the unit failures; the functional
                 failures, 14 in the coverage run [C3], none an ExactReplay stall; gcc-baseline
@@ -1488,12 +1515,16 @@ lanes:
               eigener Hardware.
           why:
             en: >-
-              7 fix PRs on one release script; the Linux candidate at c6f9678d had one independent
-              four-check run (#432, 11 Nov); no macOS, Windows or CUDA candidate has had one yet
+              7 fix PRs on one release script; the four-check pass ran once, on the Linux candidate
+              at c6f9678d (#432, 11 Nov); v0.34.16 shipped on 15 Nov at 074dac16 with Linux and
+              Linux CUDA archives only, and the hub has no four-check run of them; the first Windows
+              build report on release-0.34.17 (1e2f8b5f, #714, 16 Nov) found the MSVC build failing
             de: >-
-              7 Fix-PRs an einem einzigen Release-Skript; der Linux-Kandidat an c6f9678d hatte einen
-              unabhängigen Lauf mit vier Prüfungen (#432, 11. Nov.); kein Kandidat für macOS,
-              Windows oder CUDA hatte bisher einen
+              7 Fix-PRs an einem Release-Skript; der Durchlauf mit vier Prüfungen lief einmal, auf
+              dem Linux-Kandidaten an c6f9678d (#432, 11. Nov.); v0.34.16 erschien am 15. Nov. an
+              074dac16 nur mit Linux- und Linux-CUDA-Archiven, und der Hub hat keinen solchen
+              Durchlauf davon; der erste Windows-Build-Bericht zu release-0.34.17 (1e2f8b5f, #714,
+              16. Nov.) fand den MSVC-Build fehlerhaft
           target:
             en: >-
               a Linux, Windows and macOS line with SHA and pass/fail for every candidate; installer
@@ -1548,14 +1579,15 @@ lanes:
           scope:
             en: >-
               Archive mirrors and signed snapshots, monitoring as the health signal, IBD from
-              genesis on a stock binary, staged upgrades, mixed-version interop (v0.34.15 against
-              the release line), the operator safe profile in the guides, and which fixes a v0.34.15
-              node lacks (gate G1).
+              genesis on a stock binary, staged upgrades, mixed-version interop (v0.34.15 and
+              v0.34.16 against the release line), the operator safe profile in the guides, and which
+              fixes a v0.34.15 node lacks (gate G1).
             de: >-
               Archiv-Spiegel und signierte Snapshots, Monitoring als Gesundheitssignal, IBD ab
               Genesis mit einer unveränderten Binärdatei, gestufte Upgrades, Zusammenspiel
-              gemischter Versionen (v0.34.15 gegen die Release-Linie), das sichere Betreiberprofil
-              in den Anleitungen und welche Korrekturen einem Node mit v0.34.15 fehlen (Gate G1).
+              gemischter Versionen (v0.34.15 und v0.34.16 gegen die Release-Linie), das sichere
+              Betreiberprofil in den Anleitungen und welche Korrekturen einem Node mit v0.34.15
+              fehlen (Gate G1).
           why:
             en: >-
               gate G1 is 'partly'; most nodes run v0.34.15 and the release line is far ahead;
@@ -1678,10 +1710,10 @@ routes:
     title: { en: Pull request, de: Pull Request }
     text:
       en: >-
-        A normal pull request to release-0.34.16, sent in the Thursday batch with its fork CI run:
+        A normal pull request to release-0.34.17, sent in the Thursday batch with its fork CI run:
         fails before, passes after.
       de: >-
-        Ein normaler Pull Request an release-0.34.16, verschickt im Donnerstagspaket mit seinem
+        Ein normaler Pull Request an release-0.34.17, verschickt im Donnerstagspaket mit seinem
         Fork-CI-Lauf: schlägt vorher fehl, besteht danach.
   - id: evidence
     title: { en: Evidence, de: Beleg }
@@ -1833,8 +1865,8 @@ gates:
   - id: G6
     name: { en: Peer input charged and bounded, de: Peer-Eingaben angerechnet und begrenzt }
     state:
-      en: "open; #478 and #313 on the release line only"
-      de: "offen; #478 und #313 nur auf der Release-Linie"
+      en: "open; #478 and #313 are in v0.34.16 (on main since 15 Nov)"
+      de: "offen; #478 und #313 sind in v0.34.16 (seit 15. Nov. auf main)"
   - id: G7
     name:
       en: What runs is what was reviewed
@@ -2034,13 +2066,17 @@ rules:
       Nur getestete Korrekturen: Der Test schlägt vorher fehl und besteht danach, mit Commit,
       Plattform und Befehl. Sagen, was nicht getestet wurde.
   - en: >-
-      Validation, fork choice, attestation and the MatMul frontier stay out of release-0.34.16
-      (btxchain/btx #464 and the pull requests closed on the same day, 11 November 2026). Findings
-      there go to the E-CONSENSUS lane as evidence, not as pull requests.
+      Validation, fork choice, attestation and the MatMul frontier stay out of the release branch
+      (release-0.34.17 since 15 November 2026): the maintainer kept them out of release-0.34.16
+      (btxchain/btx #464) and took onto release-0.34.17 the open pull requests that do not change
+      consensus or a spend (#714). Findings there go to E-CONSENSUS as evidence, not as pull
+      requests.
     de: >-
-      Validierung, Fork-Wahl, Attestierung und die MatMul-Frontier bleiben aus release-0.34.16
-      heraus (btxchain/btx #464 und die am selben Tag geschlossenen Pull Requests, 11. November
-      2026). Befunde dort gehen als Belege an den Bereich E-CONSENSUS, nicht als Pull Requests.
+      Validierung, Fork-Wahl, Attestierung und die MatMul-Frontier bleiben aus dem Release-Branch
+      heraus (seit 15. November 2026 release-0.34.17): Der Maintainer hielt sie aus
+      release-0.34.16 heraus (btxchain/btx #464) und nahm in release-0.34.17 die offenen PRs auf,
+      die weder Konsens noch Coin-Ausgaben ändern (#714). Befunde dort gehen als Belege an
+      E-CONSENSUS, nicht als PRs.
   - en: >-
       A second person who is not the author reviews before anything goes upstream. Lanes send their
       pull requests together once a week, so the maintainer gets one batch, not a stream.
@@ -2068,14 +2104,15 @@ never:
       Nie selbst posten, kommentieren, pushen oder einen PR öffnen. Die verantwortliche Person liest
       zuerst den ganzen Text und den Diff.
   - en: >-
-      Never open a PR into release-0.34.16 that touches validation.cpp, pow.cpp, src/consensus/,
-      script/interpreter.cpp, fork choice or download scheduling in net_processing.cpp,
-      node/matmul_trusted_attestations.* rules, or src/matmul/. Those go to E-CONSENSUS.
+      Never open a PR into the release branch (release-0.34.17 since 15 Nov) that touches
+      validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, fork choice or download
+      scheduling in net_processing.cpp, node/matmul_trusted_attestations.* rules, or src/matmul/.
+      Those go to E-CONSENSUS.
     de: >-
-      Nie einen PR an release-0.34.16 öffnen, der validation.cpp, pow.cpp, src/consensus/,
-      script/interpreter.cpp, die Fork-Wahl oder die Download-Planung in net_processing.cpp, die
-      Regeln in node/matmul_trusted_attestations.* oder src/matmul/ berührt. Das geht an
-      E-CONSENSUS.
+      Nie einen PR an den Release-Branch (seit 15. Nov. release-0.34.17) öffnen, der
+      validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, die Fork-Wahl oder die
+      Download-Planung in net_processing.cpp, die Regeln in node/matmul_trusted_attestations.* oder
+      src/matmul/ berührt. Das geht an E-CONSENSUS.
   - en: >-
       Never file a single-site fix for a class in the registry. Count the class on the live head;
       sweep it; add the rule.

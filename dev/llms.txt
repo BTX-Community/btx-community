@@ -61,9 +61,9 @@ This index lives in BTX-Community/btx-community under dev/. Last verified: 2026-
 
 ## Outside this repo
 
-- [btxchain/btx](https://github.com/btxchain/btx): the reference implementation; work branch release-0.34.16; main is v0.34.15
-- [Upstream AGENTS.md on release-0.34.16](https://raw.githubusercontent.com/btxchain/btx/release-0.34.16/AGENTS.md): authoritative for code invariants; in a clone read it with git show origin/release-0.34.16:AGENTS.md
-- [Upstream HUMANS.md on release-0.34.16](https://raw.githubusercontent.com/btxchain/btx/release-0.34.16/HUMANS.md): the same tree, described for people
+- [btxchain/btx](https://github.com/btxchain/btx): the reference implementation; work branch release-0.34.17 since 15 Nov; main and release-0.34.16 are v0.34.16
+- [Upstream AGENTS.md on release-0.34.17](https://raw.githubusercontent.com/btxchain/btx/release-0.34.17/AGENTS.md): authoritative for code invariants; in a clone read it with git show origin/release-0.34.17:AGENTS.md
+- [Upstream HUMANS.md on release-0.34.17](https://raw.githubusercontent.com/btxchain/btx/release-0.34.17/HUMANS.md): the same tree, described for people
 - [Releases](https://github.com/btxchain/btx/releases): published archives and release notes
 - [Network status API](https://network.btx-monitoring.com/api/v1/status.json): supply, chain height and network metrics as JSON, measured from an archive node; page at https://network.btx-monitoring.com/
 - [Signed snapshots](https://github.com/dr-chambre/btx-snapshots): daily datadir snapshots, checked and signed by a second node
