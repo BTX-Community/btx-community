@@ -47,7 +47,7 @@ Routes: **PR** = a pull request to `release-0.34.16` in the weekly batch. **EVID
 
 Levels are explained in [`../08-levels.md`](../08-levels.md). New here? Start with `I-RC-runner.md` (one hour, no spend, no wallet on the machine).
 
-**Lanes without a pack.** A-NET, A-HELPER, A-SHIELDED, A-PQ and A-GUI have a scope and a done bar in `../07-lanes.md` but no owner. An unowned lane gets no work. Claim one and a pack in this format follows (template below).
+**Lanes without a pack.** A-NET, A-HELPER, A-SHIELDED, A-PQ and A-GUI have a scope and a done bar in `../07-lanes.md` but no pack yet. A-HELPER has an owner; the other four have none, and an unowned lane gets no work. Claim one and a pack in this format follows (template below).
 
 ## Claim a lane
 

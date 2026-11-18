@@ -36,7 +36,7 @@ STATUS_OF = {
     "evidence for #464": "evidence",
 }
 """The status filter of a class, from the start of its sweep_status in dev/plan/plan-data.json."""
-NUMBERS = {2: "Two", 5: "five"}
+NUMBERS = {2: "Two", 4: "Four"}
 
 
 def scope_marks(text: str) -> set[str]:
@@ -412,9 +412,10 @@ class RulesTest(unittest.TestCase):
             {"principles": [*page["principles"], {"id": "p4", "title": text, "text": text}]},
             lanes({**lane, "id": "a-wallet"}),
             lanes(lane, lane),
-            lanes({**lane, "owner": "x"}),
+            lanes({**lane, "owner": "x", "second_pass": "x"}),
+            lanes({**lane, "owner": "@x"}),
+            lanes({**lane, "second_pass": "a b"}),
             lanes({**lane, "waiting": True}),
-            lanes({k: v for k, v in lane.items() if k != "pack"}),
             lanes({**lane, "done_bar": [text] * 11}),
             lanes({**lane, "route": "chat"}),
             lanes({**lane, "pack": f"{build.HUB_URL}packs/A-STORES.md"}),
@@ -452,6 +453,9 @@ class RulesTest(unittest.TestCase):
         for change in broken:
             with self.subTest(change=change), self.assertRaisesRegex(build.ContentError, r"\.yaml is invalid"):
                 build.load_hub(self._write(json.dumps({**page, **change})))
+        # A lane can have an owner before it has a brief.
+        briefless = {k: v for k, v in lane.items() if k != "pack"}
+        build.load_hub(self._write(json.dumps({**page, **lanes({**briefless, "owner": "x", "second_pass": "y"})})))
 
     def test_the_developers_page_matches_the_hub(self) -> None:
         """hub.yaml is a copy of dev/ made by hand; every number and list on it must match the hub."""
@@ -576,7 +580,6 @@ class RulesTest(unittest.TestCase):
                 [(kind, lane.id, lane.title.en) for kind, lane in page_lanes],
             )
             routes = {"PR": "pr", "EVIDENCE": "evidence", "RUN": "run", "fork": "fork"}
-            waiting = set(lanes["no_work_until_claimed"])
             for (_, lane), data in zip(page_lanes, lanes["lanes"], strict=True):
                 with self.subTest(lane=lane.id):
                     self.assertEqual(
@@ -592,24 +595,43 @@ class RulesTest(unittest.TestCase):
                     self.assertEqual(lane.risk_rank, data["risk_rank"])
                     self.assertEqual(lane.route, routes[re.match(r"[A-Za-z]+", data["route"]).group(0)])
                     self.assertEqual([r.en for r in lane.runners], [r["role"] for r in data.get("runners", [])])
-                    self.assertEqual(lane.waiting, lane.id in waiting)
+                    # The handles are copied from the hub; a claim there is copied here too.
+                    self.assertEqual(
+                        (lane.owner, lane.second_pass),
+                        (data["owner"]["handle"], data["second_pass"]["handle"]),
+                        "copy owner.handle and second_pass.handle from dev/plan/lanes.json into hub.yaml",
+                    )
                     self.assertNotRegex(lane.scope.en, r"src/|\.(cpp|h)\b")
                     # The scope is written by hand; its numbers, classes and lane ids are the hub's.
                     # A-WALLET names the lane its shielded RPC belongs to; C-K01 names its class.
                     allowed = {"A-WALLET": {"A-SHIELDED"}, "C-K01": {"K01"}}.get(lane.id, set())
                     self.assertLessEqual(scope_marks(lane.scope.en) - allowed, scope_marks(data["scope"]))
 
+        with self.subTest("owners in 07-lanes.md"):
+            # The Owner line of each lane in 07-lanes.md names the handle in lanes.json.
+            section = lanes_page.split("## 3. The lanes")[1].split("## 4. ")[0]
+            named = {}
+            for block in re.split(r"(?m)^\*\*(?=[A-Z]-[A-Z0-9-]+: )", section)[1:]:
+                handle = re.search(r"(?m)^- Owner: `?([^`\s(]*)", block).group(1)
+                named[block.split(":", 1)[0]] = handle or None
+            self.assertEqual(named, {data["id"]: data["owner"]["handle"] for data in lanes["lanes"]})
+
         with self.subTest("counts the texts name"):
-            # The lanes that wait for an owner: their number in the claim loop, their ids in the
-            # text of their group.
-            waiting_ids = [lane.id for _, lane in page_lanes if lane.waiting]
-            self.assertEqual(waiting_ids, lanes["no_work_until_claimed"])
+            # A lane with neither an owner nor a brief gets no work until claimed: the hub's list
+            # (lanes.json and 07-lanes.md sections 1 and 4) and the number in the claim loop. The
+            # text of a group names the lanes without a brief.
+            idle = [lane.id for _, lane in page_lanes if lane.owner is None and lane.pack is None]
+            self.assertEqual(idle, lanes["no_work_until_claimed"])
+            listed = lanes_page.split("## 4. ")[1].split("## 5. ")[0].strip().split(". ")[0]
+            self.assertEqual(re.findall(r"\b[A-Z]-[A-Z0-9-]+\b", listed), idle)
+            stated = f"{NUMBERS[len(idle)]} lanes get no work until someone takes them"
+            self.assertIn(stated, lanes_page)
             claim = next(loop for loop in hub.contribute if loop.id == "claim")
-            self.assertIn(f"the {NUMBERS[len(waiting_ids)]} that wait for an owner", claim.text.en)
+            self.assertIn(stated, claim.text.en)
             for group in hub.lanes.groups:
                 named = [sentence for sentence in group.text.en.split(". ") if "no brief yet" in sentence]
                 ids = re.findall(r"\b[A-Z]-[A-Z0-9-]+\b", " ".join(named))
-                self.assertEqual(ids, [lane.id for lane in group.lanes if lane.waiting], group.id)
+                self.assertEqual(ids, [lane.id for lane in group.lanes if lane.pack is None], group.id)
             # The gates the done-bar principle names are the done bar.
             principle = next(p for p in hub.principles if p.id == "done-bar")
             self.assertEqual(set(re.findall(r"\bG\d\b", principle.text.en)),
@@ -826,6 +848,27 @@ class PageTest(unittest.TestCase):
             self.assertEqual(re.findall(r'<meter class="c-bar[^"]*" min="0" max="100" value="([0-9.]+)"', part),
                              ["37.4", "63.0"], first)
 
+    def test_each_lane_card_names_its_owner_and_second_pass(self) -> None:
+        """The handles on the cards are the hub's; a lane with an owner never waits for one."""
+        data = json.loads((build.ROOT.parent / "dev" / "plan" / "lanes.json").read_text(encoding="utf-8"))
+        texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
+        for lang in build.LANGUAGES:
+            ui = {key: str(escape(text)) for key, text in texts[lang].items()}
+            html = (self.out / build.page_path(lang, "dev-work").strip("/") / "index.html").read_text(encoding="utf-8")
+            for lane in data["lanes"]:
+                with self.subTest(lang=lang, lane=lane["id"]):
+                    head, card = html.split(f'id="lane-{lane["id"]}"')[1].split("</article>")[0].split(">", 1)
+                    shown = []
+                    for key in ("hub.lane.owner", "hub.lane.second"):
+                        row = re.search(rf"<dt>{re.escape(ui[key])}</dt>\s*<dd>([^<]*)</dd>", card)
+                        self.assertIsNotNone(row, key)
+                        shown.append(row.group(1))
+                    wanted = [lane[slot]["handle"] or ui["hub.lane.open"] for slot in ("owner", "second_pass")]
+                    self.assertEqual(shown, wanted)
+                    owned = lane["owner"]["handle"] is not None
+                    self.assertIn(f'data-waiting="{0 if owned else 1}"', head)
+                    self.assertEqual(ui["hub.lanes.waiting"] in card, not owned)
+
     def test_the_developers_page_names_both_measured_commits(self) -> None:
         """Coverage and the other counts come from different runs; each caption names both commits."""
         hub = build.load_hub(build.ROOT / "content" / "hub.yaml")
@@ -869,6 +912,44 @@ class PageTest(unittest.TestCase):
                 self.assertEqual(len(hrefs), 3)
                 for href in hrefs:
                     self.assertTrue((self.out / href.lstrip("/")).is_file(), href)
+
+    def test_every_page_describes_itself(self) -> None:
+        """Search results and link previews show each page's own description, in its own language."""
+        texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
+
+        def description(path: str) -> str:
+            html = (self.out / path.strip("/") / "index.html").read_text(encoding="utf-8")
+            found = [attrs.get("content") or "" for tag, attrs in tags(html)
+                     if tag == "meta" and attrs.get("name") == "description"]
+            self.assertEqual(len(found), 1, path)
+            return found[0]
+
+        languages: dict[str, set[str]] = {page_id: set() for page_id in build.ALL_PAGES}
+        for lang in build.LANGUAGES:
+            start = description(build.page_path(lang, "home"))
+            pages = set()
+            for page_id in build.ALL_PAGES:
+                text = description(build.page_path(lang, page_id))
+                key = "meta_description" if page_id == "home" else f"page.{page_id}.description"
+                with self.subTest(lang=lang, page=page_id):
+                    self.assertTrue(text.strip())
+                    self.assertEqual(text, texts[lang][key])
+                    if page_id != "home":
+                        self.assertNotEqual(text, start)
+                        self.assertLessEqual(len(text), 160)
+                pages.add(text)
+                languages[page_id].add(text)
+            with self.subTest(lang=lang):
+                self.assertEqual(len(pages), len(build.ALL_PAGES), f"two pages share a description in {lang}")
+        for page_id, found in languages.items():
+            with self.subTest(page=page_id):
+                self.assertEqual(len(found), len(build.LANGUAGES), f"two languages share the description of {page_id}")
+        for draft in build.DRAFT_PAGES:
+            with self.subTest(draft=draft):
+                text = description(build.page_path("en", draft))
+                self.assertTrue(text.strip())
+                self.assertNotEqual(text, description(build.page_path("en", "home")))
+                self.assertLessEqual(len(text), 160)
 
     def test_the_files_for_ai_tools_carry_the_whole_content(self) -> None:
         index = (self.out / "llms.txt").read_text(encoding="utf-8")
@@ -1268,9 +1349,10 @@ class InfraTest(unittest.TestCase):
                 self.assertLess(html.index('id="home-node"'), html.index('id="roles"'))
                 box = html.split('id="home-node"')[1].split("</section>")[0]
                 self.assertEqual(re.findall(r'class="c-home__point" id="home-([a-z]+)"', box), ["privacy", "reach"])
-                # The facts that must survive translation: the mainnet port and the safe setting.
-                self.assertIn("19335", box)
-                self.assertIn("natpmp=0", box)
+                # The facts that must survive translation: the two ports btxd maps, the safe
+                # settings and the switch for the update checks.
+                for fact in ("19335", "29447", "natpmp=0", "modelnet=0", "autoupdate=0"):
+                    self.assertIn(fact, box)
                 self.assertIn(f'href="{build.page_path(lang, "home")}#before-installing"', box)
                 self.assertIn('href="https://github.com/btxchain/btx/blob/main/doc/tor.md"', box)
         home = (self.out / "index.html").read_text(encoding="utf-8")
