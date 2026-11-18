@@ -5,7 +5,7 @@
 
 **For an AI working a lane.** Read [`AGENTS.md`](AGENTS.md), [`06-pr-gate.md`](06-pr-gate.md) and the lane's pack in [`packs/`](packs/) first. §8 of this page is the stop list: if a step would break one of its rules, stop and hand the question to the human.
 
-This is the public version: roles, and a handle once someone has claimed a slot. Every slot without a handle below is open. Companion to the plan, [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md); the machine-readable form is [`plan/lanes.json`](plan/lanes.json). Which lane fits which level: [`08-levels.md`](08-levels.md). Lanes with an AI pack have it in [`packs/`](packs/) (A-WALLET, A-STORES, C-K01, C-PORT, C-PATHS, C-STATIC, I-CI, I-RC and `I-RC-runner`, I-OPS, I-XDEV, E-CONSENSUS); the five lanes in §4 have none yet.
+This is the public version: roles, and a handle once someone has claimed a slot. Every slot without a handle below is open. Companion to the plan, [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md); the machine-readable form is [`plan/lanes.json`](plan/lanes.json). Which lane fits which level: [`08-levels.md`](08-levels.md). Lanes with an AI pack have it in [`packs/`](packs/) (A-WALLET, A-STORES, C-K01, C-PORT, C-PATHS, C-STATIC, I-CI, I-RC and `I-RC-runner`, I-OPS, I-XDEV, E-CONSENSUS); A-HELPER and the four lanes in §4 have none yet.
 
 Every number below comes from [`plan/plan-data.json`](plan/plan-data.json) or the plan; [C3] marks a number from the coverage run. Coverage is product-code line coverage on `swapnet-v2` at `a5d1637f` (14 Nov), unit-only / unit + functional; the other numbers were measured at `c6f9678d`. All coverage numbers are floors: 42 unit suites timed out and 14 of 220 functional scripts failed in the coverage run, and the time budgets were shorter than on 12 Nov, so the comparison with that run is indicative. The coverage build configures again since #578 (merged into the release line on 12 Nov as `7051507b`); the fix shipped in v0.34.16 and is not in v0.34.15. The recipe is in [`04-build-and-test.md`](04-build-and-test.md) §5. Site counts were taken at `4c7840e9`, the `release-0.34.16` head of 12 Nov, unless a count names another commit (`4c7840e9` is 31 commits after `c6f9678d`; none touches `validation.cpp`, `net_processing.cpp`, `pow.cpp`, `src/consensus` or `script/interpreter.cpp`: `git diff --stat c6f9678d 4c7840e9 -- src/validation.cpp src/net_processing.cpp src/pow.cpp src/consensus src/script/interpreter.cpp` prints nothing). Since 15 Nov `release-0.34.16` equals `main` and the v0.34.16 tag (`074dac16`); new PRs go to `release-0.34.17`, where the maintainer cherry-picks them (#714).
 
@@ -27,7 +27,7 @@ Every number below comes from [`plan/plan-data.json`](plan/plan-data.json) or th
 | Batch coordinator | keeps the board, assembles the Thursday batch, decides owner/second-pass disagreements for the batch | §6, §7 |
 | The maintainer | decides what lands in `btxchain/btx` | #464 (11 Nov) |
 
-Load rule: one person owns at most three lanes and second-passes at most three; someone taking a first lane owns one. Five lanes get no work until someone takes them (§4). That is stated, not hidden.
+Load rule: one person owns at most three lanes and second-passes at most three; someone taking a first lane owns one. Four lanes get no work until someone takes them (§4). That is stated, not hidden.
 
 Crosswalk from the master plan's L1-L8: L1 = C-PORT + C-K01; L2 = A-WALLET + A-STORES; L3 = C-STATIC + I-CI (+ A-HELPER); L4 = E-CONSENSUS; L5 = I-OPS; L6 + L8 = I-RC; L7 = I-XDEV.
 
@@ -209,7 +209,7 @@ Format per lane: scope; why (risk rank, coverage now); owner; second pass; caden
 
 ## 4. Lanes that get no work until claimed
 
-A-NET, A-HELPER, A-SHIELDED, A-PQ, A-GUI. Each has a written scope and done bar above, so a newcomer can take one. Until then: A-NET and A-HELPER get only the phase-3 fuzz targets; the other three get nothing. The done bar is the ask: claim the lane by pull request (top of this page) and post your first task on the board.
+A-NET, A-SHIELDED, A-PQ, A-GUI. Each has a written scope and done bar above, so a newcomer can take one. Until then: A-NET gets only the phase-3 fuzz targets; the other three get nothing. The done bar is the ask: claim the lane by pull request (top of this page) and post your first task on the board.
 
 ## 5. The board and the registry
 

@@ -180,7 +180,7 @@
         "role": "second pass (never the owner)",
         "handle": null
       },
-      "cadence": "none until owned; phase-3 fuzz batch covers the dispatcher target and the native.cmake gate only",
+      "cadence": "set by the owner; until then the phase-3 fuzz batch covers the dispatcher target and the native.cmake gate only",
       "done_bar": [
         "modelnet_native_dispatch target runs 24 h clean under ASan",
         "the never-run targets run 1 h clean",
@@ -654,7 +654,6 @@
   ],
   "no_work_until_claimed": [
     "A-NET",
-    "A-HELPER",
     "A-SHIELDED",
     "A-PQ",
     "A-GUI"

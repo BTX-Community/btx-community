@@ -7,6 +7,39 @@
 schema_version: 1
 translations:
 - en: >-
+    easyBTX says it holds no funds, is not a party to any trade and quotes no price. On 16 November
+    2026 the board listed one seller. Contact a seller only through the link on easyBTX's own page.
+    Anyone who messages you first is not that seller. A price agreed there is not a market price.
+  zh: >-
+    据 easyBTX 称，它不持有资金，不参与任何交易，也不报价。2026 年 11 月 16 日，该页面上有一位卖家。只通过 easyBTX
+    自己页面上的链接联系卖家。主动先来联系你的人不是那位卖家。在那里商定的价格不是市场价格。
+- en: Buying BTX
+  zh: 购买 BTX
+- en: >-
+    There is no exchange for BTX. These are trades from person to person without escrow: you pay
+    first and rely on the seller. Not checked by us. Read the checklist "Before you buy or receive
+    BTX" on the start page first, and start with a small amount.
+  zh: >-
+    BTX 没有交易所。这里是个人之间的交易，没有托管：你先付款，只能依靠卖家。我们未作核查。请先阅读首页上的清单“购买或接收 BTX 之前”，并从小额开始。
+- en: >-
+    Sellers the easyBTX team says it has bought from itself. You agree amount and price with a
+    seller on Telegram and pay them directly, usually in USDT.
+  zh: easyBTX 团队称自己曾向其购买过的卖家。你通过 Telegram 与卖家商定数量和价格，并直接付款给对方，通常用 USDT。
+- en: >-
+    Verification gate to the main BTX chat on compute and tech. Not run by the community; for
+    community questions use the group above.
+  zh: 通往 BTX 主聊天群（算力与技术）的验证入口。不由社区运营；社区问题请到上面的群组提问。
+- en: A general mining chat rather than a BTX group; the list keeps to BTX channels.
+  zh: 一个通用的挖矿聊天群，而不是 BTX 群组；本列表只收录 BTX 频道。
+- en: Ask questions in the community group on Telegram.
+  zh: 在 Telegram 上的社区群组中提问。
+- en: Hardly any activity any more; the community talks on Telegram.
+  zh: 几乎已无活动；社区在 Telegram 上交流。
+- en: No activity, and the miner has not changed since August 2026.
+  zh: 没有活动，且该矿工软件自 2026 年 8 月以来未再更新。
+- en: The main community group on Telegram, open to everyone.
+  zh: Telegram 上的主要社区群组，向所有人开放。
+- en: >-
     The archives were replaced several times under the same tag, last on 15 November 2026. The
     current ones bundle libevent, SQLite, ZeroMQ and libgomp; only libc, libstdc++ and the NVIDIA
     driver come from your system. Check your download against the release's SHA256SUMS.
@@ -221,8 +254,6 @@ translations:
     BTX Pool by default. A 5% dev fee was listed for it in August 2026; check the current fee in the
     app.
   zh: 闭源；构建版本未签名，因此请核对发布页面上的 SHA-256。它默认在 BTX Pool 上开始挖矿。2026 年 8 月时，其开发者费用被列为 5%；请在应用中查看当前费率。
-- en: Community Discord, open to everyone, including mining help.
-  zh: 社区 Discord，对所有人开放，包括挖矿帮助。
 - en: Community status page - is the network healthy, with history, node help and a public JSON API.
   zh: 社区状态页：网络是否健康，附历史记录、节点帮助和公开 JSON API。
 - en: >-
@@ -283,8 +314,6 @@ translations:
   zh: >-
     适用于多种币的 NVIDIA（CUDA）挖矿软件；BTX 对应算法 btxv4，即自区块 185,000 起的工作量证明。其 README 提供了用于 ninjaraider 和 BTX
     Pool 的命令。
-- en: No change to the miner since 2026-08-21.
-  zh: 该挖矿软件自 2026-08-21 以来没有任何更改。
 - en: Not launched. Its launch checklist is still open and the reference contracts are unaudited.
   zh: 尚未上线。其上线检查清单仍未完成，参考合约也未经审计。
 - en: >-
@@ -394,8 +423,6 @@ translations:
     The same WBTX test bridge as btx.supply, on the Robinhood Chain testnet. Test tokens have no
     value.
   zh: 与 btx.supply 相同的 WBTX 测试跨链桥，位于 Robinhood Chain 测试网上。测试代币没有价值。
-- en: Verification gate; clearing it lets you into the main BTX Telegram groups.
-  zh: 验证入口；通过验证后即可进入 BTX 的主要 Telegram 群组。
 - en: Verify the signature and SHA-256 before use. Not for signers.
   zh: 使用前请核验签名和 SHA-256。不适用于签名者。
 - en: >-
@@ -457,8 +484,6 @@ translations:
   zh: BTX 是比特币的后量子分叉，拥有固定的最大供应量和自己的工作量证明（MatMul）。它由开放的社区维护，而非公司。
 - en: See how the network is doing right now, in plain terms.
   zh: 用通俗的方式查看网络当前的运行情况。
-- en: Ask questions in the community chats (Discord, Telegram).
-  zh: 在社区聊天（Discord、Telegram）中提问。
 - en: >-
     Never share your seed or private key. Nobody from the community will ever ask for it; direct messages
     offering help or "support" are scams.
@@ -483,10 +508,6 @@ translations:
   zh: 社区
 - en: Community account on X.
   zh: 社区在 X 上的账号。
-- en: Russian-speaking mining chat with a BTX topic.
-  zh: 俄语挖矿聊天群，设有 BTX 话题。
-- en: Telegram chat of the matador miner.
-  zh: matador 挖矿软件的 Telegram 聊天群。
 - en: Portal of the easyBTX team - explorer, wallet, mining and news in one place.
   zh: easyBTX 团队的门户：浏览器、钱包、挖矿和新闻集于一处。
 - en: Official
@@ -809,8 +830,8 @@ translations:
 - en: >-
     One area of the code each. E-CONSENSUS prepares evidence and files a pull request only when the
     maintainer asks for one. A-NET, A-HELPER, A-SHIELDED, A-PQ and A-GUI have a scope and a done bar
-    but no brief yet, and wait for an owner.
-  zh: 每项负责一个代码领域。E-CONSENSUS 准备证据，只有在维护者要求时才提交拉取请求。A-NET、A-HELPER、A-SHIELDED、A-PQ 和 A-GUI 已有范围和完成标准，但还没有简报，正在等待负责人。
+    but no brief yet.
+  zh: 每项负责一个代码领域。E-CONSENSUS 准备证据，只有在维护者要求时才提交拉取请求。A-NET、A-HELPER、A-SHIELDED、A-PQ 和 A-GUI 已有范围和完成标准，但还没有简报。
 - en: Wallet, RPC authorization, secrets
   zh: 钱包、RPC 授权、机密
 - en: ModelNet store, deposit and persistence logic
@@ -1030,9 +1051,9 @@ translations:
     (parsers covered) and G4 (classes swept) hold; then the weekly batch shrinks to the ratchet.
   zh: 每项任务都有可衡量的完成标准。当关卡 G2（机器检查已开启）、G3（解析器已覆盖）和 G4（缺陷类别已清理）都满足时，整个计划即告完成；此后每周批次缩减为只剩棘轮检查。
 - en: >-
-    Every lane is claimable, including the five that wait for an owner. A claim is a small pull
-    request to this repository.
-  zh: 每项任务都可以认领，包括正在等待负责人的五项。认领就是向本代码仓库提交一个小的拉取请求。
+    Every owner and second-pass slot without a handle is open. Four lanes get no work until someone
+    takes them. A claim is a small pull request to this repository.
+  zh: 凡是还没有填写用户名的负责人或第二审阅人位置都是空缺的，可以认领。有四项任务在有人认领之前不会分配工作。认领就是向本代码仓库提交一个小的拉取请求。
 - en: >-
     Every verify call site for ML-DSA-44, SLH-DSA and the P2MR evaluation, sigop accounting for
     post-quantum signatures, the ML-KEM transport and the build flags for constant-time code; deep
@@ -1674,8 +1695,10 @@ translations:
   zh: 非原子或不完整的状态文件写入
 - en: none until owned
   zh: 有人认领前暂无
-- en: none until owned; phase-3 fuzz batch covers the dispatcher target and the native.cmake gate only
-  zh: 有人认领前暂无；阶段 3 的 fuzz 批次只涵盖分发器目标和 native.cmake 关卡
+- en: >-
+    set by the owner; until then the phase-3 fuzz batch covers the dispatcher target and the
+    native.cmake gate only
+  zh: 由负责人确定；在此之前，阶段 3 的 fuzz 批次只涵盖分发器目标和 native.cmake 关卡
 - en: none until owned; the phase-3 fuzz batch produces the targets only
   zh: 有人认领前暂无；阶段 3 的 fuzz 批次只产出这些目标
 - en: not counted
@@ -1958,23 +1981,34 @@ translations:
     connections also announces its own address, and peers pass it on.
   zh: "你的节点会向它连接的每个节点暴露自己的 IP 地址。接受入站连接的节点还会宣告自己的地址，其他节点会继续转发。"
 - en: >-
-    btxd asks your router to open its port by default (NAT-PMP or PCP), so behind a router that
-    supports this it becomes reachable by itself.
-  zh: "btxd 默认会请求你的路由器打开它的端口（NAT-PMP 或 PCP），因此在支持该功能的路由器后面，它会自行变得可达。"
+    By default btxd asks your router (NAT-PMP or PCP) to open two ports: TCP 19335 for peers and TCP
+    29447 for the model network, which btxd starts by itself. The model network also looks for peers
+    on your local network over UDP 29448.
+  zh: "btxd 默认会请求你的路由器（NAT-PMP 或 PCP）打开两个端口：TCP 19335 供节点之间连接，TCP 29447 供 btxd 自行启动的模型网络使用。模型网络还会通过 UDP 29448 在你的本地网络中寻找节点。"
+- en: >-
+    btxd also checks btx.dev for updates every 30 minutes, directly and not through -proxy, and
+    sends its version, platform, architecture and rollout group. It installs newer signed releases
+    by itself (autoupdateseamless=0 only reports them, autoupdatetelemetry=0 leaves out those
+    details, autoupdate=0 stops the checks).
+  zh: "btxd 还会每 30 分钟直接向 btx.dev 检查更新（不经过 -proxy），并附上它的版本、平台、架构和分批发布组。它会自行安装更新的签名版本（autoupdateseamless=0 只提示，autoupdatetelemetry=0 不附这些信息，autoupdate=0 停止检查）。"
 - en: >-
     If your address matters, run the node behind Tor (-proxy, -onlynet=onion; the Tor guide advises
-    onlynet=onion only once Tor runs stably) or on a rented server instead.
-  zh: "如果你在意自己的地址，就在 Tor 之后运行节点（-proxy、-onlynet=onion；Tor 指南建议等 Tor 稳定运行后再用 onlynet=onion），或者改用租用的服务器。"
+    onlynet=onion only once Tor runs stably) or on a rented server instead. With -proxy, or an
+    -onlynet without ipv4 and ipv6, btxd keeps port 29447 closed and skips the update checks unless
+    you turn them on.
+  zh: "如果你在意自己的地址，就在 Tor 之后运行节点（-proxy、-onlynet=onion；Tor 指南建议等 Tor 稳定运行后再用 onlynet=onion），或者改用租用的服务器。使用 -proxy，或 -onlynet 不含 ipv4 和 ipv6 时，btxd 会保持端口 29447 关闭，也不检查更新，除非你自己打开。"
 - en: >-
-    On a machine with coins, mining or a signer key, set natpmp=0, as the install checklist says.
-  zh: "在持有币、用于挖矿或存有签名者密钥的机器上，设置 natpmp=0，正如安装检查清单所说。"
+    On a machine with coins, mining or a signer key, set modelnet=0 and natpmp=0, as the install
+    checklist says.
+  zh: "在持有币、用于挖矿或存有签名者密钥的机器上，设置 modelnet=0 和 natpmp=0，正如安装检查清单所说。"
 - en: "Reachability"
   zh: "可达性"
 - en: >-
     Outbound connections work by default. To accept inbound ones, TCP port 19335 must be reachable:
     mapped by NAT-PMP, forwarded on the router by hand, or offered as a Tor onion service
-    (-listenonion). With -proxy, the node only listens if you also set -listen=1.
-  zh: "出站连接默认可用。要接受入站连接，TCP 端口 19335 必须可达：由 NAT-PMP 映射、在路由器上手动转发，或作为 Tor onion 服务提供（-listenonion）。使用 -proxy 时，只有同时设置 -listen=1，节点才会监听。"
+    (-listenonion). With -proxy, the node only listens if you also set -listen=1. Port 29447 is only
+    for the model network; modelnet=0 closes it.
+  zh: "出站连接默认可用。要接受入站连接，TCP 端口 19335 必须可达：由 NAT-PMP 映射、在路由器上手动转发，或作为 Tor onion 服务提供（-listenonion）。使用 -proxy 时，只有同时设置 -listen=1，节点才会监听。端口 29447 只用于模型网络；modelnet=0 会将其关闭。"
 - en: >-
     A node that only connects out stays in sync and relays to the peers it connects to, but new
     nodes cannot reach it, so it does not help them sync.
@@ -1991,9 +2025,10 @@ translations:
   zh: "全节点"
 - en: >-
     Relays blocks and transactions and keeps the network reachable. With a qualified GPU it checks
-    the MatMul work itself; without one, set it up as a trusted mirror that follows signed checks
-    from its signers (on mainnet at least two, by default), or it stops syncing.
-  zh: "转发区块和交易，保持网络可达。配备合格 GPU 时，它自行验证 MatMul 工作；没有时，需把它配置为受信任镜像，跟随其签名者签署的验证结果（主网默认至少两个），否则它会停止同步。"
+    the MatMul work itself. Without one, run it as a trusted mirror or it stops syncing: btxd ships
+    no signer keys, so pin at least two you trust and set matmultrustedthreshold=2 (default 1). On
+    mainnet it will not start with fewer unless you explicitly override that.
+  zh: "转发区块和交易，保持网络可达。配备合格 GPU 时，它自行验证 MatMul 工作。没有的话，要以受信任镜像方式运行，否则它会停止同步：btxd 不附带签名者密钥，所以要固定至少两个你信任的密钥，并设置 matmultrustedthreshold=2（默认为 1）。少于两个时，除非你明确强制覆盖，它在主网上不会启动。"
 - en: >-
     An always-on computer or small server with an SSD and a steady connection. A GPU is optional.
   zh: "一台常开的电脑或小型服务器，配 SSD 和稳定的网络连接。GPU 可选。"

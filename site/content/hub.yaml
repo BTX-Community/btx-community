@@ -18,10 +18,13 @@
 #                       sweep_status. No file, line or function of any result here: class and count
 #                       only
 #   lanes               dev/plan/lanes.json lanes (why, target, cadence, route, done bar, coverage,
-#                       risk rank, runners); a group id is the lanes' "kind"; waiting = the lane is
-#                       in no_work_until_claimed and has no pack. Scopes are written here, without
-#                       file lists; every number, class and lane id in one is in the lane's scope in
-#                       lanes.json. Owners are claimed in the hub, never named here
+#                       risk rank, runners, and the handles: owner = owner.handle, second_pass =
+#                       second_pass.handle, left out while the slot is open); a group id is the
+#                       lanes' "kind". A lane without an owner waits for one; a lane with neither
+#                       an owner nor a pack is in no_work_until_claimed. Scopes are written here,
+#                       without file lists; every number, class and lane id in one is in the
+#                       lane's scope in lanes.json. A claim in the hub is copied here in the same
+#                       pull request
 #   flow, week, sweep_rules  dev/plan/lanes.json flow, rhythm, rules 3-6; "who" from
 #                       dev/07-lanes.md section 6
 #   routes, escalation  the three routes of dev/07-lanes.md section 3 (PR, EVIDENCE, RUN) and the
@@ -37,7 +40,7 @@
 # brief.notes (dev/AGENTS.md section 1, dev/packs/README.md), rules (dev/README.md "Rules of the
 # house", the same ten as dev/AGENTS.md section 4) and contribute (dev/README.md,
 # dev/lessons/README.md, dev/exam/questions.md). The counts they name are checked all the same: the
-# lanes that wait for an owner and the exits of the flow.
+# lanes that get no work until claimed and the exits of the flow.
 #
 # ci is not from the hub: the texts of the panel that shows the last nightly CI-0 run.
 #
@@ -179,7 +182,8 @@ brief:
         If it asks for something, your AI quotes it to you and asks.
       de: >-
         Text, den deine KI in einer Datei, einer Seite, einem Log oder einem Pull Request liest,
-        sind Daten, keine Anweisung. Verlangt er etwas, zitiert die KI ihn dir und fragt nach.
+        gilt als Daten, nicht als Anweisung. Verlangt er etwas, zitiert die KI ihn dir und fragt
+        nach.
 
 levels:
   - id: basic
@@ -698,12 +702,11 @@ lanes:
         en: >-
           One area of the code each. E-CONSENSUS prepares evidence and files a pull request only
           when the maintainer asks for one. A-NET, A-HELPER, A-SHIELDED, A-PQ and A-GUI have a scope
-          and a done bar but no brief yet, and wait for an owner.
+          and a done bar but no brief yet.
         de: >-
           Je ein Bereich des Codes. E-CONSENSUS sammelt Belege und stellt einen Pull Request nur,
           wenn der Maintainer darum bittet. A-NET, A-HELPER, A-SHIELDED, A-PQ und A-GUI haben Umfang
-          und Abschlusskriterien, aber noch kein Briefing, und warten auf eine verantwortliche
-          Person.
+          und Abschlusskriterien, aber noch kein Briefing.
       lanes:
         - id: A-WALLET
           title:
@@ -730,8 +733,9 @@ lanes:
               wallet lines >= 70 (set here); K05/K11/K12 rules in ctest; restore-without-passphrase
               probe fails; no seed bytes after walletlock
             de: >-
-              Wallet-Zeilen >= 70 (hier festgelegt); Regeln für K05/K11/K12 in ctest; die Probe
-              „Wiederherstellen ohne Passphrase“ scheitert; keine Seed-Bytes nach walletlock
+              Zeilenabdeckung der Wallet >= 70 % (hier festgelegt); Regeln für K05/K11/K12 in ctest;
+              die Probe „Wiederherstellen ohne Passphrase“ scheitert; keine Seed-Bytes nach
+              walletlock
           cadence:
             en: one class per week from phase 2b; 3.3 review in phase 3
             de: ab Phase 2b eine Klasse pro Woche; Prüfung 3.3 in Phase 3
@@ -762,7 +766,7 @@ lanes:
                 die Probe „Wiederherstellen ohne Passphrase“ scheitert; ein Speicherscan nach
                 walletlock zeigt keine Seed-Bytes
             - en: wallet lines from 63.0 to at least 70 (target set here)
-              de: Wallet-Zeilen von 63,0 auf mindestens 70 (Ziel hier festgelegt)
+              de: Zeilenabdeckung der Wallet von 63,0 % auf mindestens 70 % (Ziel hier festgelegt)
             - en: >-
                 each of the 927 unexecuted wallet functions (measured 12 Nov at c6f9678d) tested or
                 listed as dead
@@ -813,7 +817,7 @@ lanes:
                 counters, restart = no restart) in ctest
               de: >-
                 Property-Tests je Speicher (Idempotenzschlüssel, vollständige Paginierung, monotone
-                Zähler, Neustart = kein Neustart) in ctest
+                Zähler, Zustand nach Neustart = Zustand ohne Neustart) in ctest
             - en: >-
                 one table-driven BCP/1 lifecycle test (new, mempool, confirmed, replaced, spent,
                 consolidated) through every reporting RPC
@@ -823,7 +827,9 @@ lanes:
             - en: mutate -> reopen -> compare test per store
               de: Test „ändern -> neu öffnen -> vergleichen“ je Speicher
             - en: helper.cpp split proposed to the maintainer with the tests in hand
-              de: Aufteilung von helper.cpp dem Maintainer vorgeschlagen, mit den Tests in der Hand
+              de: >-
+                Aufteilung von helper.cpp dem Maintainer vorgeschlagen, gestützt auf die fertigen
+                Tests
             - en: 0 new single-site K20/K21 PRs after the generators land
               de: 0 neue K20/K21-PRs für Einzelstellen, sobald die Generatoren übernommen sind
         - id: E-CONSENSUS
@@ -936,11 +942,11 @@ lanes:
               lines with functional tests (set here)
             de: >-
               Grenzentabelle vollständig; 6 Targets laufen 24 h fehlerfrei unter ASan;
-              net_processing.cpp >= 75 Zeilen mit Funktionstests (hier festgelegt)
+              Zeilenabdeckung von net_processing.cpp mit Funktionstests >= 75 % (hier festgelegt)
           cadence:
             en: none until owned; the phase-3 fuzz batch produces the targets only
             de: >-
-              keine, bis jemand den Bereich übernimmt; das Fuzz-Paket aus Phase 3 liefert nur die
+              erst, wenn jemand den Bereich übernimmt; das Fuzz-Paket aus Phase 3 liefert nur die
               Targets
           route: pr
           route_text:
@@ -950,7 +956,6 @@ lanes:
             unit: 52.7
             functional: 77.3
           risk_rank: 1
-          waiting: true
           done_bar:
             - en: >-
                 every peer-fed container in doc/resource-bounds.md with a bound, an eviction and a
@@ -970,9 +975,10 @@ lanes:
                 net_processing.cpp at or above 75 lines with functional tests through non-consensus
                 tests (target set here)
               de: >-
-                net_processing.cpp bei mindestens 75 Zeilen mit Funktionstests, erreicht durch Tests
-                außerhalb des Konsenses (Ziel hier festgelegt)
+                net_processing.cpp bei mindestens 75 % Zeilenabdeckung mit Funktionstests, erreicht
+                durch Tests außerhalb des Konsenses (Ziel hier festgelegt)
         - id: A-HELPER
+          owner: jarekpiot
           title:
             en: ModelNet helper network surface and security_v2
             de: Netzwerkschnittstelle des ModelNet-Helpers und security_v2
@@ -1004,11 +1010,11 @@ lanes:
               und Nutzertrennung im Funktionstest-Runner
           cadence:
             en: >-
-              none until owned; phase-3 fuzz batch covers the dispatcher target and the native.cmake
-              gate only
+              set by the owner; until then the phase-3 fuzz batch covers the dispatcher target and
+              the native.cmake gate only
             de: >-
-              keine, bis jemand den Bereich übernimmt; das Fuzz-Paket aus Phase 3 deckt nur das
-              Dispatcher-Target und das native.cmake-Gate ab
+              legt die verantwortliche Person fest; bis dahin deckt das Fuzz-Paket aus Phase 3 nur
+              das Dispatcher-Target und das native.cmake-Gate ab
           route: pr
           route_text:
             en: PR; the helper user default is the maintainer's decision (release-scope note)
@@ -1019,7 +1025,6 @@ lanes:
             unit: 0.2
             functional: 15.0
           risk_rank: 3
-          waiting: true
           done_bar:
             - en: modelnet_native_dispatch target runs 24 h clean under ASan
               de: das Target modelnet_native_dispatch läuft 24 h fehlerfrei unter ASan
@@ -1064,11 +1069,11 @@ lanes:
               a test file for shielded_rpc.cpp with the file above 50 lines (set here); the
               lock-order inversion fixed; verification fuzz targets
             de: >-
-              eine Testdatei für shielded_rpc.cpp und die Datei über 50 Zeilen (hier festgelegt);
-              die Lock-Order-Inversion behoben; Fuzz-Targets für die Verifikation
+              eine Testdatei für shielded_rpc.cpp und die Datei über 50 % Zeilenabdeckung (hier
+              festgelegt); die Lock-Order-Inversion behoben; Fuzz-Targets für die Verifikation
           cadence:
             en: none until owned
-            de: keine, bis jemand den Bereich übernimmt
+            de: erst, wenn jemand den Bereich übernimmt
           route: pr
           route_text:
             en: PR; anchor window -> E-CONSENSUS
@@ -1077,14 +1082,13 @@ lanes:
             unit: 72.1
             functional: 76.9
           risk_rank: 4
-          waiting: true
           done_bar:
             - en: >-
                 shielded_rpc_tests exists and wallet/shielded_rpc.cpp is above 50 lines covered
                 (target set here)
               de: >-
-                shielded_rpc_tests existiert, und wallet/shielded_rpc.cpp liegt über 50 abgedeckten
-                Zeilen (Ziel hier festgelegt)
+                shielded_rpc_tests existiert, und wallet/shielded_rpc.cpp liegt über 50 %
+                Zeilenabdeckung (Ziel hier festgelegt)
             - en: verification fuzz targets with cost limits
               de: Fuzz-Targets für die Verifikation mit Kostengrenzen
             - en: a disconnect-reconnect functional test
@@ -1124,7 +1128,7 @@ lanes:
               Build-Flags
           cadence:
             en: none until owned
-            de: keine, bis jemand den Bereich übernimmt
+            de: erst, wenn jemand den Bereich übernimmt
           route: pr
           route_text:
             en: PR for tests; any accept/reject disagreement -> EVIDENCE immediately
@@ -1132,7 +1136,6 @@ lanes:
           coverage:
             unit: 92.7
             functional: 92.7
-          waiting: true
           done_bar:
             - en: >-
                 libFuzzer differential target (BTX verify vs an independent ML-DSA-44/SLH-DSA
@@ -1172,11 +1175,10 @@ lanes:
               Bildschirm
           cadence:
             en: none until owned
-            de: keine, bis jemand den Bereich übernimmt
+            de: erst, wenn jemand den Bereich übernimmt
           route: pr
           route_text: { en: PR, de: PR }
           risk_rank: 7
-          waiting: true
           done_bar:
             - en: a GUI build job in the fork CI matrix
               de: ein GUI-Build-Job in der Fork-CI-Matrix
@@ -1261,6 +1263,7 @@ lanes:
             - en: 0 new K01 PRs after the sweep
               de: 0 neue K01-PRs nach dem Durchgang
         - id: C-PORT
+          owner: sunnyriverr
           title:
             en: Windows, macOS, build and packaging, resource lifecycle
             de: Windows, macOS, Build und Paketierung, Lebenszyklus von Ressourcen
@@ -1307,7 +1310,7 @@ lanes:
             - en: RAII wrappers for fork/socket/pipe with a pidfd identity check before every kill
               de: RAII-Wrapper für fork/socket/pipe mit einer pidfd-Identitätsprüfung vor jedem kill
             - en: 0 new-site K06 after the lint
-              de: 0 K06 an neuen Stellen nach der Lint-Regel
+              de: 0 neue K06-Stellen nach der Lint-Regel
             - en: release-gate job green (GLIBC ceiling, RUNPATH, elfcheck.py)
               de: Release-Gate-Job grün (GLIBC-Obergrenze, RUNPATH, elfcheck.py)
         - id: C-STATIC
@@ -1411,7 +1414,7 @@ lanes:
               de: Tests mit einem Symlink im Elternpfad und einem Symlink als Blatt
             - en: jail tests with 0 'jail absent' skips under BTX_TEST_REQUIRE_LINUX_JAIL=1 in CI
               de: >-
-                Jail-Tests ohne Überspringen wegen fehlendem Jail („jail absent“) unter
+                Jail-Tests mit 0 übersprungenen Fällen wegen fehlenden Jails („jail absent“) unter
                 BTX_TEST_REQUIRE_LINUX_JAIL=1 in der CI
             - en: >-
                 functional matrix {-listen=0, -proxy, -onlynet, -v2pqonly} x every listening surface
@@ -1481,8 +1484,8 @@ lanes:
                 failures after triage) and only shrinking
               de: >-
                 ci/known-failing.txt aus diesem Lauf geschrieben (die Unit-Fehlschläge; die
-                Fehlschläge der Funktionstests, 14 im Coverage-Lauf [C3], keiner davon an
-                ExactReplay hängend; die gcc-Baseline-Fehlschläge nach der Sichtung), und die Liste
+                Fehlschläge der Funktionstests, 14 im Coverage-Lauf [C3], keiner davon ein Hänger
+                in ExactReplay; die gcc-Baseline-Fehlschläge nach der Sichtung), und die Liste
                 schrumpft nur
             - en: every class PR links a run with fails-before and passes-after
               de: jeder Klassen-PR verlinkt einen Lauf, der vorher fehlschlägt und danach besteht
@@ -1528,7 +1531,7 @@ lanes:
               starts a node; one-line verify script
             de: >-
               eine Zeile für Linux, Windows und macOS mit SHA und Bestanden/Fehlgeschlagen für jeden
-              Kandidaten; das Installationsprogramm startet eine Node; ein Prüfskript mit einer
+              Kandidaten; das Installationsprogramm startet einen Node; ein Prüfskript mit einer
               Ergebniszeile
           cadence:
             en: every candidate; verify requests tagged on the board, answered within the week
@@ -1552,7 +1555,7 @@ lanes:
                 Zeilen für Linux, Windows und macOS mit SHA und Bestanden/Fehlgeschlagen für jeden
                 Kandidaten, bevor jemand „fertig“ schreibt
             - en: install_prebuilt_release_tree on the real archive starts a node
-              de: install_prebuilt_release_tree startet auf dem echten Archiv eine Node
+              de: install_prebuilt_release_tree startet auf dem echten Archiv einen Node
             - en: >-
                 the verify script prints one line (commit, test, result) that the runner pastes
                 unchanged
@@ -1571,6 +1574,7 @@ lanes:
             - en: "runner: macOS"
               de: "Runner: macOS"
         - id: I-OPS
+          owner: dr-chambre
           title: { en: Operators and whole-system runs, de: Betreiber und Läufe des Gesamtsystems }
           scope:
             en: >-
@@ -1582,8 +1586,8 @@ lanes:
               Archiv-Spiegel und signierte Snapshots, Monitoring als Gesundheitssignal, IBD ab
               Genesis mit einer unveränderten Binärdatei, gestufte Upgrades, Zusammenspiel
               gemischter Versionen (v0.34.15 und v0.34.16 gegen die Release-Linie), das sichere
-              Betreiberprofil in den Anleitungen und welche Korrekturen einer v0.34.15-Node fehlen
-              (Gate G1).
+              Betreiberprofil in den Anleitungen und welche Korrekturen einem Node mit v0.34.15
+              fehlen (Gate G1).
           why:
             en: >-
               gate G1 is 'partly'; most nodes run v0.34.15 and the release line is far ahead;
@@ -2120,8 +2124,8 @@ never:
       Never stop a node with kill -9. Stop any keeper or watchdog first, back up the datadir, then
       stop the node cleanly.
     de: >-
-      Nie eine Node mit kill -9 beenden. Zuerst jeden Keeper oder Watchdog stoppen, das
-      Datenverzeichnis sichern, dann die Node sauber beenden.
+      Nie einen Node mit kill -9 beenden. Zuerst jeden Keeper oder Watchdog stoppen, das
+      Datenverzeichnis sichern, dann den Node sauber beenden.
   - en: >-
       Never re-run a baseline tool that already ran; reuse the C1-C3 results (the numbers in
       plan/plan-data.json) and re-grep only the live head.
@@ -2176,11 +2180,12 @@ contribute:
     title: { en: Claim a lane, de: Einen Arbeitsbereich übernehmen }
     text:
       en: >-
-        Every lane is claimable, including the five that wait for an owner. A claim is a small pull
-        request to this repository.
+        Every owner and second-pass slot without a handle is open. Four lanes get no work until
+        someone takes them. A claim is a small pull request to this repository.
       de: >-
-        Jeder Arbeitsbereich kann übernommen werden, auch die fünf, die auf eine verantwortliche
-        Person warten. Eine Übernahme ist ein kleiner Pull Request an dieses Repository.
+        Jeder Platz als verantwortliche Person oder Zweitprüfung, in dem noch kein Name steht, ist
+        offen. Vier Arbeitsbereiche bekommen keine Arbeit, bis jemand sie übernimmt. Eine Übernahme
+        ist ein kleiner Pull Request an dieses Repository.
     steps:
       - text:
           en: "Pick a lane in 07-lanes.md: its scope, why, done bar and first tasks."
@@ -2204,8 +2209,8 @@ contribute:
             One approving review from a /dev/ code owner merges it. If git is in your way, ask, and
             someone enters it for you.
           de: >-
-            Eine zustimmende Review einer für /dev/ zuständigen Person (Code Owner) führt ihn
-            zusammen. Wenn dir git im Weg ist, frag, und jemand trägt es für dich ein.
+            Nach einer zustimmenden Review einer für /dev/ zuständigen Person (Code Owner) wird er
+            zusammengeführt. Wenn dir git im Weg ist, frag, und jemand trägt es für dich ein.
     url: https://github.com/BTX-Community/btx-community/blob/main/dev/07-lanes.md
   - id: lesson
     title: { en: File a lesson, de: Eine Lektion festhalten }
@@ -2235,8 +2240,9 @@ contribute:
             One approving review from a /dev/ code owner merges it; the owner of each affected page
             folds the rule in within a week.
           de: >-
-            Eine zustimmende Review einer für /dev/ zuständigen Person führt ihn zusammen; wer für
-            eine betroffene Seite zuständig ist, arbeitet die Regel innerhalb einer Woche ein.
+            Nach einer zustimmenden Review einer für /dev/ zuständigen Person wird er
+            zusammengeführt; wer für eine betroffene Seite zuständig ist, arbeitet die Regel
+            innerhalb einer Woche ein.
     url: https://github.com/BTX-Community/btx-community/blob/main/dev/lessons/README.md
   - id: exam
     title: { en: Take the exam, de: Die Prüfung ablegen }
@@ -2267,5 +2273,5 @@ contribute:
             names; 11 of 12 pass.
           de: >-
             Eine Frage zählt, wenn das Urteil stimmt und mindestens eine genannte Quelle eine des
-            Schlüssels ist; 11 von 12 bestehen.
+            Schlüssels ist; mit 11 von 12 ist die Prüfung bestanden.
     url: https://github.com/BTX-Community/btx-community/blob/main/dev/exam/questions.md

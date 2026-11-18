@@ -22,7 +22,7 @@ verified:
   commits: [074dac16, 8e7045b9]
   text:
     en: Checked on 15 Nov 2026 against the node software at v0.34.16 (074dac16) and the release-0.34.17 branch (8e7045b9).
-    de: Am 15. Nov. 2026 geprüft am Node-Code von v0.34.16 (074dac16) und am Branch release-0.34.17 (8e7045b9).
+    de: Am 15. Nov. 2026 anhand des Node-Codes von v0.34.16 (074dac16) und des Branches release-0.34.17 (8e7045b9) geprüft.
 
 texts:
   yourself_title: { en: Run it yourself, de: Selbst betreiben }
@@ -31,17 +31,17 @@ texts:
       You keep a machine running and follow its guide. Seven roles, from a node at home to a fuzz
       box in a rack; each card says what the network gets, what the machine needs and who to ask.
     de: >-
-      Du hältst einen Rechner am Laufen und folgst seiner Anleitung. Sieben Rollen, vom Node zu
-      Hause bis zur Fuzz-Box im Rechenzentrum; jede Karte sagt, was das Netz davon hat, was der
-      Rechner braucht und wen man fragt.
+      Du hältst einen Rechner am Laufen und folgst der passenden Anleitung. Sieben Rollen, vom Node
+      zu Hause bis zur Fuzz-Box im Rechenzentrum; jede Karte sagt, was das Netz davon hat, was der
+      Rechner braucht und wen du fragen kannst.
   managed_title: { en: Use a managed setup, de: Eine verwaltete Lösung nutzen }
   managed_text:
     en: >-
       An app installs and supervises the node software for you, on a machine you own. The machine
       and its uptime stay yours.
     de: >-
-      Eine App installiert und überwacht die Node-Software für dich, auf einem eigenen Rechner. Der
-      Rechner und seine Laufzeit bleiben deine Sache.
+      Eine App installiert und überwacht die Node-Software für dich, auf deinem eigenen Rechner.
+      Der Rechner und sein Betrieb bleiben deine Sache.
   managed_none:
     en: This site lists no hosted service that runs BTX infrastructure for you.
     de: Diese Seite führt keinen gehosteten Dienst, der BTX-Infrastruktur für dich betreibt.
@@ -85,10 +85,10 @@ texts:
       security policy asks. Never post a crash, a sanitizer report or a crashing input in a public
       issue, pull request or chat: it can show an attacker how to crash running nodes.
     de: >-
-      Vertraulich melden, über GitHubs private Schwachstellenmeldung bei btxchain/btx, wie es deren
-      Sicherheitsrichtlinie verlangt. Nie einen Absturz, einen Sanitizer-Bericht oder eine
-      absturzauslösende Eingabe in einem öffentlichen Issue, Pull Request oder Chat zeigen: Das kann
-      einem Angreifer zeigen, wie man laufende Nodes zum Absturz bringt.
+      Vertraulich melden, über GitHubs private Schwachstellenmeldung bei btxchain/btx, wie es die
+      Sicherheitsrichtlinie des Projekts verlangt. Nie einen Absturz, einen Sanitizer-Bericht oder
+      eine absturzauslösende Eingabe in einem öffentlichen Issue, Pull Request oder Chat posten: Das
+      kann einem Angreifer zeigen, wie man laufende Nodes zum Absturz bringt.
   report_link: { en: Report a vulnerability privately, de: Schwachstelle vertraulich melden }
   policy_link: { en: The security policy (SECURITY.md), de: Die Sicherheitsrichtlinie (SECURITY.md) }
 
@@ -108,24 +108,40 @@ home:
             eingehende Verbindungen annimmt, kündigt zudem seine eigene Adresse an, und Peers geben
             sie weiter.
         - en: >-
-            btxd asks your router to open its port by default (NAT-PMP or PCP), so behind a router
-            that supports this it becomes reachable by itself.
+            By default btxd asks your router (NAT-PMP or PCP) to open two ports: TCP 19335 for
+            peers and TCP 29447 for the model network, which btxd starts by itself. The model
+            network also looks for peers on your local network over UDP 29448.
           de: >-
-            btxd bittet deinen Router standardmäßig, seinen Port zu öffnen (NAT-PMP oder PCP);
-            hinter einem Router, der das unterstützt, wird er so von selbst erreichbar.
+            btxd bittet deinen Router standardmäßig (NAT-PMP oder PCP), zwei Ports zu öffnen: TCP
+            19335 für Peers und TCP 29447 für das Modell-Netz, das btxd von selbst startet. Das
+            Modell-Netz sucht außerdem über UDP 29448 nach Peers in deinem lokalen Netz.
+        - en: >-
+            btxd also checks btx.dev for updates every 30 minutes, directly and not through -proxy,
+            and sends its version, platform, architecture and rollout group. It installs newer
+            signed releases by itself (autoupdateseamless=0 only reports them,
+            autoupdatetelemetry=0 leaves out those details, autoupdate=0 stops the checks).
+          de: >-
+            btxd fragt außerdem alle 30 Minuten bei btx.dev nach Updates, direkt und nicht über
+            -proxy, und sendet dabei Version, Plattform, Architektur und Rollout-Gruppe. Neuere
+            signierte Releases installiert btxd selbst (autoupdateseamless=0 meldet sie nur,
+            autoupdatetelemetry=0 lässt diese Angaben weg, autoupdate=0 beendet die Abfragen).
         - en: >-
             If your address matters, run the node behind Tor (-proxy, -onlynet=onion; the Tor
             guide advises onlynet=onion only once Tor runs stably) or on a rented server instead.
+            With -proxy, or an -onlynet without ipv4 and ipv6, btxd keeps port 29447 closed and
+            skips the update checks unless you turn them on.
           de: >-
             Wenn deine Adresse zählt, den Node hinter Tor betreiben (-proxy, -onlynet=onion; die
             Tor-Anleitung rät zu onlynet=onion erst, wenn Tor stabil läuft) oder stattdessen auf
-            einem gemieteten Server.
+            einem gemieteten Server. Mit -proxy oder einem -onlynet ohne ipv4 und ipv6 hält btxd
+            Port 29447 geschlossen und lässt die Update-Abfragen aus, solange du sie nicht
+            einschaltest.
         - en: >-
-            On a machine with coins, mining or a signer key, set natpmp=0, as the install checklist
-            says.
+            On a machine with coins, mining or a signer key, set modelnet=0 and natpmp=0, as the
+            install checklist says.
           de: >-
-            Auf einem Rechner mit Guthaben, Mining oder Signer-Schlüssel natpmp=0 setzen, wie es die
-            Installations-Checkliste sagt.
+            Auf einem Rechner mit Guthaben, Mining oder Signer-Schlüssel modelnet=0 und natpmp=0
+            setzen, wie es die Installations-Checkliste sagt.
     - id: reach
       title: { en: Reachability, de: Erreichbarkeit }
       items:
@@ -133,12 +149,13 @@ home:
             Outbound connections work by default. To accept inbound ones, TCP port 19335 must be
             reachable: mapped by NAT-PMP, forwarded on the router by hand, or offered as a Tor
             onion service (-listenonion). With -proxy, the node only listens if you also set
-            -listen=1.
+            -listen=1. Port 29447 is only for the model network; modelnet=0 closes it.
           de: >-
             Ausgehende Verbindungen funktionieren von selbst. Für eingehende muss TCP-Port 19335
             erreichbar sein: per NAT-PMP freigegeben, am Router von Hand weitergeleitet oder als
             Tor-Onion-Dienst angeboten (-listenonion). Mit -proxy lauscht der Node nur, wenn du
-            zusätzlich -listen=1 setzt.
+            zusätzlich -listen=1 setzt. Port 29447 dient nur dem Modell-Netz; modelnet=0 schließt
+            ihn.
         - en: >-
             A node that only connects out stays in sync and relays to the peers it connects to,
             but new nodes cannot reach it, so it does not help them sync.
@@ -172,13 +189,15 @@ roles:
     does:
       en: >-
         Relays blocks and transactions and keeps the network reachable. With a qualified GPU it
-        checks the MatMul work itself; without one, set it up as a trusted mirror that follows
-        signed checks from its signers (on mainnet at least two, by default), or it stops syncing.
+        checks the MatMul work itself. Without one, run it as a trusted mirror or it stops syncing:
+        btxd ships no signer keys, so pin at least two you trust and set matmultrustedthreshold=2
+        (default 1). On mainnet it will not start with fewer unless you explicitly override that.
       de: >-
         Leitet Blöcke und Transaktionen weiter und hält das Netz erreichbar. Mit einer zugelassenen
-        GPU prüft er die MatMul-Arbeit selbst; ohne sie als Trusted Mirror einrichten, der den
-        signierten Prüfungen seiner Signer folgt (im Mainnet standardmäßig mindestens zwei), sonst
-        bleibt er stehen.
+        GPU prüft er die MatMul-Arbeit selbst. Ohne sie als Trusted Mirror betreiben, sonst bleibt
+        er stehen: btxd bringt keine Signer-Schlüssel mit, also mindestens zwei vertrauenswürdige
+        hinterlegen und matmultrustedthreshold=2 setzen (Standard 1). Mit weniger startet er im
+        Mainnet nur, wenn du es erzwingst.
     hardware:
       en: >-
         An always-on computer or small server with an SSD and a steady connection. A GPU is
@@ -194,7 +213,7 @@ roles:
       - text: { en: "Running a node: the steps on the start page", de: "Einen Node betreiben: die Schritte auf der Startseite" }
         page: home
         anchor: nodes
-      - text: { en: Node help for stuck heights, de: Node-Hilfe bei hängenden Höhen }
+      - text: { en: Node help for stuck heights, de: Node-Hilfe bei hängender Blockhöhe }
         url: https://network.btx-monitoring.com/help/
       - text: { en: How a trusted mirror works (developers), de: Wie ein Trusted Mirror arbeitet (Entwickler) }
         url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md
@@ -305,8 +324,8 @@ roles:
         time.
       de: >-
         Lässt die mehr als 270 Fuzz-Targets von BTX Tag und Nacht laufen und behält jede Eingabe,
-        die neuen Code erreicht; so findet sie Fehler, die Stunden an Mutation brauchen. Ein kurzer
-        CI-Lauf fängt jedes Mal bei null an.
+        die neuen Code erreicht; so findet sie Fehler, die erst nach stundenlanger Mutation
+        auftauchen. Ein kurzer CI-Lauf fängt jedes Mal bei null an.
     hardware:
       en: >-
         A dedicated Linux machine or VM (Ubuntu 24.04): many CPU threads, about 2 GB of RAM per
@@ -335,25 +354,26 @@ roles:
         it is on the developers page.
       de: >-
         Baut und testet jede Nacht den neuesten Commit eines Branches und veröffentlicht das
-        Ergebnis, damit ein Bruch binnen eines Tages auffällt. Der Betreiber der Statusseite
-        veröffentlicht einen solchen Lauf als Job CI-0; er steht auf der Entwicklerseite.
+        Ergebnis, damit innerhalb eines Tages auffällt, wenn etwas kaputtgeht. Der Betreiber der
+        Statusseite veröffentlicht einen solchen Lauf als Job CI-0; er steht auf der
+        Entwicklerseite.
     hardware:
       en: >-
         A dedicated Linux server with many threads and tens of GB of free disk. The CI-0 run of
         15 Nov took about 70 minutes on 30 threads; a coverage build tree alone takes 27 GB.
       de: >-
-        Ein eigener Linux-Server mit vielen Threads und einigen zehn GB freier Platte. Der CI-0-Lauf
-        vom 15. Nov. brauchte auf 30 Threads etwa 70 Minuten; ein Build-Baum mit Coverage allein
-        belegt 27 GB.
+        Ein eigener Linux-Server mit vielen Threads und mehreren Dutzend GB freiem Plattenplatz. Der
+        CI-0-Lauf vom 15. Nov. brauchte auf 30 Threads etwa 70 Minuten; ein Build-Baum mit Coverage
+        allein belegt 27 GB.
     coming:
       en: >-
         Until then: the I-CI pack lists the jobs, the build-and-test page has the recipes, and
         ci/README.md in the btx tree runs a CI stage locally.
       de: >-
-        Bis dahin: Das I-CI-Paket listet die Jobs, die Seite zu Build und Tests hat die Rezepte, und
-        ci/README.md im btx-Baum führt eine CI-Stufe lokal aus.
+        Bis dahin: Das Briefing für I-CI listet die Jobs, die Seite zu Build und Tests hat die
+        Rezepte, und ci/README.md im btx-Baum zeigt, wie man eine CI-Stufe lokal ausführt.
     related:
-      - text: { en: "I-CI pack: the fork CI jobs", de: "I-CI-Paket: die CI-Jobs auf dem Fork" }
+      - text: { en: "I-CI pack: the fork CI jobs", de: "Briefing für I-CI: die CI-Jobs auf dem Fork" }
         url: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-CI.md
       - text: { en: Build and test recipes, de: Rezepte für Build und Tests }
         url: https://github.com/BTX-Community/btx-community/blob/main/dev/04-build-and-test.md
@@ -364,8 +384,8 @@ roles:
         The status page's operator, who runs the nightly CI-0. The I-CI lane has no owner yet:
         claim it in the lanes file.
       de: >-
-        Den Betreiber der Statusseite, der den nächtlichen CI-0 fährt. Der Bereich I-CI hat noch
-        niemanden: in der Datei der Bereiche übernehmen.
+        Den Betreiber der Statusseite, der den nächtlichen CI-0-Lauf ausführt. Der Bereich I-CI ist
+        noch unbesetzt: Du kannst ihn in der Liste der Bereiche übernehmen.
     ask_url: https://github.com/BTX-Community/btx-community/blob/main/dev/07-lanes.md
     security: true
 
@@ -397,14 +417,14 @@ roles:
         The I-CI lane, which holds the ASan/UBSan and TSan jobs (CI-2, CI-3). It has no owner yet:
         until someone claims it, open an issue in this repository.
       de: >-
-        Den Bereich I-CI, zu dem die Jobs für ASan/UBSan und TSan gehören (CI-2, CI-3). Er hat noch
-        niemanden: Bis ihn jemand übernimmt, ein Issue in diesem Repository eröffnen.
+        Den Bereich I-CI, zu dem die Jobs für ASan/UBSan und TSan gehören (CI-2, CI-3). Er ist noch
+        unbesetzt: Bis ihn jemand übernimmt, ein Issue in diesem Repository öffnen.
     ask_url: https://github.com/BTX-Community/btx-community/issues
     security: true
 
   - id: guix
     kind: testing
-    title: { en: Guix rebuilder, de: Guix-Nachbau }
+    title: { en: Guix rebuilder, de: Guix-Nachbauer }
     does:
       en: >-
         Rebuilds a release from its tagged source in a fixed Guix environment, so independent
@@ -415,9 +435,9 @@ roles:
       de: >-
         Baut ein Release aus seinem getaggten Quellcode in einer festen Guix-Umgebung nach, damit
         unabhängige Nachbauer Hashes vergleichen und niemand einem einzelnen Build-Rechner trauen
-        muss. Laut den Release-Notes von v0.34.16 brauchen seine Linux-Binärdateien glibc 2.38 oder
-        neuer, diese Skripte bauen gegen glibc 2.31: Sie entstanden nicht mit ihnen, Nachbauer
-        vergleichen sich heute nur untereinander.
+        muss. Die Linux-Binärdateien von v0.34.16 brauchen laut Release-Notes glibc 2.38 oder neuer,
+        diese Skripte bauen gegen glibc 2.31: Sie sind also nicht damit gebaut, und Nachbauer
+        vergleichen heute nur untereinander.
     hardware:
       en: >-
         A Linux machine with Guix: 16 GB free for the Guix store plus 8 GB per platform you build.
@@ -437,7 +457,7 @@ roles:
         url: https://github.com/btxchain/btx/tree/main/contrib/guix
     ask:
       en: No lane covers reproducible builds yet; open an issue in this repository.
-      de: Noch kein Bereich deckt reproduzierbare Builds ab; ein Issue in diesem Repository eröffnen.
+      de: Noch kein Bereich deckt reproduzierbare Builds ab; ein Issue in diesem Repository öffnen.
     ask_url: https://github.com/BTX-Community/btx-community/issues
     security: true
 
@@ -570,7 +590,7 @@ map:
         de: >-
           Ein Discovery-Relay (-matmulvalidation=relay) ist der Modus für öffentliche DNS-Seeds und
           addnode-Hosts. Es gibt nur Peer-Adressen aus: Es liefert keine Blöcke, ist keine Autorität
-          für die Kette und fragt nie nach Signaturen und liefert keine.
+          für die Kette und fragt nie nach Signaturen und liefert auch keine.
       cites:
         - "btx:src/init.cpp:651"
         - "btx:src/init.cpp:2134-2136"
@@ -623,7 +643,7 @@ map:
           The status page measures supply, chain height and network figures from an archive
           node.
         de: >-
-          Die Statusseite misst Umlauf, Blockhöhe und Netzwerte an einem Archiv-Node.
+          Die Statusseite misst Umlaufmenge, Blockhöhe und Netzwerte an einem Archiv-Node.
       cites: ["community:README.md:50"]
     - from: releases
       to: network
@@ -650,10 +670,11 @@ map:
           need glibc 2.38 or newer and these scripts build against glibc 2.31, so their hashes cannot
           match a rebuild yet.
         de: >-
-          Ein Nachbauer baut den getaggten Quellcode eines Releases mit contrib/guix, bezeugt das
-          Ergebnis und prüft die Bezeugungen anderer Nachbauer. Laut den Release-Notes von v0.34.16
-          brauchen seine Linux-Binärdateien glibc 2.38 oder neuer, diese Skripte bauen gegen glibc
-          2.31; ihre Hashes können einem Nachbau daher noch nicht gleichen.
+          Ein Nachbauer baut den getaggten Quellcode eines Releases mit contrib/guix, bestätigt das
+          Ergebnis mit seiner Signatur und prüft die Signaturen anderer Nachbauer. Laut den
+          Release-Notes von v0.34.16 brauchen seine Linux-Binärdateien glibc 2.38 oder neuer, diese
+          Skripte bauen aber gegen glibc 2.31; die Hashes dieser Binärdateien können daher noch mit
+          keinem Nachbau übereinstimmen.
       cites:
         - "btx:contrib/guix/README.md:179-199"
         - "btx:contrib/guix/manifest.scm:123"
