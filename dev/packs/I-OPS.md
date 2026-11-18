@@ -25,7 +25,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 | Gate G1 "operators safe now" | partly | [data; PLAN §4.4] |
 | Release line ahead of v0.34.15 (what most nodes run) on 12 Nov | 1,194 commits | [git: `git rev-list --count 476f3f23..4c7840e9`] |
 | Genesis-sync evidence wanted | `assumevalid=0` past height 126,979, checked against the compiled pins | [PLAN §3.1; #272] |
-| The candidate archive | `btx-0.34.16-x86_64-linux-gnu.tar.gz`, SHA-256 `0552bcbceef9fab5a6b9e24f26f4ccf7e615437e5d4c4af608a6247d5c21e6dc` | [read: v0.34.16 release notes; #432, 11 Nov] |
+| The release archive | `btx-0.34.16-x86_64-linux-gnu.tar.gz`, SHA-256 `9bbfff065299b3d6e863ecdeb0e54917788c1c0395cfa1d2b61bc40bf364932b` (uploaded 15 Nov 14:58 UTC; it replaced `0552bcbc…` and `807d033d…` under the same tag, so write the hash and the date into every report) | [read: v0.34.16 release, `SHA256SUMS` (unsigned), 18 Nov] |
 
 ## 4. Done bar [lanes]
 

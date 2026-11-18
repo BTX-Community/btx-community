@@ -294,7 +294,7 @@ The method with the best yield since August [S2]: a named invariant, one reader,
 - **Upstream runs no hosted CI on purpose**, so the CI lives on a contributor fork, and every class PR links its fork run.
 - **The fork workflow already exists** (`btx-035-ci.yml`), with jobs tools, linux-build, linux-userns, mingw-cross, mingw-tests, windows-smoke, windows-tests, macos-build and macos-arm64, plus native Windows lanes in a later variant. It ran on `release-0.34.16` on 12 Nov at `4c7840e9` and on 13 Nov at `88c9b49c`, red both times.
 - **On `4c7840e9`** it must keep the three upstream Atlas workflows; its description is still to be updated. It already handles the user-namespace setting the jail tests need.
-- **Not the same job: the status page's nightly run.** The status page's operator publishes the results of a nightly build and test run of `release-0.34.16` on Linux (its API names the job CI-0). It is one run, not the fork build matrix, and its unit run leaves out the slow `matmul_v4_rc_stage3_*` suites.
+- **Not the same job: the status page's nightly run.** The status page's operator publishes the results of nightly build and test runs on Linux, one per branch: `release-0.34.16` and `release-0.34.17` (its API names the job CI-0). It is one run per branch, not the fork build matrix, and its unit run leaves out the slow `matmul_v4_rc_stage3_*` suites.
 - **Runner limits** [read: GitHub docs, 12 Nov]:
   - Standard runners are free and unlimited for public repos.
   - `ubuntu-24.04` and `windows-latest`: 4 CPU, 16 GB RAM, 14 GB SSD.

@@ -226,11 +226,12 @@ translations:
   fr: compilation réussie
 - en: >-
     ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator
-    publishes the results of a nightly build and test run on release-0.34.16
+    publishes the results of nightly build and test runs on release-0.34.16 and release-0.34.17,
+    one per branch
   fr: >-
     exécuté le 12 nov. sur 4c7840e9 et le 13 nov. sur 88c9b49c, en échec les deux fois ;
-    l'opérateur de la page d'état publie les résultats d'une exécution nocturne de compilation et de
-    tests sur release-0.34.16
+    l'opérateur de la page d'état publie les résultats d'exécutions nocturnes de compilation et de
+    tests sur release-0.34.16 et release-0.34.17, une par branche
 - en: tests not run
   fr: tests non exécutés
 - en: >-

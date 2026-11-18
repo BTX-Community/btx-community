@@ -541,8 +541,8 @@
     {
       "id": "CI-0",
       "name": "fork build matrix (Linux, userns, mingw, Windows, macOS)",
-      "state": "ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator publishes the results of a nightly build and test run on release-0.34.16",
-      "src": "fork CI workflow read 12 Nov; fork run list (GitHub API); status page API ci.json read 13 Nov"
+      "state": "ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator publishes the results of nightly build and test runs on release-0.34.16 and release-0.34.17, one per branch",
+      "src": "fork CI workflow read 12 Nov; fork run list (GitHub API); status page API ci.json read 13 and 18 Nov"
     },
     {
       "id": "G1",
