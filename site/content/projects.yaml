@@ -205,11 +205,11 @@ projects:
       - text: { en: Building on macOS (developers), de: Bauen unter macOS (Entwickler) }
         url: https://github.com/btxchain/btx/blob/main/doc/build-osx.md
       - text: { en: "The cross-device lane: I-XDEV pack", de: "Der geräteübergreifende Bereich: I-XDEV-Paket" }
-        url: https://github.com/BTX-Community/btx-community/blob/main/dev/packs/I-XDEV.md
+        url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-XDEV.md
     ask:
       en: The I-XDEV lane, which replays blocks across devices; it has no owner yet.
       de: Der Bereich I-XDEV, der Blöcke geräteübergreifend nachrechnet; er hat noch niemanden.
-    ask_url: https://github.com/BTX-Community/btx-community/blob/main/dev/07-lanes.md
+    ask_url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md
     cites:
       - "btx:src/CMakeLists.txt:10-11"
       - "btx:src/matmul/accel_v4.cpp:1058-1062"

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -319,10 +320,10 @@ class RulesTest(unittest.TestCase):
     def _developers_page(self) -> dict[str, object]:
         """The smallest developers page that validates."""
         text = {"en": "a", "de": "b"}
-        url = f"{build.REPO_URL}/blob/main/dev/README.md"
+        url = f"{build.HUB_URL}README.md"
         agents, llms = f"{build.RAW_URL}AGENTS.md", f"{build.RAW_URL}llms.txt"
         lane = {"id": "A-WALLET", "title": text, "scope": text, "why": text, "target": text, "cadence": text,
-                "route": "pr", "route_text": text, "pack": f"{build.REPO_URL}/blob/main/dev/packs/A-WALLET.md",
+                "route": "pr", "route_text": text, "pack": f"{build.HUB_URL}packs/A-WALLET.md",
                 "done_bar": [text]}
         return {
             "schema_version": 1,
@@ -417,7 +418,7 @@ class RulesTest(unittest.TestCase):
             lanes({**lane, "waiting": True}),
             lanes({**lane, "done_bar": [text] * 11}),
             lanes({**lane, "route": "chat"}),
-            lanes({**lane, "pack": f"{build.REPO_URL}/blob/main/dev/packs/A-STORES.md"}),
+            lanes({**lane, "pack": f"{build.HUB_URL}packs/A-STORES.md"}),
             lanes({**lane, "coverage": {"unit": 50.5, "functional": 37.2}}),
             {"lanes": {**page["lanes"], "groups": [group, group]}},
             {"lanes": {**page["lanes"], "groups": [{**group, "id": "areas"}]}},
@@ -441,7 +442,7 @@ class RulesTest(unittest.TestCase):
             {"brief": {**brief, "prompt": "x" * 300}},
             {"brief": {**brief, "prompt": brief["prompt"] + "<script>"}},
             {"brief": {**brief, "prompt": brief["prompt"] + "\n" * 30}},
-            {"brief": {**brief, "agents_url": f"{build.REPO_URL}/blob/main/dev/AGENTS.md"}},
+            {"brief": {**brief, "agents_url": f"{build.HUB_URL}AGENTS.md"}},
             {"contribute": [{**page["contribute"][0], "steps": [{"text": text, "page": "dev"}]}]},
             {"week": page["week"][:3]},
             {"start": [{"text": text, "url": "http://example.com"}]},
@@ -709,8 +710,29 @@ class RulesTest(unittest.TestCase):
 
         with self.subTest("links"):
             for url in hub.repo_links():
-                path = re.sub(rf"^{re.escape(build.REPO_URL)}/(blob|tree)/main/", "", url)
+                path = re.sub(rf"^{re.escape(build.REPO_URL)}/(blob|tree)/(main|{re.escape(build.HUB_REF)})/", "", url)
                 self.assertTrue((repo / path).exists(), url)
+
+    def test_hub_links_point_at_the_tag_not_main(self) -> None:
+        # A hub link on main/dev/ would hand an AI whatever was merged last, reviewed or not.
+        self.assertIn(f"/{build.HUB_REF}/dev/", build.RAW_URL)
+        self.assertIn(f"/{build.HUB_REF}/dev/", build.HUB_URL)
+        repo = Path(__file__).resolve().parents[2]
+        on_main = re.compile(r"BTX-Community/btx-community/(?:(?:blob|tree|raw)/)?(?:refs/heads/)?main/dev\b", re.I)
+        suffixes = {".md", ".txt", ".yaml", ".yml", ".py", ".js", ".j2", ".html", ".sh", ".json", ".css"}
+        # Committed files only, so a scratch file in a working tree cannot fail the test.
+        tracked = subprocess.run(["git", "ls-files", "-z"], cwd=repo, capture_output=True, check=True).stdout
+        checked, found = 0, []
+        for name in sorted(tracked.decode("utf-8").split("\0")):
+            path = repo / name
+            if path.suffix not in suffixes or not path.is_file():
+                continue
+            checked += 1
+            for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+                if on_main.search(line):
+                    found.append(f"{name}:{number}")
+        self.assertGreater(checked, 20)
+        self.assertEqual(found, [], "hub links on main/dev/ instead of the tag")
 
     def test_a_step_can_link_to_a_page(self) -> None:
         text = {"en": "a", "de": "b"}
@@ -1080,7 +1102,7 @@ class ProjectsTest(unittest.TestCase):
                         self.assertTrue(target.is_file(), href)
                         if anchor:
                             self.assertIn(f'id="{anchor}"', target.read_text(encoding="utf-8"), href)
-                    elif href.startswith(build.REPO_URL + "/blob/main/"):
+                    elif build.repo_file(href):
                         self.assertTrue(build.repo_file(href).exists(), href)
                     elif href.startswith(build.BTX_REPO_URL + "/"):
                         self.assertRegex(href, r"/((blob|tree)/(main|v[0-9.]+)/[A-Za-z0-9_./-]+|issues|releases/tag/v[0-9.]+)$")
@@ -1164,7 +1186,7 @@ class InfraTest(unittest.TestCase):
                         if anchor:
                             self.assertIn(f'id="{anchor}"', target.read_text(encoding="utf-8"), href)
                     elif href.startswith(build.REPO_URL + "/"):
-                        if href.startswith(f"{build.REPO_URL}/blob/main/") or href.startswith(f"{build.REPO_URL}/tree/main/"):
+                        if build.repo_file(href):
                             self.assertTrue(build.repo_file(href).exists(), href)
                         else:
                             self.assertEqual(href, f"{build.REPO_URL}/issues")
@@ -1185,7 +1207,7 @@ class InfraTest(unittest.TestCase):
             path = build.repo_file(url)
             if path is not None:
                 self.assertTrue(path.exists(), url)
-        self.assertIn(f"{build.REPO_URL}/blob/main/dev/fuzz-box/README.md", self.infra.links())
+        self.assertIn(f"{build.HUB_URL}fuzz-box/README.md", self.infra.links())
 
     def test_the_map_has_text_alternatives(self) -> None:
         edges = len(self.infra.map.edges)

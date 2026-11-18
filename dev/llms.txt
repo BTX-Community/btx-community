@@ -6,58 +6,58 @@ This index lives in BTX-Community/btx-community under dev/. Last verified: 2026-
 
 ## Read first
 
-- [AGENTS.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/AGENTS.md): entry file for coding agents: first-run questions, reading order, the ten rules, stop conditions, relation to the upstream AGENTS.md
-- [02-method.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/02-method.md): the working method: generate, challenge, verify, then publish
-- [03-guardrails.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/03-guardrails.md): the never list: identity hygiene, secrets, spend caps, node safety, where security findings go
-- [04-build-and-test.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/04-build-and-test.md): build on Linux, macOS, Windows and WSL2; unit and functional tests; the coverage recipe; sanitizers; fuzzing; the known state
-- [06-pr-gate.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/06-pr-gate.md): before an upstream PR: the eight class questions, release-line scope, the PR template, the batch and newcomer rules
+- [AGENTS.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/AGENTS.md): entry file for coding agents: first-run questions, reading order, the ten rules, stop conditions, relation to the upstream AGENTS.md
+- [02-method.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/02-method.md): the working method: generate, challenge, verify, then publish
+- [03-guardrails.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/03-guardrails.md): the never list: identity hygiene, secrets, spend caps, node safety, where security findings go
+- [04-build-and-test.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/04-build-and-test.md): build on Linux, macOS, Windows and WSL2; unit and functional tests; the coverage recipe; sanitizers; fuzzing; the known state
+- [06-pr-gate.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/06-pr-gate.md): before an upstream PR: the eight class questions, release-line scope, the PR template, the batch and newcomer rules
 
 ## Reference
 
-- [README.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/README.md): the front page for people: map, levels, reading order, how to claim a lane, file a lesson, add an exam question
-- [01-state.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/01-state.md): where the node software stands: branches and heads, release-line scope, coverage, baselines, CI policy, operator safe profile; each row with source and date
-- [05-bug-classes.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/05-bug-classes.md): the bug-class registry: class, rule that keeps it at zero, status, lane, example PRs
-- [07-lanes.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/07-lanes.md): the lanes: scope, done bar, first tasks, claimable owner and second pass, weekly rhythm; claim a lane here by PR
-- [08-levels.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/08-levels.md): Basic, Advanced, Core: what each needs and its first hour
-- [packs/README.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/README.md): how the lane packs work and which pack to give your AI
-- [packs/A-WALLET.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/A-WALLET.md): lane pack: wallet, RPC authorization, secrets
-- [packs/A-STORES.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/A-STORES.md): lane pack: ModelNet stores, BCP/1 deposits, persistence
-- [packs/C-K01.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/C-K01.md): lane pack: non-atomic or short state-file writes (class K01)
-- [packs/C-PORT.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/C-PORT.md): lane pack: Windows, macOS, build and packaging, resource lifecycle
-- [packs/C-PATHS.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/C-PATHS.md): lane pack: paths, symlinks, jail, options honoured
-- [packs/C-STATIC.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/C-STATIC.md): lane pack: machine-rule sweeps from the static and dynamic baselines
-- [packs/I-CI.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/I-CI.md): lane pack: the fork CI gates, CI-0 to CI-10
-- [packs/I-RC.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/I-RC.md): lane pack: release-candidate qualification and the verify service
-- [packs/I-RC-runner.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/I-RC-runner.md): runner pack, complete on its own: release-archive check, GPU check, Windows check, re-run a PR's stated test
-- [packs/I-OPS.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/I-OPS.md): lane pack: operators, genesis sync, upgrades, interop
-- [packs/I-XDEV.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/I-XDEV.md): lane pack: MatMul cross-backend corpus on CPU, CUDA and Metal
-- [packs/E-CONSENSUS.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/packs/E-CONSENSUS.md): lane pack: consensus, fork choice, attestation, MatMul frontier; evidence only, no PRs
-- [plan/MASTER-PLAN.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/plan/MASTER-PLAN.md): the review and test programme measured on the release line at c6f9678d (coverage again on swapnet-v2 at a5d1637f): baseline, class sweeps, deep reviews, gates
-- [plan/plan-data.json](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/plan/plan-data.json): the plan's numbers as JSON, with measured_at and sources
-- [plan/lanes.json](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/plan/lanes.json): the lanes as JSON; owner and second_pass handles are claimable
-- [tools/refresh-state.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/tools/refresh-state.sh): prints the head rows for 01-state.md with three anonymous GitHub API calls; never writes a file
-- [tools/check_stale.py](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/tools/check_stale.py): checks the Last verified line on every page; warns at 30 days, fails at 90
-- [fuzz-box/README.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/README.md): the continuous fuzz box: what an infra owner needs, safety rules, install, the loop, daily checks, the private route for crashes
-- [fuzz-box/fuzzbox.conf.example](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox.conf.example): the fuzz box settings: branch (default main), workers, slice length, memory limit, priority targets
-- [fuzz-box/fuzzbox-setup.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-setup.sh): one-time setup as root: the btxfuzz user, build tools, OpenSSL (hash-checked), the clone
-- [fuzz-box/fuzzbox-build.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-build.sh): builds the libFuzzer + ASan + UBSan fuzz binary for the newest commit of the branch
-- [fuzz-box/fuzzbox-loop.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-loop.sh): the continuous loop: rebuild and replay, fuzz, triage, merge, disk stop
-- [fuzz-box/fuzzbox-one.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-one.sh): one target, one job (fuzz, replay or merge)
-- [fuzz-box/fuzzbox-triage.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-triage.sh): reproduces new crash files, groups them, writes private report drafts; never publishes anything
-- [fuzz-box/fuzzbox-env.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/fuzzbox-env.sh): sourced by the other scripts: sanitizer settings and the CPU count
-- [fuzz-box/btxfuzz.service](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/fuzz-box/btxfuzz.service): the hardened systemd unit for the loop
+- [README.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/README.md): the front page for people: map, levels, reading order, how to claim a lane, file a lesson, add an exam question
+- [01-state.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/01-state.md): where the node software stands: branches and heads, release-line scope, coverage, baselines, CI policy, operator safe profile; each row with source and date
+- [05-bug-classes.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/05-bug-classes.md): the bug-class registry: class, rule that keeps it at zero, status, lane, example PRs
+- [07-lanes.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/07-lanes.md): the lanes: scope, done bar, first tasks, claimable owner and second pass, weekly rhythm; claim a lane here by PR
+- [08-levels.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/08-levels.md): Basic, Advanced, Core: what each needs and its first hour
+- [packs/README.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/README.md): how the lane packs work and which pack to give your AI
+- [packs/A-WALLET.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/A-WALLET.md): lane pack: wallet, RPC authorization, secrets
+- [packs/A-STORES.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/A-STORES.md): lane pack: ModelNet stores, BCP/1 deposits, persistence
+- [packs/C-K01.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/C-K01.md): lane pack: non-atomic or short state-file writes (class K01)
+- [packs/C-PORT.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/C-PORT.md): lane pack: Windows, macOS, build and packaging, resource lifecycle
+- [packs/C-PATHS.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/C-PATHS.md): lane pack: paths, symlinks, jail, options honoured
+- [packs/C-STATIC.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/C-STATIC.md): lane pack: machine-rule sweeps from the static and dynamic baselines
+- [packs/I-CI.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/I-CI.md): lane pack: the fork CI gates, CI-0 to CI-10
+- [packs/I-RC.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/I-RC.md): lane pack: release-candidate qualification and the verify service
+- [packs/I-RC-runner.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/I-RC-runner.md): runner pack, complete on its own: release-archive check, GPU check, Windows check, re-run a PR's stated test
+- [packs/I-OPS.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/I-OPS.md): lane pack: operators, genesis sync, upgrades, interop
+- [packs/I-XDEV.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/I-XDEV.md): lane pack: MatMul cross-backend corpus on CPU, CUDA and Metal
+- [packs/E-CONSENSUS.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/packs/E-CONSENSUS.md): lane pack: consensus, fork choice, attestation, MatMul frontier; evidence only, no PRs
+- [plan/MASTER-PLAN.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/plan/MASTER-PLAN.md): the review and test programme measured on the release line at c6f9678d (coverage again on swapnet-v2 at a5d1637f): baseline, class sweeps, deep reviews, gates
+- [plan/plan-data.json](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/plan/plan-data.json): the plan's numbers as JSON, with measured_at and sources
+- [plan/lanes.json](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/plan/lanes.json): the lanes as JSON; owner and second_pass handles are claimable
+- [tools/refresh-state.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/tools/refresh-state.sh): prints the head rows for 01-state.md with three anonymous GitHub API calls; never writes a file
+- [tools/check_stale.py](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/tools/check_stale.py): checks the Last verified line on every page; warns at 30 days, fails at 90
+- [fuzz-box/README.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/fuzz-box/README.md): the continuous fuzz box: what an infra owner needs, safety rules, install, the loop, daily checks, the private route for crashes
+- [fuzz-box/fuzzbox.conf.example](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/fuzz-box/fuzzbox.conf.example): the fuzz box settings: branch (default main), workers, slice length, memory limit, priority targets
+- [fuzz-box/fuzzbox-setup.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/fuzz-box/fuzzbox-setup.sh): one-time setup as root: the btxfuzz user, build tools, OpenSSL (hash-checked), the clone
+- [fuzz-box/fuzzbox-build.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/fuzz-box/fuzzbox-build.sh): builds the libFuzzer + ASan + UBSan fuzz binary for the newest commit of the branch
+- [fuzz-box/fuzzbox-loop.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/fuzz-box/fuzzbox-loop.sh): the continuous loop: rebuild and replay, fuzz, triage, merge, disk stop
+- [fuzz-box/fuzzbox-one.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/fuzz-box/fuzzbox-one.sh): one target, one job (fuzz, replay or merge)
+- [fuzz-box/fuzzbox-triage.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/fuzz-box/fuzzbox-triage.sh): reproduces new crash files, groups them, writes private report drafts; never publishes anything
+- [fuzz-box/fuzzbox-env.sh](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/fuzz-box/fuzzbox-env.sh): sourced by the other scripts: sanitizer settings and the CPU count
+- [fuzz-box/btxfuzz.service](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/fuzz-box/btxfuzz.service): the hardened systemd unit for the loop
 
 ## Check yourself
 
-- [exam/questions.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/exam/questions.md): twelve cases with known answers, drawn from public PRs; answer them with the key out of your context
-- [exam/answers.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/exam/answers.md): the answer key with sources; do not load it before you have answered; your operator compares
+- [exam/questions.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/exam/questions.md): twelve cases with known answers, drawn from public PRs; answer them with the key out of your context
+- [exam/answers.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/exam/answers.md): the answer key with sources; do not load it before you have answered; your operator compares
 
 ## Contribute back
 
-- [Claim a lane](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/README.md): section "Claim a lane": one pull request that adds your handle to the lane's Owner line in 07-lanes.md and to owner.handle in plan/lanes.json
-- [lessons/README.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/lessons/README.md): the lessons loop: template, index, review and folding rules
-- [lessons/2026-11-12-windows-tool-read-env-names.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/lessons/2026-11-12-windows-tool-read-env-names.md): seed lesson: never name a build-script variable after one CMake or the MSVC tools read from the environment (RC, CC, CXX, LIB, INCLUDE and others)
-- [lessons/2026-11-12-coverage-fresh-build-dir.md](https://raw.githubusercontent.com/BTX-Community/btx-community/main/dev/lessons/2026-11-12-coverage-fresh-build-dir.md): seed lesson: configure coverage in a fresh build directory after #578
+- [Claim a lane](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/README.md): section "Claim a lane": one pull request that adds your handle to the lane's Owner line in 07-lanes.md and to owner.handle in plan/lanes.json
+- [lessons/README.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/lessons/README.md): the lessons loop: template, index, review and folding rules
+- [lessons/2026-11-12-windows-tool-read-env-names.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/lessons/2026-11-12-windows-tool-read-env-names.md): seed lesson: never name a build-script variable after one CMake or the MSVC tools read from the environment (RC, CC, CXX, LIB, INCLUDE and others)
+- [lessons/2026-11-12-coverage-fresh-build-dir.md](https://raw.githubusercontent.com/BTX-Community/btx-community/hub-v1/dev/lessons/2026-11-12-coverage-fresh-build-dir.md): seed lesson: configure coverage in a fresh build directory after #578
 
 ## Outside this repo
 
