@@ -2595,6 +2595,9 @@ def context(
         ],
         "page_title": None if page_id == "home" else ui[f"page.{page_id}.title"],
         "page_lead": None if page_id == "home" else ui[f"page.{page_id}.lead"],
+        "page_description": (
+            ui["meta_description"] if page_id == "home" else ui[f"page.{page_id}.description"]
+        ),
         "nav": [(p, ui[f"nav.{p}"], page_path(lang, p)) for p in PAGES],
         "nav_href": {p: page_path(lang, p) for p in ALL_PAGES},
         "status_page": STATUS_PAGE.get(lang, STATUS_PAGE["en"]),
@@ -2804,7 +2807,8 @@ def build(out: Path, version: str) -> None:
     for page_id in DRAFT_PAGES:
         draft = context(page, guide, hub, texts, "en", version, "home", sayers["en"])
         draft.update(
-            page=page_id, page_title=fast_lane.title, page_lead=fast_lane.lead, noindex=True,
+            page=page_id, page_title=fast_lane.title, page_lead=fast_lane.lead,
+            page_description=fast_lane.lead, noindex=True,
             alternates=[("en", "en", texts["en"]["lang_name"], page_path("en", page_id))],
             lane=fast_lane, lane_checked=fast_lane.checked.isoformat(),
         )

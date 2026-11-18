@@ -2,6 +2,9 @@
 # Spanish, French and Simplified Chinese. All languages must have the same keys; site/build.py
 # refuses the file otherwise. Placeholders in braces ({count}, {date},
 # {time}, {total}) are filled in by the page and must stay as they are.
+#
+# page.<id>.description is what search results and link previews show for that page
+# (meta_description for the start page). At most 160 characters; the tests check it.
 
 en:
   lang_name: English
@@ -79,20 +82,40 @@ en:
   network.observatory: Live view and node map from the Byron Bay archive node
   page.learn.title: Learn about BTX
   page.learn.lead: What BTX is, and what the next release brings.
+  page.learn.description: >-
+    What BTX is, each fact with a source you can open, and what the newest node release brings.
   page.network.title: Network and development
   page.network.lead: >-
     The network's live state from the public status API, and the development of the node
     software as measured on GitHub.
+  page.network.description: >-
+    The BTX network's live state, such as block height and the next halving, and the development
+    of the node software on GitHub.
   page.links.title: Links
   page.links.lead: Projects, tools and services around BTX, each one opened and checked by hand.
+  page.links.description: >-
+    Projects, tools and services around BTX, from wallets and pools to mining software and
+    explorers, each one opened and checked by hand.
   page.docs.title: "Community projects"
   page.docs.lead: "What the community can build and run as its own, then the roadmap and the research papers this group maintains in the open."
+  page.docs.description: >-
+    What the BTX community can build and run as its own, then the roadmap and the research
+    papers this group maintains in the open.
   page.infra.title: Run BTX infrastructure
   page.infra.lead: "Machines you can give the network: what each one does, what it needs, its guide and who to ask, and a map of how they fit together."
+  page.infra.description: >-
+    Machines you can give the BTX network: what each role does and needs, its guide and who to
+    ask, and a map of how they fit together.
   page.dev.title: Become a BTX dev
   page.dev-work.title: "Ongoing work"
   page.dev-work.lead: "Where the node software stands and who works on what: test coverage, the nightly CI-0 run, bug classes, lanes, gates and the weekly rhythm."
+  page.dev-work.description: >-
+    Where the BTX node software stands and who works on what: the nightly CI-0 run, test
+    coverage, bug classes, lanes and gates.
   page.dev.lead: >-
+    How to send pull requests to the BTX node software that the maintainer can merge: for
+    people, and for the AI tools they work with.
+  page.dev.description: >-
     How to send pull requests to the BTX node software that the maintainer can merge: for
     people, and for the AI tools they work with.
   translation.note: This page was translated from English with AI help.
@@ -418,22 +441,43 @@ de:
   network.observatory: Live-Ansicht und Node-Karte des Archive-Nodes von Byron Bay
   page.learn.title: BTX verstehen
   page.learn.lead: Was BTX ist und was das nächste Release bringt.
+  page.learn.description: >-
+    Was BTX ist, jede Angabe mit einer Quelle zum Nachprüfen, und was das neueste Node-Release
+    bringt.
   page.network.title: Netz und Entwicklung
   page.network.lead: >-
     Der Live-Zustand des Netzes aus der öffentlichen Status-API und die Entwicklung der
     Node-Software, gemessen auf GitHub.
+  page.network.description: >-
+    Der Live-Zustand des BTX-Netzes, etwa Blockhöhe und nächstes Halving, und die Entwicklung
+    der Node-Software auf GitHub.
   page.links.title: Links
   page.links.lead: Projekte, Werkzeuge und Dienste rund um BTX, jeder Eintrag von Hand geöffnet und geprüft.
+  page.links.description: >-
+    Projekte, Werkzeuge und Dienste rund um BTX, von Wallets und Pools bis zu Mining-Software
+    und Explorern, jeder Eintrag von Hand geöffnet und geprüft.
   page.docs.title: "Community-Projekte"
   page.docs.lead: "Was die Community selbst bauen und betreiben kann, dann die Roadmap und die Research-Papiere, die diese Gruppe offen pflegt."
+  page.docs.description: >-
+    Was die BTX-Community selbst bauen und betreiben kann, dann die Roadmap und die
+    Research-Papiere, die diese Gruppe offen pflegt.
+  page.infra.description: >-
+    Rechner für das BTX-Netz: was jede Rolle tut und braucht, ihre Anleitung, wen du
+    fragen kannst, und eine Karte, wie alles zusammenhängt.
   page.infra.title: BTX-Infrastruktur betreiben
   page.infra.lead: "Rechner, die du dem Netz geben kannst: was jeder tut, was er braucht, seine Anleitung und wen man fragt, dazu eine Karte, wie alles zusammenhängt."
   page.dev.title: BTX-Entwickler werden
   page.dev-work.title: "Laufende Arbeit"
   page.dev-work.lead: "Wo die Node-Software steht und wer woran arbeitet: Testabdeckung, der nächtliche CI-0-Lauf, Fehlerklassen, Arbeitsbereiche, Gates und der Wochenrhythmus."
+  page.dev-work.description: >-
+    Wo die BTX-Node-Software steht und wer woran arbeitet: der nächtliche CI-0-Lauf,
+    Testabdeckung, Fehlerklassen, Arbeitsbereiche und Gates.
   page.dev.lead: >-
     Wie man Pull Requests für die BTX-Node-Software so vorbereitet, dass der Maintainer sie
     übernehmen kann: für Menschen und für die KI-Werkzeuge, mit denen sie arbeiten.
+  page.dev.description: >-
+    Wie man Pull Requests für die BTX-Node-Software so vorbereitet, dass der Maintainer sie
+    übernehmen kann: für Menschen und ihre KI-Werkzeuge.
   translation.note: Diese Seite wurde mit KI-Hilfe aus dem Englischen übersetzt.
   translation.fix: Übersetzung korrigieren
   facts.title: Was ist BTX?
@@ -762,20 +806,41 @@ es:
   network.observatory: Vista en vivo y mapa de nodos desde el nodo de archivo de Byron Bay
   page.learn.title: Conocer BTX
   page.learn.lead: Qué es BTX y qué trae la próxima versión.
+  page.learn.description: >-
+    Qué es BTX, cada dato con una fuente que puedes abrir, y qué trae la versión más reciente
+    del nodo.
   page.network.title: Red y desarrollo
   page.network.lead: >-
     El estado de la red en directo desde la API pública de estado, y el desarrollo del software
     del nodo medido en GitHub.
+  page.network.description: >-
+    El estado en directo de la red BTX, como la altura de bloque y el próximo halving, y el
+    desarrollo del software del nodo en GitHub.
   page.links.title: Enlaces
   page.links.lead: Proyectos, herramientas y servicios en torno a BTX, cada uno abierto y revisado a mano.
+  page.links.description: >-
+    Proyectos, herramientas y servicios en torno a BTX, desde monederos y pools hasta software
+    de minería y exploradores, cada uno abierto y revisado a mano.
   page.docs.title: "Proyectos de la comunidad"
   page.docs.lead: "Lo que la comunidad puede construir y operar por su cuenta, y después la hoja de ruta y los documentos de investigación que este grupo mantiene en abierto."
+  page.docs.description: >-
+    Lo que la comunidad BTX puede construir y operar por su cuenta, y después la hoja de ruta y
+    los documentos de investigación que este grupo mantiene en abierto.
   page.infra.title: Operar infraestructura de BTX
   page.infra.lead: "Máquinas que puedes aportar a la red: qué hace cada una, qué necesita, su guía y a quién preguntar, y un mapa de cómo encajan entre sí."
+  page.infra.description: >-
+    Máquinas que puedes aportar a la red BTX: qué hace y qué necesita cada rol, su guía y a
+    quién preguntar, y un mapa de cómo encaja todo.
   page.dev.title: Hazte desarrollador de BTX
   page.dev-work.title: "Trabajo en curso"
   page.dev-work.lead: "Dónde está el software del nodo y quién trabaja en qué: cobertura de pruebas, la ejecución nocturna de CI-0, clases de errores, tareas, controles y el ritmo semanal."
+  page.dev-work.description: >-
+    Dónde está el software del nodo BTX y quién trabaja en qué: la ejecución nocturna de CI-0,
+    cobertura de pruebas, clases de errores, tareas y controles.
   page.dev.lead: >-
+    Cómo enviar al software del nodo BTX pull requests que el mantenedor pueda integrar: para
+    personas, y para las herramientas de IA con las que trabajan.
+  page.dev.description: >-
     Cómo enviar al software del nodo BTX pull requests que el mantenedor pueda integrar: para
     personas, y para las herramientas de IA con las que trabajan.
   translation.note: Esta página se tradujo del inglés con ayuda de IA.
@@ -1108,22 +1173,43 @@ fr:
   network.observatory: "Vue en direct et carte des nœuds depuis le nœud d'archive de Byron Bay"
   page.learn.title: Comprendre BTX
   page.learn.lead: Ce qu'est BTX, et ce qu'apporte la prochaine version.
+  page.learn.description: >-
+    Ce qu'est BTX, chaque fait avec une source à ouvrir, et ce qu'apporte la dernière version du
+    nœud.
   page.network.title: Réseau et développement
   page.network.lead: >-
     L'état du réseau en direct depuis l'API publique de statut, et le développement du logiciel de
     nœud tel que mesuré sur GitHub.
+  page.network.description: >-
+    L'état du réseau BTX en direct, comme la hauteur de bloc et le prochain halving, et le
+    développement du logiciel de nœud sur GitHub.
   page.links.title: Liens
   page.links.lead: Projets, outils et services autour de BTX, chacun ouvert et vérifié à la main.
+  page.links.description: >-
+    Projets, outils et services autour de BTX, des portefeuilles et des pools aux logiciels de
+    minage et aux explorateurs, chacun ouvert et vérifié à la main.
   page.docs.title: "Projets de la communauté"
   page.docs.lead: "Ce que la communauté peut construire et faire tourner elle-même, puis la feuille de route et les documents de recherche que ce groupe tient à jour publiquement."
+  page.docs.description: >-
+    Ce que la communauté BTX peut construire et faire tourner elle-même, puis la feuille de
+    route et les documents de recherche de ce groupe.
   page.infra.title: "Faire tourner l'infrastructure de BTX"
   page.infra.lead: "Les machines que vous pouvez apporter au réseau : ce que fait chacune, ce qu'il lui faut, son guide et à qui demander, avec une carte qui montre comment elles s'articulent."
+  page.infra.description: >-
+    Les machines que vous pouvez apporter au réseau BTX : ce que fait chaque rôle et ce qu'il
+    lui faut, son guide, à qui demander, et une carte de l'ensemble.
   page.dev.title: Devenir développeur BTX
   page.dev-work.title: "Travaux en cours"
   page.dev-work.lead: "Où en est le logiciel de nœud et qui travaille sur quoi : couverture de tests, exécution nocturne de CI-0, classes de bugs, chantiers, contrôles et rythme hebdomadaire."
+  page.dev-work.description: >-
+    Où en est le logiciel de nœud BTX et qui travaille sur quoi : exécution nocturne de CI-0,
+    couverture de tests, classes de bugs, chantiers et contrôles.
   page.dev.lead: >-
     Comment proposer au logiciel de nœud BTX des pull requests que le mainteneur peut fusionner :
     pour les humains, et pour les outils d'IA avec lesquels ils travaillent.
+  page.dev.description: >-
+    Comment proposer au logiciel de nœud BTX des pull requests que le mainteneur peut
+    fusionner : pour les humains et pour leurs outils d'IA.
   translation.note: Cette page a été traduite de l'anglais avec l'aide de l'IA.
   translation.fix: Corriger la traduction
   facts.title: Qu'est-ce que BTX ?
@@ -1449,19 +1535,26 @@ zh:
   network.observatory: Byron Bay 归档节点的实时视图与节点地图
   page.learn.title: 了解 BTX
   page.learn.lead: BTX 是什么，以及下一个版本会带来什么。
+  page.learn.description: BTX 是什么（每项事实都附可打开的来源），以及最新的节点版本带来了什么。
   page.network.title: 网络与开发
   page.network.lead: 来自公开状态 API 的网络实时状态，以及在 GitHub 上测量的节点软件开发情况。
+  page.network.description: BTX 网络的实时状态，如区块高度和下次减半，以及在 GitHub 上测量的节点软件开发情况。
   page.links.title: 链接
   page.links.lead: 围绕 BTX 的项目、工具和服务，每一项都经人工打开并核实。
+  page.links.description: 围绕 BTX 的项目、工具和服务，从钱包、矿池到挖矿软件和区块浏览器，每一项都经人工打开并核实。
   page.docs.title: "社区项目"
   page.docs.lead: "社区可以自行构建和运营的项目，以及本小组公开维护的路线图和研究文档。"
+  page.docs.description: BTX 社区可以自行构建和运营的项目，以及本小组公开维护的路线图和研究文档。
   page.infra.title: 运行 BTX 基础设施
   page.infra.lead: 你可以为网络提供的机器：每台做什么、需要什么、对应的指南和该问谁，另附一张说明它们如何配合的图。
+  page.infra.description: 你可以为 BTX 网络提供的机器：每种角色做什么、需要什么、对应的指南和该问谁，另附一张说明它们如何配合的图。
   page.dev.title: 成为 BTX 开发者
   page.dev-work.title: "进行中的工作"
   page.dev-work.lead: "节点软件的现状以及谁在做什么：测试覆盖率、CI-0 夜间运行、缺陷类别、任务、关卡和每周节奏。"
+  page.dev-work.description: BTX 节点软件的现状以及谁在做什么：CI-0 夜间运行、测试覆盖率、缺陷类别、任务和关卡。
   page.dev.lead: >-
     如何向 BTX 节点软件提交维护者能够合并的拉取请求：写给人，也写给他们使用的 AI 工具。
+  page.dev.description: 如何向 BTX 节点软件提交维护者能够合并的拉取请求：写给人，也写给他们使用的 AI 工具。
   translation.note: 本页由英文借助 AI 翻译。
   translation.fix: 修正翻译
   facts.title: BTX 是什么？

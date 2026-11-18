@@ -848,6 +848,44 @@ class PageTest(unittest.TestCase):
                 for href in hrefs:
                     self.assertTrue((self.out / href.lstrip("/")).is_file(), href)
 
+    def test_every_page_describes_itself(self) -> None:
+        """Search results and link previews show each page's own description, in its own language."""
+        texts = build.load_texts(build.ROOT / "content" / "texts.yaml")
+
+        def description(path: str) -> str:
+            html = (self.out / path.strip("/") / "index.html").read_text(encoding="utf-8")
+            found = [attrs.get("content") or "" for tag, attrs in tags(html)
+                     if tag == "meta" and attrs.get("name") == "description"]
+            self.assertEqual(len(found), 1, path)
+            return found[0]
+
+        languages: dict[str, set[str]] = {page_id: set() for page_id in build.ALL_PAGES}
+        for lang in build.LANGUAGES:
+            start = description(build.page_path(lang, "home"))
+            pages = set()
+            for page_id in build.ALL_PAGES:
+                text = description(build.page_path(lang, page_id))
+                key = "meta_description" if page_id == "home" else f"page.{page_id}.description"
+                with self.subTest(lang=lang, page=page_id):
+                    self.assertTrue(text.strip())
+                    self.assertEqual(text, texts[lang][key])
+                    if page_id != "home":
+                        self.assertNotEqual(text, start)
+                        self.assertLessEqual(len(text), 160)
+                pages.add(text)
+                languages[page_id].add(text)
+            with self.subTest(lang=lang):
+                self.assertEqual(len(pages), len(build.ALL_PAGES), f"two pages share a description in {lang}")
+        for page_id, found in languages.items():
+            with self.subTest(page=page_id):
+                self.assertEqual(len(found), len(build.LANGUAGES), f"two languages share the description of {page_id}")
+        for draft in build.DRAFT_PAGES:
+            with self.subTest(draft=draft):
+                text = description(build.page_path("en", draft))
+                self.assertTrue(text.strip())
+                self.assertNotEqual(text, description(build.page_path("en", "home")))
+                self.assertLessEqual(len(text), 160)
+
     def test_the_files_for_ai_tools_carry_the_whole_content(self) -> None:
         index = (self.out / "llms.txt").read_text(encoding="utf-8")
         full = (self.out / "llms-full.txt").read_text(encoding="utf-8")
