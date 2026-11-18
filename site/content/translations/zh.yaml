@@ -163,12 +163,13 @@ translations:
     fork 上的 CI 工作流（在发布分支上于 11 月 12 日在 4c7840e9 上、11 月 13 日在 88c9b49c 上各运行过一次，两次结果均失败；需保留上游的 Atlas 工作流）：作业 CI-0 至
     CI-10、已知失败列表，以及为 41 个超时的 stage3 测试套件设置的每晚作业。
 - en: >-
-    The results of the last nightly build and test run that the status page's operator publishes as
-    job CI-0, read live from its API. It is one run on Linux, not the fork build matrix listed under
-    Gates. The unit run leaves out the slow matmul_v4_rc_stage3_* suites.
-  zh: "状态页运营者以作业 CI-0 发布的最近一次夜间构建和测试运行的结果，实时读取自其 API。这只是在 Linux 上的一次运行，不是“关卡”一节中列出的 fork 构建矩阵。单元测试运行不包括较慢的 matmul_v4_rc_stage3_* 套件。"
-- en: "This panel is filled in by JavaScript. The run as raw data: "
-  zh: 此面板由 JavaScript 填充。运行结果的原始数据：
+    The results of the last nightly build and test runs that the status page's operator publishes as
+    job CI-0, read live from its API: one run on Linux for each branch it builds, the newest release
+    first. They are not the fork build matrix listed under Gates. The unit runs leave out the slow
+    matmul_v4_rc_stage3_* suites.
+  zh: "状态页运营者以作业 CI-0 发布的最近几次夜间构建和测试运行的结果，实时读取自其 API：运营者构建的每个分支各有一次 Linux 上的运行，最新的发布版本排在最前。这些不是“关卡”一节中列出的 fork 构建矩阵。单元测试运行不包括较慢的 matmul_v4_rc_stage3_* 套件。"
+- en: "This panel is filled in by JavaScript. The runs as raw data: "
+  zh: 此面板由 JavaScript 填充。各次运行结果的原始数据：
 - en: build failed
   zh: 构建失败
 - en: build passed
@@ -197,16 +198,16 @@ translations:
   zh: 功能测试
 - en: Last run is older than 36 h; the figures below may be out of date.
   zh: 最近一次运行已超过 36 小时，下方数据可能已过时。
-- en: Loading the last run …
-  zh: 正在加载最近一次运行 …
+- en: Loading the last runs …
+  zh: 正在加载最近的几次运行 …
 - en: Started {measured} · finished {finished}
   zh: 开始于 {measured} · 完成于 {finished}
 - en: Nightly CI-0 run
   zh: CI-0 夜间运行
 - en: No current run.
   zh: 当前没有运行结果。
-- en: The run as JSON
-  zh: JSON 格式的运行结果
+- en: The runs as JSON
+  zh: JSON 格式的各次运行结果
 - en: Unit tests
   zh: 单元测试
 - en: passed · {failed} failed
@@ -217,6 +218,14 @@ translations:
     {passed} of {run}
   zh: >-
     {passed} / {run}
+- en: This run is older than 36 h; its figures may be out of date.
+  zh: 此次运行已超过 36 小时，其数据可能已过时。
+- en: "{new} new · {known} known"
+  zh: "新增 {new} 个 · 已知 {known} 个"
+- en: "New failures, not on the branch's known-failing list ({count})"
+  zh: "新增失败，不在该分支的已知失败列表中（{count}）"
+- en: "Known-failing tests that passed this time ({count})"
+  zh: "已知失败但本次通过的测试（{count}）"
 - en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
   zh: 已不再上架 BTX；其 BTX/USDT 交易对自 2026 年 7 月起已下线。
 - en: >-

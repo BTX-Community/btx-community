@@ -138,7 +138,8 @@ class ContentTest(unittest.TestCase):
                              'data-filter="registry"', 'data-filter="lanes"', 'data-filter="areas"',
                              'class="c-link c-table__lane"', 'id="ci"', f'data-api="{build.CI_API}"',
                              f'data-repo="{build.UPSTREAM_REPO}"', f'data-job="{build.CI_JOB}"', 'data-ci="status"',
-                             'data-ci="run" hidden', 'data-times="', 'data-failed-functional="', '<noscript>',
+                             'data-ci="run" role="group" hidden', 'data-times="', 'data-failed-functional="',
+                             'data-split="', 'data-new-failures="', 'data-ci="new-failures"', '<noscript>',
                              'class="c-subnav"', 'href="{dev}"', 'id="owner-rules"', 'id="never"'),
             }
             for lang in build.LANGUAGES:
