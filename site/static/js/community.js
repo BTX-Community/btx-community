@@ -747,25 +747,16 @@
     }
   }
 
-  // Contents rail: marks the section the reader is in (aria-current), the highest one whose top
-  // has passed the upper third of the window. Without IntersectionObserver nothing is marked.
+  // Contents rail: marks the section the reader is in (aria-current), the last one whose heading
+  // has reached the line just below the sticky bar. A click marks its own entry at once and keeps it
+  // while the page scrolls there, also when the target is too far down to reach that line.
   function enhanceRail(rail) {
-    if (typeof IntersectionObserver !== "function") {
-      return;
-    }
     var links = toArray(rail.querySelectorAll("a[href^='#']"));
     var targets = links.map(function (link) { return document.getElementById(link.hash.slice(1)); });
-    var visible = {};
-    function mark() {
-      var current = -1;
-      targets.forEach(function (target, index) {
-        if (target && visible[index]) {
-          current = current === -1 ? index : current;
-        }
-      });
-      if (current === -1) {
-        return;
-      }
+    var held = false;
+    var release = 0;
+    var pending = false;
+    function show(current) {
       links.forEach(function (link, index) {
         if (index === current) {
           link.setAttribute("aria-current", "true");
@@ -774,17 +765,41 @@
         }
       });
     }
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        visible[targets.indexOf(entry.target)] = entry.isIntersecting;
-      });
-      mark();
-    }, { rootMargin: "-80px 0px -60% 0px" });
-    targets.forEach(function (target) {
-      if (target) {
-        observer.observe(target);
+    function mark() {
+      pending = false;
+      if (held) {
+        return;
       }
+      var current = 0;
+      targets.forEach(function (target, index) {
+        if (target && target.getBoundingClientRect().top <= 120) {
+          current = index;
+        }
+      });
+      show(current);
+    }
+    links.forEach(function (link, index) {
+      link.addEventListener("click", function () {
+        show(index);
+        held = true;
+        window.clearTimeout(release);
+        release = window.setTimeout(function () { held = false; }, 600);
+      });
     });
+    window.addEventListener("scroll", function () {
+      // While the page scrolls to a clicked entry, keep that entry; the hold ends shortly after
+      // the scrolling stops, so the reader's own scrolling marks again.
+      if (held) {
+        window.clearTimeout(release);
+        release = window.setTimeout(function () { held = false; }, 200);
+        return;
+      }
+      if (!pending) {
+        pending = true;
+        window.requestAnimationFrame(mark);
+      }
+    }, { passive: true });
+    mark();
   }
 
   // A link into a folded section (#flow, #gate-CI-1, #phase-3) opens every closed <details> around
