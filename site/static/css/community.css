@@ -1121,7 +1121,8 @@ main > div {
   margin-bottom: 14px;
 }
 
-/* --- Side navigation for long pages: a contents rail beside the content on wide screens ---- */
+/* --- Side navigation for long pages: a contents rail beside the content on wide screens.
+   Narrow screens have no rail: there the folded category titles are the contents. --- */
 
 .c-railed {
   display: block;
@@ -1145,11 +1146,6 @@ main > div {
     display: block;
     margin-top: 6px;
     padding: 0;
-  }
-
-  /* On wide screens the rail replaces the chip row (.c-jump comes later with display: flex). */
-  .c-jump.c-jump--narrow {
-    display: none;
   }
 }
 
