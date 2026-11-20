@@ -907,9 +907,20 @@
       // (on /links/ opening one category closes the one above) and lands on the heading.
       document.addEventListener("click", function (event) {
         var link = event.target.closest ? event.target.closest("a[href^='#']") : null;
-        if (link && link.hash.length > 1) {
-          openFolds(decodeURIComponent(link.hash.slice(1)), false);
+        if (!link || link.hash.length < 2) {
+          return;
         }
+        var id = decodeURIComponent(link.hash.slice(1));
+        // In a contents list a second click on an open section folds it again.
+        var target = document.getElementById(id);
+        var own = target ? target.querySelector(":scope > details.c-fold") : null;
+        if (own && own.open && link.closest("[data-rail], .c-jump")) {
+          event.preventDefault();
+          own.open = false;
+          target.scrollIntoView();
+          return;
+        }
+        openFolds(id, false);
       });
     }
     enhanceCopy();
