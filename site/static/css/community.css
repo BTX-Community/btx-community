@@ -418,6 +418,29 @@ a {
   display: none;
 }
 
+/* Shown only while the status page lists a rule change ahead: the countdown from the start page
+   lives here now, so every page warns before an upgrade. */
+.c-badge__fork {
+  max-width: 260px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--yellow);
+  color: var(--text);
+}
+
+.c-badge__fork[hidden] {
+  display: none;
+}
+
+.c-badge__fork strong {
+  color: var(--yellow);
+}
+
+.c-badge__fork ul {
+  margin: 4px 0;
+  padding-left: 16px;
+}
+
 .c-badge__row {
   display: flex;
   justify-content: space-between;
@@ -1801,12 +1824,6 @@ main > div {
 
   .c-badge__row {
     gap: 6px;
-  }
-
-  /* Start page on a phone: the status box at the top already shows status, block height and
-     release, so the full panel is left out; the box links to the network page. */
-  .c-live--home {
-    display: none;
   }
 
   .c-hero {

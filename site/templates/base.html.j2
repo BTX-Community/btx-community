@@ -47,6 +47,11 @@
       <span class="c-badge__row"><span>{{ ui["live.on_release"] }}</span> <b data-live="on-release" data-template="{{ ui['badge.nodes'] }}">–</b></span>
       <a class="c-link c-badge__link" href="{{ status_page }}" rel="noopener noreferrer">{{ ui["live.details"] }} ↗</a>
       <span class="c-badge__time" data-live="updated" data-template="{{ ui['live.updated'] }}"></span>
+      <div class="c-badge__fork" data-live="fork" data-template="{{ ui['fork.row'] }}" hidden>
+        <strong>{{ ui["fork.title"] }}</strong>
+        <ul data-live="fork-rows"></ul>
+        <a class="c-link" href="{{ releases_url }}" rel="noopener noreferrer">{{ ui["fork.releases"] }} ↗</a>
+      </div>
     </aside>
     <main id="main">
 {% block content %}{% endblock %}
