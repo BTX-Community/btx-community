@@ -40,6 +40,19 @@
       </details>
     </header>
 
+    <aside class="c-badge c-live--unknown" id="status-badge" data-api="{{ status_api }}" data-lang="{{ lang }}" aria-label="{{ ui['live.title'] }}">
+      <a class="c-badge__head" href="{{ nav_href.network }}"><span class="c-pulse" aria-hidden="true"></span><span data-live="overall" data-label-normal="{{ ui['overall.normal'] }}" data-label-degraded="{{ ui['overall.degraded'] }}" data-label-incident="{{ ui['overall.incident'] }}">{{ ui["live.title"] }}</span></a>
+      <span class="c-badge__row"><span>{{ ui["badge.block"] }}</span> <b data-live="height">–</b></span>
+      <span class="c-badge__row"><span>{{ ui["badge.release"] }}</span> <b data-live="release">–</b></span>
+      <span class="c-badge__row"><span>{{ ui["live.on_release"] }}</span> <b data-live="on-release" data-template="{{ ui['badge.nodes'] }}">–</b></span>
+      <a class="c-link c-badge__link" href="{{ status_page }}" rel="noopener noreferrer">{{ ui["live.details"] }} ↗</a>
+      <span class="c-badge__time" data-live="updated" data-template="{{ ui['live.updated'] }}"></span>
+      <div class="c-badge__fork" data-live="fork" data-template="{{ ui['fork.row'] }}" hidden>
+        <strong>{{ ui["fork.title"] }}</strong>
+        <ul data-live="fork-rows"></ul>
+        <a class="c-link" href="{{ releases_url }}" rel="noopener noreferrer">{{ ui["fork.releases"] }} ↗</a>
+      </div>
+    </aside>
     <main id="main">
 {% block content %}{% endblock %}
     </main>

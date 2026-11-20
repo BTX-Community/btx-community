@@ -427,13 +427,14 @@
       .catch(function () { /* keep the section as it is */ });
   }
 
-  function refresh(root) {
-    fetch(root.dataset.api, { cache: "no-store", credentials: "omit" })
+  // roots: the live panel and the status box at the top of every page; one request fills both.
+  function refresh(roots) {
+    fetch(roots[0].dataset.api, { cache: "no-store", credentials: "omit" })
       .then(function (response) { return response.ok ? response.text() : ""; })
       .then(function (text) {
         var status = parseStatus(text);
         if (status) {
-          apply(root, status);
+          roots.forEach(function (root) { apply(root, status); });
         }
       })
       .catch(function () { /* keep the values shown so far */ });
@@ -840,10 +841,11 @@
       window.location.replace(moved);
       return;
     }
-    var root = document.getElementById("live");
-    if (root && root.dataset.api && typeof fetch === "function") {
-      refresh(root);
-      window.setInterval(function () { refresh(root); }, INTERVAL_MS);
+    var roots = ["live", "status-badge"].map(function (id) { return document.getElementById(id); })
+      .filter(function (root) { return root && root.dataset.api; });
+    if (roots.length && typeof fetch === "function") {
+      refresh(roots);
+      window.setInterval(function () { refresh(roots); }, INTERVAL_MS);
     }
     var development = document.getElementById("development");
     if (development && development.dataset.api && development.dataset.repo && typeof fetch === "function") {
