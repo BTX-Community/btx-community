@@ -1,0 +1,24 @@
+# Draft 01 "Klar": calm and light. Five menu items by intent instead of seven by topic, a status
+# strip under the header, the first steps of every path visible on the start page, the safety
+# checklist as its own dark block, and long pages with an "On this page" rail. Space Grotesk for
+# headings, Inter for text, JetBrains Mono for data only. A second variant "mono" (?v=mono) keeps
+# JetBrains Mono for headings and starts dark.
+title: "Design 01 · Klar"
+summary: >-
+  Calm and light: five menu items by intent, a status strip with words and colours, the first
+  steps of every path on the start page, a dark safety block, numbered sections with an "On this
+  page" rail, and a filterable directory. Add ?v=mono for the variant with monospace headings,
+  dark by default.
+source: "Draft 01 \"Klar\" from the design brief of 20 Nov 2026"
+theme: light
+css: [css/new/design01.css]
+js: [js/new/design01-head.js, js/new/design01.js]
+pages:
+  home: { template: home.html.j2, path: "", live: home }
+  learn: { template: learn.html.j2, path: "learn/", live: learn }
+  network: { template: network.html.j2, path: "network/", live: network }
+  links: { template: links.html.j2, path: "links/", live: links }
+  projects: { template: projects.html.j2, path: "projects/", live: docs }
+  infra: { template: infra.html.j2, path: "infra/", live: infra }
+  dev: { template: dev.html.j2, path: "dev/", live: dev }
+  dev-work: { template: dev-work.html.j2, path: "dev/work/", live: dev-work }
