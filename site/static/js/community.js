@@ -799,6 +799,17 @@
         window.requestAnimationFrame(mark);
       }
     }, { passive: true });
+    // When the last open section is folded, go back to the top, where the title and status are.
+    var folds = targets.map(function (target) {
+      return target ? target.querySelector(":scope > details.c-fold") : null;
+    }).filter(Boolean);
+    folds.forEach(function (fold) {
+      fold.addEventListener("toggle", function () {
+        if (!fold.open && !folds.some(function (other) { return other.open; })) {
+          window.scrollTo(0, 0);
+        }
+      });
+    });
     mark();
   }
 
