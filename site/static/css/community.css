@@ -849,8 +849,9 @@ a {
 
 /* Marker, title and count on one line; a long title wraps itself, the count never moves down.
    Every closed card has room for a title of two lines, so a title that wraps does not make its
-   card taller than the one beside it. */
-.c-audience__fold > summary {
+   card taller than the one beside it, and an opened card starts its text at the same height as
+   its neighbour. (.c-fold in the selector: the general fold rule sets a lower min-height.) */
+.c-fold.c-audience__fold > summary {
   gap: 12px;
   min-height: 84px;
   padding: 14px 0;
