@@ -208,8 +208,10 @@ while kill -0 "$pid" 2>/dev/null; do sleep 2; done; echo "btxd $pid exited"
   `-autoupdate` defaults to 1 on mainnet and 0 on test chains, so without it a long mainnet run may
   stop being the binary under test [read: `-autoupdate` help in `src/init.cpp` at `4c7840e9`;
   [`packs/I-OPS.md`](packs/I-OPS.md) tasks 2 and 3].
-- **Safe profile** for any node that holds a wallet or a signer key: `-modelnet=0` and
-  `-natpmp=0`, and review `-autoupdate` before enabling it [read: plan §4.4, gate G1].
+- **Safe profile** for any node that holds a wallet or a signer key: `-modelnet=0`, `-natpmp=0`
+  and `-swapnet=0`, and review `-autoupdate` before enabling it [read: plan §4.4, gate G1].
+  SwapNet is off by default in v0.34.16 and on from 0.34.17, where a failed SwapNet start stops
+  `btxd` [read: `-swapnet` default 0 at `src/swapnet/node.cpp:96` on `074dac16` (v0.34.16), default 1 at `:179` and the failed-start exit at `src/init.cpp:4652` on `release-0.34.17` @ `d6a86523`].
 
 Source: `07-lanes.md` and `AGENTS.md` (stop condition S9); `04-build-and-test.md` §5; plan §4.4.
 

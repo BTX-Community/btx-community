@@ -921,15 +921,18 @@ translations:
     El nodo deriva de Bitcoin Knots v29.2, una variante de Bitcoin Core. btxd, btx-cli, la interfaz RPC
     y los PSBT funcionan como los conocen los usuarios de Bitcoin; lo que cambia es la prueba de
     trabajo, las firmas y algunas reglas de red.
-- en: 'Three defaults to decide on: btxd installs newer signed releases from btx.dev by itself (autoupdateseamless=0
-    only reports them, autoupdate=0 stops checking); the model network listens on port 29447 (modelnet=0
-    turns it off); and natpmp asks your router to open ports 19335 and 29447 to the internet (natpmp=0
-    stops it). With coins, mining or a signer, set both to 0.'
-  es: 'Tres valores por defecto que debes decidir: btxd instala por sí mismo versiones firmadas más recientes
-    desde btx.dev (autoupdateseamless=0 solo avisa, autoupdate=0 no busca); la red de
-    modelos escucha en el puerto 29447 (modelnet=0 la desactiva); y natpmp pide a tu router que abra a
-    internet los puertos 19335 y 29447 (natpmp=0 lo evita). Con fondos, minería o firmante, pon ambos
-    a 0.'
+- en: >-
+    Four defaults: btxd installs newer signed releases from btx.dev itself (autoupdateseamless=0
+    only reports them, autoupdate=0 stops checking); the model network listens on port 29447
+    (modelnet=0); natpmp opens ports 19335 and 29447 on your router (natpmp=0); SwapNet starts
+    by default from 0.34.17, and a failed start stops btxd (swapnet=0). With coins, mining or a
+    signer, set the last three to 0.
+  es: >-
+    Cuatro valores por defecto: btxd instala solo versiones firmadas nuevas de btx.dev
+    (autoupdateseamless=0 solo avisa, autoupdate=0 no busca); la red de modelos usa el puerto
+    29447 (modelnet=0); natpmp abre en el router los puertos 19335 y 29447 (natpmp=0); SwapNet
+    arranca solo desde 0.34.17 y si falla detiene btxd (swapnet=0). Con fondos, minería o
+    firmante, los tres últimos a 0.
 - en: Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.
   es: >-
     Descomprime el archivo completo y ejecuta bin/btxd desde él. Un bin/btxd copiado por separado se
@@ -2594,11 +2597,11 @@ translations:
     alquilado. Con -proxy, o con un -onlynet sin ipv4 ni ipv6, btxd mantiene cerrado el puerto 29447
     y no busca actualizaciones, salvo que tú lo actives.
 - en: >-
-    On a machine with coins, mining or a signer key, set modelnet=0 and natpmp=0, as the install
-    checklist says.
+    On a machine with coins, mining or a signer key, set modelnet=0, natpmp=0 and swapnet=0, as the
+    install checklist says.
   es: >-
-    En una máquina con monedas, minería o una clave de firmante, pon modelnet=0 y natpmp=0, como
-    dice la lista de instalación.
+    En una máquina con monedas, minería o una clave de firmante, pon modelnet=0, natpmp=0 y
+    swapnet=0, como dice la lista de instalación.
 - en: "Reachability"
   es: "Accesibilidad"
 - en: >-

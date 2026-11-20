@@ -97,7 +97,7 @@ paths:
         href: https://github.com/btxchain/btx/releases
       - text: Load the latest snapshot
         href: https://github.com/dr-chambre/btx-snapshots/releases/latest
-      - text: "Node holds coins or mines? Set modelnet=0 and natpmp=0"
+      - text: "Node holds coins or mines? Set modelnet=0, natpmp=0 and swapnet=0"
         href: https://network.btx-monitoring.com/help/
       - text: Updates install themselves by default; set autoupdate=0 to decide yourself
       - text: Open TCP port 19335 for incoming peers
@@ -114,9 +114,9 @@ watch_out:
     The price on btxprice.com is a model price, not the result of exchange trades.
 
 ask:
-  - text: BTX Discord
-    href: https://discord.gg/btx
-  - text: BTX Telegram
+  - text: BTX Community (Telegram)
+    href: https://t.me/BTX_COMMUNITY_ENTRY
+  - text: BTX main chat (Telegram gate)
     href: https://t.me/btx_ecosystem
   - text: easyBTX chat (Telegram)
     href: https://t.me/easyBTX
