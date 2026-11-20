@@ -1,0 +1,113 @@
+{% extends "design01/base.html.j2" %}
+{% import "design01/_parts.html.j2" as parts %}
+{% set title = ui["nav.dev"] %}
+{% set description = page_description %}
+{% set sections = [
+  ("brief", ui["hub.nav.brief"], None),
+  ("begin", ui["hub.nav.begin"], None),
+  ("levels", ui["hub.nav.levels"], hub.levels | length),
+  ("rules", ui["hub.nav.rules"], None),
+  ("contribute", ui["hub.nav.contribute"], hub.contribute | length),
+] %}
+{% block content %}
+{{ parts.pagehead("Build", draft.pages.dev, page_title, page_lead, [("checked", ui["hub.checked"].format(date=hub.checked))]) }}
+      <section class="sec sec--num" id="brief" aria-labelledby="brief-title">
+        <h2 class="h2" id="brief-title">{{ ui["hub.brief.title"] }}</h2>
+        <p class="prose">{{ ui["hub.brief.lead"] }}</p>
+        <div class="card prompt">
+          <pre class="prompt__text" id="ai-prompt" lang="en" translate="no" tabindex="0" role="region" aria-labelledby="brief-title">{{ hub.brief_prompt }}</pre>
+          <p class="prompt__bar">
+            <button type="button" class="btn btn--primary c-btn--copy" data-copy="ai-prompt" data-copied="{{ ui['hub.brief.copied'] }}" hidden>{{ ui["hub.brief.copy"] }}</button>
+            <span class="meta" data-copy-hint>{{ ui["hub.brief.select"] }}</span>
+            <span class="sr" aria-live="polite" data-copy-status></span>
+          </p>
+        </div>
+        <ul class="links links--row">
+          <li><a href="{{ hub.brief_agents }}" rel="noopener noreferrer">{{ ui["hub.brief.agents"] }}&nbsp;<span aria-hidden="true">↗</span></a></li>
+          <li><a href="{{ hub.brief_llms }}" rel="noopener noreferrer">{{ ui["hub.brief.llms"] }}&nbsp;<span aria-hidden="true">↗</span></a></li>
+        </ul>
+        <ul class="blist">
+          {%- for note in hub.brief_notes %}
+          <li>{{ note }}</li>
+          {%- endfor %}
+        </ul>
+        <h3 class="h3 h3--sub" id="ai-files-title">{{ ui["hub.ai.title"] }}</h3>
+        <ul class="blist" aria-labelledby="ai-files-title">
+          <li><a href="/llms.txt"><code class="code">llms.txt</code></a> {{ ui["hub.ai.index"] }}</li>
+          <li><a href="/llms-full.txt"><code class="code">llms-full.txt</code></a> {{ ui["hub.ai.full"] }}</li>
+        </ul>
+        <p class="meta">{{ ui["hub.ai.english"] }}</p>
+      </section>
+
+      <section class="sec sec--num" id="begin" aria-labelledby="begin-title">
+        <h2 class="h2" id="begin-title">{{ ui["hub.begin.title"] }}</h2>
+        <p class="prose">{{ ui["hub.begin.lead"] }}</p>
+        <h3 class="h3 h3--sub" id="first-steps">{{ ui["hub.steps.title"] }}</h3>
+        <ol class="steps">
+          {%- for step in hub.start %}
+          <li><a href="{{ step.href }}" rel="noopener noreferrer">{{ step.text }}&nbsp;<span aria-hidden="true">↗</span></a></li>
+          {%- endfor %}
+        </ol>
+        <p class="src"><a href="{{ draft.pages['dev-work'] }}#lanes">{{ ui["hub.begin.open_lanes"] }}&nbsp;<span aria-hidden="true">→</span></a></p>
+        <h3 class="h3 h3--sub" id="principles-title">{{ ui["hub.principles.title"] }}</h3>
+        <div class="grid grid--2" role="group" aria-labelledby="principles-title">
+          {%- for principle in hub.principles %}
+          <article class="card" id="principle-{{ principle.id }}">
+            <h4 class="h4">{{ principle.title }}</h4>
+            <p>{{ principle.text }}</p>
+          </article>
+          {%- endfor %}
+        </div>
+        <p class="src">{{ ui["hub.checked"].format(date=hub.checked) }} <a href="{{ hub.source }}" rel="noopener noreferrer">{{ ui["hub.source"] }}&nbsp;<span aria-hidden="true">↗</span></a></p>
+      </section>
+
+      <section class="sec sec--num" id="levels" aria-labelledby="levels-title">
+        <h2 class="h2" id="levels-title">{{ ui["hub.levels.title"] }}</h2>
+        <p class="prose">{{ ui["hub.levels.lead"] }}</p>
+        <ul class="rows">
+          {%- for level in hub.levels %}
+          <li id="level-{{ level.id }}"><a class="row row--tall" href="{{ level.url }}" rel="noopener noreferrer"><span class="row__body"><span class="row__t">{{ level.title }}</span><span class="row__d">{{ level.text }}</span></span><span class="row__a" aria-hidden="true">↗</span></a></li>
+          {%- endfor %}
+        </ul>
+      </section>
+
+      <section class="sec sec--num" id="rules" aria-labelledby="rules-title">
+        <h2 class="h2" id="rules-title">{{ ui["hub.rules.section"] }}</h2>
+        <aside class="warnbox" role="note">
+          {{ parts.warn_icon() }}
+          <div class="warnbox__body"><p>{{ ui["hub.rules.security"] }}</p></div>
+        </aside>
+        {%- if hub.rules %}
+        <h3 class="h3 h3--sub" id="rules-short">{{ ui["hub.rules.title"] }}</h3>
+        <ol class="nlist">
+          {%- for rule in hub.rules %}
+          <li>{{ rule }}</li>
+          {%- endfor %}
+        </ol>
+        {%- endif %}
+        <ul class="links links--row">
+          <li><a href="{{ hub.method_source }}" rel="noopener noreferrer">{{ ui["hub.rules.method"] }}&nbsp;<span aria-hidden="true">↗</span></a></li>
+          <li><a href="{{ hub.guardrails_source }}" rel="noopener noreferrer">{{ ui["hub.rules.guardrails"] }}&nbsp;<span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </section>
+
+      <section class="sec sec--num" id="contribute" aria-labelledby="contribute-title">
+        <h2 class="h2" id="contribute-title">{{ ui["hub.contribute.title"] }}</h2>
+        <p class="prose">{{ ui["hub.contribute.lead"] }}</p>
+        <div class="grid grid--2">
+          {%- for loop_ in hub.contribute %}
+          <article class="card" id="loop-{{ loop_.id }}">
+            <h3 class="h3">{{ loop_.title }}</h3>
+            <p>{{ loop_.text }}</p>
+            <ol class="nlist nlist--tight">
+              {%- for step in loop_.steps %}
+              <li>{% if step.href %}<a href="{{ step.href }}" rel="noopener noreferrer">{{ step.text }}&nbsp;<span aria-hidden="true">↗</span></a>{% else %}{{ step.text }}{% endif %}</li>
+              {%- endfor %}
+            </ol>
+            <p class="src"><a href="{{ loop_.url }}" rel="noopener noreferrer">{{ ui["hub.contribute.open"] }}: {{ loop_.title }}&nbsp;<span aria-hidden="true">↗</span></a></p>
+          </article>
+          {%- endfor %}
+        </div>
+        <p class="src">{{ ui["hub.checked"].format(date=hub.checked) }} <a href="{{ hub.source }}" rel="noopener noreferrer">{{ ui["hub.source"] }}&nbsp;<span aria-hidden="true">↗</span></a></p>
+      </section>
+{% endblock %}

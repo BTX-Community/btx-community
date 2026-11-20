@@ -1,0 +1,51 @@
+{% extends "design01/base.html.j2" %}
+{% import "design01/_parts.html.j2" as parts %}
+{% set t = projects.texts %}
+{% set title = ui["nav.docs"] %}
+{% set description = page_description %}
+{% set sections = [] %}
+{% for project in projects.projects %}{% if sections.append(("project-" ~ project.id, project.title, None)) %}{% endif %}{% endfor %}
+{% if documents %}{% if sections.append(("documents", ui["documents.title"], documents | length)) %}{% endif %}{% endif %}
+{% block content %}
+{{ parts.pagehead("Build", draft.pages.dev, page_title, page_lead, [("checked", projects.verified)]) }}
+      {{ parts.note(ui["note"], t.caution) }}
+      {%- for project in projects.projects %}
+      <section class="sec sec--num" id="project-{{ project.id }}" aria-labelledby="project-{{ project.id }}-title">
+        <h2 class="h2" id="project-{{ project.id }}-title">{{ project.title }}</h2>
+        <p class="prose">{{ project.idea }}</p>
+        <dl class="card kv">
+          <div class="kv__row"><dt>{{ t.today }}</dt><dd>{{ project.today }}</dd></div>
+          <div class="kv__row"><dt>{{ t.missing }}</dt><dd>{{ project.missing }}</dd></div>
+          {%- if project.careful %}
+          <div class="kv__row kv__row--careful"><dt>{{ t.careful }}</dt><dd>{{ project.careful }}</dd></div>
+          {%- endif %}
+          <div class="kv__row"><dt>{{ t.start }}</dt><dd>
+            <ul class="links">
+              {%- for link in project.start %}
+              <li>{{ parts.link(link.href, link.text, link.external) }}</li>
+              {%- endfor %}
+            </ul>
+          </dd></div>
+          <div class="kv__row"><dt>{{ t.ask }}</dt><dd>{% if project.ask_href %}{{ parts.link(project.ask_href, project.ask, project.ask_external) }}{% else %}{{ project.ask }}{% endif %}</dd></div>
+        </dl>
+        <p class="src"><span class="muted">{{ t.source }}:</span>{% for cite in project.cites %} <a href="{{ cite.href }}" rel="noopener noreferrer"><code class="code">{{ cite.label }}</code></a>{% endfor %}</p>
+      </section>
+      {%- endfor %}
+
+      {%- if documents %}
+      <section class="sec sec--num" id="documents" aria-labelledby="documents-title">
+        <h2 class="h2" id="documents-title">{{ ui["documents.title"] }}</h2>
+        <p class="prose">{{ ui["documents.lead"] }}</p>
+        <ul class="grid grid--2 plain">
+          {%- for document in documents %}
+          <li class="card doc-card" id="{{ document.id }}">
+            <h3 class="h3"><a href="{{ document.url }}" rel="noopener noreferrer">{{ document.title }}&nbsp;<span aria-hidden="true">↗</span></a></h3>
+            <p>{{ document.text }}</p>
+            {%- if document.status %}<p class="meta">{{ document.status }}</p>{% endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+        <p class="src"><a href="{{ repo_url }}" rel="noopener noreferrer">{{ ui["documents.repo"] }}&nbsp;<span aria-hidden="true">↗</span></a></p>
+      </section>
+      {%- endif %}
+{% endblock %}

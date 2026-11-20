@@ -1,0 +1,47 @@
+{% extends "design01/base.html.j2" %}
+{% import "design01/_parts.html.j2" as parts %}
+{% set title = page_title %}
+{% set description = page_description %}
+{% set sections = [("about", ui["facts.title"], facts | length)] + ([("next", ui["upcoming.title"].format(version=upcoming.version), upcoming.features | length)] if upcoming else []) %}
+{% block content %}
+{{ parts.pagehead("Start here", draft.pages.home, page_title, page_lead, [("checked", ui["upcoming.checked"].format(date=upcoming.checked)), ("version", "Applies to v" ~ upcoming.version)] if upcoming else []) }}
+      <section class="sec sec--num" id="about" aria-labelledby="about-title">
+        <h2 class="h2" id="about-title">{{ ui["facts.title"] }}</h2>
+        <div class="grid grid--2">
+          {%- for fact in facts %}
+          <article class="card fact" id="fact-{{ fact.id }}">
+            <h3 class="h3">{{ fact.title }}</h3>
+            <p>{{ fact.text }}</p>
+            <p class="src"><a href="{{ fact.source }}" rel="noopener noreferrer">{{ ui["facts.source"] }}: {{ fact.title }}&nbsp;<span aria-hidden="true">↗</span></a></p>
+          </article>
+          {%- endfor %}
+        </div>
+      </section>
+
+      {%- if upcoming %}
+      <section class="sec sec--num" id="next" aria-labelledby="next-title">
+        <h2 class="h2" id="next-title">{{ ui["upcoming.title"].format(version=upcoming.version) }}</h2>
+        {{ parts.note(ui["note"], upcoming.status) }}
+        <div class="grid grid--2">
+          {%- for feature in upcoming.features %}
+          <article class="card fact">
+            <h3 class="h3">{{ feature.title }}</h3>
+            <p>{{ feature.text }}</p>
+            <p class="src"><a href="{{ feature.source }}" rel="noopener noreferrer">{{ ui["facts.source"] }}: {{ feature.title }}&nbsp;<span aria-hidden="true">↗</span></a></p>
+          </article>
+          {%- endfor %}
+        </div>
+        {%- if upcoming.caveats %}
+        <h3 class="h3 h3--sub" id="caveats">{{ ui["upcoming.caveats"] }}</h3>
+        <ol class="nlist">
+          {%- for caveat in upcoming.caveats %}
+          <li>{{ caveat }}</li>
+          {%- endfor %}
+        </ol>
+        {%- endif %}
+        <p class="src">{{ ui["upcoming.checked"].format(date=upcoming.checked) }} <a href="{{ upcoming.source }}" rel="noopener noreferrer">{{ ui["upcoming.notes"] }} v{{ upcoming.version }}&nbsp;<span aria-hidden="true">↗</span></a></p>
+      </section>
+      {%- endif %}
+
+{{ parts.onward(next_links, ui) }}
+{% endblock %}

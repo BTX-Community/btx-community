@@ -1,0 +1,75 @@
+{% extends "design01/base.html.j2" %}
+{% import "design01/_parts.html.j2" as parts %}
+{% set title = ui["nav.network"] %}
+{% set description = page_description %}
+{#- The development panel stays hidden until it has data; its rail entry points at a visible anchor. #}
+{% set sections = [("live", ui["live.title"] ~ " · " ~ ui["numbers.title"], None), ("dev-activity", ui["dev.title"], None)] %}
+{% block content %}
+{{ parts.pagehead(ui["nav.network"], draft.pages.network, page_title, page_lead) }}
+      <section class="sec sec--num card panel" id="live" aria-labelledby="live-title" data-api="{{ status_api }}" data-lang="{{ lang }}"
+               data-level-green="{{ ui['level.green'] }}" data-level-yellow="{{ ui['level.yellow'] }}"
+               data-level-red="{{ ui['level.red'] }}" data-level-unknown="{{ ui['level.unknown'] }}">
+        <div class="panel__head">
+          <h2 class="h2" id="live-title">{{ ui["live.title"] }}</h2>
+          <p class="pill"><span class="dot" aria-hidden="true"></span><span class="sr">{{ ui["live.status"] }}: </span><span data-live="overall" data-label-normal="{{ ui['overall.normal'] }}" data-label-degraded="{{ ui['overall.degraded'] }}" data-label-incident="{{ ui['overall.incident'] }}">No data</span></p>
+        </div>
+        <p class="note note--warn" role="alert" data-live="stale" hidden><span class="note__label">{{ ui["note"] }}</span> <span class="note__body">{{ ui["live.stale"] }}</span></p>
+        <div class="fork fork--box" data-live="fork" data-template="{{ ui['fork.row'] }}" hidden>
+          <h3 class="h3">{{ ui["fork.title"] }}</h3>
+          <p>{{ ui["fork.lead"] }}</p>
+          <ul class="fork__rows" data-live="fork-rows"></ul>
+          <a href="{{ releases_url }}" rel="noopener noreferrer">{{ ui["fork.releases"] }}&nbsp;<span aria-hidden="true">↗</span></a>
+        </div>
+        <ul class="verdicts">
+          {%- for id, label in verdicts %}
+          <li class="verdict c-verdict--unknown" data-verdict="{{ id }}"><span class="dot" aria-hidden="true"></span>{{ label }}: <span data-verdict-label>{{ ui["level.unknown"] }}</span></li>
+          {%- endfor %}
+        </ul>
+        <dl class="figs figs--5">
+          <div class="fig"><dt>{{ ui["live.height"] }}</dt><dd class="fig__v" data-live="height">No data</dd></div>
+          <div class="fig"><dt>{{ ui["live.release"] }}</dt><dd class="fig__v" data-live="release">No data</dd></div>
+          <div class="fig"><dt>{{ ui["live.on_release"] }}</dt><dd class="fig__v" data-live="on-release" data-template="{{ ui['on_release'] }}">No data</dd></div>
+          <div class="fig"><dt>{{ ui["live.interval"] }}</dt><dd class="fig__v" data-live="interval">No data</dd></div>
+          <div class="fig"><dt>{{ ui["live.signers"] }}</dt><dd class="fig__v" data-live="signers">No data</dd></div>
+        </dl>
+        <h3 class="h3 h3--sub" id="numbers">{{ ui["numbers.title"] }}</h3>
+        <dl class="figs figs--5">
+          <div class="fig"><dt>{{ ui["numbers.supply"] }}</dt><dd class="fig__v" data-live="supply">No data</dd><dd class="fig__sub" data-live="supply-share" data-template="{{ ui['numbers.supply_of'] }}"></dd></div>
+          <div class="fig"><dt>{{ ui["numbers.reward"] }}</dt><dd class="fig__v" data-live="reward">No data</dd></div>
+          <div class="fig"><dt>{{ ui["numbers.halving"] }}</dt><dd class="fig__v" data-live="halving" data-template="{{ ui['numbers.blocks'] }}">No data</dd><dd class="fig__sub" data-live="halving-time" data-template="{{ ui['numbers.about'] }}"></dd></div>
+          <div class="fig"><dt>{{ ui["numbers.tx"] }}</dt><dd class="fig__v" data-live="tx">No data</dd></div>
+          <div class="fig"><dt>{{ ui["numbers.size"] }}</dt><dd class="fig__v" data-live="size">No data</dd></div>
+        </dl>
+        <p class="meta" data-live="updated" data-template="{{ ui['live.updated'] }}">{{ ui["live.loading"] }}</p>
+        <p class="src"><a href="{{ status_page }}" rel="noopener noreferrer">{{ ui["live.details"] }}&nbsp;<span aria-hidden="true">↗</span></a> <a href="{{ observatory_url }}" rel="noopener noreferrer">{{ ui["network.observatory"] }}&nbsp;<span aria-hidden="true">↗</span></a></p>
+      </section>
+
+      <div class="sec sec--num sec--anchor" id="dev-activity">
+        <h2 class="h2">{{ ui["dev.title"] }}</h2>
+        <noscript><p class="meta">Shown once the measurements have loaded; this needs JavaScript. <a href="{{ development_api }}" rel="noopener noreferrer">development.json&nbsp;<span aria-hidden="true">↗</span></a></p></noscript>
+      </div>
+      <section class="card panel panel--dev" aria-label="{{ ui['dev.title'] }}" id="development" hidden
+        data-api="{{ development_api }}" data-repo="{{ upstream_repo }}" data-lang="{{ lang }}"
+        data-default="{{ ui['dev.default'] }}" data-today="{{ ui['dev.today'] }}"
+        data-day="{{ ui['dev.day'] }}" data-days="{{ ui['dev.days'] }}">
+        <p>{{ ui["dev.lead"] }} <a href="{{ upstream_url }}" rel="noopener noreferrer">{{ ui["dev.source"] }}&nbsp;<span aria-hidden="true">↗</span></a></p>
+        <p class="note note--warn" role="alert" data-dev="stale" hidden><span class="note__label">{{ ui["note"] }}</span> <span class="note__body">{{ ui["dev.stale"] }}</span></p>
+        <div class="branches" role="table" aria-label="{{ ui['dev.title'] }}">
+          <div class="c-branch c-branch--head" role="row">
+            <span role="columnheader">{{ ui["dev.branch"] }}</span>
+            <span role="columnheader">{{ ui["dev.last_commit"] }}</span>
+            <span role="columnheader">{{ ui["dev.commits"] }}</span>
+          </div>
+          <div role="rowgroup" data-dev="branches"></div>
+        </div>
+        <p class="meta">{{ ui["dev.note"] }}</p>
+        <dl class="figs figs--3">
+          <div class="fig"><dt>{{ ui["dev.pulls"] }}</dt><dd class="fig__v" data-dev="pulls">No data</dd></div>
+          <div class="fig"><dt>{{ ui["dev.release"] }}</dt><dd class="fig__v" data-dev="release">No data</dd><dd class="fig__sub" data-dev="release-date"></dd></div>
+          <div class="fig" data-dev="prerelease-tile" hidden><dt>{{ ui["dev.prerelease"] }}</dt><dd class="fig__v" data-dev="prerelease">No data</dd><dd class="fig__sub" data-dev="prerelease-date"></dd></div>
+        </dl>
+        <p class="meta" data-dev="measured" data-template="{{ ui['dev.measured'] }}"></p>
+      </section>
+
+{{ parts.onward(next_links, ui) }}
+{% endblock %}

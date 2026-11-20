@@ -1,0 +1,62 @@
+{% extends "design01/base.html.j2" %}
+{% import "design01/_parts.html.j2" as parts %}
+{% set title = "Directory" %}
+{% set description = page_description %}
+{% block page %}
+    <div class="wrap">
+{{ parts.pagehead("Directory", draft.pages.links, page_title, page_lead, [("checked", ui["directory.lead"].format(count=entry_count, date=checked))]) }}
+      {#- Filter field and category chips work in the browser on the entries below; nothing is sent.
+          Without JavaScript the chips stay hidden and the list of categories below is the way in. #}
+      <div class="filter card" data-d01-filter hidden>
+        <div class="filter__row">
+          <label class="filter__label" for="dq">Filter the directory</label>
+          <input class="filter__input" id="dq" type="search" autocomplete="off" spellcheck="false" placeholder="Name, host, tag or word" data-d01-query>
+        </div>
+        <div class="chips" role="group" aria-label="Category">
+          <button type="button" class="chip" data-d01-cat="all" aria-pressed="true">All <span class="chip__n">{{ entry_count }}</span></button>
+          {%- for category in categories %}
+          <button type="button" class="chip" data-d01-cat="{{ category.id }}" aria-pressed="false">{{ category.title }} <span class="chip__n">{{ category.entries | length }}</span></button>
+          {%- endfor %}
+        </div>
+        <p class="filter__shown" aria-live="polite" data-d01-shown data-total="{{ entry_count }}">{{ entry_count }} of {{ entry_count }} shown</p>
+      </div>
+      <nav class="jump" aria-label="Categories" data-d01-jump>
+        {%- for category in categories %}
+        <a class="jump__link" href="#cat-{{ category.id }}">{{ category.title }} <span class="chip__n">{{ category.entries | length }}</span></a>
+        {%- endfor %}
+      </nav>
+      {#- Trust label: only "Official" is shown, for entries in the category with id "official" of
+          the content; the content does not say which of the other entries are community-run. #}
+      <p class="legend"><span class="trust trust--official">Official</span> an entry from the category “{{ (categories | selectattr("id", "equalto", "official") | first).title }}” of this list. Yellow boxes are notes to read before you use an entry.</p>
+
+      {%- for category in categories %}
+      <section class="dircat" id="cat-{{ category.id }}" data-d01-cat-section="{{ category.id }}" aria-labelledby="cat-{{ category.id }}-title">
+        <h2 class="h2 dircat__title" id="cat-{{ category.id }}-title">{{ category.title }} <span class="dircat__n">{{ category.entries | length }}</span></h2>
+        {%- if category.risk %}
+        {{ parts.note(ui["risk"], category.risk, "risk") }}
+        {%- endif %}
+        <ul class="entries">
+          {%- for entry in category.entries %}
+          <li class="card entry" id="{{ entry.id }}" data-d01-entry data-cat="{{ category.id }}">
+            <p class="entry__head">
+              <a class="entry__name" href="{{ entry.url }}" rel="noopener noreferrer">{{ entry.name }}&nbsp;<span aria-hidden="true">↗</span></a>
+              {%- if category.id == "official" %} <span class="trust trust--official">Official</span>{% endif %}
+            </p>
+            <p class="entry__host mono">{{ entry.url.split("/")[2] }}</p>
+            <p class="entry__text">{{ entry.description }}</p>
+            {%- if entry.note %}
+            {{ parts.note(ui["note"], entry.note, "risk") }}
+            {%- endif %}
+            {%- if entry.tags %}
+            <p class="tags">{% for tag in entry.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</p>
+            {%- endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endfor %}
+      <p class="empty" data-d01-empty hidden>Nothing matches. Clear the filter or pick “All”.</p>
+      <p class="src">{{ ui["directory.add"] }} <a href="{{ add_project_url }}" rel="noopener noreferrer">{{ ui["directory.add_link"] }}&nbsp;<span aria-hidden="true">↗</span></a></p>
+{{ parts.onward(next_links, ui) }}
+    </div>
+{% endblock %}
