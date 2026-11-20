@@ -830,7 +830,7 @@
   var MOVED = [
     [/^development$/, "network/"],
     [/^(about|next|fact-[a-z0-9-]+)$/, "learn/"],
-    [/^(links|removed-title|cat-[a-z0-9-]+)$/, "links/"],
+    [/^(links|cat-[a-z0-9-]+)$/, "links/"],
     [/^(documents|doc-[a-z0-9-]+)$/, "projects/"],
   ];
 

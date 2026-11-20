@@ -274,13 +274,6 @@ class Document(_Model):
     """Where the document stands, e.g. "Draft - under review"."""
 
 
-class Removed(_Model):
-    """An entry of the old btxlinks list that is no longer listed, and why."""
-
-    name: Name
-    reason: Text
-
-
 class CommunityPage(_Model):
     """``content/community.yaml``."""
 
@@ -289,7 +282,6 @@ class CommunityPage(_Model):
     audiences: Annotated[list[Audience], Field(min_length=1, max_length=5)]
     categories: Annotated[list[Category], Field(min_length=1, max_length=20)]
     documents: Annotated[list[Document], Field(max_length=12)] = []
-    removed: Annotated[list[Removed], Field(max_length=30)] = []
 
     @model_validator(mode="after")
     def _consistent(self) -> Self:
@@ -2663,7 +2655,6 @@ def context(
         "hub": hub_view(hub, say),
         "infra": infra_view(infra, page, say) if infra is not None else None,
         "projects": projects_view(projects, say) if projects is not None else None,
-        "removed": tuple((r.name, say(r.reason)) for r in page.removed),
         "checked": page.checked.isoformat(),
         "entry_count": sum(len(c.entries) for c in categories),
         "repo_url": REPO_URL,
@@ -2740,7 +2731,7 @@ def llms_index(page: CommunityPage, hub: HubPage, texts: dict[str, dict[str, str
         _llms_line(
             "llms-full.txt", _site_url("/llms-full.txt"),
             "the whole content of these pages as plain text: facts with sources, the next release, "
-            "the checklists, the link directory with notes, and the removed entries with reasons",
+            "the checklists and the link directory with notes",
         ),
         "",
         *_llms_live_data(),
@@ -2814,8 +2805,6 @@ def llms_full(page: CommunityPage, guide: GuidePage, texts: dict[str, dict[str, 
         for e in c.entries:
             out.append(_llms_line(e.name, e.url, e.description + (f" Note: {e.note}" if e.note else "")))
         out.append("")
-    out += [f"## {ui['removed.title']}", "", ui["removed.lead"], ""]
-    out += [f"- {r.name}: {say(r.reason)}" for r in page.removed] + [""]
     out += [f"## {ui['page.docs.title']}", ""]
     out += [_llms_line(d.title, d.url, d.text) for d in documents] + [""]
     return "\n".join(out)

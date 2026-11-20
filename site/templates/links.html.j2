@@ -22,7 +22,6 @@
             {% for category in categories %}
             <li><a class="c-rail__link" href="#cat-{{ category.id }}">{{ category.title }} <span class="c-rail__count">{{ category.entries | length }}</span></a></li>
             {% endfor %}
-            {% if removed %}<li><a class="c-rail__link" href="#removed-title">{{ ui["removed.title"] }} <span class="c-rail__count">{{ removed | length }}</span></a></li>{% endif %}
           </ul>
         </nav>
         <div class="c-railed__body">
@@ -56,17 +55,6 @@
         </section>
         {% endfor %}
 
-        {% if removed %}
-        <section class="c-removed" aria-labelledby="removed-title">
-          <h3 class="c-category__title" id="removed-title">{{ ui["removed.title"] }}</h3>
-          <p class="c-muted">{{ ui["removed.lead"] }}</p>
-          <ul>
-            {% for name, reason in removed %}
-            <li><strong>{{ name }}</strong> - {{ reason }}</li>
-            {% endfor %}
-          </ul>
-        </section>
-        {% endif %}
         </div>
         </div>
       </section>

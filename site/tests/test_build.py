@@ -1009,8 +1009,6 @@ class PageTest(unittest.TestCase):
         for category in page.categories:
             for entry in category.entries:
                 self.assertIn(f"- [{entry.name}]({entry.url}): {entry.description.en}", full)
-        for removed in page.removed:
-            self.assertIn(f"- {removed.name}: {removed.reason.en}", full)
         for fact in guide.facts:
             self.assertIn(fact.text.en, full)
         for checklist in guide.checklists:

@@ -29,12 +29,6 @@ translations:
     Verification gate to the main BTX chat on compute and tech. Not run by the community; for
     community questions use the group above.
   zh: 通往 BTX 主聊天群（算力与技术）的验证入口。不由社区运营；社区问题请到上面的群组提问。
-- en: A general mining chat rather than a BTX group; the list keeps to BTX channels.
-  zh: 一个通用的挖矿聊天群，而不是 BTX 群组；本列表只收录 BTX 频道。
-- en: Hardly any activity any more; the community talks on Telegram.
-  zh: 几乎已无活动；社区在 Telegram 上交流。
-- en: No activity, and the miner has not changed since August 2026.
-  zh: 没有活动，且该矿工软件自 2026 年 8 月以来未再更新。
 - en: The main community group on Telegram, open to everyone.
   zh: Telegram 上的主要社区群组，向所有人开放。
 - en: >-
@@ -225,8 +219,6 @@ translations:
   zh: "新增失败，不在该分支的已知失败列表中（{count}）"
 - en: "Known-failing tests that passed this time ({count})"
   zh: "已知失败但本次通过的测试（{count}）"
-- en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
-  zh: 已不再上架 BTX；其 BTX/USDT 交易对自 2026 年 7 月起已下线。
 - en: >-
     A .btxwallet file holds the post-quantum seed in plain text. Treat it like a private key and
     delete temporary copies.
@@ -358,10 +350,6 @@ translations:
     Open-source (MIT) desktop app of the easyBTX team that installs and supervises btxd on the
     machine you already own.
   zh: easyBTX 团队的开源（MIT）桌面应用，在你现有的电脑上安装并监管 btxd。
-- en: >-
-    Paused by its operator since September 2026; no blocks among the last 1,000 (2026-11-12). The
-    first light explorer of the same team stays listed.
-  zh: 自 2026 年 9 月起被其运营者暂停；最近 1,000 个区块中没有它找到的区块（2026-11-12）。同一团队的 first light 区块浏览器仍保留在列表中。
 - en: >-
     Pool dedicated to BTX, run by the author of btx-pool-miner (GitHub lucasan123). It pays miners
     inside each block it finds, split by work over a 30-minute window. Check its fee on the pool
@@ -581,14 +569,6 @@ translations:
     What you can edit freely, what needs a second pair of eyes, and how to report a wrong figure if
     git is not your thing.
   zh: 哪些可以自由编辑，哪些需要第二个人审阅，以及如果你不熟悉 git，如何报告错误的数字。
-- en: Website not reachable, explorer answered 503 (2026-11-03).
-  zh: 网站无法访问，区块浏览器返回 503（2026-11-03）。
-- en: Website not reachable (2026-11-03).
-  zh: 网站无法访问（2026-11-03）。
-- en: Custodial OTC desk run by a third party, with no published company, licence, fees or audit; outside what this page can check.
-  zh: 第三方托管式场外交易平台，未公开公司、牌照、费用或审计信息；超出本页可核实的范围。
-- en: The BTX page no longer exists (404, 2026-11-03).
-  zh: BTX 页面已不存在（404，2026-11-03）。
 - en: >-
     A new node cannot sync from genesis: v0.34.15 and v0.34.16 stop at block 126,978. Start from a
     signed snapshot, and do not run -reindex until a release fixes it.

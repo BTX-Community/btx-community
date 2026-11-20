@@ -38,12 +38,6 @@ translations:
   fr: >-
     Sas de vérification vers le chat principal de BTX sur le calcul et la technique. Non géré par la
     communauté ; pour les questions de la communauté, utilisez le groupe ci-dessus.
-- en: A general mining chat rather than a BTX group; the list keeps to BTX channels.
-  fr: Un chat de minage généraliste, pas un groupe BTX ; la liste s'en tient aux canaux BTX.
-- en: Hardly any activity any more; the community talks on Telegram.
-  fr: Presque plus d'activité ; la communauté discute sur Telegram.
-- en: No activity, and the miner has not changed since August 2026.
-  fr: Aucune activité, et le mineur n'a pas changé depuis août 2026.
 - en: The main community group on Telegram, open to everyone.
   fr: Le groupe principal de la communauté sur Telegram, ouvert à tous.
 - en: >-
@@ -279,8 +273,6 @@ translations:
   fr: "Nouveaux échecs, absents de la liste des échecs connus de la branche ({count})"
 - en: "Known-failing tests that passed this time ({count})"
   fr: "Tests en échec connu réussis cette fois ({count})"
-- en: No longer lists BTX; its BTX/USDT market has been gone since July 2026.
-  fr: Ne liste plus BTX ; son marché BTX/USDT a disparu en juillet 2026.
 - en: >-
     A .btxwallet file holds the post-quantum seed in plain text. Treat it like a private key and
     delete temporary copies.
@@ -470,12 +462,6 @@ translations:
   fr: >-
     Application de bureau open source (MIT) de l'équipe easyBTX qui installe et supervise btxd sur
     la machine que vous avez déjà.
-- en: >-
-    Paused by its operator since September 2026; no blocks among the last 1,000 (2026-11-12). The
-    first light explorer of the same team stays listed.
-  fr: >-
-    Mis en pause par son exploitant depuis septembre 2026 ; aucun bloc parmi les 1 000 derniers
-    (2026-11-12). L'explorateur first light de la même équipe reste dans la liste.
 - en: >-
     Pool dedicated to BTX, run by the author of btx-pool-miner (GitHub lucasan123). It pays miners
     inside each block it finds, split by work over a 30-minute window. Check its fee on the pool
@@ -763,14 +749,6 @@ translations:
   fr: >-
     Ce que vous pouvez modifier librement, ce qui demande un second regard, et comment signaler un
     chiffre erroné si git n'est pas votre truc.
-- en: Website not reachable, explorer answered 503 (2026-11-03).
-  fr: Site inaccessible, l'explorateur a répondu 503 (2026-11-03).
-- en: Website not reachable (2026-11-03).
-  fr: Site inaccessible (2026-11-03).
-- en: Custodial OTC desk run by a third party, with no published company, licence, fees or audit; outside what this page can check.
-  fr: Desk OTC dépositaire tenu par un tiers, sans société, licence, frais ni audit publiés ; hors de ce que cette page peut vérifier.
-- en: The BTX page no longer exists (404, 2026-11-03).
-  fr: La page BTX n'existe plus (404, 2026-11-03).
 - en: >-
     A new node cannot sync from genesis: v0.34.15 and v0.34.16 stop at block 126,978. Start from a
     signed snapshot, and do not run -reindex until a release fixes it.
