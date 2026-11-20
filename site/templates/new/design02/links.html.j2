@@ -1,0 +1,46 @@
+{% extends "design02/base.html.j2" %}
+{% import "design02/_parts.html.j2" as parts %}
+{% set title = "Directory" %}
+{% set description = page_description %}
+{% set crumb = "directory / links" %}
+{% set heading = "Directory" %}
+{% set lead = page_lead %}
+{% set badges = [("lime", "every link checked " ~ checked)] %}
+{% set steps = [] %}
+{% for category in categories %}{% if steps.append(("cat-" ~ category.id, category.title, category.entries | length)) %}{% endif %}{% endfor %}
+{% set onward = next_links %}
+{% block content %}
+      <p class="d02-src">{{ ui["directory.lead"].format(count=entry_count, date=checked) }} {{ ui["directory.add"] }} <a href="{{ add_project_url }}" rel="noopener noreferrer">{{ ui["directory.add_link"] }} ↗</a></p>
+
+      {#- Filter and category chips work only in the browser, on the entries already on the page.
+          Without JavaScript the bar stays hidden and every entry shows. #}
+      <div class="d02-filter" id="filter" data-d02-filter data-template="{shown} of {total} shown" hidden>
+        <label class="d02-filter__label" for="filter-q">Filter the directory</label>
+        <div class="d02-filter__row">
+          <input class="d02-filter__input" id="filter-q" type="search" autocomplete="off" spellcheck="false" placeholder="name, host, tag or word" data-d02-filter-input>
+          <p class="d02-filter__shown" aria-live="polite" data-d02-filter-shown>{{ entry_count }} of {{ entry_count }} shown</p>
+        </div>
+        <div class="d02-filter__chips" role="group" aria-label="Category">
+          <button type="button" class="d02-chipbtn" data-d02-cat="all" aria-pressed="true">All <span class="d02-chipbtn__n">{{ entry_count }}</span></button>
+          {%- for category in categories %}
+          <button type="button" class="d02-chipbtn" data-d02-cat="{{ category.id }}" aria-pressed="false">{{ category.title }} <span class="d02-chipbtn__n">{{ category.entries | length }}</span></button>
+          {%- endfor %}
+        </div>
+      </div>
+
+      {%- for category in categories %}
+      <section class="d02-step d02-cat" id="cat-{{ category.id }}" aria-labelledby="cat-{{ category.id }}-title" data-d02-category="{{ category.id }}">
+        {{ parts.stephead("cat-" ~ category.id, loop.index, category.title) }}
+        {%- if category.risk %}
+        {{ parts.note(ui["risk"], category.risk, "warn") }}
+        {%- endif %}
+        <ul class="d02-entries">
+          {%- for item in category.entries %}
+          {#- Trust label only where the data says it: the entries of the category "official". #}
+          {{ parts.entry(item, ui, "Official" if category.id == "official" else None) }}
+          {%- endfor %}
+        </ul>
+        <p class="d02-meta d02-cat__none" data-d02-none hidden>No entry of this category matches.</p>
+      </section>
+      {%- endfor %}
+{% endblock %}
