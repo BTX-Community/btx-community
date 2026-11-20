@@ -19,6 +19,11 @@ next to the font files.
 | `Unbounded-800-latin.woff2` | same, `files/unbounded-latin-800-normal.woff2` | `fe6d4ea7ed9647abf1e100a703786338d7898d56d0bedcdfdbc325e8fb02c834` |
 | `Unbounded-800-latin-ext.woff2` | same, `files/unbounded-latin-ext-800-normal.woff2` | `c623718098663cd545bfd3329f30d79bff46c0764fa70b29dc6cf78c3f68d9cb` |
 | `OFL-Unbounded.txt` | same, `LICENSE` | – |
+| `Merriweather-400-latin.woff2` | [@fontsource/merriweather 5.3.0](https://www.npmjs.com/package/@fontsource/merriweather/v/5.3.0), `files/merriweather-latin-400-normal.woff2` | `66f5bd22d738a801a9e58d71920559743b0baaced04be299e3c4feca3dce3556` |
+| `Merriweather-400-latin-ext.woff2` | same, `files/merriweather-latin-ext-400-normal.woff2` | `be42f8d64ab6410fd300c4d352d9a0943cc1c3b4eb74016b73bcf6b252d74ac5` |
+| `Merriweather-700-latin.woff2` | same, `files/merriweather-latin-700-normal.woff2` | `4e1ab49396c02be0d9a2a25eed7bc73781c047d85fcb5dfc2889873eaf992b09` |
+| `Merriweather-700-latin-ext.woff2` | same, `files/merriweather-latin-ext-700-normal.woff2` | `c4d28d6ee3414f8e0482f1acd62a35ea6409a2447c427191bcfa2f4f4ee670ff` |
+| `OFL-Merriweather.txt` | same, `LICENSE` | – |
 
 Instrument Serif (draft 03): downloaded 2026-11-20 from `https://cdn.jsdelivr.net/npm/@fontsource/instrument-serif@5.3.0/`.
 Upstream: <https://github.com/Instrument/instrument-serif>.
@@ -29,3 +34,6 @@ Upstream: <https://github.com/floriankarsten/space-grotesk>.
 
 Unbounded (draft 02): downloaded 2026-11-20 from `https://cdn.jsdelivr.net/npm/@fontsource/unbounded@5.3.0/`.
 Upstream: <https://github.com/googlefonts/unbounded>.
+
+Merriweather (draft 03b): downloaded 2026-11-20 from `https://cdn.jsdelivr.net/npm/@fontsource/merriweather@5.3.0/`.
+Upstream: <https://github.com/EbenSorkin/Merriweather4>.

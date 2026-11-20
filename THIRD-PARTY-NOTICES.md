@@ -43,3 +43,5 @@ from, with its SHA-256, is listed in `site/static/fonts/new/SOURCES.md`.
   (<https://github.com/floriankarsten/space-grotesk>).
 - Unbounded: Copyright 2022 The Unbounded Project Authors
   (<https://github.com/googlefonts/unbounded>).
+- Merriweather: Copyright 2024 The Merriweather Project Authors
+  (<https://github.com/EbenSorkin/Merriweather4>), with Reserved Font Name "Merriweather".

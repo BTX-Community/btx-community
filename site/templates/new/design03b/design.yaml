@@ -1,0 +1,20 @@
+# Draft 03b: a copy of draft 03 (direction A "Reader's Guide" from Jpp-matata's design audit, with
+# the eight grafts of his panel) with one change: Merriweather instead of Instrument Serif for the
+# headings, because first feedback on draft 03 found Instrument Serif too narrow and too thin.
+title: "Design 03b · Reader's Guide, Merriweather"
+summary: >-
+  Draft 03 with a wider, sturdier serif for the headings: Merriweather instead of Instrument Serif,
+  as suggested in the first feedback on draft 03. Everything else is the same as draft 03.
+source: "Draft 03 (direction A from Jpp's design audit, 19 Nov 2026) with Merriweather headings"
+theme: light
+css: [css/new/design03b.css]
+js: [js/new/design03b.js]
+pages:
+  home: { template: home.html.j2, path: "", live: home }
+  learn: { template: learn.html.j2, path: "learn/", live: learn }
+  network: { template: network.html.j2, path: "network/", live: network }
+  links: { template: links.html.j2, path: "links/", live: links }
+  projects: { template: projects.html.j2, path: "projects/", live: docs }
+  infra: { template: infra.html.j2, path: "infra/", live: infra }
+  dev: { template: dev.html.j2, path: "dev/", live: dev }
+  dev-work: { template: dev-work.html.j2, path: "dev/work/", live: dev-work }
