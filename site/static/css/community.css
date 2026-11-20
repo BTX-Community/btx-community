@@ -33,28 +33,7 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-sans: "Inter", system-ui, sans-serif;
 
-  /* Dark theme, the default. Panels step up from the page and carry a visible edge. */
-  color-scheme: dark;
-  --bg: #0b0d11;
-  --bg-raised: #151820;
-  --surface: #1b1f28;
-  --surface-hover: #242935;
-  --border: #454c5a;
-  --text: #eceae4;
-  --muted: #b8bcc7;
-  --faint: #a2a7b4;
-  --accent: #6ee7ff;
-  --shadow: rgb(0 0 0 / 50%);
-
-  --green: #86e8a0;
-  --yellow: #ffc24a;
-  --red: #ff8a80;
-  --grey: #a2a7b4;
-}
-
-/* Light theme: chosen with the switch in the top bar (data-theme on <html>). Without a choice the
-   page stays dark, also when the system is set to light. */
-:root[data-theme="light"] {
+  /* Light theme, the default. Panels are white on paper and carry a visible edge. */
   color-scheme: light;
   --bg: #f5f3ee;
   --bg-raised: #fff;
@@ -71,6 +50,27 @@
   --yellow: #8a4b00;
   --red: #b3261e;
   --grey: #5b606c;
+}
+
+/* Dark theme: chosen with the switch in the top bar (data-theme on <html>) and kept on the
+   device. Without a choice the page is light. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b0d11;
+  --bg-raised: #151820;
+  --surface: #1b1f28;
+  --surface-hover: #242935;
+  --border: #454c5a;
+  --text: #eceae4;
+  --muted: #b8bcc7;
+  --faint: #a2a7b4;
+  --accent: #6ee7ff;
+  --shadow: rgb(0 0 0 / 50%);
+
+  --green: #86e8a0;
+  --yellow: #ffc24a;
+  --red: #ff8a80;
+  --grey: #a2a7b4;
 }
 
 /* One accent for everything. The category names stay, so the rules below keep their hooks. */
@@ -249,11 +249,11 @@ a {
 }
 
 .c-theme::before {
-  content: "☀";
+  content: "☾";
 }
 
-:root[data-theme="light"] .c-theme::before {
-  content: "☾";
+:root[data-theme="dark"] .c-theme::before {
+  content: "☀";
 }
 
 /* Language menu: a native disclosure, so it works without JavaScript. */
@@ -1101,6 +1101,100 @@ main > div {
   margin-top: 18px;
 }
 
+/* --- Link categories that fold: one open at a time ------------------------------------- */
+
+/* Closed categories stand as a compact list of titles. */
+.c-category:has(> .c-category__fold) {
+  margin-top: 6px;
+}
+
+.c-category__fold > summary {
+  margin-bottom: 0;
+}
+
+.c-category__fold > summary .c-category__title {
+  flex: 1;
+  margin: 0;
+}
+
+.c-category__fold[open] > summary {
+  margin-bottom: 14px;
+}
+
+/* --- Side navigation for long pages: a contents rail beside the content on wide screens ---- */
+
+.c-railed {
+  display: block;
+}
+
+.c-rail {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .c-railed {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+  }
+
+  .c-rail {
+    position: sticky;
+    top: 84px;
+    display: block;
+    margin-top: 6px;
+    padding: 0;
+  }
+
+  /* On wide screens the rail replaces the chip row (.c-jump comes later with display: flex). */
+  .c-jump.c-jump--narrow {
+    display: none;
+  }
+}
+
+.c-rail__title {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.c-rail__list {
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--border);
+  list-style: none;
+}
+
+.c-rail__link {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-left: -1px;
+  padding: 6px 10px 6px 12px;
+  border-left: 3px solid transparent;
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.c-rail__link:hover {
+  color: var(--text);
+}
+
+.c-rail__link[aria-current="true"] {
+  border-left-color: var(--accent);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.c-rail__count {
+  color: var(--faint);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
 /* --- Onward links at the foot of a page ------------------------------------------------ */
 
 .c-next {
@@ -1196,7 +1290,6 @@ main > div {
   --accent: var(--a-community);
 
   margin-top: 36px;
-  scroll-margin-top: 16px;
 }
 
 .c-category--official,
@@ -1334,15 +1427,6 @@ main > div {
   border-top: 1px dashed var(--border);
   color: var(--yellow);
   font-size: 13px;
-}
-
-.c-removed {
-  margin-top: 40px;
-  color: var(--text);
-}
-
-.c-removed ul {
-  padding-left: 20px;
 }
 
 /* --- Developer hub ---------------------------------------------------------------------- */

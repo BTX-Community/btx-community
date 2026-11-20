@@ -747,15 +747,83 @@
     }
   }
 
+  // Contents rail: marks the section the reader is in (aria-current), the last one whose heading
+  // has reached the line just below the sticky bar. A click marks its own entry at once and keeps it
+  // while the page scrolls there, also when the target is too far down to reach that line.
+  function enhanceRail(rail) {
+    var links = toArray(rail.querySelectorAll("a[href^='#']"));
+    var targets = links.map(function (link) { return document.getElementById(link.hash.slice(1)); });
+    var held = false;
+    var release = 0;
+    var pending = false;
+    function show(current) {
+      links.forEach(function (link, index) {
+        if (index === current) {
+          link.setAttribute("aria-current", "true");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+    function mark() {
+      pending = false;
+      if (held) {
+        return;
+      }
+      var current = 0;
+      targets.forEach(function (target, index) {
+        if (target && target.getBoundingClientRect().top <= 120) {
+          current = index;
+        }
+      });
+      show(current);
+    }
+    links.forEach(function (link, index) {
+      link.addEventListener("click", function () {
+        show(index);
+        held = true;
+        window.clearTimeout(release);
+        release = window.setTimeout(function () { held = false; }, 600);
+      });
+    });
+    window.addEventListener("scroll", function () {
+      // While the page scrolls to a clicked entry, keep that entry; the hold ends shortly after
+      // the scrolling stops, so the reader's own scrolling marks again.
+      if (held) {
+        window.clearTimeout(release);
+        release = window.setTimeout(function () { held = false; }, 200);
+        return;
+      }
+      if (!pending) {
+        pending = true;
+        window.requestAnimationFrame(mark);
+      }
+    }, { passive: true });
+    // When the last open section is folded, go back to the top, where the title and status are.
+    var folds = targets.map(function (target) {
+      return target ? target.querySelector(":scope > details.c-fold") : null;
+    }).filter(Boolean);
+    folds.forEach(function (fold) {
+      fold.addEventListener("toggle", function () {
+        if (!fold.open && !folds.some(function (other) { return other.open; })) {
+          window.scrollTo(0, 0);
+        }
+      });
+    });
+    mark();
+  }
+
   // A link into a folded section (#flow, #gate-CI-1, #phase-3) opens every closed <details> around
   // its target and scrolls to it; the browser could not, since the target was not rendered.
-  function openFolds(id) {
+  // scroll: false when the browser is about to scroll there itself (a click on the link).
+  function openFolds(id, scroll) {
     var target = id ? document.getElementById(id) : null;
     var opened = false;
     // A link to the section itself (#flow) opens its own fold.
     var own = target ? target.querySelector(":scope > details.c-fold") : null;
-    if (own) {
+    if (own && !own.open) {
       own.open = true;
+      opened = true;
     }
     for (var node = target; node; node = node.parentElement) {
       if (node.tagName === "DETAILS" && !node.open) {
@@ -763,7 +831,7 @@
         opened = true;
       }
     }
-    if (opened) {
+    if (opened && scroll !== false) {
       target.scrollIntoView();
     }
   }
@@ -790,7 +858,7 @@
   var MOVED = [
     [/^development$/, "network/"],
     [/^(about|next|fact-[a-z0-9-]+)$/, "learn/"],
-    [/^(links|removed-title|cat-[a-z0-9-]+)$/, "links/"],
+    [/^(links|cat-[a-z0-9-]+)$/, "links/"],
     [/^(documents|doc-[a-z0-9-]+)$/, "projects/"],
   ];
 
@@ -852,6 +920,7 @@
       refreshDevelopment(development);
       window.setInterval(function () { refreshDevelopment(development); }, DEV_INTERVAL_MS);
     }
+    Array.prototype.forEach.call(document.querySelectorAll("[data-rail]"), enhanceRail);
     var hub = document.getElementById("lanes");
     if (hub) {
       enhanceHub(hub);
@@ -860,6 +929,25 @@
       var unfold = function () { openFolds(window.location.hash.slice(1)); };
       unfold();
       window.addEventListener("hashchange", unfold);
+      // A click opens the fold before the browser scrolls, so it measures the page as it will be
+      // (on /links/ opening one category closes the one above) and lands on the heading.
+      document.addEventListener("click", function (event) {
+        var link = event.target.closest ? event.target.closest("a[href^='#']") : null;
+        if (!link || link.hash.length < 2) {
+          return;
+        }
+        var id = decodeURIComponent(link.hash.slice(1));
+        // In a contents list a second click on an open section folds it again.
+        var target = document.getElementById(id);
+        var own = target ? target.querySelector(":scope > details.c-fold") : null;
+        if (own && own.open && link.closest("[data-rail], .c-jump")) {
+          event.preventDefault();
+          own.open = false;
+          target.scrollIntoView();
+          return;
+        }
+        openFolds(id, false);
+      });
     }
     enhanceCopy();
   }

@@ -9,15 +9,28 @@
         <h2 class="c-section-title" id="links-title">{{ ui["directory.title"] }}</h2>
         <p class="c-muted">{{ ui["directory.lead"].format(count=entry_count, date=checked) }}</p>
         <p class="c-add">{{ ui["directory.add"] }} <a class="c-link" href="{{ add_project_url }}" rel="noopener noreferrer">{{ ui["directory.add_link"] }} ↗</a></p>
-        <nav class="c-jump" aria-label="{{ ui['jump'] }}">
+        <nav class="c-jump c-jump--narrow" aria-label="{{ ui['jump'] }}">
           {% for category in categories %}
           <a class="c-chip c-chip--{{ category.id }}" href="#cat-{{ category.id }}">{{ category.title }}</a>
           {% endfor %}
         </nav>
 
+        <div class="c-railed">
+        <nav class="c-rail" aria-label="{{ ui['jump'] }}" data-rail>
+          <p class="c-rail__title">{{ ui["jump"] }}</p>
+          <ul class="c-rail__list">
+            {% for category in categories %}
+            <li><a class="c-rail__link" href="#cat-{{ category.id }}">{{ category.title }} <span class="c-rail__count">{{ category.entries | length }}</span></a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+        <div class="c-railed__body">
+
         {% for category in categories %}
         <section class="c-category c-category--{{ category.id }}" id="cat-{{ category.id }}" aria-labelledby="cat-{{ category.id }}-title">
-          <h3 class="c-category__title" id="cat-{{ category.id }}-title">{{ category.title }} <span class="c-count">{{ category.entries | length }}</span></h3>
+          {#- One category open at a time (details with the same name); the first one at the start. #}
+          <details class="c-fold c-category__fold" name="links-category"{% if loop.first %} open{% endif %}>
+          <summary><h3 class="c-category__title" id="cat-{{ category.id }}-title">{{ category.title }} <span class="c-count">{{ category.entries | length }}</span></h3></summary>
           {% if category.risk %}
           <p class="c-risk"><strong>{{ ui["risk"] }}:</strong> {{ category.risk }}</p>
           {% endif %}
@@ -38,20 +51,12 @@
             </li>
             {% endfor %}
           </ul>
+          </details>
         </section>
         {% endfor %}
 
-        {% if removed %}
-        <section class="c-removed" aria-labelledby="removed-title">
-          <h3 class="c-category__title" id="removed-title">{{ ui["removed.title"] }}</h3>
-          <p class="c-muted">{{ ui["removed.lead"] }}</p>
-          <ul>
-            {% for name, reason in removed %}
-            <li><strong>{{ name }}</strong> - {{ reason }}</li>
-            {% endfor %}
-          </ul>
-        </section>
-        {% endif %}
+        </div>
+        </div>
       </section>
 
       {% include "_next.html.j2" %}
