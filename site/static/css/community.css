@@ -830,6 +830,11 @@ a {
   gap: 16px;
 }
 
+/* The four ways in on the start page: two by two, like the checklists below them. */
+.c-audiences--two {
+  grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+}
+
 .c-audience {
   --accent: var(--a-community);
 

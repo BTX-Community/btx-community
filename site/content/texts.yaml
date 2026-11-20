@@ -67,6 +67,7 @@ en:
   skip: Skip to content
   nav.label: Pages
   lang.label: Language
+  moved: "This page has moved:"
   next.title: "Where next"
   next.buying: "Before you buy or receive BTX"
   next.wallets: "Choose a wallet"
@@ -440,6 +441,7 @@ de:
   skip: Zum Inhalt springen
   nav.label: Seiten
   lang.label: Sprache
+  moved: "Diese Seite ist umgezogen:"
   next.title: "Wie geht es weiter"
   next.buying: "Bevor du BTX kaufst oder empfängst"
   next.wallets: "Eine Wallet wählen"
@@ -819,6 +821,7 @@ es:
   skip: Ir al contenido
   nav.label: Páginas
   lang.label: Idioma
+  moved: "Esta página se ha trasladado:"
   next.title: "¿Y ahora?"
   next.buying: "Antes de comprar o recibir BTX"
   next.wallets: "Elegir una cartera"
@@ -1201,6 +1204,7 @@ fr:
   skip: Aller au contenu
   nav.label: Pages
   lang.label: Langue
+  moved: "Cette page a déménagé :"
   next.title: "Et ensuite"
   next.buying: "Avant d'acheter ou de recevoir des BTX"
   next.wallets: "Choisir un portefeuille"
@@ -1577,6 +1581,7 @@ zh:
   skip: 跳到正文
   nav.label: 页面
   lang.label: 语言
+  moved: "此页面已迁移："
   next.title: "接下来"
   next.buying: "购买或接收 BTX 之前"
   next.wallets: "选择钱包"
