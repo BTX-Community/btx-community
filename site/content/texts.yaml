@@ -286,6 +286,7 @@ en:
   hub.lane.rank: Risk rank
   hub.lane.runners: Runner slots
   hub.lane.done: Done bar ({count} items)
+  hub.lane.more: "Scope, why, target and done bar"
   hub.lane.nodata: not a coverage lane
   hub.lane.pack: The brief for this lane
   hub.lane.nopack: No brief yet; the first tasks are in the hub.
@@ -661,6 +662,7 @@ de:
   hub.lane.rank: Risikorang
   hub.lane.runners: Runner-Plätze
   hub.lane.done: Abschlusskriterien ({count} Punkte)
+  hub.lane.more: "Umfang, Grund, Ziel und Abschlusskriterien"
   hub.lane.nodata: kein Abdeckungsbereich
   hub.lane.pack: Das Briefing für diesen Bereich
   hub.lane.nopack: Noch kein Briefing; die ersten Aufgaben stehen im Hub.
@@ -1042,6 +1044,7 @@ es:
   hub.lane.rank: Ranking de riesgo
   hub.lane.runners: Puestos de runner
   hub.lane.done: Criterio de finalización ({count} puntos)
+  hub.lane.more: "Alcance, motivo, objetivo y criterio de finalización"
   hub.lane.nodata: no es una tarea de cobertura
   hub.lane.pack: El documento de partida de esta tarea
   hub.lane.nopack: Aún no hay documento de partida; los primeros trabajos están en el centro.
@@ -1424,6 +1427,7 @@ fr:
   hub.lane.rank: Rang de risque
   hub.lane.runners: Places de runner
   hub.lane.done: Critère d'achèvement ({count} points)
+  hub.lane.more: "Périmètre, raison, objectif et critère d'achèvement"
   hub.lane.nodata: pas un chantier de couverture
   hub.lane.pack: Le brief de ce chantier
   hub.lane.nopack: Pas encore de brief ; les premières tâches sont dans le hub.
@@ -1756,6 +1760,7 @@ zh:
   hub.lane.rank: 风险排名
   hub.lane.runners: 运行者席位
   hub.lane.done: 完成标准（{count} 项）
+  hub.lane.more: "范围、原因、目标和完成标准"
   hub.lane.nodata: 非覆盖率任务
   hub.lane.pack: 本任务的简报
   hub.lane.nopack: 尚无简报；首批工作见开发者中心。
