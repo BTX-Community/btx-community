@@ -39,7 +39,7 @@
                 {% endif %}
                 <span class="c-card__text">{{ entry.description }}</span>
                 {% if entry.note %}
-                <span class="c-card__note"><strong>{{ ui["note"] }}:</strong> {{ entry.note }}</span>
+                <span class="c-card__note"><span class="c-note-label">{{ ui["note"] }}</span> {{ entry.note }}</span>
                 {% endif %}
               </a>
             </li>
