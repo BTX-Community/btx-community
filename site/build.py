@@ -73,6 +73,12 @@ sub-menu ``SUBMENUS``."""
 SUBMENUS = {"dev": ("dev", "dev-work")}
 """The sub-menu of a menu page, in order: the page itself and its sub-pages (texts ``subnav.<id>``)."""
 ALL_PAGES = PAGES + tuple(SUBPAGES)
+NEXT_LINKS = {
+    "learn": (("next.buying", "home", "#before-buying"), ("next.wallets", "links", "#cat-wallets"), ("next.network", "network", "")),
+    "network": (("next.infra", "infra", ""), ("next.work", "dev-work", ""), ("next.learn", "learn", "")),
+    "links": (("next.buying", "home", "#before-buying"), ("next.infra", "infra", ""), ("next.projects", "docs", "")),
+}
+"""Pages that would otherwise end without a link onward: where each points next (text ``ui[key]``, page, anchor)."""
 """Every page the build writes: the menu pages, then the sub-pages."""
 MAX_YAML_BYTES = 256 * 1024
 REPO_URL = "https://github.com/BTX-Community/btx-community"
@@ -2631,6 +2637,7 @@ def context(
         ),
         "nav": [(p, ui[f"nav.{p}"], page_path(lang, p)) for p in PAGES],
         "nav_href": {p: page_path(lang, p) for p in ALL_PAGES},
+        "next_links": [(ui[key], page_path(lang, target) + anchor) for key, target, anchor in NEXT_LINKS.get(page_id, ())],
         "status_page": STATUS_PAGE.get(lang, STATUS_PAGE["en"]),
         "status_api": STATUS_API,
         "development_api": DEVELOPMENT_API,

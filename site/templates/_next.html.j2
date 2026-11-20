@@ -1,0 +1,11 @@
+{#- Where to go from here: a few links at the foot of a page that would otherwise end in a dead end. -#}
+{% if next_links %}
+      <nav class="c-next" aria-labelledby="onward-title">
+        <h2 class="c-section-title" id="onward-title">{{ ui["next.title"] }}</h2>
+        <ul class="c-next__list">
+          {% for label, href in next_links %}
+          <li><a class="c-link" href="{{ href }}">{{ label }} →</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+{% endif %}

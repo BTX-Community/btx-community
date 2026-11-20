@@ -914,6 +914,29 @@ a {
   font-weight: 600;
 }
 
+/* --- Onward links at the foot of a page ------------------------------------------------ */
+
+.c-next {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.c-next__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-next__list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 /* --- Directory -------------------------------------------------------------------------- */
 
 .c-muted {
