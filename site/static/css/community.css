@@ -1290,7 +1290,6 @@ main > div {
   --accent: var(--a-community);
 
   margin-top: 36px;
-  scroll-margin-top: 16px;
 }
 
 .c-category--official,

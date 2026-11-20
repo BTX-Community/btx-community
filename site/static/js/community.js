@@ -789,13 +789,15 @@
 
   // A link into a folded section (#flow, #gate-CI-1, #phase-3) opens every closed <details> around
   // its target and scrolls to it; the browser could not, since the target was not rendered.
-  function openFolds(id) {
+  // scroll: false when the browser is about to scroll there itself (a click on the link).
+  function openFolds(id, scroll) {
     var target = id ? document.getElementById(id) : null;
     var opened = false;
     // A link to the section itself (#flow) opens its own fold.
     var own = target ? target.querySelector(":scope > details.c-fold") : null;
-    if (own) {
+    if (own && !own.open) {
       own.open = true;
+      opened = true;
     }
     for (var node = target; node; node = node.parentElement) {
       if (node.tagName === "DETAILS" && !node.open) {
@@ -803,7 +805,7 @@
         opened = true;
       }
     }
-    if (opened) {
+    if (opened && scroll !== false) {
       target.scrollIntoView();
     }
   }
@@ -901,6 +903,14 @@
       var unfold = function () { openFolds(window.location.hash.slice(1)); };
       unfold();
       window.addEventListener("hashchange", unfold);
+      // A click opens the fold before the browser scrolls, so it measures the page as it will be
+      // (on /links/ opening one category closes the one above) and lands on the heading.
+      document.addEventListener("click", function (event) {
+        var link = event.target.closest ? event.target.closest("a[href^='#']") : null;
+        if (link && link.hash.length > 1) {
+          openFolds(decodeURIComponent(link.hash.slice(1)), false);
+        }
+      });
     }
     enhanceCopy();
   }
