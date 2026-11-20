@@ -38,8 +38,6 @@ translations:
     la comunidad; para preguntas de la comunidad, usa el grupo de arriba.
 - en: A general mining chat rather than a BTX group; the list keeps to BTX channels.
   es: Un chat de minería general, no un grupo de BTX; la lista se limita a canales de BTX.
-- en: Ask questions in the community group on Telegram.
-  es: Haz preguntas en el grupo de la comunidad en Telegram.
 - en: Hardly any activity any more; the community talks on Telegram.
   es: Apenas tiene actividad; la comunidad habla en Telegram.
 - en: No activity, and the miner has not changed since August 2026.
@@ -307,12 +305,6 @@ translations:
   es: >-
     Explorador de bloques gestionado por el pool ninjaraider, con una API JSON para direcciones y
     bloques.
-- en: >-
-    Catch up in minutes with a daily signed snapshot. A sync from genesis currently stops at block
-    126,978 (issue #272).
-  es: >-
-    Ponte al día en minutos con una instantánea diaria firmada. Una sincronización desde el génesis
-    se detiene actualmente en el bloque 126.978 (issue #272).
 - en: Closed source (stated in its README). 2% dev fee on BTX.
   es: Código cerrado (según su README). Comisión de desarrollador del 2 % en BTX.
 - en: >-
@@ -452,16 +444,6 @@ translations:
 - en: Official website with documentation, the browser wallet and the whitepaper.
   es: Web oficial con documentación, el monedero de navegador y el whitepaper.
 - en: >-
-    On a server - v0.34.16 has two Linux x86_64 archives, both for glibc 2.38 or newer (Ubuntu
-    24.04, Debian 13): a plain one, and a -cuda13 one for GPU nodes (sm_120: RTX 50 and RTX PRO
-    Blackwell cards; the NVIDIA driver is not included). There is no official Windows or macOS
-    archive.
-  es: >-
-    En un servidor: v0.34.16 tiene dos archivos Linux x86_64, ambos para glibc 2.38 o posterior
-    (Ubuntu 24.04, Debian 13): uno normal y otro -cuda13 para nodos con GPU (sm_120: tarjetas
-    Blackwell RTX 50 y RTX PRO; el driver de NVIDIA no va incluido). No hay archivo oficial para
-    Windows ni macOS.
-- en: >-
     On mainnet it needs at least two pinned signers and a threshold of two. Pin only signers that
     are live today.
   es: >-
@@ -486,12 +468,6 @@ translations:
     Pausado por su operador desde septiembre de 2026; ningún bloque entre los últimos 1.000
     (2026-11-12). El explorador first light del mismo equipo sigue en la lista.
 - en: >-
-    Pick a miner from our link list - for example easyBTX (an app for Mac and Linux; on Windows
-    through WSL) or matador (open source).
-  es: >-
-    Elige un minero de nuestra lista de enlaces: por ejemplo easyBTX (una app para Mac y Linux; en
-    Windows a través de WSL) o matador (código abierto).
-- en: >-
     Pool dedicated to BTX, run by the author of btx-pool-miner (GitHub lucasan123). It pays miners
     inside each block it finds, split by work over a 30-minute window. Check its fee on the pool
     page.
@@ -500,23 +476,11 @@ translations:
     mineros dentro de cada bloque que encuentra y reparte el pago según el trabajo de una ventana de
     30 minutos. Consulta su comisión en la página del pool.
 - en: >-
-    Problems with an NVIDIA card? The official CUDA troubleshooting guide helps; parts of it
-    describe the CUDA path from before block 185,000.
-  es: >-
-    ¿Problemas con una tarjeta NVIDIA? La guía oficial de solución de problemas de CUDA ayuda;
-    partes de ella describen la vía CUDA anterior al bloque 185.000.
-- en: >-
     Public tester site and guide of the wbtx-eth project (evxdev): a WBTX bridge on an Ethereum
     testnet. Test tokens have no value.
   es: >-
     Web pública de pruebas y guía del proyecto wbtx-eth (evxdev): un puente WBTX en una red de
     prueba de Ethereum. Los tokens de prueba no tienen valor.
-- en: >-
-    Read the official introduction and documentation. It was written for v0.33.2; newer releases
-    differ in places.
-  es: >-
-    Lee la introducción y la documentación oficiales. Se escribieron para la v0.33.2; las versiones
-    más nuevas difieren en algunos puntos.
 - en: Run by the vendor of those apps.
   es: Lo gestiona el proveedor de esas apps.
 - en: >-
@@ -575,13 +539,6 @@ translations:
   es: >-
     BTX envuelto en Ethereum: contratos, servicios de validador y un simulador local, de la
     organización de GitHub evxdev. Solo red de prueba.
-- en: >-
-    matador's quick start contains a sample payout address that is not yours and two pools that are
-    offline. Always put in your own btx1z address and a pool from our link list.
-  es: >-
-    El inicio rápido de matador contiene una dirección de cobro de ejemplo que no es tuya y dos
-    pools fuera de servicio. Pon siempre tu propia dirección btx1z y un pool de nuestra lista de
-    enlaces.
 - en: Fixed supply
   es: Suministro fijo
 - en: >-
@@ -645,8 +602,6 @@ translations:
   es: >-
     BTX es un fork poscuántico de Bitcoin con un suministro máximo fijo y su propia prueba de trabajo
     (MatMul). Lo sostiene una comunidad abierta, no una empresa.
-- en: See how the network is doing right now, in plain terms.
-  es: Mira cómo está la red ahora mismo, explicado con claridad.
 - en: >-
     Never share your seed or private key. Nobody from the community will ever ask for it; direct messages
     offering help or "support" are scams.
@@ -661,19 +616,8 @@ translations:
   es: >-
     Para minar hace falta una GPU. Puedes minar en solitario contra tu propio nodo y quedarte cada
     bloque, o unirte a un pool para cobrar de forma más regular.
-- en: >-
-    Prefer a smaller pool. When one pool finds most blocks, the network depends on it; the status
-    page shows the current shares.
-  es: >-
-    Mejor un pool pequeño. Cuando un pool encuentra la mayoría de los bloques, la red depende de él;
-    la página de estado muestra las cuotas actuales.
 - en: Running a node
   es: Operar un nodo
-- en: Easiest start at home - easynode installs and supervises btxd for you.
-  es: 'El inicio más fácil en casa: easynode instala y supervisa btxd por ti.'
-- en: Node stuck at a height? The node help explains each known case and its fix.
-  es: >-
-    ¿Nodo atascado en una altura? La ayuda para nodos explica cada caso conocido y su solución.
 - en: Community
   es: Comunidad
 - en: Community account on X.
@@ -982,19 +926,12 @@ translations:
     El centro para desarrolladores te explica a ti, y a la herramienta de IA con la que trabajas,
     cómo compilar, probar y documentar un cambio para que pueda integrarse, y qué trabajo está
     abierto.
-- en: The reference implementation and its own rules for agents.
-  es: La implementación de referencia y sus propias reglas para agentes.
-- en: "Start here: where to begin, the prompt for your AI tool and the three levels."
-  es: >-
-    Empieza aquí: por dónde empezar, la instrucción para tu herramienta de IA y los tres niveles.
 - en: Read the hub's front page, written for people.
   es: Lee la portada del centro, escrita para personas.
 - en: >-
     Pick a level: what each one needs, and its first hour.
   es: >-
     Elige un nivel: qué necesita cada uno y su primera hora.
-- en: Give your AI tool (Claude Code, Cursor, Codex or another) the agent file.
-  es: Dale a tu herramienta de IA (Claude Code, Cursor, Codex u otra) el archivo para agentes.
 - en: >-
     Learn the working method: generate, challenge, verify, then publish.
   es: >-
@@ -2952,11 +2889,6 @@ translations:
     necesitan glibc 2.38 o posterior y estos scripts compilan contra glibc 2.31, así que sus hashes
     todavía no pueden coincidir con una recompilación.
 # developers split: the start card's two steps
-- en: "Ongoing work: test coverage, the nightly CI-0 run and the lanes waiting for an owner."
-  es: >-
-    Trabajo en curso: cobertura de pruebas, la ejecución nocturna de CI-0 y las tareas a la espera
-    de responsable.
-# start and links pages: fact fixes and new steps of the UX pass
 - en: >-
     Unofficial demo with sample data only. SwapNet is in v0.34.16 for broader testing, off unless a
     node starts with -swapnet=1; the page connects to no node or wallet.
@@ -2964,17 +2896,6 @@ translations:
     Demo no oficial, solo con datos de ejemplo. SwapNet está en v0.34.16 para pruebas más amplias,
     desactivado salvo que un nodo arranque con -swapnet=1; la página no se conecta a ningún nodo ni
     monedero.
-- en: "What BTX is, in a few facts with their sources."
-  es: "Qué es BTX, en unos pocos hechos con sus fuentes."
-- en: "Choose a wallet from the list, after reading \"Before you buy or receive BTX\" below."
-  es: "Elige un monedero de la lista, después de leer «Antes de comprar o recibir BTX» más abajo."
-- en: "Have a spare machine? Seven ways to give BTX infrastructure, from a node to a fuzz box."
-  es: >-
-    ¿Tienes una máquina libre? Siete formas de aportar infraestructura a BTX, desde un nodo hasta
-    una caja de fuzzing.
-- en: "Community projects: things to build and run outside the node software."
-  es: "Proyectos de la comunidad: cosas que construir y operar fuera del software del nodo."
-# projects.yaml: the projects at the top of the Projects page
 - en: "Build something"
   es: "Construir algo"
 - en: >-
@@ -3154,3 +3075,106 @@ translations:
   es: "Formatos de monedero de navegador y de nodo (desarrolladores)"
 - en: "The community chats on the links page."
   es: "Los chats de la comunidad en la página de enlaces."
+- en: "A few facts, each with its source."
+  es: "Unos pocos datos, cada uno con su fuente."
+- en: "What BTX is"
+  es: "Qué es BTX"
+- en: "Written for v0.33.2; newer releases differ in places."
+  es: "Escrita para v0.33.2; las versiones más nuevas difieren en algunos puntos."
+- en: "Official introduction"
+  es: "Introducción oficial"
+- en: "The status page, in plain terms."
+  es: "La página de estado, en palabras sencillas."
+- en: "How the network is doing"
+  es: "Cómo está la red"
+- en: "The community group on Telegram."
+  es: "El grupo de la comunidad en Telegram."
+- en: "Ask the community"
+  es: "Pregunta a la comunidad"
+- en: "Read \"Before you buy or receive BTX\" below first."
+  es: "Lee antes «Antes de comprar o recibir BTX», más abajo."
+- en: "Choose a wallet"
+  es: "Elegir una cartera"
+- en: >-
+    For example easyBTX (an app for Mac and Linux; on Windows through WSL) or matador (open source).
+  es: >-
+    Por ejemplo easyBTX (una app para Mac y Linux; en Windows mediante WSL) o matador (código
+    abierto).
+- en: "Pick a miner"
+  es: "Elegir un software de minería"
+- en: >-
+    When one pool finds most blocks, the network depends on it; the status page shows the current
+    shares.
+  es: >-
+    Si un pool encuentra la mayoría de los bloques, la red depende de él; la página de estado
+    muestra los porcentajes actuales.
+- en: "Prefer a smaller pool"
+  es: "Mejor un pool más pequeño"
+- en: >-
+    matador's quick start contains a sample payout address that is not yours and two pools that are
+    offline. Put in your own address and a pool from our link list.
+  es: >-
+    El inicio rápido de matador trae una dirección de cobro de ejemplo que no es tuya y dos pools
+    que ya no funcionan. Pon tu propia dirección y un pool de nuestra lista de enlaces.
+- en: "Use your own btx1z address"
+  es: "Usa tu propia dirección btx1z"
+- en: >-
+    The official CUDA troubleshooting guide; parts of it describe the CUDA path from before block
+    185,000.
+  es: >-
+    La guía oficial de solución de problemas de CUDA; partes de ella describen el camino CUDA
+    anterior al bloque 185.000.
+- en: "Problems with an NVIDIA card"
+  es: "Problemas con una tarjeta NVIDIA"
+- en: "Installs and supervises btxd for you."
+  es: "Instala y supervisa btxd por ti."
+- en: "Easiest start at home: easynode"
+  es: "El inicio más fácil en casa: easynode"
+- en: >-
+    v0.34.16 has two Linux x86_64 archives for glibc 2.38 or newer (Ubuntu 24.04, Debian 13): a plain
+    one, and -cuda13 for GPU nodes (sm_120: RTX 50 and RTX PRO Blackwell cards; driver not included).
+    No official Windows or macOS archive.
+  es: >-
+    v0.34.16 tiene dos archivos Linux x86_64 para glibc 2.38 o posterior (Ubuntu 24.04, Debian 13):
+    uno normal y -cuda13 para nodos con GPU (sm_120: tarjetas Blackwell RTX 50 y RTX PRO; sin el
+    controlador). No hay archivo oficial para Windows ni macOS.
+- en: "On a server"
+  es: "En un servidor"
+- en: "Catches up in minutes. A sync from genesis currently stops at block 126,978 (issue #272)."
+  es: >-
+    Te pone al día en minutos. Una sincronización desde el génesis se detiene hoy en el bloque
+    126.978 (issue #272).
+- en: "Start from a signed snapshot"
+  es: "Empieza desde un snapshot firmado"
+- en: "The node help explains each known case and its fix."
+  es: "La ayuda para nodos explica cada caso conocido y su solución."
+- en: "Node stuck at a height?"
+  es: "¿El nodo se atasca en una altura?"
+- en: "Seven ways to give BTX infrastructure, from a node to a fuzz box."
+  es: "Siete formas de dar infraestructura a BTX, desde un nodo hasta una fuzz box."
+- en: "Have a spare machine?"
+  es: "¿Tienes una máquina libre?"
+- en: "Run a signer"
+  es: "Operar un firmante"
+- en: "Where to begin, the prompt for your AI tool and the three levels."
+  es: "Por dónde empezar, el prompt para tu herramienta de IA y los tres niveles."
+- en: "Start here"
+  es: "Empieza aquí"
+- en: "Test coverage, the nightly CI-0 run and the lanes waiting for an owner."
+  es: "Cobertura de pruebas, la ejecución nocturna CI-0 y las lanes que esperan responsable."
+- en: "Ongoing work"
+  es: "Trabajo en curso"
+- en: "For Claude Code, Cursor, Codex or another."
+  es: "Para Claude Code, Cursor, Codex u otra."
+- en: "The agent file for your AI tool"
+  es: "El archivo de agente para tu herramienta de IA"
+- en: "btxchain/btx, with its own rules for agents."
+  es: "btxchain/btx, con sus propias reglas para agentes."
+- en: "The reference implementation"
+  es: "La implementación de referencia"
+- en: "Things to build and run outside the node software."
+  es: "Cosas para construir y operar fuera del software del nodo."
+- en: "Community projects"
+  es: "Proyectos de la comunidad"
+- en: "Give your AI tool (Claude Code, Cursor, Codex or another) the agent file."
+  es: "Dale a tu herramienta de IA (Claude Code, Cursor, Codex u otra) el archivo para agentes."

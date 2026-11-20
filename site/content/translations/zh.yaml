@@ -31,8 +31,6 @@ translations:
   zh: 通往 BTX 主聊天群（算力与技术）的验证入口。不由社区运营；社区问题请到上面的群组提问。
 - en: A general mining chat rather than a BTX group; the list keeps to BTX channels.
   zh: 一个通用的挖矿聊天群，而不是 BTX 群组；本列表只收录 BTX 频道。
-- en: Ask questions in the community group on Telegram.
-  zh: 在 Telegram 上的社区群组中提问。
 - en: Hardly any activity any more; the community talks on Telegram.
   zh: 几乎已无活动；社区在 Telegram 上交流。
 - en: No activity, and the miner has not changed since August 2026.
@@ -252,11 +250,6 @@ translations:
   zh: easyBTX 团队的区块浏览器，可查询区块、交易和地址，提供公开 API（api.btxscan.io）。
 - en: Block explorer run by the ninjaraider pool, with a JSON API for addresses and blocks.
   zh: 由 ninjaraider 矿池运营的区块浏览器，提供地址和区块的 JSON API。
-- en: >-
-    Catch up in minutes with a daily signed snapshot. A sync from genesis currently stops at block
-    126,978 (issue #272).
-  zh: >-
-    使用每日签名快照，几分钟内追上进度。从创世区块开始的同步目前会停在区块 126,978（issue #272）。
 - en: Closed source (stated in its README). 2% dev fee on BTX.
   zh: 闭源（其 README 中写明）。挖 BTX 时收取 2% 的开发者费用。
 - en: >-
@@ -354,12 +347,6 @@ translations:
 - en: Official website with documentation, the browser wallet and the whitepaper.
   zh: 官方网站，含文档、浏览器钱包和白皮书。
 - en: >-
-    On a server - v0.34.16 has two Linux x86_64 archives, both for glibc 2.38 or newer (Ubuntu
-    24.04, Debian 13): a plain one, and a -cuda13 one for GPU nodes (sm_120: RTX 50 and RTX PRO
-    Blackwell cards; the NVIDIA driver is not included). There is no official Windows or macOS
-    archive.
-  zh: "在服务器上：v0.34.16 有两个 Linux x86_64 压缩包，都需要 glibc 2.38 或更新版本（Ubuntu 24.04、Debian 13）：一个普通版，一个供 GPU 节点使用的 -cuda13 版（sm_120：RTX 50 与 RTX PRO 系列 Blackwell 显卡；不含 NVIDIA 驱动）。没有官方的 Windows 或 macOS 压缩包。"
-- en: >-
     On mainnet it needs at least two pinned signers and a threshold of two. Pin only signers that
     are live today.
   zh: 在主网上，它需要至少两个固定的签名者，且阈值为 2。只固定目前仍在运行的签名者。
@@ -376,10 +363,6 @@ translations:
     first light explorer of the same team stays listed.
   zh: 自 2026 年 9 月起被其运营者暂停；最近 1,000 个区块中没有它找到的区块（2026-11-12）。同一团队的 first light 区块浏览器仍保留在列表中。
 - en: >-
-    Pick a miner from our link list - for example easyBTX (an app for Mac and Linux; on Windows
-    through WSL) or matador (open source).
-  zh: 从我们的链接列表中选择挖矿软件：例如 easyBTX（适用于 Mac 和 Linux 的应用；在 Windows 上通过 WSL）或 matador（开源）。
-- en: >-
     Pool dedicated to BTX, run by the author of btx-pool-miner (GitHub lucasan123). It pays miners
     inside each block it finds, split by work over a 30-minute window. Check its fee on the pool
     page.
@@ -387,17 +370,9 @@ translations:
     专门的 BTX 矿池，由 btx-pool-miner 的作者（GitHub lucasan123）运营。它在找到的每个区块内直接向矿工付款，按 30
     分钟窗口内的工作量分配。请在矿池页面查看其费率。
 - en: >-
-    Problems with an NVIDIA card? The official CUDA troubleshooting guide helps; parts of it
-    describe the CUDA path from before block 185,000.
-  zh: NVIDIA 显卡有问题？官方 CUDA 故障排除指南可以帮忙；其中部分内容描述的是区块 185,000 之前的 CUDA 路径。
-- en: >-
     Public tester site and guide of the wbtx-eth project (evxdev): a WBTX bridge on an Ethereum
     testnet. Test tokens have no value.
   zh: wbtx-eth 项目（evxdev）面向测试者的公开网站和指南：以太坊测试网上的 WBTX 跨链桥。测试代币没有价值。
-- en: >-
-    Read the official introduction and documentation. It was written for v0.33.2; newer releases
-    differ in places.
-  zh: 阅读官方介绍和文档。它针对 v0.33.2 编写；较新版本在部分地方有所不同。
 - en: Run by the vendor of those apps.
   zh: 由这些应用的厂商运营。
 - en: >-
@@ -439,10 +414,6 @@ translations:
     Wrapped BTX on Ethereum - contracts, validator services and a local simulator, by the GitHub
     organisation evxdev. Testnet only.
   zh: 以太坊上的封装 BTX：合约、验证者服务和本地模拟器，由 GitHub 组织 evxdev 开发。仅限测试网。
-- en: >-
-    matador's quick start contains a sample payout address that is not yours and two pools that are
-    offline. Always put in your own btx1z address and a pool from our link list.
-  zh: matador 的快速入门包含一个不属于你的示例收款地址，以及两个已下线的矿池。务必填入你自己的 btx1z 地址和我们链接列表中的矿池。
 - en: Fixed supply
   zh: 固定供应量
 - en: >-
@@ -492,8 +463,6 @@ translations:
     BTX is a post-quantum fork of Bitcoin with a fixed maximum supply and its own proof-of-work (MatMul).
     It is run by an open community, not by a company.
   zh: BTX 是比特币的后量子分叉，拥有固定的最大供应量和自己的工作量证明（MatMul）。它由开放的社区维护，而非公司。
-- en: See how the network is doing right now, in plain terms.
-  zh: 用通俗的方式查看网络当前的运行情况。
 - en: >-
     Never share your seed or private key. Nobody from the community will ever ask for it; direct messages
     offering help or "support" are scams.
@@ -504,16 +473,8 @@ translations:
     Mining needs a GPU. You can mine alone against your own node and keep every block, or join a pool
     for steadier payouts.
   zh: 挖矿需要一块 GPU。你可以连接自己的节点单独挖矿并保留每个区块，也可以加入矿池以获得更稳定的收益。
-- en: >-
-    Prefer a smaller pool. When one pool finds most blocks, the network depends on it; the status
-    page shows the current shares.
-  zh: 优先选择较小的矿池。当一个矿池找到大多数区块时，网络就依赖于它；状态页显示当前各矿池的份额。
 - en: Running a node
   zh: 运行节点
-- en: Easiest start at home - easynode installs and supervises btxd for you.
-  zh: 在家最简单的开始方式：easynode 帮你安装并监管 btxd。
-- en: Node stuck at a height? The node help explains each known case and its fix.
-  zh: 节点卡在某个高度？节点帮助页面解释了每种已知情况及其解决方法。
 - en: Community
   zh: 社区
 - en: Community account on X.
@@ -742,17 +703,11 @@ translations:
     hub tells you, and the AI tool you work with, how to build, test and document a change so that
     it can be merged, and which work is open.
   zh: 节点软件是开源的，任何人都可以在 GitHub 上向它提交拉取请求。开发者中心会告诉你以及你使用的 AI 工具，如何构建、测试一项更改并为其编写文档，使它能够被合并，以及哪些工作仍然开放。
-- en: The reference implementation and its own rules for agents.
-  zh: 参考实现及其针对智能体的自有规则。
-- en: "Start here: where to begin, the prompt for your AI tool and the three levels."
-  zh: "从这里开始：从何入手、给你的 AI 工具的提示词，以及三个级别。"
 - en: Read the hub's front page, written for people.
   zh: 阅读开发者中心的首页，面向人类读者。
 - en: >-
     Pick a level: what each one needs, and its first hour.
   zh: 选择一个级别：各级别需要什么，以及第一个小时做什么。
-- en: Give your AI tool (Claude Code, Cursor, Codex or another) the agent file.
-  zh: 把智能体文件交给你的 AI 工具（Claude Code、Cursor、Codex 或其他工具）。
 - en: >-
     Learn the working method: generate, challenge, verify, then publish.
   zh: 学习工作方法：生成、质疑、核实，然后发布。
@@ -2263,22 +2218,10 @@ translations:
     rebuild yet.
   zh: "复现构建者用 contrib/guix 构建某个版本打了标签的源代码，为结果出具证明，并核验其他构建者的证明。据 v0.34.16 的发布说明，其 Linux 二进制文件需要 glibc 2.38 或更新版本，而这些脚本基于 glibc 2.31 构建，因此它们的哈希值目前还不可能与复现构建的结果一致。"
 # developers split: the start card's two steps
-- en: "Ongoing work: test coverage, the nightly CI-0 run and the lanes waiting for an owner."
-  zh: "进行中的工作：测试覆盖率、CI-0 夜间运行，以及等待负责人的任务。"
-# start and links pages: fact fixes and new steps of the UX pass
 - en: >-
     Unofficial demo with sample data only. SwapNet is in v0.34.16 for broader testing, off unless a
     node starts with -swapnet=1; the page connects to no node or wallet.
   zh: "非官方演示，仅含示例数据。SwapNet 已随 v0.34.16 提供以便更广泛地测试，默认关闭，除非节点以 -swapnet=1 启动；页面不连接任何节点或钱包。"
-- en: "What BTX is, in a few facts with their sources."
-  zh: "BTX 是什么：几条附出处的事实。"
-- en: "Choose a wallet from the list, after reading \"Before you buy or receive BTX\" below."
-  zh: "先阅读下方的“购买或接收 BTX 之前”，再从列表中选择钱包。"
-- en: "Have a spare machine? Seven ways to give BTX infrastructure, from a node to a fuzz box."
-  zh: "有闲置的机器？七种为 BTX 提供基础设施的方式，从节点到模糊测试机。"
-- en: "Community projects: things to build and run outside the node software."
-  zh: "社区项目：在节点软件之外可以构建和运营的东西。"
-# projects.yaml: the projects at the top of the Projects page
 - en: "Build something"
   zh: "动手构建"
 - en: >-
@@ -2413,3 +2356,95 @@ translations:
   zh: "浏览器钱包与节点钱包的格式（开发者文档）"
 - en: "The community chats on the links page."
   zh: "链接页上的社区聊天群。"
+- en: "A few facts, each with its source."
+  zh: "几条事实，每条都附有来源。"
+- en: "What BTX is"
+  zh: "BTX 是什么"
+- en: "Written for v0.33.2; newer releases differ in places."
+  zh: "针对 v0.33.2 编写；较新版本在部分地方有所不同。"
+- en: "Official introduction"
+  zh: "官方介绍"
+- en: "The status page, in plain terms."
+  zh: "状态页，用通俗的话说明。"
+- en: "How the network is doing"
+  zh: "网络状况"
+- en: "The community group on Telegram."
+  zh: "Telegram 上的社区群组。"
+- en: "Ask the community"
+  zh: "向社区提问"
+- en: "Read \"Before you buy or receive BTX\" below first."
+  zh: "请先阅读下方的“购买或接收 BTX 之前”。"
+- en: "Choose a wallet"
+  zh: "选择钱包"
+- en: >-
+    For example easyBTX (an app for Mac and Linux; on Windows through WSL) or matador (open source).
+  zh: "例如 easyBTX（适用于 Mac 和 Linux 的应用；Windows 上通过 WSL）或 matador（开源）。"
+- en: "Pick a miner"
+  zh: "选择挖矿软件"
+- en: >-
+    When one pool finds most blocks, the network depends on it; the status page shows the current
+    shares.
+  zh: "如果一个矿池找到大部分区块，网络就会依赖它；状态页显示当前份额。"
+- en: "Prefer a smaller pool"
+  zh: "优先选择较小的矿池"
+- en: >-
+    matador's quick start contains a sample payout address that is not yours and two pools that are
+    offline. Put in your own address and a pool from our link list.
+  zh: "matador 的快速入门里有一个不属于你的示例收款地址和两个已下线的矿池。请填写你自己的地址和我们链接列表中的矿池。"
+- en: "Use your own btx1z address"
+  zh: "使用你自己的 btx1z 地址"
+- en: >-
+    The official CUDA troubleshooting guide; parts of it describe the CUDA path from before block
+    185,000.
+  zh: "官方 CUDA 故障排查指南；其中部分内容描述的是区块 185,000 之前的 CUDA 方式。"
+- en: "Problems with an NVIDIA card"
+  zh: "NVIDIA 显卡出现问题"
+- en: "Installs and supervises btxd for you."
+  zh: "为你安装并监控 btxd。"
+- en: "Easiest start at home: easynode"
+  zh: "在家最简单的开始：easynode"
+- en: >-
+    v0.34.16 has two Linux x86_64 archives for glibc 2.38 or newer (Ubuntu 24.04, Debian 13): a plain
+    one, and -cuda13 for GPU nodes (sm_120: RTX 50 and RTX PRO Blackwell cards; driver not included).
+    No official Windows or macOS archive.
+  zh: >-
+    v0.34.16 有两个 Linux x86_64 压缩包，需要 glibc 2.38 或更新（Ubuntu 24.04、Debian 13）：一个普通版，一个用于 GPU 节点的
+    -cuda13（sm_120：Blackwell RTX 50 和 RTX PRO 显卡；不含驱动）。没有官方 Windows 或 macOS 压缩包。
+- en: "On a server"
+  zh: "在服务器上"
+- en: "Catches up in minutes. A sync from genesis currently stops at block 126,978 (issue #272)."
+  zh: "几分钟即可追上。目前从创世区块同步会停在区块 126,978（issue #272）。"
+- en: "Start from a signed snapshot"
+  zh: "从签名快照开始"
+- en: "The node help explains each known case and its fix."
+  zh: "节点帮助说明了每种已知情况及其解决办法。"
+- en: "Node stuck at a height?"
+  zh: "节点卡在某个高度？"
+- en: "Seven ways to give BTX infrastructure, from a node to a fuzz box."
+  zh: "为 BTX 提供基础设施的七种方式，从节点到 fuzz box。"
+- en: "Have a spare machine?"
+  zh: "有闲置的机器？"
+- en: "Run a signer"
+  zh: "运行签名者"
+- en: "Where to begin, the prompt for your AI tool and the three levels."
+  zh: "从哪里开始、给你的 AI 工具的提示词，以及三个级别。"
+- en: "Start here"
+  zh: "从这里开始"
+- en: "Test coverage, the nightly CI-0 run and the lanes waiting for an owner."
+  zh: "测试覆盖率、每晚的 CI-0 运行，以及等待负责人的 lane。"
+- en: "Ongoing work"
+  zh: "正在进行的工作"
+- en: "For Claude Code, Cursor, Codex or another."
+  zh: "适用于 Claude Code、Cursor、Codex 或其他工具。"
+- en: "The agent file for your AI tool"
+  zh: "给你的 AI 工具的智能体文件"
+- en: "btxchain/btx, with its own rules for agents."
+  zh: "btxchain/btx，附带其自身的智能体规则。"
+- en: "The reference implementation"
+  zh: "参考实现"
+- en: "Things to build and run outside the node software."
+  zh: "在节点软件之外构建和运行的东西。"
+- en: "Community projects"
+  zh: "社区项目"
+- en: "Give your AI tool (Claude Code, Cursor, Codex or another) the agent file."
+  zh: "把智能体文件交给你的 AI 工具（Claude Code、Cursor、Codex 或其他工具）。"

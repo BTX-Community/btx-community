@@ -365,7 +365,7 @@ a {
 }
 
 .c-hero {
-  padding: 48px 0 32px;
+  padding: 32px 0 24px;
 }
 
 .c-kicker {
@@ -380,7 +380,7 @@ a {
 .c-hero__title {
   margin: 0;
   font-family: var(--font-mono);
-  font-size: clamp(40px, 9vw, 88px);
+  font-size: clamp(34px, 6vw, 60px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1;
@@ -392,9 +392,9 @@ a {
 
 .c-hero__lead {
   max-width: 44rem;
-  margin: 20px 0 0;
+  margin: 14px 0 0;
   color: var(--muted);
-  font-size: 18px;
+  font-size: 17px;
 }
 
 /* --- Live strip ------------------------------------------------------------------------- */
@@ -974,6 +974,61 @@ a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+}
+
+/* --- Task rows of the start cards: a short task with an arrow, the detail below it ----- */
+
+.c-tasks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-task {
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+
+.c-task__link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 28px;
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.c-task__link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.c-task__arrow {
+  flex: none;
+  color: var(--accent);
+}
+
+.c-task__detail {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* A step without a link is a warning that stays visible. */
+.c-task--note {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-top: 0;
+  border-left: 3px solid var(--yellow);
+  border-radius: 6px;
+  background: var(--warn-tint);
+  font-size: 14px;
+}
+
+.c-task--note strong {
+  font-weight: 600;
 }
 
 /* --- Directory -------------------------------------------------------------------------- */
