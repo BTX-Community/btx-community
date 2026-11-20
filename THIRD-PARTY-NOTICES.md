@@ -39,3 +39,7 @@ from, with its SHA-256, is listed in `site/static/fonts/new/SOURCES.md`.
 
 - Instrument Serif: Copyright 2022 The Instrument Serif Project Authors
   (<https://github.com/Instrument/instrument-serif>).
+- Space Grotesk: Copyright 2020 The Space Grotesk Project Authors
+  (<https://github.com/floriankarsten/space-grotesk>).
+- Unbounded: Copyright 2022 The Unbounded Project Authors
+  (<https://github.com/googlefonts/unbounded>).

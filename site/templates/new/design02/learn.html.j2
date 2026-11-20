@@ -1,0 +1,79 @@
+{% extends "design02/base.html.j2" %}
+{% import "design02/_parts.html.j2" as parts %}
+{% set title = "Learn BTX" %}
+{% set description = page_description %}
+{% set crumb = "start here / learn btx" %}
+{% set heading = page_title %}
+{% set lead = page_lead %}
+{% set guide = true %}
+{#- The reading page of "Start here": what BTX is, then the four lanes of the start page with all
+    their steps (the start page shows only the first three), then the current release. #}
+{% set steps = [("about", ui["facts.title"], None)] %}
+{% for audience in audiences %}{% if steps.append(("lane-" ~ audience.id, audience.title, audience.steps | length)) %}{% endif %}{% endfor %}
+{% if upcoming %}{% if steps.append(("next", ui["upcoming.title"].format(version=upcoming.version), None)) %}{% endif %}{% endif %}
+{% set badges = [("lime", "release notes checked " ~ upcoming.checked), ("cyan", "applies to v" ~ upcoming.version)] if upcoming else [] %}
+{% set onward = next_links %}
+{% block content %}
+      <section class="d02-step" id="about" aria-labelledby="about-title">
+        {{ parts.stephead("about", 1, ui["facts.title"]) }}
+        <div class="d02-cards">
+          {%- for fact in facts %}
+          <article class="d02-card" id="fact-{{ fact.id }}" aria-labelledby="fact-{{ fact.id }}-title">
+            <h3 class="d02-card__t" id="fact-{{ fact.id }}-title">{{ fact.title }}</h3>
+            <p>{{ fact.text }}</p>
+            <p class="d02-src"><a href="{{ fact.source }}" rel="noopener noreferrer">{{ ui["facts.source"] }}: {{ fact.title }} ↗</a></p>
+          </article>
+          {%- endfor %}
+        </div>
+      </section>
+
+      {%- for audience in audiences %}
+      <section class="d02-step" id="lane-{{ audience.id }}" aria-labelledby="lane-{{ audience.id }}-title">
+        {{ parts.stephead("lane-" ~ audience.id, loop.index + 1, audience.title) }}
+        <p class="d02-prose">{{ audience.text }}</p>
+        <ol class="d02-todo">
+          {%- for step in audience.steps %}
+          {%- if step.href %}
+          <li class="d02-todo__i">
+            <a class="d02-todo__a" href="{{ step.href | d }}"{{ parts.rel(step.external) }}><span class="d02-todo__n" aria-hidden="true">{{ "%02d" | format(loop.index) }}</span><span class="d02-todo__t">{{ step.text }}</span>{{ parts.arrow(step.external) }}</a>
+            {%- if step.detail %}<p class="d02-todo__d">{{ step.detail }}</p>{% endif %}
+          </li>
+          {%- else %}
+          {#- A step without a link is a warning in the content (e.g. the seed); it stays a warning here. #}
+          <li class="d02-todo__i d02-todo__i--warn">
+            <aside class="d02-warn" role="note">
+              <svg class="d02-warn__ico" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M12 3l9 16H3z M12 10v4 M12 17h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <p><strong>{{ step.text }}</strong>{% if step.detail %} {{ step.detail }}{% endif %}</p>
+            </aside>
+          </li>
+          {%- endif %}
+          {%- endfor %}
+        </ol>
+      </section>
+      {%- endfor %}
+
+      {%- if upcoming %}
+      <section class="d02-step" id="next" aria-labelledby="next-title">
+        {{ parts.stephead("next", audiences | length + 2, ui["upcoming.title"].format(version=upcoming.version)) }}
+        <p class="d02-prose">{{ upcoming.status }}</p>
+        <p class="d02-src">{{ ui["upcoming.checked"].format(date=upcoming.checked) }} <a href="{{ upcoming.source }}" rel="noopener noreferrer">{{ ui["upcoming.notes"] }} v{{ upcoming.version }} ↗</a></p>
+        <div class="d02-cards">
+          {%- for feature in upcoming.features %}
+          <article class="d02-card">
+            <h3 class="d02-card__t">{{ feature.title }}</h3>
+            <p>{{ feature.text }}</p>
+            <p class="d02-src"><a href="{{ feature.source }}" rel="noopener noreferrer">{{ ui["facts.source"] }}: {{ feature.title }} ↗</a></p>
+          </article>
+          {%- endfor %}
+        </div>
+        {%- if upcoming.caveats %}
+        <h3 class="d02-h3">{{ ui["upcoming.caveats"] }}</h3>
+        <ul class="d02-checks">
+          {%- for caveat in upcoming.caveats %}
+          <li class="d02-checks__i"><input class="d02-checks__box" type="checkbox" id="caveat-{{ loop.index }}"><label class="d02-checks__l" for="caveat-{{ loop.index }}">{{ caveat }}</label></li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+      </section>
+      {%- endif %}
+{% endblock %}
