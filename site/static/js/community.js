@@ -747,6 +747,46 @@
     }
   }
 
+  // Contents rail: marks the section the reader is in (aria-current), the highest one whose top
+  // has passed the upper third of the window. Without IntersectionObserver nothing is marked.
+  function enhanceRail(rail) {
+    if (typeof IntersectionObserver !== "function") {
+      return;
+    }
+    var links = toArray(rail.querySelectorAll("a[href^='#']"));
+    var targets = links.map(function (link) { return document.getElementById(link.hash.slice(1)); });
+    var visible = {};
+    function mark() {
+      var current = -1;
+      targets.forEach(function (target, index) {
+        if (target && visible[index]) {
+          current = current === -1 ? index : current;
+        }
+      });
+      if (current === -1) {
+        return;
+      }
+      links.forEach(function (link, index) {
+        if (index === current) {
+          link.setAttribute("aria-current", "true");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        visible[targets.indexOf(entry.target)] = entry.isIntersecting;
+      });
+      mark();
+    }, { rootMargin: "-80px 0px -60% 0px" });
+    targets.forEach(function (target) {
+      if (target) {
+        observer.observe(target);
+      }
+    });
+  }
+
   // A link into a folded section (#flow, #gate-CI-1, #phase-3) opens every closed <details> around
   // its target and scrolls to it; the browser could not, since the target was not rendered.
   function openFolds(id) {
@@ -852,6 +892,7 @@
       refreshDevelopment(development);
       window.setInterval(function () { refreshDevelopment(development); }, DEV_INTERVAL_MS);
     }
+    Array.prototype.forEach.call(document.querySelectorAll("[data-rail]"), enhanceRail);
     var hub = document.getElementById("lanes");
     if (hub) {
       enhanceHub(hub);
