@@ -137,11 +137,11 @@ home:
             Port 29447 geschlossen und lässt die Update-Abfragen aus, solange du sie nicht
             einschaltest.
         - en: >-
-            On a machine with coins, mining or a signer key, set modelnet=0 and natpmp=0, as the
-            install checklist says.
+            On a machine with coins, mining or a signer key, set modelnet=0, natpmp=0 and
+            swapnet=0, as the install checklist says.
           de: >-
-            Auf einem Rechner mit Guthaben, Mining oder Signer-Schlüssel modelnet=0 und natpmp=0
-            setzen, wie es die Installations-Checkliste sagt.
+            Auf einem Rechner mit Guthaben, Mining oder Signer-Schlüssel modelnet=0, natpmp=0 und
+            swapnet=0 setzen, wie es die Installations-Checkliste sagt.
     - id: reach
       title: { en: Reachability, de: Erreichbarkeit }
       items:

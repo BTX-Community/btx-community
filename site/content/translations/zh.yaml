@@ -703,12 +703,13 @@ translations:
     signatures and some network rules.
   zh: >-
     节点源自 Bitcoin Knots v29.2（Bitcoin Core 的一个变体）。btxd、btx-cli、RPC 接口和 PSBT 的用法与比特币用户熟悉的一样；不同的是工作量证明、签名和部分网络规则。
-- en: 'Three defaults to decide on: btxd installs newer signed releases from btx.dev by itself (autoupdateseamless=0
-    only reports them, autoupdate=0 stops checking); the model network listens on port 29447 (modelnet=0
-    turns it off); and natpmp asks your router to open ports 19335 and 29447 to the internet (natpmp=0
-    stops it). With coins, mining or a signer, set both to 0.'
-  zh: 有三项默认设置需要你决定：btxd 会自行从 btx.dev 安装更新的签名版本（autoupdateseamless=0 只提示，autoupdate=0 不再检查）；模型网络监听端口 29447（modelnet=0
-    可关闭）；natpmp 会请求路由器把端口 19335 和 29447 向互联网开放（natpmp=0 可阻止）。持有资金、挖矿或运行签名者时，请把两者都设为 0。
+- en: >-
+    Four defaults: btxd installs newer signed releases from btx.dev itself (autoupdateseamless=0
+    only reports them, autoupdate=0 stops checking); the model network listens on port 29447
+    (modelnet=0); natpmp opens ports 19335 and 29447 on your router (natpmp=0); SwapNet starts
+    by default from 0.34.17, and a failed start stops btxd (swapnet=0). With coins, mining or a
+    signer, set the last three to 0.
+  zh: 有四项默认设置：btxd 会自行从 btx.dev 安装更新的签名版本（autoupdateseamless=0 只提示，autoupdate=0 不再检查）；模型网络监听端口 29447（modelnet=0）；natpmp 会让路由器开放端口 19335 和 29447（natpmp=0）；SwapNet 从 0.34.17 起默认启动，启动失败时 btxd 会退出（swapnet=0）。持有资金、挖矿或运行签名者时，请把后三项都设为 0。
 - en: Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.
   zh: 解压整个压缩包，并从中运行 bin/btxd。单独复制出来的 bin/btxd 会直接退出。
 - en: >-
@@ -2008,9 +2009,9 @@ translations:
     you turn them on.
   zh: "如果你在意自己的地址，就在 Tor 之后运行节点（-proxy、-onlynet=onion；Tor 指南建议等 Tor 稳定运行后再用 onlynet=onion），或者改用租用的服务器。使用 -proxy，或 -onlynet 不含 ipv4 和 ipv6 时，btxd 会保持端口 29447 关闭，也不检查更新，除非你自己打开。"
 - en: >-
-    On a machine with coins, mining or a signer key, set modelnet=0 and natpmp=0, as the install
-    checklist says.
-  zh: "在持有币、用于挖矿或存有签名者密钥的机器上，设置 modelnet=0 和 natpmp=0，正如安装检查清单所说。"
+    On a machine with coins, mining or a signer key, set modelnet=0, natpmp=0 and swapnet=0, as the
+    install checklist says.
+  zh: "在持有币、用于挖矿或存有签名者密钥的机器上，设置 modelnet=0、natpmp=0 和 swapnet=0，正如安装检查清单所说。"
 - en: "Reachability"
   zh: "可达性"
 - en: >-

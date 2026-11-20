@@ -359,7 +359,7 @@ This is the contributors' checklist. Rows owned by the community are lane work. 
 | G8 Chain verifiable from genesis | a scheduled genesis sync on a stock binary passes; the #272 item carries its evidence on #464 (it stays out of `release-0.34.16`, #464, 11 Nov); signer set with headroom above its threshold | maintainer; operators | open |
 | G9 Process | contributors keep a branch matrix per fix (which branch carries which fix) and the list of fixes a v0.34.15 node lacks (G1); `SECURITY.md` exists upstream and names a reporting channel, so reports have a route | community | open |
 
-**Operator safe profile (G1).** Run `-modelnet=0` and `-natpmp=0` on any node that holds a wallet or signer key, and review `-autoupdate` before enabling it.
+**Operator safe profile (G1).** Run `-modelnet=0`, `-natpmp=0` and `-swapnet=0` on any node that holds a wallet or signer key, and review `-autoupdate` before enabling it.
 
 **Hardening outside the class sweeps:**
 - the helper under its own OS user, loopback-bound unless `-modelbind`, inside the jail

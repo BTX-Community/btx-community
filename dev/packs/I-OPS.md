@@ -48,7 +48,7 @@ Give your AI [`../AGENTS.md`](../AGENTS.md) and this file. This pack adds the la
 
 Text for the community guide and the status page [PLAN §4.4, G1]:
 
-> **Safe profile for operators.** On any node that holds a wallet or a signer key, run with `-modelnet=0` and `-natpmp=0`. Review `-autoupdate` before you rely on it: it is on by default on mainnet and polls over direct HTTPS from the node's host [repo: `src/init.cpp:784`]. The release line (`release-0.34.16`) carries fixes that v0.34.15 nodes lack; the list is kept on the board.
+> **Safe profile for operators.** On any node that holds a wallet or a signer key, run with `-modelnet=0`, `-natpmp=0` and `-swapnet=0` (SwapNet starts by default from 0.34.17, and a failed start stops `btxd`) [read: `-swapnet` default 0 at `src/swapnet/node.cpp:96` on `074dac16` (v0.34.16), default 1 at `:179` and the failed-start exit at `src/init.cpp:4652` on `release-0.34.17` @ `d6a86523`]. Review `-autoupdate` before you rely on it: it is on by default on mainnet and polls over direct HTTPS from the node's host [repo: `src/init.cpp:784`]. The release line (`release-0.34.16`) carries fixes that v0.34.15 nodes lack; the list is kept on the board.
 
 - Every fact in that paragraph comes from the plan and the tree. Anything you add needs a source and a second reader before it goes public.
 - Guides use roles, not names ("an archive operator").
