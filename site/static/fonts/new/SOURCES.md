@@ -14,10 +14,18 @@ next to the font files.
 | `SpaceGrotesk-latin-700.woff2` | same, `files/space-grotesk-latin-700-normal.woff2` | `35f8aec56cfd5cbfdb03cc68733a54a0b05bb3617ffcd5fd332badc0b045ca55` |
 | `SpaceGrotesk-latin-ext-700.woff2` | same, `files/space-grotesk-latin-ext-700-normal.woff2` | `7ce350b706d79c955ebf91314295f39fa82999f980b7e9beee743c2f3580a15e` |
 | `OFL-SpaceGrotesk.txt` | same, `LICENSE` | `18a4de52385f6b988782639d5d0cc1326e5a8c2de9a7f01d7b20d9aedcc60943` |
+| `Unbounded-700-latin.woff2` | [@fontsource/unbounded 5.3.0](https://www.npmjs.com/package/@fontsource/unbounded/v/5.3.0), `files/unbounded-latin-700-normal.woff2` | `477fa23002517a32f232316d859e7b672a044f20073babec8ed3dbcfdb8e041a` |
+| `Unbounded-700-latin-ext.woff2` | same, `files/unbounded-latin-ext-700-normal.woff2` | `886ac002ab58cad1db918be20757a20c2a2abae4d0b76a92ab570f71ff70bebf` |
+| `Unbounded-800-latin.woff2` | same, `files/unbounded-latin-800-normal.woff2` | `fe6d4ea7ed9647abf1e100a703786338d7898d56d0bedcdfdbc325e8fb02c834` |
+| `Unbounded-800-latin-ext.woff2` | same, `files/unbounded-latin-ext-800-normal.woff2` | `c623718098663cd545bfd3329f30d79bff46c0764fa70b29dc6cf78c3f68d9cb` |
+| `OFL-Unbounded.txt` | same, `LICENSE` | – |
 
-Downloaded 2026-11-20 from `https://cdn.jsdelivr.net/npm/@fontsource/instrument-serif@5.3.0/`.
+Instrument Serif (draft 03): downloaded 2026-11-20 from `https://cdn.jsdelivr.net/npm/@fontsource/instrument-serif@5.3.0/`.
 Upstream: <https://github.com/Instrument/instrument-serif>.
 
 Space Grotesk (draft 01): downloaded 2026-11-20 from
 `https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.3.0/`.
 Upstream: <https://github.com/floriankarsten/space-grotesk>.
+
+Unbounded (draft 02): downloaded 2026-11-20 from `https://cdn.jsdelivr.net/npm/@fontsource/unbounded@5.3.0/`.
+Upstream: <https://github.com/googlefonts/unbounded>.
