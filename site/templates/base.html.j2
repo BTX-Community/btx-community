@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="{{ page_description }}">
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="dark light">
   {% if noindex is defined and noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
   <title>{% if page_title %}{{ page_title }} · {% endif %}{{ ui["title"] }}</title>
   {% for code, tag, name, href in alternates %}
@@ -15,6 +15,7 @@
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="{{ touch_icon_url }}">
   <link rel="stylesheet" href="{{ css_url }}">
+  <script src="{{ theme_js_url }}"></script>
   <script src="{{ js_url }}" defer></script>
 {%- block scripts %}{% endblock %}
 </head>
@@ -28,6 +29,7 @@
         <a class="c-menu__link{% if id == page %} c-menu__link--active{% endif %}" href="{{ href }}"{% if id == page %} aria-current="page"{% endif %}>{{ label }}</a>
         {% endfor %}
       </nav>
+      <button class="c-theme" type="button" data-theme-switch data-to-light="{{ ui['theme.to_light'] }}" data-to-dark="{{ ui['theme.to_dark'] }}" aria-label="{{ ui['theme.to_light'] }}" hidden></button>
       <details class="c-lang">
         <summary class="c-chip c-chip--active" aria-label="{{ ui['lang.label'] }}: {{ ui['lang_name'] }}">{{ lang | upper }} <span aria-hidden="true">▾</span></summary>
         <nav class="c-lang__list" aria-label="{{ ui['lang.label'] }}">

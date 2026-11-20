@@ -67,6 +67,8 @@ en:
   skip: Skip to content
   nav.label: Pages
   lang.label: Language
+  theme.to_light: Switch to light theme
+  theme.to_dark: Switch to dark theme
   nav.home: Start
   nav.learn: Learn
   nav.network: Network
@@ -429,6 +431,8 @@ de:
   skip: Zum Inhalt springen
   nav.label: Seiten
   lang.label: Sprache
+  theme.to_light: Zum hellen Design wechseln
+  theme.to_dark: Zum dunklen Design wechseln
   nav.home: Start
   nav.learn: Lernen
   nav.network: Netz
@@ -797,6 +801,8 @@ es:
   skip: Ir al contenido
   nav.label: Páginas
   lang.label: Idioma
+  theme.to_light: Cambiar al tema claro
+  theme.to_dark: Cambiar al tema oscuro
   nav.home: Inicio
   nav.learn: Aprender
   nav.network: Red
@@ -1168,6 +1174,8 @@ fr:
   skip: Aller au contenu
   nav.label: Pages
   lang.label: Langue
+  theme.to_light: Passer au thème clair
+  theme.to_dark: Passer au thème sombre
   nav.home: Accueil
   nav.learn: Comprendre
   nav.network: Réseau
@@ -1533,6 +1541,8 @@ zh:
   skip: 跳到正文
   nav.label: 页面
   lang.label: 语言
+  theme.to_light: 切换到浅色主题
+  theme.to_dark: 切换到深色主题
   nav.home: 首页
   nav.learn: 了解
   nav.network: 网络

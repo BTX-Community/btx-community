@@ -2658,6 +2658,7 @@ def context(
         "version": version,
         "css_url": asset_url("css/community.css"),
         "js_url": asset_url("js/community.js"),
+        "theme_js_url": asset_url("js/theme.js"),
         "ci_js_url": asset_url("js/ci.js"),
         "icon_url": asset_url("icons/favicon.svg"),
         "touch_icon_url": asset_url("icons/apple-touch-icon.png"),

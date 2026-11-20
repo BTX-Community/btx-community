@@ -781,10 +781,12 @@ class PageTest(unittest.TestCase):
             with self.subTest(page=str(page.relative_to(self.out))):
                 self.assertNotIn("<style", html)
                 self.assertNotIn("javascript:", html)
-                scripts = re.findall(r'<script src="/static/js/([a-z]+)\.js\?v=[0-9a-f]{12}" defer></script>', html)
+                # theme.js alone runs before the page is drawn (no flash in the other theme).
+                scripts = re.findall(r'<script src="/static/js/([a-z]+)\.js\?v=[0-9a-f]{12}"( defer)?></script>', html)
                 self.assertEqual(html.count("<script"), len(scripts))
                 developers = page.parent.name == "work" and page.parent.parent.name == "dev"
-                self.assertEqual(scripts, ["community", "ci"] if developers else ["community"])
+                expected = [("theme", ""), ("community", " defer")] + ([("ci", " defer")] if developers else [])
+                self.assertEqual(scripts, expected)
                 for tag, attrs in tags(html):
                     self.assertNotIn(tag, ("img", "iframe", "object", "embed", "base"))
                     self.assertNotIn("style", attrs, tag)
