@@ -52,8 +52,8 @@
   --grey: #a2a7b4;
 }
 
-/* Light theme: chosen with the switch in the top bar (data-theme on <html>), or by the system
-   setting when the visitor has not chosen. The two blocks hold the same values. */
+/* Light theme: chosen with the switch in the top bar (data-theme on <html>). Without a choice the
+   page stays dark, also when the system is set to light. */
 :root[data-theme="light"] {
   color-scheme: light;
   --bg: #f5f3ee;
@@ -71,27 +71,6 @@
   --yellow: #8a4b00;
   --red: #b3261e;
   --grey: #5b606c;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    color-scheme: light;
-    --bg: #f5f3ee;
-    --bg-raised: #fff;
-    --surface: #fff;
-    --surface-hover: #efece5;
-    --border: #b9b3a5;
-    --text: #16181d;
-    --muted: #474c57;
-    --faint: #585d69;
-    --accent: #1d4fc4;
-    --shadow: rgb(22 24 29 / 18%);
-
-    --green: #17693f;
-    --yellow: #8a4b00;
-    --red: #b3261e;
-    --grey: #5b606c;
-  }
 }
 
 /* One accent for everything. The category names stay, so the rules below keep their hooks. */
@@ -275,12 +254,6 @@ a {
 
 :root[data-theme="light"] .c-theme::before {
   content: "☾";
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .c-theme::before {
-    content: "☾";
-  }
 }
 
 /* Language menu: a native disclosure, so it works without JavaScript. */
@@ -831,32 +804,50 @@ a {
 .c-audiences--two {
   grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
   align-items: start;
+  gap: 20px 16px;
 }
 
 .c-audience__fold > summary .c-audience__title {
   margin: 0;
 }
 
-/* The whole card is the button: the summary fills it, the card lights up under the pointer, and
-   a line says what is inside ("6 steps"). The content keeps the card's padding when open. */
+/* The whole card is a button with an edge below it: it rises under the pointer and sinks when
+   pressed. A line says what is inside ("6 steps"). The content keeps the card's padding when open. */
 .c-audience--folded {
+  --lift: var(--border);
+
   padding: 0;
-  transition: border-color 0.15s;
+  box-shadow: 0 4px 0 var(--lift);
+  transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
 }
 
 .c-audience--folded:hover,
 .c-audience--folded:focus-within {
+  --lift: var(--accent);
+
   border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--lift);
+}
+
+.c-audience--folded:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--lift);
 }
 
 .c-audience__fold {
   padding: 0 22px;
 }
 
+/* Marker, title and count on one line; a long title wraps itself, the count never moves down. */
 .c-audience__fold > summary {
-  flex-wrap: wrap;
-  gap: 4px 12px;
+  gap: 12px;
   padding: 14px 0;
+}
+
+.c-audience__fold > summary .c-audience__title {
+  flex: 1;
+  min-width: 0;
 }
 
 .c-audience__fold > summary::before {
@@ -873,9 +864,10 @@ a {
 }
 
 .c-audience__count {
-  margin-left: auto;
+  flex: none;
   color: var(--muted);
   font-size: 13px;
+  white-space: nowrap;
 }
 
 .c-audience {
