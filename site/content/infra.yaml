@@ -171,8 +171,8 @@ home:
             verbunden haben, und btx-cli getnetworkinfo listet unter localaddresses die Adressen
             deines Nodes.
   links:
-    - text: { en: "Full node: the install checklist on the start page", de: "Full Node: die Installations-Checkliste auf der Startseite" }
-      page: home
+    - text: { en: "Full node: the install checklist below", de: "Full Node: die Installations-Checkliste weiter unten" }
+      page: infra
       anchor: before-installing
     - text: { en: Running the node with Tor (developers), de: Den Node mit Tor betreiben (Entwickler) }
       url: https://github.com/btxchain/btx/blob/main/doc/tor.md
@@ -206,8 +206,8 @@ roles:
         Ein ständig laufender Rechner oder kleiner Server mit SSD und stabiler Verbindung. Eine GPU
         ist optional.
     guide:
-      text: { en: "Before you install a node release: the checklist on the start page", de: "Bevor du ein Node-Release installierst: die Checkliste auf der Startseite" }
-      page: home
+      text: { en: "Before you install a node release: the checklist on this page", de: "Bevor du ein Node-Release installierst: die Checkliste auf dieser Seite" }
+      page: infra
       anchor: before-installing
     related:
       - text: { en: "Running a node: the steps on the start page", de: "Einen Node betreiben: die Schritte auf der Startseite" }

@@ -102,7 +102,7 @@ paths:
       - text: Updates install themselves by default; set autoupdate=0 to decide yourself
       - text: Open TCP port 19335 for incoming peers
       - text: Read the checklist before you install
-        href: /learn/#before-installing
+        href: /infra/#before-installing
 
 watch_out:
   - Nobody from the team or a seller will message you first. Treat every direct message as a scam.

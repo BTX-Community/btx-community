@@ -885,18 +885,6 @@ translations:
     fichier.
 - en: Become a BTX dev
   fr: Devenir développeur BTX
-- en: >-
-    How to work on the node software so that your change can be merged: the method, build and test
-    recipes, the gate before an upstream pull request, open lanes with claimable owners, an exam,
-    and an entry file for AI tools.
-  fr: >-
-    Comment travailler sur le logiciel du nœud pour que votre modification puisse être fusionnée :
-    la méthode, des procédures de compilation et de test, le contrôle préalable à une pull request
-    en amont, des chantiers ouverts à prendre en charge, un examen et un fichier servant de point
-    d'entrée aux outils d'IA.
-- en: Living document - every page carries its last-verified date
-  fr: >-
-    Document vivant : chaque page indique la date de sa dernière vérification
 - en: Measured 12 November 2026 at commit c6f9678d; coverage 14 November at a5d1637f
   fr: Mesuré le 12 novembre 2026 au commit c6f9678d ; couverture le 14 novembre au commit a5d1637f
 - en: Review and test programme - one pull request per bug class
@@ -2576,8 +2564,8 @@ translations:
   fr: >-
     Pour vérifier : btx-cli getpeerinfo affiche "inbound": true pour les pairs qui se sont connectés
     à vous, et btx-cli getnetworkinfo liste les localaddresses de votre nœud.
-- en: "Full node: the install checklist on the start page"
-  fr: "Nœud complet : la liste d'installation de la page d'accueil"
+- en: "Full node: the install checklist below"
+  fr: "Nœud complet : la liste d'installation plus bas"
 - en: "Running the node with Tor (developers)"
   fr: "Faire tourner le nœud avec Tor (développeurs)"
 - en: "Full node"
@@ -2598,8 +2586,8 @@ translations:
   fr: >-
     Un ordinateur ou un petit serveur toujours allumé, avec un SSD et une connexion stable. Le GPU
     est facultatif.
-- en: "Before you install a node release: the checklist on the start page"
-  fr: "Avant d'installer une version du nœud : la liste de la page d'accueil"
+- en: "Before you install a node release: the checklist on this page"
+  fr: "Avant d'installer une version du nœud : la liste de cette page"
 - en: "Running a node: the steps on the start page"
   fr: "Faire tourner un nœud : les étapes de la page d'accueil"
 - en: "Node help for stuck heights"
@@ -3185,17 +3173,13 @@ translations:
   fr: "Couverture des tests, l'exécution nocturne CI-0 et les lanes en attente d'un responsable."
 - en: "Ongoing work"
   fr: "Travail en cours"
-- en: "For Claude Code, Cursor, Codex or another."
-  fr: "Pour Claude Code, Cursor, Codex ou un autre."
-- en: "The agent file for your AI tool"
-  fr: "Le fichier d'agent pour votre outil d'IA"
-- en: "btxchain/btx, with its own rules for agents."
-  fr: "btxchain/btx, avec ses propres règles pour les agents."
-- en: "The reference implementation"
-  fr: "L'implémentation de référence"
 - en: "Things to build and run outside the node software."
   fr: "Des choses à construire et à faire tourner en dehors du logiciel du nœud."
 - en: "Community projects"
   fr: "Projets de la communauté"
 - en: "Give your AI tool (Claude Code, Cursor, Codex or another) the agent file."
   fr: "Donner le fichier pour agents à votre outil d'IA (Claude Code, Cursor, Codex ou un autre)."
+- en: "Before you install: the checklist"
+  fr: "Avant d'installer : la liste"
+- en: "Where to download, how to check the file, and the settings for a node with coins."
+  fr: "Où télécharger, comment vérifier le fichier et les réglages pour un nœud qui détient des fonds."

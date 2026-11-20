@@ -31,23 +31,5 @@
         </div>
       </section>
 
-      {% if checklists %}
-      <section class="c-checks" id="check" aria-labelledby="check-title">
-        <h2 class="c-section-title" id="check-title">{{ ui["checklists.title"] }}</h2>
-        <div class="c-audiences c-audiences--two">
-          {% for checklist in checklists %}
-          <article class="c-audience c-audience--folded c-audience--check" id="{{ checklist.id }}">
-            <details class="c-fold c-audience__fold">
-            <summary><h3 class="c-audience__title">{{ checklist.title }}</h3> <span class="c-audience__count">{{ ui["checklists.count"].format(count=checklist.items | length) }}</span></summary>
-            <ol class="c-steps">
-              {% for item in checklist.items %}
-              <li>{{ item }}</li>
-              {% endfor %}
-            </ol>
-            </details>
-          </article>
-          {% endfor %}
-        </div>
-      </section>
-      {% endif %}
+{% include "_checklists.html.j2" %}
 {% endblock %}

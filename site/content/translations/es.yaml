@@ -868,18 +868,6 @@ translations:
     cifrado. Las copias hechas con versiones anteriores contienen el mismo archivo.
 - en: Become a BTX dev
   es: Hazte desarrollador de BTX
-- en: >-
-    How to work on the node software so that your change can be merged: the method, build and test
-    recipes, the gate before an upstream pull request, open lanes with claimable owners, an exam,
-    and an entry file for AI tools.
-  es: >-
-    Cómo trabajar en el software del nodo para que tu cambio pueda integrarse: el método, recetas de
-    compilación y pruebas, la lista de comprobación previa a un pull request upstream, tareas
-    abiertas en las que puedes apuntarte como responsable, un examen y un archivo de entrada para
-    herramientas de IA.
-- en: Living document - every page carries its last-verified date
-  es: >-
-    Documento vivo: cada página indica la fecha de su última verificación
 - en: Measured 12 November 2026 at commit c6f9678d; coverage 14 November at a5d1637f
   es: Medido el 12 de noviembre de 2026 en el commit c6f9678d; cobertura el 14 de noviembre en a5d1637f
 - en: Review and test programme - one pull request per bug class
@@ -2541,8 +2529,8 @@ translations:
   es: >-
     Para comprobarlo: btx-cli getpeerinfo muestra "inbound": true para los pares que se conectaron a
     ti, y btx-cli getnetworkinfo lista las localaddresses de tu nodo.
-- en: "Full node: the install checklist on the start page"
-  es: "Nodo completo: la lista de instalación de la página de inicio"
+- en: "Full node: the install checklist below"
+  es: "Nodo completo: la lista de instalación más abajo"
 - en: "Running the node with Tor (developers)"
   es: "Operar el nodo con Tor (desarrolladores)"
 - en: "Full node"
@@ -2563,8 +2551,8 @@ translations:
   es: >-
     Un ordenador o un servidor pequeño siempre encendido, con SSD y una conexión estable. La GPU es
     opcional.
-- en: "Before you install a node release: the checklist on the start page"
-  es: "Antes de instalar una versión del nodo: la lista de la página de inicio"
+- en: "Before you install a node release: the checklist on this page"
+  es: "Antes de instalar una versión del nodo: la lista de esta página"
 - en: "Running a node: the steps on the start page"
   es: "Operar un nodo: los pasos de la página de inicio"
 - en: "Node help for stuck heights"
@@ -3142,17 +3130,13 @@ translations:
   es: "Cobertura de pruebas, la ejecución nocturna CI-0 y las lanes que esperan responsable."
 - en: "Ongoing work"
   es: "Trabajo en curso"
-- en: "For Claude Code, Cursor, Codex or another."
-  es: "Para Claude Code, Cursor, Codex u otra."
-- en: "The agent file for your AI tool"
-  es: "El archivo de agente para tu herramienta de IA"
-- en: "btxchain/btx, with its own rules for agents."
-  es: "btxchain/btx, con sus propias reglas para agentes."
-- en: "The reference implementation"
-  es: "La implementación de referencia"
 - en: "Things to build and run outside the node software."
   es: "Cosas para construir y operar fuera del software del nodo."
 - en: "Community projects"
   es: "Proyectos de la comunidad"
 - en: "Give your AI tool (Claude Code, Cursor, Codex or another) the agent file."
   es: "Dale a tu herramienta de IA (Claude Code, Cursor, Codex u otra) el archivo para agentes."
+- en: "Before you install: the checklist"
+  es: "Antes de instalar: la lista"
+- en: "Where to download, how to check the file, and the settings for a node with coins."
+  es: "Dónde descargar, cómo comprobar el archivo y los ajustes para un nodo con fondos."
