@@ -15,19 +15,18 @@
           <article class="c-audience c-audience--{{ audience.id }}" id="{{ audience.id }}">
             <h3 class="c-audience__title">{{ audience.title }}</h3>
             <p class="c-audience__text">{{ audience.text }}</p>
-            <ol class="c-steps">
+            <ul class="c-tasks">
               {% for step in audience.steps %}
-              <li>
-                {% if step.href and step.external %}
-                <a href="{{ step.href }}" rel="noopener noreferrer">{{ step.text }} <span aria-hidden="true">↗</span></a>
-                {% elif step.href %}
-                <a href="{{ step.href }}">{{ step.text }} <span aria-hidden="true">→</span></a>
-                {% else %}
-                <strong>{{ step.text }}</strong>
-                {% endif %}
+              {% if step.href %}
+              <li class="c-task">
+                <a class="c-task__link" href="{{ step.href }}"{% if step.external %} rel="noopener noreferrer"{% endif %}><span>{{ step.text }}</span> <span class="c-task__arrow" aria-hidden="true">{% if step.external %}↗{% else %}→{% endif %}</span></a>
+                {% if step.detail %}<p class="c-task__detail">{{ step.detail }}</p>{% endif %}
               </li>
+              {% else %}
+              <li class="c-task c-task--note"><strong>{{ step.text }}</strong></li>
+              {% endif %}
               {% endfor %}
-            </ol>
+            </ul>
           </article>
           {% endfor %}
         </div>

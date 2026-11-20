@@ -356,7 +356,7 @@ en:
   directory.add: Missing a project? Add it with a pull request; no e-mail and no gatekeeper.
   directory.add_link: How to add a project
   on_release: "{count} of {total} nodes"
-  start.title: Where do you want to start?
+  start.title: Start from what you do
   directory.title: Link directory
   directory.lead: "{count} links, every one opened and checked on {date}."
   jump: Jump to
@@ -737,7 +737,7 @@ de:
   directory.add: Ein Projekt fehlt? Per Pull Request eintragen; ohne E-Mail und ohne Türsteher.
   directory.add_link: So trägst du ein Projekt ein
   on_release: "{count} von {total} Nodes"
-  start.title: Womit möchtest du anfangen?
+  start.title: Fang bei dem an, was du tust
   directory.title: Linkverzeichnis
   directory.lead: "{count} Links, jeder am {date} geöffnet und geprüft."
   jump: Springe zu
@@ -1119,7 +1119,7 @@ es:
   directory.add: ¿Falta un proyecto? Añádelo con un pull request; sin correo y sin guardianes.
   directory.add_link: Cómo añadir un proyecto
   on_release: "{count} de {total} nodos"
-  start.title: ¿Por dónde quieres empezar?
+  start.title: Empieza por lo que haces
   directory.title: Directorio de enlaces
   directory.lead: "{count} enlaces, cada uno abierto y revisado el {date}."
   jump: Ir a
@@ -1504,7 +1504,7 @@ fr:
   directory.add: Un projet manque ? Ajoutez-le par une pull request ; ni e-mail ni gardien.
   directory.add_link: Comment ajouter un projet
   on_release: "{count} sur {total} nœuds"
-  start.title: Par où voulez-vous commencer ?
+  start.title: Commencez par ce que vous faites
   directory.title: Annuaire de liens
   directory.lead: "{count} liens, chacun ouvert et vérifié le {date}."
   jump: Aller à
@@ -1823,7 +1823,7 @@ zh:
   directory.add: 缺少某个项目？通过拉取请求添加即可，无需邮件，也没有把关人。
   directory.add_link: 如何添加项目
   on_release: "{total} 个节点中的 {count} 个"
-  start.title: 你想从哪里开始？
+  start.title: 从你要做的事开始
   directory.title: 链接目录
   directory.lead: "共 {count} 个链接，每个都已于 {date} 打开并核实。"
   jump: 跳转到

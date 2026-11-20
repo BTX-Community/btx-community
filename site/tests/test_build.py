@@ -114,7 +114,7 @@ class ContentTest(unittest.TestCase):
             # Each section lives on exactly one page, in both languages.
             expected = {
                 "home": ('id="start"', 'id="check"', 'data-live="fork"', 'href="{links}#cat-',
-                         '<a href="{dev}">'),
+                         '<a class="c-task__link" href="{dev}">'),
                 "learn": ('id="about"', 'id="next"'),
                 "network": ('data-live="supply"', 'data-live="fork"', 'id="development" hidden',
                             f'data-api="{build.DEVELOPMENT_API}"', f'data-repo="{build.UPSTREAM_REPO}"'),

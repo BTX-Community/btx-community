@@ -28,37 +28,47 @@ audiences:
         Proof-of-Work (MatMul). Getragen wird es von einer offenen Community, nicht von einer Firma.
     steps:
       - text:
-          en: What BTX is, in a few facts with their sources.
-          de: Was BTX ist, in wenigen Fakten mit ihren Quellen.
+          en: "What BTX is"
+          de: "Was BTX ist"
+        detail:
+          en: "A few facts, each with its source."
+          de: "Wenige Fakten, jeder mit Quelle."
         page: learn
       - text:
-          en: >-
-            Read the official introduction and documentation. It was written for v0.33.2;
-            newer releases differ in places.
-          de: >-
-            Die offizielle Einführung und Dokumentation lesen. Sie wurde für v0.33.2 geschrieben;
-            neuere Releases weichen teils ab.
+          en: "Official introduction"
+          de: "Offizielle Einführung"
+        detail:
+          en: "Written for v0.33.2; newer releases differ in places."
+          de: "Geschrieben für v0.33.2; neuere Releases weichen teils ab."
         url: https://btx.dev/
       - text:
-          en: See how the network is doing right now, in plain terms.
-          de: Nachsehen, wie es dem Netz gerade geht, verständlich erklärt.
+          en: "How the network is doing"
+          de: "Wie es dem Netz geht"
+        detail:
+          en: "The status page, in plain terms."
+          de: "Die Statusseite, verständlich erklärt."
         url: https://network.btx-monitoring.com/
       - text:
-          en: Ask questions in the community group on Telegram.
-          de: Fragen in der Community-Gruppe auf Telegram stellen.
+          en: "Ask the community"
+          de: "Die Community fragen"
+        detail:
+          en: "The community group on Telegram."
+          de: "Die Community-Gruppe auf Telegram."
         anchor: community
       - text:
-          en: Choose a wallet from the list, after reading "Before you buy or receive BTX" below.
-          de: Eine Wallet aus der Liste wählen, nachdem du unten „Bevor du BTX kaufst oder empfängst“ gelesen hast.
+          en: "Choose a wallet"
+          de: "Eine Wallet wählen"
+        detail:
+          en: "Read \"Before you buy or receive BTX\" below first."
+          de: "Vorher unten „Bevor du BTX kaufst oder empfängst“ lesen."
         anchor: wallets
       - text:
           en: >-
-            Never share your seed or private key. Nobody from the community will ever ask for
-            it; direct messages offering help or "support" are scams.
+            Never share your seed or private key. Nobody from the community will ever ask for it;
+            direct messages offering help or "support" are scams.
           de: >-
             Seed oder privaten Schlüssel nie weitergeben. Niemand aus der Community fragt danach;
             Direktnachrichten mit "Hilfe" oder "Support" sind Betrug.
-
   - id: miners
     title: { en: Mining, de: Mining }
     text:
@@ -70,40 +80,50 @@ audiences:
         jeden Block behalten oder einem Pool beitreten und regelmäßiger ausgezahlt werden.
     steps:
       - text:
+          en: "Pick a miner"
+          de: "Einen Miner wählen"
+        detail:
           en: >-
-            Pick a miner from our link list - for example easyBTX (an app for Mac and Linux; on
-            Windows through WSL) or matador (open source).
+            For example easyBTX (an app for Mac and Linux; on Windows through WSL) or matador (open
+            source).
           de: >-
-            Einen Miner aus unserer Linkliste wählen - etwa easyBTX (eine App für Mac und Linux;
-            unter Windows über WSL) oder matador (Open Source).
+            Etwa easyBTX (eine App für Mac und Linux; unter Windows über WSL) oder matador (Open
+            Source).
         anchor: miners
       - text:
+          en: "Prefer a smaller pool"
+          de: "Lieber einen kleineren Pool"
+        detail:
           en: >-
-            Prefer a smaller pool. When one pool finds most blocks, the network depends on it;
-            the status page shows the current shares.
+            When one pool finds most blocks, the network depends on it; the status page shows the
+            current shares.
           de: >-
-            Lieber einen kleineren Pool wählen. Findet ein Pool die meisten Blöcke, hängt das Netz
-            an ihm; die Statusseite zeigt die aktuellen Anteile.
+            Findet ein Pool die meisten Blöcke, hängt das Netz an ihm; die Statusseite zeigt die
+            aktuellen Anteile.
         url: https://network.btx-monitoring.com/
       - text:
+          en: "Use your own btx1z address"
+          de: "Die eigene btx1z-Adresse eintragen"
+        detail:
           en: >-
-            matador's quick start contains a sample payout address that is not yours and two
-            pools that are offline. Always put in your own btx1z address and a pool from our
-            link list.
+            matador's quick start contains a sample payout address that is not yours and two pools
+            that are offline. Put in your own address and a pool from our link list.
           de: >-
             Im Schnellstart von matador stehen eine fremde Beispiel-Auszahlungsadresse und zwei
-            Pools, die nicht mehr erreichbar sind. Immer die eigene btx1z-Adresse und einen Pool
-            aus unserer Linkliste eintragen.
+            Pools, die nicht mehr erreichbar sind. Die eigene Adresse und einen Pool aus unserer
+            Linkliste eintragen.
         anchor: pools
       - text:
+          en: "Problems with an NVIDIA card"
+          de: "Probleme mit einer NVIDIA-Karte"
+        detail:
           en: >-
-            Problems with an NVIDIA card? The official CUDA troubleshooting guide helps; parts of
-            it describe the CUDA path from before block 185,000.
+            The official CUDA troubleshooting guide; parts of it describe the CUDA path from before
+            block 185,000.
           de: >-
-            Probleme mit einer NVIDIA-Karte? Die offizielle CUDA-Fehlersuche hilft; Teile davon
-            beschreiben den CUDA-Weg von vor Block 185.000.
+            Die offizielle CUDA-Fehlersuche; Teile davon beschreiben den CUDA-Weg von vor Block
+            185.000.
         url: https://github.com/btxchain/btx/blob/main/doc/btx-cuda-mining-troubleshooting.md
-
   - id: nodes
     title: { en: Running a node, de: Einen Node betreiben }
     text:
@@ -119,49 +139,64 @@ audiences:
         bleibt er stehen. Signer haben die höchsten Anforderungen.
     steps:
       - text:
-          en: Easiest start at home - easynode installs and supervises btxd for you.
-          de: Einfachster Start zu Hause - easynode installiert und überwacht btxd für dich.
+          en: "Easiest start at home: easynode"
+          de: "Einfachster Start zu Hause: easynode"
+        detail:
+          en: "Installs and supervises btxd for you."
+          de: "Installiert und überwacht btxd für dich."
         url: https://github.com/MendeMatthias/easynode
       - text:
+          en: "On a server"
+          de: "Auf einem Server"
+        detail:
           en: >-
-            On a server - v0.34.16 has two Linux x86_64 archives, both for glibc 2.38 or newer
-            (Ubuntu 24.04, Debian 13): a plain one, and a -cuda13 one for GPU nodes (sm_120: RTX 50
-            and RTX PRO Blackwell cards; the NVIDIA driver is not included). There is no official
-            Windows or macOS archive.
+            v0.34.16 has two Linux x86_64 archives for glibc 2.38 or newer (Ubuntu 24.04, Debian
+            13): a plain one, and -cuda13 for GPU nodes (sm_120: RTX 50 and RTX PRO Blackwell cards;
+            driver not included). No official Windows or macOS archive.
           de: >-
-            Auf einem Server - v0.34.16 hat zwei Linux-x86_64-Archive, beide für glibc 2.38 oder
-            neuer (Ubuntu 24.04, Debian 13): ein normales und eines mit -cuda13 für GPU-Nodes
-            (sm_120: Blackwell-Karten der Reihen RTX 50 und RTX PRO; der NVIDIA-Treiber ist nicht
-            dabei). Ein offizielles Windows- oder macOS-Archiv gibt es nicht.
+            v0.34.16 hat zwei Linux-x86_64-Archive für glibc 2.38 oder neuer (Ubuntu 24.04, Debian
+            13): ein normales und -cuda13 für GPU-Nodes (sm_120: Blackwell-Karten RTX 50 und RTX
+            PRO; ohne Treiber). Kein offizielles Windows- oder macOS-Archiv.
         url: https://github.com/btxchain/btx/releases
       - text:
+          en: "Start from a signed snapshot"
+          de: "Mit einem signierten Snapshot starten"
+        detail:
           en: >-
-            Catch up in minutes with a daily signed snapshot. A sync from genesis currently
-            stops at block 126,978 (issue #272).
+            Catches up in minutes. A sync from genesis currently stops at block 126,978 (issue
+            #272).
           de: >-
-            In Minuten aufholen mit einem täglich signierten Snapshot. Ein Sync ab Genesis bleibt
-            derzeit bei Block 126.978 stehen (Issue #272).
+            Holt in Minuten auf. Ein Sync ab Genesis bleibt derzeit bei Block 126.978 stehen (Issue
+            #272).
         url: https://github.com/dr-chambre/btx-snapshots/releases/latest
       - text:
-          en: Node stuck at a height? The node help explains each known case and its fix.
-          de: Node hängt bei einer Höhe? Die Node-Hilfe erklärt jeden bekannten Fall und die Lösung.
+          en: "Node stuck at a height?"
+          de: "Node hängt bei einer Höhe?"
+        detail:
+          en: "The node help explains each known case and its fix."
+          de: "Die Node-Hilfe erklärt jeden bekannten Fall und die Lösung."
         url: https://network.btx-monitoring.com/help/
       - text:
-          en: Have a spare machine? Seven ways to give BTX infrastructure, from a node to a fuzz box.
-          de: Einen Rechner übrig? Sieben Wege, BTX Infrastruktur zu geben, vom Node bis zur Fuzz-Box.
+          en: "Have a spare machine?"
+          de: "Einen Rechner übrig?"
+        detail:
+          en: "Seven ways to give BTX infrastructure, from a node to a fuzz box."
+          de: "Sieben Wege, BTX Infrastruktur zu geben, vom Node bis zur Fuzz-Box."
         page: infra
       - text:
+          en: "Run a signer"
+          de: "Einen Signer betreiben"
+        detail:
           en: >-
-            Signers (GPU attestors) need a GPU that passes btxd's self-test and must stay
-            online. The official CUDA archive covers Blackwell cards (sm_120); other NVIDIA cards
-            need a build from source and may not qualify. Follow the developers' operator runbook.
+            Signers (GPU attestors) need a GPU that passes btxd's self-test and must stay online.
+            The official CUDA archive covers Blackwell cards (sm_120); other NVIDIA cards need a
+            build from source and may not qualify. Follow the developers' operator runbook.
           de: >-
             Signer (GPU-Attestoren) brauchen eine GPU, die den Selbsttest von btxd besteht, und
             müssen ständig online sein. Das offizielle CUDA-Archiv deckt Blackwell-Karten (sm_120)
             ab; andere NVIDIA-Karten brauchen einen eigenen Build und qualifizieren sich womöglich
             nicht. An das Betreiber-Runbook der Entwickler halten.
         url: https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md
-
   - id: developers
     title: { en: Become a BTX dev, de: BTX-Entwickler werden }
     text:
@@ -176,24 +211,40 @@ audiences:
         Arbeit offen ist.
     steps:
       - text:
-          en: "Start here: where to begin, the prompt for your AI tool and the three levels."
-          de: "Hier anfangen: Einstieg, die Anweisung für dein KI-Werkzeug und die drei Stufen."
+          en: "Start here"
+          de: "Hier anfangen"
+        detail:
+          en: "Where to begin, the prompt for your AI tool and the three levels."
+          de: "Einstieg, die Anweisung für dein KI-Werkzeug und die drei Stufen."
         page: dev
       - text:
-          en: "Ongoing work: test coverage, the nightly CI-0 run and the lanes waiting for an owner."
-          de: "Laufende Arbeit: Testabdeckung, der nächtliche CI-0-Lauf und die Arbeitsbereiche ohne Verantwortliche."
+          en: "Ongoing work"
+          de: "Laufende Arbeit"
+        detail:
+          en: "Test coverage, the nightly CI-0 run and the lanes waiting for an owner."
+          de: >-
+            Testabdeckung, der nächtliche CI-0-Lauf und die Arbeitsbereiche ohne Verantwortliche.
         page: dev-work
       - text:
-          en: Give your AI tool (Claude Code, Cursor, Codex or another) the agent file.
-          de: Dem eigenen KI-Werkzeug (Claude Code, Cursor, Codex oder einem anderen) die Agenten-Datei geben.
+          en: "The agent file for your AI tool"
+          de: "Die Agenten-Datei für dein KI-Werkzeug"
+        detail:
+          en: "For Claude Code, Cursor, Codex or another."
+          de: "Für Claude Code, Cursor, Codex oder ein anderes."
         url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/AGENTS.md
       - text:
-          en: The reference implementation and its own rules for agents.
-          de: Die Referenzimplementierung und ihre eigenen Regeln für Agenten.
+          en: "The reference implementation"
+          de: "Die Referenzimplementierung"
+        detail:
+          en: "btxchain/btx, with its own rules for agents."
+          de: "btxchain/btx, mit eigenen Regeln für Agenten."
         url: https://github.com/btxchain/btx
       - text:
-          en: "Community projects: things to build and run outside the node software."
-          de: "Community-Projekte: Dinge, die man außerhalb der Node-Software baut und betreibt."
+          en: "Community projects"
+          de: "Community-Projekte"
+        detail:
+          en: "Things to build and run outside the node software."
+          de: "Dinge, die man außerhalb der Node-Software baut und betreibt."
         page: docs
 
 categories:

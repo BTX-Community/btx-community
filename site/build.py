@@ -211,9 +211,13 @@ class Text(_Model):
 
 
 class Step(_Model):
-    """One step of an audience card; points to a website, a category of the links page or a page."""
+    """One step of an audience card; points to a website, a category of the links page or a page.
+
+    ``text`` is the short task (the link); ``detail`` the sentence under it. A step without a
+    target is a note that stays visible, such as a warning."""
 
     text: Text
+    detail: Text | None = None
     url: Link | None = None
     anchor: Id | None = None
     page: Id | None = None
@@ -1426,6 +1430,7 @@ class StepView:
     text: str
     href: str | None
     external: bool
+    detail: str | None = None
 
 
 @dataclass(frozen=True)
@@ -1540,12 +1545,13 @@ def guide_views(
 
 
 def _step(step: Step, say: Localizer) -> StepView:
+    detail = say(step.detail) if step.detail is not None else None
     if step.url is not None:
-        return StepView(say(step.text), step.url, external=True)
+        return StepView(say(step.text), step.url, external=True, detail=detail)
     if step.page is not None:
-        return StepView(say(step.text), page_path(say.lang, step.page), external=False)
+        return StepView(say(step.text), page_path(say.lang, step.page), external=False, detail=detail)
     href = f"{page_path(say.lang, 'links')}#cat-{step.anchor}" if step.anchor is not None else None
-    return StepView(say(step.text), href, external=False)
+    return StepView(say(step.text), href, external=False, detail=detail)
 
 
 def community_views(
@@ -2799,7 +2805,7 @@ def llms_full(page: CommunityPage, guide: GuidePage, texts: dict[str, dict[str, 
         out += [f"### {a.title}", "", a.text, ""]
         for step in a.steps:
             href = step.href if step.href is None or step.external else _site_url(step.href)
-            out.append(f"- {step.text}" + (f" ({href})" if href else ""))
+            out.append(f"- {step.text}" + (f": {step.detail}" if step.detail else "") + (f" ({href})" if href else ""))
         out.append("")
     count = sum(len(c.entries) for c in categories)
     out += [f"## {ui['directory.title']}", "", ui["directory.lead"].format(count=count, date=page.checked.isoformat()), ""]
