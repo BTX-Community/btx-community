@@ -377,7 +377,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  min-width: 200px;
+  min-width: 230px;
   margin: 40px 0 16px 24px;
   padding: 10px 14px;
   border: 1px solid var(--border);
@@ -389,19 +389,33 @@ a {
   text-decoration: none;
 }
 
-.c-badge:hover {
-  border-color: var(--accent);
-  border-left-color: var(--state);
-}
-
 .c-badge__head {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 2px;
   color: var(--state);
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 700;
+  text-decoration: none;
+}
+
+.c-badge__head:hover {
+  text-decoration: underline;
+}
+
+.c-badge__link {
+  margin-top: 4px;
+}
+
+.c-badge__time {
+  color: var(--faint);
+  font-family: var(--font-mono);
+}
+
+.c-badge__time:empty {
+  display: none;
 }
 
 .c-badge__row {
