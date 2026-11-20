@@ -746,12 +746,35 @@
     }
   }
 
+  // A link into a folded section (#flow, #gate-CI-1, #phase-3) opens every closed <details> around
+  // its target and scrolls to it; the browser could not, since the target was not rendered.
+  function openFolds(id) {
+    var target = id ? document.getElementById(id) : null;
+    var opened = false;
+    // A link to the section itself (#flow) opens its own fold.
+    var own = target ? target.querySelector(":scope > details.c-fold") : null;
+    if (own) {
+      own.open = true;
+    }
+    for (var node = target; node; node = node.parentElement) {
+      if (node.tagName === "DETAILS" && !node.open) {
+        node.open = true;
+        opened = true;
+      }
+    }
+    if (opened) {
+      target.scrollIntoView();
+    }
+  }
+
   function enhanceHub(lanes) {
     enhanceRegistry();
     var reveal = enhanceLanes(lanes);
     enhanceAreas();
     function fromHash() {
-      openLane(window.location.hash.slice(1), reveal, true);
+      var id = window.location.hash.slice(1);
+      openLane(id, reveal, true);
+      openFolds(id);
     }
     // A click runs before the browser scrolls, and also when the hash is already the same.
     toArray(document.querySelectorAll("a.c-table__lane")).forEach(function (link) {

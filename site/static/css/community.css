@@ -914,6 +914,40 @@ a {
   font-weight: 600;
 }
 
+/* --- Folded sections: reference parts of a long page stay closed until opened --------- */
+
+.c-fold > summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.c-fold > summary::-webkit-details-marker {
+  display: none;
+}
+
+.c-fold > summary::before {
+  content: "▸";
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.c-fold[open] > summary::before {
+  content: "▾";
+}
+
+.c-fold > summary > .c-section-title,
+.c-fold > summary > .c-subtitle {
+  margin: 0;
+}
+
+.c-fold--sub {
+  margin-top: 18px;
+}
+
 /* --- Onward links at the foot of a page ------------------------------------------------ */
 
 .c-next {
@@ -1657,13 +1691,18 @@ a {
     padding: 8px 10px;
   }
 
-  .c-lane__meta {
+  /* The four short facts on the card stay label | value; the long texts inside the fold stack. */
+  .c-lane__done .c-lane__meta {
     grid-template-columns: minmax(0, 1fr);
     gap: 2px;
   }
 
-  .c-lane__meta dd {
+  .c-lane__done .c-lane__meta dd {
     margin-bottom: 6px;
+  }
+
+  .c-lane {
+    padding: 16px;
   }
 }
 
