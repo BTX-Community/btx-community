@@ -50,7 +50,7 @@
           <div class="c-split__entry">
             <a class="c-split__name c-link" href="{{ entry.url }}" rel="noopener noreferrer">{{ entry.name }} ↗</a>
             <p class="c-card__text">{{ entry.description }}</p>
-            {% if entry.note %}<p class="c-card__note">{{ entry.note }}</p>{% endif %}
+            {% if entry.note %}<p class="c-card__note"><span class="c-note-label">{{ ui["note"] }}</span> {{ entry.note }}</p>{% endif %}
           </div>
           {% endfor %}
           <p class="c-muted c-note">{{ t.managed_none }}</p>
@@ -96,7 +96,7 @@
               <dd>{{ role.hardware }}</dd>
               <dt>{{ t.guide }}</dt>
               <dd>
-                {% if role.guide %}<a class="c-link" href="{{ role.guide.href }}"{% if role.guide.external %} rel="noopener noreferrer"{% endif %}>{{ role.guide.text }} {% if role.guide.external %}↗{% else %}→{% endif %}</a>{% if role.guide.note %}<span class="c-role__note c-role__guide-note">{{ role.guide.note }}</span>{% endif %}{% else %}<strong class="c-role__coming">{{ t.coming }}</strong>{% endif %}
+                {% if role.guide %}<a class="c-link" href="{{ role.guide.href }}"{% if role.guide.external %} rel="noopener noreferrer"{% endif %}>{{ role.guide.text }} {% if role.guide.external %}↗{% else %}→{% endif %}</a>{% if role.guide.note %}<span class="c-role__note c-role__guide-note"><span class="c-note-label">{{ ui["note"] }}</span> {{ role.guide.note }}</span>{% endif %}{% else %}<strong class="c-role__coming">{{ t.coming }}</strong>{% endif %}
                 {% if role.coming %}<span class="c-role__note">{{ role.coming }}</span>{% endif %}
                 {% if role.related %}
                 <ul class="c-role__related">

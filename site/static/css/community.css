@@ -1417,12 +1417,26 @@ main > div {
   font-size: 14px;
 }
 
+/* Notes are information, not warnings: the text colour of the page, with a small label. Status
+   colours stay next to a status. */
 .c-card__note {
   margin-top: auto;
   padding-top: 8px;
   border-top: 1px dashed var(--border);
-  color: var(--yellow);
+  color: var(--muted);
   font-size: 13px;
+}
+
+.c-note-label {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 /* --- Developer hub ---------------------------------------------------------------------- */
@@ -2131,7 +2145,7 @@ main > div {
   display: block;
   padding-top: 10px;
   border-top: 1px dashed var(--border);
-  color: var(--yellow);
+  color: var(--text);
 }
 
 /* The network map: one SVG per layout, the narrow one on phones. Colours come from the site's
@@ -2297,7 +2311,7 @@ main > div {
 }
 
 .c-role__guide-note {
-  color: var(--yellow);
+  color: var(--muted);
   font-size: 13px;
 }
 
@@ -2366,9 +2380,10 @@ main > div {
 
 .c-report {
   padding: 18px 20px;
-  border-left: 3px solid var(--yellow);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
   border-radius: 10px;
-  background: var(--warn-tint);
+  background: var(--surface);
 }
 
 .c-report p {
