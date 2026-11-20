@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en" class="d02-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://btx-community.com/">
+  <title>[Draft] Start · Design 02 · Matrix</title>
+  <meta name="description" content="Start page of the BTX community: information and help for newcomers, miners and node operators, with the network&#39;s live state and a checked link directory.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[Draft] Start – Design draft, not the official layout">
+  <meta property="og:description" content="A dark, technical layout built on the matrix motif of BTX mining: a small A × B = C animation in the hero, a terminal-style status bar, five menu items by intent (Start here, Take part, Network, Directory, Build) and numbered reading pages with a step rail and a progress bar.">
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/new/design02.css?v=6fe3174df885">
+  <link rel="preload" href="/static/fonts/new/Unbounded-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/static/js/new/design02-theme.js?v=34fa485317ef"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+  <script src="/static/js/new/design02.js?v=2656de8eb999" defer></script>
+</head>
+<body class="d02">
+  <a class="d02-skip" href="#main">Skip to content</a>
+  <div class="draft-banner" role="note">
+    <p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind.
+      <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a>
+      <a class="draft-banner__link" href="/new/">All drafts →</a>
+      <a class="draft-banner__link" href="https://btx-community.com/">This page on the live site ↗</a>
+    </p>
+  </div>
+  <header class="d02-top">
+    <div class="d02-wrap d02-top__in">
+      <a class="d02-logo" href="/new/design02/">
+        <svg class="d02-logo__mark" viewBox="0 0 25 25" width="25" height="25" aria-hidden="true" focusable="false">
+          <rect class="d02-logo__cell" x="0" y="0" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="9" y="0" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="18" y="0" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="0" y="9" width="7" height="7"/>
+          <rect class="d02-logo__cell d02-logo__cell--on" x="9" y="9" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="18" y="9" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="0" y="18" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="9" y="18" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="18" y="18" width="7" height="7"/>
+        </svg>
+        <span class="d02-logo__name">BTX</span><span class="d02-logo__sub">/community</span><span class="d02-sr">, start page</span>
+      </a>
+      <nav class="d02-nav" aria-label="Pages">
+        <a class="d02-nav__a" href="/new/design02/" aria-current="page">Start here</a>
+        <a class="d02-nav__a" href="/new/design02/infra/">Take part</a>
+        <a class="d02-nav__a" href="/new/design02/network/">Network</a>
+        <a class="d02-nav__a" href="/new/design02/links/">Directory</a>
+        <a class="d02-nav__a" href="/new/design02/dev/">Build</a>
+      </nav>
+      <div class="d02-tools">
+        <a class="d02-tool d02-tool--search" href="/new/design02/links/#filter" data-search-link>
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="d02-tool__t">Search</span><span class="d02-sr"> the directory</span><kbd class="d02-kbd" aria-hidden="true">/</kbd>
+        </a>
+        <span class="d02-tool d02-tool--lang" title="This draft is in English only"><span aria-hidden="true">EN</span><span class="d02-sr">This draft is in English only</span></span>
+        <button class="d02-tool d02-tool--theme" type="button" data-theme-switch data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to light theme" hidden>
+          <svg class="d02-theme__sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="d02-theme__moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
+        <details class="d02-menu">
+          <summary class="d02-tool d02-menu__btn"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="d02-sr">Menu</span></summary>
+          <nav class="d02-sheet" aria-label="Pages">
+            <ul class="d02-sheet__list">
+              <li><a class="d02-sheet__a" href="/new/design02/" aria-current="page"><span class="d02-sheet__n" aria-hidden="true">01</span>Start here</a>
+                <ul class="d02-sheet__sub">
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="/new/design02/" aria-current="page">Overview</a></li>
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="/new/design02/learn/">Learn BTX</a></li>
+                </ul>
+              </li>
+              <li><a class="d02-sheet__a" href="/new/design02/infra/"><span class="d02-sheet__n" aria-hidden="true">02</span>Take part</a>
+              </li>
+              <li><a class="d02-sheet__a" href="/new/design02/network/"><span class="d02-sheet__n" aria-hidden="true">03</span>Network</a>
+              </li>
+              <li><a class="d02-sheet__a" href="/new/design02/links/"><span class="d02-sheet__n" aria-hidden="true">04</span>Directory</a>
+              </li>
+              <li><a class="d02-sheet__a" href="/new/design02/dev/"><span class="d02-sheet__n" aria-hidden="true">05</span>Build</a>
+                <ul class="d02-sheet__sub">
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="/new/design02/dev/">Start here</a></li>
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="/new/design02/dev/work/">Ongoing work</a></li>
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="/new/design02/projects/">Projects</a></li>
+                </ul>
+              </li>
+            </ul>
+            <p class="d02-sheet__note">This draft is in English only.</p>
+          </nav>
+        </details>
+      </div>
+    </div>
+    <nav class="d02-subnav" aria-label="Start here">
+      <div class="d02-wrap d02-subnav__in">
+        <a class="d02-subnav__a" href="/new/design02/" aria-current="page">Overview</a>
+        <a class="d02-subnav__a" href="/new/design02/learn/">Learn BTX</a>
+      </div>
+    </nav>
+  </header>
+  <main id="main" class="d02-home">
+
+    <section class="d02-hero" aria-labelledby="hero-title">
+      <div class="d02-wrap d02-hero__in">
+        <div class="d02-hero__text">
+          <p class="d02-mark">// our community hub · run by members, not a company</p>
+          <h1 class="d02-display" id="hero-title">Mined with matrices. <span class="d02-display__accent">Signed for the quantum era.</span></h1>
+          <p class="d02-hero__lead">A community page for everyone interested in BTX: what it is, how to mine it, how to run a node, and where to find help. Run by community members, not by a company.</p>
+          <p class="d02-actions">
+            <a class="d02-btn d02-btn--primary" href="/new/design02/learn/">Start here <span aria-hidden="true">→</span></a>
+            <a class="d02-btn d02-btn--ghost" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Live network <span aria-hidden="true">↗</span></a>
+          </p>
+          <div class="d02-mmrow" aria-hidden="true"><span class="d02-mm__c d02-mm__c--a">2</span><span class="d02-mm__c d02-mm__c--a">0</span><span class="d02-mm__c d02-mm__c--a">1</span><span class="d02-mm__c d02-mm__c--a">3</span><span class="d02-mm__c d02-mm__c--b">1</span><span class="d02-mm__c d02-mm__c--b">0</span><span class="d02-mm__c d02-mm__c--b">2</span><span class="d02-mm__c d02-mm__c--b">1</span></div>
+        </div>
+        <figure class="d02-mm" data-mm aria-labelledby="mm-caption">
+          <div class="d02-mm__bar">
+            <span class="d02-mm__k" aria-hidden="true">MATMUL · A × B = C</span>
+            <span class="d02-mm__ctl">
+              <span class="d02-mm__step" data-mm-step aria-hidden="true">01/16</span>
+              <button type="button" class="d02-mm__toggle" data-mm-toggle data-label-pause="Pause the animation" data-label-play="Play the animation" hidden>
+                <svg class="d02-mm__ico d02-mm__ico--pause" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><rect x="3" y="2" width="3.5" height="12"/><rect x="9.5" y="2" width="3.5" height="12"/></svg>
+                <svg class="d02-mm__ico d02-mm__ico--play" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M4 2l10 6-10 6z"/></svg>
+                <span class="d02-sr" data-mm-label>Pause the animation</span>
+              </button>
+            </span>
+          </div>
+          <div class="d02-mm__grids" aria-hidden="true">
+            <div class="d02-mm__g" data-mm-a><span class="d02-mm__c d02-mm__c--a">2</span><span class="d02-mm__c d02-mm__c--a">0</span><span class="d02-mm__c d02-mm__c--a">1</span><span class="d02-mm__c d02-mm__c--a">3</span><span class="d02-mm__c">1</span><span class="d02-mm__c">4</span><span class="d02-mm__c">0</span><span class="d02-mm__c">2</span><span class="d02-mm__c">3</span><span class="d02-mm__c">1</span><span class="d02-mm__c">2</span><span class="d02-mm__c">0</span><span class="d02-mm__c">0</span><span class="d02-mm__c">2</span><span class="d02-mm__c">3</span><span class="d02-mm__c">1</span></div>
+            <span class="d02-mm__op">×</span>
+            <div class="d02-mm__g" data-mm-b><span class="d02-mm__c d02-mm__c--b">1</span><span class="d02-mm__c">2</span><span class="d02-mm__c">0</span><span class="d02-mm__c">1</span><span class="d02-mm__c d02-mm__c--b">0</span><span class="d02-mm__c">1</span><span class="d02-mm__c">3</span><span class="d02-mm__c">2</span><span class="d02-mm__c d02-mm__c--b">2</span><span class="d02-mm__c">0</span><span class="d02-mm__c">1</span><span class="d02-mm__c">4</span><span class="d02-mm__c d02-mm__c--b">1</span><span class="d02-mm__c">3</span><span class="d02-mm__c">2</span><span class="d02-mm__c">0</span></div>
+            <span class="d02-mm__op">=</span>
+            <div class="d02-mm__g" data-mm-c><span class="d02-mm__c d02-mm__c--now" data-value="7">7</span><span class="d02-mm__c" data-value="13">·</span><span class="d02-mm__c" data-value="7">·</span><span class="d02-mm__c" data-value="6">·</span><span class="d02-mm__c" data-value="3">·</span><span class="d02-mm__c" data-value="12">·</span><span class="d02-mm__c" data-value="16">·</span><span class="d02-mm__c" data-value="9">·</span><span class="d02-mm__c" data-value="7">·</span><span class="d02-mm__c" data-value="7">·</span><span class="d02-mm__c" data-value="5">·</span><span class="d02-mm__c" data-value="13">·</span><span class="d02-mm__c" data-value="7">·</span><span class="d02-mm__c" data-value="5">·</span><span class="d02-mm__c" data-value="11">·</span><span class="d02-mm__c" data-value="16">·</span></div>
+          </div>
+          <p class="d02-mm__formula" data-mm-formula aria-hidden="true">c[0][0] = 2·1 + 0·0 + 1·2 + 3·1 = 7</p>
+          <figcaption class="d02-mm__cap" id="mm-caption">Each cell of C is a row of A times a column of B. Miners' GPUs multiply far larger matrices like this to find the next block.</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="d02-statusbar" id="status-badge" aria-labelledby="statusbar-title" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en">
+      <h2 class="d02-sr" id="statusbar-title">Network right now</h2>
+      <div class="d02-wrap">
+        <dl class="d02-statusbar__in">
+          <div class="d02-statusbar__cell d02-statusbar__cell--state">
+            <dt>Status</dt>
+            <dd><span class="d02-dot" aria-hidden="true"></span><span data-live="overall" data-label-normal="All systems normal" data-label-degraded="Degraded" data-label-incident="Incident">No data</span></dd>
+          </div>
+          <div class="d02-statusbar__cell"><dt>Block height</dt><dd data-live="height">No data</dd></div>
+          <div class="d02-statusbar__cell"><dt>Latest node release</dt><dd data-live="release">No data</dd></div>
+          <div class="d02-statusbar__cell"><dt>Nodes on it</dt><dd data-live="on-release" data-template="{count} of {total} nodes">No data</dd></div>
+          <div class="d02-statusbar__cell d02-statusbar__cell--meta">
+            <dt class="d02-sr">Data</dt>
+            <dd class="d02-statusbar__time" data-live="updated" data-template="Data from {time}">Loading live data …</dd>
+            <dd class="d02-statusbar__links"><a href="/new/design02/network/">What does this mean? <span aria-hidden="true">→</span></a> <a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Full status <span aria-hidden="true">↗</span></a></dd>
+          </div>
+        </dl>
+        <div class="d02-statusbar__fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+          <p class="d02-statusbar__fork-t">Network upgrade ahead</p>
+          <ul data-live="fork-rows"></ul>
+          <a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="d02-wrap d02-sec" aria-labelledby="diff-title">
+      <p class="d02-mark">// 01 — the idea</p>
+      <h2 class="d02-h2" id="diff-title">What makes BTX different</h2>
+      <ul class="d02-facts">
+        <li class="d02-fact">
+          <p class="d02-fact__mark" aria-hidden="true">21,000,000</p>
+          <h3 class="d02-fact__t">Fixed supply</h3>
+          <p class="d02-fact__p">At most 21 million BTX, as with Bitcoin.</p>
+          <a class="d02-fact__a" href="/new/design02/learn/#fact-supply">More on fixed supply <span aria-hidden="true">→</span></a>
+        </li>
+        <li class="d02-fact">
+          <p class="d02-fact__mark" aria-hidden="true">A × B</p>
+          <h3 class="d02-fact__t">Mining by matrix multiplication</h3>
+          <p class="d02-fact__p">Instead of hashing, miners multiply large matrices, the work AI accelerators are built for.</p>
+          <a class="d02-fact__a" href="/new/design02/learn/#fact-matmul">More on mining by matrix multiplication <span aria-hidden="true">→</span></a>
+        </li>
+        <li class="d02-fact">
+          <p class="d02-fact__mark" aria-hidden="true">PQ</p>
+          <h3 class="d02-fact__t">Post-quantum signatures</h3>
+          <p class="d02-fact__p">Coins are locked with signatures meant to withstand quantum computers: ML-DSA-44 (NIST FIPS 204) for everyday spending, SLH-DSA (FIPS 205) as a hash-based fallback.</p>
+          <a class="d02-fact__a" href="/new/design02/learn/#fact-post-quantum">More on post-quantum signatures <span aria-hidden="true">→</span></a>
+        </li>
+        <li class="d02-fact">
+          <p class="d02-fact__mark" aria-hidden="true">Knots</p>
+          <h3 class="d02-fact__t">Built on Bitcoin Knots</h3>
+          <p class="d02-fact__p">The node derives from Bitcoin Knots v29.2, a variant of Bitcoin Core.</p>
+          <a class="d02-fact__a" href="/new/design02/learn/#fact-bitcoin-core">More on built on bitcoin knots <span aria-hidden="true">→</span></a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="d02-wrap d02-sec" aria-labelledby="lanes-title">
+      <p class="d02-mark">// 02 — your way in</p>
+      <h2 class="d02-h2" id="lanes-title">Pick your lane</h2>
+      <ol class="d02-lanes">
+        <li>
+          <a class="d02-lane" href="/new/design02/learn/#lane-newcomers">
+            <span class="d02-lane__n" aria-hidden="true">01</span>
+            <span class="d02-lane__main">
+              <span class="d02-lane__t">New to BTX</span>
+              <span class="d02-lane__p">BTX is a post-quantum fork of Bitcoin with a fixed maximum supply and its own proof-of-work (MatMul).</span>
+            </span>
+            <span class="d02-lane__chips"><span class="d02-chip">What BTX is</span><span class="d02-chip">Official introduction</span><span class="d02-chip">How the network is doing</span></span>
+            <span class="d02-lane__go">6 steps <span class="d02-lane__arrow" aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="d02-lane" href="/new/design02/learn/#lane-miners">
+            <span class="d02-lane__n" aria-hidden="true">02</span>
+            <span class="d02-lane__main">
+              <span class="d02-lane__t">Mining</span>
+              <span class="d02-lane__p">Mining needs a GPU.</span>
+            </span>
+            <span class="d02-lane__chips"><span class="d02-chip">Pick a miner</span><span class="d02-chip">Prefer a smaller pool</span><span class="d02-chip">Use your own btx1z address</span></span>
+            <span class="d02-lane__go">4 steps <span class="d02-lane__arrow" aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="d02-lane" href="/new/design02/learn/#lane-nodes">
+            <span class="d02-lane__n" aria-hidden="true">03</span>
+            <span class="d02-lane__main">
+              <span class="d02-lane__t">Running a node</span>
+              <span class="d02-lane__p">Every node relays blocks and keeps the network reachable.</span>
+            </span>
+            <span class="d02-lane__chips"><span class="d02-chip">Easiest start at home: easynode</span><span class="d02-chip">On a server</span><span class="d02-chip">Before you install: the checklist</span></span>
+            <span class="d02-lane__go">7 steps <span class="d02-lane__arrow" aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        <li>
+          <a class="d02-lane" href="/new/design02/learn/#lane-developers">
+            <span class="d02-lane__n" aria-hidden="true">04</span>
+            <span class="d02-lane__main">
+              <span class="d02-lane__t">Become a BTX dev</span>
+              <span class="d02-lane__p">The node software is open source, and anyone can send it a pull request on GitHub.</span>
+            </span>
+            <span class="d02-lane__chips"><span class="d02-chip">Start here</span><span class="d02-chip">Ongoing work</span><span class="d02-chip">Community projects</span></span>
+            <span class="d02-lane__go">3 steps <span class="d02-lane__arrow" aria-hidden="true">→</span></span>
+          </a>
+        </li>
+      </ol>
+    </section>
+    <section class="d02-wrap d02-sec d02-sec--last" id="before-buying" aria-labelledby="before-buying-title">
+      <div class="d02-safe">
+        <div class="d02-safe__head">
+          <p class="d02-mark d02-mark--amber">// 03 — read this once</p>
+          <h2 class="d02-h2 d02-safe__t" id="before-buying-title">Before you buy or receive BTX</h2>
+          <p class="d02-safe__count">7 checks</p>
+          <p class="d02-safe__more"><a href="/new/design02/links/#cat-buying">Where people buy, with its warning <span aria-hidden="true">→</span></a></p>
+        </div>
+        <ol class="d02-safe__list">
+          <li class="d02-safe__item"><span class="d02-safe__n" aria-hidden="true">01</span><p><strong>Make a backup before money arrives.</strong> In btxd, backupwalletbundlearchive writes one encrypted file; keep it and its passphrase offline and apart. Any backup can spend your coins: plain exports at once, the archive once opened. Restore it once to test it.</p></li>
+          <li class="d02-safe__item"><span class="d02-safe__n" aria-hidden="true">02</span><p><strong>Check the receiving address in full, not just its start and end.</strong> BTX addresses start with btx1z.</p></li>
+          <li class="d02-safe__item"><span class="d02-safe__n" aria-hidden="true">03</span><p><strong>Send a small test amount first.</strong> Wait for at least 10 confirmations before you treat a payment as final; short reorganisations of the chain happen several times a day.</p></li>
+          <li class="d02-safe__item"><span class="d02-safe__n" aria-hidden="true">04</span><p><strong>Before you use an exchange or an OTC seller, check that withdrawals really work.</strong> A price on a website is not a market you can sell into.</p></li>
+          <li class="d02-safe__item"><span class="d02-safe__n" aria-hidden="true">05</span><p><strong>Other coins also trade as BTX.</strong> A market is only for this chain if its deposit addresses start with btx1z.</p></li>
+          <li class="d02-safe__item"><span class="d02-safe__n" aria-hidden="true">06</span><p><strong>A &#34;model&#34; or &#34;reference&#34; price is an estimate, not an offer that anyone has to honour.</strong></p></li>
+          <li class="d02-safe__item"><span class="d02-safe__n" aria-hidden="true">07</span><p><strong>Nobody legitimate asks for your seed.</strong> Messages offering help, &#34;recovery&#34; or guaranteed returns are scams.</p></li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+  <footer class="d02-foot">
+    <div class="d02-wrap d02-foot__in">
+      <nav class="d02-foot__nav" aria-label="Pages, again">
+        <a href="/new/design02/">Start here</a>
+        <a href="/new/design02/infra/">Take part</a>
+        <a href="/new/design02/network/">Network</a>
+        <a href="/new/design02/links/">Directory</a>
+        <a href="/new/design02/dev/">Build</a>
+        <a href="/new/design02/projects/">Projects</a>
+      </nav>
+      <p class="d02-foot__t">Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+      <p class="draft-arrows">→ goes to a page of this site · ↗ opens another site</p>
+      <p class="d02-foot__t">Layout draft for feedback. The live site at <a href="https://btx-community.com/">btx-community.com ↗</a> is the official one. English only.</p>
+      <p class="d02-foot__t"><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a> · <span class="d02-mono">be8fa8e0eb51</span></p>
+    </div>
+  </footer>
+</body>
+</html>

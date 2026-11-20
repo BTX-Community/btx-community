@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ce que la communauté BTX peut construire et faire tourner elle-même, puis la feuille de route et les documents de recherche de ce groupe.">
+  <meta name="color-scheme" content="light">
+  
+  <title>Projets de la communauté · Communauté BTX</title>
+  
+  <link rel="alternate" hreflang="en" href="/projects/">
+  
+  <link rel="alternate" hreflang="de" href="/de/projects/">
+  
+  <link rel="alternate" hreflang="es" href="/es/projects/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/projects/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/projects/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/community.css?v=7186087629f4">
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">Aller au contenu</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/fr/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="Pages">
+        
+        <a class="c-menu__link" href="/fr/">Accueil</a>
+        
+        <a class="c-menu__link" href="/fr/learn/">Comprendre</a>
+        
+        <a class="c-menu__link" href="/fr/network/">Réseau</a>
+        
+        <a class="c-menu__link" href="/fr/links/">Liens</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/fr/projects/" aria-current="page">Projets</a>
+        
+        <a class="c-menu__link" href="/fr/infra/">Infra</a>
+        
+        <a class="c-menu__link" href="/fr/dev/">Développeurs</a>
+        
+      </nav>
+      <button class="c-theme" type="button" data-theme-switch data-to-light="Passer au thème clair" data-to-dark="Passer au thème sombre" aria-label="Passer au thème clair" hidden></button>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="Langue: Français">FR <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="Langue">
+          
+          <a class="c-lang__item" href="/projects/" hreflang="en" lang="en"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item" href="/de/projects/" hreflang="de" lang="de"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/projects/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item c-lang__item--active" href="/fr/projects/" hreflang="fr" lang="fr" aria-current="true"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item" href="/zh/projects/" hreflang="zh-Hans" lang="zh-Hans"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <aside class="c-badge c-live--unknown" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="fr" aria-label="Le réseau en ce moment">
+      <a class="c-badge__head" href="/fr/network/"><span class="c-pulse" aria-hidden="true"></span><span data-live="overall" data-label-normal="Tout est normal" data-label-degraded="Dégradé" data-label-incident="Incident">Le réseau en ce moment</span></a>
+      <span class="c-badge__row"><span>Bloc</span> <b data-live="height">–</b></span>
+      <span class="c-badge__row"><span>Version</span> <b data-live="release">–</b></span>
+      <span class="c-badge__row"><span>Nœuds à jour</span> <b data-live="on-release" data-template="{count} sur {total}">–</b></span>
+      <a class="c-link c-badge__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Page d&#39;état complète ↗</a>
+      <span class="c-badge__time" data-live="updated" data-template="Données du {time}"></span>
+      <div class="c-badge__fork" data-live="fork" data-template="{name} : bloc {height}, encore {remaining} blocs (environ {time})" hidden>
+        <strong>Mise à niveau du réseau à venir</strong>
+        <ul data-live="fork-rows"></ul>
+        <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Versions et notes de version ↗</a>
+      </div>
+    </aside>
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">Projets de la communauté</h1>
+        <p class="c-hero__lead">Ce que la communauté peut construire et faire tourner elle-même, puis la feuille de route et les documents de recherche que ce groupe tient à jour publiquement.</p>
+      </section>
+
+      
+      
+      <section class="c-projects" id="projects" aria-labelledby="projects-title">
+        <h2 class="c-section-title" id="projects-title">Construire quelque chose</h2>
+        <p class="c-muted c-map__lead">Tout cela se situe en dehors du logiciel du nœud. Rien ici n&#39;est prévu, promis ni approuvé par les développeurs du nœud. Chaque carte dit ce qui existe aujourd&#39;hui et ce qui manque, avec la source de chaque affirmation.</p>
+        <p class="c-warning">Tout ce qui déplace les coins d&#39;autres personnes commence sur regtest ou testnet.</p>
+        <div class="c-audiences">
+          
+          <article class="c-audience c-role c-project" id="project-venues">
+            <h3 class="c-audience__title">Marchés pour BTX : ce qui existe, ce qui manque</h3>
+            <p class="c-audience__text">Un lieu où l&#39;on échange des BTX contre d&#39;autres coins, tenu par ses propres opérateurs : un carnet d&#39;ordres, ou une interface au-dessus des swaps de SwapNet.</p>
+            <dl class="c-role__facts">
+              <dt>Ce qui existe</dt>
+              <dd>SwapNet dans le nœud échange des BTX contre des BTC ou des ETH entre deux parties ; les pools AMM, les soldes encapsulés et les exécutions partielles n&#39;en font pas partie. Le document de ce groupe sur la structure des plateformes compare quatre modèles et situe la limite des licences.</dd>
+              <dt>Ce qui manque</dt>
+              <dd>Des opérateurs, un modèle choisi dans le document, et un conseil juridique là où la plateforme fonctionnera. Le document est un brouillon pour la discussion, pas un conseil juridique.</dd>
+              
+              <dt>Point de départ</dt>
+              <dd>
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md" rel="noopener noreferrer">Le document sur la structure des plateformes ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/README.md" rel="noopener noreferrer">Présentation de SwapNet (développeurs) ↗</a></li>
+                  
+                </ul>
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/issues" rel="noopener noreferrer">Discussion du document en issue dans ce dépôt. ↗</a></dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/IMPLEMENTATION_STATUS.md" rel="noopener noreferrer"><code>doc/swapnet/IMPLEMENTATION_STATUS.md:9</code></a> <a class="c-link c-map__cite" href="https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md" rel="noopener noreferrer"><code>btx-community/research/venue-structure.md:1-5</code></a></p>
+          </article>
+          
+          <article class="c-audience c-role c-project" id="project-swapnet-tools">
+            <h3 class="c-audience__title">Portefeuilles et outils pour SwapNet</h3>
+            <p class="c-audience__text">Des logiciels autour de SwapNet : un portefeuille qui affiche les cotations et exécute les swaps, des outils qui font tourner le marché d&#39;un maker, une interface pour les appels de swap du nœud.</p>
+            <dl class="c-role__facts">
+              <dt>Ce qui existe</dt>
+              <dd>Un nœud démarré avec -swapnet=1 trouve d&#39;autres nœuds SwapNet par ses liens entre pairs et offre 33 méthodes RPC de swap. v0.34.16 inclut SwapNet pour des tests plus larges. Il n&#39;y a pas de panneau graphique d&#39;échange : la console RPC est l&#39;interface.</dd>
+              <dt>Ce qui manque</dt>
+              <dd>Tout ce qu&#39;utiliserait quelqu&#39;un qui n&#39;est pas développeur. La page d&#39;état du paquet marque le règlement sur de vraies chaînes et un audit indépendant comme non exécutés, le côté ETH exige un contrat déployé que le propriétaire du nœud approuve localement, et la documentation de version veut des preuves externes avant de le dire qualifié pour le mainnet.</dd>
+              
+              <dt>Attention</dt>
+              <dd class="c-project__careful">Une fois qu&#39;un taker a financé un swap, l&#39;annuler ne le libère pas : les coins restent bloqués jusqu&#39;à la hauteur ou l&#39;heure de remboursement convenue.</dd>
+              
+              <dt>Point de départ</dt>
+              <dd>
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/RPC.md" rel="noopener noreferrer">Les 33 méthodes RPC de swap ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer">Faire tourner SwapNet sur un nœud ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/TESTING_AND_RELEASE.md" rel="noopener noreferrer">Tests et publication (développeurs) ↗</a></li>
+                  
+                </ul>
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="https://github.com/btxchain/btx/issues" rel="noopener noreferrer">Les questions en issue sur btxchain/btx ; les problèmes de sécurité uniquement par le signalement privé. ↗</a></dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code>doc/swapnet/OPERATIONS.md:5</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/RPC.md" rel="noopener noreferrer"><code>doc/swapnet/RPC.md:1</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code>release v0.34.16</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/IMPLEMENTATION_STATUS.md" rel="noopener noreferrer"><code>doc/swapnet/IMPLEMENTATION_STATUS.md:9</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/IMPLEMENTATION_STATUS.md" rel="noopener noreferrer"><code>doc/swapnet/IMPLEMENTATION_STATUS.md:7</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code>doc/swapnet/OPERATIONS.md:21</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/TESTING_AND_RELEASE.md" rel="noopener noreferrer"><code>doc/swapnet/TESTING_AND_RELEASE.md:34</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code>doc/swapnet/OPERATIONS.md:13</code></a></p>
+          </article>
+          
+          <article class="c-audience c-role c-project" id="project-amd-mining">
+            <h3 class="c-audience__title">Minage sur cartes AMD grand public</h3>
+            <p class="c-audience__text">Un chemin MatMul INT8 exact pour les cartes Radeon grand public, pour qu&#39;elles puissent miner.</p>
+            <dl class="c-role__facts">
+              <dt>Ce qui existe</dt>
+              <dd>Le chemin AMD (HIP) du nœud admet six puces Instinct de centre de données : gfx908, gfx90a, gfx940, gfx941, gfx942 et gfx950 (MI100 à MI350) ; il se compile tout seul quand un clang HIP et un GPU AMD sont trouvés. Les Radeon grand public (RDNA, gfx10 à gfx12) ne servent ni à miner ni à valider ; le code les dit verification-only tant que des vecteurs golden inter-fabricants ne les qualifient pas.</dd>
+              <dt>Ce qui manque</dt>
+              <dd>Un chemin INT8 exact sur RDNA qui corresponde bit à bit à la référence CPU, et les vecteurs golden qui le montrent. L&#39;admission d&#39;un tel chemin est la décision du mainteneur.</dd>
+              
+              <dt>Point de départ</dt>
+              <dd>
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/src/matmul/backend_capabilities_v4.cpp" rel="noopener noreferrer">Comment le nœud admet un GPU (développeurs) ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/tree/main/src/hip" rel="noopener noreferrer">Les sources du backend HIP (développeurs) ↗</a></li>
+                  
+                </ul>
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="https://github.com/btxchain/btx/issues" rel="noopener noreferrer">Les éléments de preuve en issue sur btxchain/btx ; aucun chantier de ce hub ne couvre encore AMD. ↗</a></dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/backend_capabilities_v4.cpp" rel="noopener noreferrer"><code>src/matmul/backend_capabilities_v4.cpp:475-491</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/backend_capabilities_v4.cpp" rel="noopener noreferrer"><code>src/matmul/backend_capabilities_v4.cpp:493-501</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/CMakeLists.txt" rel="noopener noreferrer"><code>src/CMakeLists.txt:243-247</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/accel_v4.cpp" rel="noopener noreferrer"><code>src/matmul/accel_v4.cpp:649-652</code></a></p>
+          </article>
+          
+          <article class="c-audience c-role c-project" id="project-metal">
+            <h3 class="c-audience__title">Tests sur Apple Silicon</h3>
+            <p class="c-audience__text">Faire tourner l&#39;autotest Metal du nœud sur d&#39;autres puces Apple et en rapporter les résultats, pour savoir que le chemin Metal fonctionne au-delà d&#39;une classe d&#39;appareil.</p>
+            <dl class="c-role__facts">
+              <dt>Ce qui existe</dt>
+              <dd>Metal est compilé par défaut sur Apple. Un appareil Metal est admis après les autotests d&#39;exactitude du nœud, via les opérations tensorielles INT8 de Metal 4 ou, pour rejouer l&#39;époque actuelle, un chemin exact en ALU entière. Là où une ligne golden existe, elle est comparée ; sinon l&#39;autotest décide (le manifeste en a une, pour la classe M4). La version n&#39;a pas de binaires macOS.</dd>
+              <dt>Ce qui manque</dt>
+              <dd>Des rapports d&#39;autotest d&#39;autres puces Apple.</dd>
+              
+              <dt>Point de départ</dt>
+              <dd>
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/build-osx.md" rel="noopener noreferrer">Compiler sous macOS (développeurs) ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-XDEV.md" rel="noopener noreferrer">Le chantier inter-appareils : paquet I-XDEV ↗</a></li>
+                  
+                </ul>
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">Le chantier I-XDEV, qui rejoue les blocs sur différents appareils ; il n&#39;a pas encore de responsable. ↗</a></dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/CMakeLists.txt" rel="noopener noreferrer"><code>src/CMakeLists.txt:10-11</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/accel_v4.cpp" rel="noopener noreferrer"><code>src/matmul/accel_v4.cpp:1058-1062</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/matmul_v4_rc_production_canary.cpp" rel="noopener noreferrer"><code>src/matmul/matmul_v4_rc_production_canary.cpp:655-656</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/accel_v4.cpp" rel="noopener noreferrer"><code>src/matmul/accel_v4.cpp:843-844</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/matmul_v4_rc_production_golden_manifest.data" rel="noopener noreferrer"><code>src/matmul/matmul_v4_rc_production_golden_manifest.data:3</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code>release v0.34.16</code></a></p>
+          </article>
+          
+          <article class="c-audience c-role c-project" id="project-tooling">
+            <h3 class="c-audience__title">Explorateurs, surveillance et portefeuilles légers</h3>
+            <p class="c-audience__text">Davantage de vues indépendantes sur la chaîne, des alertes quand quelque chose ne va pas, et des portefeuilles pour qui ne fait pas tourner un nœud en permanence.</p>
+            <dl class="c-role__facts">
+              <dt>Ce qui existe</dt>
+              <dd>Plusieurs explorateurs et une page d&#39;état figurent sur la page des liens ; la page d&#39;état publie ses chiffres en JSON. btx-cli lightwatch est un client léger en lecture seule : il lit les filtres de blocs compacts d&#39;un nœud de confiance (démarré avec -blockfilterindex=1) et ne signe rien. Le nœud lit et écrit aussi un format de récupération pour portefeuilles de navigateur.</dd>
+              <dt>Ce qui manque</dt>
+              <dd>Des explorateurs et des moniteurs tenus par davantage d&#39;opérateurs indépendants, des alertes, et des portefeuilles légers qui puissent aussi signer.</dd>
+              
+              <dt>Point de départ</dt>
+              <dd>
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="/fr/links/#cat-network">Explorateurs et page d&#39;état dans la liste de liens →</a></li>
+                  
+                  <li><a class="c-link" href="https://network.btx-monitoring.com/api/v1/status.json" rel="noopener noreferrer">Le JSON de la page d&#39;état ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/btxwallet-browser-node-interop.md" rel="noopener noreferrer">Formats des portefeuilles de navigateur et de nœud (développeurs) ↗</a></li>
+                  
+                </ul>
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="/fr/links/">Les chats de la communauté sur la page des liens. →</a></dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/BTX-Community/btx-community/blob/main/README.md" rel="noopener noreferrer"><code>btx-community/README.md:50</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/balance-watch.md" rel="noopener noreferrer"><code>doc/balance-watch.md:44-46</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btxwallet-browser-node-interop.md" rel="noopener noreferrer"><code>doc/btxwallet-browser-node-interop.md:3-9</code></a></p>
+          </article>
+          
+        </div>
+        <p class="c-muted c-note">Vérifié le 15 nov. 2026 sur le logiciel du nœud en v0.34.16 (074dac16) et sur la branche release-0.34.17 (8e7045b9).</p>
+      </section>
+      
+
+      
+      <section class="c-docs" id="documents" aria-labelledby="documents-title">
+        <h2 class="c-section-title" id="documents-title">Feuille de route et documents</h2>
+        <p class="c-muted">Ce que cette communauté a mis par écrit. Tout se trouve dans le dépôt : chaque modification est visible comme un commit et chacun peut corriger un chiffre.</p>
+        <div class="c-audiences">
+          
+          <article class="c-audience c-audience--doc" id="doc-roadmap">
+            <h3 class="c-audience__title">Feuille de route</h3>
+            <p>Ce que la communauté peut faire elle-même et ce qui dépend de l&#39;équipe principale, en deux colonnes, avec une place pour inscrire votre nom face à un chantier.</p>
+            <p class="c-muted">Ouverte aux modifications</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/ROADMAP.md" rel="noopener noreferrer" aria-label="Lire: Feuille de route">Lire ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-deployment-reward">
+            <h3 class="c-audience__title">La fenêtre d&#39;amorçage et la récompense de déploiement de 1 000 000 BTX</h3>
+            <p>La première question de la plupart des nouveaux venus, traitée à partir des données de la chaîne : ce qu&#39;ont produit les 50 000 premiers blocs, selon quelles règles de consensus, et ce que les données publiques peuvent et ne peuvent pas montrer.</p>
+            <p class="c-muted">Brouillon, en relecture</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/research/deployment-reward.md" rel="noopener noreferrer" aria-label="Lire: La fenêtre d&#39;amorçage et la récompense de déploiement de 1 000 000 BTX">Lire ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-network-fund">
+            <h3 class="c-audience__title">Fonds du réseau</h3>
+            <p>Comment le réseau pourrait financer sa propre infrastructure : contributions, garde en multisignature, règles publiées et paiements selon la disponibilité vérifiée.</p>
+            <p class="c-muted">Document de discussion</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/research/network-fund.md" rel="noopener noreferrer" aria-label="Lire: Fonds du réseau">Lire ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-venue-structure">
+            <h3 class="c-audience__title">Structure d&#39;une plateforme et limite de l&#39;agrément</h3>
+            <p>Ce qu&#39;une plateforme d&#39;échange décentralisée peut être sur une chaîne sans machine virtuelle, où passe la limite réglementaire, et les modèles qui restent ouverts. Pas un conseil juridique.</p>
+            <p class="c-muted">Brouillon pour discussion</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md" rel="noopener noreferrer" aria-label="Lire: Structure d&#39;une plateforme et limite de l&#39;agrément">Lire ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-contributing">
+            <h3 class="c-audience__title">Comment modifier quelque chose ici</h3>
+            <p>Ce que vous pouvez modifier librement, ce qui demande un second regard, et comment signaler un chiffre erroné si git n&#39;est pas votre truc.</p>
+            
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/CONTRIBUTING.md" rel="noopener noreferrer" aria-label="Lire: Comment modifier quelque chose ici">Lire ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-review-programme">
+            <h3 class="c-audience__title">Programme de revue et de test : une pull request par classe de bugs</h3>
+            <p>La couverture de tests mesurée sur swapnet-v2 au commit a5d1637f (désormais intégré à la branche de version), les classes de bugs récurrentes derrière 317 pull requests de correction depuis août, un balayage par classe, qui la clôt par une règle, et des vérifications avant une version finale. Une proposition de contributeurs ; le mainteneur décide de ce qui est intégré.</p>
+            <p class="c-muted">Mesuré le 12 novembre 2026 au commit c6f9678d ; couverture le 14 novembre au commit a5d1637f</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/MASTER-PLAN.md" rel="noopener noreferrer" aria-label="Lire: Programme de revue et de test : une pull request par classe de bugs">Lire ↗</a>
+          </article>
+          
+        </div>
+        <p class="c-add"><a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Le tout, y compris le code source de cette page ↗</a></p>
+      </section>
+      
+
+    </main>
+
+    <footer class="c-footer">
+      <p>Projet communautaire indépendant. Les liens mènent vers des tiers ; nous ne sommes pas responsables de leur contenu. Rien ici n&#39;est un conseil financier.</p>
+      <p class="c-muted">Cette page a été traduite de l&#39;anglais avec l&#39;aide de l&#39;IA. <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/main/site/content/translations/fr.yaml" rel="noopener noreferrer">Corriger la traduction ↗</a></p>
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Code source ↗</a>
+      </p>
+      <p class="c-muted">be8fa8e0eb51</p>
+    </footer>
+  </div>
+</body>
+</html>

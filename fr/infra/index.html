@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Les machines que vous pouvez apporter au réseau BTX : ce que fait chaque rôle et ce qu&#39;il lui faut, son guide, à qui demander, et une carte de l&#39;ensemble.">
+  <meta name="color-scheme" content="light">
+  
+  <title>Faire tourner l&#39;infrastructure de BTX · Communauté BTX</title>
+  
+  <link rel="alternate" hreflang="en" href="/infra/">
+  
+  <link rel="alternate" hreflang="de" href="/de/infra/">
+  
+  <link rel="alternate" hreflang="es" href="/es/infra/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/infra/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/infra/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/community.css?v=7186087629f4">
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">Aller au contenu</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/fr/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="Pages">
+        
+        <a class="c-menu__link" href="/fr/">Accueil</a>
+        
+        <a class="c-menu__link" href="/fr/learn/">Comprendre</a>
+        
+        <a class="c-menu__link" href="/fr/network/">Réseau</a>
+        
+        <a class="c-menu__link" href="/fr/links/">Liens</a>
+        
+        <a class="c-menu__link" href="/fr/projects/">Projets</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/fr/infra/" aria-current="page">Infra</a>
+        
+        <a class="c-menu__link" href="/fr/dev/">Développeurs</a>
+        
+      </nav>
+      <button class="c-theme" type="button" data-theme-switch data-to-light="Passer au thème clair" data-to-dark="Passer au thème sombre" aria-label="Passer au thème clair" hidden></button>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="Langue: Français">FR <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="Langue">
+          
+          <a class="c-lang__item" href="/infra/" hreflang="en" lang="en"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item" href="/de/infra/" hreflang="de" lang="de"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/infra/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item c-lang__item--active" href="/fr/infra/" hreflang="fr" lang="fr" aria-current="true"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item" href="/zh/infra/" hreflang="zh-Hans" lang="zh-Hans"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <aside class="c-badge c-live--unknown" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="fr" aria-label="Le réseau en ce moment">
+      <a class="c-badge__head" href="/fr/network/"><span class="c-pulse" aria-hidden="true"></span><span data-live="overall" data-label-normal="Tout est normal" data-label-degraded="Dégradé" data-label-incident="Incident">Le réseau en ce moment</span></a>
+      <span class="c-badge__row"><span>Bloc</span> <b data-live="height">–</b></span>
+      <span class="c-badge__row"><span>Version</span> <b data-live="release">–</b></span>
+      <span class="c-badge__row"><span>Nœuds à jour</span> <b data-live="on-release" data-template="{count} sur {total}">–</b></span>
+      <a class="c-link c-badge__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Page d&#39;état complète ↗</a>
+      <span class="c-badge__time" data-live="updated" data-template="Données du {time}"></span>
+      <div class="c-badge__fork" data-live="fork" data-template="{name} : bloc {height}, encore {remaining} blocs (environ {time})" hidden>
+        <strong>Mise à niveau du réseau à venir</strong>
+        <ul data-live="fork-rows"></ul>
+        <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Versions et notes de version ↗</a>
+      </div>
+    </aside>
+    <main id="main">
+
+
+      <section class="c-intro">
+        <h1 class="c-page-title">Faire tourner l&#39;infrastructure de BTX</h1>
+        <p class="c-hero__lead">Les machines que vous pouvez apporter au réseau : ce que fait chacune, ce qu&#39;il lui faut, son guide et à qui demander, avec une carte qui montre comment elles s&#39;articulent.</p>
+      </section>
+
+      <section class="c-split" id="paths" aria-label="Le faire tourner soi-même / Utiliser une solution gérée">
+        <article class="c-audience c-split__card c-split__card--yourself" id="yourself">
+          <h2 class="c-audience__title">Le faire tourner soi-même</h2>
+          <p class="c-audience__text">Vous faites tourner une machine et suivez son guide. Sept rôles, du nœud à la maison à la machine de fuzzing en baie ; chaque carte dit ce que le réseau y gagne, ce qu&#39;il faut à la machine et à qui demander.</p>
+          <nav class="c-jump" aria-label="Les rôles">
+            
+            <a class="c-chip" href="#role-full-node">Nœud complet</a>
+            
+            <a class="c-chip" href="#role-archive">Nœud d&#39;archive et éditeur de snapshots</a>
+            
+            <a class="c-chip" href="#role-signer">Signataire d&#39;attestations</a>
+            
+            <a class="c-chip" href="#role-fuzz-box">Machine de fuzzing permanente</a>
+            
+            <a class="c-chip" href="#role-ci-runner">Exécuteur de CI</a>
+            
+            <a class="c-chip" href="#role-sanitizers">Exécutions avec sanitizers</a>
+            
+            <a class="c-chip" href="#role-guix">Recompilation avec Guix</a>
+            
+          </nav>
+        </article>
+        <article class="c-audience c-split__card c-split__card--managed" id="managed">
+          <h2 class="c-audience__title">Utiliser une solution gérée</h2>
+          <p class="c-audience__text">Une application installe et surveille le logiciel du nœud pour vous, sur une machine qui vous appartient. La machine et sa disponibilité restent votre affaire.</p>
+          
+          <div class="c-split__entry">
+            <a class="c-split__name c-link" href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer">easynode ↗</a>
+            <p class="c-card__text">Application de bureau open source (MIT) de l&#39;équipe easyBTX qui installe et supervise btxd sur la machine que vous avez déjà.</p>
+            <p class="c-card__note"><span class="c-note-label">Remarque</span> Fonctionne avec la v0.34.15 sans le réseau de modèles. Sans GPU qualifié, le nœud suit les vérifications des signataires au lieu de vérifier lui-même le travail MatMul.</p>
+          </div>
+          
+          <p class="c-muted c-note">Ce site ne répertorie aucun service hébergé qui fasse tourner une infrastructure BTX à votre place.</p>
+        </article>
+      </section>
+
+      
+      <section class="c-home" id="home-node" aria-labelledby="home-node-title">
+        <h2 class="c-section-title" id="home-node-title">Avant de faire tourner un nœud chez soi</h2>
+        <div class="c-home__points">
+          
+          <div class="c-home__point" id="home-privacy">
+            <h3 class="c-home__title">Vie privée</h3>
+            <ul class="c-home__items">
+              
+              <li>Votre nœud montre son adresse IP à chaque pair auquel il se connecte. Un nœud qui accepte des connexions entrantes annonce aussi sa propre adresse, et les pairs la relaient.</li>
+              
+              <li>Par défaut, btxd demande à votre routeur (NAT-PMP ou PCP) d&#39;ouvrir deux ports : TCP 19335 pour les pairs et TCP 29447 pour le réseau de modèles, que btxd lance de lui-même. Le réseau de modèles cherche en outre des pairs sur votre réseau local via UDP 29448.</li>
+              
+              <li>btxd interroge aussi btx.dev toutes les 30 minutes pour les mises à jour, directement et sans passer par -proxy, et envoie sa version, sa plateforme, son architecture et son groupe de déploiement. Il installe seul les versions signées plus récentes (autoupdateseamless=0 les signale seulement, autoupdatetelemetry=0 omet ces détails, autoupdate=0 arrête les vérifications).</li>
+              
+              <li>Si votre adresse compte, faites tourner le nœud derrière Tor (-proxy, -onlynet=onion ; le guide Tor conseille onlynet=onion seulement une fois Tor stable) ou plutôt sur un serveur loué. Avec -proxy, ou un -onlynet sans ipv4 ni ipv6, btxd garde le port 29447 fermé et ne cherche pas de mises à jour, sauf si vous les activez.</li>
+              
+              <li>Sur une machine avec des coins, du minage ou une clé de signataire, mettez modelnet=0, natpmp=0 et swapnet=0, comme le dit la liste d&#39;installation.</li>
+              
+            </ul>
+          </div>
+          
+          <div class="c-home__point" id="home-reach">
+            <h3 class="c-home__title">Joignabilité</h3>
+            <ul class="c-home__items">
+              
+              <li>Les connexions sortantes fonctionnent par défaut. Pour en accepter d&#39;entrantes, le port TCP 19335 doit être joignable : ouvert par NAT-PMP, redirigé à la main sur le routeur, ou proposé comme service onion Tor (-listenonion). Avec -proxy, le nœud n&#39;écoute que si vous ajoutez -listen=1. Le port 29447 ne sert qu&#39;au réseau de modèles ; modelnet=0 le ferme.</li>
+              
+              <li>Un nœud qui ne fait que se connecter vers l&#39;extérieur reste synchronisé et relaie vers les pairs auxquels il se connecte, mais les nouveaux nœuds ne peuvent pas l&#39;atteindre : il ne les aide donc pas à se synchroniser.</li>
+              
+              <li>Pour vérifier : btx-cli getpeerinfo affiche &#34;inbound&#34;: true pour les pairs qui se sont connectés à vous, et btx-cli getnetworkinfo liste les localaddresses de votre nœud.</li>
+              
+            </ul>
+          </div>
+          
+        </div>
+        <p class="c-home__links">
+          
+          <a class="c-link" href="/fr/infra/#before-installing">Nœud complet : la liste d&#39;installation plus bas →</a>
+          
+          <a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/tor.md" rel="noopener noreferrer">Faire tourner le nœud avec Tor (développeurs) ↗</a>
+          
+        </p>
+      </section>
+      
+
+
+      
+      <section class="c-checks" id="check" aria-labelledby="check-title">
+        <h2 class="c-section-title" id="check-title">À vérifier d&#39;abord</h2>
+        <div class="c-audiences c-audiences--two">
+          
+          <article class="c-audience c-audience--folded c-audience--check" id="before-installing">
+            <details class="c-fold c-audience__fold">
+            <summary><h3 class="c-audience__title">Avant d&#39;installer une version du nœud</h3> <span class="c-audience__count">10 vérifications</span></summary>
+            <ol class="c-steps">
+              
+              <li>Téléchargez les versions du nœud uniquement depuis github.com/btxchain/btx/releases. Faire confiance aux outils de la communauté comme easynode ou les instantanés relève de votre choix ; vérifiez leurs signatures.</li>
+              
+              <li>Les versions récentes n&#39;ont pas de fichier de sommes de contrôle signé : le dernier SHA256SUMS.asc concernait la v0.34.6, et la v0.34.16 a un SHA256SUMS non signé. Comparez le SHA-256 que GitHub affiche pour chaque fichier avec « shasum -a 256 &lt;fichier&gt; » (« sha256sum » sous Linux).</li>
+              
+              <li>Cela prouve que le fichier est bien celui de GitHub, pas qui l&#39;a compilé. Si cela compte pour vous, compilez vous-même le code source étiqueté.</li>
+              
+              <li>Décidez d&#39;abord du rôle du nœud. Vérifier soi-même les blocs nécessite un GPU qualifié NVIDIA ou Apple. Sans lui, faites-le tourner comme miroir de confiance avec au moins deux signataires, sinon le nœud s&#39;arrête.</li>
+              
+              <li>Un nouveau nœud ne peut pas se synchroniser depuis la genèse : la v0.34.15 et la v0.34.16 s&#39;arrêtent au bloc 126 978. Commencez avec un instantané signé et n&#39;exécutez pas -reindex tant qu&#39;une version n&#39;a pas corrigé le problème.</li>
+              
+              <li>Quatre réglages : btxd installe seul les versions signées récentes de btx.dev (autoupdateseamless=0 les signale, autoupdate=0 ne vérifie plus) ; le réseau de modèles écoute sur le port 29447 (modelnet=0) ; natpmp ouvre les ports 19335 et 29447 du routeur (natpmp=0) ; SwapNet démarre seul dès 0.34.17 et son échec arrête btxd (swapnet=0). Avec fonds, minage ou signataire : les trois derniers à 0.</li>
+              
+              <li>Avant une mise à jour, arrêtez le nœud avec btx-cli stop et attendez que btxd se termine ; ne le tuez jamais. Sauvegardez ensuite le répertoire de données et les portefeuilles.</li>
+              
+              <li>Lisez les notes de version avant de mettre à jour. Certaines versions changent les règles à partir d&#39;une hauteur de bloc fixe ; cette page affiche un compte à rebours quand cela approche. Chaque version cesse aussi de fonctionner environ deux ans après sa compilation ; les actuelles en novembre 2028.</li>
+              
+              <li>Les binaires Linux nécessitent glibc 2.38 ou plus récent (Ubuntu 24.04, Debian 13). La v0.34.16 a des archives pour Linux et Linux avec CUDA ; pour les Mac Apple Silicon, la plus récente est la v0.34.15. Il n&#39;existe pas de version officielle pour Windows.</li>
+              
+              <li>Les versions candidates (rc) servent aux tests. Un nœud qui détient des coins, mine ou signe doit tourner sur la dernière version complète.</li>
+              
+            </ol>
+            </details>
+          </article>
+          
+        </div>
+      </section>
+      
+
+
+      <section class="c-roles" id="roles" aria-labelledby="roles-title">
+        <h2 class="c-section-title" id="roles-title">Les rôles</h2>
+        <div class="c-audiences">
+          
+          <article class="c-audience c-role c-role--network" id="role-full-node">
+            <p class="c-role__kind"><span class="c-tag">Réseau</span></p>
+            <h3 class="c-audience__title">Nœud complet</h3>
+            <dl class="c-role__facts">
+              <dt>Ce que le réseau y gagne</dt>
+              <dd>Relaie blocs et transactions et garde le réseau joignable. Avec un GPU qualifié, il vérifie lui-même le travail MatMul. Sans GPU, faites-en un miroir de confiance, sinon il ne se synchronise plus : btxd n&#39;inclut aucune clé de signataire, épinglez-en au moins deux de confiance et mettez matmultrustedthreshold=2 (1 par défaut). Sur le mainnet, il ne démarre pas avec moins, sauf si vous le forcez.</dd>
+              <dt>Machine</dt>
+              <dd>Un ordinateur ou un petit serveur toujours allumé, avec un SSD et une connexion stable. Le GPU est facultatif.</dd>
+              <dt>Guide</dt>
+              <dd>
+                <a class="c-link" href="/fr/infra/#before-installing">Avant d&#39;installer une version du nœud : la liste de cette page →</a>
+                
+                
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="/fr/#nodes">Faire tourner un nœud : les étapes de la page d&#39;accueil →</a></li>
+                  
+                  <li><a class="c-link" href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer">Aide pour les nœuds bloqués à une hauteur ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer">Fonctionnement d&#39;un miroir de confiance (développeurs) ↗</a></li>
+                  
+                </ul>
+                
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="/fr/links/">D&#39;abord l&#39;aide aux nœuds ; pour le reste, les chats de la communauté sur la page des liens. →</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">Les plantages et les problèmes de sécurité vont en privé aux mainteneurs, jamais en public.</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--network" id="role-archive">
+            <p class="c-role__kind"><span class="c-tag">Réseau</span></p>
+            <h3 class="c-audience__title">Nœud d&#39;archive et éditeur de snapshots</h3>
+            <dl class="c-role__facts">
+              <dt>Ce que le réseau y gagne</dt>
+              <dd>Un nœud d&#39;archive garde chaque bloc (prune=0) et sert toute la chaîne à ses pairs ; la page d&#39;état mesure la chaîne sur des nœuds d&#39;archive. Un éditeur de snapshots fait des données d&#39;un nœud un fichier signé qui épargne à un nouveau nœud l&#39;essentiel de la synchronisation. Depuis la genèse, la synchronisation s&#39;arrête au bloc 126 978 (#272) : les nouveaux nœuds partent d&#39;un snapshot.</dd>
+              <dt>Machine</dt>
+              <dd>Un serveur avec un grand disque (toute la chaîne, jamais élaguée, plus de la place pour les fichiers de snapshot) et un débit montant capable de les servir.</dd>
+              <dt>Guide</dt>
+              <dd>
+                <a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer">Runbook des nœuds d&#39;archive (développeurs) ↗</a><span class="c-role__note c-role__guide-note"><span class="c-note-label">Remarque</span> Sa note d&#39;ouverture appelle encore Epoch A une version candidate ; l&#39;index de la documentation des développeurs dit qu&#39;elle est active sur le mainnet depuis le bloc 185 000.</span>
+                <span class="c-role__note">Pas encore de guide de la communauté pour publier un snapshot signé.</span>
+                
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="/fr/links/#cat-node-tools">Snapshots signés dans la liste de liens →</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/contrib/devtools/README.md" rel="noopener noreferrer">La recette de snapshot UTXO des développeurs ↗</a></li>
+                  
+                </ul>
+                
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-OPS.md" rel="noopener noreferrer">Le ou la responsable du chantier I-OPS, qui couvre les miroirs d&#39;archive et les snapshots signés. ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">Les plantages et les problèmes de sécurité vont en privé aux mainteneurs, jamais en public.</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--network" id="role-signer">
+            <p class="c-role__kind"><span class="c-tag">Réseau</span></p>
+            <h3 class="c-audience__title">Signataire d&#39;attestations</h3>
+            <dl class="c-role__facts">
+              <dt>Ce que le réseau y gagne</dt>
+              <dd>Rejoue sur un GPU qualifié le travail MatMul des nouveaux blocs (ExactReplay) et signe le résultat. Les miroirs de confiance qui ont épinglé sa clé suivent ces signatures ; un nœud qui vérifie lui-même les blocs ne les met jamais à la place de sa propre vérification. La documentation des développeurs appelle ce rôle archive GPU ou attestateur.</dd>
+              <dt>Machine</dt>
+              <dd>Un GPU qui réussit l&#39;autoqualification de btxd en mode strict-device, toute la chaîne (prune=0), en ligne jour et nuit. Le runbook indique que les RTX 5090 et RTX PRO 6000 la réussissent avec CUDA 13.2 et cuBLASLt 13.4 ; les autres cartes doivent réussir le même autotest. Une clé de signature par machine ; jamais sur un mineur.</dd>
+              <dt>Guide</dt>
+              <dd>
+                <a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer">Runbook des opérateurs GPU (développeurs) ↗</a><span class="c-role__note c-role__guide-note"><span class="c-note-label">Remarque</span> Ses lignes d&#39;état appellent encore Epoch A une version candidate ; l&#39;index de la documentation des développeurs dit qu&#39;elle est active sur le mainnet depuis le bloc 185 000.</span>
+                
+                
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer">Signataires et miroirs de confiance (développeurs) ↗</a></li>
+                  
+                </ul>
+                
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="https://github.com/btxchain/btx/issues" rel="noopener noreferrer">Les questions sur le runbook, en issue sur btxchain/btx. Aucun chantier de ce hub ne couvre encore les signataires. ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">Les plantages et les problèmes de sécurité vont en privé aux mainteneurs, jamais en public.</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--testing" id="role-fuzz-box">
+            <p class="c-role__kind"><span class="c-tag">Tests</span></p>
+            <h3 class="c-audience__title">Machine de fuzzing permanente</h3>
+            <dl class="c-role__facts">
+              <dt>Ce que le réseau y gagne</dt>
+              <dd>Fait tourner jour et nuit les plus de 270 cibles de fuzzing de BTX et garde chaque entrée qui atteint du code nouveau ; elle trouve ainsi des bugs qui demandent des heures de mutation. Une courte exécution de CI repart de zéro à chaque fois.</dd>
+              <dt>Machine</dt>
+              <dd>Une machine Linux ou une VM dédiée (Ubuntu 24.04) : beaucoup de threads CPU, environ 2 Go de RAM par processus de fuzzing, 80 Go de disque libre, pas de GPU. Rien d&#39;autre dessus : ni nœud, ni portefeuille, ni mineur, ni clés.</dd>
+              <dt>Guide</dt>
+              <dd>
+                <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/fuzz-box/README.md" rel="noopener noreferrer">Faire tourner une machine de fuzzing continu pour BTX ↗</a>
+                
+                
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-OPS.md" rel="noopener noreferrer">Le ou la responsable d&#39;I-OPS, qui tient à jour le guide de la machine de fuzzing. ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">Les plantages et les problèmes de sécurité vont en privé aux mainteneurs, jamais en public.</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--testing" id="role-ci-runner">
+            <p class="c-role__kind"><span class="c-tag">Tests</span></p>
+            <h3 class="c-audience__title">Exécuteur de CI</h3>
+            <dl class="c-role__facts">
+              <dt>Ce que le réseau y gagne</dt>
+              <dd>Compile et teste chaque nuit le dernier commit d&#39;une branche et publie le résultat, pour qu&#39;une casse se voie en un jour. L&#39;opérateur de la page d&#39;état publie une telle exécution comme tâche CI-0 ; elle figure sur la page des développeurs.</dd>
+              <dt>Machine</dt>
+              <dd>Un serveur Linux dédié avec beaucoup de threads et quelques dizaines de Go de disque libre. L&#39;exécution CI-0 du 15 nov. a pris environ 70 minutes sur 30 threads ; un arbre de compilation avec couverture occupe à lui seul 27 Go.</dd>
+              <dt>Guide</dt>
+              <dd>
+                <strong class="c-role__coming">Guide à venir.</strong>
+                <span class="c-role__note">En attendant : le paquet I-CI liste les tâches, la page de compilation et de tests donne les recettes, et ci/README.md dans l&#39;arborescence de btx lance une étape de CI en local.</span>
+                
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-CI.md" rel="noopener noreferrer">Paquet I-CI : les tâches de CI sur le fork ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/04-build-and-test.md" rel="noopener noreferrer">Recettes de compilation et de tests ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/ci/README.md" rel="noopener noreferrer">Les scripts de CI dans l&#39;arborescence de btx ↗</a></li>
+                  
+                </ul>
+                
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">L&#39;opérateur de la page d&#39;état, qui fait tourner le CI-0 nocturne. Le chantier I-CI n&#39;a pas encore de responsable : prenez-le dans le fichier des chantiers. ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">Les plantages et les problèmes de sécurité vont en privé aux mainteneurs, jamais en public.</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--testing" id="role-sanitizers">
+            <p class="c-role__kind"><span class="c-tag">Tests</span></p>
+            <h3 class="c-audience__title">Exécutions avec sanitizers</h3>
+            <dl class="c-role__facts">
+              <dt>Ce que le réseau y gagne</dt>
+              <dd>Compile le nœud avec AddressSanitizer et UndefinedBehaviorSanitizer, ou avec ThreadSanitizer, et lance les tests. Les bugs de mémoire et de threads qui passent inaperçus dans une compilation normale deviennent des rapports.</dd>
+              <dt>Machine</dt>
+              <dd>Une machine Linux avec clang (clang 20 ou plus récent pour ThreadSanitizer), beaucoup de RAM et de threads. Les exécutions sont plusieurs fois plus lentes : les tests fonctionnels prennent --timeout-factor=4.</dd>
+              <dt>Guide</dt>
+              <dd>
+                <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/04-build-and-test.md" rel="noopener noreferrer">Compilation et tests, section 6 : sanitizers ↗</a>
+                
+                
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/issues" rel="noopener noreferrer">Le chantier I-CI, auquel appartiennent les tâches ASan/UBSan et TSan (CI-2, CI-3). Il n&#39;a pas encore de responsable : tant que personne ne le prend, ouvrez une issue dans ce dépôt. ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">Les plantages et les problèmes de sécurité vont en privé aux mainteneurs, jamais en public.</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--testing" id="role-guix">
+            <p class="c-role__kind"><span class="c-tag">Tests</span></p>
+            <h3 class="c-audience__title">Recompilation avec Guix</h3>
+            <dl class="c-role__facts">
+              <dt>Ce que le réseau y gagne</dt>
+              <dd>Recompile une version à partir de son code étiqueté dans un environnement Guix fixe : des personnes indépendantes comparent les hachages, nul ne dépend d&#39;une seule machine. Selon les notes de v0.34.16, ses binaires Linux exigent glibc 2.38 ou plus, ces scripts compilent contre glibc 2.31 : ils n&#39;en sont pas issus, et les recompilateurs ne se comparent qu&#39;entre eux.</dd>
+              <dt>Machine</dt>
+              <dd>Une machine Linux avec Guix : 16 Go libres pour le store Guix plus 8 Go par plateforme compilée. Plus de cœurs compilent plus vite.</dd>
+              <dt>Guide</dt>
+              <dd>
+                <strong class="c-role__coming">Guide à venir.</strong>
+                <span class="c-role__note">Les scripts sont dans l&#39;arborescence de btx (contrib/guix). Leur README est celui de Bitcoin Core et renvoie au dépôt de signatures de Bitcoin Core ; ce site n&#39;en connaît pas encore pour BTX.</span>
+                
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/tree/main/contrib/guix" rel="noopener noreferrer">Les scripts Guix dans l&#39;arborescence de btx ↗</a></li>
+                  
+                </ul>
+                
+              </dd>
+              <dt>À qui demander</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/issues" rel="noopener noreferrer">Aucun chantier ne couvre encore les compilations reproductibles ; ouvrez une issue dans ce dépôt. ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">Les plantages et les problèmes de sécurité vont en privé aux mainteneurs, jamais en public.</a></p>
+          </article>
+          
+        </div>
+        <p class="c-links c-roles__projects"><a class="c-link" href="/fr/projects/#projects">Plutôt construire quelque chose que faire tourner une machine ? Projets de la communauté →</a></p>
+      </section>
+
+      <section class="c-map" id="map" aria-labelledby="map-title">
+        <h2 class="c-section-title" id="map-title">Comment tout s&#39;articule</h2>
+        <p class="c-muted c-map__lead">Qui envoie quoi à qui. Chaque case ouvre son guide ou sa carte ; les numéros des flèches renvoient à la liste sous la carte, et chaque ligne de la liste cite sa source dans le logiciel du nœud.</p>
+        <figure class="c-map__figure" aria-labelledby="map-title">
+
+<svg class="c-map__svg c-map__svg--wide" viewBox="0 0 960 651.0" role="group" aria-labelledby="map-wide-title map-wide-desc" font-family="Inter, system-ui, sans-serif">
+          <title id="map-wide-title">Carte de l&#39;infrastructure BTX</title>
+          <desc id="map-wide-desc">Des cases pour les rôles, des flèches pour ce qu&#39;ils s&#39;envoient. Les mêmes liaisons sont décrites en mots sous la carte.</desc>
+          <rect class="c-map__frame" x="322" y="8.0" width="316" height="524.0" rx="14"/>
+          <text class="c-map__frame-label" x="334" y="28.0" font-size="12.5" aria-hidden="true">Réseau pair-à-pair BTX</text>
+          <g class="c-map__arrows" aria-hidden="true">
+            
+            <g class="c-map__arrow" data-edge="1">
+              <line x1="262" y1="82.6" x2="348" y2="82.6"/>
+              <polygon class="c-map__head" points="348,82.6 341.0,86.6 341.0,78.6"/><polygon class="c-map__head" points="262,82.6 269.0,78.6 269.0,86.6"/>
+              <circle class="c-map__badge" cx="305.0" cy="82.6" r="9"/><text class="c-map__badge-text" x="305.0" y="82.6" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">1</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="2">
+              <line x1="369" y1="112.6" x2="369" y2="268.2"/><line x1="369" y1="328.2" x2="369" y2="450.4"/>
+              <polygon class="c-map__head" points="369,268.2 365.0,261.2 373.0,261.2"/><polygon class="c-map__head" points="369,112.6 373.0,119.6 365.0,119.6"/><polygon class="c-map__head" points="369,450.4 365.0,443.4 373.0,443.4"/><polygon class="c-map__head" points="369,328.2 373.0,335.2 365.0,335.2"/>
+              <circle class="c-map__badge" cx="369.0" cy="190.4" r="9"/><text class="c-map__badge-text" x="369.0" y="190.4" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">2</text><circle class="c-map__badge" cx="369.0" cy="389.3" r="9"/><text class="c-map__badge-text" x="369.0" y="389.3" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">2</text>
+              <text class="c-map__label" x="386" y="194.8" font-size="12.5">blocs et transactions</text>
+            </g>
+            
+            <g class="c-map__arrow" data-edge="3">
+              <line x1="262" y1="194.4" x2="322" y2="194.4"/>
+              <polygon class="c-map__head" points="322,194.4 315.0,198.4 315.0,190.4"/><polygon class="c-map__head" points="262,194.4 269.0,190.4 269.0,198.4"/>
+              <circle class="c-map__badge" cx="292.0" cy="194.4" r="9"/><text class="c-map__badge-text" x="292.0" y="194.4" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">3</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="4">
+              <line x1="698" y1="194.5" x2="638" y2="194.5"/>
+              <polygon class="c-map__head" points="638,194.5 645.0,190.5 645.0,198.5"/>
+              <circle class="c-map__badge" cx="668.0" cy="194.5" r="9"/><text class="c-map__badge-text" x="668.0" y="194.5" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">4</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="5">
+              <line x1="698" y1="298.3" x2="612" y2="298.3"/>
+              <polygon class="c-map__head" points="612,298.3 619.0,294.3 619.0,302.3"/>
+              <circle class="c-map__badge" cx="655.0" cy="298.3" r="9"/><text class="c-map__badge-text" x="655.0" y="298.3" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">5</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="6">
+              <line x1="262" y1="385.3" x2="322" y2="385.3"/>
+              <polygon class="c-map__head" points="322,385.3 315.0,389.3 315.0,381.3"/>
+              <circle class="c-map__badge" cx="292.0" cy="385.3" r="9"/><text class="c-map__badge-text" x="292.0" y="385.3" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">6</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="7">
+              <line x1="612" y1="480.4" x2="698" y2="480.4"/>
+              <polygon class="c-map__head" points="698,480.4 691.0,484.4 691.0,476.4"/>
+              <circle class="c-map__badge" cx="655.0" cy="480.4" r="9"/><text class="c-map__badge-text" x="655.0" y="480.4" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">7</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="8">
+              <line x1="480.0" y1="578.0" x2="480.0" y2="532.0"/>
+              <polygon class="c-map__head" points="480.0,532.0 484.0,539.0 476.0,539.0"/>
+              <circle class="c-map__badge" cx="480.0" cy="555.0" r="9"/><text class="c-map__badge-text" x="480.0" y="555.0" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">8</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="9">
+              <line x1="322" y1="610.5" x2="262" y2="610.5"/>
+              <polygon class="c-map__head" points="262,610.5 269.0,606.5 269.0,614.5"/>
+              <circle class="c-map__badge" cx="292.0" cy="610.5" r="9"/><text class="c-map__badge-text" x="292.0" y="610.5" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">9</text>
+              
+            </g>
+            
+          </g>
+          
+          <a class="c-map__node c-map__node--edge" href="/fr/links/#cat-pools" aria-label="Mineurs et pools: ouvrir le guide" data-node="miners">
+            <rect x="16" y="42.0" width="246" height="81.2" rx="10"/>
+            <text class="c-map__title" x="28" y="68.2" font-size="15" font-weight="600">Mineurs et pools</text>
+            
+            <circle class="c-map__badge" cx="37" cy="86.2" r="9"/><text class="c-map__badge-text" x="37" y="86.2" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">1</text>
+            <text class="c-map__label" x="52" y="90.6" font-size="12.5">modèles à l&#39;aller, blocs au</text><text class="c-map__label" x="52" y="106.9" font-size="12.5">retour</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="/fr/infra/#before-installing" aria-label="Nœuds complets: ouvrir le guide" data-node="fullnodes">
+            <rect x="348" y="52.6" width="264" height="60.0" rx="10"/>
+            <text class="c-map__title" x="360" y="78.9" font-size="15" font-weight="600">Nœuds complets</text>
+            <text class="c-map__code" x="360" y="95.5" font-size="11.5" font-family="JetBrains Mono, ui-monospace, monospace">-matmulvalidation=consensus</text>
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer" aria-label="Pairs SwapNet: ouvrir le guide" data-node="swapnet">
+            <rect x="16" y="145.2" width="246" height="98.5" rx="10"/>
+            <text class="c-map__title" x="28" y="171.5" font-size="15" font-weight="600">Pairs SwapNet</text>
+            <text class="c-map__code" x="28" y="188.1" font-size="11.5" font-family="JetBrains Mono, ui-monospace, monospace">-swapnet=1</text>
+            <circle class="c-map__badge" cx="37" cy="206.8" r="9"/><text class="c-map__badge-text" x="37" y="206.8" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">3</text>
+            <text class="c-map__label" x="52" y="211.1" font-size="12.5">offres d&#39;échange par les</text><text class="c-map__label" x="52" y="227.4" font-size="12.5">mêmes liens entre pairs</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="Relais de découverte: ouvrir le guide" data-node="relays">
+            <rect x="698" y="153.4" width="246" height="82.2" rx="10"/>
+            <text class="c-map__title" x="710" y="179.6" font-size="15" font-weight="600">Relais de découverte</text>
+            <text class="c-map__code" x="710" y="196.2" font-size="11.5" font-family="JetBrains Mono, ui-monospace, monospace">-matmulvalidation=relay</text>
+            <circle class="c-map__badge" cx="719" cy="214.9" r="9"/><text class="c-map__badge-text" x="719" y="214.9" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">4</text>
+            <text class="c-map__label" x="734" y="219.2" font-size="12.5">adresses de pairs uniquement</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer" aria-label="Miroirs de confiance: ouvrir le guide" data-node="mirrors">
+            <rect x="348" y="268.2" width="264" height="60.0" rx="10"/>
+            <text class="c-map__title" x="360" y="294.5" font-size="15" font-weight="600">Miroirs de confiance</text>
+            <text class="c-map__code" x="360" y="311.1" font-size="11.5" font-family="JetBrains Mono, ui-monospace, monospace">-matmulvalidation=trusted</text>
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer" aria-label="Signataires d&#39;attestations: ouvrir le guide" data-node="signers">
+            <rect x="698" y="265.8" width="246" height="65.0" rx="10"/>
+            <text class="c-map__title" x="710" y="292.0" font-size="15" font-weight="600">Signataires d&#39;attestations</text>
+            
+            <circle class="c-map__badge" cx="719" cy="310.0" r="9"/><text class="c-map__badge-text" x="719" y="310.0" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">5</text>
+            <text class="c-map__label" x="734" y="314.4" font-size="12.5">attestations signées</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="Éditeurs de snapshots: ouvrir le guide" data-node="snapshots">
+            <rect x="16" y="352.8" width="246" height="65.0" rx="10"/>
+            <text class="c-map__title" x="28" y="379.0" font-size="15" font-weight="600">Éditeurs de snapshots</text>
+            
+            <circle class="c-map__badge" cx="37" cy="397.0" r="9"/><text class="c-map__badge-text" x="37" y="397.0" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">6</text>
+            <text class="c-map__label" x="52" y="401.4" font-size="12.5">un point de départ signé</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="Nœuds d&#39;archive: ouvrir le guide" data-node="archive">
+            <rect x="348" y="450.4" width="264" height="60.0" rx="10"/>
+            <text class="c-map__title" x="360" y="476.6" font-size="15" font-weight="600">Nœuds d&#39;archive</text>
+            <text class="c-map__code" x="360" y="493.2" font-size="11.5" font-family="JetBrains Mono, ui-monospace, monospace">prune=0</text>
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://network.btx-monitoring.com/" rel="noopener noreferrer" aria-label="Page d&#39;état: ouvrir le guide" data-node="status">
+            <rect x="698" y="439.8" width="246" height="81.2" rx="10"/>
+            <text class="c-map__title" x="710" y="466.0" font-size="15" font-weight="600">Page d&#39;état</text>
+            
+            <circle class="c-map__badge" cx="719" cy="484.0" r="9"/><text class="c-map__badge-text" x="719" y="484.0" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">7</text>
+            <text class="c-map__label" x="734" y="488.4" font-size="12.5">données de chaîne d&#39;un nœud</text><text class="c-map__label" x="734" y="504.6" font-size="12.5">d&#39;archive</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--build" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer" aria-label="Versions: ouvrir le guide" data-node="releases">
+            <rect x="322" y="578.0" width="316" height="65.0" rx="10"/>
+            <text class="c-map__title" x="334" y="604.2" font-size="15" font-weight="600">Versions</text>
+            
+            <circle class="c-map__badge" cx="343" cy="622.2" r="9"/><text class="c-map__badge-text" x="343" y="622.2" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">8</text>
+            <text class="c-map__label" x="358" y="626.6" font-size="12.5">archives des versions</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--build" href="#role-guix" aria-label="Recompilateurs Guix: aller à sa carte" data-node="guix">
+            <rect x="16" y="578.0" width="246" height="65.0" rx="10"/>
+            <text class="c-map__title" x="28" y="604.2" font-size="15" font-weight="600">Recompilateurs Guix</text>
+            
+            <circle class="c-map__badge" cx="37" cy="622.2" r="9"/><text class="c-map__badge-text" x="37" y="622.2" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">9</text>
+            <text class="c-map__label" x="52" y="626.6" font-size="12.5">code étiqueté à recompiler</text>
+          </a>
+          
+        </svg>
+
+<svg class="c-map__svg c-map__svg--narrow" viewBox="0 0 360 788.1" role="group" aria-labelledby="map-narrow-title map-narrow-desc" font-family="Inter, system-ui, sans-serif">
+          <title id="map-narrow-title">Carte de l&#39;infrastructure BTX</title>
+          <desc id="map-narrow-desc">Des cases pour les rôles, des flèches pour ce qu&#39;ils s&#39;envoient. Les mêmes liaisons sont décrites en mots sous la carte.</desc>
+          <rect class="c-map__frame" x="4" y="8.0" width="154" height="639.9" rx="14"/>
+          <text class="c-map__frame-label" x="16" y="28.0" font-size="12" aria-hidden="true">Réseau pair-à-pair</text><text class="c-map__frame-label" x="16" y="43.6" font-size="12" aria-hidden="true">BTX</text>
+          <g class="c-map__arrows" aria-hidden="true">
+            
+            <g class="c-map__arrow" data-edge="1">
+              <line x1="194" y1="92.0" x2="149" y2="92.0"/>
+              <polygon class="c-map__head" points="149,92.0 156.0,88.0 156.0,96.0"/><polygon class="c-map__head" points="194,92.0 187.0,96.0 187.0,88.0"/>
+              <circle class="c-map__badge" cx="171.5" cy="92.0" r="8.5"/><text class="c-map__badge-text" x="171.5" y="92.0" font-size="11.05" text-anchor="middle" dominant-baseline="central">1</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="2">
+              <line x1="30.5" y1="109.7" x2="30.5" y2="373.4"/><line x1="30.5" y1="426.4" x2="30.5" y2="585.8"/>
+              <polygon class="c-map__head" points="30.5,373.4 26.5,366.4 34.5,366.4"/><polygon class="c-map__head" points="30.5,109.7 34.5,116.7 26.5,116.7"/><polygon class="c-map__head" points="30.5,585.8 26.5,578.8 34.5,578.8"/><polygon class="c-map__head" points="30.5,426.4 34.5,433.4 26.5,433.4"/>
+              <circle class="c-map__badge" cx="30.5" cy="241.5" r="8.5"/><text class="c-map__badge-text" x="30.5" y="241.5" font-size="11.05" text-anchor="middle" dominant-baseline="central">2</text><circle class="c-map__badge" cx="30.5" cy="506.1" r="8.5"/><text class="c-map__badge-text" x="30.5" y="506.1" font-size="11.05" text-anchor="middle" dominant-baseline="central">2</text>
+              <text class="c-map__label" x="47.0" y="237.9" font-size="12">blocs et</text><text class="c-map__label" x="47.0" y="253.5" font-size="12">transactions</text>
+            </g>
+            
+            <g class="c-map__arrow" data-edge="3">
+              <line x1="194" y1="188.5" x2="158" y2="188.5"/>
+              <polygon class="c-map__head" points="158,188.5 165.0,184.5 165.0,192.5"/><polygon class="c-map__head" points="194,188.5 187.0,192.5 187.0,184.5"/>
+              <circle class="c-map__badge" cx="176.0" cy="188.5" r="8.5"/><text class="c-map__badge-text" x="176.0" y="188.5" font-size="11.05" text-anchor="middle" dominant-baseline="central">3</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="4">
+              <line x1="194" y1="293.7" x2="158" y2="293.7"/>
+              <polygon class="c-map__head" points="158,293.7 165.0,289.7 165.0,297.7"/>
+              <circle class="c-map__badge" cx="176.0" cy="293.7" r="8.5"/><text class="c-map__badge-text" x="176.0" y="293.7" font-size="11.05" text-anchor="middle" dominant-baseline="central">4</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="5">
+              <line x1="194" y1="399.9" x2="149" y2="399.9"/>
+              <polygon class="c-map__head" points="149,399.9 156.0,395.9 156.0,403.9"/>
+              <circle class="c-map__badge" cx="171.5" cy="399.9" r="8.5"/><text class="c-map__badge-text" x="171.5" y="399.9" font-size="11.05" text-anchor="middle" dominant-baseline="central">5</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="6">
+              <line x1="194" y1="506.1" x2="158" y2="506.1"/>
+              <polygon class="c-map__head" points="158,506.1 165.0,502.1 165.0,510.1"/>
+              <circle class="c-map__badge" cx="176.0" cy="506.1" r="8.5"/><text class="c-map__badge-text" x="176.0" y="506.1" font-size="11.05" text-anchor="middle" dominant-baseline="central">6</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="7">
+              <line x1="149" y1="603.6" x2="194" y2="603.6"/>
+              <polygon class="c-map__head" points="194,603.6 187.0,607.6 187.0,599.6"/>
+              <circle class="c-map__badge" cx="171.5" cy="603.6" r="8.5"/><text class="c-map__badge-text" x="171.5" y="603.6" font-size="11.05" text-anchor="middle" dominant-baseline="central">7</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="8">
+              <line x1="81.0" y1="698.7" x2="81.0" y2="647.9"/>
+              <polygon class="c-map__head" points="81.0,647.9 85.0,654.9 77.0,654.9"/>
+              <circle class="c-map__badge" cx="81.0" cy="673.3" r="8.5"/><text class="c-map__badge-text" x="81.0" y="673.3" font-size="11.05" text-anchor="middle" dominant-baseline="central">8</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="9">
+              <line x1="158" y1="735.0" x2="194" y2="735.0"/>
+              <polygon class="c-map__head" points="194,735.0 187.0,739.0 187.0,731.0"/>
+              <circle class="c-map__badge" cx="176.0" cy="735.0" r="8.5"/><text class="c-map__badge-text" x="176.0" y="735.0" font-size="11.05" text-anchor="middle" dominant-baseline="central">9</text>
+              
+            </g>
+            
+          </g>
+          
+          <a class="c-map__node c-map__node--edge" href="/fr/links/#cat-pools" aria-label="Mineurs et pools: ouvrir le guide" data-node="miners">
+            <rect x="194" y="55.6" width="162" height="72.7" rx="10"/>
+            <text class="c-map__title" x="203" y="77.9" font-size="14" font-weight="600">Mineurs et pools</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="95.3" r="8.5"/><text class="c-map__badge-text" x="211.5" y="95.3" font-size="11.05" text-anchor="middle" dominant-baseline="central">1</text>
+            <text class="c-map__label" x="226.0" y="99.5" font-size="12">modèles à l&#39;aller,</text><text class="c-map__label" x="226.0" y="115.1" font-size="12">blocs au retour</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="/fr/infra/#before-installing" aria-label="Nœuds complets: ouvrir le guide" data-node="fullnodes">
+            <rect x="13" y="74.2" width="136" height="35.5" rx="10"/>
+            <text class="c-map__title" x="22" y="96.5" font-size="14" font-weight="600">Nœuds complets</text>
+            
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer" aria-label="Pairs SwapNet: ouvrir le guide" data-node="swapnet">
+            <rect x="194" y="144.3" width="162" height="88.3" rx="10"/>
+            <text class="c-map__title" x="203" y="166.6" font-size="14" font-weight="600">Pairs SwapNet</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="184.0" r="8.5"/><text class="c-map__badge-text" x="211.5" y="184.0" font-size="11.05" text-anchor="middle" dominant-baseline="central">3</text>
+            <text class="c-map__label" x="226.0" y="188.2" font-size="12">offres d&#39;échange</text><text class="c-map__label" x="226.0" y="203.8" font-size="12">par les mêmes liens</text><text class="c-map__label" x="226.0" y="219.4" font-size="12">entre pairs</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="Relais de découverte: ouvrir le guide" data-node="relays">
+            <rect x="194" y="248.6" width="162" height="90.2" rx="10"/>
+            <text class="c-map__title" x="203" y="270.9" font-size="14" font-weight="600">Relais de</text><text class="c-map__title" x="203" y="288.4" font-size="14" font-weight="600">découverte</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="305.8" r="8.5"/><text class="c-map__badge-text" x="211.5" y="305.8" font-size="11.05" text-anchor="middle" dominant-baseline="central">4</text>
+            <text class="c-map__label" x="226.0" y="310.0" font-size="12">adresses de pairs</text><text class="c-map__label" x="226.0" y="325.6" font-size="12">uniquement</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer" aria-label="Miroirs de confiance: ouvrir le guide" data-node="mirrors">
+            <rect x="13" y="373.4" width="136" height="53.0" rx="10"/>
+            <text class="c-map__title" x="22" y="395.7" font-size="14" font-weight="600">Miroirs de</text><text class="c-map__title" x="22" y="413.2" font-size="14" font-weight="600">confiance</text>
+            
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer" aria-label="Signataires d&#39;attestations: ouvrir le guide" data-node="signers">
+            <rect x="194" y="354.8" width="162" height="90.2" rx="10"/>
+            <text class="c-map__title" x="203" y="377.1" font-size="14" font-weight="600">Signataires</text><text class="c-map__title" x="203" y="394.6" font-size="14" font-weight="600">d&#39;attestations</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="412.0" r="8.5"/><text class="c-map__badge-text" x="211.5" y="412.0" font-size="11.05" text-anchor="middle" dominant-baseline="central">5</text>
+            <text class="c-map__label" x="226.0" y="416.2" font-size="12">attestations</text><text class="c-map__label" x="226.0" y="431.8" font-size="12">signées</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="Éditeurs de snapshots: ouvrir le guide" data-node="snapshots">
+            <rect x="194" y="461.0" width="162" height="90.2" rx="10"/>
+            <text class="c-map__title" x="203" y="483.3" font-size="14" font-weight="600">Éditeurs de</text><text class="c-map__title" x="203" y="500.8" font-size="14" font-weight="600">snapshots</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="518.2" r="8.5"/><text class="c-map__badge-text" x="211.5" y="518.2" font-size="11.05" text-anchor="middle" dominant-baseline="central">6</text>
+            <text class="c-map__label" x="226.0" y="522.4" font-size="12">un point de départ</text><text class="c-map__label" x="226.0" y="538.0" font-size="12">signé</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="Nœuds d&#39;archive: ouvrir le guide" data-node="archive">
+            <rect x="13" y="585.8" width="136" height="35.5" rx="10"/>
+            <text class="c-map__title" x="22" y="608.1" font-size="14" font-weight="600">Nœuds d&#39;archive</text>
+            
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://network.btx-monitoring.com/" rel="noopener noreferrer" aria-label="Page d&#39;état: ouvrir le guide" data-node="status">
+            <rect x="194" y="567.2" width="162" height="72.7" rx="10"/>
+            <text class="c-map__title" x="203" y="589.5" font-size="14" font-weight="600">Page d&#39;état</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="606.9" r="8.5"/><text class="c-map__badge-text" x="211.5" y="606.9" font-size="11.05" text-anchor="middle" dominant-baseline="central">7</text>
+            <text class="c-map__label" x="226.0" y="611.1" font-size="12">données de chaîne</text><text class="c-map__label" x="226.0" y="626.7" font-size="12">d&#39;un nœud d&#39;archive</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--build" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer" aria-label="Versions: ouvrir le guide" data-node="releases">
+            <rect x="4" y="698.7" width="154" height="72.7" rx="10"/>
+            <text class="c-map__title" x="13" y="721.0" font-size="14" font-weight="600">Versions</text>
+            
+            <circle class="c-map__badge" cx="21.5" cy="738.4" r="8.5"/><text class="c-map__badge-text" x="21.5" y="738.4" font-size="11.05" text-anchor="middle" dominant-baseline="central">8</text>
+            <text class="c-map__label" x="36.0" y="742.6" font-size="12">archives des</text><text class="c-map__label" x="36.0" y="758.2" font-size="12">versions</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--build" href="#role-guix" aria-label="Recompilateurs Guix: aller à sa carte" data-node="guix">
+            <rect x="194" y="689.9" width="162" height="90.2" rx="10"/>
+            <text class="c-map__title" x="203" y="712.2" font-size="14" font-weight="600">Recompilateurs</text><text class="c-map__title" x="203" y="729.7" font-size="14" font-weight="600">Guix</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="747.1" r="8.5"/><text class="c-map__badge-text" x="211.5" y="747.1" font-size="11.05" text-anchor="middle" dominant-baseline="central">9</text>
+            <text class="c-map__label" x="226.0" y="751.3" font-size="12">code étiqueté à</text><text class="c-map__label" x="226.0" y="766.9" font-size="12">recompiler</text>
+          </a>
+          
+        </svg>
+
+          <figcaption class="c-muted c-note">Vérifié le 15 nov. 2026 sur le logiciel du nœud en v0.34.16 (074dac16) et sur la branche release-0.34.17 (8e7045b9).</figcaption>
+        </figure>
+        <details class="c-map__details">
+        <summary class="c-map__list-title" id="map-list-title">Les liaisons en mots</summary>
+        <ol class="c-map__list" aria-labelledby="map-list-title">
+          
+          <li id="edge-1">
+            <span class="c-map__number" aria-hidden="true">1</span>
+            <div>
+              <p class="c-map__pair"><strong>Mineurs et pools ⇄ Nœuds complets</strong></p>
+              <p>Un nœud complet distribue des modèles de bloc ; mineurs et pools renvoient les blocs résolus (getblocktemplate, puis une tâche stratum, puis submitblock).</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-miner-pool-readiness.md" rel="noopener noreferrer"><code>doc/btx-miner-pool-readiness.md:4-5</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-2">
+            <span class="c-map__number" aria-hidden="true">2</span>
+            <div>
+              <p class="c-map__pair"><strong>Nœuds complets ⇄ Miroirs de confiance ⇄ Nœuds d&#39;archive</strong></p>
+              <p>Blocs et transactions circulent entre pairs. Un nœud qui garde chaque bloc sert toute la chaîne ; un miroir de confiance vérifie toujours lui-même le contenu des blocs, les transactions, les scripts et l&#39;état, et pour le travail MatMul il s&#39;appuie sur ses signataires.</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:504-506</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:22-32</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-3">
+            <span class="c-map__number" aria-hidden="true">3</span>
+            <div>
+              <p class="c-map__pair"><strong>Pairs SwapNet ⇄ Réseau pair-à-pair BTX</strong></p>
+              <p>Un nœud démarré avec -swapnet=1 trouve d&#39;autres nœuds SwapNet par les connexions entre pairs qu&#39;il a déjà : pas de nouveau port, pas de liste de seeds, pas de service hébergé. SwapNet est désactivé par défaut.</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code>doc/swapnet/OPERATIONS.md:5</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/swapnet/node.cpp" rel="noopener noreferrer"><code>src/swapnet/node.cpp:96</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:61-68</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-4">
+            <span class="c-map__number" aria-hidden="true">4</span>
+            <div>
+              <p class="c-map__pair"><strong>Relais de découverte → Réseau pair-à-pair BTX</strong></p>
+              <p>Un relais de découverte (-matmulvalidation=relay) est le mode prévu pour les seeds DNS publics et les hôtes addnode. Il ne distribue que des adresses de pairs : il ne sert aucun bloc, ne fait pas autorité sur la chaîne et ne demande ni ne sert jamais de signatures.</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/init.cpp" rel="noopener noreferrer"><code>src/init.cpp:651</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/init.cpp" rel="noopener noreferrer"><code>src/init.cpp:2134-2136</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer"><code>doc/btx-public-node-bootstrap.md:60-62</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-5">
+            <span class="c-map__number" aria-hidden="true">5</span>
+            <div>
+              <p class="c-map__pair"><strong>Signataires d&#39;attestations → Miroirs de confiance</strong></p>
+              <p>Un signataire signe chaque bloc dont il a rejoué le travail MatMul (messages getmmattest et mmattest). Sur le mainnet, par défaut, un miroir de confiance n&#39;accepte ce travail qu&#39;avec les signatures d&#39;au moins deux clés qu&#39;il a épinglées ; tout pair peut les relayer. Un nœud qui vérifie lui-même les blocs ne les met jamais à la place de sa propre vérification.</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:320-327</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:34-38</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:94-95</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:131-134</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer"><code>doc/btx-matmul-v4.7-gpu-operator-runbook.md:121-125</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-6">
+            <span class="c-map__number" aria-hidden="true">6</span>
+            <div>
+              <p class="c-map__pair"><strong>Éditeurs de snapshots → Réseau pair-à-pair BTX</strong></p>
+              <p>Un snapshot épargne à un nouveau nœud l&#39;essentiel de la synchronisation : une copie signée des données d&#39;un nœud, ou un snapshot UTXO à une hauteur compilée dans btxd (loadtxoutset). Vérifiez son SHA-256 et sa signature avant de le charger. Un nœud qui détient un snapshot UTXO attesté peut aussi le proposer à ses pairs sur le réseau P2P.</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-mining-node-snapshot-runbook.md" rel="noopener noreferrer"><code>doc/btx-mining-node-snapshot-runbook.md:76-95</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/contrib/devtools/README.md" rel="noopener noreferrer"><code>contrib/devtools/README.md:179-182</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:564-567</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/init.cpp" rel="noopener noreferrer"><code>src/init.cpp:765</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-7">
+            <span class="c-map__number" aria-hidden="true">7</span>
+            <div>
+              <p class="c-map__pair"><strong>Nœuds d&#39;archive → Page d&#39;état</strong></p>
+              <p>La page d&#39;état mesure l&#39;offre, la hauteur de la chaîne et les chiffres du réseau à partir d&#39;un nœud d&#39;archive.</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/BTX-Community/btx-community/blob/main/README.md" rel="noopener noreferrer"><code>btx-community/README.md:50</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-8">
+            <span class="c-map__number" aria-hidden="true">8</span>
+            <div>
+              <p class="c-map__pair"><strong>Versions → Réseau pair-à-pair BTX</strong></p>
+              <p>Les archives des versions sont publiées sur la page des releases de btxchain/btx. Pour v0.34.16 il y en a deux, toutes deux pour Linux x86_64 (l&#39;une compilée avec CUDA 13), et un fichier SHA256SUMS ; sur les autres plateformes, le nœud se compile depuis les sources.</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-github-release-automation.md" rel="noopener noreferrer"><code>doc/btx-github-release-automation.md:25-26</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code>release v0.34.16</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-9">
+            <span class="c-map__number" aria-hidden="true">9</span>
+            <div>
+              <p class="c-map__pair"><strong>Versions → Recompilateurs Guix</strong></p>
+              <p>Un recompilateur compile avec contrib/guix le code étiqueté d&#39;une version, atteste le résultat et vérifie les attestations des autres. Selon les notes de v0.34.16, ses binaires Linux exigent glibc 2.38 ou plus et ces scripts compilent contre glibc 2.31 : leurs hachages ne peuvent donc pas encore correspondre à une recompilation.</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">Source</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/contrib/guix/README.md" rel="noopener noreferrer"><code>contrib/guix/README.md:179-199</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/contrib/guix/manifest.scm" rel="noopener noreferrer"><code>contrib/guix/manifest.scm:123</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer"><code>doc/release-notes-0.34.16.md:32-33</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code>release v0.34.16</code></a></p>
+            </div>
+          </li>
+          
+        </ol>
+        </details>
+      </section>
+
+      <section class="c-report" id="report" aria-labelledby="report-title">
+        <h2 class="c-section-title" id="report-title">Vous avez trouvé un plantage ou un problème de sécurité ?</h2>
+        <p>Signalez-le en privé via le signalement privé de vulnérabilités de GitHub sur btxchain/btx, comme le demande sa politique de sécurité. Ne publiez jamais un plantage, un rapport de sanitizer ou une entrée qui fait planter dans une issue, une pull request ou un chat publics : cela peut montrer à un attaquant comment faire planter des nœuds en service.</p>
+        <p class="c-report__links">
+          <a class="c-link" href="https://github.com/btxchain/btx/security/advisories/new" rel="noopener noreferrer">Signaler une vulnérabilité en privé ↗</a>
+          <a class="c-link" href="https://github.com/btxchain/btx/blob/main/SECURITY.md" rel="noopener noreferrer">La politique de sécurité (SECURITY.md) ↗</a>
+        </p>
+      </section>
+
+    </main>
+
+    <footer class="c-footer">
+      <p>Projet communautaire indépendant. Les liens mènent vers des tiers ; nous ne sommes pas responsables de leur contenu. Rien ici n&#39;est un conseil financier.</p>
+      <p class="c-muted">Cette page a été traduite de l&#39;anglais avec l&#39;aide de l&#39;IA. <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/main/site/content/translations/fr.yaml" rel="noopener noreferrer">Corriger la traduction ↗</a></p>
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Code source ↗</a>
+      </p>
+      <p class="c-muted">be8fa8e0eb51</p>
+    </footer>
+  </div>
+</body>
+</html>

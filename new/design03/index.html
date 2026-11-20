@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en" class="d03-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://btx-community.com/">
+  <title>[Draft] Start · Design 03 · Reader&#39;s Guide</title>
+  <meta name="description" content="Start page of the BTX community: information and help for newcomers, miners and node operators, with the network&#39;s live state and a checked link directory.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[Draft] Start – Design draft, not the official layout">
+  <meta property="og:description" content="Direction A from Jpp&#39;s design audit (19 Nov 2026): a light, editorial handbook with a serif display face, one cobalt accent, numbered chapters and a contents rail on long pages, plus the eight ideas from directions B and C his panel recommended.">
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/new/design03.css?v=ee5a5c1ab387">
+  <link rel="preload" href="/static/fonts/new/InstrumentSerif-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+  <script src="/static/js/new/design03.js?v=e68be2105d19" defer></script>
+</head>
+<body class="d03">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="draft-banner" role="note">
+    <p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind.
+      <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a>
+      <a class="draft-banner__link" href="/new/">All drafts →</a>
+      <a class="draft-banner__link" href="https://btx-community.com/">This page on the live site ↗</a>
+    </p>
+  </div>
+  <header class="top">
+    <div class="top__in">
+      <a class="logo" href="/new/design03/">BTX Community</a>
+      <nav class="nav" aria-label="Pages">
+        <a class="nav__link" href="/new/design03/" aria-current="page">Start</a>
+        <a class="nav__link" href="/new/design03/learn/">About BTX</a>
+        <a class="nav__link" href="/new/design03/network/">Network</a>
+        <a class="nav__link" href="/new/design03/links/">Directory</a>
+        <a class="nav__link" href="/new/design03/infra/">Run infra</a>
+        <a class="nav__link" href="/new/design03/dev/">Developers</a>
+      </nav>
+      <button class="theme" type="button" data-theme-switch data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to dark theme" hidden><span class="theme__icon" aria-hidden="true"></span></button>
+      <details class="menu">
+        <summary class="menu__btn">Menu</summary>
+        <div class="sheet">
+          <nav aria-label="Pages">
+            <ul class="sheet__list">
+              <li><a class="sheet__link" href="/new/design03/" aria-current="page">Start</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/learn/">About BTX</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/network/">Network</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/links/">Directory</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/links/">Links</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/projects/">Projects</a></li>
+                </ul>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/infra/">Run infra</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/dev/">Developers</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/dev/">Start here</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/dev/work/">Ongoing work</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          <p class="sheet__label">This draft is in English only.</p>
+        </div>
+      </details>
+    </div>
+  </header>
+  <main id="main">
+    <div class="wrap">
+
+      <p class="draft-source">Direction A from Jpp's design audit (19 Nov 2026), with the eight grafts his panel recommended. <a href="/new/">About the drafts →</a></p>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__text">
+          <p class="kicker">Our Community Hub</p>
+          <h1 class="display" id="hero-title"><span class="display__l">A chain you can check,</span> <span class="display__l">run by the people who use it.</span></h1>
+          <p class="hero__lead">A community page for everyone interested in BTX: what it is, how to mine it, how to run a node, and where to find help. Run by community members, not by a company.</p>
+          <p class="actions">
+            <a class="btn btn--primary" href="/new/design03/learn/">What BTX is</a>
+            <a class="btn btn--secondary" href="/new/design03/dev/#brief">Brief your AI</a>
+          </p>
+        </div>
+        <aside class="status" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en" aria-labelledby="status-title"
+               data-level-green="OK" data-level-yellow="Warning"
+               data-level-red="Critical" data-level-unknown="Unknown">
+          <h2 class="status__title" id="status-title">Network right now</h2>
+          <p class="status__state"><span class="dot" aria-hidden="true"></span><span class="sr">Status: </span><span data-live="overall" data-label-normal="All systems normal" data-label-degraded="Degraded" data-label-incident="Incident">No data</span></p>
+          <ul class="verdicts">
+            <li class="verdict c-verdict--unknown" data-verdict="stable"><span class="dot" aria-hidden="true"></span>Stable: <span data-verdict-label>Unknown</span></li>
+            <li class="verdict c-verdict--unknown" data-verdict="performant"><span class="dot" aria-hidden="true"></span>Performant: <span data-verdict-label>Unknown</span></li>
+            <li class="verdict c-verdict--unknown" data-verdict="secure"><span class="dot" aria-hidden="true"></span>Secure: <span data-verdict-label>Unknown</span></li>
+          </ul>
+          <dl class="status__rows">
+            <div><dt>Block height</dt><dd data-live="height">No data</dd></div>
+            <div><dt>Latest node release</dt><dd data-live="release">No data</dd></div>
+            <div><dt>Nodes on it</dt><dd data-live="on-release" data-template="{count} of {total} nodes">No data</dd></div>
+          </dl>
+          <div class="status__fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+            <p class="status__fork-title">Network upgrade ahead</p>
+            <ul data-live="fork-rows"></ul>
+            <a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes ↗</a>
+          </div>
+          <p class="status__meta" data-live="updated" data-template="Data from {time}">Loading live data …</p>
+          <a class="status__link" href="/new/design03/network/">Full status <span aria-hidden="true">→</span></a>
+        </aside>
+      </section>
+      <section class="chapters" id="start" aria-labelledby="start-title">
+        <h2 class="section-title section-title--rank" id="start-title">Four ways in</h2>
+        <div class="chapters__grid">
+          <article class="chapter" id="newcomers" aria-labelledby="newcomers-title">
+            <p class="chapter__num" aria-hidden="true">01</p>
+            <h3 class="chapter__title" id="newcomers-title">New to BTX</h3>
+            <p class="chapter__lead">BTX is a post-quantum fork of Bitcoin with a fixed maximum supply and its own proof-of-work (MatMul). It is run by an open community, not by a company.</p>
+            <ul class="chapter__links">
+              <li><a class="row-link" href="/new/design03/learn/"><span class="row-link__t">What BTX is</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+              <li><a class="row-link" href="https://btx.dev/" rel="noopener noreferrer"><span class="row-link__t">Official introduction</span><span class="row-link__a" aria-hidden="true">↗</span></a></li>
+            </ul>
+            <p class="note"><span class="note__label">Note</span><span class="note__body"><strong>Never share your seed or private key. Nobody from the community will ever ask for it; direct messages offering help or &#34;support&#34; are scams.</strong></span></p>
+            <details class="steps">
+              <summary class="steps__sum">All 5 steps</summary>
+              <ol class="steps__list">
+                <li><div><a href="/new/design03/learn/">What BTX is <span aria-hidden="true">→</span></a><p class="steps__detail">A few facts, each with its source.</p></div></li>
+                <li><div><a href="https://btx.dev/" rel="noopener noreferrer">Official introduction <span aria-hidden="true">↗</span></a><p class="steps__detail">Written for v0.33.2; newer releases differ in places.</p></div></li>
+                <li><div><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">How the network is doing <span aria-hidden="true">↗</span></a><p class="steps__detail">The status page, in plain terms.</p></div></li>
+                <li><div><a href="/new/design03/links/#cat-community">Ask the community <span aria-hidden="true">→</span></a><p class="steps__detail">The community group on Telegram.</p></div></li>
+                <li><div><a href="/new/design03/links/#cat-wallets">Choose a wallet <span aria-hidden="true">→</span></a><p class="steps__detail">Read &#34;Before you buy or receive BTX&#34; below first.</p></div></li>
+              </ol>
+            </details>
+          </article>
+          <article class="chapter" id="miners" aria-labelledby="miners-title">
+            <p class="chapter__num" aria-hidden="true">02</p>
+            <h3 class="chapter__title" id="miners-title">Mining</h3>
+            <p class="chapter__lead">Mining needs a GPU. You can mine alone against your own node and keep every block, or join a pool for steadier payouts.</p>
+            <ul class="chapter__links">
+              <li><a class="row-link" href="/new/design03/links/#cat-miners"><span class="row-link__t">Pick a miner</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+              <li><a class="row-link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer"><span class="row-link__t">Prefer a smaller pool</span><span class="row-link__a" aria-hidden="true">↗</span></a></li>
+            </ul>
+            <details class="steps">
+              <summary class="steps__sum">All 4 steps</summary>
+              <ol class="steps__list">
+                <li><div><a href="/new/design03/links/#cat-miners">Pick a miner <span aria-hidden="true">→</span></a><p class="steps__detail">For example easyBTX (an app for Mac and Linux; on Windows through WSL) or matador (open source).</p></div></li>
+                <li><div><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Prefer a smaller pool <span aria-hidden="true">↗</span></a><p class="steps__detail">When one pool finds most blocks, the network depends on it; the status page shows the current shares.</p></div></li>
+                <li><div><a href="/new/design03/links/#cat-pools">Use your own btx1z address <span aria-hidden="true">→</span></a><p class="steps__detail">matador&#39;s quick start contains a sample payout address that is not yours and two pools that are offline. Put in your own address and a pool from our link list.</p></div></li>
+                <li><div><a href="https://github.com/btxchain/btx/blob/main/doc/btx-cuda-mining-troubleshooting.md" rel="noopener noreferrer">Problems with an NVIDIA card <span aria-hidden="true">↗</span></a><p class="steps__detail">The official CUDA troubleshooting guide; parts of it describe the CUDA path from before block 185,000.</p></div></li>
+              </ol>
+            </details>
+          </article>
+          <article class="chapter" id="nodes" aria-labelledby="nodes-title">
+            <p class="chapter__num" aria-hidden="true">03</p>
+            <h3 class="chapter__title" id="nodes-title">Running a node</h3>
+            <p class="chapter__lead">Every node relays blocks and keeps the network reachable. A node checks every block itself only with a GPU that passes btxd&#39;s self-test. Without one, run it as a trusted mirror that follows signed checks from at least two signers; otherwise it stops syncing. Signers have the highest requirements.</p>
+            <ul class="chapter__links">
+              <li><a class="row-link" href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer"><span class="row-link__t">Easiest start at home: easynode</span><span class="row-link__a" aria-hidden="true">↗</span></a></li>
+              <li><a class="row-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer"><span class="row-link__t">On a server</span><span class="row-link__a" aria-hidden="true">↗</span></a></li>
+            </ul>
+            <details class="steps">
+              <summary class="steps__sum">All 7 steps</summary>
+              <ol class="steps__list">
+                <li><div><a href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer">Easiest start at home: easynode <span aria-hidden="true">↗</span></a><p class="steps__detail">Installs and supervises btxd for you.</p></div></li>
+                <li><div><a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">On a server <span aria-hidden="true">↗</span></a><p class="steps__detail">v0.34.16 has two Linux x86_64 archives for glibc 2.38 or newer (Ubuntu 24.04, Debian 13): a plain one, and -cuda13 for GPU nodes (sm_120: RTX 50 and RTX PRO Blackwell cards; driver not included). No official Windows or macOS archive.</p></div></li>
+                <li><div><a href="/new/design03/infra/#before-installing">Before you install: the checklist <span aria-hidden="true">→</span></a><p class="steps__detail">Where to download, how to check the file, and the settings for a node with coins.</p></div></li>
+                <li><div><a href="https://github.com/dr-chambre/btx-snapshots/releases/latest" rel="noopener noreferrer">Start from a signed snapshot <span aria-hidden="true">↗</span></a><p class="steps__detail">Catches up in minutes. A sync from genesis currently stops at block 126,978 (issue #272).</p></div></li>
+                <li><div><a href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer">Node stuck at a height? <span aria-hidden="true">↗</span></a><p class="steps__detail">The node help explains each known case and its fix.</p></div></li>
+                <li><div><a href="/new/design03/infra/">Have a spare machine? <span aria-hidden="true">→</span></a><p class="steps__detail">Seven ways to give BTX infrastructure, from a node to a fuzz box.</p></div></li>
+                <li><div><a href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer">Run a signer <span aria-hidden="true">↗</span></a><p class="steps__detail">Signers (GPU attestors) need a GPU that passes btxd&#39;s self-test and must stay online. The official CUDA archive covers Blackwell cards (sm_120); other NVIDIA cards need a build from source and may not qualify. Follow the developers&#39; operator runbook.</p></div></li>
+              </ol>
+            </details>
+          </article>
+          <article class="chapter" id="developers" aria-labelledby="developers-title">
+            <p class="chapter__num" aria-hidden="true">04</p>
+            <h3 class="chapter__title" id="developers-title">Become a BTX dev</h3>
+            <p class="chapter__lead">The node software is open source, and anyone can send it a pull request on GitHub. The developer hub tells you, and the AI tool you work with, how to build, test and document a change so that it can be merged, and which work is open.</p>
+            <ul class="chapter__links">
+              <li><a class="row-link" href="/new/design03/dev/"><span class="row-link__t">Start here</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+              <li><a class="row-link" href="/new/design03/dev/work/"><span class="row-link__t">Ongoing work</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+            </ul>
+            <details class="steps">
+              <summary class="steps__sum">All 3 steps</summary>
+              <ol class="steps__list">
+                <li><div><a href="/new/design03/dev/">Start here <span aria-hidden="true">→</span></a><p class="steps__detail">Where to begin, the prompt for your AI tool and the three levels.</p></div></li>
+                <li><div><a href="/new/design03/dev/work/">Ongoing work <span aria-hidden="true">→</span></a><p class="steps__detail">Test coverage, the nightly CI-0 run and the lanes waiting for an owner.</p></div></li>
+                <li><div><a href="/new/design03/projects/">Community projects <span aria-hidden="true">→</span></a><p class="steps__detail">Things to build and run outside the node software.</p></div></li>
+              </ol>
+            </details>
+          </article>
+        </div>
+      </section>
+      <section class="check" id="check" aria-labelledby="check-title">
+        <h2 class="section-title" id="check-title">Check first</h2>
+        <div class="check__grid">
+          <article class="checklist checklist--open" id="before-buying" aria-labelledby="before-buying-title">
+            <h3 class="checklist__head"><span class="checklist__title" id="before-buying-title">Before you buy or receive BTX</span><span class="checklist__count">7 checks</span></h3>
+            <ol class="checklist__list">
+              <li>Make a backup before money arrives. In btxd, backupwalletbundlearchive writes one encrypted file; keep it and its passphrase offline and apart. Any backup can spend your coins: plain exports at once, the archive once opened. Restore it once to test it.</li>
+              <li>Check the receiving address in full, not just its start and end. BTX addresses start with btx1z.</li>
+              <li>Send a small test amount first. Wait for at least 10 confirmations before you treat a payment as final; short reorganisations of the chain happen several times a day.</li>
+              <li>Before you use an exchange or an OTC seller, check that withdrawals really work. A price on a website is not a market you can sell into.</li>
+              <li>Other coins also trade as BTX. A market is only for this chain if its deposit addresses start with btx1z.</li>
+              <li>A &#34;model&#34; or &#34;reference&#34; price is an estimate, not an offer that anyone has to honour.</li>
+              <li>Nobody legitimate asks for your seed. Messages offering help, &#34;recovery&#34; or guaranteed returns are scams.</li>
+            </ol>
+          </article>
+          <a class="checklist checklist--link" href="/new/design03/infra/#before-installing">
+            <span class="checklist__title">Before you install a node release</span>
+            <span class="checklist__count">on Run infra <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <nav class="foot__nav" aria-label="Pages, again">
+        <a href="/new/design03/">Start</a>
+        <a href="/new/design03/learn/">About BTX</a>
+        <a href="/new/design03/network/">Network</a>
+        <a href="/new/design03/links/">Directory</a>
+        <a href="/new/design03/infra/">Run infra</a>
+        <a href="/new/design03/dev/">Developers</a>
+      </nav>
+      <p class="foot__text">Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+      <p class="draft-arrows">→ goes to a page of this site · ↗ opens another site</p>
+      <p class="foot__text">Direction A from Jpp&#39;s design audit (19 Nov 2026). Layout draft for feedback; the live site at <a href="https://btx-community.com/">btx-community.com ↗</a> is the official one. English only.</p>
+      <p class="foot__text"><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a> · <span class="muted">be8fa8e0eb51</span></p>
+    </div>
+  </footer>
+</body>
+</html>

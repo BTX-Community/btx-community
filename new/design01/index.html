@@ -1,0 +1,314 @@
+
+<!doctype html>
+<html lang="en" class="d01-root" data-d01-base="/new/design01/">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://btx-community.com/">
+  <title>[Draft] Start · Design 01 · Klar</title>
+  <meta name="description" content="Start page of the BTX community: information and help for newcomers, miners and node operators, with the network&#39;s live state and a checked link directory.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[Draft] Start – Design draft, not the official layout">
+  <meta property="og:description" content="Calm and light: five menu items by intent, a status strip with words and colours, the first steps of every path on the start page, a dark safety block, numbered sections with an &#34;On this page&#34; rail, and a filterable directory. Add ?v=mono for the variant with monospace headings, dark by default.">
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/new/design01.css?v=fcb816e93901">
+  <link rel="preload" href="/static/fonts/new/SpaceGrotesk-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/static/js/new/design01-head.js?v=1bbc3eaca389"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+  <script src="/static/js/new/design01.js?v=98dbe56c251d" defer></script>
+</head>
+<body class="d01">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="draft-banner" role="note">
+    <p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind.
+      <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a>
+      <a class="draft-banner__link" href="/new/">All drafts →</a>
+      <a class="draft-banner__link" href="https://btx-community.com/">This page on the live site ↗</a>
+    </p>
+  </div>
+  <header class="hd">
+    <div class="hd__in">
+      <a class="logo" href="/new/design01/"><span class="logo__mark" aria-hidden="true">B</span><span class="logo__name">BTX Community</span></a>
+      <nav class="hd__nav" aria-label="Pages">
+        <a class="hd__link" href="/new/design01/" aria-current="page">Start here</a>
+        <a class="hd__link" href="/new/design01/infra/">Take part</a>
+        <a class="hd__link" href="/new/design01/network/">Network</a>
+        <a class="hd__link" href="/new/design01/links/">Directory</a>
+        <a class="hd__link" href="/new/design01/dev/">Build</a>
+      </nav>
+      <div class="hd__tools">
+        <p class="variant" aria-label="Variant of this draft">
+          <a class="variant__opt" href="?v=klar" data-d01-variant="klar" aria-current="true">Klar</a><a class="variant__opt" href="?v=mono" data-d01-variant="mono">Mono</a>
+        </p>
+        <span class="lang" title="This draft is in English only"><span aria-hidden="true">EN</span><span class="sr">Language: English only</span></span>
+        <button class="iconbtn" type="button" data-d01-theme data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to dark theme" hidden>
+          <svg class="iconbtn__moon" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="iconbtn__sun" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <details class="menu">
+          <summary class="iconbtn menu__btn"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="menu__label">Menu</span></summary>
+          <nav class="sheet" aria-label="Pages">
+            <ul class="sheet__list">
+              <li>
+                <a class="sheet__link" href="/new/design01/" aria-current="page">Start here</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/" aria-current="page">Start</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/learn/">Learn</a></li>
+                </ul>
+              </li>
+              <li>
+                <a class="sheet__link" href="/new/design01/infra/">Take part</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/#miners">Mining</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/#nodes">Running a node</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/infra/">Run infra</a></li>
+                </ul>
+              </li>
+              <li>
+                <a class="sheet__link" href="/new/design01/network/">Network</a>
+              </li>
+              <li>
+                <a class="sheet__link" href="/new/design01/links/">Directory</a>
+              </li>
+              <li>
+                <a class="sheet__link" href="/new/design01/dev/">Build</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/dev/">Developers</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/dev/work/">Ongoing work</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/projects/">Projects</a></li>
+                </ul>
+              </li>
+            </ul>
+            <p class="variant variant--sheet" aria-label="Variant of this draft">
+              <a class="variant__opt" href="?v=klar" data-d01-variant="klar" aria-current="true">Klar</a><a class="variant__opt" href="?v=mono" data-d01-variant="mono">Mono</a>
+            </p>
+            <p class="sheet__note">This draft is in English only.</p>
+          </nav>
+        </details>
+      </div>
+    </div>
+    <div class="strip" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en"
+         data-level-green="OK" data-level-yellow="Warning"
+         data-level-red="Critical" data-level-unknown="Unknown">
+      <div class="strip__in">
+        <p class="strip__state"><span class="dot" aria-hidden="true"></span><span class="sr">Status: </span><span data-live="overall" data-label-normal="All systems normal" data-label-degraded="Degraded" data-label-incident="Incident">No data</span></p>
+        <p class="strip__fig"><span class="strip__k">Block</span> <span class="mono" data-live="height">No data</span></p>
+        <p class="strip__fig strip__fig--release"><span class="strip__k">Release</span> <span class="mono" data-live="release">No data</span></p>
+        <p class="strip__fig strip__fig--wide"><span class="strip__k">Nodes on it</span> <span class="mono" data-live="on-release" data-template="{count} of {total} nodes">No data</span></p>
+        <p class="strip__fig strip__fig--wide strip__time" data-live="updated" data-template="Data from {time}">Loading live data …</p>
+        <a class="strip__link" href="/new/design01/network/#live">What does this mean?&nbsp;<span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="page page--home">
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__in">
+        <div class="hero__text">
+          <p class="kicker">Our Community Hub</p>
+          <h1 class="hero__title" id="hero-title">BTX Community</h1>
+          <p class="hero__lead">A community page for everyone interested in BTX: what it is, how to mine it, how to run a node, and where to find help. Run by community members, not by a company.</p>
+          <p class="actions">
+            <a class="btn btn--primary" href="#newcomers">I’m new – start here&nbsp;<span aria-hidden="true">→</span></a>
+            <a class="btn btn--secondary" href="/new/design01/links/#cat-community">Ask the community&nbsp;<span aria-hidden="true">→</span></a>
+          </p>
+        </div>
+        <section class="card netcard" id="live" aria-labelledby="live-title" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en"
+                 data-level-green="OK" data-level-yellow="Warning"
+                 data-level-red="Critical" data-level-unknown="Unknown">
+          <div class="netcard__head">
+            <h2 class="netcard__title" id="live-title">Network right now</h2>
+            <p class="pill"><span class="dot" aria-hidden="true"></span><span class="sr">Status: </span><span data-live="overall" data-label-normal="All systems normal" data-label-degraded="Degraded" data-label-incident="Incident">No data</span></p>
+          </div>
+          <p class="note note--warn" role="alert" data-live="stale" hidden><span class="note__label">Note</span> <span class="note__body">The data is out of date; the values may be wrong.</span></p>
+          <dl class="figs">
+            <div class="fig"><dt>Block height</dt><dd class="fig__v" data-live="height">No data</dd></div>
+            <div class="fig"><dt>Latest node release</dt><dd class="fig__v" data-live="release">No data</dd></div>
+            <div class="fig"><dt>Nodes on it</dt><dd class="fig__v" data-live="on-release" data-template="{count} of {total} nodes">No data</dd></div>
+            <div class="fig"><dt>Average block time (24 h)</dt><dd class="fig__v" data-live="interval">No data</dd></div>
+          </dl>
+          <ul class="verdicts">
+            <li class="verdict c-verdict--unknown" data-verdict="stable"><span class="dot" aria-hidden="true"></span>Stable: <span data-verdict-label>Unknown</span></li>
+            <li class="verdict c-verdict--unknown" data-verdict="performant"><span class="dot" aria-hidden="true"></span>Performant: <span data-verdict-label>Unknown</span></li>
+            <li class="verdict c-verdict--unknown" data-verdict="secure"><span class="dot" aria-hidden="true"></span>Secure: <span data-verdict-label>Unknown</span></li>
+          </ul>
+          <div class="fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+            <p class="fork__title">Network upgrade ahead</p>
+            <ul class="fork__rows" data-live="fork-rows"></ul>
+          </div>
+          <p class="netcard__meta" data-live="updated" data-template="Data from {time}">Loading live data …</p>
+          <p class="netcard__links"><a href="/new/design01/network/">More on the network&nbsp;<span aria-hidden="true">→</span></a> <a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Full status page&nbsp;<span aria-hidden="true">↗</span></a></p>
+        </section>
+      </div>
+    </section>
+    <section class="band paths" id="start" aria-labelledby="paths-title">
+      <div class="band__in">
+        <h2 class="h2 h2--big" id="paths-title">What do you want to do?</h2>
+        <p class="band__lead">Every path shows its first steps here; all steps open below each card.</p>
+        <div class="paths__grid">
+          <article class="card path" id="newcomers" aria-labelledby="newcomers-title">
+            <span class="path__icon"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
+            <div>
+              <h3 class="path__title" id="newcomers-title">New to BTX</h3>
+              <p class="path__who">BTX is a post-quantum fork of Bitcoin with a fixed maximum supply and its own proof-of-work (MatMul).</p>
+            </div>
+            <ol class="path__steps">
+              <li><a href="/new/design01/learn/">What BTX is&nbsp;<span aria-hidden="true">→</span></a></li>
+              <li><a href="https://btx.dev/" rel="noopener noreferrer">Official introduction&nbsp;<span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">How the network is doing&nbsp;<span aria-hidden="true">↗</span></a></li>
+            </ol>
+            <p class="note note--warn"><span class="note__label">Safety</span> <span class="note__body">Never share your seed or private key. Nobody from the community will ever ask for it; direct messages offering help or &#34;support&#34; are scams.</span></p>
+            <details class="path__all">
+              <summary class="path__more">All 5 steps<span class="sr"> for New to BTX</span></summary>
+              <ol class="path__full">
+                <li><a href="/new/design01/learn/">What BTX is&nbsp;<span aria-hidden="true">→</span></a><span class="path__detail">A few facts, each with its source.</span></li>
+                <li><a href="https://btx.dev/" rel="noopener noreferrer">Official introduction&nbsp;<span aria-hidden="true">↗</span></a><span class="path__detail">Written for v0.33.2; newer releases differ in places.</span></li>
+                <li><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">How the network is doing&nbsp;<span aria-hidden="true">↗</span></a><span class="path__detail">The status page, in plain terms.</span></li>
+                <li><a href="/new/design01/links/#cat-community">Ask the community&nbsp;<span aria-hidden="true">→</span></a><span class="path__detail">The community group on Telegram.</span></li>
+                <li><a href="/new/design01/links/#cat-wallets">Choose a wallet&nbsp;<span aria-hidden="true">→</span></a><span class="path__detail">Read &#34;Before you buy or receive BTX&#34; below first.</span></li>
+              </ol>
+            </details>
+          </article>
+          <article class="card path" id="miners" aria-labelledby="miners-title">
+            <span class="path__icon"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></span>
+            <div>
+              <h3 class="path__title" id="miners-title">Mining</h3>
+              <p class="path__who">Mining needs a GPU.</p>
+            </div>
+            <ol class="path__steps">
+              <li><a href="/new/design01/links/#cat-miners">Pick a miner&nbsp;<span aria-hidden="true">→</span></a></li>
+              <li><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Prefer a smaller pool&nbsp;<span aria-hidden="true">↗</span></a></li>
+              <li><a href="/new/design01/links/#cat-pools">Use your own btx1z address&nbsp;<span aria-hidden="true">→</span></a></li>
+            </ol>
+            <details class="path__all">
+              <summary class="path__more">All 4 steps<span class="sr"> for Mining</span></summary>
+              <ol class="path__full">
+                <li><a href="/new/design01/links/#cat-miners">Pick a miner&nbsp;<span aria-hidden="true">→</span></a><span class="path__detail">For example easyBTX (an app for Mac and Linux; on Windows through WSL) or matador (open source).</span></li>
+                <li><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Prefer a smaller pool&nbsp;<span aria-hidden="true">↗</span></a><span class="path__detail">When one pool finds most blocks, the network depends on it; the status page shows the current shares.</span></li>
+                <li><a href="/new/design01/links/#cat-pools">Use your own btx1z address&nbsp;<span aria-hidden="true">→</span></a><span class="path__detail">matador&#39;s quick start contains a sample payout address that is not yours and two pools that are offline. Put in your own address and a pool from our link list.</span></li>
+                <li><a href="https://github.com/btxchain/btx/blob/main/doc/btx-cuda-mining-troubleshooting.md" rel="noopener noreferrer">Problems with an NVIDIA card&nbsp;<span aria-hidden="true">↗</span></a><span class="path__detail">The official CUDA troubleshooting guide; parts of it describe the CUDA path from before block 185,000.</span></li>
+              </ol>
+            </details>
+          </article>
+          <article class="card path" id="nodes" aria-labelledby="nodes-title">
+            <span class="path__icon"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M8 7h.01M8 17h.01"/></svg></span>
+            <div>
+              <h3 class="path__title" id="nodes-title">Running a node</h3>
+              <p class="path__who">Every node relays blocks and keeps the network reachable.</p>
+            </div>
+            <ol class="path__steps">
+              <li><a href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer">Easiest start at home: easynode&nbsp;<span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">On a server&nbsp;<span aria-hidden="true">↗</span></a></li>
+              <li><a href="/new/design01/infra/#before-installing">Before you install: the checklist&nbsp;<span aria-hidden="true">→</span></a></li>
+            </ol>
+            <details class="path__all">
+              <summary class="path__more">All 7 steps<span class="sr"> for Running a node</span></summary>
+              <ol class="path__full">
+                <li><a href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer">Easiest start at home: easynode&nbsp;<span aria-hidden="true">↗</span></a><span class="path__detail">Installs and supervises btxd for you.</span></li>
+                <li><a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">On a server&nbsp;<span aria-hidden="true">↗</span></a><span class="path__detail">v0.34.16 has two Linux x86_64 archives for glibc 2.38 or newer (Ubuntu 24.04, Debian 13): a plain one, and -cuda13 for GPU nodes (sm_120: RTX 50 and RTX PRO Blackwell cards; driver not included). No official Windows or macOS archive.</span></li>
+                <li><a href="/new/design01/infra/#before-installing">Before you install: the checklist&nbsp;<span aria-hidden="true">→</span></a><span class="path__detail">Where to download, how to check the file, and the settings for a node with coins.</span></li>
+                <li><a href="https://github.com/dr-chambre/btx-snapshots/releases/latest" rel="noopener noreferrer">Start from a signed snapshot&nbsp;<span aria-hidden="true">↗</span></a><span class="path__detail">Catches up in minutes. A sync from genesis currently stops at block 126,978 (issue #272).</span></li>
+                <li><a href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer">Node stuck at a height?&nbsp;<span aria-hidden="true">↗</span></a><span class="path__detail">The node help explains each known case and its fix.</span></li>
+                <li><a href="/new/design01/infra/">Have a spare machine?&nbsp;<span aria-hidden="true">→</span></a><span class="path__detail">Seven ways to give BTX infrastructure, from a node to a fuzz box.</span></li>
+                <li><a href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer">Run a signer&nbsp;<span aria-hidden="true">↗</span></a><span class="path__detail">Signers (GPU attestors) need a GPU that passes btxd&#39;s self-test and must stay online. The official CUDA archive covers Blackwell cards (sm_120); other NVIDIA cards need a build from source and may not qualify. Follow the developers&#39; operator runbook.</span></li>
+              </ol>
+            </details>
+          </article>
+          <article class="card path" id="developers" aria-labelledby="developers-title">
+            <span class="path__icon"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></span>
+            <div>
+              <h3 class="path__title" id="developers-title">Become a BTX dev</h3>
+              <p class="path__who">The node software is open source, and anyone can send it a pull request on GitHub.</p>
+            </div>
+            <ol class="path__steps">
+              <li><a href="/new/design01/dev/">Start here&nbsp;<span aria-hidden="true">→</span></a></li>
+              <li><a href="/new/design01/dev/work/">Ongoing work&nbsp;<span aria-hidden="true">→</span></a></li>
+              <li><a href="/new/design01/projects/">Community projects&nbsp;<span aria-hidden="true">→</span></a></li>
+            </ol>
+            <details class="path__all">
+              <summary class="path__more">All 3 steps<span class="sr"> for Become a BTX dev</span></summary>
+              <ol class="path__full">
+                <li><a href="/new/design01/dev/">Start here&nbsp;<span aria-hidden="true">→</span></a><span class="path__detail">Where to begin, the prompt for your AI tool and the three levels.</span></li>
+                <li><a href="/new/design01/dev/work/">Ongoing work&nbsp;<span aria-hidden="true">→</span></a><span class="path__detail">Test coverage, the nightly CI-0 run and the lanes waiting for an owner.</span></li>
+                <li><a href="/new/design01/projects/">Community projects&nbsp;<span aria-hidden="true">→</span></a><span class="path__detail">Things to build and run outside the node software.</span></li>
+              </ol>
+            </details>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="safety" id="before-buying" aria-labelledby="before-buying-title">
+      <div class="band__in">
+        <div class="safety__head">
+          <div>
+            <p class="safety__kicker">Read this once · 7 checks</p>
+            <h2 class="h2 h2--big" id="before-buying-title">Before you buy or receive BTX</h2>
+          </div>
+          <a class="safety__link" href="/new/design01/infra/#before-installing">Before you install a node release&nbsp;<span aria-hidden="true">→</span></a>
+        </div>
+        <ol class="safety__list">
+          <li class="safety__item"><span class="safety__n" aria-hidden="true">01</span><span class="safety__t"><strong class="ck__first">Make a backup before money arrives.</strong> <span class="ck__rest">In btxd, backupwalletbundlearchive writes one encrypted file; keep it and its passphrase offline and apart. Any backup can spend your coins: plain exports at once, the archive once opened. Restore it once to test it.</span></span></li>
+          <li class="safety__item"><span class="safety__n" aria-hidden="true">02</span><span class="safety__t"><strong class="ck__first">Check the receiving address in full, not just its start and end.</strong> <span class="ck__rest">BTX addresses start with btx1z.</span></span></li>
+          <li class="safety__item"><span class="safety__n" aria-hidden="true">03</span><span class="safety__t"><strong class="ck__first">Send a small test amount first.</strong> <span class="ck__rest">Wait for at least 10 confirmations before you treat a payment as final; short reorganisations of the chain happen several times a day.</span></span></li>
+          <li class="safety__item"><span class="safety__n" aria-hidden="true">04</span><span class="safety__t"><strong class="ck__first">Before you use an exchange or an OTC seller, check that withdrawals really work.</strong> <span class="ck__rest">A price on a website is not a market you can sell into.</span></span></li>
+          <li class="safety__item"><span class="safety__n" aria-hidden="true">05</span><span class="safety__t"><strong class="ck__first">Other coins also trade as BTX.</strong> <span class="ck__rest">A market is only for this chain if its deposit addresses start with btx1z.</span></span></li>
+          <li class="safety__item"><span class="safety__n" aria-hidden="true">06</span><span class="safety__t"><strong class="ck__first">A &#34;model&#34; or &#34;reference&#34; price is an estimate, not an offer that anyone has to honour.</strong></span></li>
+          <li class="safety__item"><span class="safety__n" aria-hidden="true">07</span><span class="safety__t"><strong class="ck__first">Nobody legitimate asks for your seed.</strong> <span class="ck__rest">Messages offering help, &#34;recovery&#34; or guaranteed returns are scams.</span></span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="band" aria-label="What changed, and help">
+      <div class="band__in duo">
+        <section class="card changed" aria-labelledby="changed-title">
+          <p class="badges"><span class="badge badge--version">v0.34.16</span> <span class="badge badge--checked">Checked 2026-11-16</span></p>
+          <h2 class="h2" id="changed-title">What changed for you</h2>
+          <ul class="changed__list">
+            <li>Presigned swap claims from the wallet</li>
+            <li>Cross-chain swaps, off by default</li>
+            <li>Model network with fewer open ports</li>
+            <li>Auto-update off behind a proxy</li>
+            <li>Signing keeps your timelocks</li>
+            <li>Clearer backup warning</li>
+          </ul>
+          <p class="changed__links">
+            <a href="/new/design01/learn/#next">All of v0.34.16, with sources&nbsp;<span aria-hidden="true">→</span></a>
+            <a href="/new/design01/learn/#caveats">Before you switch: 5 points&nbsp;<span aria-hidden="true">→</span></a>
+          </p>
+        </section>
+        <section class="card stuck" aria-labelledby="stuck-title">
+          <h2 class="h2" id="stuck-title">Stuck?</h2>
+          <ul class="rows">
+            <li><a class="row" href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer"><span class="row__t">Node stuck at a height?</span><span class="row__a" aria-hidden="true">↗</span></a></li>
+            <li><a class="row" href="/new/design01/links/#cat-community"><span class="row__t">Ask the community: the chats</span><span class="row__a" aria-hidden="true">→</span></a></li>
+            <li><a class="row" href="/new/design01/learn/"><span class="row__t">What BTX is</span><span class="row__a" aria-hidden="true">→</span></a></li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+  </main>
+  <footer class="ft">
+    <div class="ft__in">
+      <div class="ft__col">
+        <p class="ft__text">Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+        <p class="draft-arrows">→ goes to a page of this site · ↗ opens another site</p>
+        <p class="ft__text">Draft 01 &#34;Klar&#34; from the design brief of 20 Nov 2026. A layout draft for feedback, in English only; the live site at <a href="https://btx-community.com/">btx-community.com ↗</a> is the official one.</p>
+      </div>
+      <nav class="ft__nav" aria-label="Pages, again">
+        <a href="/new/design01/">Start here</a>
+        <a href="/new/design01/infra/">Take part</a>
+        <a href="/new/design01/network/">Network</a>
+        <a href="/new/design01/links/">Directory</a>
+        <a href="/new/design01/dev/">Build</a>
+        <a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a>
+      </nav>
+      <p class="ft__ver mono">be8fa8e0eb51</p>
+    </div>
+  </footer>
+</body>
+</html>

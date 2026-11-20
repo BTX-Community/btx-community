@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The BTX network&#39;s live state, such as block height and the next halving, and the development of the node software on GitHub.">
+  <meta name="color-scheme" content="light">
+  
+  <title>Network and development · BTX Community</title>
+  
+  <link rel="alternate" hreflang="en" href="/network/">
+  
+  <link rel="alternate" hreflang="de" href="/de/network/">
+  
+  <link rel="alternate" hreflang="es" href="/es/network/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/network/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/network/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/community.css?v=7186087629f4">
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">Skip to content</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="Pages">
+        
+        <a class="c-menu__link" href="/">Start</a>
+        
+        <a class="c-menu__link" href="/learn/">Learn</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/network/" aria-current="page">Network</a>
+        
+        <a class="c-menu__link" href="/links/">Links</a>
+        
+        <a class="c-menu__link" href="/projects/">Projects</a>
+        
+        <a class="c-menu__link" href="/infra/">Run infra</a>
+        
+        <a class="c-menu__link" href="/dev/">Developers</a>
+        
+      </nav>
+      <button class="c-theme" type="button" data-theme-switch data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to light theme" hidden></button>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="Language: English">EN <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="Language">
+          
+          <a class="c-lang__item c-lang__item--active" href="/network/" hreflang="en" lang="en" aria-current="true"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item" href="/de/network/" hreflang="de" lang="de"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/network/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item" href="/fr/network/" hreflang="fr" lang="fr"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item" href="/zh/network/" hreflang="zh-Hans" lang="zh-Hans"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <aside class="c-badge c-live--unknown" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en" aria-label="Network right now">
+      <a class="c-badge__head" href="/network/"><span class="c-pulse" aria-hidden="true"></span><span data-live="overall" data-label-normal="All systems normal" data-label-degraded="Degraded" data-label-incident="Incident">Network right now</span></a>
+      <span class="c-badge__row"><span>Block</span> <b data-live="height">–</b></span>
+      <span class="c-badge__row"><span>Release</span> <b data-live="release">–</b></span>
+      <span class="c-badge__row"><span>Nodes on it</span> <b data-live="on-release" data-template="{count} of {total}">–</b></span>
+      <a class="c-link c-badge__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Full status page ↗</a>
+      <span class="c-badge__time" data-live="updated" data-template="Data from {time}"></span>
+      <div class="c-badge__fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+        <strong>Network upgrade ahead</strong>
+        <ul data-live="fork-rows"></ul>
+        <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes ↗</a>
+      </div>
+    </aside>
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">Network and development</h1>
+        <p class="c-hero__lead">The network&#39;s live state from the public status API, and the development of the node software as measured on GitHub.</p>
+      </section>
+
+      
+      <section class="c-live c-live--unknown" aria-labelledby="live-title" id="live" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en"
+               data-level-green="OK" data-level-yellow="Warning"
+               data-level-red="Critical" data-level-unknown="Unknown">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="live-title"><span class="c-pulse" aria-hidden="true"></span>Network right now</h2>
+          <a class="c-link" href="https://network.btx-monitoring.com/">Full status page →</a>
+        </div>
+        <p class="c-warning" role="alert" data-live="stale" hidden>The data is out of date; the values may be wrong.</p>
+        <div class="c-fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+          <h3 class="c-fork__title">Network upgrade ahead</h3>
+          <p>The rules change at the block below. Every node and miner needs a release that knows this change before then, or it stops following the network.</p>
+          <ul class="c-fork__rows" data-live="fork-rows"></ul>
+          <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes ↗</a>
+        </div>
+        <dl class="c-tiles">
+          <div class="c-tile c-tile--status">
+            <dt>Status</dt>
+            <dd data-live="overall"
+                data-label-normal="All systems normal"
+                data-label-degraded="Degraded"
+                data-label-incident="Incident">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Block height</dt>
+            <dd data-live="height">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Latest node release</dt>
+            <dd data-live="release">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Nodes on it</dt>
+            <dd data-live="on-release" data-template="{count} of {total} nodes">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Average block time (24 h)</dt>
+            <dd data-live="interval">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Active signers</dt>
+            <dd data-live="signers">–</dd>
+          </div>
+        </dl>
+        <ul class="c-verdicts">
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="stable">
+            <span class="c-dot" aria-hidden="true"></span>Stable: <span data-verdict-label>Unknown</span>
+          </li>
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="performant">
+            <span class="c-dot" aria-hidden="true"></span>Performant: <span data-verdict-label>Unknown</span>
+          </li>
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="secure">
+            <span class="c-dot" aria-hidden="true"></span>Secure: <span data-verdict-label>Unknown</span>
+          </li>
+          
+        </ul>
+        
+        <h3 class="c-subtitle" id="numbers-title">BTX in numbers</h3>
+        <dl class="c-tiles" aria-labelledby="numbers-title">
+          <div class="c-tile c-tile--wide">
+            <dt>Mined so far</dt>
+            <dd data-live="supply">–</dd>
+            <dd class="c-tile__sub" data-live="supply-share" data-template="{pct} % of 21 million"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>Block reward</dt>
+            <dd data-live="reward">–</dd>
+          </div>
+          <div class="c-tile c-tile--wide">
+            <dt>Next halving</dt>
+            <dd data-live="halving" data-template="{count} blocks">–</dd>
+            <dd class="c-tile__sub" data-live="halving-time" data-template="about {time}"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>Transactions (24 h)</dt>
+            <dd data-live="tx">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Size of the chain</dt>
+            <dd data-live="size">–</dd>
+          </div>
+        </dl>
+        
+        <p class="c-updated" data-live="updated" data-template="Data from {time}">Loading live data …</p>
+        
+      </section>
+
+
+      <p class="c-add"><a class="c-link" href="https://explorer.btxbyronbay.com/observatory" rel="noopener noreferrer">Live view and node map from the Byron Bay archive node ↗</a></p>
+
+            <section class="c-live c-dev" aria-labelledby="dev-title" id="development" hidden
+        data-api="https://network.btx-monitoring.com/api/v1/development.json" data-repo="btxchain/btx" data-lang="en"
+        data-default="default branch" data-today="today"
+        data-day="1 day ago" data-days="{count} days ago">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="dev-title">Development of the node software</h2>
+          <a class="c-link" href="https://github.com/btxchain/btx" rel="noopener noreferrer">btxchain/btx on GitHub ↗</a>
+        </div>
+        <p class="c-dev__lead">Commits and pull requests in btxchain/btx, the reference implementation of the BTX node. GitHub opens the repository on main, the default branch; the other rows are the branches with the most recent commits. main holds the last full release; current work happens on the release and review branches.</p>
+        <p class="c-warning" role="alert" data-dev="stale" hidden>This measurement is more than three hours old; the figures may be out of date.</p>
+        <div class="c-branches" role="table" aria-labelledby="dev-title">
+          <div class="c-branch c-branch--head" role="row">
+            <span role="columnheader">Branch</span>
+            <span role="columnheader">Last commit</span>
+            <span role="columnheader">Commits, 30 days</span>
+          </div>
+          <div role="rowgroup" data-dev="branches"></div>
+        </div>
+        <p class="c-dev__note">Commits are counted per branch by commit date, at most 100 per branch (shown as 100+). A commit that is on several branches counts on each of them.</p>
+        <dl class="c-tiles">
+          <div class="c-tile">
+            <dt>Pull requests updated, 7 days</dt>
+            <dd data-dev="pulls">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Latest release</dt>
+            <dd data-dev="release">–</dd>
+            <dd class="c-tile__sub" data-dev="release-date"></dd>
+          </div>
+          <div class="c-tile" data-dev="prerelease-tile" hidden>
+            <dt>Newer pre-release</dt>
+            <dd data-dev="prerelease">–</dd>
+            <dd class="c-tile__sub" data-dev="prerelease-date"></dd>
+          </div>
+        </dl>
+        <p class="c-updated" data-dev="measured" data-template="Measured on GitHub at {time}, every hour."></p>
+      </section>
+
+
+      
+      <nav class="c-next" aria-labelledby="onward-title">
+        <h2 class="c-section-title" id="onward-title">Where next</h2>
+        <ul class="c-next__list">
+          
+          <li><a class="c-link" href="/infra/">Run a node or other infrastructure →</a></li>
+          
+          <li><a class="c-link" href="/dev/work/">Ongoing work of the developers →</a></li>
+          
+          <li><a class="c-link" href="/learn/">What BTX is →</a></li>
+          
+        </ul>
+      </nav>
+
+
+
+    </main>
+
+    <footer class="c-footer">
+      <p>Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+      
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a>
+      </p>
+      <p class="c-muted">be8fa8e0eb51</p>
+    </footer>
+  </div>
+</body>
+</html>

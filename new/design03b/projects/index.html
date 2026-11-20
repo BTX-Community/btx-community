@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en" class="d03b-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://btx-community.com/projects/">
+  <title>[Draft] Directory: Projects · Design 03b · Reader&#39;s Guide, Merriweather</title>
+  <meta name="description" content="What the BTX community can build and run as its own, then the roadmap and the research papers this group maintains in the open.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[Draft] Directory: Projects – Design draft, not the official layout">
+  <meta property="og:description" content="Draft 03 with a wider, sturdier serif for the headings: Merriweather instead of Instrument Serif, as suggested in the first feedback on draft 03. Everything else is the same as draft 03.">
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/new/design03b.css?v=5919ab38c6d3">
+  <link rel="preload" href="/static/fonts/new/Merriweather-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+  <script src="/static/js/new/design03b.js?v=4169318ab265" defer></script>
+</head>
+<body class="d03b">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="draft-banner" role="note">
+    <p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind.
+      <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a>
+      <a class="draft-banner__link" href="/new/">All drafts →</a>
+      <a class="draft-banner__link" href="https://btx-community.com/projects/">This page on the live site ↗</a>
+    </p>
+  </div>
+  <header class="top">
+    <div class="top__in">
+      <a class="logo" href="/new/design03b/">BTX Community</a>
+      <nav class="nav" aria-label="Pages">
+        <a class="nav__link" href="/new/design03b/">Start</a>
+        <a class="nav__link" href="/new/design03b/learn/">About BTX</a>
+        <a class="nav__link" href="/new/design03b/network/">Network</a>
+        <a class="nav__link" href="/new/design03b/links/" aria-current="page">Directory</a>
+        <a class="nav__link" href="/new/design03b/infra/">Run infra</a>
+        <a class="nav__link" href="/new/design03b/dev/">Developers</a>
+      </nav>
+      <button class="theme" type="button" data-theme-switch data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to dark theme" hidden><span class="theme__icon" aria-hidden="true"></span></button>
+      <details class="menu">
+        <summary class="menu__btn">Menu</summary>
+        <div class="sheet">
+          <nav aria-label="Pages">
+            <ul class="sheet__list">
+              <li><a class="sheet__link" href="/new/design03b/">Start</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03b/learn/">About BTX</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03b/network/">Network</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03b/links/" aria-current="page">Directory</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03b/links/">Links</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03b/projects/" aria-current="page">Projects</a></li>
+                </ul>
+              </li>
+              <li><a class="sheet__link" href="/new/design03b/infra/">Run infra</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03b/dev/">Developers</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03b/dev/">Start here</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03b/dev/work/">Ongoing work</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          <p class="sheet__label">This draft is in English only.</p>
+        </div>
+      </details>
+    </div>
+  </header>
+  <div class="otp">
+    <details class="otp__d" data-otp>
+      <summary class="otp__sum"><span class="otp__k">On this page:</span> <span class="otp__cur" data-otp-current>Markets for BTX: what exists, what is missing</span><span class="chev" aria-hidden="true"></span></summary>
+      <nav class="otp__list" aria-label="On this page">
+        <a class="otp__sec" href="#project-venues">Markets for BTX: what exists, what is missing</a>
+        <a class="otp__sec" href="#project-swapnet-tools">SwapNet wallets and tools</a>
+        <a class="otp__sec" href="#project-amd-mining">Mining on consumer AMD cards</a>
+        <a class="otp__sec" href="#project-metal">Testing on Apple Silicon</a>
+        <a class="otp__sec" href="#project-tooling">Explorers, monitoring and light wallets</a>
+      </nav>
+    </details>
+  </div>
+  <div class="layout">
+    <nav class="rail" aria-label="On this page" data-rail>
+      <p class="rail__k">On this page</p>
+      <ul class="rail__list rail__secs">
+        <li><a class="rail__sec" href="#project-venues">Markets for BTX: what exists, what is missing</a></li>
+        <li><a class="rail__sec" href="#project-swapnet-tools">SwapNet wallets and tools</a></li>
+        <li><a class="rail__sec" href="#project-amd-mining">Mining on consumer AMD cards</a></li>
+        <li><a class="rail__sec" href="#project-metal">Testing on Apple Silicon</a></li>
+        <li><a class="rail__sec" href="#project-tooling">Explorers, monitoring and light wallets</a></li>
+      </ul>
+    </nav>
+    <main id="main" class="content">
+
+<header class="pagehead">
+        <h1 class="h1">Directory</h1>
+        <p class="pagehead__lead">All of it lies outside the node software. Nothing here is planned, promised or endorsed by the node&#39;s developers. Each card says what exists today and what is missing, with the source of every claim.</p>
+      </header>
+<nav class="dirtabs" aria-label="Directory">
+        <a class="dirtabs__tab" href="/new/design03b/links/">Links</a>
+        <a class="dirtabs__tab" href="/new/design03b/projects/" aria-current="page">Projects</a>
+      </nav>
+      <p class="note"><span class="note__label">Note</span><span class="note__body">Anything that moves other people&#39;s coins starts on regtest or testnet.</span></p>
+      <section class="sec project" id="project-venues" aria-labelledby="project-venues-title">
+        <h2 class="sec__title" id="project-venues-title">Markets for BTX: what exists, what is missing</h2>
+        <p class="prose">A place where people trade BTX against other coins, run by its own operators: an order book, or a front-end over SwapNet&#39;s swaps.</p>
+        <dl class="lane__dl project__dl">
+          <div><dt>There today</dt><dd>SwapNet in the node swaps BTX with BTC or ETH between two parties; AMM pools, wrapped balances and partial fills are not part of it. This group&#39;s venue-structure paper compares four models and where the licensing line runs.</dd></div>
+          <div><dt>Missing</dt><dd>Operators, a model chosen from the paper, and legal advice where the venue will run. The paper is a draft for discussion, not legal advice.</dd></div>
+          <div><dt>Start from</dt><dd>
+            <ul class="project__links">
+              <li><a href="https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md" rel="noopener noreferrer">The venue-structure paper <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://github.com/btxchain/btx/blob/main/doc/swapnet/README.md" rel="noopener noreferrer">SwapNet overview (developers) <span aria-hidden="true">↗</span></a></li>
+            </ul>
+          </dd></div>
+          <div><dt>Who to ask</dt><dd><a href="https://github.com/BTX-Community/btx-community/issues" rel="noopener noreferrer">Discussion of the paper as an issue in this repository. <span aria-hidden="true">↗</span></a></dd></div>
+        </dl>
+        <p class="src"><span class="muted">Source</span> <a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/IMPLEMENTATION_STATUS.md" rel="noopener noreferrer"><code class="code">doc/swapnet/IMPLEMENTATION_STATUS.md:9</code></a> <a href="https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md" rel="noopener noreferrer"><code class="code">btx-community/research/venue-structure.md:1-5</code></a></p>
+      </section>
+      <section class="sec project" id="project-swapnet-tools" aria-labelledby="project-swapnet-tools-title">
+        <h2 class="sec__title" id="project-swapnet-tools-title">SwapNet wallets and tools</h2>
+        <p class="prose">Software around SwapNet: a wallet that shows quotes and runs swaps, tools that run a maker&#39;s market, a front-end for the node&#39;s swap calls.</p>
+        <dl class="lane__dl project__dl">
+          <div><dt>There today</dt><dd>A node started with -swapnet=1 finds other SwapNet nodes over its peer links and offers 33 swap RPC methods. v0.34.16 carries SwapNet for broader testing. There is no graphical trading panel: the RPC console is the interface.</dd></div>
+          <div><dt>Missing</dt><dd>Everything a non-developer would use. The package&#39;s own status page marks real-chain settlement and an independent audit as not executed, the ETH leg needs a deployed contract that the node&#39;s owner approves locally, and the release docs want external receipts before anyone calls it mainnet-qualified.</dd></div>
+          <div><dt>Careful</dt><dd>Once a taker has funded a swap, cancelling does not release it: the coins stay locked until the agreed refund height or time.</dd></div>
+          <div><dt>Start from</dt><dd>
+            <ul class="project__links">
+              <li><a href="https://github.com/btxchain/btx/blob/main/doc/swapnet/RPC.md" rel="noopener noreferrer">The 33 swap RPC methods <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://github.com/btxchain/btx/blob/main/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer">Running SwapNet on a node <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://github.com/btxchain/btx/blob/main/doc/swapnet/TESTING_AND_RELEASE.md" rel="noopener noreferrer">Testing and release (developers) <span aria-hidden="true">↗</span></a></li>
+            </ul>
+          </dd></div>
+          <div><dt>Who to ask</dt><dd><a href="https://github.com/btxchain/btx/issues" rel="noopener noreferrer">Questions as an issue on btxchain/btx; security problems only through private reporting. <span aria-hidden="true">↗</span></a></dd></div>
+        </dl>
+        <p class="src"><span class="muted">Source</span> <a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code class="code">doc/swapnet/OPERATIONS.md:5</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/RPC.md" rel="noopener noreferrer"><code class="code">doc/swapnet/RPC.md:1</code></a> <a href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code class="code">release v0.34.16</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/IMPLEMENTATION_STATUS.md" rel="noopener noreferrer"><code class="code">doc/swapnet/IMPLEMENTATION_STATUS.md:9</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/IMPLEMENTATION_STATUS.md" rel="noopener noreferrer"><code class="code">doc/swapnet/IMPLEMENTATION_STATUS.md:7</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code class="code">doc/swapnet/OPERATIONS.md:21</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/TESTING_AND_RELEASE.md" rel="noopener noreferrer"><code class="code">doc/swapnet/TESTING_AND_RELEASE.md:34</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code class="code">doc/swapnet/OPERATIONS.md:13</code></a></p>
+      </section>
+      <section class="sec project" id="project-amd-mining" aria-labelledby="project-amd-mining-title">
+        <h2 class="sec__title" id="project-amd-mining-title">Mining on consumer AMD cards</h2>
+        <p class="prose">An exact INT8 MatMul path for consumer Radeon cards, so they can mine.</p>
+        <dl class="lane__dl project__dl">
+          <div><dt>There today</dt><dd>The node&#39;s AMD (HIP) path admits six datacenter Instinct chips: gfx908, gfx90a, gfx940, gfx941, gfx942 and gfx950 (MI100 to MI350). It is built automatically when a HIP clang and an AMD GPU are found. Consumer Radeon cards (RDNA, gfx10 to gfx12) are used neither to mine nor to validate; the source calls them verification-only until cross-vendor golden vectors qualify them.</dd></div>
+          <div><dt>Missing</dt><dd>An exact INT8 path on RDNA that matches the CPU reference bit for bit, and the golden vectors that show it. Whether such a path is admitted is the maintainer&#39;s decision.</dd></div>
+          <div><dt>Start from</dt><dd>
+            <ul class="project__links">
+              <li><a href="https://github.com/btxchain/btx/blob/main/src/matmul/backend_capabilities_v4.cpp" rel="noopener noreferrer">How the node admits a GPU (developers) <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://github.com/btxchain/btx/tree/main/src/hip" rel="noopener noreferrer">The HIP backend sources (developers) <span aria-hidden="true">↗</span></a></li>
+            </ul>
+          </dd></div>
+          <div><dt>Who to ask</dt><dd><a href="https://github.com/btxchain/btx/issues" rel="noopener noreferrer">Evidence as an issue on btxchain/btx; no lane of this hub covers AMD yet. <span aria-hidden="true">↗</span></a></dd></div>
+        </dl>
+        <p class="src"><span class="muted">Source</span> <a href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/backend_capabilities_v4.cpp" rel="noopener noreferrer"><code class="code">src/matmul/backend_capabilities_v4.cpp:475-491</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/backend_capabilities_v4.cpp" rel="noopener noreferrer"><code class="code">src/matmul/backend_capabilities_v4.cpp:493-501</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/src/CMakeLists.txt" rel="noopener noreferrer"><code class="code">src/CMakeLists.txt:243-247</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/accel_v4.cpp" rel="noopener noreferrer"><code class="code">src/matmul/accel_v4.cpp:649-652</code></a></p>
+      </section>
+      <section class="sec project" id="project-metal" aria-labelledby="project-metal-title">
+        <h2 class="sec__title" id="project-metal-title">Testing on Apple Silicon</h2>
+        <p class="prose">Run the node&#39;s Metal self-test on more Apple chips and report the results, so the Metal path is known to work beyond one device class.</p>
+        <dl class="lane__dl project__dl">
+          <div><dt>There today</dt><dd>Metal is built by default on Apple. A Metal device is admitted after the node&#39;s exactness self-tests, through Metal 4 INT8 tensor ops or, for the current epoch&#39;s replay, an exact integer-ALU path. A golden row, where one exists, is compared; without one the self-test decides (the manifest has one row, for an M4-class device). The release has no macOS binaries.</dd></div>
+          <div><dt>Missing</dt><dd>Self-test reports from other Apple chips.</dd></div>
+          <div><dt>Start from</dt><dd>
+            <ul class="project__links">
+              <li><a href="https://github.com/btxchain/btx/blob/main/doc/build-osx.md" rel="noopener noreferrer">Building on macOS (developers) <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-XDEV.md" rel="noopener noreferrer">The cross-device lane: I-XDEV pack <span aria-hidden="true">↗</span></a></li>
+            </ul>
+          </dd></div>
+          <div><dt>Who to ask</dt><dd><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">The I-XDEV lane, which replays blocks across devices; it has no owner yet. <span aria-hidden="true">↗</span></a></dd></div>
+        </dl>
+        <p class="src"><span class="muted">Source</span> <a href="https://github.com/btxchain/btx/blob/v0.34.16/src/CMakeLists.txt" rel="noopener noreferrer"><code class="code">src/CMakeLists.txt:10-11</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/accel_v4.cpp" rel="noopener noreferrer"><code class="code">src/matmul/accel_v4.cpp:1058-1062</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/matmul_v4_rc_production_canary.cpp" rel="noopener noreferrer"><code class="code">src/matmul/matmul_v4_rc_production_canary.cpp:655-656</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/accel_v4.cpp" rel="noopener noreferrer"><code class="code">src/matmul/accel_v4.cpp:843-844</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/matmul_v4_rc_production_golden_manifest.data" rel="noopener noreferrer"><code class="code">src/matmul/matmul_v4_rc_production_golden_manifest.data:3</code></a> <a href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code class="code">release v0.34.16</code></a></p>
+      </section>
+      <section class="sec project" id="project-tooling" aria-labelledby="project-tooling-title">
+        <h2 class="sec__title" id="project-tooling-title">Explorers, monitoring and light wallets</h2>
+        <p class="prose">More independent views of the chain, alerts when something goes wrong, and wallets for people who do not run a node all the time.</p>
+        <dl class="lane__dl project__dl">
+          <div><dt>There today</dt><dd>Several explorers and a status page are on the links page; the status page publishes its figures as JSON. btx-cli lightwatch is a watch-only light client: it reads compact block filters from a node it trusts (started with -blockfilterindex=1) and signs nothing. The node also reads and writes a browser-wallet recovery format.</dd></div>
+          <div><dt>Missing</dt><dd>Explorers and monitors run by more independent operators, alerting, and light wallets that can also sign.</dd></div>
+          <div><dt>Start from</dt><dd>
+            <ul class="project__links">
+              <li><a href="/new/design03b/links/#cat-network">Explorers and the status page in the link list <span aria-hidden="true">→</span></a></li>
+              <li><a href="https://network.btx-monitoring.com/api/v1/status.json" rel="noopener noreferrer">The status page&#39;s JSON <span aria-hidden="true">↗</span></a></li>
+              <li><a href="https://github.com/btxchain/btx/blob/main/doc/btxwallet-browser-node-interop.md" rel="noopener noreferrer">Browser wallet and node wallet formats (developers) <span aria-hidden="true">↗</span></a></li>
+            </ul>
+          </dd></div>
+          <div><dt>Who to ask</dt><dd><a href="/new/design03b/links/">The community chats on the links page. <span aria-hidden="true">→</span></a></dd></div>
+        </dl>
+        <p class="src"><span class="muted">Source</span> <a href="https://github.com/BTX-Community/btx-community/blob/main/README.md" rel="noopener noreferrer"><code class="code">btx-community/README.md:50</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/balance-watch.md" rel="noopener noreferrer"><code class="code">doc/balance-watch.md:44-46</code></a> <a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btxwallet-browser-node-interop.md" rel="noopener noreferrer"><code class="code">doc/btxwallet-browser-node-interop.md:3-9</code></a></p>
+      </section>
+      <p class="footnote">Checked on 15 Nov 2026 against the node software at v0.34.16 (074dac16) and the release-0.34.17 branch (8e7045b9).</p>
+
+    </main>
+  </div>
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <nav class="foot__nav" aria-label="Pages, again">
+        <a href="/new/design03b/">Start</a>
+        <a href="/new/design03b/learn/">About BTX</a>
+        <a href="/new/design03b/network/">Network</a>
+        <a href="/new/design03b/links/">Directory</a>
+        <a href="/new/design03b/infra/">Run infra</a>
+        <a href="/new/design03b/dev/">Developers</a>
+      </nav>
+      <p class="foot__text">Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+      <p class="draft-arrows">→ goes to a page of this site · ↗ opens another site</p>
+      <p class="foot__text">Draft 03 (direction A from Jpp&#39;s design audit, 19 Nov 2026) with Merriweather headings. Layout draft for feedback; the live site at <a href="https://btx-community.com/projects/">btx-community.com ↗</a> is the official one. English only.</p>
+      <p class="foot__text"><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a> · <span class="muted">be8fa8e0eb51</span></p>
+    </div>
+  </footer>
+</body>
+</html>
