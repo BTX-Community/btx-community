@@ -9,12 +9,6 @@
         <h2 class="c-section-title" id="links-title">{{ ui["directory.title"] }}</h2>
         <p class="c-muted">{{ ui["directory.lead"].format(count=entry_count, date=checked) }}</p>
         <p class="c-add">{{ ui["directory.add"] }} <a class="c-link" href="{{ add_project_url }}" rel="noopener noreferrer">{{ ui["directory.add_link"] }} ↗</a></p>
-        <nav class="c-jump c-jump--narrow" aria-label="{{ ui['jump'] }}">
-          {% for category in categories %}
-          <a class="c-chip c-chip--{{ category.id }}" href="#cat-{{ category.id }}">{{ category.title }}</a>
-          {% endfor %}
-        </nav>
-
         <div class="c-railed">
         <nav class="c-rail" aria-label="{{ ui['jump'] }}" data-rail>
           <p class="c-rail__title">{{ ui["jump"] }}</p>

@@ -937,10 +937,10 @@
           return;
         }
         var id = decodeURIComponent(link.hash.slice(1));
-        // In a contents list a second click on an open section folds it again.
+        // In the contents rail a second click on an open section folds it again.
         var target = document.getElementById(id);
         var own = target ? target.querySelector(":scope > details.c-fold") : null;
-        if (own && own.open && link.closest("[data-rail], .c-jump")) {
+        if (own && own.open && link.closest("[data-rail]")) {
           event.preventDefault();
           own.open = false;
           target.scrollIntoView();
