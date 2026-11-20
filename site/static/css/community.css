@@ -52,8 +52,8 @@
   --grey: #a2a7b4;
 }
 
-/* Light theme: chosen with the switch in the top bar (data-theme on <html>), or by the system
-   setting when the visitor has not chosen. The two blocks hold the same values. */
+/* Light theme: chosen with the switch in the top bar (data-theme on <html>). Without a choice the
+   page stays dark, also when the system is set to light. */
 :root[data-theme="light"] {
   color-scheme: light;
   --bg: #f5f3ee;
@@ -71,27 +71,6 @@
   --yellow: #8a4b00;
   --red: #b3261e;
   --grey: #5b606c;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    color-scheme: light;
-    --bg: #f5f3ee;
-    --bg-raised: #fff;
-    --surface: #fff;
-    --surface-hover: #efece5;
-    --border: #b9b3a5;
-    --text: #16181d;
-    --muted: #474c57;
-    --faint: #585d69;
-    --accent: #1d4fc4;
-    --shadow: rgb(22 24 29 / 18%);
-
-    --green: #17693f;
-    --yellow: #8a4b00;
-    --red: #b3261e;
-    --grey: #5b606c;
-  }
 }
 
 /* One accent for everything. The category names stay, so the rules below keep their hooks. */
@@ -256,7 +235,7 @@ a {
   background: transparent;
   color: var(--text);
   font: inherit;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1;
   cursor: pointer;
 }
@@ -275,12 +254,6 @@ a {
 
 :root[data-theme="light"] .c-theme::before {
   content: "☾";
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .c-theme::before {
-    content: "☾";
-  }
 }
 
 /* Language menu: a native disclosure, so it works without JavaScript. */
@@ -330,7 +303,7 @@ a {
   width: 2.4em;
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .c-chip {
@@ -373,8 +346,6 @@ a {
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: 13px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
 }
 
 .c-hero__title {
@@ -393,8 +364,8 @@ a {
 .c-hero__lead {
   max-width: 44rem;
   margin: 14px 0 0;
-  color: var(--muted);
-  font-size: 17px;
+  color: var(--text);
+  font-size: 18px;
 }
 
 /* --- Live strip ------------------------------------------------------------------------- */
@@ -405,7 +376,7 @@ a {
   gap: 10px;
   margin: 0 0 16px;
   font-family: var(--font-mono);
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: 0.02em;
 }
 
@@ -473,10 +444,9 @@ a {
 
 .c-tile dt {
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .c-tile dd {
@@ -514,10 +484,9 @@ a {
 .c-subtitle {
   margin: 22px 0 10px;
   color: var(--muted);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 600;
 }
 
 /* Shown only while the status page lists a rule change ahead of the chain tip. */
@@ -596,7 +565,7 @@ a {
   margin: 12px 0 0;
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 /* --- Development activity: hidden until development.json gives a usable answer ----------- */
@@ -613,7 +582,7 @@ a {
 .c-dev__lead,
 .c-dev__note {
   margin: 0 0 14px;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-dev__note {
@@ -640,9 +609,9 @@ a {
 .c-branch--head {
   border-top: 0;
   color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  font-weight: 600;
 }
 
 .c-branch__name {
@@ -656,7 +625,7 @@ a {
   border: 1px solid var(--border);
   border-radius: 999px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .c-branch__commits,
@@ -801,7 +770,7 @@ a {
 
 .c-fact p {
   margin: 0;
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -813,7 +782,7 @@ a {
 .c-caveats {
   margin: 0 0 12px;
   padding-left: 20px;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-caveats li {
@@ -830,9 +799,87 @@ a {
   gap: 16px;
 }
 
-/* The four ways in on the start page: two by two, like the checklists below them. */
+/* The four ways in and the two checklists on the start page: two by two, each card closed to its
+   title until opened; an open card does not stretch its closed neighbour. */
 .c-audiences--two {
   grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
+  gap: 20px 16px;
+}
+
+/* While a card is open, its closed neighbour keeps its own height instead of stretching. */
+.c-audiences--two:has(> .c-audience > details[open]) {
+  align-items: start;
+}
+
+.c-audience--folded > .c-audience__fold:not([open]) {
+  height: 100%;
+}
+
+.c-audience__fold > summary .c-audience__title {
+  margin: 0;
+}
+
+/* The whole card is a button with an edge below it: it rises under the pointer and sinks when
+   pressed. A line says what is inside ("6 steps"). The content keeps the card's padding when open. */
+.c-audience--folded {
+  --lift: var(--border);
+
+  padding: 0;
+  box-shadow: 0 4px 0 var(--lift);
+  transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
+}
+
+.c-audience--folded:hover,
+.c-audience--folded:focus-within {
+  --lift: var(--accent);
+
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--lift);
+}
+
+.c-audience--folded:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--lift);
+}
+
+.c-audience__fold {
+  padding: 0 22px;
+}
+
+/* Marker, title and count on one line; a long title wraps itself, the count never moves down.
+   Every closed card has room for a title of two lines, so a title that wraps does not make its
+   card taller than the one beside it, and an opened card starts its text at the same height as
+   its neighbour. (.c-fold in the selector: the general fold rule sets a lower min-height.) */
+.c-fold.c-audience__fold > summary {
+  gap: 12px;
+  min-height: 84px;
+  padding: 14px 0;
+}
+
+.c-audience__fold > summary .c-audience__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.c-audience__fold > summary::before {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.c-audience__fold[open] {
+  padding-bottom: 22px;
+}
+
+.c-audience__fold[open] > summary {
+  padding-bottom: 12px;
+}
+
+.c-audience__count {
+  flex: none;
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 .c-audience {
@@ -879,7 +926,7 @@ a {
 
 .c-audience__text {
   margin: 0 0 14px;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-steps {
@@ -903,7 +950,7 @@ a {
   top: 9px;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .c-steps a {
@@ -947,6 +994,8 @@ a {
 .c-fold > summary > .c-section-title,
 .c-fold > summary > .c-subtitle {
   margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 600;
 }
 
 .c-fold--sub {
@@ -1012,7 +1061,7 @@ a {
 
 .c-task__detail {
   margin: 2px 0 0;
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -1034,7 +1083,7 @@ a {
 /* --- Directory -------------------------------------------------------------------------- */
 
 .c-muted {
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-jump {
@@ -1098,9 +1147,7 @@ a {
   margin: 0 0 14px;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 15px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 16px;
 }
 
 .c-category__title::after {
@@ -1112,7 +1159,7 @@ a {
 
 .c-count {
   color: var(--faint);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .c-cards {
@@ -1149,12 +1196,12 @@ a {
 .c-card__number {
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .c-card__name {
   font-family: var(--font-mono);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
 }
 
@@ -1174,13 +1221,11 @@ a {
   border-radius: 999px;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: 13px;
 }
 
 .c-card__text {
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -1194,7 +1239,7 @@ a {
 
 .c-removed {
   margin-top: 40px;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-removed ul {
@@ -1328,15 +1373,14 @@ a {
 
 .c-filter__label {
   color: var(--faint);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .c-filter__count {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .c-filter__check {
@@ -1357,7 +1401,7 @@ a {
   margin: 0;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 /* Tables: the test runs, coverage by area, the registry, the gates and the week. */
@@ -1387,11 +1431,10 @@ a {
 .c-table thead th {
   border-top: 0;
   color: var(--muted);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
   white-space: nowrap;
+  font-family: var(--font-sans);
 }
 
 .c-table tbody th {
@@ -1423,7 +1466,7 @@ a {
 .c-table__hint {
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .c-table td.c-table__num .c-table__note {
@@ -1492,7 +1535,7 @@ a {
   border-radius: 999px;
   color: var(--level);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   white-space: nowrap;
 }
 
@@ -1584,15 +1627,14 @@ a {
 .c-lane__meta dt {
   padding-top: 3px;
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .c-lane__meta dd {
   margin: 0;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-lane__done {
@@ -1614,10 +1656,9 @@ a {
 .c-lane__label {
   margin: 0 0 6px;
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .c-lane__pack {
@@ -1671,6 +1712,24 @@ a {
 }
 
 @media (max-width: 600px) {
+  /* Start page on a phone: the network in three values (status, height, release) and the verdicts;
+     node count, block time and signers stay on the network page and the status page. */
+  .c-live--home .c-tiles > .c-tile:nth-child(n + 4) {
+    display: none;
+  }
+
+  .c-live--home .c-tile {
+    padding: 10px 12px;
+  }
+
+  .c-live--home .c-verdicts {
+    gap: 6px;
+  }
+
+  .c-live--home .c-verdict {
+    padding: 2px 10px;
+  }
+
   .c-hero {
     padding-top: 24px;
   }
@@ -1852,15 +1911,14 @@ a {
 .c-role__facts dt {
   margin-top: 12px;
   color: var(--faint);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .c-role__facts dd {
   margin: 2px 0 0;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-role__facts dd a,
@@ -2086,7 +2144,7 @@ a {
 
 .c-map__list p {
   margin: 0;
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -2102,21 +2160,20 @@ a {
   border-radius: 50%;
   place-items: center;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .c-map__cites {
   margin-top: 4px !important;
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 
 .c-map__cites-label {
   margin-right: 2px;
   color: var(--faint);
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-family: var(--font-sans);
+  font-weight: 600;
 }
 
 .c-map__cite {
@@ -2127,7 +2184,7 @@ a {
 
 .c-map__cites code {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   overflow-wrap: anywhere;
 }
 
@@ -2187,7 +2244,7 @@ a {
 .c-ai-files {
   margin: 0 0 6px;
   padding-left: 20px;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-ai-files li {
@@ -2222,13 +2279,13 @@ a {
   margin: 0 0 6px;
   color: var(--a-node-tools);
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .c-home__items {
   margin: 0;
   padding-left: 18px;
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
   overflow-wrap: anywhere;
 }

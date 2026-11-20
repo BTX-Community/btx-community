@@ -853,6 +853,11 @@
     var hub = document.getElementById("lanes");
     if (hub) {
       enhanceHub(hub);
+    } else {
+      // A link to a folded card (/#before-buying, /#miners) opens it.
+      var unfold = function () { openFolds(window.location.hash.slice(1)); };
+      unfold();
+      window.addEventListener("hashchange", unfold);
     }
     enhanceCopy();
   }

@@ -67,6 +67,8 @@ en:
   skip: Skip to content
   nav.label: Pages
   lang.label: Language
+  start.count: "{count} steps"
+  checklists.count: "{count} checks"
   moved: "This page has moved:"
   next.title: "Where next"
   next.buying: "Before you buy or receive BTX"
@@ -441,6 +443,8 @@ de:
   skip: Zum Inhalt springen
   nav.label: Seiten
   lang.label: Sprache
+  start.count: "{count} Schritte"
+  checklists.count: "{count} Prüfpunkte"
   moved: "Diese Seite ist umgezogen:"
   next.title: "Wie geht es weiter"
   next.buying: "Bevor du BTX kaufst oder empfängst"
@@ -821,6 +825,8 @@ es:
   skip: Ir al contenido
   nav.label: Páginas
   lang.label: Idioma
+  start.count: "{count} pasos"
+  checklists.count: "{count} comprobaciones"
   moved: "Esta página se ha trasladado:"
   next.title: "¿Y ahora?"
   next.buying: "Antes de comprar o recibir BTX"
@@ -1204,6 +1210,8 @@ fr:
   skip: Aller au contenu
   nav.label: Pages
   lang.label: Langue
+  start.count: "{count} étapes"
+  checklists.count: "{count} vérifications"
   moved: "Cette page a déménagé :"
   next.title: "Et ensuite"
   next.buying: "Avant d'acheter ou de recevoir des BTX"
@@ -1581,6 +1589,8 @@ zh:
   skip: 跳到正文
   nav.label: 页面
   lang.label: 语言
+  start.count: "{count} 个步骤"
+  checklists.count: "{count} 项检查"
   moved: "此页面已迁移："
   next.title: "接下来"
   next.buying: "购买或接收 BTX 之前"

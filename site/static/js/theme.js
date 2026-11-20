@@ -1,6 +1,6 @@
 // btx-community.com: the light and dark theme. Loaded in <head> without defer, so a stored choice
 // is set on <html> before the page is drawn and the page does not flash in the other theme.
-// Without a stored choice, and without JavaScript, the stylesheet follows the system setting.
+// Without a stored choice, and without JavaScript, the page is dark.
 // The choice is kept in localStorage on this device only; nothing is sent anywhere.
 (function () {
   "use strict";
@@ -22,7 +22,7 @@
     if (chosen === "light" || chosen === "dark") {
       return chosen;
     }
-    return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    return "dark";
   }
 
   // The button says what a click does ("Switch to light theme"), in the page's language.

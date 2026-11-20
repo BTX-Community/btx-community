@@ -12,8 +12,9 @@
         <h2 class="c-section-title" id="start-title">{{ ui["start.title"] }}</h2>
         <div class="c-audiences c-audiences--two">
           {% for audience in audiences %}
-          <article class="c-audience c-audience--{{ audience.id }}" id="{{ audience.id }}">
-            <h3 class="c-audience__title">{{ audience.title }}</h3>
+          <article class="c-audience c-audience--folded c-audience--{{ audience.id }}" id="{{ audience.id }}">
+            <details class="c-fold c-audience__fold">
+            <summary><h3 class="c-audience__title">{{ audience.title }}</h3> <span class="c-audience__count">{{ ui["start.count"].format(count=audience.steps | length) }}</span></summary>
             <p class="c-audience__text">{{ audience.text }}</p>
             <ul class="c-tasks">
               {% for step in audience.steps %}
@@ -27,6 +28,7 @@
               {% endif %}
               {% endfor %}
             </ul>
+            </details>
           </article>
           {% endfor %}
         </div>
@@ -35,15 +37,17 @@
       {% if checklists %}
       <section class="c-checks" id="check" aria-labelledby="check-title">
         <h2 class="c-section-title" id="check-title">{{ ui["checklists.title"] }}</h2>
-        <div class="c-audiences">
+        <div class="c-audiences c-audiences--two">
           {% for checklist in checklists %}
-          <article class="c-audience c-audience--check" id="{{ checklist.id }}">
-            <h3 class="c-audience__title">{{ checklist.title }}</h3>
+          <article class="c-audience c-audience--folded c-audience--check" id="{{ checklist.id }}">
+            <details class="c-fold c-audience__fold">
+            <summary><h3 class="c-audience__title">{{ checklist.title }}</h3> <span class="c-audience__count">{{ ui["checklists.count"].format(count=checklist.items | length) }}</span></summary>
             <ol class="c-steps">
               {% for item in checklist.items %}
               <li>{{ item }}</li>
               {% endfor %}
             </ol>
+            </details>
           </article>
           {% endfor %}
         </div>
