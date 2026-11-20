@@ -29,7 +29,9 @@
 
         {% for category in categories %}
         <section class="c-category c-category--{{ category.id }}" id="cat-{{ category.id }}" aria-labelledby="cat-{{ category.id }}-title">
-          <h3 class="c-category__title" id="cat-{{ category.id }}-title">{{ category.title }} <span class="c-count">{{ category.entries | length }}</span></h3>
+          {#- One category open at a time (details with the same name); the first one at the start. #}
+          <details class="c-fold c-category__fold" name="links-category"{% if loop.first %} open{% endif %}>
+          <summary><h3 class="c-category__title" id="cat-{{ category.id }}-title">{{ category.title }} <span class="c-count">{{ category.entries | length }}</span></h3></summary>
           {% if category.risk %}
           <p class="c-risk"><strong>{{ ui["risk"] }}:</strong> {{ category.risk }}</p>
           {% endif %}
@@ -50,6 +52,7 @@
             </li>
             {% endfor %}
           </ul>
+          </details>
         </section>
         {% endfor %}
 

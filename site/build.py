@@ -1445,7 +1445,7 @@ class AudienceView:
 
 @dataclass(frozen=True)
 class EntryView:
-    """A directory entry in one language; ``number`` is its running number on the page."""
+    """A directory entry in one language; ``number`` is its running number in its category."""
 
     id: str
     number: str
@@ -1557,7 +1557,7 @@ def _step(step: Step, say: Localizer) -> StepView:
 def community_views(
     page: CommunityPage, say: Localizer
 ) -> tuple[tuple[AudienceView, ...], tuple[CategoryView, ...], tuple[DocumentView, ...]]:
-    """The audience cards, categories and documents in one language, entries numbered in page order."""
+    """The audience cards, categories and documents in one language, entries numbered within their category."""
     audiences = tuple(
         AudienceView(
             id=a.id,
@@ -1568,11 +1568,9 @@ def community_views(
         for a in page.audiences
     )
     categories = []
-    number = 0
     for category in page.categories:
         entries = []
-        for entry in category.entries:
-            number += 1
+        for number, entry in enumerate(category.entries, start=1):
             entries.append(
                 EntryView(
                     id=entry.id,
