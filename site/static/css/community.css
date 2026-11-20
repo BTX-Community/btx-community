@@ -803,8 +803,16 @@ a {
    title until opened; an open card does not stretch its closed neighbour. */
 .c-audiences--two {
   grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));
-  align-items: start;
   gap: 20px 16px;
+}
+
+/* While a card is open, its closed neighbour keeps its own height instead of stretching. */
+.c-audiences--two:has(> .c-audience > details[open]) {
+  align-items: start;
+}
+
+.c-audience--folded > .c-audience__fold:not([open]) {
+  height: 100%;
 }
 
 .c-audience__fold > summary .c-audience__title {
@@ -839,9 +847,12 @@ a {
   padding: 0 22px;
 }
 
-/* Marker, title and count on one line; a long title wraps itself, the count never moves down. */
+/* Marker, title and count on one line; a long title wraps itself, the count never moves down.
+   Every closed card has room for a title of two lines, so a title that wraps does not make its
+   card taller than the one beside it. */
 .c-audience__fold > summary {
   gap: 12px;
+  min-height: 84px;
   padding: 14px 0;
 }
 
