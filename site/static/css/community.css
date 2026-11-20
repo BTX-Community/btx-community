@@ -256,7 +256,7 @@ a {
   background: transparent;
   color: var(--text);
   font: inherit;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1;
   cursor: pointer;
 }
@@ -330,7 +330,7 @@ a {
   width: 2.4em;
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .c-chip {
@@ -373,8 +373,6 @@ a {
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: 13px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
 }
 
 .c-hero__title {
@@ -393,8 +391,8 @@ a {
 .c-hero__lead {
   max-width: 44rem;
   margin: 14px 0 0;
-  color: var(--muted);
-  font-size: 17px;
+  color: var(--text);
+  font-size: 18px;
 }
 
 /* --- Live strip ------------------------------------------------------------------------- */
@@ -405,7 +403,7 @@ a {
   gap: 10px;
   margin: 0 0 16px;
   font-family: var(--font-mono);
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: 0.02em;
 }
 
@@ -473,10 +471,9 @@ a {
 
 .c-tile dt {
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .c-tile dd {
@@ -514,10 +511,9 @@ a {
 .c-subtitle {
   margin: 22px 0 10px;
   color: var(--muted);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 600;
 }
 
 /* Shown only while the status page lists a rule change ahead of the chain tip. */
@@ -596,7 +592,7 @@ a {
   margin: 12px 0 0;
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 /* --- Development activity: hidden until development.json gives a usable answer ----------- */
@@ -613,7 +609,7 @@ a {
 .c-dev__lead,
 .c-dev__note {
   margin: 0 0 14px;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-dev__note {
@@ -640,9 +636,9 @@ a {
 .c-branch--head {
   border-top: 0;
   color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  font-weight: 600;
 }
 
 .c-branch__name {
@@ -656,7 +652,7 @@ a {
   border: 1px solid var(--border);
   border-radius: 999px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .c-branch__commits,
@@ -801,7 +797,7 @@ a {
 
 .c-fact p {
   margin: 0;
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -813,7 +809,7 @@ a {
 .c-caveats {
   margin: 0 0 12px;
   padding-left: 20px;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-caveats li {
@@ -879,7 +875,7 @@ a {
 
 .c-audience__text {
   margin: 0 0 14px;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-steps {
@@ -903,7 +899,7 @@ a {
   top: 9px;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .c-steps a {
@@ -947,6 +943,8 @@ a {
 .c-fold > summary > .c-section-title,
 .c-fold > summary > .c-subtitle {
   margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 600;
 }
 
 .c-fold--sub {
@@ -1012,7 +1010,7 @@ a {
 
 .c-task__detail {
   margin: 2px 0 0;
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -1034,7 +1032,7 @@ a {
 /* --- Directory -------------------------------------------------------------------------- */
 
 .c-muted {
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-jump {
@@ -1098,9 +1096,7 @@ a {
   margin: 0 0 14px;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 15px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 16px;
 }
 
 .c-category__title::after {
@@ -1112,7 +1108,7 @@ a {
 
 .c-count {
   color: var(--faint);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .c-cards {
@@ -1149,12 +1145,12 @@ a {
 .c-card__number {
   color: var(--faint);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .c-card__name {
   font-family: var(--font-mono);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
 }
 
@@ -1174,13 +1170,11 @@ a {
   border-radius: 999px;
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: 13px;
 }
 
 .c-card__text {
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -1194,7 +1188,7 @@ a {
 
 .c-removed {
   margin-top: 40px;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-removed ul {
@@ -1328,15 +1322,14 @@ a {
 
 .c-filter__label {
   color: var(--faint);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .c-filter__count {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
 }
 
 .c-filter__check {
@@ -1357,7 +1350,7 @@ a {
   margin: 0;
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 /* Tables: the test runs, coverage by area, the registry, the gates and the week. */
@@ -1387,11 +1380,10 @@ a {
 .c-table thead th {
   border-top: 0;
   color: var(--muted);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
   white-space: nowrap;
+  font-family: var(--font-sans);
 }
 
 .c-table tbody th {
@@ -1423,7 +1415,7 @@ a {
 .c-table__hint {
   color: var(--muted);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .c-table td.c-table__num .c-table__note {
@@ -1492,7 +1484,7 @@ a {
   border-radius: 999px;
   color: var(--level);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   white-space: nowrap;
 }
 
@@ -1584,15 +1576,14 @@ a {
 .c-lane__meta dt {
   padding-top: 3px;
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .c-lane__meta dd {
   margin: 0;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-lane__done {
@@ -1614,10 +1605,9 @@ a {
 .c-lane__label {
   margin: 0 0 6px;
   color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .c-lane__pack {
@@ -1671,6 +1661,24 @@ a {
 }
 
 @media (max-width: 600px) {
+  /* Start page on a phone: the network in three values (status, height, release) and the verdicts;
+     node count, block time and signers stay on the network page and the status page. */
+  .c-live--home .c-tiles > .c-tile:nth-child(n + 4) {
+    display: none;
+  }
+
+  .c-live--home .c-tile {
+    padding: 10px 12px;
+  }
+
+  .c-live--home .c-verdicts {
+    gap: 6px;
+  }
+
+  .c-live--home .c-verdict {
+    padding: 2px 10px;
+  }
+
   .c-hero {
     padding-top: 24px;
   }
@@ -1852,15 +1860,14 @@ a {
 .c-role__facts dt {
   margin-top: 12px;
   color: var(--faint);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .c-role__facts dd {
   margin: 2px 0 0;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-role__facts dd a,
@@ -2086,7 +2093,7 @@ a {
 
 .c-map__list p {
   margin: 0;
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
 }
 
@@ -2102,21 +2109,20 @@ a {
   border-radius: 50%;
   place-items: center;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .c-map__cites {
   margin-top: 4px !important;
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 
 .c-map__cites-label {
   margin-right: 2px;
   color: var(--faint);
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-family: var(--font-sans);
+  font-weight: 600;
 }
 
 .c-map__cite {
@@ -2127,7 +2133,7 @@ a {
 
 .c-map__cites code {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   overflow-wrap: anywhere;
 }
 
@@ -2187,7 +2193,7 @@ a {
 .c-ai-files {
   margin: 0 0 6px;
   padding-left: 20px;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .c-ai-files li {
@@ -2222,13 +2228,13 @@ a {
   margin: 0 0 6px;
   color: var(--a-node-tools);
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .c-home__items {
   margin: 0;
   padding-left: 18px;
-  color: var(--muted);
+  color: var(--text);
   font-size: 14px;
   overflow-wrap: anywhere;
 }

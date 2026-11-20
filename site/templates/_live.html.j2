@@ -1,5 +1,5 @@
 {# The live strip; full=True adds "BTX in numbers" (network page). #}
-      <section class="c-live c-live--unknown" aria-labelledby="live-title" id="live" data-api="{{ status_api }}" data-lang="{{ lang }}"
+      <section class="c-live c-live--unknown{% if not full %} c-live--home{% endif %}" aria-labelledby="live-title" id="live" data-api="{{ status_api }}" data-lang="{{ lang }}"
                data-level-green="{{ ui['level.green'] }}" data-level-yellow="{{ ui['level.yellow'] }}"
                data-level-red="{{ ui['level.red'] }}" data-level-unknown="{{ ui['level.unknown'] }}">
         <div class="c-live__head">
