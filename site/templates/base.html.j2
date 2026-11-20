@@ -40,6 +40,11 @@
       </details>
     </header>
 
+    <a class="c-badge c-live--unknown" id="status-badge" href="{{ nav_href.network }}" data-api="{{ status_api }}" data-lang="{{ lang }}" aria-label="{{ ui['live.title'] }}">
+      <span class="c-badge__head"><span class="c-pulse" aria-hidden="true"></span><span data-live="overall" data-label-normal="{{ ui['overall.normal'] }}" data-label-degraded="{{ ui['overall.degraded'] }}" data-label-incident="{{ ui['overall.incident'] }}">{{ ui["live.title"] }}</span></span>
+      <span class="c-badge__row"><span>{{ ui["badge.block"] }}</span> <b data-live="height">–</b></span>
+      <span class="c-badge__row"><span>{{ ui["badge.release"] }}</span> <b data-live="release">–</b></span>
+    </a>
     <main id="main">
 {% block content %}{% endblock %}
     </main>

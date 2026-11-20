@@ -368,6 +368,62 @@ a {
   font-size: 18px;
 }
 
+/* --- Status box: the network in three values at the top right of every page ------------- */
+
+.c-badge {
+  --state: var(--grey);
+
+  float: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 200px;
+  margin: 40px 0 16px 24px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--state);
+  border-radius: 12px;
+  background: var(--bg-raised);
+  color: var(--text);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.c-badge:hover {
+  border-color: var(--accent);
+  border-left-color: var(--state);
+}
+
+.c-badge__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--state);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.c-badge__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+}
+
+.c-badge__row b {
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+/* Sections below the title do not flow around the box. */
+main > section:not(.c-intro),
+main > nav,
+main > div {
+  clear: both;
+}
+
 /* --- Live strip ------------------------------------------------------------------------- */
 
 .c-section-title {
@@ -1718,39 +1774,25 @@ a {
 }
 
 @media (max-width: 600px) {
-  /* Start page on a phone: the network as one short status line (status, block height, latest
-     release, side by side without boxes). Node count, block time, signers and the verdicts stay
-     on the network page and the status page. */
+  /* Phone: the status box is one line under the menu. */
+  .c-badge {
+    float: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 14px;
+    margin: 12px 0 0;
+    padding: 8px 12px;
+  }
+
+  .c-badge__row {
+    gap: 6px;
+  }
+
+  /* Start page on a phone: the status box at the top already shows status, block height and
+     release, so the full panel is left out; the box links to the network page. */
   .c-live--home {
-    padding: 12px 14px;
-  }
-
-  .c-live--home .c-section-title {
-    margin-bottom: 8px;
-    font-size: 16px;
-  }
-
-  .c-live--home .c-tiles {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .c-live--home .c-tiles > .c-tile:nth-child(n + 4),
-  .c-live--home .c-verdicts {
     display: none;
-  }
-
-  .c-live--home .c-tile,
-  .c-live--home .c-tile--status {
-    grid-column: auto;
-    padding: 0;
-    border: 0;
-    background: none;
-  }
-
-  .c-live--home .c-tile dd {
-    margin-top: 2px;
-    font-size: 16px;
   }
 
   .c-hero {

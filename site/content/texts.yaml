@@ -12,7 +12,7 @@ en:
   meta_description: >-
     Start page of the BTX community: information and help for newcomers, miners and node
     operators, with the network's live state and a checked link directory.
-  kicker: Community hub
+  kicker: Our Community Hub
   lead: >-
     A community page for everyone interested in BTX: what it is, how to mine it, how to run a
     node, and where to find help. Run by community members, not by a company.
@@ -67,6 +67,8 @@ en:
   skip: Skip to content
   nav.label: Pages
   lang.label: Language
+  badge.block: "Block"
+  badge.release: "Release"
   start.count: "{count} steps"
   checklists.count: "{count} checks"
   moved: "This page has moved:"
@@ -387,7 +389,7 @@ de:
   meta_description: >-
     Startseite der BTX-Community: Informationen und Hilfe für Interessierte, Miner und
     Node-Betreiber, mit dem Live-Zustand des Netzes und einem geprüften Linkverzeichnis.
-  kicker: Community-Treffpunkt
+  kicker: Unser Community-Treffpunkt
   lead: >-
     Eine Community-Seite für alle, die sich für BTX interessieren: was es ist, wie man es mint,
     wie man einen Node betreibt und wo es Hilfe gibt. Betrieben von Community-Mitgliedern,
@@ -443,6 +445,8 @@ de:
   skip: Zum Inhalt springen
   nav.label: Seiten
   lang.label: Sprache
+  badge.block: "Block"
+  badge.release: "Version"
   start.count: "{count} Schritte"
   checklists.count: "{count} Prüfpunkte"
   moved: "Diese Seite ist umgezogen:"
@@ -770,7 +774,7 @@ es:
   meta_description: >-
     Página de inicio de la comunidad BTX: información y ayuda para recién llegados, mineros y
     operadores de nodos, con el estado de la red en directo y un directorio de enlaces revisado.
-  kicker: Punto de encuentro
+  kicker: Nuestro punto de encuentro
   lead: >-
     Una página de la comunidad para todos los interesados en BTX: qué es, cómo minarlo, cómo operar
     un nodo y dónde encontrar ayuda. La llevan miembros de la comunidad, no una empresa.
@@ -825,6 +829,8 @@ es:
   skip: Ir al contenido
   nav.label: Páginas
   lang.label: Idioma
+  badge.block: "Bloque"
+  badge.release: "Versión"
   start.count: "{count} pasos"
   checklists.count: "{count} comprobaciones"
   moved: "Esta página se ha trasladado:"
@@ -1154,7 +1160,7 @@ fr:
   meta_description: >-
     Page d'accueil de la communauté BTX : informations et aide pour les nouveaux venus, les mineurs
     et les opérateurs de nœuds, avec l'état du réseau en direct et un annuaire de liens vérifié.
-  kicker: Point de rencontre
+  kicker: Notre point de rencontre
   lead: >-
     Une page communautaire pour toutes celles et tous ceux qui s'intéressent à BTX : ce que c'est,
     comment le miner, comment faire tourner un nœud et où trouver de l'aide. Tenue par des membres
@@ -1210,6 +1216,8 @@ fr:
   skip: Aller au contenu
   nav.label: Pages
   lang.label: Langue
+  badge.block: "Bloc"
+  badge.release: "Version"
   start.count: "{count} étapes"
   checklists.count: "{count} vérifications"
   moved: "Cette page a déménagé :"
@@ -1540,7 +1548,7 @@ zh:
   title: BTX 社区
   meta_description: >-
     BTX 社区首页：为新手、矿工和节点运营者提供信息与帮助，附网络实时状态和经过核实的链接目录。
-  kicker: 社区枢纽
+  kicker: 我们的社区枢纽
   lead: >-
     一个面向所有关注 BTX 的人的社区页面：BTX 是什么、如何挖矿、如何运行节点，以及在哪里获得帮助。由社区成员运营，而非公司。
   live.title: 网络实时状态
@@ -1589,6 +1597,8 @@ zh:
   skip: 跳到正文
   nav.label: 页面
   lang.label: 语言
+  badge.block: "区块"
+  badge.release: "版本"
   start.count: "{count} 个步骤"
   checklists.count: "{count} 项检查"
   moved: "此页面已迁移："
