@@ -3038,8 +3038,8 @@ translations:
   fr: "Point de départ"
 - en: "Rather build something than run a machine? Community projects"
   fr: "Plutôt construire quelque chose que faire tourner une machine ? Projets de la communauté"
-- en: "Venues for trading BTX"
-  fr: "Plateformes d'échange de BTX"
+- en: "Markets for BTX: what exists, what is missing"
+  fr: "Marchés pour BTX : ce qui existe, ce qui manque"
 - en: >-
     A place where people trade BTX against other coins, run by its own operators: an order book, or
     a front-end over SwapNet's swaps.

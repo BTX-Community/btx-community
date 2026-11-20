@@ -2298,8 +2298,8 @@ translations:
   zh: "从这里入手"
 - en: "Rather build something than run a machine? Community projects"
   zh: "比起运行机器，更想动手构建？社区项目"
-- en: "Venues for trading BTX"
-  zh: "BTX 交易场所"
+- en: "Markets for BTX: what exists, what is missing"
+  zh: "BTX 市场：已有什么，缺少什么"
 - en: >-
     A place where people trade BTX against other coins, run by its own operators: an order book, or
     a front-end over SwapNet's swaps.

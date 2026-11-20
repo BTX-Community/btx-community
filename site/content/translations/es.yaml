@@ -2997,8 +2997,8 @@ translations:
   es: "Punto de partida"
 - en: "Rather build something than run a machine? Community projects"
   es: "¿Prefieres construir algo antes que operar una máquina? Proyectos de la comunidad"
-- en: "Venues for trading BTX"
-  es: "Lugares para negociar BTX"
+- en: "Markets for BTX: what exists, what is missing"
+  es: "Mercados para BTX: qué existe y qué falta"
 - en: >-
     A place where people trade BTX against other coins, run by its own operators: an order book, or
     a front-end over SwapNet's swaps.
