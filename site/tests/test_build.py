@@ -772,6 +772,19 @@ class PageTest(unittest.TestCase):
     def tearDownClass(cls) -> None:
         cls._tmp.cleanup()
 
+    def test_the_old_projects_folder_forwards_with_its_anchor(self) -> None:
+        for lang in build.LANGUAGES:
+            prefix = "" if lang == "en" else f"{lang}/"
+            html = (self.out / prefix / "docs" / "index.html").read_text(encoding="utf-8")
+            target = build.page_path(lang, "docs")
+            with self.subTest(lang=lang):
+                self.assertTrue(target.endswith("/projects/"))
+                self.assertIn(f'<meta http-equiv="refresh" content="1; url={target}">', html)
+                self.assertIn(f'<link rel="canonical" href="{build.SITE_URL}{target}">', html)
+                self.assertIn(f'href="{target}" data-moved', html)
+                self.assertIn('<meta name="robots" content="noindex">', html)
+                self.assertTrue((self.out / target.strip("/") / "index.html").is_file())
+
     def test_pages_without_an_onward_link_get_one(self) -> None:
         # Learn, Network and Links used to end without a link to another page of the site.
         for lang in build.LANGUAGES:
@@ -786,9 +799,17 @@ class PageTest(unittest.TestCase):
     def test_the_built_pages_obey_the_csp(self) -> None:
         # default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'
         pages = sorted(self.out.rglob("index.html"))
-        self.assertEqual(len(pages), len(build.LANGUAGES) * len(build.ALL_PAGES) + len(build.DRAFT_PAGES))
+        moved = {str(Path(build.page_path(lang, "home").strip("/")) / old / "index.html")
+                 for lang in build.LANGUAGES for old in build.MOVED_PAGES.values()}
+        self.assertEqual(len(pages), len(build.LANGUAGES) * (len(build.ALL_PAGES) + len(build.MOVED_PAGES))
+                         + len(build.DRAFT_PAGES))
         for page in pages:
             html = page.read_text(encoding="utf-8")
+            if str(page.relative_to(self.out)) in moved:
+                # A forwarding page: only redirect.js, plus the stylesheet.
+                self.assertEqual(re.findall(r"<script[^>]*>", html), [
+                    f'<script src="{build.asset_url("js/redirect.js")}" defer>'])
+                continue
             with self.subTest(page=str(page.relative_to(self.out))):
                 self.assertNotIn("<style", html)
                 self.assertNotIn("javascript:", html)
@@ -914,7 +935,9 @@ class PageTest(unittest.TestCase):
                 for path, other in pages.items():
                     if path.parts[-2:-1] != (draft,):
                         self.assertNotIn(f'href="/{draft}/', other, str(path))
-                        self.assertNotIn("noindex", other, str(path))
+                        # Forwarding pages of a moved page are noindex too; every real page is not.
+                        if path.parts[-2:-1] not in {(old,) for old in build.MOVED_PAGES.values()}:
+                            self.assertNotIn("noindex", other, str(path))
                 for name in ("llms.txt", "llms-full.txt"):
                     self.assertNotIn(draft, (self.out / name).read_text(encoding="utf-8"))
 

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="{{ html_lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="robots" content="noindex">
+  {#- One second, so redirect.js can forward with the #anchor first; without it the refresh does. #}
+  <meta http-equiv="refresh" content="1; url={{ target }}">
+  <link rel="canonical" href="{{ canonical }}">
+  <title>{{ page_title }} · {{ ui["title"] }}</title>
+  <link rel="icon" href="{{ icon_url }}" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="{{ touch_icon_url }}">
+  <link rel="stylesheet" href="{{ css_url }}">
+  <script src="{{ redirect_js_url }}" defer></script>
+</head>
+<body class="c">
+  <main class="c-shell" id="main">
+    <p class="c-intro">{{ ui["moved"] }} <a class="c-link" href="{{ target }}" data-moved>{{ page_title }} →</a></p>
+  </main>
+</body>
+</html>

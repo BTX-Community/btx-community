@@ -790,7 +790,7 @@
     [/^development$/, "network/"],
     [/^(about|next|fact-[a-z0-9-]+)$/, "learn/"],
     [/^(links|removed-title|cat-[a-z0-9-]+)$/, "links/"],
-    [/^(documents|doc-[a-z0-9-]+)$/, "docs/"],
+    [/^(documents|doc-[a-z0-9-]+)$/, "projects/"],
   ];
 
   // Sections of the developers page that moved to its sub-page "Ongoing work" (/dev/work/).

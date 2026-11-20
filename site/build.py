@@ -73,6 +73,10 @@ sub-menu ``SUBMENUS``."""
 SUBMENUS = {"dev": ("dev", "dev-work")}
 """The sub-menu of a menu page, in order: the page itself and its sub-pages (texts ``subnav.<id>``)."""
 ALL_PAGES = PAGES + tuple(SUBPAGES)
+PAGE_DIRS = {"docs": "projects"}
+"""Pages whose folder differs from their id: the menu item Projects lives at /projects/."""
+MOVED_PAGES = {"docs": "docs"}
+"""Old folders that now hold only a redirect to the page (id: old folder), in every language."""
 NEXT_LINKS = {
     "learn": (("next.buying", "home", "#before-buying"), ("next.wallets", "links", "#cat-wallets"), ("next.network", "network", "")),
     "network": (("next.infra", "infra", ""), ("next.work", "dev-work", ""), ("next.learn", "learn", "")),
@@ -2595,7 +2599,7 @@ def page_path(lang: str, page: str = "home") -> str:
     prefix = "/" if lang == "en" else f"/{lang}/"
     if page in SUBPAGES:
         return f"{prefix}{SUBPAGES[page][1]}/"
-    return prefix if page == "home" else f"{prefix}{page}/"
+    return prefix if page == "home" else f"{prefix}{PAGE_DIRS.get(page, page)}/"
 
 
 def context(
@@ -2666,6 +2670,7 @@ def context(
         "css_url": asset_url("css/community.css"),
         "js_url": asset_url("js/community.js"),
         "theme_js_url": asset_url("js/theme.js"),
+        "redirect_js_url": asset_url("js/redirect.js"),
         "ci_js_url": asset_url("js/ci.js"),
         "icon_url": asset_url("icons/favicon.svg"),
         "touch_icon_url": asset_url("icons/apple-touch-icon.png"),
@@ -2852,6 +2857,14 @@ def build(out: Path, version: str) -> None:
             lane=fast_lane, lane_checked=fast_lane.checked.isoformat(),
         )
         rendered[page_path("en", page_id)] = env.get_template(f"{page_id}.html.j2").render(draft)
+
+    # Links shared before a page moved keep working: the old folder holds a page that forwards.
+    for page_id, old in MOVED_PAGES.items():
+        for lang in LANGUAGES:
+            moved = context(page, guide, hub, texts, lang, version, page_id, sayers[lang], infra, projects)
+            moved.update(target=page_path(lang, page_id), canonical=_site_url(page_path(lang, page_id)))
+            old_path = ("/" if lang == "en" else f"/{lang}/") + f"{old}/"
+            rendered[old_path] = env.get_template("_moved.html.j2").render(moved)
 
     if out.exists():
         shutil.rmtree(out)
