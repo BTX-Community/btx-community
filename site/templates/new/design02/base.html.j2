@@ -1,0 +1,198 @@
+{#- Draft 02 "Matrix": the frame every page shares. A page sets title, description, crumb and,
+    for a reading page, steps = [(id, label, count)] and guide (true: numbered steps with a
+    progress bar). The home page fills block "home"; every other page fills block "content". -#}
+{%- import "_draft.html.j2" as drafting with context -%}
+{%- set menu = [
+  ("start", "Start here", draft.pages.home),
+  ("take-part", "Take part", draft.pages.infra),
+  ("network", "Network", draft.pages.network),
+  ("directory", "Directory", draft.pages.links),
+  ("build", "Build", draft.pages.dev),
+] -%}
+{%- set section_of = {"home": "start", "learn": "start", "infra": "take-part", "network": "network",
+                      "links": "directory", "dev": "build", "dev-work": "build", "projects": "build"} -%}
+{%- set subpages = {
+  "start": [("home", "Overview", draft.pages.home), ("learn", "Learn BTX", draft.pages.learn)],
+  "build": [("dev", ui["subnav.dev"], draft.pages.dev), ("dev-work", ui["subnav.dev-work"], draft.pages["dev-work"]), ("projects", "Projects", draft.pages.projects)],
+} -%}
+{%- set current = section_of[draft.page] -%}
+{%- set menu_label = {"start": "Start here", "build": "Build"} -%}
+{%- set _steps = steps if steps is defined else [] -%}
+{%- set _guide = guide if guide is defined else false -%}
+{%- set _lead = lead if lead is defined else none -%}
+{%- set _badges = badges if badges is defined else [] -%}
+{%- set _onward = onward if onward is defined else [] -%}
+<!doctype html>
+<html lang="en" class="d02-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  {{ drafting.head(draft, title, description) }}
+  <link rel="preload" href="/static/fonts/new/Unbounded-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+  {%- for url in draft.js_urls %}
+  {%- if "design02-theme" in url %}
+  <script src="{{ url }}"></script>
+  {%- endif %}
+  {%- endfor %}
+  <script src="{{ js_url }}" defer></script>
+  {%- for url in draft.js_urls %}
+  {%- if "design02-theme" not in url %}
+  <script src="{{ url }}" defer></script>
+  {%- endif %}
+  {%- endfor %}
+{%- block scripts %}{% endblock %}
+</head>
+<body class="d02">
+  <a class="d02-skip" href="#main">{{ ui["skip"] }}</a>
+  {{ drafting.banner(draft) }}
+  <header class="d02-top">
+    <div class="d02-wrap d02-top__in">
+      <a class="d02-logo" href="{{ draft.pages.home }}">
+        <svg class="d02-logo__mark" viewBox="0 0 25 25" width="25" height="25" aria-hidden="true" focusable="false">
+          {%- for row in range(3) %}{% for col in range(3) %}
+          <rect class="d02-logo__cell{% if row == 1 and col == 1 %} d02-logo__cell--on{% endif %}" x="{{ col * 9 }}" y="{{ row * 9 }}" width="7" height="7"/>
+          {%- endfor %}{% endfor %}
+        </svg>
+        <span class="d02-logo__name">BTX</span><span class="d02-logo__sub">/community</span><span class="d02-sr">, start page</span>
+      </a>
+      <nav class="d02-nav" aria-label="{{ ui['nav.label'] }}">
+        {%- for id, label, href in menu %}
+        <a class="d02-nav__a" href="{{ href }}"{% if id == current %} aria-current="page"{% endif %}>{{ label }}</a>
+        {%- endfor %}
+      </nav>
+      <div class="d02-tools">
+        {%- if draft.page != "home" %}
+        {#- The live state on every page: always a word, never only a colour. #}
+        <a class="d02-pill" id="status-badge" href="{{ draft.pages.network }}" data-api="{{ status_api }}" data-lang="{{ lang }}">
+          <span class="d02-dot" aria-hidden="true"></span><span class="d02-sr">{{ ui["live.status"] }}: </span><span data-live="overall" data-label-normal="{{ ui['overall.normal'] }}" data-label-degraded="{{ ui['overall.degraded'] }}" data-label-incident="{{ ui['overall.incident'] }}">No data</span><span class="d02-pill__h"><span class="d02-sr">, {{ ui["live.height"] }} </span><span data-live="height"></span></span>
+        </a>
+        {%- endif %}
+        <a class="d02-tool d02-tool--search" href="{{ draft.pages.links }}#filter" data-search-link>
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="d02-tool__t">Search</span><span class="d02-sr"> the directory</span><kbd class="d02-kbd" aria-hidden="true">/</kbd>
+        </a>
+        <span class="d02-tool d02-tool--lang" title="This draft is in English only"><span aria-hidden="true">EN</span><span class="d02-sr">This draft is in English only</span></span>
+        <button class="d02-tool d02-tool--theme" type="button" data-theme-switch data-to-light="{{ ui['theme.to_light'] }}" data-to-dark="{{ ui['theme.to_dark'] }}" aria-label="{{ ui['theme.to_light'] }}" hidden>
+          <svg class="d02-theme__sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="d02-theme__moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
+        <details class="d02-menu">
+          <summary class="d02-tool d02-menu__btn"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="d02-sr">Menu</span></summary>
+          <nav class="d02-sheet" aria-label="{{ ui['nav.label'] }}">
+            <ul class="d02-sheet__list">
+              {%- for id, label, href in menu %}
+              <li><a class="d02-sheet__a" href="{{ href }}"{% if id == current %} aria-current="page"{% endif %}><span class="d02-sheet__n" aria-hidden="true">{{ "%02d" | format(loop.index) }}</span>{{ label }}</a>
+                {%- if id in subpages %}
+                <ul class="d02-sheet__sub">
+                  {%- for sid, slabel, shref in subpages[id] %}
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="{{ shref }}"{% if sid == draft.page %} aria-current="page"{% endif %}>{{ slabel }}</a></li>
+                  {%- endfor %}
+                </ul>
+                {%- endif %}
+              </li>
+              {%- endfor %}
+            </ul>
+            <p class="d02-sheet__note">This draft is in English only.</p>
+          </nav>
+        </details>
+      </div>
+    </div>
+    {%- if current in subpages %}
+    <nav class="d02-subnav" aria-label="{{ menu_label[current] }}">
+      <div class="d02-wrap d02-subnav__in">
+        {%- for sid, slabel, shref in subpages[current] %}
+        <a class="d02-subnav__a" href="{{ shref }}"{% if sid == draft.page %} aria-current="page"{% endif %}>{{ slabel }}</a>
+        {%- endfor %}
+      </div>
+    </nav>
+    {%- endif %}
+  </header>
+{%- if draft.page == "home" %}
+  <main id="main" class="d02-home">
+{% block home %}{% endblock %}
+  </main>
+{%- else %}
+  <div class="d02-wrap d02-read">
+    {%- if _steps %}
+    <nav class="d02-rail" aria-label="{{ 'Steps on this page' if _guide else 'On this page' }}" data-rail>
+      <p class="d02-rail__k">{{ "Steps" if _guide else "On this page" }}</p>
+      <ol class="d02-rail__list">
+        {%- for id, label, count in _steps %}
+        <li><a class="d02-rail__a" href="#{{ id }}"><span class="d02-rail__n" aria-hidden="true">{{ "%02d" | format(loop.index) }}</span><span class="d02-rail__t">{{ label }}</span>{% if count %}<span class="d02-rail__c">{{ count }}</span>{% endif %}</a></li>
+        {%- endfor %}
+      </ol>
+    </nav>
+    {%- endif %}
+    <main id="main" class="d02-main{% if not _steps %} d02-main--wide{% endif %}">
+      <header class="d02-head">
+        <p class="d02-mark">// {{ crumb }}</p>
+        <h1 class="d02-h1">{{ heading }}</h1>
+        {%- if _lead %}
+        <p class="d02-lead">{{ _lead }}</p>
+        {%- endif %}
+        {%- if _badges %}
+        <p class="d02-badges">
+          {%- for kind, text in _badges %}
+          <span class="d02-badge d02-badge--{{ kind }}">{{ text }}</span>
+          {%- endfor %}
+        </p>
+        {%- endif %}
+        {%- if _guide and _steps %}
+        <div class="d02-progress" data-progress>
+          <p class="d02-progress__label">Step <span data-progress-now>01</span> of {{ "%02d" | format(_steps | length) }}</p>
+          <ol class="d02-progress__bar" aria-hidden="true">
+            {%- for id, label, count in _steps %}
+            <li class="d02-progress__seg{% if loop.first %} is-done{% endif %}"></li>
+            {%- endfor %}
+          </ol>
+        </div>
+        {%- endif %}
+      </header>
+      {%- if _steps %}
+      <details class="d02-otp">
+        <summary class="d02-otp__sum">{{ "Steps on this page" if _guide else "On this page" }} <span class="d02-otp__c">{{ _steps | length }}</span><span class="d02-chev" aria-hidden="true"></span></summary>
+        <ol class="d02-otp__list">
+          {%- for id, label, count in _steps %}
+          <li><a class="d02-otp__a" href="#{{ id }}"><span class="d02-rail__n" aria-hidden="true">{{ "%02d" | format(loop.index) }}</span>{{ label }}{% if count %} <span class="d02-rail__c">{{ count }}</span>{% endif %}</a></li>
+          {%- endfor %}
+        </ol>
+      </details>
+      {%- endif %}
+{% block content %}{% endblock %}
+      {%- if _onward %}
+      <nav class="d02-next" aria-label="Next">
+        {%- set first = _onward[0] %}
+        <a class="d02-next__card" href="{{ first[1] | d }}">
+          <span class="d02-next__k">next · {{ first[0] }}</span>
+          <span class="d02-next__arrow" aria-hidden="true">→</span>
+        </a>
+        {%- if _onward | length > 1 %}
+        <ul class="d02-next__more">
+          {%- for label, href in _onward[1:] %}
+          <li><a href="{{ href | d }}">{{ label }} <span aria-hidden="true">→</span></a></li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+      </nav>
+      {%- endif %}
+      <p class="d02-edit">Outdated or wrong? <a href="{{ repo_url }}/tree/main/site/content" rel="noopener noreferrer">Suggest an edit on GitHub ↗</a></p>
+    </main>
+  </div>
+{%- endif %}
+  <footer class="d02-foot">
+    <div class="d02-wrap d02-foot__in">
+      <nav class="d02-foot__nav" aria-label="Pages, again">
+        {%- for id, label, href in menu %}
+        <a href="{{ href }}">{{ label }}</a>
+        {%- endfor %}
+        <a href="{{ draft.pages.projects }}">Projects</a>
+      </nav>
+      <p class="d02-foot__t">{{ ui["disclaimer"] }}</p>
+      {{ drafting.arrows() }}
+      <p class="d02-foot__t">Layout draft for feedback. The live site at <a href="{{ draft.canonical }}">btx-community.com ↗</a> is the official one. English only.</p>
+      <p class="d02-foot__t"><a href="{{ repo_url }}" rel="noopener noreferrer">{{ ui["repo"] }} ↗</a> · <span class="d02-mono">{{ version }}</span></p>
+    </div>
+  </footer>
+</body>
+</html>

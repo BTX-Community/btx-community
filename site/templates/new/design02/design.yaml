@@ -1,0 +1,22 @@
+# Draft 02 "Matrix": dark by default, a light variant behind the switch. BTX mines with matrix
+# multiplication, the core operation of today's AI, and the look follows from that: a computing
+# grid behind the hero, a 3×3 matrix as the logo, numbers in monospace. Unbounded for headings,
+# Inter for text, JetBrains Mono for data, labels and code. Five menu items by intent.
+title: "Design 02 · Matrix"
+summary: >-
+  A dark, technical layout built on the matrix motif of BTX mining: a small A × B = C animation in
+  the hero, a terminal-style status bar, five menu items by intent (Start here, Take part, Network,
+  Directory, Build) and numbered reading pages with a step rail and a progress bar.
+theme: dark
+css: [css/new/design02.css]
+# design02-theme.js is loaded in <head> without defer (base.html.j2), the other one deferred.
+js: [js/new/design02-theme.js, js/new/design02.js]
+pages:
+  home: { template: home.html.j2, path: "", live: home }
+  learn: { template: learn.html.j2, path: "learn/", live: learn }
+  network: { template: network.html.j2, path: "network/", live: network }
+  links: { template: links.html.j2, path: "links/", live: links }
+  projects: { template: projects.html.j2, path: "projects/", live: docs }
+  infra: { template: infra.html.j2, path: "infra/", live: infra }
+  dev: { template: dev.html.j2, path: "dev/", live: dev }
+  dev-work: { template: dev-work.html.j2, path: "dev/work/", live: dev-work }
