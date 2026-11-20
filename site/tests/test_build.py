@@ -772,6 +772,17 @@ class PageTest(unittest.TestCase):
     def tearDownClass(cls) -> None:
         cls._tmp.cleanup()
 
+    def test_pages_without_an_onward_link_get_one(self) -> None:
+        # Learn, Network and Links used to end without a link to another page of the site.
+        for lang in build.LANGUAGES:
+            for page_id, links in build.NEXT_LINKS.items():
+                path = build.page_path(lang, page_id).strip("/")
+                html = (self.out / path / "index.html").read_text(encoding="utf-8")
+                with self.subTest(lang=lang, page=page_id):
+                    block = html.split('class="c-next"')[1].split("</nav>")[0]
+                    hrefs = re.findall(r'href="([^"]+)"', block)
+                    self.assertEqual(hrefs, [build.page_path(lang, target) + anchor for _, target, anchor in links])
+
     def test_the_built_pages_obey_the_csp(self) -> None:
         # default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'
         pages = sorted(self.out.rglob("index.html"))
@@ -781,10 +792,12 @@ class PageTest(unittest.TestCase):
             with self.subTest(page=str(page.relative_to(self.out))):
                 self.assertNotIn("<style", html)
                 self.assertNotIn("javascript:", html)
-                scripts = re.findall(r'<script src="/static/js/([a-z]+)\.js\?v=[0-9a-f]{12}" defer></script>', html)
+                # theme.js alone runs before the page is drawn (no flash in the other theme).
+                scripts = re.findall(r'<script src="/static/js/([a-z]+)\.js\?v=[0-9a-f]{12}"( defer)?></script>', html)
                 self.assertEqual(html.count("<script"), len(scripts))
                 developers = page.parent.name == "work" and page.parent.parent.name == "dev"
-                self.assertEqual(scripts, ["community", "ci"] if developers else ["community"])
+                expected = [("theme", ""), ("community", " defer")] + ([("ci", " defer")] if developers else [])
+                self.assertEqual(scripts, expected)
                 for tag, attrs in tags(html):
                     self.assertNotIn(tag, ("img", "iframe", "object", "embed", "base"))
                     self.assertNotIn("style", attrs, tag)
