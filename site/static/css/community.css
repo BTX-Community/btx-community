@@ -837,8 +837,45 @@ a {
   margin: 0;
 }
 
+/* The whole card is the button: the summary fills it, the card lights up under the pointer, and
+   a line says what is inside ("6 steps"). The content keeps the card's padding when open. */
+.c-audience--folded {
+  padding: 0;
+  transition: border-color 0.15s;
+}
+
+.c-audience--folded:hover,
+.c-audience--folded:focus-within {
+  border-color: var(--accent);
+}
+
+.c-audience__fold {
+  padding: 0 22px;
+}
+
+.c-audience__fold > summary {
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  padding: 14px 0;
+}
+
+.c-audience__fold > summary::before {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.c-audience__fold[open] {
+  padding-bottom: 22px;
+}
+
 .c-audience__fold[open] > summary {
-  margin-bottom: 10px;
+  padding-bottom: 12px;
+}
+
+.c-audience__count {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .c-audience {
