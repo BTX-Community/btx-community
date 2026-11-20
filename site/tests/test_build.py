@@ -51,6 +51,11 @@ def scope_marks(text: str) -> set[str]:
     return lanes | commits | classes | numbers
 
 
+def live_pages(out: Path) -> list[Path]:
+    """The pages of the live site: everything but the design drafts under /new/ (DraftsTest)."""
+    return sorted(page for page in out.rglob("index.html") if page.relative_to(out).parts[0] != build.NEW_DIR)
+
+
 class _Tags(HTMLParser):
     """Every start tag of a page with its attributes, in document order."""
 
@@ -798,7 +803,7 @@ class PageTest(unittest.TestCase):
 
     def test_the_built_pages_obey_the_csp(self) -> None:
         # default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'
-        pages = sorted(self.out.rglob("index.html"))
+        pages = live_pages(self.out)
         moved = {str(Path(build.page_path(lang, "home").strip("/")) / old / "index.html")
                  for lang in build.LANGUAGES for old in build.MOVED_PAGES.values()}
         self.assertEqual(len(pages), len(build.LANGUAGES) * (len(build.ALL_PAGES) + len(build.MOVED_PAGES))
@@ -925,7 +930,7 @@ class PageTest(unittest.TestCase):
 
 
     def test_draft_pages_are_english_noindex_and_linked_from_nowhere(self) -> None:
-        pages = {page.relative_to(self.out): page.read_text(encoding="utf-8") for page in self.out.rglob("index.html")}
+        pages = {page.relative_to(self.out): page.read_text(encoding="utf-8") for page in live_pages(self.out)}
         for draft in build.DRAFT_PAGES:
             with self.subTest(draft=draft):
                 html = pages[Path(draft) / "index.html"]
@@ -1409,6 +1414,86 @@ class InfraTest(unittest.TestCase):
         self.assertEqual(build.wrap("one two three", build.text_width("one two", 10), 10), ("one two", "three"))
         self.assertEqual(build.wrap("Peer-Verbindungen", build.text_width("Peer-", 10), 10), ("Peer-", "Verbindungen"))
         self.assertEqual(build.wrap("下发模板回传区块", 40, 10), ("下发模板", "回传区块"))
+
+
+class DraftsTest(unittest.TestCase):
+    """The design drafts under /new/: every page builds and says it is a draft, and the live site
+    neither links to them nor changes because of them."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls.out = Path(cls._tmp.name) / "site"
+        build.build(cls.out, "test")
+        cls.designs = build.load_new_designs(build.ROOT / "templates" / build.NEW_DIR)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls._tmp.cleanup()
+
+    def test_there_is_a_draft(self) -> None:
+        self.assertTrue(self.designs)
+
+    def test_every_page_of_every_draft_builds_and_says_it_is_a_draft(self) -> None:
+        for name, design in self.designs.items():
+            for page_id, page in design.pages.items():
+                with self.subTest(draft=name, page=page_id):
+                    html = (self.out / build.NEW_DIR / name / page.path / "index.html").read_text(encoding="utf-8")
+                    self.assertIn('<meta name="robots" content="noindex, nofollow">', html)
+                    canonical = build.SITE_URL + build.page_path("en", page.live)
+                    self.assertIn(f'<link rel="canonical" href="{canonical}">', html)
+                    self.assertRegex(html, r"<title>\[Draft\] ")
+                    self.assertIn('class="draft-banner"', html)
+                    self.assertIn(build.NEW_FEEDBACK, html)
+                    self.assertNotIn("<style", html)
+                    self.assertNotIn("javascript:", html)
+                    for tag, attrs in tags(html):
+                        self.assertNotIn(tag, ("img", "iframe", "object", "embed", "base", "form"))
+                        self.assertNotIn("style", attrs, tag)
+                        self.assertEqual([n for n in attrs if n.startswith("on")], [], tag)
+                        if tag == "script":
+                            self.assertTrue((attrs.get("src") or "").startswith("/static/js/"), attrs)
+                        if tag == "link" and attrs.get("rel") != "canonical":
+                            self.assertTrue((attrs.get("href") or "").startswith("/"), attrs)
+                    self.assertNotRegex(html, r'(src|href)="https?://(?!btx-community\.com)[^"]*\.(css|js|woff2?)[?"]')
+        overview = (self.out / build.NEW_DIR / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<meta name="robots" content="noindex, nofollow">', overview)
+        for name in self.designs:
+            self.assertIn(f'href="/{build.NEW_DIR}/{name}/"', overview)
+
+    def test_links_inside_a_draft_stay_in_the_draft(self) -> None:
+        for name, design in self.designs.items():
+            pages = {build.page_path("en", p.live) for p in design.pages.values()}
+            for page in design.pages.values():
+                html = (self.out / build.NEW_DIR / name / page.path / "index.html").read_text(encoding="utf-8")
+                for href in re.findall(r'href="(/[^"#]*)', html):
+                    with self.subTest(draft=name, href=href):
+                        self.assertFalse(href in pages and href != "/", f"{href} leaves the draft")
+
+    def test_the_live_site_does_not_link_to_the_drafts(self) -> None:
+        for path in self.out.rglob("*.html"):
+            if path.relative_to(self.out).parts[0] == build.NEW_DIR:
+                continue
+            with self.subTest(page=str(path.relative_to(self.out))):
+                self.assertNotIn(f"/{build.NEW_DIR}/", path.read_text(encoding="utf-8"))
+        for name in ("llms.txt", "llms-full.txt"):
+            self.assertNotIn(f"/{build.NEW_DIR}/", (self.out / name).read_text(encoding="utf-8"))
+
+    def test_draft_links_point_into_the_draft(self) -> None:
+        table = {"/links/": "/new/designXX/links/"}
+        self.assertEqual(build.draft_href("/links/#cat-pools", table), "/new/designXX/links/#cat-pools")
+        self.assertEqual(build.draft_href("/llms.txt", table), "/llms.txt")
+        self.assertEqual(build.draft_href("https://example.org/links/", table), "https://example.org/links/")
+        self.assertEqual(build.draft_href("//example.org/links/", table), "//example.org/links/")
+
+    def test_a_draft_needs_a_home_page(self) -> None:
+        with self.assertRaises(ValueError):
+            build.NewDesign.model_validate({
+                "title": "x", "summary": "x", "theme": "light", "css": [],
+                "pages": {"learn": {"template": "learn.html.j2", "path": "learn/", "live": "learn"}},
+            })
+        with self.assertRaises(ValueError):
+            build.NewPage.model_validate({"template": "x.html.j2", "path": "", "live": "nowhere"})
 
 
 if __name__ == "__main__":

@@ -1,0 +1,33 @@
+{#- Small parts the pages of draft 03 share. -#}
+
+{% macro pagehead(title, lead, meta=None) -%}
+      <header class="pagehead">
+        <h1 class="h1">{{ title }}</h1>
+        <p class="pagehead__lead">{{ lead }}</p>
+        {%- if meta %}
+        <p class="pagehead__meta">{{ meta }}</p>
+        {%- endif %}
+      </header>
+{%- endmacro %}
+
+{% macro arrow(external) -%}<span aria-hidden="true">{% if external %}↗{% else %}→{% endif %}</span>{%- endmacro %}
+
+{% macro onward(links, ui) -%}
+{%- if links %}
+      <nav class="sec onward" aria-labelledby="onward-title">
+        <h2 class="sec__title" id="onward-title">{{ ui["next.title"] }}</h2>
+        <ul class="onward__list">
+          {%- for label, href in links %}
+          <li><a class="row-link" href="{{ href | d }}"><span class="row-link__t">{{ label }}</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+          {%- endfor %}
+        </ul>
+      </nav>
+{%- endif %}
+{%- endmacro %}
+
+{% macro directory_tabs(draft, current) -%}
+      <nav class="dirtabs" aria-label="Directory">
+        <a class="dirtabs__tab" href="{{ draft.pages.links }}"{% if current == "links" %} aria-current="page"{% endif %}>Links</a>
+        <a class="dirtabs__tab" href="{{ draft.pages.projects }}"{% if current == "projects" %} aria-current="page"{% endif %}>Projects</a>
+      </nav>
+{%- endmacro %}

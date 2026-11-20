@@ -1,0 +1,135 @@
+{%- import "_draft.html.j2" as drafting with context -%}
+{%- set menu = [
+  ("home", "Start", draft.pages.home),
+  ("learn", "About BTX", draft.pages.learn),
+  ("network", "Network", draft.pages.network),
+  ("directory", "Directory", draft.pages.links),
+  ("infra", "Run infra", draft.pages.infra),
+  ("dev", "Developers", draft.pages.dev),
+] -%}
+{%- set section_of = {"links": "directory", "projects": "directory", "dev-work": "dev"} -%}
+{%- set current = section_of.get(draft.page, draft.page) -%}
+<!doctype html>
+<html lang="en" class="d03-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  {{ drafting.head(draft, title, description) }}
+  <link rel="preload" href="/static/fonts/new/InstrumentSerif-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="{{ theme_js_url }}"></script>
+  <script src="{{ js_url }}" defer></script>
+  {%- for url in draft.js_urls %}
+  <script src="{{ url }}" defer></script>
+  {%- endfor %}
+{%- block scripts %}{% endblock %}
+</head>
+<body class="d03">
+  <a class="skip" href="#main">{{ ui["skip"] }}</a>
+  {{ drafting.banner(draft) }}
+  <header class="top">
+    <div class="top__in">
+      <a class="logo" href="{{ draft.pages.home }}">BTX Community</a>
+      <nav class="nav" aria-label="{{ ui['nav.label'] }}">
+        {%- for id, label, href in menu %}
+        <a class="nav__link" href="{{ href }}"{% if id == current %} aria-current="page"{% endif %}>{{ label }}</a>
+        {%- endfor %}
+      </nav>
+      <button class="theme" type="button" data-theme-switch data-to-light="{{ ui['theme.to_light'] }}" data-to-dark="{{ ui['theme.to_dark'] }}" aria-label="{{ ui['theme.to_dark'] }}" hidden><span class="theme__icon" aria-hidden="true"></span></button>
+      <details class="menu">
+        <summary class="menu__btn">Menu</summary>
+        <div class="sheet">
+          <nav aria-label="{{ ui['nav.label'] }}">
+            <ul class="sheet__list">
+              {%- for id, label, href in menu %}
+              <li><a class="sheet__link" href="{{ href }}"{% if id == current %} aria-current="page"{% endif %}>{{ label }}</a>
+                {%- if id == "directory" %}
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="{{ draft.pages.links }}"{% if draft.page == "links" %} aria-current="page"{% endif %}>Links</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="{{ draft.pages.projects }}"{% if draft.page == "projects" %} aria-current="page"{% endif %}>Projects</a></li>
+                </ul>
+                {%- elif id == "dev" %}
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="{{ draft.pages.dev }}"{% if draft.page == "dev" %} aria-current="page"{% endif %}>{{ ui["subnav.dev"] }}</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="{{ draft.pages['dev-work'] }}"{% if draft.page == "dev-work" %} aria-current="page"{% endif %}>{{ ui["subnav.dev-work"] }}</a></li>
+                </ul>
+                {%- endif %}
+              </li>
+              {%- endfor %}
+            </ul>
+          </nav>
+          <p class="sheet__label">This draft is in English only.</p>
+        </div>
+      </details>
+    </div>
+  </header>
+{%- if sections is defined and sections %}
+  <div class="otp">
+    <details class="otp__d" data-otp>
+      <summary class="otp__sum"><span class="otp__k">On this page:</span> <span class="otp__cur" data-otp-current>{{ sections[0][1] }}</span><span class="chev" aria-hidden="true"></span></summary>
+      <nav class="otp__list" aria-label="On this page">
+        {%- if pageswitch is defined %}
+        {%- for id, label, href in pageswitch %}
+        <a class="otp__page{% if id == draft.page %} otp__page--cur{% endif %}" href="{{ href }}"{% if id == draft.page %} aria-current="page"{% endif %}>{{ label }}</a>
+        {%- endfor %}
+        {%- endif %}
+        {%- for id, label, count in sections %}
+        <a class="otp__sec" href="#{{ id }}">{{ label }}{% if count %} <span class="otp__n">{{ count }}</span>{% endif %}</a>
+        {%- endfor %}
+      </nav>
+    </details>
+  </div>
+  <div class="layout">
+    <nav class="rail" aria-label="On this page" data-rail>
+      {%- if pageswitch is defined %}
+      <p class="rail__k">Developers</p>
+      <ul class="rail__list">
+        {%- for id, label, href in pageswitch %}
+        <li>
+          <a class="rail__page" href="{{ href }}"{% if id == draft.page %} aria-current="page"{% endif %}>{{ label }}</a>
+          {%- if id == draft.page %}
+          <ul class="rail__secs">
+            {%- for sid, slabel, count in sections %}
+            <li><a class="rail__sec" href="#{{ sid }}">{{ slabel }}{% if count %} <span class="rail__n">{{ count }}</span>{% endif %}</a></li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- else %}
+      <p class="rail__k">On this page</p>
+      <ul class="rail__list rail__secs">
+        {%- for sid, slabel, count in sections %}
+        <li><a class="rail__sec" href="#{{ sid }}">{{ slabel }}{% if count %} <span class="rail__n">{{ count }}</span>{% endif %}</a></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      {%- block rail_meta %}{% endblock %}
+    </nav>
+    <main id="main" class="content">
+{% block content %}{% endblock %}
+    </main>
+  </div>
+{%- else %}
+  <main id="main">
+    <div class="wrap">
+{% block page %}{% endblock %}
+    </div>
+  </main>
+{%- endif %}
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <nav class="foot__nav" aria-label="Pages, again">
+        {%- for id, label, href in menu %}
+        <a href="{{ href }}">{{ label }}</a>
+        {%- endfor %}
+      </nav>
+      <p class="foot__text">{{ ui["disclaimer"] }}</p>
+      {{ drafting.arrows() }}
+      <p class="foot__text">{{ draft.source }}. Layout draft for feedback; the live site at <a href="{{ draft.canonical }}">btx-community.com ↗</a> is the official one. English only.</p>
+      <p class="foot__text"><a href="{{ repo_url }}" rel="noopener noreferrer">{{ ui["repo"] }} ↗</a> · <span class="muted">{{ version }}</span></p>
+    </div>
+  </footer>
+</body>
+</html>

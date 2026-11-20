@@ -30,3 +30,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## Fonts of the design drafts
+
+The design drafts under `/new/` ship their own webfonts in `site/static/fonts/new/`, each under
+the SIL Open Font License 1.1 with its licence text next to the font files. Where each file comes
+from, with its SHA-256, is listed in `site/static/fonts/new/SOURCES.md`.
+
+- Instrument Serif: Copyright 2022 The Instrument Serif Project Authors
+  (<https://github.com/Instrument/instrument-serif>).

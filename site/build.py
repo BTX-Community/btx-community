@@ -25,6 +25,7 @@ import os
 import re
 import shutil
 import sys
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import date  # noqa: TC003 - pydantic needs the type at runtime
 from pathlib import Path
@@ -2817,6 +2818,141 @@ def llms_full(page: CommunityPage, guide: GuidePage, texts: dict[str, dict[str, 
     return "\n".join(out)
 
 
+# --- Design drafts under /new/ ----------------------------------------------------------------
+# Layouts to collect feedback on, beside the live site and without touching it: every draft is a
+# folder templates/new/<name>/ with a design.yaml, its own templates, and its own CSS and JS under
+# static/css/new/ and static/js/new/. A draft reads the same content as the live pages, in English
+# only, and every page of it says it is a draft: banner, "[Draft]" in the title, noindex, and a
+# canonical link to the live page it stands for. Nothing outside /new/ links to a draft. Removing
+# a draft is deleting its folder and its files; no other part of the build knows it.
+
+NEW_DIR = "new"
+NEW_NAME = r"^design[0-9]{2}$"
+NEW_FEEDBACK = f"{REPO_URL}/issues/75"
+"""The one feedback issue for all drafts; the banner of every draft page links to it."""
+NEW_ASSET = r"^(css|js)/new/[a-z0-9-]{1,40}\.(css|js)$"
+
+
+class NewPage(_Model):
+    """One page of a draft: its template, its folder below the draft and the live page it stands for."""
+
+    template: Annotated[StrictStr, Field(pattern=r"^[a-z0-9-]{1,40}\.html\.j2$")]
+    path: Annotated[StrictStr, Field(pattern=r"^([a-z0-9-]{1,40}/){0,2}$")]
+    live: StrictStr
+
+    @model_validator(mode="after")
+    def _live_page(self) -> Self:
+        if self.live not in ALL_PAGES:
+            raise ValueError(f"unknown live page {self.live!r}")
+        return self
+
+
+class NewDesign(_Model):
+    """design.yaml of a draft."""
+
+    title: Annotated[StrictStr, Field(min_length=1, max_length=60)]
+    summary: Annotated[StrictStr, Field(min_length=1, max_length=MAX_TEXT)]
+    source: Annotated[StrictStr, Field(max_length=MAX_TEXT)] | None = None
+    theme: Literal["light", "dark"]
+    css: tuple[Annotated[StrictStr, Field(pattern=NEW_ASSET)], ...]
+    js: tuple[Annotated[StrictStr, Field(pattern=NEW_ASSET)], ...] = ()
+    pages: dict[Annotated[StrictStr, Field(pattern=ID_PATTERN)], NewPage]
+
+    @model_validator(mode="after")
+    def _pages(self) -> Self:
+        if "home" not in self.pages or self.pages["home"].path != "":
+            raise ValueError("a draft needs a page 'home' with path ''")
+        paths = [p.path for p in self.pages.values()]
+        if len(set(paths)) != len(paths):
+            raise ValueError("two pages of the draft share a folder")
+        return self
+
+
+@dataclass(frozen=True)
+class DraftView:
+    """What every page of a draft knows about the draft."""
+
+    name: str
+    title: str
+    summary: str
+    source: str | None
+    theme: str
+    base: str
+    page: str
+    pages: dict[str, str]
+    canonical: str
+    feedback: str
+    overview: str
+    css_urls: tuple[str, ...]
+    js_urls: tuple[str, ...]
+
+
+def load_new_designs(folder: Path) -> dict[str, NewDesign]:
+    """The drafts in templates/new/, by folder name; a folder without design.yaml is ignored."""
+    designs = {}
+    for child in sorted(folder.iterdir()) if folder.is_dir() else ():
+        if not (child / "design.yaml").is_file():
+            continue
+        if not re.fullmatch(NEW_NAME, child.name):
+            raise ContentError(f"draft folder {child.name!r} must be named designNN")
+        try:
+            design = NewDesign.model_validate(load_yaml(child / "design.yaml"))
+        except ValidationError as exc:
+            raise ContentError(f"{child.name}/design.yaml: {exc}") from exc
+        for asset in design.css + design.js:
+            if not (ROOT / "static" / asset).is_file():
+                raise ContentError(f"{child.name}/design.yaml: no file static/{asset}")
+        designs[child.name] = design
+    return designs
+
+
+def draft_href(href: str, live_to_draft: dict[str, str]) -> str:
+    """A link of the live site, pointed at the same page of the draft if the draft has it.
+
+    External links, files (/llms.txt) and pages the draft does not have stay as they are.
+    """
+    if not href.startswith("/") or href.startswith("//"):
+        return href
+    path, mark, anchor = href.partition("#")
+    target = live_to_draft.get(path)
+    return href if target is None else target + mark + anchor
+
+
+def render_new(
+    designs: dict[str, NewDesign], base_context: Callable[[str], dict[str, object]], version: str
+) -> dict[str, str]:
+    """Every page of every draft and the overview /new/, by URL path."""
+    env = Environment(
+        loader=FileSystemLoader(ROOT / "templates" / NEW_DIR),
+        autoescape=True,
+        undefined=StrictUndefined,
+        keep_trailing_newline=True,
+    )
+    rendered = {}
+    for name, design in designs.items():
+        base = f"/{NEW_DIR}/{name}/"
+        pages = {page_id: base + p.path for page_id, p in design.pages.items()}
+        live_to_draft = {page_path("en", p.live): base + p.path for p in design.pages.values()}
+        env.filters["d"] = lambda href, table=live_to_draft: draft_href(href, table)
+        for page_id, p in design.pages.items():
+            ctx = base_context(p.live)
+            ctx["draft"] = DraftView(
+                name=name, title=design.title, summary=design.summary, source=design.source,
+                theme=design.theme, base=base, page=page_id, pages=pages,
+                canonical=_site_url(page_path("en", p.live)), feedback=NEW_FEEDBACK,
+                overview=f"/{NEW_DIR}/", css_urls=tuple(asset_url(a) for a in design.css),
+                js_urls=tuple(asset_url(a) for a in design.js),
+            )
+            rendered[pages[page_id]] = env.get_template(f"{name}/{p.template}").render(ctx)
+    overview = base_context("home")
+    overview.update(
+        designs=[(name, d, f"/{NEW_DIR}/{name}/") for name, d in designs.items()],
+        feedback=NEW_FEEDBACK, overview_css=asset_url("css/new/overview.css"), version=version,
+    )
+    rendered[f"/{NEW_DIR}/"] = env.get_template("index.html.j2").render(overview)
+    return rendered
+
+
 # --- Build ------------------------------------------------------------------------------------
 
 
@@ -2865,6 +3001,12 @@ def build(out: Path, version: str) -> None:
             moved.update(target=page_path(lang, page_id), canonical=_site_url(page_path(lang, page_id)))
             old_path = ("/" if lang == "en" else f"/{lang}/") + f"{old}/"
             rendered[old_path] = env.get_template("_moved.html.j2").render(moved)
+
+    rendered.update(render_new(
+        load_new_designs(ROOT / "templates" / NEW_DIR),
+        lambda live: context(page, guide, hub, texts, "en", version, live, sayers["en"], infra, projects),
+        version,
+    ))
 
     if out.exists():
         shutil.rmtree(out)
