@@ -1,0 +1,96 @@
+{% extends "design03b/base.html.j2" %}
+{% set title = "Start" %}
+{% set description = ui["meta_description"] %}
+{% block page %}
+      <p class="draft-source">Draft 03 with Merriweather instead of Instrument Serif for the headings, as suggested in feedback on draft 03; everything else is the same. <a href="{{ draft.overview }}">About the drafts →</a></p>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__text">
+          <p class="kicker">{{ ui["kicker"] }}</p>
+          <h1 class="display" id="hero-title"><span class="display__l">A chain you can check,</span> <span class="display__l">run by the people who use it.</span></h1>
+          <p class="hero__lead">{{ ui["lead"] }}</p>
+          <p class="actions">
+            <a class="btn btn--primary" href="{{ draft.pages.learn }}">What BTX is</a>
+            <a class="btn btn--secondary" href="{{ draft.pages.dev }}#brief">Brief your AI</a>
+          </p>
+        </div>
+        {#- Graft 2 (from B): the Stable / Performant / Secure row under the overall state. #}
+        <aside class="status" id="status-badge" data-api="{{ status_api }}" data-lang="{{ lang }}" aria-labelledby="status-title"
+               data-level-green="{{ ui['level.green'] }}" data-level-yellow="{{ ui['level.yellow'] }}"
+               data-level-red="{{ ui['level.red'] }}" data-level-unknown="{{ ui['level.unknown'] }}">
+          <h2 class="status__title" id="status-title">{{ ui["live.title"] }}</h2>
+          <p class="status__state"><span class="dot" aria-hidden="true"></span><span class="sr">{{ ui["live.status"] }}: </span><span data-live="overall" data-label-normal="{{ ui['overall.normal'] }}" data-label-degraded="{{ ui['overall.degraded'] }}" data-label-incident="{{ ui['overall.incident'] }}">No data</span></p>
+          <ul class="verdicts">
+            {%- for id, label in verdicts %}
+            <li class="verdict c-verdict--unknown" data-verdict="{{ id }}"><span class="dot" aria-hidden="true"></span>{{ label }}: <span data-verdict-label>{{ ui["level.unknown"] }}</span></li>
+            {%- endfor %}
+          </ul>
+          <dl class="status__rows">
+            <div><dt>{{ ui["live.height"] }}</dt><dd data-live="height">No data</dd></div>
+            <div><dt>{{ ui["live.release"] }}</dt><dd data-live="release">No data</dd></div>
+            <div><dt>{{ ui["live.on_release"] }}</dt><dd data-live="on-release" data-template="{{ ui['on_release'] }}">No data</dd></div>
+          </dl>
+          <div class="status__fork" data-live="fork" data-template="{{ ui['fork.row'] }}" hidden>
+            <p class="status__fork-title">{{ ui["fork.title"] }}</p>
+            <ul data-live="fork-rows"></ul>
+            <a href="{{ releases_url }}" rel="noopener noreferrer">{{ ui["fork.releases"] }} ↗</a>
+          </div>
+          <p class="status__meta" data-live="updated" data-template="{{ ui['live.updated'] }}">{{ ui["live.loading"] }}</p>
+          <a class="status__link" href="{{ draft.pages.network }}">Full status <span aria-hidden="true">→</span></a>
+        </aside>
+      </section>
+
+      {#- Graft 1 (from C): short task rows with an arrow. Graft 3: notes stay visible as Note rows. #}
+      <section class="chapters" id="start" aria-labelledby="start-title">
+        <h2 class="section-title section-title--rank" id="start-title">Four ways in</h2>
+        <div class="chapters__grid">
+          {%- for audience in audiences %}
+          {%- set linked = audience.steps | selectattr("href") | list %}
+          {%- set notes = audience.steps | rejectattr("href") | list %}
+          <article class="chapter" id="{{ audience.id }}" aria-labelledby="{{ audience.id }}-title">
+            <p class="chapter__num" aria-hidden="true">{{ "%02d" | format(loop.index) }}</p>
+            <h3 class="chapter__title" id="{{ audience.id }}-title">{{ audience.title }}</h3>
+            <p class="chapter__lead">{{ audience.text }}</p>
+            <ul class="chapter__links">
+              {%- for step in linked[:2] %}
+              <li><a class="row-link" href="{{ step.href | d }}"{% if step.external %} rel="noopener noreferrer"{% endif %}><span class="row-link__t">{{ step.text }}</span><span class="row-link__a" aria-hidden="true">{% if step.external %}↗{% else %}→{% endif %}</span></a></li>
+              {%- endfor %}
+            </ul>
+            {%- for step in notes %}
+            <p class="note"><span class="note__label">{{ ui["note"] }}</span><span class="note__body"><strong>{{ step.text }}</strong></span></p>
+            {%- endfor %}
+            {%- if linked | length > 2 %}
+            <details class="steps">
+              <summary class="steps__sum">All {{ linked | length }} steps</summary>
+              <ol class="steps__list">
+                {%- for step in linked %}
+                <li><div><a href="{{ step.href | d }}"{% if step.external %} rel="noopener noreferrer"{% endif %}>{{ step.text }} <span aria-hidden="true">{% if step.external %}↗{% else %}→{% endif %}</span></a>{% if step.detail %}<p class="steps__detail">{{ step.detail }}</p>{% endif %}</div></li>
+                {%- endfor %}
+              </ol>
+            </details>
+            {%- endif %}
+          </article>
+          {%- endfor %}
+        </div>
+      </section>
+
+      {#- Security content stays visible (brief of the drafts, section 4); the node checklist lives on Run infra. #}
+      <section class="check" id="check" aria-labelledby="check-title">
+        <h2 class="section-title" id="check-title">Check first</h2>
+        <div class="check__grid">
+          {%- for checklist in checklists %}
+          <article class="checklist checklist--open" id="{{ checklist.id }}" aria-labelledby="{{ checklist.id }}-title">
+            <h3 class="checklist__head"><span class="checklist__title" id="{{ checklist.id }}-title">{{ checklist.title }}</span><span class="checklist__count">{{ checklist.items | length }} checks</span></h3>
+            <ol class="checklist__list">
+              {%- for item in checklist.items %}
+              <li>{{ item }}</li>
+              {%- endfor %}
+            </ol>
+          </article>
+          {%- endfor %}
+          <a class="checklist checklist--link" href="{{ draft.pages.infra }}#before-installing">
+            <span class="checklist__title">Before you install a node release</span>
+            <span class="checklist__count">on Run infra <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </section>
+{% endblock %}

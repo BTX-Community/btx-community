@@ -1,0 +1,46 @@
+{% extends "design03b/base.html.j2" %}
+{% import "design03b/_parts.html.j2" as parts %}
+{% set title = "About BTX" %}
+{% set description = page_description %}
+{#- A: "About BTX" explains; the release notes moved to Network (#release), the roadmap and the
+    papers came here from Projects (#documents). #}
+{% block page %}
+{{ parts.pagehead("About BTX", page_lead) }}
+      <section class="sec" id="about" aria-labelledby="about-title">
+        <h2 class="sec__title" id="about-title">{{ ui["facts.title"] }}</h2>
+        <div class="facts facts--4">
+          {%- for fact in facts %}
+          <article class="fact fact--read" id="fact-{{ fact.id }}">
+            <p class="chapter__num" aria-hidden="true">{{ "%02d" | format(loop.index) }}</p>
+            <h3 class="fact__t">{{ fact.title }}</h3>
+            <p>{{ fact.text }}</p>
+            <p class="src"><a href="{{ fact.source }}" rel="noopener noreferrer">Source: {{ fact.title }} ↗</a></p>
+          </article>
+          {%- endfor %}
+        </div>
+        {%- if upcoming %}
+        <p class="note"><span class="note__label">{{ ui["note"] }}</span><span class="note__body">What is new in v{{ upcoming.version }} is on the Network page. <a href="{{ draft.pages.network }}#release">New in v{{ upcoming.version }} →</a></span></p>
+        {%- endif %}
+      </section>
+
+      {%- if documents %}
+      <section class="sec" id="documents" aria-labelledby="documents-title">
+        <h2 class="sec__title" id="documents-title">{{ ui["documents.title"] }}</h2>
+        <p class="prose">{{ ui["documents.lead"] }}</p>
+        <ul class="doclist">
+          {%- for document in documents %}
+          <li class="doclist__item" id="{{ document.id }}">
+            <a class="doclist__link" href="{{ document.url }}" rel="noopener noreferrer">
+              <span class="doclist__title">{{ document.title }} <span aria-hidden="true">↗</span></span>
+              <span class="doclist__text">{{ document.text }}</span>
+              {%- if document.status %}<span class="doclist__status">{{ document.status }}</span>{% endif %}
+            </a>
+          </li>
+          {%- endfor %}
+        </ul>
+        <p class="src"><a href="{{ repo_url }}" rel="noopener noreferrer">{{ ui["documents.repo"] }} ↗</a></p>
+      </section>
+      {%- endif %}
+
+{{ parts.onward(next_links, ui) }}
+{% endblock %}

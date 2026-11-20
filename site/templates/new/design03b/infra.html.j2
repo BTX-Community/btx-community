@@ -1,0 +1,179 @@
+{% extends "design03b/base.html.j2" %}
+{% import "design03b/_parts.html.j2" as parts %}
+{% import "_draft.html.j2" as drafting with context %}
+{% set t = infra.texts %}
+{% set title = "Run infra" %}
+{% set description = page_description %}
+{% set sections = [("roles", t.roles_title, infra.roles | length), ("paths", "Two ways to help", None)] %}
+{% if infra.home %}{% if sections.append(("home-node", infra.home.title, None)) %}{% endif %}{% endif %}
+{% for c in checklists %}{% if sections.append((c.id, c.title, c.items | length)) %}{% endif %}{% endfor %}
+{% if sections.append(("map", t.map_title, None)) %}{% endif %}
+{% if sections.append(("report", t.report_title, None)) %}{% endif %}
+{% macro map_svg(m) -%}
+        <svg class="map__svg map__svg--{{ m.name }}" viewBox="0 0 {{ m.width }} {{ m.height }}" role="group" aria-labelledby="map-{{ m.name }}-title map-{{ m.name }}-desc" font-family="Inter, system-ui, sans-serif">
+          <title id="map-{{ m.name }}-title">{{ t.map_name }}</title>
+          <desc id="map-{{ m.name }}-desc">{{ t.map_desc }}</desc>
+          <rect class="map__frame" x="{{ m.frame[0] }}" y="{{ m.frame[1] }}" width="{{ m.frame[2] }}" height="{{ m.frame[3] }}" rx="2"/>
+          {% for line in m.frame_label %}<text class="map__frame-label" x="{{ line.x }}" y="{{ line.y }}" font-size="{{ m.label_size }}" aria-hidden="true">{{ line.text }}</text>{% endfor %}
+          <g class="map__arrows" aria-hidden="true">
+            {% for arrow in m.arrows %}
+            <g class="map__arrow">
+              {% for x1, y1, x2, y2 in arrow.segments %}<line x1="{{ x1 }}" y1="{{ y1 }}" x2="{{ x2 }}" y2="{{ y2 }}"/>{% endfor %}
+              {% for points in arrow.heads %}<polygon class="map__head" points="{{ points }}"/>{% endfor %}
+              {% for badge in arrow.badges %}<circle class="map__badge" cx="{{ badge.x }}" cy="{{ badge.y }}" r="{{ m.badge_radius }}"/><text class="map__badge-text" x="{{ badge.x }}" y="{{ badge.y }}" font-size="{{ m.badge_radius * 1.3 }}" text-anchor="middle" dominant-baseline="central">{{ badge.number }}</text>{% endfor %}
+              {% for line in arrow.labels %}<text class="map__label" x="{{ line.x }}" y="{{ line.y }}" font-size="{{ m.label_size }}">{{ line.text }}</text>{% endfor %}
+            </g>
+            {% endfor %}
+          </g>
+          {% for box in m.boxes %}
+          <a class="map__node map__node--{{ box.tone }}" href="{{ box.href | d }}"{% if box.external %} rel="noopener noreferrer"{% endif %} aria-label="{{ box.label }}">
+            <rect x="{{ box.x }}" y="{{ box.y }}" width="{{ box.width }}" height="{{ box.height }}" rx="2"/>
+            {% for line in box.title %}<text class="map__title" x="{{ line.x }}" y="{{ line.y }}" font-size="{{ m.title_size }}" font-weight="600">{{ line.text }}</text>{% endfor %}
+            {% if box.code %}<text class="map__code" x="{{ box.code.x }}" y="{{ box.code.y }}" font-size="{{ m.code_size }}" font-family="JetBrains Mono, ui-monospace, monospace">{{ box.code.text }}</text>{% endif %}
+            {% for badge in box.badges %}<circle class="map__badge" cx="{{ badge.x }}" cy="{{ badge.y }}" r="{{ m.badge_radius }}"/><text class="map__badge-text" x="{{ badge.x }}" y="{{ badge.y }}" font-size="{{ m.badge_radius * 1.3 }}" text-anchor="middle" dominant-baseline="central">{{ badge.number }}</text>{% endfor %}
+            {% for line in box.labels %}<text class="map__label" x="{{ line.x }}" y="{{ line.y }}" font-size="{{ m.label_size }}">{{ line.text }}</text>{% endfor %}
+          </a>
+          {% endfor %}
+        </svg>
+{%- endmacro %}
+{% block content %}
+{{ parts.pagehead(page_title, page_lead) }}
+      {#- A.8: the role table is on the first screen. #}
+      <section class="sec" id="roles" aria-labelledby="roles-title">
+        <h2 class="sec__title" id="roles-title">{{ t.roles_title }}</h2>
+        <p class="note"><span class="note__label">{{ ui["note"] }}</span><span class="note__body">Crashes and security problems from any of these roles go privately to the maintainers: <a href="#report">how to report →</a></span></p>
+        <div class="scroll" tabindex="0" role="region" aria-labelledby="roles-title">
+          <table class="tbl tbl--roles">
+            <thead>
+              <tr>
+                <th scope="col">Role</th>
+                <th scope="col">Kind</th>
+                <th scope="col">{{ t.hardware }}</th>
+                <th scope="col">{{ t.guide }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for role in infra.roles %}
+              <tr>
+                <th scope="row"><a href="#role-{{ role.id }}">{{ role.title }}</a></th>
+                <td>{{ role.kind_label }}</td>
+                <td>{{ role.hardware }}</td>
+                <td>{% if role.guide %}<a href="{{ role.guide.href | d }}"{% if role.guide.external %} rel="noopener noreferrer"{% endif %}>{{ role.guide.text }} {{ parts.arrow(role.guide.external) }}</a>{% else %}<span class="stchip">{{ t.coming }}</span>{% endif %}</td>
+              </tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="disc">
+          {%- for role in infra.roles %}
+          <details class="disc__d" id="role-{{ role.id }}">
+            <summary class="disc__sum"><h3 class="disc__title">{{ role.title }}</h3><span class="disc__meta">{{ role.kind_label }}</span></summary>
+            <div class="disc__body">
+              <dl class="lane__dl">
+                <div><dt>{{ t.does }}</dt><dd>{{ role.does }}</dd></div>
+                <div><dt>{{ t.hardware }}</dt><dd>{{ role.hardware }}</dd></div>
+                <div><dt>{{ t.guide }}</dt><dd>
+                  {%- if role.guide %}<a href="{{ role.guide.href | d }}"{% if role.guide.external %} rel="noopener noreferrer"{% endif %}>{{ role.guide.text }} {{ parts.arrow(role.guide.external) }}</a>{% if role.guide.note %}<span class="note note--inline"><span class="note__label">{{ ui["note"] }}</span><span class="note__body">{{ role.guide.note }}</span></span>{% endif %}{% else %}<strong>{{ t.coming }}</strong>{% endif %}
+                  {%- if role.coming %} <span class="cellnote">{{ role.coming }}</span>{% endif %}
+                  {%- if role.related %}
+                  <ul class="project__links">
+                    {%- for link in role.related %}
+                    <li><a href="{{ link.href | d }}"{% if link.external %} rel="noopener noreferrer"{% endif %}>{{ link.text }} {{ parts.arrow(link.external) }}</a></li>
+                    {%- endfor %}
+                  </ul>
+                  {%- endif %}
+                </dd></div>
+                <div><dt>{{ t.ask }}</dt><dd>{% if role.ask_href %}<a href="{{ role.ask_href | d }}"{% if role.ask_external %} rel="noopener noreferrer"{% endif %}>{{ role.ask }} {{ parts.arrow(role.ask_external) }}</a>{% else %}{{ role.ask }}{% endif %}</dd></div>
+              </dl>
+            </div>
+          </details>
+          {%- endfor %}
+        </div>
+        {%- if projects %}<p class="src"><a href="{{ draft.pages.projects }}">{{ projects.texts.infra_link }} →</a></p>{% endif %}
+      </section>
+
+      <section class="sec split" id="paths" aria-label="{{ t.yourself_title }} / {{ t.managed_title }}">
+        <article class="split__col" id="yourself">
+          <h2 class="sec__title">{{ t.yourself_title }}</h2>
+          <p class="prose">{{ t.yourself_text }}</p>
+          <p class="src"><a href="#roles">The {{ infra.roles | length }} roles above →</a></p>
+        </article>
+        <article class="split__col" id="managed">
+          <h2 class="sec__title">{{ t.managed_title }}</h2>
+          <p class="prose">{{ t.managed_text }}</p>
+          <ul class="entries entries--tight">
+            {%- for entry in infra.managed %}
+            <li class="entry">
+              <p class="entry__head"><a class="entry__name" href="{{ entry.url }}" rel="noopener noreferrer">{{ entry.name }} <span aria-hidden="true">↗</span></a> <span class="entry__host">{{ entry.url.split("/")[2] }}</span></p>
+              <p class="entry__text">{{ entry.description }}</p>
+              {%- if entry.note %}<p class="note"><span class="note__label">{{ ui["note"] }}</span><span class="note__body">{{ entry.note }}</span></p>{% endif %}
+            </li>
+            {%- endfor %}
+          </ul>
+          <p class="footnote">{{ t.managed_none }}</p>
+        </article>
+      </section>
+
+      {%- if infra.home %}
+      <section class="sec" id="home-node" aria-labelledby="home-node-title">
+        <h2 class="sec__title" id="home-node-title">{{ infra.home.title }}</h2>
+        <div class="facts">
+          {%- for id, ptitle, items in infra.home.points %}
+          <article class="fact" id="home-{{ id }}">
+            <h3 class="fact__t">{{ ptitle }}</h3>
+            <ul class="blist blist--tight">
+              {%- for item in items %}
+              <li>{{ item }}</li>
+              {%- endfor %}
+            </ul>
+          </article>
+          {%- endfor %}
+        </div>
+        <p class="src">
+          {%- for link in infra.home.links %}
+          <a href="{{ link.href | d }}"{% if link.external %} rel="noopener noreferrer"{% endif %}>{{ link.text }} {{ parts.arrow(link.external) }}</a>
+          {%- endfor %}
+        </p>
+      </section>
+      {%- endif %}
+
+      {%- for checklist in checklists %}
+      <section class="sec" aria-labelledby="{{ checklist.id }}-title">
+        <details class="checklist" id="{{ checklist.id }}">
+          <summary class="checklist__sum"><span class="checklist__title" id="{{ checklist.id }}-title">{{ checklist.title }}</span><span class="checklist__count">{{ checklist.items | length }} checks</span></summary>
+          <ol class="checklist__list">
+            {%- for item in checklist.items %}
+            <li>{{ item }}</li>
+            {%- endfor %}
+          </ol>
+        </details>
+      </section>
+      {%- endfor %}
+
+      <section class="sec" id="map" aria-labelledby="map-title">
+        <h2 class="sec__title" id="map-title">{{ t.map_title }}</h2>
+        <p class="prose">{{ t.map_lead }}</p>
+        <figure class="map panel" aria-labelledby="map-title">
+{% for m in infra.maps %}
+{{ map_svg(m) }}
+{% endfor %}
+          <figcaption class="footnote">{{ infra.verified }}</figcaption>
+        </figure>
+        <details class="disc__d map__list">
+          <summary class="disc__sum"><h3 class="disc__title" id="map-list-title">{{ t.list_title }}</h3><span class="disc__meta">{{ infra.edges | length }}</span></summary>
+          <ol class="nlist" aria-labelledby="map-list-title">
+            {%- for edge in infra.edges %}
+            <li id="edge-{{ edge.number }}"><div>
+              <p><strong>{{ edge.path | join(" ⇄ " if edge.both else " → ") }}</strong></p>
+              <p>{{ edge.text }}</p>
+              <p class="src"><span class="muted">{{ t.source }}</span>{% for cite in edge.cites %} <a href="{{ cite.href }}" rel="noopener noreferrer"><code class="code">{{ cite.label }}</code></a>{% endfor %}</p>
+            </div></li>
+            {%- endfor %}
+          </ol>
+        </details>
+      </section>
+
+      <div class="sec">
+{{ drafting.report(infra) }}
+      </div>
+{% endblock %}
