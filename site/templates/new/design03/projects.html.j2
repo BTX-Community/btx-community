@@ -1,0 +1,36 @@
+{% extends "design03/base.html.j2" %}
+{% import "design03/_parts.html.j2" as parts %}
+{% set title = "Directory: Projects" %}
+{% set description = page_description %}
+{% set t = projects.texts %}
+{% set sections = [] %}
+{% for project in projects.projects %}{% if sections.append(("project-" ~ project.id, project.title, None)) %}{% endif %}{% endfor %}
+{#- A: Projects is the second tab of Directory; the roadmap and the papers moved to About BTX. #}
+{% block content %}
+{{ parts.pagehead("Directory", t.lead) }}
+{{ parts.directory_tabs(draft, "projects") }}
+      <p class="note"><span class="note__label">{{ ui["note"] }}</span><span class="note__body">{{ t.caution }}</span></p>
+      {%- for project in projects.projects %}
+      <section class="sec project" id="project-{{ project.id }}" aria-labelledby="project-{{ project.id }}-title">
+        <h2 class="sec__title" id="project-{{ project.id }}-title">{{ project.title }}</h2>
+        <p class="prose">{{ project.idea }}</p>
+        <dl class="lane__dl project__dl">
+          <div><dt>{{ t.today }}</dt><dd>{{ project.today }}</dd></div>
+          <div><dt>{{ t.missing }}</dt><dd>{{ project.missing }}</dd></div>
+          {%- if project.careful %}
+          <div><dt>{{ t.careful }}</dt><dd>{{ project.careful }}</dd></div>
+          {%- endif %}
+          <div><dt>{{ t.start }}</dt><dd>
+            <ul class="project__links">
+              {%- for link in project.start %}
+              <li><a href="{{ link.href | d }}"{% if link.external %} rel="noopener noreferrer"{% endif %}>{{ link.text }} {{ parts.arrow(link.external) }}</a></li>
+              {%- endfor %}
+            </ul>
+          </dd></div>
+          <div><dt>{{ t.ask }}</dt><dd>{% if project.ask_href %}<a href="{{ project.ask_href | d }}"{% if project.ask_external %} rel="noopener noreferrer"{% endif %}>{{ project.ask }} {{ parts.arrow(project.ask_external) }}</a>{% else %}{{ project.ask }}{% endif %}</dd></div>
+        </dl>
+        <p class="src"><span class="muted">{{ t.source }}</span>{% for cite in project.cites %} <a href="{{ cite.href }}" rel="noopener noreferrer"><code class="code">{{ cite.label }}</code></a>{% endfor %}</p>
+      </section>
+      {%- endfor %}
+      <p class="footnote">{{ projects.verified }}</p>
+{% endblock %}

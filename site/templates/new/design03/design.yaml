@@ -1,0 +1,21 @@
+# Draft 03: direction A "Reader's Guide" from Jpp-matata's design audit of 19 Nov 2026, with the
+# eight grafts from directions B and C that his review panel recommended. Light paper, ink, one
+# cobalt accent; Instrument Serif for headings, Inter for text, JetBrains Mono for data only.
+title: "Design 03 · Reader's Guide"
+summary: >-
+  Direction A from Jpp's design audit (19 Nov 2026): a light, editorial handbook with a serif
+  display face, one cobalt accent, numbered chapters and a contents rail on long pages, plus the
+  eight ideas from directions B and C his panel recommended.
+source: "Direction A from Jpp's design audit (19 Nov 2026)"
+theme: light
+css: [css/new/design03.css]
+js: [js/new/design03.js]
+pages:
+  home: { template: home.html.j2, path: "", live: home }
+  learn: { template: learn.html.j2, path: "learn/", live: learn }
+  network: { template: network.html.j2, path: "network/", live: network }
+  links: { template: links.html.j2, path: "links/", live: links }
+  projects: { template: projects.html.j2, path: "projects/", live: docs }
+  infra: { template: infra.html.j2, path: "infra/", live: infra }
+  dev: { template: dev.html.j2, path: "dev/", live: dev }
+  dev-work: { template: dev-work.html.j2, path: "dev/work/", live: dev-work }

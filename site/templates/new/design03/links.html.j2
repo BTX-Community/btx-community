@@ -1,0 +1,38 @@
+{% extends "design03/base.html.j2" %}
+{% import "design03/_parts.html.j2" as parts %}
+{% set title = "Directory: Links" %}
+{% set description = page_description %}
+{% set sections = [] %}
+{% for category in categories %}{% if sections.append(("cat-" ~ category.id, category.title, category.entries | length)) %}{% endif %}{% endfor %}
+{% block content %}
+{{ parts.pagehead("Directory", page_lead, ui["directory.lead"].format(count=entry_count, date=checked)) }}
+{{ parts.directory_tabs(draft, "links") }}
+      <p class="src">{{ ui["directory.add"] }} <a href="{{ add_project_url }}" rel="noopener noreferrer">{{ ui["directory.add_link"] }} ↗</a></p>
+      {#- Not specified in direction A: how the categories open. As on the live site, one at a time. #}
+      {%- for category in categories %}
+      <section class="sec dircat" id="cat-{{ category.id }}" aria-labelledby="cat-{{ category.id }}-title">
+        <details class="c-fold dircat__fold" name="links-category"{% if loop.first %} open{% endif %}>
+          <summary class="dircat__sum"><h2 class="sec__title dircat__title" id="cat-{{ category.id }}-title">{{ category.title }}</h2><span class="dircat__n">{{ category.entries | length }}</span><span class="chev" aria-hidden="true"></span></summary>
+          {%- if category.risk %}
+          <p class="note"><span class="note__label">{{ ui["risk"] }}</span><span class="note__body">{{ category.risk }}</span></p>
+          {%- endif %}
+          <ul class="entries">
+            {%- for entry in category.entries %}
+            <li class="entry" id="{{ entry.id }}">
+              <p class="entry__head"><span class="entry__num" aria-hidden="true">{{ entry.number }}</span> <a class="entry__name" href="{{ entry.url }}" rel="noopener noreferrer">{{ entry.name }} <span aria-hidden="true">↗</span></a> <span class="entry__host">{{ entry.url.split("/")[2] }}</span></p>
+              <p class="entry__text">{{ entry.description }}</p>
+              {%- if entry.note %}
+              <p class="note"><span class="note__label">{{ ui["note"] }}</span><span class="note__body">{{ entry.note }}</span></p>
+              {%- endif %}
+              {%- if entry.tags %}
+              <p class="entry__tags">{% for tag in entry.tags %}<span class="tag">{{ tag }}</span>{% endfor %}</p>
+              {%- endif %}
+            </li>
+            {%- endfor %}
+          </ul>
+        </details>
+      </section>
+      {%- endfor %}
+
+{{ parts.onward(next_links, ui) }}
+{% endblock %}
