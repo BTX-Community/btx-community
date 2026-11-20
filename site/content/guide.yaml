@@ -234,6 +234,7 @@ checklists:
 
   - id: before-installing
     title: { en: Before you install a node release, de: Bevor du ein Node-Release installierst }
+    page: infra
     items:
       - en: >-
           Download node releases only from github.com/btxchain/btx/releases. Community tools such

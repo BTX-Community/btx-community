@@ -159,6 +159,14 @@ audiences:
             PRO; ohne Treiber). Kein offizielles Windows- oder macOS-Archiv.
         url: https://github.com/btxchain/btx/releases
       - text:
+          en: "Before you install: the checklist"
+          de: "Vor der Installation: die Checkliste"
+        detail:
+          en: "Where to download, how to check the file, and the settings for a node with coins."
+          de: "Wo herunterladen, wie die Datei prüfen und die Einstellungen für einen Node mit Guthaben."
+        page: infra
+        section: before-installing
+      - text:
           en: "Start from a signed snapshot"
           de: "Mit einem signierten Snapshot starten"
         detail:
@@ -225,20 +233,6 @@ audiences:
           de: >-
             Testabdeckung, der nächtliche CI-0-Lauf und die Arbeitsbereiche ohne Verantwortliche.
         page: dev-work
-      - text:
-          en: "The agent file for your AI tool"
-          de: "Die Agenten-Datei für dein KI-Werkzeug"
-        detail:
-          en: "For Claude Code, Cursor, Codex or another."
-          de: "Für Claude Code, Cursor, Codex oder ein anderes."
-        url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/AGENTS.md
-      - text:
-          en: "The reference implementation"
-          de: "Die Referenzimplementierung"
-        detail:
-          en: "btxchain/btx, with its own rules for agents."
-          de: "btxchain/btx, mit eigenen Regeln für Agenten."
-        url: https://github.com/btxchain/btx
       - text:
           en: "Community projects"
           de: "Community-Projekte"
@@ -1074,25 +1068,6 @@ documents:
         Was man frei ändern kann, was ein zweites Augenpaar braucht, und wie man eine falsche
         Zahl meldet, wenn git nicht das eigene Werkzeug ist.
     url: https://github.com/BTX-Community/btx-community/blob/main/CONTRIBUTING.md
-
-  - id: doc-dev-hub
-    title:
-      en: Become a BTX dev
-      de: BTX-Entwickler werden
-    text:
-      en: >-
-        How to work on the node software so that your change can be merged: the method, build
-        and test recipes, the gate before an upstream pull request, open lanes with claimable
-        owners, an exam, and an entry file for AI tools.
-      de: >-
-        Wie man an der Node-Software so arbeitet, dass eine Änderung angenommen werden kann:
-        die Methode, Bau- und Testanleitungen, die Prüfliste vor einem Upstream-Pull-Request,
-        offene Bereiche, in die man sich eintragen kann, eine Prüfung und eine Einstiegsdatei
-        für KI-Werkzeuge.
-    url: https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/README.md
-    status:
-      en: Living document - every page carries its last-verified date
-      de: Wird laufend gepflegt - jede Seite nennt das Datum ihrer letzten Prüfung
 
   - id: doc-review-programme
     title:

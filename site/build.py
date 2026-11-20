@@ -221,11 +221,15 @@ class Step(_Model):
     url: Link | None = None
     anchor: Id | None = None
     page: Id | None = None
+    section: Id | None = None
 
     @model_validator(mode="after")
     def _one_target(self) -> Self:
         if sum(target is not None for target in (self.url, self.anchor, self.page)) > 1:
             msg = "a step has at most one of url, anchor and page"
+            raise ValueError(msg)
+        if self.section is not None and self.page is None:
+            msg = "a section needs a page"
             raise ValueError(msg)
         if self.page is not None and self.page not in ALL_PAGES:
             msg = f"unknown page {self.page!r}"
@@ -397,6 +401,7 @@ class Checklist(_Model):
     id: Id
     title: Text
     items: Annotated[list[Text], Field(min_length=1, max_length=10)]
+    page: Literal["home", "infra"] = "home"
 
 
 class GuidePage(_Model):
@@ -1507,6 +1512,7 @@ class ChecklistView:
     id: str
     title: str
     items: tuple[str, ...]
+    page: str = "home"
 
 
 def guide_views(
@@ -1530,7 +1536,7 @@ def guide_views(
             caveats=tuple(say(c) for c in u.caveats),
         )
     checklists = tuple(
-        ChecklistView(c.id, say(c.title), tuple(say(i) for i in c.items))
+        ChecklistView(c.id, say(c.title), tuple(say(i) for i in c.items), c.page)
         for c in guide.checklists
     )
     return facts, upcoming, checklists
@@ -1541,7 +1547,8 @@ def _step(step: Step, say: Localizer) -> StepView:
     if step.url is not None:
         return StepView(say(step.text), step.url, external=True, detail=detail)
     if step.page is not None:
-        return StepView(say(step.text), page_path(say.lang, step.page), external=False, detail=detail)
+        section = f"#{step.section}" if step.section is not None else ""
+        return StepView(say(step.text), page_path(say.lang, step.page) + section, external=False, detail=detail)
     href = f"{page_path(say.lang, 'links')}#cat-{step.anchor}" if step.anchor is not None else None
     return StepView(say(step.text), href, external=False, detail=detail)
 
@@ -2649,7 +2656,7 @@ def context(
         "audiences": audiences,
         "facts": facts,
         "upcoming": upcoming,
-        "checklists": checklists,
+        "checklists": tuple(c for c in checklists if c.page == page_id),
         "categories": categories,
         "documents": documents,
         "hub": hub_view(hub, say),

@@ -860,6 +860,7 @@
     [/^(about|next|fact-[a-z0-9-]+)$/, "learn/"],
     [/^(links|cat-[a-z0-9-]+)$/, "links/"],
     [/^(documents|doc-[a-z0-9-]+)$/, "projects/"],
+    [/^before-installing$/, "infra/"],
   ];
 
   // Sections of the developers page that moved to its sub-page "Ongoing work" (/dev/work/).

@@ -659,13 +659,6 @@ translations:
   zh: 钱包打包备份现在会说明，其中的描述符文件无需钱包密码即可花费，并对加密钱包发出警告。用早期版本制作的备份也包含同一个文件。
 - en: Become a BTX dev
   zh: 成为 BTX 开发者
-- en: >-
-    How to work on the node software so that your change can be merged: the method, build and test
-    recipes, the gate before an upstream pull request, open lanes with claimable owners, an exam,
-    and an entry file for AI tools.
-  zh: 如何开发节点软件，让你的更改能够被合并：方法、构建和测试步骤、向上游提交拉取请求之前的关卡、可认领的开放任务、一套测验，以及供 AI 工具使用的入口文件。
-- en: Living document - every page carries its last-verified date
-  zh: 持续更新的文档：每个页面都标注最后核实日期
 - en: Measured 12 November 2026 at commit c6f9678d; coverage 14 November at a5d1637f
   zh: 2026 年 11 月 12 日在提交 c6f9678d 上测得；覆盖率于 11 月 14 日在 a5d1637f 上测得
 - en: Review and test programme - one pull request per bug class
@@ -1963,8 +1956,8 @@ translations:
     To check: btx-cli getpeerinfo shows "inbound": true for peers that connected to you, and btx-cli
     getnetworkinfo lists your node's localaddresses.
   zh: "检查方法：btx-cli getpeerinfo 会对主动连上你的节点显示 \"inbound\": true，btx-cli getnetworkinfo 会在 localaddresses 中列出你节点的地址。"
-- en: "Full node: the install checklist on the start page"
-  zh: "全节点：首页上的安装检查清单"
+- en: "Full node: the install checklist below"
+  zh: "全节点：下方的安装检查清单"
 - en: "Running the node with Tor (developers)"
   zh: "通过 Tor 运行节点（开发者文档）"
 - en: "Full node"
@@ -1978,8 +1971,8 @@ translations:
 - en: >-
     An always-on computer or small server with an SSD and a steady connection. A GPU is optional.
   zh: "一台常开的电脑或小型服务器，配 SSD 和稳定的网络连接。GPU 可选。"
-- en: "Before you install a node release: the checklist on the start page"
-  zh: "安装节点版本之前：首页上的检查清单"
+- en: "Before you install a node release: the checklist on this page"
+  zh: "安装节点版本之前：本页的检查清单"
 - en: "Running a node: the steps on the start page"
   zh: "运行节点：首页上的步骤"
 - en: "Node help for stuck heights"
@@ -2414,17 +2407,13 @@ translations:
   zh: "测试覆盖率、每晚的 CI-0 运行，以及等待负责人的 lane。"
 - en: "Ongoing work"
   zh: "正在进行的工作"
-- en: "For Claude Code, Cursor, Codex or another."
-  zh: "适用于 Claude Code、Cursor、Codex 或其他工具。"
-- en: "The agent file for your AI tool"
-  zh: "给你的 AI 工具的智能体文件"
-- en: "btxchain/btx, with its own rules for agents."
-  zh: "btxchain/btx，附带其自身的智能体规则。"
-- en: "The reference implementation"
-  zh: "参考实现"
 - en: "Things to build and run outside the node software."
   zh: "在节点软件之外构建和运行的东西。"
 - en: "Community projects"
   zh: "社区项目"
 - en: "Give your AI tool (Claude Code, Cursor, Codex or another) the agent file."
   zh: "把智能体文件交给你的 AI 工具（Claude Code、Cursor、Codex 或其他工具）。"
+- en: "Before you install: the checklist"
+  zh: "安装之前：检查清单"
+- en: "Where to download, how to check the file, and the settings for a node with coins."
+  zh: "从哪里下载、如何校验文件，以及持有资金的节点应如何设置。"

@@ -1389,10 +1389,15 @@ class InfraTest(unittest.TestCase):
                 # settings and the switch for the update checks.
                 for fact in ("19335", "29447", "natpmp=0", "modelnet=0", "autoupdate=0"):
                     self.assertIn(fact, box)
-                self.assertIn(f'href="{build.page_path(lang, "home")}#before-installing"', box)
+                self.assertIn(f'href="{build.page_path(lang, "infra")}#before-installing"', box)
                 self.assertIn('href="https://github.com/btxchain/btx/blob/main/doc/tor.md"', box)
+                # The install checklist sits on this page, after the box and before the roles,
+                # and no longer on the start page, so the node path does not loop back there.
+                self.assertLess(html.index('id="home-node"'), html.index('id="before-installing"'))
+                self.assertLess(html.index('id="before-installing"'), html.index('id="roles"'))
         home = (self.out / "index.html").read_text(encoding="utf-8")
-        self.assertIn('id="before-installing"', home)
+        self.assertNotIn('id="before-installing"', home)
+        self.assertIn('href="/infra/#before-installing"', home)
 
     def test_the_home_node_box_names_no_price(self) -> None:
         data = json.loads(json.dumps(self.raw, default=str))

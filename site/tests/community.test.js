@@ -245,6 +245,7 @@ test("links into the old single page lead to the page that holds the section now
   assert.equal(live.movedTarget("/de/", "#links"), "/de/links/#links");
   assert.equal(live.movedTarget("/", "#cat-pools"), "/links/#cat-pools");
   assert.equal(live.movedTarget("/de/", "#doc-venue-structure"), "/de/projects/#doc-venue-structure");
+  assert.equal(live.movedTarget("/es/", "#before-installing"), "/es/infra/#before-installing");
   assert.equal(live.movedTarget("/", "#about"), "/learn/#about");
   assert.equal(live.movedTarget("/dev/", "#lanes"), "/dev/work/#lanes");
   assert.equal(live.movedTarget("/de/dev/", "#coverage"), "/de/dev/work/#coverage");
