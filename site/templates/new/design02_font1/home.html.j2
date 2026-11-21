@@ -1,0 +1,144 @@
+{% extends "design02_font1/base.html.j2" %}
+{% import "design02_font1/_parts.html.j2" as parts %}
+{% set title = "Start" %}
+{% set description = ui["meta_description"] %}
+{#- The two example matrices of the hero animation. An illustration of the operation, not data. #}
+{% set A = [[2, 0, 1, 3], [1, 4, 0, 2], [3, 1, 2, 0], [0, 2, 3, 1]] %}
+{% set B = [[1, 2, 0, 1], [0, 1, 3, 2], [2, 0, 1, 4], [1, 3, 2, 0]] %}
+{#- The big mono label of each fact; the statement under it comes from guide.yaml. #}
+{% set fact_marks = {"supply": "21,000,000", "matmul": "A × B", "post-quantum": "PQ", "bitcoin-core": "Knots"} %}
+{% block home %}
+    <section class="d02-hero" aria-labelledby="hero-title">
+      <div class="d02-wrap d02-hero__in">
+        <div class="d02-hero__text">
+          <p class="d02-mark">// {{ ui["kicker"] | lower }} · run by members, not a company</p>
+          <h1 class="d02-display" id="hero-title">Mined with matrices. <span class="d02-display__accent">Signed for the quantum era.</span></h1>
+          <p class="d02-hero__lead">{{ ui["lead"] }}</p>
+          <p class="d02-actions">
+            <a class="d02-btn d02-btn--primary" href="{{ draft.pages.learn }}">Start here <span aria-hidden="true">→</span></a>
+            <a class="d02-btn d02-btn--ghost" href="{{ status_page }}" rel="noopener noreferrer">Live network <span aria-hidden="true">↗</span></a>
+          </p>
+          {#- On a phone: one row of the multiplication, still, instead of the animation. #}
+          <div class="d02-mmrow" aria-hidden="true">
+            {%- for k in range(4) %}<span class="d02-mm__c d02-mm__c--a">{{ A[0][k] }}</span>{% endfor -%}
+            {%- for k in range(4) %}<span class="d02-mm__c d02-mm__c--b">{{ B[k][0] }}</span>{% endfor -%}
+          </div>
+        </div>
+        <figure class="d02-mm" data-mm aria-labelledby="mm-caption">
+          <div class="d02-mm__bar">
+            <span class="d02-mm__k" aria-hidden="true">MATMUL · A × B = C</span>
+            <span class="d02-mm__ctl">
+              <span class="d02-mm__step" data-mm-step aria-hidden="true">01/16</span>
+              <button type="button" class="d02-mm__toggle" data-mm-toggle data-label-pause="Pause the animation" data-label-play="Play the animation" hidden>
+                <svg class="d02-mm__ico d02-mm__ico--pause" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><rect x="3" y="2" width="3.5" height="12"/><rect x="9.5" y="2" width="3.5" height="12"/></svg>
+                <svg class="d02-mm__ico d02-mm__ico--play" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M4 2l10 6-10 6z"/></svg>
+                <span class="d02-sr" data-mm-label>Pause the animation</span>
+              </button>
+            </span>
+          </div>
+          <div class="d02-mm__grids" aria-hidden="true">
+            <div class="d02-mm__g" data-mm-a>
+              {%- for i in range(4) %}{% for k in range(4) %}<span class="d02-mm__c{% if i == 0 %} d02-mm__c--a{% endif %}">{{ A[i][k] }}</span>{% endfor %}{% endfor -%}
+            </div>
+            <span class="d02-mm__op">×</span>
+            <div class="d02-mm__g" data-mm-b>
+              {%- for k in range(4) %}{% for j in range(4) %}<span class="d02-mm__c{% if j == 0 %} d02-mm__c--b{% endif %}">{{ B[k][j] }}</span>{% endfor %}{% endfor -%}
+            </div>
+            <span class="d02-mm__op">=</span>
+            <div class="d02-mm__g" data-mm-c>
+              {%- for i in range(4) %}{% for j in range(4) %}
+              {%- set ns = namespace(sum=0) %}{% for k in range(4) %}{% set ns.sum = ns.sum + A[i][k] * B[k][j] %}{% endfor -%}
+              <span class="d02-mm__c{% if i == 0 and j == 0 %} d02-mm__c--now{% endif %}" data-value="{{ ns.sum }}">{% if i == 0 and j == 0 %}{{ ns.sum }}{% else %}·{% endif %}</span>
+              {%- endfor %}{% endfor -%}
+            </div>
+          </div>
+          {%- set ns = namespace(sum=0) %}{% for k in range(4) %}{% set ns.sum = ns.sum + A[0][k] * B[k][0] %}{% endfor %}
+          <p class="d02-mm__formula" data-mm-formula aria-hidden="true">c[0][0] = {% for k in range(4) %}{{ A[0][k] }}·{{ B[k][0] }}{% if not loop.last %} + {% endif %}{% endfor %} = {{ ns.sum }}</p>
+          <figcaption class="d02-mm__cap" id="mm-caption">Each cell of C is a row of A times a column of B. Miners' GPUs multiply far larger matrices like this to find the next block.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    {#- The live state, terminal style. Always a word next to the colour, and the time of the data. #}
+    <section class="d02-statusbar" id="status-badge" aria-labelledby="statusbar-title" data-api="{{ status_api }}" data-lang="{{ lang }}">
+      <h2 class="d02-sr" id="statusbar-title">{{ ui["live.title"] }}</h2>
+      <div class="d02-wrap">
+        <dl class="d02-statusbar__in">
+          <div class="d02-statusbar__cell d02-statusbar__cell--state">
+            <dt>{{ ui["live.status"] }}</dt>
+            <dd><span class="d02-dot" aria-hidden="true"></span><span data-live="overall" data-label-normal="{{ ui['overall.normal'] }}" data-label-degraded="{{ ui['overall.degraded'] }}" data-label-incident="{{ ui['overall.incident'] }}">No data</span></dd>
+          </div>
+          <div class="d02-statusbar__cell"><dt>{{ ui["live.height"] }}</dt><dd data-live="height">No data</dd></div>
+          <div class="d02-statusbar__cell"><dt>{{ ui["live.release"] }}</dt><dd data-live="release">No data</dd></div>
+          <div class="d02-statusbar__cell"><dt>{{ ui["live.on_release"] }}</dt><dd data-live="on-release" data-template="{{ ui['on_release'] }}">No data</dd></div>
+          <div class="d02-statusbar__cell d02-statusbar__cell--meta">
+            <dt class="d02-sr">Data</dt>
+            <dd class="d02-statusbar__time" data-live="updated" data-template="{{ ui['live.updated'] }}">{{ ui["live.loading"] }}</dd>
+            <dd class="d02-statusbar__links"><a href="{{ draft.pages.network }}">What does this mean? <span aria-hidden="true">→</span></a> <a href="{{ status_page }}" rel="noopener noreferrer">Full status <span aria-hidden="true">↗</span></a></dd>
+          </div>
+        </dl>
+        <div class="d02-statusbar__fork" data-live="fork" data-template="{{ ui['fork.row'] }}" hidden>
+          <p class="d02-statusbar__fork-t">{{ ui["fork.title"] }}</p>
+          <ul data-live="fork-rows"></ul>
+          <a href="{{ releases_url }}" rel="noopener noreferrer">{{ ui["fork.releases"] }} ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="d02-wrap d02-sec" aria-labelledby="diff-title">
+      <p class="d02-mark">// 01 — the idea</p>
+      <h2 class="d02-h2" id="diff-title">What makes BTX different</h2>
+      <ul class="d02-facts">
+        {%- for fact in facts %}
+        <li class="d02-fact">
+          <p class="d02-fact__mark" aria-hidden="true">{{ fact_marks.get(fact.id, "%02d" | format(loop.index)) }}</p>
+          <h3 class="d02-fact__t">{{ fact.title }}</h3>
+          <p class="d02-fact__p">{{ parts.first(fact.text) }}</p>
+          <a class="d02-fact__a" href="{{ draft.pages.learn }}#fact-{{ fact.id }}">More on {{ fact.title | lower }} <span aria-hidden="true">→</span></a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </section>
+
+    <section class="d02-wrap d02-sec" aria-labelledby="lanes-title">
+      <p class="d02-mark">// 02 — your way in</p>
+      <h2 class="d02-h2" id="lanes-title">Pick your lane</h2>
+      <ol class="d02-lanes">
+        {%- for audience in audiences %}
+        {%- set linked = audience.steps | selectattr("href") | list %}
+        <li>
+          <a class="d02-lane" href="{{ draft.pages.learn }}#lane-{{ audience.id }}">
+            <span class="d02-lane__n" aria-hidden="true">{{ "%02d" | format(loop.index) }}</span>
+            <span class="d02-lane__main">
+              <span class="d02-lane__t">{{ audience.title }}</span>
+              <span class="d02-lane__p">{{ parts.first(audience.text) }}</span>
+            </span>
+            <span class="d02-lane__chips">
+              {%- for step in linked[:3] %}<span class="d02-chip">{{ step.text }}</span>{% endfor -%}
+            </span>
+            <span class="d02-lane__go">{{ ui["start.count"].format(count=audience.steps | length) }} <span class="d02-lane__arrow" aria-hidden="true">→</span></span>
+          </a>
+        </li>
+        {%- endfor %}
+      </ol>
+    </section>
+
+    {#- Brief, section 4: the buying checklist is its own visible block, numbered, not folded. #}
+    {%- for checklist in checklists %}
+    <section class="d02-wrap d02-sec d02-sec--last" id="{{ checklist.id }}" aria-labelledby="{{ checklist.id }}-title">
+      <div class="d02-safe">
+        <div class="d02-safe__head">
+          <p class="d02-mark d02-mark--amber">// 03 — read this once</p>
+          <h2 class="d02-h2 d02-safe__t" id="{{ checklist.id }}-title">{{ checklist.title }}</h2>
+          <p class="d02-safe__count">{{ checklist.items | length }} checks</p>
+          <p class="d02-safe__more"><a href="{{ draft.pages.links }}#cat-buying">Where people buy, with its warning <span aria-hidden="true">→</span></a></p>
+        </div>
+        <ol class="d02-safe__list">
+          {%- for item in checklist.items %}
+          <li class="d02-safe__item"><span class="d02-safe__n" aria-hidden="true">{{ "%02d" | format(loop.index) }}</span><p><strong>{{ parts.first(item) }}</strong>{% set more = parts.rest(item) %}{% if more %} {{ more }}{% endif %}</p></li>
+          {%- endfor %}
+        </ol>
+      </div>
+    </section>
+    {%- endfor %}
+{% endblock %}

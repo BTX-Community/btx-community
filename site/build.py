@@ -2827,7 +2827,7 @@ def llms_full(page: CommunityPage, guide: GuidePage, texts: dict[str, dict[str, 
 # a draft is deleting its folder and its files; no other part of the build knows it.
 
 NEW_DIR = "new"
-NEW_NAME = r"^design[0-9]{2}[a-z]?$"
+NEW_NAME = r"^design[0-9]{2}([a-z]|_font[0-9])?$"
 NEW_FEEDBACK = f"{REPO_URL}/issues/75"
 """The one feedback issue for all drafts; the banner of every draft page links to it."""
 NEW_ASSET = r"^(css|js)/new/[a-z0-9-]{1,40}\.(css|js)$"
@@ -2894,7 +2894,7 @@ def load_new_designs(folder: Path) -> dict[str, NewDesign]:
         if not (child / "design.yaml").is_file():
             continue
         if not re.fullmatch(NEW_NAME, child.name):
-            raise ContentError(f"draft folder {child.name!r} must be named designNN or designNNx")
+            raise ContentError(f"draft folder {child.name!r} must be named designNN, designNNx or designNN_fontN")
         try:
             design = NewDesign.model_validate(load_yaml(child / "design.yaml"))
         except ValidationError as exc:
