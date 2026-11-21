@@ -1,0 +1,46 @@
+{#- Small parts the pages of draft 02 share. -#}
+
+{% macro arrow(external) -%}<span aria-hidden="true">{% if external %}↗{% else %}→{% endif %}</span>{%- endmacro %}
+
+{% macro rel(external) -%}{% if external %} rel="noopener noreferrer"{% endif %}{%- endmacro %}
+
+{#- A step heading: the number in mono and the accent, the title in JetBrains Mono. -#}
+{% macro stephead(id, number, text, tag="h2") -%}
+<{{ tag }} class="d02-step__h" id="{{ id }}-title"><span class="d02-step__n" aria-hidden="true">{{ "%02d" | format(number) }}</span>{{ text }}</{{ tag }}>
+{%- endmacro %}
+
+{% macro note(label, body, kind="") -%}
+<p class="d02-note{% if kind %} d02-note--{{ kind }}{% endif %}"><span class="d02-note__k">{{ label }}</span><span class="d02-note__b">{{ body }}</span></p>
+{%- endmacro %}
+
+{#- The first sentence of a content text, and the rest: for short rows that keep the whole text. -#}
+{% macro first(text) -%}{% set parts = text.split(". ", 1) %}{{ parts[0] }}{% if parts | length > 1 %}.{% endif %}{%- endmacro %}
+{% macro rest(text) -%}{% set parts = text.split(". ", 1) %}{% if parts | length > 1 %}{{ parts[1] }}{% endif %}{%- endmacro %}
+
+{#- A terminal block with a Copy button (Clipboard API, design02.js). Without JavaScript or
+    without clipboard access the button stays hidden and the text can be selected by hand. -#}
+{% macro terminal(id, label, text, prompt=false) -%}
+<div class="d02-term">
+  <div class="d02-term__bar">
+    <span class="d02-term__k">{{ label }}</span>
+    <button type="button" class="d02-term__copy" data-d02-copy="{{ id }}" data-copied="Copied" hidden>Copy</button>
+  </div>
+  <pre class="d02-term__pre" id="{{ id }}" tabindex="0" lang="en" translate="no">{% if prompt %}<span class="d02-term__ps" aria-hidden="true">$ </span>{% endif %}{{ text }}</pre>
+  <p class="d02-sr" aria-live="polite" data-d02-copy-status="{{ id }}"></p>
+</div>
+{%- endmacro %}
+
+{#- An entry of the link list: name ↗, trust label where the data gives one, host in mono. -#}
+{% macro entry(item, ui, trust=None) -%}
+<li class="d02-entry" id="{{ item.id }}"{% if item.tags %} data-tags="{{ item.tags | join(' ') }}"{% endif %}>
+  <p class="d02-entry__head"><span class="d02-entry__num" aria-hidden="true">{{ item.number }}</span><a class="d02-entry__name" href="{{ item.url }}" rel="noopener noreferrer">{{ item.name }} <span aria-hidden="true">↗</span></a>{% if trust %} <span class="d02-trust">{{ trust }}</span>{% endif %}</p>
+  <p class="d02-entry__host">{{ item.url.split("/")[2] }}</p>
+  <p class="d02-entry__text">{{ item.description }}</p>
+  {%- if item.note %}
+  {{ note(ui["note"], item.note, "warn") }}
+  {%- endif %}
+  {%- if item.tags %}
+  <p class="d02-tags">{% for tag in item.tags %}<span class="d02-tag">{{ tag }}</span>{% endfor %}</p>
+  {%- endif %}
+</li>
+{%- endmacro %}

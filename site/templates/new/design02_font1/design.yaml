@@ -1,0 +1,20 @@
+# Draft 02 "Matrix", font variant 1: a copy of draft 02 with the fonts of the live site instead of
+# Unbounded: JetBrains Mono for headings, menu, labels and data, Inter for text. Everything else is
+# draft 02: dark by default, the matrix motif, five menu items by intent.
+title: "Design 02 · Matrix, live-site fonts"
+summary: >-
+  Draft 02 "Matrix" with the fonts of today's site instead of Unbounded: JetBrains Mono for headings,
+  menu and data, Inter for text. Layout, colours and the matrix animation are the same as draft 02.
+theme: dark
+css: [css/new/design02-font1.css]
+# The scripts are draft 02's own; design02-theme.js is loaded in <head> without defer (base.html.j2), the other one deferred.
+js: [js/new/design02-theme.js, js/new/design02.js]
+pages:
+  home: { template: home.html.j2, path: "", live: home }
+  learn: { template: learn.html.j2, path: "learn/", live: learn }
+  network: { template: network.html.j2, path: "network/", live: network }
+  links: { template: links.html.j2, path: "links/", live: links }
+  projects: { template: projects.html.j2, path: "projects/", live: docs }
+  infra: { template: infra.html.j2, path: "infra/", live: infra }
+  dev: { template: dev.html.j2, path: "dev/", live: dev }
+  dev-work: { template: dev-work.html.j2, path: "dev/work/", live: dev-work }
