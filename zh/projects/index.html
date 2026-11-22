@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="BTX 社区可以自行构建和运营的项目，以及本小组公开维护的路线图和研究文档。">
+  <meta name="color-scheme" content="light">
+  
+  <title>社区项目 · BTX 社区</title>
+  
+  <link rel="alternate" hreflang="en" href="/projects/">
+  
+  <link rel="alternate" hreflang="de" href="/de/projects/">
+  
+  <link rel="alternate" hreflang="es" href="/es/projects/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/projects/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/projects/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/community.css?v=7186087629f4">
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">跳到正文</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/zh/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="页面">
+        
+        <a class="c-menu__link" href="/zh/">首页</a>
+        
+        <a class="c-menu__link" href="/zh/learn/">了解</a>
+        
+        <a class="c-menu__link" href="/zh/network/">网络</a>
+        
+        <a class="c-menu__link" href="/zh/links/">链接</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/zh/projects/" aria-current="page">项目</a>
+        
+        <a class="c-menu__link" href="/zh/infra/">运行基础设施</a>
+        
+        <a class="c-menu__link" href="/zh/dev/">开发者</a>
+        
+      </nav>
+      <button class="c-theme" type="button" data-theme-switch data-to-light="切换到浅色主题" data-to-dark="切换到深色主题" aria-label="切换到浅色主题" hidden></button>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="语言: 中文">ZH <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="语言">
+          
+          <a class="c-lang__item" href="/projects/" hreflang="en" lang="en"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item" href="/de/projects/" hreflang="de" lang="de"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/projects/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item" href="/fr/projects/" hreflang="fr" lang="fr"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item c-lang__item--active" href="/zh/projects/" hreflang="zh-Hans" lang="zh-Hans" aria-current="true"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <aside class="c-badge c-live--unknown" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="zh" aria-label="网络实时状态">
+      <a class="c-badge__head" href="/zh/network/"><span class="c-pulse" aria-hidden="true"></span><span data-live="overall" data-label-normal="一切正常" data-label-degraded="性能下降" data-label-incident="故障">网络实时状态</span></a>
+      <span class="c-badge__row"><span>区块</span> <b data-live="height">–</b></span>
+      <span class="c-badge__row"><span>版本</span> <b data-live="release">–</b></span>
+      <span class="c-badge__row"><span>运行该版本的节点</span> <b data-live="on-release" data-template="{total} 个中的 {count} 个">–</b></span>
+      <a class="c-link c-badge__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">完整状态页 ↗</a>
+      <span class="c-badge__time" data-live="updated" data-template="数据时间 {time}"></span>
+      <div class="c-badge__fork" data-live="fork" data-template="{name}：区块 {height}，还剩 {remaining} 个区块（约 {time}）" hidden>
+        <strong>网络即将升级</strong>
+        <ul data-live="fork-rows"></ul>
+        <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">版本发布与发布说明 ↗</a>
+      </div>
+    </aside>
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">社区项目</h1>
+        <p class="c-hero__lead">社区可以自行构建和运营的项目，以及本小组公开维护的路线图和研究文档。</p>
+      </section>
+
+      
+      
+      <section class="c-projects" id="projects" aria-labelledby="projects-title">
+        <h2 class="c-section-title" id="projects-title">动手构建</h2>
+        <p class="c-muted c-map__lead">这一切都在节点软件之外。这里的一切都不是节点开发者计划、承诺或认可的。每张卡片说明今天已有什么、还缺什么，并为每条说法注明出处。</p>
+        <p class="c-warning">任何会动用他人币的东西，都先在 regtest 或 testnet 上开始。</p>
+        <div class="c-audiences">
+          
+          <article class="c-audience c-role c-project" id="project-venues">
+            <h3 class="c-audience__title">BTX 市场：已有什么，缺少什么</h3>
+            <p class="c-audience__text">一个由自己的运营者经营、让人们用 BTX 与其他币交易的地方：订单簿，或基于 SwapNet 兑换的前端。</p>
+            <dl class="c-role__facts">
+              <dt>今天已有</dt>
+              <dd>节点中的 SwapNet 在双方之间用 BTX 兑换 BTC 或 ETH；AMM 池、包装余额和部分成交不在其中。本小组的交易场所结构文档比较了四种模式，以及许可的界线在哪里。</dd>
+              <dt>还缺什么</dt>
+              <dd>运营者、从文档中选定的模式，以及交易场所所在地的法律意见。该文档是供讨论的草稿，不构成法律意见。</dd>
+              
+              <dt>从这里入手</dt>
+              <dd>
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md" rel="noopener noreferrer">交易场所结构文档 ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/README.md" rel="noopener noreferrer">SwapNet 概览（开发者文档） ↗</a></li>
+                  
+                </ul>
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/issues" rel="noopener noreferrer">在本仓库以 issue 讨论该文档。 ↗</a></dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/IMPLEMENTATION_STATUS.md" rel="noopener noreferrer"><code>doc/swapnet/IMPLEMENTATION_STATUS.md:9</code></a> <a class="c-link c-map__cite" href="https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md" rel="noopener noreferrer"><code>btx-community/research/venue-structure.md:1-5</code></a></p>
+          </article>
+          
+          <article class="c-audience c-role c-project" id="project-swapnet-tools">
+            <h3 class="c-audience__title">SwapNet 钱包与工具</h3>
+            <p class="c-audience__text">围绕 SwapNet 的软件：显示报价并执行兑换的钱包、运行做市方市场的工具、节点兑换调用的前端。</p>
+            <dl class="c-role__facts">
+              <dt>今天已有</dt>
+              <dd>以 -swapnet=1 启动的节点会通过节点连接找到其他 SwapNet 节点，并提供 33 个兑换 RPC 方法。v0.34.16 带有 SwapNet，以便更广泛地测试。没有图形化交易面板：RPC 控制台就是界面。</dd>
+              <dt>还缺什么</dt>
+              <dd>非开发者会用到的一切。该软件包自己的状态页把真实链上的结算和独立审计标为未执行；ETH 一侧需要一个由节点所有者在本地批准的已部署合约；发布文档要求在称其具备主网资格之前先有外部凭证。</dd>
+              
+              <dt>注意</dt>
+              <dd class="c-project__careful">一旦接受方为兑换注资，取消并不会释放它：这些币会一直锁定到约定的退款高度或时间。</dd>
+              
+              <dt>从这里入手</dt>
+              <dd>
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/RPC.md" rel="noopener noreferrer">33 个兑换 RPC 方法 ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer">在节点上运行 SwapNet ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/TESTING_AND_RELEASE.md" rel="noopener noreferrer">测试与发布（开发者文档） ↗</a></li>
+                  
+                </ul>
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="https://github.com/btxchain/btx/issues" rel="noopener noreferrer">问题请在 btxchain/btx 提 issue；安全问题只能通过私密报告提交。 ↗</a></dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code>doc/swapnet/OPERATIONS.md:5</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/RPC.md" rel="noopener noreferrer"><code>doc/swapnet/RPC.md:1</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code>release v0.34.16</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/IMPLEMENTATION_STATUS.md" rel="noopener noreferrer"><code>doc/swapnet/IMPLEMENTATION_STATUS.md:9</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/IMPLEMENTATION_STATUS.md" rel="noopener noreferrer"><code>doc/swapnet/IMPLEMENTATION_STATUS.md:7</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code>doc/swapnet/OPERATIONS.md:21</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/TESTING_AND_RELEASE.md" rel="noopener noreferrer"><code>doc/swapnet/TESTING_AND_RELEASE.md:34</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code>doc/swapnet/OPERATIONS.md:13</code></a></p>
+          </article>
+          
+          <article class="c-audience c-role c-project" id="project-amd-mining">
+            <h3 class="c-audience__title">在消费级 AMD 显卡上挖矿</h3>
+            <p class="c-audience__text">为消费级 Radeon 显卡提供精确的 INT8 MatMul 路径，使其能够挖矿。</p>
+            <dl class="c-role__facts">
+              <dt>今天已有</dt>
+              <dd>节点的 AMD（HIP）路径接纳六种数据中心 Instinct 芯片：gfx908、gfx90a、gfx940、gfx941、gfx942 和 gfx950（MI100 到 MI350）；当找到 HIP clang 和 AMD GPU 时会自动构建。消费级 Radeon 显卡（RDNA，gfx10 到 gfx12）既不用于挖矿也不用于验证；源代码称其为 verification-only，直到跨厂商的 golden 向量为其认证。</dd>
+              <dt>还缺什么</dt>
+              <dd>在 RDNA 上与 CPU 参考逐位一致的精确 INT8 路径，以及证明这一点的 golden 向量。是否接纳这样的路径由维护者决定。</dd>
+              
+              <dt>从这里入手</dt>
+              <dd>
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/src/matmul/backend_capabilities_v4.cpp" rel="noopener noreferrer">节点如何接纳 GPU（开发者文档） ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/tree/main/src/hip" rel="noopener noreferrer">HIP 后端源代码（开发者文档） ↗</a></li>
+                  
+                </ul>
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="https://github.com/btxchain/btx/issues" rel="noopener noreferrer">证据请在 btxchain/btx 提 issue；本 hub 目前还没有任务负责 AMD。 ↗</a></dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/backend_capabilities_v4.cpp" rel="noopener noreferrer"><code>src/matmul/backend_capabilities_v4.cpp:475-491</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/backend_capabilities_v4.cpp" rel="noopener noreferrer"><code>src/matmul/backend_capabilities_v4.cpp:493-501</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/CMakeLists.txt" rel="noopener noreferrer"><code>src/CMakeLists.txt:243-247</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/accel_v4.cpp" rel="noopener noreferrer"><code>src/matmul/accel_v4.cpp:649-652</code></a></p>
+          </article>
+          
+          <article class="c-audience c-role c-project" id="project-metal">
+            <h3 class="c-audience__title">在 Apple Silicon 上测试</h3>
+            <p class="c-audience__text">在更多 Apple 芯片上运行节点的 Metal 自检并报告结果，以确认 Metal 路径不只在一类设备上可用。</p>
+            <dl class="c-role__facts">
+              <dt>今天已有</dt>
+              <dd>在 Apple 上默认会构建 Metal。Metal 设备要先通过节点的精确性自检才被接纳，可走 Metal 4 INT8 张量运算，或在重算当前纪元时走精确的整数 ALU 路径。有 golden 行时会比对；没有时由自检决定（清单中有一行，适用于 M4 级设备）。发布版本没有 macOS 二进制文件。</dd>
+              <dt>还缺什么</dt>
+              <dd>其他 Apple 芯片的自检报告。</dd>
+              
+              <dt>从这里入手</dt>
+              <dd>
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/build-osx.md" rel="noopener noreferrer">在 macOS 上构建（开发者文档） ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-XDEV.md" rel="noopener noreferrer">跨设备任务：I-XDEV 任务包 ↗</a></li>
+                  
+                </ul>
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">在不同设备上重算区块的 I-XDEV 任务；它还没有负责人。 ↗</a></dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/CMakeLists.txt" rel="noopener noreferrer"><code>src/CMakeLists.txt:10-11</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/accel_v4.cpp" rel="noopener noreferrer"><code>src/matmul/accel_v4.cpp:1058-1062</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/matmul_v4_rc_production_canary.cpp" rel="noopener noreferrer"><code>src/matmul/matmul_v4_rc_production_canary.cpp:655-656</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/accel_v4.cpp" rel="noopener noreferrer"><code>src/matmul/accel_v4.cpp:843-844</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/matmul/matmul_v4_rc_production_golden_manifest.data" rel="noopener noreferrer"><code>src/matmul/matmul_v4_rc_production_golden_manifest.data:3</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code>release v0.34.16</code></a></p>
+          </article>
+          
+          <article class="c-audience c-role c-project" id="project-tooling">
+            <h3 class="c-audience__title">区块浏览器、监控与轻钱包</h3>
+            <p class="c-audience__text">更多独立的链上视图、出问题时的告警，以及给不常运行节点的人用的钱包。</p>
+            <dl class="c-role__facts">
+              <dt>今天已有</dt>
+              <dd>链接页上列有几个区块浏览器和一个状态页；状态页以 JSON 发布其数据。btx-cli lightwatch 是只读的轻客户端：它从一个它信任的节点（以 -blockfilterindex=1 启动）读取紧凑区块过滤器，不做任何签名。节点还能读写一种浏览器钱包恢复格式。</dd>
+              <dt>还缺什么</dt>
+              <dd>由更多独立运营者运行的浏览器和监控、告警，以及也能签名的轻钱包。</dd>
+              
+              <dt>从这里入手</dt>
+              <dd>
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="/zh/links/#cat-network">链接列表中的浏览器和状态页 →</a></li>
+                  
+                  <li><a class="c-link" href="https://network.btx-monitoring.com/api/v1/status.json" rel="noopener noreferrer">状态页的 JSON ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/btxwallet-browser-node-interop.md" rel="noopener noreferrer">浏览器钱包与节点钱包的格式（开发者文档） ↗</a></li>
+                  
+                </ul>
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="/zh/links/">链接页上的社区聊天群。 →</a></dd>
+            </dl>
+            <p class="c-map__cites c-project__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/BTX-Community/btx-community/blob/main/README.md" rel="noopener noreferrer"><code>btx-community/README.md:50</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/balance-watch.md" rel="noopener noreferrer"><code>doc/balance-watch.md:44-46</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btxwallet-browser-node-interop.md" rel="noopener noreferrer"><code>doc/btxwallet-browser-node-interop.md:3-9</code></a></p>
+          </article>
+          
+        </div>
+        <p class="c-muted c-note">2026 年 11 月 15 日对照 v0.34.16（074dac16）的节点软件和 release-0.34.17 分支（8e7045b9）核对。</p>
+      </section>
+      
+
+      
+      <section class="c-docs" id="documents" aria-labelledby="documents-title">
+        <h2 class="c-section-title" id="documents-title">路线图与研究文档</h2>
+        <p class="c-muted">这个社区写下的内容。所有文档都在代码仓库中，因此每次修改都以提交的形式可见，任何人都可以更正数字。</p>
+        <div class="c-audiences">
+          
+          <article class="c-audience c-audience--doc" id="doc-roadmap">
+            <h3 class="c-audience__title">路线图</h3>
+            <p>社区能自己完成的事和依赖核心团队的事，分为两栏，你可以在某项任务旁写上自己的名字。</p>
+            <p class="c-muted">欢迎编辑</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/ROADMAP.md" rel="noopener noreferrer" aria-label="阅读: 路线图">阅读 ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-deployment-reward">
+            <h3 class="c-audience__title">启动窗口与 1,000,000 BTX 部署奖励</h3>
+            <p>大多数新人问的第一个问题，用链上数据来回答：前 50,000 个区块产生了什么、依据哪些共识规则，以及公开数据能显示什么、不能显示什么。</p>
+            <p class="c-muted">草稿，审阅中</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/research/deployment-reward.md" rel="noopener noreferrer" aria-label="阅读: 启动窗口与 1,000,000 BTX 部署奖励">阅读 ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-network-fund">
+            <h3 class="c-audience__title">网络基金</h3>
+            <p>网络如何为自己的基础设施付费：捐助、多签托管、公开规则，以及按核实的在线时长付款。</p>
+            <p class="c-muted">讨论稿</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/research/network-fund.md" rel="noopener noreferrer" aria-label="阅读: 网络基金">阅读 ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-venue-structure">
+            <h3 class="c-audience__title">交易场所结构与牌照边界</h3>
+            <p>在没有虚拟机的链上，去中心化交易所可以是什么样子，监管界线在哪里，以及仍然可选的模式。不构成法律意见。</p>
+            <p class="c-muted">讨论草稿</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md" rel="noopener noreferrer" aria-label="阅读: 交易场所结构与牌照边界">阅读 ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-contributing">
+            <h3 class="c-audience__title">如何在这里修改内容</h3>
+            <p>哪些可以自由编辑，哪些需要第二个人审阅，以及如果你不熟悉 git，如何报告错误的数字。</p>
+            
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/CONTRIBUTING.md" rel="noopener noreferrer" aria-label="阅读: 如何在这里修改内容">阅读 ↗</a>
+          </article>
+          
+          <article class="c-audience c-audience--doc" id="doc-review-programme">
+            <h3 class="c-audience__title">审阅与测试计划：每类缺陷一个拉取请求</h3>
+            <p>在 swapnet-v2 的提交 a5d1637f（现已并入发布分支）上测得的测试覆盖率；自 8 月以来 317 个修复拉取请求背后反复出现的缺陷类别；每类一次集中清理，并用一条规则封堵该类缺陷；以及正式版发布前的检查。这是贡献者的提议，合并什么由维护者决定。</p>
+            <p class="c-muted">2026 年 11 月 12 日在提交 c6f9678d 上测得；覆盖率于 11 月 14 日在 a5d1637f 上测得</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/MASTER-PLAN.md" rel="noopener noreferrer" aria-label="阅读: 审阅与测试计划：每类缺陷一个拉取请求">阅读 ↗</a>
+          </article>
+          
+        </div>
+        <p class="c-add"><a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">全部内容，包括本页的源代码 ↗</a></p>
+      </section>
+      
+
+    </main>
+
+    <footer class="c-footer">
+      <p>独立的社区项目。链接指向第三方，我们不对其内容负责。本页内容均不构成投资建议。</p>
+      <p class="c-muted">本页由英文借助 AI 翻译。 <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/main/site/content/translations/zh.yaml" rel="noopener noreferrer">修正翻译 ↗</a></p>
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">源代码 ↗</a>
+      </p>
+      <p class="c-muted">3a9d1c47e44b</p>
+    </footer>
+  </div>
+</body>
+</html>

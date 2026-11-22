@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="你可以为 BTX 网络提供的机器：每种角色做什么、需要什么、对应的指南和该问谁，另附一张说明它们如何配合的图。">
+  <meta name="color-scheme" content="light">
+  
+  <title>运行 BTX 基础设施 · BTX 社区</title>
+  
+  <link rel="alternate" hreflang="en" href="/infra/">
+  
+  <link rel="alternate" hreflang="de" href="/de/infra/">
+  
+  <link rel="alternate" hreflang="es" href="/es/infra/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/infra/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/infra/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/community.css?v=7186087629f4">
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">跳到正文</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/zh/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="页面">
+        
+        <a class="c-menu__link" href="/zh/">首页</a>
+        
+        <a class="c-menu__link" href="/zh/learn/">了解</a>
+        
+        <a class="c-menu__link" href="/zh/network/">网络</a>
+        
+        <a class="c-menu__link" href="/zh/links/">链接</a>
+        
+        <a class="c-menu__link" href="/zh/projects/">项目</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/zh/infra/" aria-current="page">运行基础设施</a>
+        
+        <a class="c-menu__link" href="/zh/dev/">开发者</a>
+        
+      </nav>
+      <button class="c-theme" type="button" data-theme-switch data-to-light="切换到浅色主题" data-to-dark="切换到深色主题" aria-label="切换到浅色主题" hidden></button>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="语言: 中文">ZH <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="语言">
+          
+          <a class="c-lang__item" href="/infra/" hreflang="en" lang="en"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item" href="/de/infra/" hreflang="de" lang="de"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/infra/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item" href="/fr/infra/" hreflang="fr" lang="fr"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item c-lang__item--active" href="/zh/infra/" hreflang="zh-Hans" lang="zh-Hans" aria-current="true"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <aside class="c-badge c-live--unknown" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="zh" aria-label="网络实时状态">
+      <a class="c-badge__head" href="/zh/network/"><span class="c-pulse" aria-hidden="true"></span><span data-live="overall" data-label-normal="一切正常" data-label-degraded="性能下降" data-label-incident="故障">网络实时状态</span></a>
+      <span class="c-badge__row"><span>区块</span> <b data-live="height">–</b></span>
+      <span class="c-badge__row"><span>版本</span> <b data-live="release">–</b></span>
+      <span class="c-badge__row"><span>运行该版本的节点</span> <b data-live="on-release" data-template="{total} 个中的 {count} 个">–</b></span>
+      <a class="c-link c-badge__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">完整状态页 ↗</a>
+      <span class="c-badge__time" data-live="updated" data-template="数据时间 {time}"></span>
+      <div class="c-badge__fork" data-live="fork" data-template="{name}：区块 {height}，还剩 {remaining} 个区块（约 {time}）" hidden>
+        <strong>网络即将升级</strong>
+        <ul data-live="fork-rows"></ul>
+        <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">版本发布与发布说明 ↗</a>
+      </div>
+    </aside>
+    <main id="main">
+
+
+      <section class="c-intro">
+        <h1 class="c-page-title">运行 BTX 基础设施</h1>
+        <p class="c-hero__lead">你可以为网络提供的机器：每台做什么、需要什么、对应的指南和该问谁，另附一张说明它们如何配合的图。</p>
+      </section>
+
+      <section class="c-split" id="paths" aria-label="自己运行 / 使用托管式方案">
+        <article class="c-audience c-split__card c-split__card--yourself" id="yourself">
+          <h2 class="c-audience__title">自己运行</h2>
+          <p class="c-audience__text">你让一台机器持续运行，并按它的指南操作。共七种角色，从家里的节点到机房里的模糊测试机；每张卡片说明网络能得到什么、机器需要什么以及该问谁。</p>
+          <nav class="c-jump" aria-label="角色">
+            
+            <a class="c-chip" href="#role-full-node">全节点</a>
+            
+            <a class="c-chip" href="#role-archive">归档节点与快照发布者</a>
+            
+            <a class="c-chip" href="#role-signer">证明签名者</a>
+            
+            <a class="c-chip" href="#role-fuzz-box">全天候模糊测试机</a>
+            
+            <a class="c-chip" href="#role-ci-runner">CI 运行机</a>
+            
+            <a class="c-chip" href="#role-sanitizers">Sanitizer 运行</a>
+            
+            <a class="c-chip" href="#role-guix">Guix 复现构建</a>
+            
+          </nav>
+        </article>
+        <article class="c-audience c-split__card c-split__card--managed" id="managed">
+          <h2 class="c-audience__title">使用托管式方案</h2>
+          <p class="c-audience__text">由一个应用替你在自己的机器上安装并看护节点软件。机器及其在线时间仍由你负责。</p>
+          
+          <div class="c-split__entry">
+            <a class="c-split__name c-link" href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer">easynode ↗</a>
+            <p class="c-card__text">easyBTX 团队的开源（MIT）桌面应用，在你现有的电脑上安装并监管 btxd。</p>
+            <p class="c-card__note"><span class="c-note-label">备注</span> 运行 v0.34.15，不含模型网络。没有合格的 GPU 时，节点跟随签名者的验证结果，而不是自行验证 MatMul 工作。</p>
+          </div>
+          
+          <p class="c-muted c-note">本站没有收录任何替你运行 BTX 基础设施的托管服务。</p>
+        </article>
+      </section>
+
+      
+      <section class="c-home" id="home-node" aria-labelledby="home-node-title">
+        <h2 class="c-section-title" id="home-node-title">在家运行节点之前</h2>
+        <div class="c-home__points">
+          
+          <div class="c-home__point" id="home-privacy">
+            <h3 class="c-home__title">隐私</h3>
+            <ul class="c-home__items">
+              
+              <li>你的节点会向它连接的每个节点暴露自己的 IP 地址。接受入站连接的节点还会宣告自己的地址，其他节点会继续转发。</li>
+              
+              <li>btxd 默认会请求你的路由器（NAT-PMP 或 PCP）打开两个端口：TCP 19335 供节点之间连接，TCP 29447 供 btxd 自行启动的模型网络使用。模型网络还会通过 UDP 29448 在你的本地网络中寻找节点。</li>
+              
+              <li>btxd 还会每 30 分钟直接向 btx.dev 检查更新（不经过 -proxy），并附上它的版本、平台、架构和分批发布组。它会自行安装更新的签名版本（autoupdateseamless=0 只提示，autoupdatetelemetry=0 不附这些信息，autoupdate=0 停止检查）。</li>
+              
+              <li>如果你在意自己的地址，就在 Tor 之后运行节点（-proxy、-onlynet=onion；Tor 指南建议等 Tor 稳定运行后再用 onlynet=onion），或者改用租用的服务器。使用 -proxy，或 -onlynet 不含 ipv4 和 ipv6 时，btxd 会保持端口 29447 关闭，也不检查更新，除非你自己打开。</li>
+              
+              <li>在持有币、用于挖矿或存有签名者密钥的机器上，设置 modelnet=0、natpmp=0 和 swapnet=0，正如安装检查清单所说。</li>
+              
+            </ul>
+          </div>
+          
+          <div class="c-home__point" id="home-reach">
+            <h3 class="c-home__title">可达性</h3>
+            <ul class="c-home__items">
+              
+              <li>出站连接默认可用。要接受入站连接，TCP 端口 19335 必须可达：由 NAT-PMP 映射、在路由器上手动转发，或作为 Tor onion 服务提供（-listenonion）。使用 -proxy 时，只有同时设置 -listen=1，节点才会监听。端口 29447 只用于模型网络；modelnet=0 会将其关闭。</li>
+              
+              <li>只向外连接的节点仍能保持同步，并向它所连接的节点转发，但新节点无法连上它，所以它帮不了新节点同步。</li>
+              
+              <li>检查方法：btx-cli getpeerinfo 会对主动连上你的节点显示 &#34;inbound&#34;: true，btx-cli getnetworkinfo 会在 localaddresses 中列出你节点的地址。</li>
+              
+            </ul>
+          </div>
+          
+        </div>
+        <p class="c-home__links">
+          
+          <a class="c-link" href="/zh/infra/#before-installing">全节点：下方的安装检查清单 →</a>
+          
+          <a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/tor.md" rel="noopener noreferrer">通过 Tor 运行节点（开发者文档） ↗</a>
+          
+        </p>
+      </section>
+      
+
+
+      
+      <section class="c-checks" id="check" aria-labelledby="check-title">
+        <h2 class="c-section-title" id="check-title">先检查</h2>
+        <div class="c-audiences c-audiences--two">
+          
+          <article class="c-audience c-audience--folded c-audience--check" id="before-installing">
+            <details class="c-fold c-audience__fold">
+            <summary><h3 class="c-audience__title">安装节点版本之前</h3> <span class="c-audience__count">10 项检查</span></summary>
+            <ol class="c-steps">
+              
+              <li>只从 github.com/btxchain/btx/releases 下载节点版本。是否信任 easynode 或快照等社区工具由你自己决定；请核验它们的签名。</li>
+              
+              <li>近期版本没有签名的校验和文件：最后一个 SHA256SUMS.asc 属于 v0.34.6，v0.34.16 附带未签名的 SHA256SUMS。请用 &#34;shasum -a 256 &lt;文件&gt;&#34;（Linux 上用 &#34;sha256sum&#34;）与 GitHub 为每个文件显示的 SHA-256 进行比较。</li>
+              
+              <li>这只能证明文件就是 GitHub 上的那个，而不能证明是谁构建的。如果你在意这一点，请自行编译带标签的源代码。</li>
+              
+              <li>先确定节点的角色。自行验证区块需要一块合格的 NVIDIA 或 Apple GPU。没有的话，就以至少两个签名者的受信任镜像方式运行，否则节点会停下来。</li>
+              
+              <li>新节点无法从创世区块开始同步：v0.34.15 和 v0.34.16 都会停在区块 126,978。请从签名快照开始，在有版本修复之前不要运行 -reindex。</li>
+              
+              <li>有四项默认设置：btxd 会自行从 btx.dev 安装更新的签名版本（autoupdateseamless=0 只提示，autoupdate=0 不再检查）；模型网络监听端口 29447（modelnet=0）；natpmp 会让路由器开放端口 19335 和 29447（natpmp=0）；SwapNet 从 0.34.17 起默认启动，启动失败时 btxd 会退出（swapnet=0）。持有资金、挖矿或运行签名者时，请把后三项都设为 0。</li>
+              
+              <li>升级前先用 btx-cli stop 停止节点，并等待 btxd 完全退出；不要强行结束进程。然后备份数据目录和钱包。</li>
+              
+              <li>升级前请阅读发布说明。有些版本会在固定区块高度改变规则；临近时本页会显示倒计时。此外，每个版本在构建约两年后会停止运行；当前版本将在 2028 年 11 月到期。</li>
+              
+              <li>Linux 程序需要 glibc 2.38 或更新版本（Ubuntu 24.04、Debian 13）。v0.34.16 提供 Linux 和带 CUDA 的 Linux 归档；Apple Silicon Mac 的最新版本是 v0.34.15。没有官方 Windows 版本。</li>
+              
+              <li>候选版本（rc）仅用于测试。持有币、挖矿或作为签名者的节点应使用最新的正式版。</li>
+              
+            </ol>
+            </details>
+          </article>
+          
+        </div>
+      </section>
+      
+
+
+      <section class="c-roles" id="roles" aria-labelledby="roles-title">
+        <h2 class="c-section-title" id="roles-title">角色</h2>
+        <div class="c-audiences">
+          
+          <article class="c-audience c-role c-role--network" id="role-full-node">
+            <p class="c-role__kind"><span class="c-tag">网络</span></p>
+            <h3 class="c-audience__title">全节点</h3>
+            <dl class="c-role__facts">
+              <dt>网络能得到什么</dt>
+              <dd>转发区块和交易，保持网络可达。配备合格 GPU 时，它自行验证 MatMul 工作。没有的话，要以受信任镜像方式运行，否则它会停止同步：btxd 不附带签名者密钥，所以要固定至少两个你信任的密钥，并设置 matmultrustedthreshold=2（默认为 1）。少于两个时，除非你明确强制覆盖，它在主网上不会启动。</dd>
+              <dt>机器</dt>
+              <dd>一台常开的电脑或小型服务器，配 SSD 和稳定的网络连接。GPU 可选。</dd>
+              <dt>指南</dt>
+              <dd>
+                <a class="c-link" href="/zh/infra/#before-installing">安装节点版本之前：本页的检查清单 →</a>
+                
+                
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="/zh/#nodes">运行节点：首页上的步骤 →</a></li>
+                  
+                  <li><a class="c-link" href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer">节点卡在某个高度时的帮助 ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer">受信任镜像如何工作（开发者文档） ↗</a></li>
+                  
+                </ul>
+                
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="/zh/links/">先看节点帮助；其他问题请到链接页上的社区聊天群。 →</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">崩溃和安全问题应私下报告给维护者，切勿公开。</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--network" id="role-archive">
+            <p class="c-role__kind"><span class="c-tag">网络</span></p>
+            <h3 class="c-audience__title">归档节点与快照发布者</h3>
+            <dl class="c-role__facts">
+              <dt>网络能得到什么</dt>
+              <dd>归档节点保留每一个区块（prune=0），并向其他节点提供整条链；状态页从归档节点测量这条链。快照发布者把一个节点的数据做成签名文件，省去新节点的大部分同步。从创世区块同步目前会停在第 126,978 号区块（#272），因此新节点从快照启动。</dd>
+              <dt>机器</dt>
+              <dd>一台大容量磁盘的服务器（完整且从不修剪的链，加上存放快照文件的空间），以及足以对外提供这些文件的上行带宽。</dd>
+              <dt>指南</dt>
+              <dd>
+                <a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer">归档节点操作手册（开发者文档） ↗</a><span class="c-role__note c-role__guide-note"><span class="c-note-label">备注</span> 其开头说明仍称 Epoch A 为发布候选；开发者的文档索引说它自第 185,000 号区块起已在主网生效。</span>
+                <span class="c-role__note">目前还没有发布签名快照的社区指南。</span>
+                
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="/zh/links/#cat-node-tools">链接列表中的签名快照 →</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/contrib/devtools/README.md" rel="noopener noreferrer">开发者的 UTXO 快照步骤 ↗</a></li>
+                  
+                </ul>
+                
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-OPS.md" rel="noopener noreferrer">I-OPS 任务的负责人；该任务涵盖归档镜像和签名快照。 ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">崩溃和安全问题应私下报告给维护者，切勿公开。</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--network" id="role-signer">
+            <p class="c-role__kind"><span class="c-tag">网络</span></p>
+            <h3 class="c-audience__title">证明签名者</h3>
+            <dl class="c-role__facts">
+              <dt>网络能得到什么</dt>
+              <dd>在合格 GPU 上重算新区块的 MatMul 工作（ExactReplay）并对结果签名。固定了其密钥的受信任镜像会跟随这些签名；自行验证区块的节点从不用它们代替自己的验证。开发者文档把这个角色称为 GPU 归档或证明者。</dd>
+              <dt>机器</dt>
+              <dd>一块能在 strict-device 模式下通过 btxd 自我资格检测的 GPU，完整的链（prune=0），全天候在线。操作手册记录 RTX 5090 和 RTX PRO 6000 在 CUDA 13.2 与 cuBLASLt 13.4 下通过；其他显卡须通过同样的自检。每台机器一把签名密钥；绝不放在矿机上。</dd>
+              <dt>指南</dt>
+              <dd>
+                <a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer">GPU 运营者操作手册（开发者文档） ↗</a><span class="c-role__note c-role__guide-note"><span class="c-note-label">备注</span> 其状态说明仍称 Epoch A 为发布候选；开发者的文档索引说它自第 185,000 号区块起已在主网生效。</span>
+                
+                
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer">签名者与受信任镜像（开发者文档） ↗</a></li>
+                  
+                </ul>
+                
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="https://github.com/btxchain/btx/issues" rel="noopener noreferrer">关于操作手册的问题请在 btxchain/btx 提 issue。本 hub 目前还没有任务负责签名者。 ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">崩溃和安全问题应私下报告给维护者，切勿公开。</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--testing" id="role-fuzz-box">
+            <p class="c-role__kind"><span class="c-tag">测试</span></p>
+            <h3 class="c-audience__title">全天候模糊测试机</h3>
+            <dl class="c-role__facts">
+              <dt>网络能得到什么</dt>
+              <dd>日夜不停地运行 BTX 的 270 多个模糊测试目标，并保留每个触及新代码的输入，从而找到需要数小时变异才能发现的缺陷。短时的 CI 运行每次都从零开始。</dd>
+              <dt>机器</dt>
+              <dd>一台专用的 Linux 机器或虚拟机（Ubuntu 24.04）：CPU 线程多多益善，每个模糊测试进程约 2 GB 内存，80 GB 空闲磁盘，无需 GPU。上面不放别的：没有节点、钱包、矿机或密钥。</dd>
+              <dt>指南</dt>
+              <dd>
+                <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/fuzz-box/README.md" rel="noopener noreferrer">运行持续的 BTX 模糊测试机 ↗</a>
+                
+                
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-OPS.md" rel="noopener noreferrer">I-OPS 负责人，负责维护模糊测试机指南。 ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">崩溃和安全问题应私下报告给维护者，切勿公开。</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--testing" id="role-ci-runner">
+            <p class="c-role__kind"><span class="c-tag">测试</span></p>
+            <h3 class="c-audience__title">CI 运行机</h3>
+            <dl class="c-role__facts">
+              <dt>网络能得到什么</dt>
+              <dd>每晚构建并测试某个分支的最新提交并公布结果，让问题在一天内被发现。状态页的运营者把这样一次运行作为任务 CI-0 公布；它在开发者页面上。</dd>
+              <dt>机器</dt>
+              <dd>一台专用的 Linux 服务器，线程多，空闲磁盘几十 GB。11 月 15 日的 CI-0 运行在 30 个线程上用了约 70 分钟；仅一个带覆盖率的构建目录就占 27 GB。</dd>
+              <dt>指南</dt>
+              <dd>
+                <strong class="c-role__coming">指南即将推出。</strong>
+                <span class="c-role__note">在此之前：I-CI 任务包列出了各项任务，构建与测试页面提供了具体步骤，btx 代码树中的 ci/README.md 可在本地运行某个 CI 阶段。</span>
+                
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-CI.md" rel="noopener noreferrer">I-CI 任务包：fork 上的 CI 任务 ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/04-build-and-test.md" rel="noopener noreferrer">构建与测试步骤 ↗</a></li>
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/blob/main/ci/README.md" rel="noopener noreferrer">btx 代码树中的 CI 脚本 ↗</a></li>
+                  
+                </ul>
+                
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">状态页的运营者，他负责每晚的 CI-0。I-CI 任务还没有负责人：可在任务文件中认领。 ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">崩溃和安全问题应私下报告给维护者，切勿公开。</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--testing" id="role-sanitizers">
+            <p class="c-role__kind"><span class="c-tag">测试</span></p>
+            <h3 class="c-audience__title">Sanitizer 运行</h3>
+            <dl class="c-role__facts">
+              <dt>网络能得到什么</dt>
+              <dd>用 AddressSanitizer 和 UndefinedBehaviorSanitizer，或用 ThreadSanitizer 构建节点并运行测试。在普通构建中悄无声息的内存和线程错误会变成报告。</dd>
+              <dt>机器</dt>
+              <dd>一台装有 clang 的 Linux 机器（ThreadSanitizer 需 clang 20 或更新版本），内存和线程充足。运行速度会慢好几倍：功能测试需加 --timeout-factor=4。</dd>
+              <dt>指南</dt>
+              <dd>
+                <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/04-build-and-test.md" rel="noopener noreferrer">构建与测试，第 6 节：Sanitizer ↗</a>
+                
+                
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/issues" rel="noopener noreferrer">I-CI 任务，ASan/UBSan 和 TSan 任务（CI-2、CI-3）归它管。它还没有负责人：在有人认领之前，请在本仓库提 issue。 ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">崩溃和安全问题应私下报告给维护者，切勿公开。</a></p>
+          </article>
+          
+          <article class="c-audience c-role c-role--testing" id="role-guix">
+            <p class="c-role__kind"><span class="c-tag">测试</span></p>
+            <h3 class="c-audience__title">Guix 复现构建</h3>
+            <dl class="c-role__facts">
+              <dt>网络能得到什么</dt>
+              <dd>在固定的 Guix 环境中，从打了标签的源代码重新构建一个版本，让独立构建者可以比对哈希值，任何人都不必信任某一台构建机器。据 v0.34.16 的发布说明，其 Linux 二进制文件需要 glibc 2.38 或更新版本，而这些脚本基于 glibc 2.31 构建：它们不是用这些脚本做出来的，所以目前复现构建者只能彼此比对。</dd>
+              <dt>机器</dt>
+              <dd>一台装有 Guix 的 Linux 机器：Guix 存储需 16 GB 空闲空间，每构建一个平台再加 8 GB。核心越多构建越快。</dd>
+              <dt>指南</dt>
+              <dd>
+                <strong class="c-role__coming">指南即将推出。</strong>
+                <span class="c-role__note">脚本位于 btx 代码树中（contrib/guix）。其 README 沿用 Bitcoin Core 的版本，指向 Bitcoin Core 的签名仓库；本站目前还不知道有 BTX 自己的签名仓库。</span>
+                
+                <ul class="c-role__related">
+                  
+                  <li><a class="c-link" href="https://github.com/btxchain/btx/tree/main/contrib/guix" rel="noopener noreferrer">btx 代码树中的 Guix 脚本 ↗</a></li>
+                  
+                </ul>
+                
+              </dd>
+              <dt>该问谁</dt>
+              <dd><a class="c-link" href="https://github.com/BTX-Community/btx-community/issues" rel="noopener noreferrer">目前还没有任务负责可复现构建；请在本仓库提 issue。 ↗</a></dd>
+            </dl>
+            <p class="c-role__report"><a class="c-link" href="#report">崩溃和安全问题应私下报告给维护者，切勿公开。</a></p>
+          </article>
+          
+        </div>
+        <p class="c-links c-roles__projects"><a class="c-link" href="/zh/projects/#projects">比起运行机器，更想动手构建？社区项目 →</a></p>
+      </section>
+
+      <section class="c-map" id="map" aria-labelledby="map-title">
+        <h2 class="c-section-title" id="map-title">各部分如何配合</h2>
+        <p class="c-muted c-map__lead">谁向谁发送什么。点击方框打开它的指南或卡片；箭头上的编号对应图下方的列表，列表每一行都注明了它在节点软件中的出处。</p>
+        <figure class="c-map__figure" aria-labelledby="map-title">
+
+<svg class="c-map__svg c-map__svg--wide" viewBox="0 0 960 602.2" role="group" aria-labelledby="map-wide-title map-wide-desc" font-family="Inter, system-ui, sans-serif">
+          <title id="map-wide-title">BTX 基础设施示意图</title>
+          <desc id="map-wide-desc">方框代表角色，箭头代表它们相互发送的内容。图下方用文字列出了同样的连接。</desc>
+          <rect class="c-map__frame" x="322" y="8.0" width="316" height="475.2" rx="14"/>
+          <text class="c-map__frame-label" x="334" y="28.0" font-size="12.5" aria-hidden="true">BTX 点对点网络</text>
+          <g class="c-map__arrows" aria-hidden="true">
+            
+            <g class="c-map__arrow" data-edge="1">
+              <line x1="262" y1="74.5" x2="348" y2="74.5"/>
+              <polygon class="c-map__head" points="348,74.5 341.0,78.5 341.0,70.5"/><polygon class="c-map__head" points="262,74.5 269.0,70.5 269.0,78.5"/>
+              <circle class="c-map__badge" cx="305.0" cy="74.5" r="9"/><text class="c-map__badge-text" x="305.0" y="74.5" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">1</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="2">
+              <line x1="369" y1="104.5" x2="369" y2="235.8"/><line x1="369" y1="295.8" x2="369" y2="409.8"/>
+              <polygon class="c-map__head" points="369,235.8 365.0,228.8 373.0,228.8"/><polygon class="c-map__head" points="369,104.5 373.0,111.5 365.0,111.5"/><polygon class="c-map__head" points="369,409.8 365.0,402.8 373.0,402.8"/><polygon class="c-map__head" points="369,295.8 373.0,302.8 365.0,302.8"/>
+              <circle class="c-map__badge" cx="369.0" cy="170.2" r="9"/><text class="c-map__badge-text" x="369.0" y="170.2" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">2</text><circle class="c-map__badge" cx="369.0" cy="352.8" r="9"/><text class="c-map__badge-text" x="369.0" y="352.8" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">2</text>
+              <text class="c-map__label" x="386" y="174.5" font-size="12.5">区块与交易</text>
+            </g>
+            
+            <g class="c-map__arrow" data-edge="3">
+              <line x1="262" y1="170.1" x2="322" y2="170.1"/>
+              <polygon class="c-map__head" points="322,170.1 315.0,174.1 315.0,166.1"/><polygon class="c-map__head" points="262,170.1 269.0,166.1 269.0,174.1"/>
+              <circle class="c-map__badge" cx="292.0" cy="170.1" r="9"/><text class="c-map__badge-text" x="292.0" y="170.1" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">3</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="4">
+              <line x1="698" y1="170.1" x2="638" y2="170.1"/>
+              <polygon class="c-map__head" points="638,170.1 645.0,166.1 645.0,174.1"/>
+              <circle class="c-map__badge" cx="668.0" cy="170.1" r="9"/><text class="c-map__badge-text" x="668.0" y="170.1" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">4</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="5">
+              <line x1="698" y1="265.7" x2="612" y2="265.7"/>
+              <polygon class="c-map__head" points="612,265.7 619.0,261.7 619.0,269.7"/>
+              <circle class="c-map__badge" cx="655.0" cy="265.7" r="9"/><text class="c-map__badge-text" x="655.0" y="265.7" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">5</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="6">
+              <line x1="262" y1="352.7" x2="322" y2="352.7"/>
+              <polygon class="c-map__head" points="322,352.7 315.0,356.7 315.0,348.7"/>
+              <circle class="c-map__badge" cx="292.0" cy="352.7" r="9"/><text class="c-map__badge-text" x="292.0" y="352.7" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">6</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="7">
+              <line x1="612" y1="439.7" x2="698" y2="439.7"/>
+              <polygon class="c-map__head" points="698,439.7 691.0,443.7 691.0,435.7"/>
+              <circle class="c-map__badge" cx="655.0" cy="439.7" r="9"/><text class="c-map__badge-text" x="655.0" y="439.7" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">7</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="8">
+              <line x1="480.0" y1="529.2" x2="480.0" y2="483.2"/>
+              <polygon class="c-map__head" points="480.0,483.2 484.0,490.2 476.0,490.2"/>
+              <circle class="c-map__badge" cx="480.0" cy="506.2" r="9"/><text class="c-map__badge-text" x="480.0" y="506.2" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">8</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="9">
+              <line x1="322" y1="561.7" x2="262" y2="561.7"/>
+              <polygon class="c-map__head" points="262,561.7 269.0,557.7 269.0,565.7"/>
+              <circle class="c-map__badge" cx="292.0" cy="561.7" r="9"/><text class="c-map__badge-text" x="292.0" y="561.7" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">9</text>
+              
+            </g>
+            
+          </g>
+          
+          <a class="c-map__node c-map__node--edge" href="/zh/links/#cat-pools" aria-label="矿工与矿池: 打开指南" data-node="miners">
+            <rect x="16" y="42.0" width="246" height="65.0" rx="10"/>
+            <text class="c-map__title" x="28" y="68.2" font-size="15" font-weight="600">矿工与矿池</text>
+            
+            <circle class="c-map__badge" cx="37" cy="86.2" r="9"/><text class="c-map__badge-text" x="37" y="86.2" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">1</text>
+            <text class="c-map__label" x="52" y="90.6" font-size="12.5">下发模板，回传区块</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="/zh/infra/#before-installing" aria-label="全节点: 打开指南" data-node="fullnodes">
+            <rect x="348" y="44.5" width="264" height="60.0" rx="10"/>
+            <text class="c-map__title" x="360" y="70.8" font-size="15" font-weight="600">全节点</text>
+            <text class="c-map__code" x="360" y="87.3" font-size="11.5" font-family="JetBrains Mono, ui-monospace, monospace">-matmulvalidation=consensus</text>
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer" aria-label="SwapNet 节点: 打开指南" data-node="swapnet">
+            <rect x="16" y="129.0" width="246" height="82.2" rx="10"/>
+            <text class="c-map__title" x="28" y="155.2" font-size="15" font-weight="600">SwapNet 节点</text>
+            <text class="c-map__code" x="28" y="171.8" font-size="11.5" font-family="JetBrains Mono, ui-monospace, monospace">-swapnet=1</text>
+            <circle class="c-map__badge" cx="37" cy="190.5" r="9"/><text class="c-map__badge-text" x="37" y="190.5" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">3</text>
+            <text class="c-map__label" x="52" y="194.9" font-size="12.5">通过已有节点连接传递兑换报价</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="发现中继: 打开指南" data-node="relays">
+            <rect x="698" y="129.0" width="246" height="82.2" rx="10"/>
+            <text class="c-map__title" x="710" y="155.2" font-size="15" font-weight="600">发现中继</text>
+            <text class="c-map__code" x="710" y="171.8" font-size="11.5" font-family="JetBrains Mono, ui-monospace, monospace">-matmulvalidation=relay</text>
+            <circle class="c-map__badge" cx="719" cy="190.5" r="9"/><text class="c-map__badge-text" x="719" y="190.5" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">4</text>
+            <text class="c-map__label" x="734" y="194.9" font-size="12.5">仅节点地址</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer" aria-label="受信任镜像: 打开指南" data-node="mirrors">
+            <rect x="348" y="235.8" width="264" height="60.0" rx="10"/>
+            <text class="c-map__title" x="360" y="262.0" font-size="15" font-weight="600">受信任镜像</text>
+            <text class="c-map__code" x="360" y="278.6" font-size="11.5" font-family="JetBrains Mono, ui-monospace, monospace">-matmulvalidation=trusted</text>
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer" aria-label="证明签名者: 打开指南" data-node="signers">
+            <rect x="698" y="233.2" width="246" height="65.0" rx="10"/>
+            <text class="c-map__title" x="710" y="259.5" font-size="15" font-weight="600">证明签名者</text>
+            
+            <circle class="c-map__badge" cx="719" cy="277.5" r="9"/><text class="c-map__badge-text" x="719" y="277.5" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">5</text>
+            <text class="c-map__label" x="734" y="281.9" font-size="12.5">签名证明</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="快照发布者: 打开指南" data-node="snapshots">
+            <rect x="16" y="320.2" width="246" height="65.0" rx="10"/>
+            <text class="c-map__title" x="28" y="346.5" font-size="15" font-weight="600">快照发布者</text>
+            
+            <circle class="c-map__badge" cx="37" cy="364.5" r="9"/><text class="c-map__badge-text" x="37" y="364.5" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">6</text>
+            <text class="c-map__label" x="52" y="368.9" font-size="12.5">签名的起点</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="归档节点: 打开指南" data-node="archive">
+            <rect x="348" y="409.8" width="264" height="60.0" rx="10"/>
+            <text class="c-map__title" x="360" y="436.0" font-size="15" font-weight="600">归档节点</text>
+            <text class="c-map__code" x="360" y="452.6" font-size="11.5" font-family="JetBrains Mono, ui-monospace, monospace">prune=0</text>
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://network.btx-monitoring.com/" rel="noopener noreferrer" aria-label="状态页: 打开指南" data-node="status">
+            <rect x="698" y="407.2" width="246" height="65.0" rx="10"/>
+            <text class="c-map__title" x="710" y="433.5" font-size="15" font-weight="600">状态页</text>
+            
+            <circle class="c-map__badge" cx="719" cy="451.5" r="9"/><text class="c-map__badge-text" x="719" y="451.5" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">7</text>
+            <text class="c-map__label" x="734" y="455.9" font-size="12.5">来自归档节点的链数据</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--build" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer" aria-label="发布版本: 打开指南" data-node="releases">
+            <rect x="322" y="529.2" width="316" height="65.0" rx="10"/>
+            <text class="c-map__title" x="334" y="555.5" font-size="15" font-weight="600">发布版本</text>
+            
+            <circle class="c-map__badge" cx="343" cy="573.5" r="9"/><text class="c-map__badge-text" x="343" y="573.5" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">8</text>
+            <text class="c-map__label" x="358" y="577.9" font-size="12.5">发布归档</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--build" href="#role-guix" aria-label="Guix 复现构建者: 转到其卡片" data-node="guix">
+            <rect x="16" y="529.2" width="246" height="65.0" rx="10"/>
+            <text class="c-map__title" x="28" y="555.5" font-size="15" font-weight="600">Guix 复现构建者</text>
+            
+            <circle class="c-map__badge" cx="37" cy="573.5" r="9"/><text class="c-map__badge-text" x="37" y="573.5" font-size="11.700000000000001" text-anchor="middle" dominant-baseline="central">9</text>
+            <text class="c-map__label" x="52" y="577.9" font-size="12.5">供复现构建的标签源代码</text>
+          </a>
+          
+        </svg>
+
+<svg class="c-map__svg c-map__svg--narrow" viewBox="0 0 360 608.9" role="group" aria-labelledby="map-narrow-title map-narrow-desc" font-family="Inter, system-ui, sans-serif">
+          <title id="map-narrow-title">BTX 基础设施示意图</title>
+          <desc id="map-narrow-desc">方框代表角色，箭头代表它们相互发送的内容。图下方用文字列出了同样的连接。</desc>
+          <rect class="c-map__frame" x="4" y="8.0" width="154" height="478.2" rx="14"/>
+          <text class="c-map__frame-label" x="16" y="28.0" font-size="12" aria-hidden="true">BTX 点对点网络</text>
+          <g class="c-map__arrows" aria-hidden="true">
+            
+            <g class="c-map__arrow" data-edge="1">
+              <line x1="194" y1="68.5" x2="149" y2="68.5"/>
+              <polygon class="c-map__head" points="149,68.5 156.0,64.5 156.0,72.5"/><polygon class="c-map__head" points="194,68.5 187.0,72.5 187.0,64.5"/>
+              <circle class="c-map__badge" cx="171.5" cy="68.5" r="8.5"/><text class="c-map__badge-text" x="171.5" y="68.5" font-size="11.05" text-anchor="middle" dominant-baseline="central">1</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="2">
+              <line x1="30.5" y1="86.3" x2="30.5" y2="285.7"/><line x1="30.5" y1="321.2" x2="30.5" y2="431.9"/>
+              <polygon class="c-map__head" points="30.5,285.7 26.5,278.7 34.5,278.7"/><polygon class="c-map__head" points="30.5,86.3 34.5,93.3 26.5,93.3"/><polygon class="c-map__head" points="30.5,431.9 26.5,424.9 34.5,424.9"/><polygon class="c-map__head" points="30.5,321.2 34.5,328.2 26.5,328.2"/>
+              <circle class="c-map__badge" cx="30.5" cy="186.0" r="8.5"/><text class="c-map__badge-text" x="30.5" y="186.0" font-size="11.05" text-anchor="middle" dominant-baseline="central">2</text><circle class="c-map__badge" cx="30.5" cy="376.5" r="8.5"/><text class="c-map__badge-text" x="30.5" y="376.5" font-size="11.05" text-anchor="middle" dominant-baseline="central">2</text>
+              <text class="c-map__label" x="47.0" y="190.2" font-size="12">区块与交易</text>
+            </g>
+            
+            <g class="c-map__arrow" data-edge="3">
+              <line x1="194" y1="149.4" x2="158" y2="149.4"/>
+              <polygon class="c-map__head" points="158,149.4 165.0,145.4 165.0,153.4"/><polygon class="c-map__head" points="194,149.4 187.0,153.4 187.0,145.4"/>
+              <circle class="c-map__badge" cx="176.0" cy="149.4" r="8.5"/><text class="c-map__badge-text" x="176.0" y="149.4" font-size="11.05" text-anchor="middle" dominant-baseline="central">3</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="4">
+              <line x1="194" y1="230.4" x2="158" y2="230.4"/>
+              <polygon class="c-map__head" points="158,230.4 165.0,226.4 165.0,234.4"/>
+              <circle class="c-map__badge" cx="176.0" cy="230.4" r="8.5"/><text class="c-map__badge-text" x="176.0" y="230.4" font-size="11.05" text-anchor="middle" dominant-baseline="central">4</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="5">
+              <line x1="194" y1="303.4" x2="149" y2="303.4"/>
+              <polygon class="c-map__head" points="149,303.4 156.0,299.4 156.0,307.4"/>
+              <circle class="c-map__badge" cx="171.5" cy="303.4" r="8.5"/><text class="c-map__badge-text" x="171.5" y="303.4" font-size="11.05" text-anchor="middle" dominant-baseline="central">5</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="6">
+              <line x1="194" y1="376.6" x2="158" y2="376.6"/>
+              <polygon class="c-map__head" points="158,376.6 165.0,372.6 165.0,380.6"/>
+              <circle class="c-map__badge" cx="176.0" cy="376.6" r="8.5"/><text class="c-map__badge-text" x="176.0" y="376.6" font-size="11.05" text-anchor="middle" dominant-baseline="central">6</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="7">
+              <line x1="149" y1="449.7" x2="194" y2="449.7"/>
+              <polygon class="c-map__head" points="194,449.7 187.0,453.7 187.0,445.7"/>
+              <circle class="c-map__badge" cx="171.5" cy="449.7" r="8.5"/><text class="c-map__badge-text" x="171.5" y="449.7" font-size="11.05" text-anchor="middle" dominant-baseline="central">7</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="8">
+              <line x1="81.0" y1="536.0" x2="81.0" y2="486.2"/>
+              <polygon class="c-map__head" points="81.0,486.2 85.0,493.2 77.0,493.2"/>
+              <circle class="c-map__badge" cx="81.0" cy="511.1" r="8.5"/><text class="c-map__badge-text" x="81.0" y="511.1" font-size="11.05" text-anchor="middle" dominant-baseline="central">8</text>
+              
+            </g>
+            
+            <g class="c-map__arrow" data-edge="9">
+              <line x1="158" y1="564.6" x2="194" y2="564.6"/>
+              <polygon class="c-map__head" points="194,564.6 187.0,568.6 187.0,560.6"/>
+              <circle class="c-map__badge" cx="176.0" cy="564.6" r="8.5"/><text class="c-map__badge-text" x="176.0" y="564.6" font-size="11.05" text-anchor="middle" dominant-baseline="central">9</text>
+              
+            </g>
+            
+          </g>
+          
+          <a class="c-map__node c-map__node--edge" href="/zh/links/#cat-pools" aria-label="矿工与矿池: 打开指南" data-node="miners">
+            <rect x="194" y="40.0" width="162" height="57.1" rx="10"/>
+            <text class="c-map__title" x="203" y="62.3" font-size="14" font-weight="600">矿工与矿池</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="79.7" r="8.5"/><text class="c-map__badge-text" x="211.5" y="79.7" font-size="11.05" text-anchor="middle" dominant-baseline="central">1</text>
+            <text class="c-map__label" x="226.0" y="83.9" font-size="12">下发模板，回传区块</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="/zh/infra/#before-installing" aria-label="全节点: 打开指南" data-node="fullnodes">
+            <rect x="13" y="50.8" width="136" height="35.5" rx="10"/>
+            <text class="c-map__title" x="22" y="73.1" font-size="14" font-weight="600">全节点</text>
+            
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer" aria-label="SwapNet 节点: 打开指南" data-node="swapnet">
+            <rect x="194" y="113.1" width="162" height="72.7" rx="10"/>
+            <text class="c-map__title" x="203" y="135.4" font-size="14" font-weight="600">SwapNet 节点</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="152.8" r="8.5"/><text class="c-map__badge-text" x="211.5" y="152.8" font-size="11.05" text-anchor="middle" dominant-baseline="central">3</text>
+            <text class="c-map__label" x="226.0" y="157.0" font-size="12">通过已有节点连接传递</text><text class="c-map__label" x="226.0" y="172.6" font-size="12">兑换报价</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="发现中继: 打开指南" data-node="relays">
+            <rect x="194" y="201.8" width="162" height="57.1" rx="10"/>
+            <text class="c-map__title" x="203" y="224.1" font-size="14" font-weight="600">发现中继</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="241.5" r="8.5"/><text class="c-map__badge-text" x="211.5" y="241.5" font-size="11.05" text-anchor="middle" dominant-baseline="central">4</text>
+            <text class="c-map__label" x="226.0" y="245.7" font-size="12">仅节点地址</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer" aria-label="受信任镜像: 打开指南" data-node="mirrors">
+            <rect x="13" y="285.7" width="136" height="35.5" rx="10"/>
+            <text class="c-map__title" x="22" y="308.0" font-size="14" font-weight="600">受信任镜像</text>
+            
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer" aria-label="证明签名者: 打开指南" data-node="signers">
+            <rect x="194" y="274.9" width="162" height="57.1" rx="10"/>
+            <text class="c-map__title" x="203" y="297.2" font-size="14" font-weight="600">证明签名者</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="314.6" r="8.5"/><text class="c-map__badge-text" x="211.5" y="314.6" font-size="11.05" text-anchor="middle" dominant-baseline="central">5</text>
+            <text class="c-map__label" x="226.0" y="318.8" font-size="12">签名证明</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="快照发布者: 打开指南" data-node="snapshots">
+            <rect x="194" y="348.0" width="162" height="57.1" rx="10"/>
+            <text class="c-map__title" x="203" y="370.3" font-size="14" font-weight="600">快照发布者</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="387.7" r="8.5"/><text class="c-map__badge-text" x="211.5" y="387.7" font-size="11.05" text-anchor="middle" dominant-baseline="central">6</text>
+            <text class="c-map__label" x="226.0" y="391.9" font-size="12">签名的起点</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--chain" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="归档节点: 打开指南" data-node="archive">
+            <rect x="13" y="431.9" width="136" height="35.5" rx="10"/>
+            <text class="c-map__title" x="22" y="454.2" font-size="14" font-weight="600">归档节点</text>
+            
+            
+            
+          </a>
+          
+          <a class="c-map__node c-map__node--edge" href="https://network.btx-monitoring.com/" rel="noopener noreferrer" aria-label="状态页: 打开指南" data-node="status">
+            <rect x="194" y="421.1" width="162" height="57.1" rx="10"/>
+            <text class="c-map__title" x="203" y="443.4" font-size="14" font-weight="600">状态页</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="460.8" r="8.5"/><text class="c-map__badge-text" x="211.5" y="460.8" font-size="11.05" text-anchor="middle" dominant-baseline="central">7</text>
+            <text class="c-map__label" x="226.0" y="465.0" font-size="12">来自归档节点的链数据</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--build" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer" aria-label="发布版本: 打开指南" data-node="releases">
+            <rect x="4" y="536.0" width="154" height="57.1" rx="10"/>
+            <text class="c-map__title" x="13" y="558.3" font-size="14" font-weight="600">发布版本</text>
+            
+            <circle class="c-map__badge" cx="21.5" cy="575.7" r="8.5"/><text class="c-map__badge-text" x="21.5" y="575.7" font-size="11.05" text-anchor="middle" dominant-baseline="central">8</text>
+            <text class="c-map__label" x="36.0" y="579.9" font-size="12">发布归档</text>
+          </a>
+          
+          <a class="c-map__node c-map__node--build" href="#role-guix" aria-label="Guix 复现构建者: 转到其卡片" data-node="guix">
+            <rect x="194" y="528.2" width="162" height="72.7" rx="10"/>
+            <text class="c-map__title" x="203" y="550.5" font-size="14" font-weight="600">Guix 复现构建者</text>
+            
+            <circle class="c-map__badge" cx="211.5" cy="567.9" r="8.5"/><text class="c-map__badge-text" x="211.5" y="567.9" font-size="11.05" text-anchor="middle" dominant-baseline="central">9</text>
+            <text class="c-map__label" x="226.0" y="572.1" font-size="12">供复现构建的标签源代</text><text class="c-map__label" x="226.0" y="587.7" font-size="12">码</text>
+          </a>
+          
+        </svg>
+
+          <figcaption class="c-muted c-note">2026 年 11 月 15 日对照 v0.34.16（074dac16）的节点软件和 release-0.34.17 分支（8e7045b9）核对。</figcaption>
+        </figure>
+        <details class="c-map__details">
+        <summary class="c-map__list-title" id="map-list-title">用文字说明的连接</summary>
+        <ol class="c-map__list" aria-labelledby="map-list-title">
+          
+          <li id="edge-1">
+            <span class="c-map__number" aria-hidden="true">1</span>
+            <div>
+              <p class="c-map__pair"><strong>矿工与矿池 ⇄ 全节点</strong></p>
+              <p>全节点下发区块模板；矿工和矿池把解出的区块送回（getblocktemplate，然后是 stratum 任务，然后是 submitblock）。</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-miner-pool-readiness.md" rel="noopener noreferrer"><code>doc/btx-miner-pool-readiness.md:4-5</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-2">
+            <span class="c-map__number" aria-hidden="true">2</span>
+            <div>
+              <p class="c-map__pair"><strong>全节点 ⇄ 受信任镜像 ⇄ 归档节点</strong></p>
+              <p>区块和交易在节点之间传递。保留全部区块的节点可提供整条链；受信任镜像仍会自行验证区块内容、交易、脚本和状态，在 MatMul 工作上则依靠它的签名者。</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:504-506</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:22-32</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-3">
+            <span class="c-map__number" aria-hidden="true">3</span>
+            <div>
+              <p class="c-map__pair"><strong>SwapNet 节点 ⇄ BTX 点对点网络</strong></p>
+              <p>以 -swapnet=1 启动的节点会通过它已有的节点连接找到其他 SwapNet 节点：无需新端口、种子列表或托管服务。SwapNet 默认关闭。</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code>doc/swapnet/OPERATIONS.md:5</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/swapnet/node.cpp" rel="noopener noreferrer"><code>src/swapnet/node.cpp:96</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:61-68</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-4">
+            <span class="c-map__number" aria-hidden="true">4</span>
+            <div>
+              <p class="c-map__pair"><strong>发现中继 → BTX 点对点网络</strong></p>
+              <p>发现中继（-matmulvalidation=relay）是为公共 DNS 种子和 addnode 主机设计的模式。它只分发节点地址：不提供区块，不是链的权威，也从不请求或提供签名。</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/init.cpp" rel="noopener noreferrer"><code>src/init.cpp:651</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/init.cpp" rel="noopener noreferrer"><code>src/init.cpp:2134-2136</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer"><code>doc/btx-public-node-bootstrap.md:60-62</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-5">
+            <span class="c-map__number" aria-hidden="true">5</span>
+            <div>
+              <p class="c-map__pair"><strong>证明签名者 → 受信任镜像</strong></p>
+              <p>签名者会对每个它重算过 MatMul 工作的区块签名（消息 getmmattest 和 mmattest）。在主网上，受信任镜像默认只有在拿到至少两个它自己固定的密钥的签名时才接受这些工作；任何节点都可以转发这些签名。自行验证区块的节点从不用它们代替自己的验证。</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:320-327</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:34-38</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:94-95</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:131-134</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer"><code>doc/btx-matmul-v4.7-gpu-operator-runbook.md:121-125</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-6">
+            <span class="c-map__number" aria-hidden="true">6</span>
+            <div>
+              <p class="c-map__pair"><strong>快照发布者 → BTX 点对点网络</strong></p>
+              <p>快照省去新节点的大部分同步：可以是一个节点数据的签名副本，也可以是 btxd 中编入的某个高度的 UTXO 快照（loadtxoutset）。加载前请核对其 SHA-256 和签名。持有经证明的 UTXO 快照的节点也可以通过 P2P 网络把它提供给其他节点。</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-mining-node-snapshot-runbook.md" rel="noopener noreferrer"><code>doc/btx-mining-node-snapshot-runbook.md:76-95</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/contrib/devtools/README.md" rel="noopener noreferrer"><code>contrib/devtools/README.md:179-182</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:564-567</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/src/init.cpp" rel="noopener noreferrer"><code>src/init.cpp:765</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-7">
+            <span class="c-map__number" aria-hidden="true">7</span>
+            <div>
+              <p class="c-map__pair"><strong>归档节点 → 状态页</strong></p>
+              <p>状态页从一个归档节点测量供应量、链高度和网络数据。</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/BTX-Community/btx-community/blob/main/README.md" rel="noopener noreferrer"><code>btx-community/README.md:50</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-8">
+            <span class="c-map__number" aria-hidden="true">8</span>
+            <div>
+              <p class="c-map__pair"><strong>发布版本 → BTX 点对点网络</strong></p>
+              <p>发布归档发布在 btxchain/btx 的 releases 页面上。v0.34.16 有两个，都适用于 Linux x86_64（其中一个用 CUDA 13 构建），另有一个 SHA256SUMS 文件；其他平台需从源代码构建节点。</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-github-release-automation.md" rel="noopener noreferrer"><code>doc/btx-github-release-automation.md:25-26</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code>release v0.34.16</code></a></p>
+            </div>
+          </li>
+          
+          <li id="edge-9">
+            <span class="c-map__number" aria-hidden="true">9</span>
+            <div>
+              <p class="c-map__pair"><strong>发布版本 → Guix 复现构建者</strong></p>
+              <p>复现构建者用 contrib/guix 构建某个版本打了标签的源代码，为结果出具证明，并核验其他构建者的证明。据 v0.34.16 的发布说明，其 Linux 二进制文件需要 glibc 2.38 或更新版本，而这些脚本基于 glibc 2.31 构建，因此它们的哈希值目前还不可能与复现构建的结果一致。</p>
+              <p class="c-map__cites"><span class="c-map__cites-label">出处</span> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/contrib/guix/README.md" rel="noopener noreferrer"><code>contrib/guix/README.md:179-199</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/contrib/guix/manifest.scm" rel="noopener noreferrer"><code>contrib/guix/manifest.scm:123</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer"><code>doc/release-notes-0.34.16.md:32-33</code></a> <a class="c-link c-map__cite" href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code>release v0.34.16</code></a></p>
+            </div>
+          </li>
+          
+        </ol>
+        </details>
+      </section>
+
+      <section class="c-report" id="report" aria-labelledby="report-title">
+        <h2 class="c-section-title" id="report-title">发现了崩溃或安全问题？</h2>
+        <p>请按照 btxchain/btx 安全策略的要求，通过 GitHub 的私密漏洞报告功能私下报告。切勿在公开的 issue、拉取请求或聊天中发布崩溃、sanitizer 报告或会导致崩溃的输入：这可能让攻击者学会如何让正在运行的节点崩溃。</p>
+        <p class="c-report__links">
+          <a class="c-link" href="https://github.com/btxchain/btx/security/advisories/new" rel="noopener noreferrer">私下报告漏洞 ↗</a>
+          <a class="c-link" href="https://github.com/btxchain/btx/blob/main/SECURITY.md" rel="noopener noreferrer">安全策略（SECURITY.md） ↗</a>
+        </p>
+      </section>
+
+    </main>
+
+    <footer class="c-footer">
+      <p>独立的社区项目。链接指向第三方，我们不对其内容负责。本页内容均不构成投资建议。</p>
+      <p class="c-muted">本页由英文借助 AI 翻译。 <a class="c-link" href="https://github.com/BTX-Community/btx-community/blob/main/site/content/translations/zh.yaml" rel="noopener noreferrer">修正翻译 ↗</a></p>
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">源代码 ↗</a>
+      </p>
+      <p class="c-muted">3a9d1c47e44b</p>
+    </footer>
+  </div>
+</body>
+</html>

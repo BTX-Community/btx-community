@@ -1,0 +1,75 @@
+/* BTX Community · second colour version, "btx.dev colours" (spec: qa/variant-btxdev.md).
+   Overrides only: loaded after site.css and the page CSS on every page of site-btxdev/ by
+   tools/make-variant.sh. Same layout, copy, motion and fonts; only colours change.
+   Palette: black #0A0A0A, dark greys #111111 / #141414 / #1A1A1A, white #FAFAFA, light green #9BE7AD,
+   deep green #2F9D68, silver #9CA3AF, yellow #F59E0B for warnings and Degraded/Incident only.
+   No blue, pink, red or any other hue. */
+:root {
+  --bg: #0A0A0A;
+  /* Black with one faint green glow in the top-right corner (fixed layer, body::before), like btx.dev's
+     microsite pages. It replaces the blue-to-pink gradient. */
+  --bg-gradient: radial-gradient(ellipse at top right, rgba(142,246,200,.08) 0%, rgba(142,246,200,0) 60%);
+  --sheet: rgb(20 20 20 / .94);    /* #141414 dark grey sheets and panels */
+  --surface: var(--sheet);
+  --surface-2: rgb(26 26 26 / .96); /* #1A1A1A recessed areas, code, note callouts */
+  --panel: #141414;
+  --ink: #FAFAFA;          /* white: 17.7:1 on #141414 */
+  --ink-2: #B8B8B8;        /* solid equivalent of rgba(250,250,250,.7): 8.8:1 on #1A1A1A, 9.3:1 on #141414 */
+  --ink-3: #8F8F8F;        /* meta text: 5.4:1 on #1A1A1A, 6.1:1 on #0A0A0A */
+  --rule: rgb(250 250 250 / .12);
+  --rule-2: rgb(250 250 250 / .22);
+  --rule-strong: #FAFAFA;
+  --tick: rgb(250 250 250 / .6);
+  --rule-hover: rgb(250 250 250 / .4);
+
+  /* The four lines. Badge letters black on all four (white on deep green is only 3.4:1). */
+  --line-s: #FAFAFA;       /* Start here: white */
+  --line-m: #9BE7AD;       /* Mine BTX: light green */
+  --line-n: #2F9D68;       /* Run a node: deep green (lines, dots, fills; never small text) */
+  --line-b: #9CA3AF;       /* Build: silver grey */
+  --on-line-s: #0A0A0A;
+  --on-line-m: #0A0A0A;
+  --on-line-n: #0A0A0A;
+  --on-line-b: #0A0A0A;
+
+  /* Roles: --sky (Normal, OK, focus, link underline, board label, burn bar) becomes light green;
+     --rose (Degraded, Incident, warning edges and labels) becomes yellow. */
+  --sky: #9BE7AD;
+  --rose: #F59E0B;
+  --on-rose: #0A0A0A;
+  --tint-sky: rgb(155 231 173 / .16);
+  --chip-sky: rgb(155 231 173 / .12);
+  --chip-rose: rgb(245 158 11 / .14);
+  --focus: #9BE7AD;
+  --unknown: #9CA3AF;      /* No data: silver grey */
+
+  --hdr-bg: rgb(10 10 10 / .85);
+  --hdr-solid: #0A0A0A;
+
+  /* Departures board: solid dark grey on the black page */
+  --board: #111111;
+
+  /* Background animation: white structure, light green column (so it reads), silver row,
+     deep green product cells. The animation's own contrast guard keeps all text at 4.5:1. */
+  --bg-anim-ink: #FAFAFA;
+  --bg-anim-col: #9BE7AD;
+  --bg-anim-row: #9CA3AF;
+  --bg-anim-product: #2F9D68;
+}
+
+/* No data = silver grey (the shape and word stay as they are). */
+.pill--unknown .pill__shape,
+.board .is-unknown .shape, .board .lvl-unknown .shape { color: var(--unknown); }
+
+/* Warning signs: a yellow header band with black text and a black triangle (yellow "!"), yellow left edge. */
+.sign--warn .sign__head { background: var(--rose); color: var(--on-rose); }
+.sign--warn .sign__head h2, .sign--warn .sign__head h3, .sign--warn .sign__head .label { color: var(--on-rose); }
+.sign--warn .sign__icon path:first-child { fill: var(--on-rose); }
+.sign--warn .sign__icon path + path { fill: var(--rose); }
+.sign--warn .pm--sign { color: var(--on-rose); }
+
+/* Roadmap: the Today marker and the "You are here" icon in white (the line still arrives deep green). */
+.rmap__stop--now .rmap__dot,
+.roadmap .rmap__stop--now .rmap__dot { border-color: var(--ink); background: var(--ink); }
+.roadmap .rmap__stop--now .rmap__dot::before { box-shadow: 0 0 10px 1px rgb(250 250 250 / .45); }
+.here-icon, .rm-here { fill: var(--ink); }

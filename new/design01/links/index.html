@@ -1,0 +1,696 @@
+
+<!doctype html>
+<html lang="en" class="d01-root" data-d01-base="/new/design01/">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://btx-community.com/links/">
+  <title>[Draft] Directory · Design 01 · Klar</title>
+  <meta name="description" content="Projects, tools and services around BTX, from wallets and pools to mining software and explorers, each one opened and checked by hand.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[Draft] Directory – Design draft, not the official layout">
+  <meta property="og:description" content="Calm and light: five menu items by intent, a status strip with words and colours, the first steps of every path on the start page, a dark safety block, numbered sections with an &#34;On this page&#34; rail, and a filterable directory. Add ?v=mono for the variant with monospace headings, dark by default.">
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/new/design01.css?v=fcb816e93901">
+  <link rel="preload" href="/static/fonts/new/SpaceGrotesk-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/static/js/new/design01-head.js?v=1bbc3eaca389"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+  <script src="/static/js/new/design01.js?v=98dbe56c251d" defer></script>
+</head>
+<body class="d01">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="draft-banner" role="note">
+    <p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind.
+      <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a>
+      <a class="draft-banner__link" href="/new/">All drafts →</a>
+      <a class="draft-banner__link" href="https://btx-community.com/links/">This page on the live site ↗</a>
+    </p>
+  </div>
+  <header class="hd">
+    <div class="hd__in">
+      <a class="logo" href="/new/design01/"><span class="logo__mark" aria-hidden="true">B</span><span class="logo__name">BTX Community</span></a>
+      <nav class="hd__nav" aria-label="Pages">
+        <a class="hd__link" href="/new/design01/">Start here</a>
+        <a class="hd__link" href="/new/design01/infra/">Take part</a>
+        <a class="hd__link" href="/new/design01/network/">Network</a>
+        <a class="hd__link" href="/new/design01/links/" aria-current="page">Directory</a>
+        <a class="hd__link" href="/new/design01/dev/">Build</a>
+      </nav>
+      <div class="hd__tools">
+        <p class="variant" aria-label="Variant of this draft">
+          <a class="variant__opt" href="?v=klar" data-d01-variant="klar" aria-current="true">Klar</a><a class="variant__opt" href="?v=mono" data-d01-variant="mono">Mono</a>
+        </p>
+        <span class="lang" title="This draft is in English only"><span aria-hidden="true">EN</span><span class="sr">Language: English only</span></span>
+        <button class="iconbtn" type="button" data-d01-theme data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to dark theme" hidden>
+          <svg class="iconbtn__moon" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="iconbtn__sun" aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <details class="menu">
+          <summary class="iconbtn menu__btn"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="menu__label">Menu</span></summary>
+          <nav class="sheet" aria-label="Pages">
+            <ul class="sheet__list">
+              <li>
+                <a class="sheet__link" href="/new/design01/">Start here</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/">Start</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/learn/">Learn</a></li>
+                </ul>
+              </li>
+              <li>
+                <a class="sheet__link" href="/new/design01/infra/">Take part</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/#miners">Mining</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/#nodes">Running a node</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/infra/">Run infra</a></li>
+                </ul>
+              </li>
+              <li>
+                <a class="sheet__link" href="/new/design01/network/">Network</a>
+              </li>
+              <li>
+                <a class="sheet__link" href="/new/design01/links/" aria-current="page">Directory</a>
+              </li>
+              <li>
+                <a class="sheet__link" href="/new/design01/dev/">Build</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/dev/">Developers</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/dev/work/">Ongoing work</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design01/projects/">Projects</a></li>
+                </ul>
+              </li>
+            </ul>
+            <p class="variant variant--sheet" aria-label="Variant of this draft">
+              <a class="variant__opt" href="?v=klar" data-d01-variant="klar" aria-current="true">Klar</a><a class="variant__opt" href="?v=mono" data-d01-variant="mono">Mono</a>
+            </p>
+            <p class="sheet__note">This draft is in English only.</p>
+          </nav>
+        </details>
+      </div>
+    </div>
+    <div class="strip" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en"
+         data-level-green="OK" data-level-yellow="Warning"
+         data-level-red="Critical" data-level-unknown="Unknown">
+      <div class="strip__in">
+        <p class="strip__state"><span class="dot" aria-hidden="true"></span><span class="sr">Status: </span><span data-live="overall" data-label-normal="All systems normal" data-label-degraded="Degraded" data-label-incident="Incident">No data</span></p>
+        <p class="strip__fig"><span class="strip__k">Block</span> <span class="mono" data-live="height">No data</span></p>
+        <p class="strip__fig strip__fig--release"><span class="strip__k">Release</span> <span class="mono" data-live="release">No data</span></p>
+        <p class="strip__fig strip__fig--wide"><span class="strip__k">Nodes on it</span> <span class="mono" data-live="on-release" data-template="{count} of {total} nodes">No data</span></p>
+        <p class="strip__fig strip__fig--wide strip__time" data-live="updated" data-template="Data from {time}">Loading live data …</p>
+        <a class="strip__link" href="/new/design01/network/#live">What does this mean?&nbsp;<span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="page">
+
+    <div class="wrap">
+<header class="ph">
+        <p class="ph__crumb"><a href="/new/design01/links/">Directory</a> <span aria-hidden="true">/</span> <span class="ph__here">Links</span></p>
+        <h1 class="ph__title">Links</h1>
+        <p class="ph__lead">Projects, tools and services around BTX, each one opened and checked by hand.</p>
+        <p class="badges">
+          <span class="badge badge--checked"><svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>53 links, every one opened and checked on 2026-11-15.</span>
+        </p>
+      </header>
+      <div class="filter card" data-d01-filter hidden>
+        <div class="filter__row">
+          <label class="filter__label" for="dq">Filter the directory</label>
+          <input class="filter__input" id="dq" type="search" autocomplete="off" spellcheck="false" placeholder="Name, host, tag or word" data-d01-query>
+        </div>
+        <div class="chips" role="group" aria-label="Category">
+          <button type="button" class="chip" data-d01-cat="all" aria-pressed="true">All <span class="chip__n">53</span></button>
+          <button type="button" class="chip" data-d01-cat="community" aria-pressed="false">Community <span class="chip__n">6</span></button>
+          <button type="button" class="chip" data-d01-cat="official" aria-pressed="false">Official <span class="chip__n">15</span></button>
+          <button type="button" class="chip" data-d01-cat="network" aria-pressed="false">Network and explorers <span class="chip__n">9</span></button>
+          <button type="button" class="chip" data-d01-cat="pools" aria-pressed="false">Pools <span class="chip__n">2</span></button>
+          <button type="button" class="chip" data-d01-cat="miners" aria-pressed="false">Miners <span class="chip__n">5</span></button>
+          <button type="button" class="chip" data-d01-cat="node-tools" aria-pressed="false">Node tools <span class="chip__n">7</span></button>
+          <button type="button" class="chip" data-d01-cat="wallets" aria-pressed="false">Wallets <span class="chip__n">4</span></button>
+          <button type="button" class="chip" data-d01-cat="buying" aria-pressed="false">Buying BTX <span class="chip__n">1</span></button>
+          <button type="button" class="chip" data-d01-cat="bridges" aria-pressed="false">Bridges and testnets <span class="chip__n">4</span></button>
+        </div>
+        <p class="filter__shown" aria-live="polite" data-d01-shown data-total="53">53 of 53 shown</p>
+      </div>
+      <nav class="jump" aria-label="Categories" data-d01-jump>
+        <a class="jump__link" href="#cat-community">Community <span class="chip__n">6</span></a>
+        <a class="jump__link" href="#cat-official">Official <span class="chip__n">15</span></a>
+        <a class="jump__link" href="#cat-network">Network and explorers <span class="chip__n">9</span></a>
+        <a class="jump__link" href="#cat-pools">Pools <span class="chip__n">2</span></a>
+        <a class="jump__link" href="#cat-miners">Miners <span class="chip__n">5</span></a>
+        <a class="jump__link" href="#cat-node-tools">Node tools <span class="chip__n">7</span></a>
+        <a class="jump__link" href="#cat-wallets">Wallets <span class="chip__n">4</span></a>
+        <a class="jump__link" href="#cat-buying">Buying BTX <span class="chip__n">1</span></a>
+        <a class="jump__link" href="#cat-bridges">Bridges and testnets <span class="chip__n">4</span></a>
+      </nav>
+      <p class="legend"><span class="trust trust--official">Official</span> an entry from the category “Official” of this list. Yellow boxes are notes to read before you use an entry.</p>
+      <section class="dircat" id="cat-community" data-d01-cat-section="community" aria-labelledby="cat-community-title">
+        <h2 class="h2 dircat__title" id="cat-community-title">Community <span class="dircat__n">6</span></h2>
+        <ul class="entries">
+          <li class="card entry" id="telegram" data-d01-entry data-cat="community">
+            <p class="entry__head">
+              <a class="entry__name" href="https://t.me/BTX_COMMUNITY_ENTRY" rel="noopener noreferrer">BTX Community (Telegram)&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">t.me</p>
+            <p class="entry__text">The main community group on Telegram, open to everyone.</p>
+            <p class="tags"><span class="tag">telegram</span><span class="tag">chat</span></p>
+          </li>
+          <li class="card entry" id="telegram-gate" data-d01-entry data-cat="community">
+            <p class="entry__head">
+              <a class="entry__name" href="https://t.me/btx_ecosystem" rel="noopener noreferrer">BTX main chat (Telegram gate)&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">t.me</p>
+            <p class="entry__text">Verification gate to the main BTX chat on compute and tech. Not run by the community; for community questions use the group above.</p>
+            <p class="tags"><span class="tag">telegram</span><span class="tag">chat</span></p>
+          </li>
+          <li class="card entry" id="x-community" data-d01-entry data-cat="community">
+            <p class="entry__head">
+              <a class="entry__name" href="https://x.com/btxcommunity" rel="noopener noreferrer">BTX on X&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">x.com</p>
+            <p class="entry__text">Community account on X.</p>
+            <p class="tags"><span class="tag">x</span><span class="tag">news</span></p>
+          </li>
+          <li class="card entry" id="x-chain" data-d01-entry data-cat="community">
+            <p class="entry__head">
+              <a class="entry__name" href="https://x.com/thebtxchain" rel="noopener noreferrer">BTX Chain on X&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">x.com</p>
+            <p class="entry__text">Community-run account on X, not the developers&#39;. It posted release notes and network news in August and September 2026.</p>
+            <p class="tags"><span class="tag">x</span><span class="tag">news</span></p>
+          </li>
+          <li class="card entry" id="easybtx-chat" data-d01-entry data-cat="community">
+            <p class="entry__head">
+              <a class="entry__name" href="https://t.me/easyBTX" rel="noopener noreferrer">easyBTX chat&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">t.me</p>
+            <p class="entry__text">Telegram group of the easyBTX team, for questions about its miner, node app and wallet.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Run by the vendor of those apps.</span></p>
+            <p class="tags"><span class="tag">telegram</span><span class="tag">support</span></p>
+          </li>
+          <li class="card entry" id="btx-best" data-d01-entry data-cat="community">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btx.best/" rel="noopener noreferrer">BTX.best&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">btx.best</p>
+            <p class="entry__text">Portal of the easyBTX team - explorer, wallet, mining and news in one place.</p>
+            <p class="tags"><span class="tag">portal</span><span class="tag">news</span></p>
+          </li>
+        </ul>
+      </section>
+      <section class="dircat" id="cat-official" data-d01-cat-section="official" aria-labelledby="cat-official-title">
+        <h2 class="h2 dircat__title" id="cat-official-title">Official <span class="dircat__n">15</span></h2>
+        <ul class="entries">
+          <li class="card entry" id="btx-dev" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btx.dev/" rel="noopener noreferrer">btx.dev&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">btx.dev</p>
+            <p class="entry__text">Official website with documentation, the browser wallet and the whitepaper.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Last updated for v0.33.2 (August 2026); newer releases are on the GitHub releases page.</span></p>
+            <p class="tags"><span class="tag">docs</span><span class="tag">wallet</span></p>
+          </li>
+          <li class="card entry" id="btx-node" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx" rel="noopener noreferrer">BTX Node&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Source code and releases of the reference node (btxd).</p>
+            <p class="tags"><span class="tag">source</span><span class="tag">node</span></p>
+          </li>
+          <li class="card entry" id="protocol-of-record" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btx.dev/BTX-Context.pdf" rel="noopener noreferrer">The Protocol of Record&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">btx.dev</p>
+            <p class="entry__text">The official whitepaper, describing what BTX is and why.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Written for v0.33.2 (August 2026). Newer releases differ in places.</span></p>
+            <p class="tags"><span class="tag">whitepaper</span><span class="tag">pdf</span></p>
+          </li>
+          <li class="card entry" id="specification" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btx.dev/BTX-Specifications.pdf" rel="noopener noreferrer">BTX Specification&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">btx.dev</p>
+            <p class="entry__text">The official technical specification of the protocol.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Written for v0.33.2 (August 2026). Newer releases differ in places.</span></p>
+            <p class="tags"><span class="tag">spec</span><span class="tag">pdf</span></p>
+          </li>
+          <li class="card entry" id="build-from-source" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/doc/build-unix.md" rel="noopener noreferrer">Build from source&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">How to build btxd yourself on Linux, if you would rather not trust a binary.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">A default build has no GPU support and cannot check MatMul blocks itself: add CUDA, or run it as a trusted mirror. On Ubuntu 22.04 or 24.04 add -DWITH_MODELNET=OFF, unless you install OpenSSL 3.5 or newer.</span></p>
+            <p class="tags"><span class="tag">docs</span><span class="tag">node</span></p>
+          </li>
+          <li class="card entry" id="windows-build" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-windows-11-compile-handbook.md" rel="noopener noreferrer">Build on Windows 11&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Official step-by-step guide to building btxd and btx-cli on Windows 11.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">The current release has no official Windows archive. The handbook starts without CUDA, and such a build cannot check MatMul blocks itself: run it as a trusted mirror.</span></p>
+            <p class="tags"><span class="tag">docs</span><span class="tag">windows</span><span class="tag">node</span></p>
+          </li>
+          <li class="card entry" id="pqc-spec" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md" rel="noopener noreferrer">Post-quantum signatures&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">ML-DSA and SLH-DSA in BTX, P2MR outputs and the address format.</p>
+            <p class="tags"><span class="tag">spec</span><span class="tag">pq</span></p>
+          </li>
+          <li class="card entry" id="pq-multisig" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-pq-multisig-tutorial.md" rel="noopener noreferrer">Post-quantum multisig&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Step-by-step guide to a multisig wallet with post-quantum keys.</p>
+            <p class="tags"><span class="tag">docs</span><span class="tag">pq</span></p>
+          </li>
+          <li class="card entry" id="key-management" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-key-management-guide.md" rel="noopener noreferrer">Key management and backups&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Official guide to wallet roles, multisig, timelocked recovery, watch-only setups and encrypted backups, with a restore drill.</p>
+            <p class="tags"><span class="tag">docs</span><span class="tag">wallet</span><span class="tag">backup</span></p>
+          </li>
+          <li class="card entry" id="browser-wallet-interop" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/doc/btxwallet-browser-node-interop.md" rel="noopener noreferrer">Browser wallet and node wallet&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Official guide to moving a btx.dev browser wallet into btxd and back, and how that file differs from an encrypted node backup.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">A .btxwallet file holds the post-quantum seed in plain text. Treat it like a private key and delete temporary copies.</span></p>
+            <p class="tags"><span class="tag">docs</span><span class="tag">wallet</span><span class="tag">browser</span></p>
+          </li>
+          <li class="card entry" id="matmul-spec" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btx.dev/docs/specs/matmul-pow/" rel="noopener noreferrer">MatMul proof-of-work&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">btx.dev</p>
+            <p class="entry__text">How mining by matrix multiplication works and how blocks are checked.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Describes MatMul v4.7, which the network runs since block 185,000, and keeps v3 as reference. Last updated 4 Aug 2026; its release notes still name v0.33.2.</span></p>
+            <p class="tags"><span class="tag">spec</span><span class="tag">mining</span></p>
+          </li>
+          <li class="card entry" id="trusted-mirrors" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer">Trusted MatMul mirrors&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Running a node without a qualified GPU by trusting signers&#39; replay attestations, and what that trust means.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">On mainnet it needs at least two pinned signers and a threshold of two. Pin only signers that are live today.</span></p>
+            <p class="tags"><span class="tag">docs</span><span class="tag">node</span></p>
+          </li>
+          <li class="card entry" id="gpu-verified-nodes" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-gpu-verified-network-transition.md" rel="noopener noreferrer">Who needs a GPU&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Official explanation of why a node needs a qualified GPU to check blocks itself since block 185,000, and what machines without one can do.</p>
+            <p class="tags"><span class="tag">docs</span><span class="tag">node</span><span class="tag">gpu</span></p>
+          </li>
+          <li class="card entry" id="integration-docs" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/doc/integrations/README.md" rel="noopener noreferrer">Exchange and custody integration (BCP/1)&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Official integration profile for exchanges and custodians: UTXO model, watch-only setup, deposits, confirmations and reorg handling.</p>
+            <p class="tags"><span class="tag">docs</span><span class="tag">exchange</span><span class="tag">custody</span></p>
+          </li>
+          <li class="card entry" id="security-policy" data-d01-entry data-cat="official">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/SECURITY.md" rel="noopener noreferrer">Report a security problem&nbsp;<span aria-hidden="true">↗</span></a> <span class="trust trust--official">Official</span>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">How to report a vulnerability privately to the BTX Development Team. Not for support questions.</p>
+            <p class="tags"><span class="tag">security</span></p>
+          </li>
+        </ul>
+      </section>
+      <section class="dircat" id="cat-network" data-d01-cat-section="network" aria-labelledby="cat-network-title">
+        <h2 class="h2 dircat__title" id="cat-network-title">Network and explorers <span class="dircat__n">9</span></h2>
+        <ul class="entries">
+          <li class="card entry" id="status" data-d01-entry data-cat="network">
+            <p class="entry__head">
+              <a class="entry__name" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">BTX Network Status&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">network.btx-monitoring.com</p>
+            <p class="entry__text">Community status page - is the network healthy, with history, node help and a public JSON API.</p>
+            <p class="tags"><span class="tag">status</span><span class="tag">api</span></p>
+          </li>
+          <li class="card entry" id="btxscan" data-d01-entry data-cat="network">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btxscan.io/" rel="noopener noreferrer">BTXScan&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">btxscan.io</p>
+            <p class="entry__text">Block explorer of the easyBTX team for blocks, transactions and addresses, with a public API (api.btxscan.io).</p>
+            <p class="tags"><span class="tag">explorer</span><span class="tag">halving</span><span class="tag">api</span></p>
+          </li>
+          <li class="card entry" id="first-light" data-d01-entry data-cat="network">
+            <p class="entry__head">
+              <a class="entry__name" href="https://explorer.btxbyronbay.com/" rel="noopener noreferrer">first light&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">explorer.btxbyronbay.com</p>
+            <p class="entry__text">Explorer of the Byron Bay team, with a 24 h mining view, stats pages, a public API and tools for AI assistants (MCP, REST, llms.txt) at /ai.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">13 of the 16 AI tools are public with no key; 3 premium ones need a token from the operator.</span></p>
+            <p class="tags"><span class="tag">explorer</span><span class="tag">stats</span><span class="tag">api</span></p>
+          </li>
+          <li class="card entry" id="byron-observatory" data-d01-entry data-cat="network">
+            <p class="entry__head">
+              <a class="entry__name" href="https://explorer.btxbyronbay.com/observatory" rel="noopener noreferrer">BTX Network Observatory&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">explorer.btxbyronbay.com</p>
+            <p class="entry__text">Live view from the Byron Bay archive node: its chain progress, the heights of the nodes connected to it, and a map of those connections (preview).</p>
+            <p class="tags"><span class="tag">map</span><span class="tag">stats</span></p>
+          </li>
+          <li class="card entry" id="byron-atlas-demo" data-d01-entry data-cat="network">
+            <p class="entry__head">
+              <a class="entry__name" href="https://explorer.btxbyronbay.com/observatory-atlas/" rel="noopener noreferrer">Atlas demo&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">explorer.btxbyronbay.com</p>
+            <p class="entry__text">The upstream Atlas desktop interface (btxchain/btx #273), hosted by the Byron Bay team as a demo.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Unofficial demo with sample data only. Atlas is in the v0.34.16 source, but the release archives leave it out; the page connects to no node or wallet.</span></p>
+            <p class="tags"><span class="tag">demo</span><span class="tag">preview</span></p>
+          </li>
+          <li class="card entry" id="byron-swapnet-demo" data-d01-entry data-cat="network">
+            <p class="entry__head">
+              <a class="entry__name" href="https://explorer.btxbyronbay.com/observatory-swapnet/" rel="noopener noreferrer">SwapNet demo&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">explorer.btxbyronbay.com</p>
+            <p class="entry__text">A walk-through of SwapNet (btxchain/btx #630), built by the Byron Bay team from the open-source code.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Unofficial demo with sample data only. SwapNet is in v0.34.16 for broader testing, off unless a node starts with -swapnet=1; the page connects to no node or wallet.</span></p>
+            <p class="tags"><span class="tag">demo</span><span class="tag">preview</span></p>
+          </li>
+          <li class="card entry" id="ninjaraider-explorer" data-d01-entry data-cat="network">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btxscan.ninjaraider.com" rel="noopener noreferrer">ninjaraider explorer&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">btxscan.ninjaraider.com</p>
+            <p class="entry__text">Block explorer run by the ninjaraider pool, with a JSON API for addresses and blocks.</p>
+            <p class="tags"><span class="tag">explorer</span><span class="tag">api</span></p>
+          </li>
+          <li class="card entry" id="easybtx-census" data-d01-entry data-cat="network">
+            <p class="entry__head">
+              <a class="entry__name" href="https://easybtx.com/nodes" rel="noopener noreferrer">easyBTX network&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">easybtx.com</p>
+            <p class="entry__text">Live census of BTX nodes and signer witness of the easyBTX team.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">The roles a node advertises are its own claim; the page marks separately which nodes answered a real request (&#34;serve-verified&#34;).</span></p>
+            <p class="tags"><span class="tag">census</span><span class="tag">signers</span></p>
+          </li>
+          <li class="card entry" id="btxinfo" data-d01-entry data-cat="network">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btxinfo.com" rel="noopener noreferrer">btxinfo&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">btxinfo.com</p>
+            <p class="entry__text">Supply, holders and rich list.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Its own node showed height 184,999 (a known stuck height) on 2026-11-02; check the date of its data.</span></p>
+            <p class="tags"><span class="tag">analytics</span><span class="tag">rich list</span></p>
+          </li>
+        </ul>
+      </section>
+      <section class="dircat" id="cat-pools" data-d01-cat-section="pools" aria-labelledby="cat-pools-title">
+        <h2 class="h2 dircat__title" id="cat-pools-title">Pools <span class="dircat__n">2</span></h2>
+        <ul class="entries">
+          <li class="card entry" id="ninjaraider" data-d01-entry data-cat="pools">
+            <p class="entry__head">
+              <a class="entry__name" href="https://ninjaraider.com" rel="noopener noreferrer">ninjaraider&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">ninjaraider.com</p>
+            <p class="entry__text">Multi-coin pool with BTX. Check its fee on the pool page.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Miners log in as ADDRESS.worker; nekominer documents this and charges no dev fee on this pool.</span></p>
+            <p class="tags"><span class="tag">pool</span><span class="tag">multi-coin</span></p>
+          </li>
+          <li class="card entry" id="btx-pool" data-d01-entry data-cat="pools">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btx-pool.com" rel="noopener noreferrer">BTX Pool&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">btx-pool.com</p>
+            <p class="entry__text">Pool dedicated to BTX, run by the author of btx-pool-miner (GitHub lucasan123). It pays miners inside each block it finds, split by work over a 30-minute window. Check its fee on the pool page.</p>
+            <p class="tags"><span class="tag">pool</span></p>
+          </li>
+        </ul>
+      </section>
+      <section class="dircat" id="cat-miners" data-d01-cat-section="miners" aria-labelledby="cat-miners-title">
+        <h2 class="h2 dircat__title" id="cat-miners-title">Miners <span class="dircat__n">5</span></h2>
+        <ul class="entries">
+          <li class="card entry" id="easybtx" data-d01-entry data-cat="miners">
+            <p class="entry__head">
+              <a class="entry__name" href="https://easybtx.com/" rel="noopener noreferrer">easyBTX&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">easybtx.com</p>
+            <p class="entry__text">One-click miner app with a self-custodial wallet built in, for Apple Silicon Macs and Linux (on Windows through WSL).</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Closed source; the builds are unsigned, so check the SHA-256 on the release page. It starts on BTX Pool by default. A 5% dev fee was listed for it in August 2026; check the current fee in the app.</span></p>
+            <p class="tags"><span class="tag">gpu</span><span class="tag">mac</span><span class="tag">linux</span><span class="tag">wsl</span><span class="tag">closed source</span></p>
+          </li>
+          <li class="card entry" id="matador" data-d01-entry data-cat="miners">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/vanities/matador-miner" rel="noopener noreferrer">matador&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Open-source GPU miner (NVIDIA, CUDA), solo against your own node or in a pool.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Last change 2026-08-21. The quick start in its README contains a sample payout address and two offline pools (minebtx, Byron); replace all three. 1% dev fee in pool mode; it updates itself unless started with --no-auto-update. NVIDIA Ampere (RTX 30 series) or newer only.</span></p>
+            <p class="tags"><span class="tag">gpu</span><span class="tag">nvidia</span><span class="tag">open source</span></p>
+          </li>
+          <li class="card entry" id="nekominer" data-d01-entry data-cat="miners">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/nr800/nekominer" rel="noopener noreferrer">nekominer&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">NVIDIA (CUDA) miner for several coins; BTX runs as algorithm btxv4, the proof-of-work since block 185,000. Its README has commands for ninjaraider and BTX Pool.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">The miner&#39;s source is not published: the repository holds scripts and binary releases, with no licence. 2% dev fee, 0% on ninjaraider.</span></p>
+            <p class="tags"><span class="tag">gpu</span><span class="tag">nvidia</span><span class="tag">linux</span><span class="tag">hiveos</span><span class="tag">closed source</span></p>
+          </li>
+          <li class="card entry" id="forgeminer" data-d01-entry data-cat="miners">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/0xHashRaptor/ForgeMiner" rel="noopener noreferrer">ForgeMiner&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Multi-coin GPU miner with BTX support (MatMul v4.7 since version 1.6.0); its BTX example uses BTX Pool. BTX mines on NVIDIA cards only.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Closed source (stated in its README). 2% dev fee on BTX.</span></p>
+            <p class="tags"><span class="tag">gpu</span><span class="tag">nvidia</span><span class="tag">windows</span><span class="tag">hiveos</span><span class="tag">closed source</span></p>
+          </li>
+          <li class="card entry" id="btxd-solo-mining" data-d01-entry data-cat="miners">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/tree/main/contrib/mining" rel="noopener noreferrer">Solo mining helpers (btxd)&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Official scripts for solo mining against your own btxd: a health-aware mining loop, start and stop scripts and a wallet backup. For larger setups the README points to getblocktemplate with external miners.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Mining needs a qualified GPU and a node that checks blocks itself (matmulvalidation=consensus, the default), not a trusted mirror. See the GPU operator runbook.</span></p>
+            <p class="tags"><span class="tag">solo</span><span class="tag">official</span><span class="tag">open source</span><span class="tag">scripts</span></p>
+          </li>
+        </ul>
+      </section>
+      <section class="dircat" id="cat-node-tools" data-d01-cat-section="node-tools" aria-labelledby="cat-node-tools-title">
+        <h2 class="h2 dircat__title" id="cat-node-tools-title">Node tools <span class="dircat__n">7</span></h2>
+        <ul class="entries">
+          <li class="card entry" id="easynode" data-d01-entry data-cat="node-tools">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer">easynode&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Open-source (MIT) desktop app of the easyBTX team that installs and supervises btxd on the machine you already own.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Runs v0.34.15 without the model network. Without a qualified GPU the node follows signers&#39; checks instead of checking the MatMul work itself.</span></p>
+            <p class="tags"><span class="tag">desktop</span><span class="tag">open source</span></p>
+          </li>
+          <li class="card entry" id="guardian" data-d01-entry data-cat="node-tools">
+            <p class="entry__head">
+              <a class="entry__name" href="https://easybtx.com/guardian" rel="noopener noreferrer">BTX Node Guardian&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">easybtx.com</p>
+            <p class="entry__text">Free script that tells a waiting network from a stuck node and dials helpful peers. It never restarts the node.</p>
+            <p class="tags"><span class="tag">script</span><span class="tag">watchdog</span></p>
+          </li>
+          <li class="card entry" id="snapshots" data-d01-entry data-cat="node-tools">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/dr-chambre/btx-snapshots/releases/latest" rel="noopener noreferrer">BTX snapshots&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Daily pruned datadir snapshot, checked and signed by a second node. Built on a trusted mirror, so the MatMul work was accepted on signers&#39; attestations.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Verify the signature and SHA-256 before use. Not for signers.</span></p>
+            <p class="tags"><span class="tag">snapshot</span><span class="tag">signed</span><span class="tag">pruned</span></p>
+          </li>
+          <li class="card entry" id="easybtx-utxo-snapshots" data-d01-entry data-cat="node-tools">
+            <p class="entry__head">
+              <a class="entry__name" href="https://easybtx.com/api/snapshots/latest" rel="noopener noreferrer">easyBTX UTXO snapshots&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">easybtx.com</p>
+            <p class="entry__text">UTXO snapshot for loadtxoutset, confirmed by two operators, with SHA-256 of the file and the manifest.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Check the SHA-256 before use. The JSON names the height; it can lag the chain by a few thousand blocks.</span></p>
+            <p class="tags"><span class="tag">snapshot</span><span class="tag">utxo</span><span class="tag">signed</span></p>
+          </li>
+          <li class="card entry" id="byron-utxo-snapshots" data-d01-entry data-cat="node-tools">
+            <p class="entry__head">
+              <a class="entry__name" href="https://api-explorer.btxbyronbay.com/snapshots/" rel="noopener noreferrer">Byron Bay UTXO snapshots&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">api-explorer.btxbyronbay.com</p>
+            <p class="entry__text">UTXO snapshot every 1,000 blocks from the Byron Bay archive node, with SHA256SUMS; the last seven are kept.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">One signer, the operator. A height is sometimes skipped; then there is no file, not a wrong one.</span></p>
+            <p class="tags"><span class="tag">snapshot</span><span class="tag">utxo</span></p>
+          </li>
+          <li class="card entry" id="node-help" data-d01-entry data-cat="node-tools">
+            <p class="entry__head">
+              <a class="entry__name" href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer">Node help&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">network.btx-monitoring.com</p>
+            <p class="entry__text">Known stuck heights with their cause and fix.</p>
+            <p class="tags"><span class="tag">help</span><span class="tag">stuck heights</span></p>
+          </li>
+          <li class="card entry" id="ainode" data-d01-entry data-cat="node-tools">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/MendeMatthias/ainode-releases" rel="noopener noreferrer">AInode&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Mac app (Apple Silicon, macOS 13 or later) of the easyBTX team that fetches open AI models over the BTX model network and runs them on your Mac. It only downloads; it never serves, pays or earns.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">MIT-licensed; this repository holds only the downloads and release notes. Compare the SHA-256 listed with each release.</span></p>
+            <p class="tags"><span class="tag">mac</span><span class="tag">model network</span><span class="tag">desktop</span></p>
+          </li>
+        </ul>
+      </section>
+      <section class="dircat" id="cat-wallets" data-d01-cat-section="wallets" aria-labelledby="cat-wallets-title">
+        <h2 class="h2 dircat__title" id="cat-wallets-title">Wallets <span class="dircat__n">4</span></h2>
+        <p class="note note--risk"><span class="note__label">Caution</span> <span class="note__body">Not audited by us. Only install wallets from the link here, keep your seed offline and never type it into a website.</span></p>
+        <ul class="entries">
+          <li class="card entry" id="btx-wallet" data-d01-entry data-cat="wallets">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btx.dev/wallet/" rel="noopener noreferrer">BTX Wallet&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">btx.dev</p>
+            <p class="entry__text">Official post-quantum wallet in the browser.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Its backup file (.btxwallet) holds the seed in plain text. Keep it offline and never send it to anyone.</span></p>
+            <p class="tags"><span class="tag">official</span><span class="tag">browser</span><span class="tag">pq</span></p>
+          </li>
+          <li class="card entry" id="node-wallet" data-d01-entry data-cat="wallets">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Node wallet (btx-qt, btx-cli)&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">The wallet in the official releases: btxd with btx-cli, open source, on your own node. The desktop app btx-qt is in v0.34.15; the v0.34.16 archives leave it out.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Back up the whole wallet with backupwalletbundlearchive (one passphrase-encrypted file; see doc/managing-wallets.md), not only the seed. A .btxwallet export holds the seed in plain text.</span></p>
+            <p class="tags"><span class="tag">official</span><span class="tag">desktop</span><span class="tag">open source</span><span class="tag">pq</span></p>
+          </li>
+          <li class="card entry" id="pq-wallet" data-d01-entry data-cat="wallets">
+            <p class="entry__head">
+              <a class="entry__name" href="https://pq-wallet.com" rel="noopener noreferrer">BTX PQ Wallet&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">pq-wallet.com</p>
+            <p class="entry__text">Post-quantum desktop wallet of the easyBTX team for macOS, Windows and Linux.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">No independent audit; the source code is not public. The Mac build is signed and notarized (Bonuz Technology DMCC); Windows and Linux builds are unsigned, so check the SHA-256. Keep the master key or the encrypted recovery file offline.</span></p>
+            <p class="tags"><span class="tag">desktop</span><span class="tag">pq</span><span class="tag">mac</span><span class="tag">windows</span><span class="tag">linux</span></p>
+          </li>
+          <li class="card entry" id="bonuz" data-d01-entry data-cat="wallets">
+            <p class="entry__head">
+              <a class="entry__name" href="https://www.bonuz.xyz/en/btx-wallet" rel="noopener noreferrer">Bonuz&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">www.bonuz.xyz</p>
+            <p class="entry__text">Seedless mobile wallet for iOS and Android with BTX support.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Seedless means there is no seed phrase you back up yourself: the page says the key is split by MPC, and access and recovery go through the Bonuz login. Check how recovery works before you rely on it.</span></p>
+            <p class="tags"><span class="tag">mobile</span><span class="tag">ios</span><span class="tag">android</span><span class="tag">seedless</span></p>
+          </li>
+        </ul>
+      </section>
+      <section class="dircat" id="cat-buying" data-d01-cat-section="buying" aria-labelledby="cat-buying-title">
+        <h2 class="h2 dircat__title" id="cat-buying-title">Buying BTX <span class="dircat__n">1</span></h2>
+        <p class="note note--risk"><span class="note__label">Caution</span> <span class="note__body">There is no exchange for BTX. These are trades from person to person without escrow: you pay first and rely on the seller. Not checked by us. Read the checklist &#34;Before you buy or receive BTX&#34; on the start page first, and start with a small amount.</span></p>
+        <ul class="entries">
+          <li class="card entry" id="easybtx-buy" data-d01-entry data-cat="buying">
+            <p class="entry__head">
+              <a class="entry__name" href="https://easybtx.com/buy" rel="noopener noreferrer">easyBTX seller board&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">easybtx.com</p>
+            <p class="entry__text">Sellers the easyBTX team says it has bought from itself. You agree amount and price with a seller on Telegram and pay them directly, usually in USDT.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">easyBTX says it holds no funds, is not a party to any trade and quotes no price. On 16 November 2026 the board listed one seller. Contact a seller only through the link on easyBTX&#39;s own page. Anyone who messages you first is not that seller. A price agreed there is not a market price.</span></p>
+            <p class="tags"><span class="tag">p2p</span><span class="tag">telegram</span><span class="tag">no escrow</span></p>
+          </li>
+        </ul>
+      </section>
+      <section class="dircat" id="cat-bridges" data-d01-cat-section="bridges" aria-labelledby="cat-bridges-title">
+        <h2 class="h2 dircat__title" id="cat-bridges-title">Bridges and testnets <span class="dircat__n">4</span></h2>
+        <p class="note note--risk"><span class="note__label">Caution</span> <span class="note__body">Experimental and not audited by us. Bridges can lose funds; do not send more than you can afford to lose.</span></p>
+        <ul class="entries">
+          <li class="card entry" id="wbtx-spec" data-d01-entry data-cat="bridges">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/btxchain/btx/blob/main/docs/wBTX.md" rel="noopener noreferrer">wBTX specification (official)&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">The developers&#39; design for wrapped BTX on EVM chains: token rules, bridge models and reference contracts. A design, not a working bridge.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Not launched. Its launch checklist is still open and the reference contracts are unaudited.</span></p>
+            <p class="tags"><span class="tag">official</span><span class="tag">spec</span><span class="tag">wrapped</span><span class="tag">ethereum</span></p>
+          </li>
+          <li class="card entry" id="wbtx" data-d01-entry data-cat="bridges">
+            <p class="entry__head">
+              <a class="entry__name" href="https://github.com/evxdev/wbtx-eth" rel="noopener noreferrer">WBTX (wbtx-eth)&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">github.com</p>
+            <p class="entry__text">Wrapped BTX on Ethereum - contracts, validator services and a local simulator, by the GitHub organisation evxdev. Testnet only.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Last change 2026-07-09.</span></p>
+            <p class="tags"><span class="tag">ethereum</span><span class="tag">wrapped</span><span class="tag">testnet</span></p>
+          </li>
+          <li class="card entry" id="btx-supply" data-d01-entry data-cat="bridges">
+            <p class="entry__head">
+              <a class="entry__name" href="https://btx.supply/" rel="noopener noreferrer">btx.supply&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">btx.supply</p>
+            <p class="entry__text">Public tester site and guide of the wbtx-eth project (evxdev): a WBTX bridge on an Ethereum testnet. Test tokens have no value.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Testnet only; it can be reset. Code unchanged since 2026-07-09.</span></p>
+            <p class="tags"><span class="tag">testnet</span><span class="tag">bridge</span><span class="tag">wip</span></p>
+          </li>
+          <li class="card entry" id="robinhood" data-d01-entry data-cat="bridges">
+            <p class="entry__head">
+              <a class="entry__name" href="https://robinhood.btx.supply/" rel="noopener noreferrer">Robinhood Chain testnet&nbsp;<span aria-hidden="true">↗</span></a>
+            </p>
+            <p class="entry__host mono">robinhood.btx.supply</p>
+            <p class="entry__text">The same WBTX test bridge as btx.supply, on the Robinhood Chain testnet. Test tokens have no value.</p>
+            <p class="note note--risk"><span class="note__label">Note</span> <span class="note__body">Testnet only; it can be reset. Code unchanged since 2026-07-09.</span></p>
+            <p class="tags"><span class="tag">testnet</span><span class="tag">bridge</span><span class="tag">wip</span></p>
+          </li>
+        </ul>
+      </section>
+      <p class="empty" data-d01-empty hidden>Nothing matches. Clear the filter or pick “All”.</p>
+      <p class="src">Missing a project? Add it with a pull request; no e-mail and no gatekeeper. <a href="https://github.com/BTX-Community/btx-community/blob/main/CONTRIBUTING.md#changing-the-website" rel="noopener noreferrer">How to add a project&nbsp;<span aria-hidden="true">↗</span></a></p>
+
+      <nav class="sec onward" aria-labelledby="onward-title">
+        <h2 class="h2" id="onward-title">Where next</h2>
+        <ul class="rows">
+          <li><a class="row" href="/new/design01/#before-buying"><span class="row__t">Before you buy or receive BTX</span><span class="row__a" aria-hidden="true">→</span></a></li>
+          <li><a class="row" href="/new/design01/infra/"><span class="row__t">Run a node or other infrastructure</span><span class="row__a" aria-hidden="true">→</span></a></li>
+          <li><a class="row" href="/new/design01/projects/"><span class="row__t">Community projects</span><span class="row__a" aria-hidden="true">→</span></a></li>
+        </ul>
+      </nav>
+    </div>
+
+
+    <div class="pn">
+      <nav class="pn__nav" aria-label="Previous and next page">
+        <a class="pn__link" href="/new/design01/network/"><span class="pn__k">Previous</span><span class="pn__t"><span aria-hidden="true">←</span> Network</span></a>
+        <a class="pn__link pn__link--next" href="/new/design01/dev/"><span class="pn__k">Next</span><span class="pn__t">Developers&nbsp;<span aria-hidden="true">→</span></span></a>
+      </nav>
+      <p class="pn__edit">Something wrong or out of date? <a href="https://github.com/BTX-Community/btx-community/edit/main/site/content/community.yaml" rel="noopener noreferrer">Suggest an edit on GitHub ↗</a></p>
+    </div>
+  </main>
+  <footer class="ft">
+    <div class="ft__in">
+      <div class="ft__col">
+        <p class="ft__text">Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+        <p class="draft-arrows">→ goes to a page of this site · ↗ opens another site</p>
+        <p class="ft__text">Draft 01 &#34;Klar&#34; from the design brief of 20 Nov 2026. A layout draft for feedback, in English only; the live site at <a href="https://btx-community.com/links/">btx-community.com ↗</a> is the official one.</p>
+      </div>
+      <nav class="ft__nav" aria-label="Pages, again">
+        <a href="/new/design01/">Start here</a>
+        <a href="/new/design01/infra/">Take part</a>
+        <a href="/new/design01/network/">Network</a>
+        <a href="/new/design01/links/">Directory</a>
+        <a href="/new/design01/dev/">Build</a>
+        <a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a>
+      </nav>
+      <p class="ft__ver mono">3a9d1c47e44b</p>
+    </div>
+  </footer>
+</body>
+</html>

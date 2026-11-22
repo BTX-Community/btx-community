@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Start page of the BTX community: information and help for newcomers, miners and node operators, with the network&#39;s live state and a checked link directory.">
+  <meta name="color-scheme" content="light">
+  
+  <title>BTX Community</title>
+  
+  <link rel="alternate" hreflang="en" href="/">
+  
+  <link rel="alternate" hreflang="de" href="/de/">
+  
+  <link rel="alternate" hreflang="es" href="/es/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/community.css?v=7186087629f4">
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">Skip to content</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="Pages">
+        
+        <a class="c-menu__link c-menu__link--active" href="/" aria-current="page">Start</a>
+        
+        <a class="c-menu__link" href="/learn/">Learn</a>
+        
+        <a class="c-menu__link" href="/network/">Network</a>
+        
+        <a class="c-menu__link" href="/links/">Links</a>
+        
+        <a class="c-menu__link" href="/projects/">Projects</a>
+        
+        <a class="c-menu__link" href="/infra/">Run infra</a>
+        
+        <a class="c-menu__link" href="/dev/">Developers</a>
+        
+      </nav>
+      <button class="c-theme" type="button" data-theme-switch data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to light theme" hidden></button>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="Language: English">EN <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="Language">
+          
+          <a class="c-lang__item c-lang__item--active" href="/" hreflang="en" lang="en" aria-current="true"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item" href="/de/" hreflang="de" lang="de"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item" href="/fr/" hreflang="fr" lang="fr"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item" href="/zh/" hreflang="zh-Hans" lang="zh-Hans"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <aside class="c-badge c-live--unknown" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en" aria-label="Network right now">
+      <a class="c-badge__head" href="/network/"><span class="c-pulse" aria-hidden="true"></span><span data-live="overall" data-label-normal="All systems normal" data-label-degraded="Degraded" data-label-incident="Incident">Network right now</span></a>
+      <span class="c-badge__row"><span>Block</span> <b data-live="height">–</b></span>
+      <span class="c-badge__row"><span>Release</span> <b data-live="release">–</b></span>
+      <span class="c-badge__row"><span>Nodes on it</span> <b data-live="on-release" data-template="{count} of {total}">–</b></span>
+      <a class="c-link c-badge__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Full status page ↗</a>
+      <span class="c-badge__time" data-live="updated" data-template="Data from {time}"></span>
+      <div class="c-badge__fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+        <strong>Network upgrade ahead</strong>
+        <ul data-live="fork-rows"></ul>
+        <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes ↗</a>
+      </div>
+    </aside>
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">BTX<span class="c-hero__accent">.</span>community -<br>Our Community Hub</h1>
+        <p class="c-hero__lead">A community page for everyone interested in BTX: what it is, how to mine it, how to run a node, and where to find help. Run by community members, not by a company.</p>
+      </section>
+
+      <section class="c-start" id="start" aria-labelledby="start-title">
+        <h2 class="c-section-title" id="start-title">Start from what you do</h2>
+        <div class="c-audiences c-audiences--two">
+          
+          <article class="c-audience c-audience--folded c-audience--newcomers" id="newcomers">
+            <details class="c-fold c-audience__fold">
+            <summary><h3 class="c-audience__title">New to BTX</h3> <span class="c-audience__count">6 steps</span></summary>
+            <p class="c-audience__text">BTX is a post-quantum fork of Bitcoin with a fixed maximum supply and its own proof-of-work (MatMul). It is run by an open community, not by a company.</p>
+            <ul class="c-tasks">
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="/learn/"><span>What BTX is</span> <span class="c-task__arrow" aria-hidden="true">→</span></a>
+                <p class="c-task__detail">A few facts, each with its source.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="https://btx.dev/" rel="noopener noreferrer"><span>Official introduction</span> <span class="c-task__arrow" aria-hidden="true">↗</span></a>
+                <p class="c-task__detail">Written for v0.33.2; newer releases differ in places.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer"><span>How the network is doing</span> <span class="c-task__arrow" aria-hidden="true">↗</span></a>
+                <p class="c-task__detail">The status page, in plain terms.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="/links/#cat-community"><span>Ask the community</span> <span class="c-task__arrow" aria-hidden="true">→</span></a>
+                <p class="c-task__detail">The community group on Telegram.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="/links/#cat-wallets"><span>Choose a wallet</span> <span class="c-task__arrow" aria-hidden="true">→</span></a>
+                <p class="c-task__detail">Read &#34;Before you buy or receive BTX&#34; below first.</p>
+              </li>
+              
+              
+              
+              <li class="c-task c-task--note"><strong>Never share your seed or private key. Nobody from the community will ever ask for it; direct messages offering help or &#34;support&#34; are scams.</strong></li>
+              
+              
+            </ul>
+            </details>
+          </article>
+          
+          <article class="c-audience c-audience--folded c-audience--miners" id="miners">
+            <details class="c-fold c-audience__fold">
+            <summary><h3 class="c-audience__title">Mining</h3> <span class="c-audience__count">4 steps</span></summary>
+            <p class="c-audience__text">Mining needs a GPU. You can mine alone against your own node and keep every block, or join a pool for steadier payouts.</p>
+            <ul class="c-tasks">
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="/links/#cat-miners"><span>Pick a miner</span> <span class="c-task__arrow" aria-hidden="true">→</span></a>
+                <p class="c-task__detail">For example easyBTX (an app for Mac and Linux; on Windows through WSL) or matador (open source).</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer"><span>Prefer a smaller pool</span> <span class="c-task__arrow" aria-hidden="true">↗</span></a>
+                <p class="c-task__detail">When one pool finds most blocks, the network depends on it; the status page shows the current shares.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="/links/#cat-pools"><span>Use your own btx1z address</span> <span class="c-task__arrow" aria-hidden="true">→</span></a>
+                <p class="c-task__detail">matador&#39;s quick start contains a sample payout address that is not yours and two pools that are offline. Put in your own address and a pool from our link list.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="https://github.com/btxchain/btx/blob/main/doc/btx-cuda-mining-troubleshooting.md" rel="noopener noreferrer"><span>Problems with an NVIDIA card</span> <span class="c-task__arrow" aria-hidden="true">↗</span></a>
+                <p class="c-task__detail">The official CUDA troubleshooting guide; parts of it describe the CUDA path from before block 185,000.</p>
+              </li>
+              
+              
+            </ul>
+            </details>
+          </article>
+          
+          <article class="c-audience c-audience--folded c-audience--nodes" id="nodes">
+            <details class="c-fold c-audience__fold">
+            <summary><h3 class="c-audience__title">Running a node</h3> <span class="c-audience__count">7 steps</span></summary>
+            <p class="c-audience__text">Every node relays blocks and keeps the network reachable. A node checks every block itself only with a GPU that passes btxd&#39;s self-test. Without one, run it as a trusted mirror that follows signed checks from at least two signers; otherwise it stops syncing. Signers have the highest requirements.</p>
+            <ul class="c-tasks">
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer"><span>Easiest start at home: easynode</span> <span class="c-task__arrow" aria-hidden="true">↗</span></a>
+                <p class="c-task__detail">Installs and supervises btxd for you.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer"><span>On a server</span> <span class="c-task__arrow" aria-hidden="true">↗</span></a>
+                <p class="c-task__detail">v0.34.16 has two Linux x86_64 archives for glibc 2.38 or newer (Ubuntu 24.04, Debian 13): a plain one, and -cuda13 for GPU nodes (sm_120: RTX 50 and RTX PRO Blackwell cards; driver not included). No official Windows or macOS archive.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="/infra/#before-installing"><span>Before you install: the checklist</span> <span class="c-task__arrow" aria-hidden="true">→</span></a>
+                <p class="c-task__detail">Where to download, how to check the file, and the settings for a node with coins.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="https://github.com/dr-chambre/btx-snapshots/releases/latest" rel="noopener noreferrer"><span>Start from a signed snapshot</span> <span class="c-task__arrow" aria-hidden="true">↗</span></a>
+                <p class="c-task__detail">Catches up in minutes. A sync from genesis currently stops at block 126,978 (issue #272).</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer"><span>Node stuck at a height?</span> <span class="c-task__arrow" aria-hidden="true">↗</span></a>
+                <p class="c-task__detail">The node help explains each known case and its fix.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="/infra/"><span>Have a spare machine?</span> <span class="c-task__arrow" aria-hidden="true">→</span></a>
+                <p class="c-task__detail">Seven ways to give BTX infrastructure, from a node to a fuzz box.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer"><span>Run a signer</span> <span class="c-task__arrow" aria-hidden="true">↗</span></a>
+                <p class="c-task__detail">Signers (GPU attestors) need a GPU that passes btxd&#39;s self-test and must stay online. The official CUDA archive covers Blackwell cards (sm_120); other NVIDIA cards need a build from source and may not qualify. Follow the developers&#39; operator runbook.</p>
+              </li>
+              
+              
+            </ul>
+            </details>
+          </article>
+          
+          <article class="c-audience c-audience--folded c-audience--developers" id="developers">
+            <details class="c-fold c-audience__fold">
+            <summary><h3 class="c-audience__title">Become a BTX dev</h3> <span class="c-audience__count">3 steps</span></summary>
+            <p class="c-audience__text">The node software is open source, and anyone can send it a pull request on GitHub. The developer hub tells you, and the AI tool you work with, how to build, test and document a change so that it can be merged, and which work is open.</p>
+            <ul class="c-tasks">
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="/dev/"><span>Start here</span> <span class="c-task__arrow" aria-hidden="true">→</span></a>
+                <p class="c-task__detail">Where to begin, the prompt for your AI tool and the three levels.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="/dev/work/"><span>Ongoing work</span> <span class="c-task__arrow" aria-hidden="true">→</span></a>
+                <p class="c-task__detail">Test coverage, the nightly CI-0 run and the lanes waiting for an owner.</p>
+              </li>
+              
+              
+              
+              <li class="c-task">
+                <a class="c-task__link" href="/projects/"><span>Community projects</span> <span class="c-task__arrow" aria-hidden="true">→</span></a>
+                <p class="c-task__detail">Things to build and run outside the node software.</p>
+              </li>
+              
+              
+            </ul>
+            </details>
+          </article>
+          
+        </div>
+      </section>
+
+
+      
+      <section class="c-checks" id="check" aria-labelledby="check-title">
+        <h2 class="c-section-title" id="check-title">Check first</h2>
+        <div class="c-audiences c-audiences--two">
+          
+          <article class="c-audience c-audience--folded c-audience--check" id="before-buying">
+            <details class="c-fold c-audience__fold">
+            <summary><h3 class="c-audience__title">Before you buy or receive BTX</h3> <span class="c-audience__count">7 checks</span></summary>
+            <ol class="c-steps">
+              
+              <li>Make a backup before money arrives. In btxd, backupwalletbundlearchive writes one encrypted file; keep it and its passphrase offline and apart. Any backup can spend your coins: plain exports at once, the archive once opened. Restore it once to test it.</li>
+              
+              <li>Check the receiving address in full, not just its start and end. BTX addresses start with btx1z.</li>
+              
+              <li>Send a small test amount first. Wait for at least 10 confirmations before you treat a payment as final; short reorganisations of the chain happen several times a day.</li>
+              
+              <li>Before you use an exchange or an OTC seller, check that withdrawals really work. A price on a website is not a market you can sell into.</li>
+              
+              <li>Other coins also trade as BTX. A market is only for this chain if its deposit addresses start with btx1z.</li>
+              
+              <li>A &#34;model&#34; or &#34;reference&#34; price is an estimate, not an offer that anyone has to honour.</li>
+              
+              <li>Nobody legitimate asks for your seed. Messages offering help, &#34;recovery&#34; or guaranteed returns are scams.</li>
+              
+            </ol>
+            </details>
+          </article>
+          
+        </div>
+      </section>
+      
+
+
+    </main>
+
+    <footer class="c-footer">
+      <p>Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+      
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a>
+      </p>
+      <p class="c-muted">3a9d1c47e44b</p>
+    </footer>
+  </div>
+</body>
+</html>

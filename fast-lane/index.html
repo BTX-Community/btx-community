@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Everything a newcomer needs on one page: what BTX is, how to get a wallet, buy, mine or run a node, and what to watch out for.">
+  <meta name="color-scheme" content="light">
+  <meta name="robots" content="noindex, nofollow">
+  <title>BTX fast lane · BTX Community</title>
+  
+  <link rel="alternate" hreflang="en" href="/fast-lane/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/community.css?v=7186087629f4">
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">Skip to content</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="Pages">
+        
+        <a class="c-menu__link" href="/">Start</a>
+        
+        <a class="c-menu__link" href="/learn/">Learn</a>
+        
+        <a class="c-menu__link" href="/network/">Network</a>
+        
+        <a class="c-menu__link" href="/links/">Links</a>
+        
+        <a class="c-menu__link" href="/projects/">Projects</a>
+        
+        <a class="c-menu__link" href="/infra/">Run infra</a>
+        
+        <a class="c-menu__link" href="/dev/">Developers</a>
+        
+      </nav>
+      <button class="c-theme" type="button" data-theme-switch data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to light theme" hidden></button>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="Language: English">EN <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="Language">
+          
+          <a class="c-lang__item c-lang__item--active" href="/fast-lane/" hreflang="en" lang="en" aria-current="true"><span class="c-lang__code">EN</span> English</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <aside class="c-badge c-live--unknown" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en" aria-label="Network right now">
+      <a class="c-badge__head" href="/network/"><span class="c-pulse" aria-hidden="true"></span><span data-live="overall" data-label-normal="All systems normal" data-label-degraded="Degraded" data-label-incident="Incident">Network right now</span></a>
+      <span class="c-badge__row"><span>Block</span> <b data-live="height">–</b></span>
+      <span class="c-badge__row"><span>Release</span> <b data-live="release">–</b></span>
+      <span class="c-badge__row"><span>Nodes on it</span> <b data-live="on-release" data-template="{count} of {total}">–</b></span>
+      <a class="c-link c-badge__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Full status page ↗</a>
+      <span class="c-badge__time" data-live="updated" data-template="Data from {time}"></span>
+      <div class="c-badge__fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+        <strong>Network upgrade ahead</strong>
+        <ul data-live="fork-rows"></ul>
+        <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes ↗</a>
+      </div>
+    </aside>
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">BTX fast lane</h1>
+        <p class="c-hero__lead">Everything a newcomer needs on one page: what BTX is, how to get a wallet, buy, mine or run a node, and what to watch out for.</p>
+      </section>
+
+      <section class="c-facts" id="facts" aria-labelledby="facts-title">
+        <h2 class="c-section-title" id="facts-title">The facts</h2>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact">
+            <h3 class="c-fact__title">What it is</h3>
+            <p>A Bitcoin fork (Bitcoin Knots v29.2) with two changes: proof-of-work by matrix multiplication on GPUs, and post-quantum signatures.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact">
+            <h3 class="c-fact__title">Supply</h3>
+            <p>At most 21,000,000 BTX. 20 BTX per block, halving every 525,000 blocks (about 18 months).</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/src/kernel/chainparams.cpp" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact">
+            <h3 class="c-fact__title">Blocks</h3>
+            <p>One block about every 90 seconds; difficulty adjusts every block.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/src/kernel/chainparams.cpp" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact">
+            <h3 class="c-fact__title">Addresses</h3>
+            <p>Start with btx1z. Signed with ML-DSA-44 (NIST FIPS 204), with SLH-DSA (FIPS 205) as a hash-based fallback.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact">
+            <h3 class="c-fact__title">Mining needs a GPU</h3>
+            <p>Since block 185,000 every block is replayed on a qualified NVIDIA (CUDA) or Apple (Metal) GPU. No CPU mining.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-gpu-verified-network-transition.md" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact">
+            <h3 class="c-fact__title">Current release</h3>
+            <p>v0.34.16, for Linux x86_64 only (CPU and CUDA builds). The last macOS build is v0.34.15 (Apple Silicon). There is no official Windows build.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact">
+            <h3 class="c-fact__title">The first million</h3>
+            <p>Blocks 1 to 50,000 paid 1,000,000 BTX (4.76 % of the maximum) to one address. All of it left through shielded transactions by May 2026; where it went cannot be seen.</p>
+            <a class="c-link c-fact__source" href="https://github.com/BTX-Community/btx-community/blob/main/research/deployment-reward.md" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+          <article class="c-fact">
+            <h3 class="c-fact__title">No exchange</h3>
+            <p>No exchange lists this BTX. Trading is person to person or over the counter. The &#34;BTX&#34; on CoinGecko and similar sites is a different coin.</p>
+            <a class="c-link c-fact__source" href="https://btxotc.com/research/btx-market-structure/" rel="noopener noreferrer">Source ↗</a>
+          </article>
+          
+        </div>
+      </section>
+
+      
+      <section class="c-live c-live--unknown" aria-labelledby="live-title" id="live" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en"
+               data-level-green="OK" data-level-yellow="Warning"
+               data-level-red="Critical" data-level-unknown="Unknown">
+        <div class="c-live__head">
+          <h2 class="c-section-title" id="live-title"><span class="c-pulse" aria-hidden="true"></span>Network right now</h2>
+          <a class="c-link" href="https://network.btx-monitoring.com/">Full status page →</a>
+        </div>
+        <p class="c-warning" role="alert" data-live="stale" hidden>The data is out of date; the values may be wrong.</p>
+        <div class="c-fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+          <h3 class="c-fork__title">Network upgrade ahead</h3>
+          <p>The rules change at the block below. Every node and miner needs a release that knows this change before then, or it stops following the network.</p>
+          <ul class="c-fork__rows" data-live="fork-rows"></ul>
+          <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes ↗</a>
+        </div>
+        <dl class="c-tiles">
+          <div class="c-tile c-tile--status">
+            <dt>Status</dt>
+            <dd data-live="overall"
+                data-label-normal="All systems normal"
+                data-label-degraded="Degraded"
+                data-label-incident="Incident">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Block height</dt>
+            <dd data-live="height">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Latest node release</dt>
+            <dd data-live="release">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Nodes on it</dt>
+            <dd data-live="on-release" data-template="{count} of {total} nodes">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Average block time (24 h)</dt>
+            <dd data-live="interval">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Active signers</dt>
+            <dd data-live="signers">–</dd>
+          </div>
+        </dl>
+        <ul class="c-verdicts">
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="stable">
+            <span class="c-dot" aria-hidden="true"></span>Stable: <span data-verdict-label>Unknown</span>
+          </li>
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="performant">
+            <span class="c-dot" aria-hidden="true"></span>Performant: <span data-verdict-label>Unknown</span>
+          </li>
+          
+          <li class="c-verdict c-verdict--unknown" data-verdict="secure">
+            <span class="c-dot" aria-hidden="true"></span>Secure: <span data-verdict-label>Unknown</span>
+          </li>
+          
+        </ul>
+        
+        <h3 class="c-subtitle" id="numbers-title">BTX in numbers</h3>
+        <dl class="c-tiles" aria-labelledby="numbers-title">
+          <div class="c-tile c-tile--wide">
+            <dt>Mined so far</dt>
+            <dd data-live="supply">–</dd>
+            <dd class="c-tile__sub" data-live="supply-share" data-template="{pct} % of 21 million"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>Block reward</dt>
+            <dd data-live="reward">–</dd>
+          </div>
+          <div class="c-tile c-tile--wide">
+            <dt>Next halving</dt>
+            <dd data-live="halving" data-template="{count} blocks">–</dd>
+            <dd class="c-tile__sub" data-live="halving-time" data-template="about {time}"></dd>
+          </div>
+          <div class="c-tile">
+            <dt>Transactions (24 h)</dt>
+            <dd data-live="tx">–</dd>
+          </div>
+          <div class="c-tile">
+            <dt>Size of the chain</dt>
+            <dd data-live="size">–</dd>
+          </div>
+        </dl>
+        
+        <p class="c-updated" data-live="updated" data-template="Data from {time}">Loading live data …</p>
+        
+      </section>
+
+
+      <section class="c-start" id="paths" aria-labelledby="paths-title">
+        <h2 class="c-section-title" id="paths-title">What do you want to do?</h2>
+        <div class="c-audiences">
+          
+          <article class="c-audience c-audience--wallet" id="wallet">
+            <h3 class="c-audience__title">Get a wallet</h3>
+            <p class="c-audience__text">Pick one. Write the recovery words on paper, never into a website or chat.</p>
+            <ol class="c-steps">
+              
+              <li>
+                
+                <a href="https://pq-wallet.com" rel="noopener noreferrer">PQ Wallet: desktop, macOS, Windows, Linux <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://www.bonuz.xyz/en/btx-wallet" rel="noopener noreferrer">Bonuz: phone, iOS and Android <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://btx.dev/wallet/" rel="noopener noreferrer">BTX Wallet: in the browser, from btx.dev <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://github.com/btxchain/btx/blob/main/doc/btx-key-management-guide.md" rel="noopener noreferrer">Backups and keys: the official guide <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+            </ol>
+          </article>
+          
+          <article class="c-audience c-audience--buy" id="buy">
+            <h3 class="c-audience__title">Buy BTX</h3>
+            <p class="c-audience__text">There is no exchange and no escrow. You usually pay first and trust the seller.</p>
+            <ol class="c-steps">
+              
+              <li>
+                
+                <a href="/learn/#before-buying">Read the checklist before you buy <span aria-hidden="true">→</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://easybtx.com/buy" rel="noopener noreferrer">easyBTX seller board: person to person, no escrow <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                Start with a small amount and wait for confirmations
+                
+              </li>
+              
+              <li>
+                
+                Anyone who messages you first is not a seller
+                
+              </li>
+              
+            </ol>
+          </article>
+          
+          <article class="c-audience c-audience--miners" id="miners">
+            <h3 class="c-audience__title">Mine</h3>
+            <p class="c-audience__text">You need a GPU (NVIDIA, AMD or Apple), mining software and a pool.</p>
+            <ol class="c-steps">
+              
+              <li>
+                
+                <a href="https://easybtx.com/" rel="noopener noreferrer">easyBTX miner: macOS, Windows, Linux <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://github.com/vanities/matador-miner" rel="noopener noreferrer">matador: open source, NVIDIA <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://ninjaraider.com" rel="noopener noreferrer">Pool: ninjaraider <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://btx-pool.com" rel="noopener noreferrer">Pool: BTX Pool <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Two pools find almost every block. Check their shares before you pick one <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+            </ol>
+          </article>
+          
+          <article class="c-audience c-audience--nodes" id="nodes">
+            <h3 class="c-audience__title">Run a node</h3>
+            <p class="c-audience__text">Linux x86_64. Start from a snapshot instead of syncing from the first block.</p>
+            <ol class="c-steps">
+              
+              <li>
+                
+                <a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Download v0.34.16 and compare it with SHA256SUMS <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://github.com/dr-chambre/btx-snapshots/releases/latest" rel="noopener noreferrer">Load the latest snapshot <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                <a href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer">Node holds coins or mines? Set modelnet=0, natpmp=0 and swapnet=0 <span aria-hidden="true">↗</span></a>
+                
+              </li>
+              
+              <li>
+                
+                Updates install themselves by default; set autoupdate=0 to decide yourself
+                
+              </li>
+              
+              <li>
+                
+                Open TCP port 19335 for incoming peers
+                
+              </li>
+              
+              <li>
+                
+                <a href="/infra/#before-installing">Read the checklist before you install <span aria-hidden="true">→</span></a>
+                
+              </li>
+              
+            </ol>
+          </article>
+          
+        </div>
+      </section>
+
+      <section class="c-checks" id="watch-out" aria-labelledby="watch-title">
+        <h2 class="c-section-title" id="watch-title">Watch out</h2>
+        <ul class="c-caveats">
+          
+          <li>Nobody from the team or a seller will message you first. Treat every direct message as a scam.</li>
+          
+          <li>Never type your recovery words or upload a wallet file into any website.</li>
+          
+          <li>Release files have been replaced under the same version tag, and SHA256SUMS is not signed. Compare your download with it on the day you download.</li>
+          
+          <li>The price on btxprice.com is a model price, not the result of exchange trades.</li>
+          
+        </ul>
+      </section>
+
+      <section class="c-checks" id="ask" aria-labelledby="ask-title">
+        <h2 class="c-section-title" id="ask-title">Stuck? Ask</h2>
+        <ol class="c-steps">
+          
+          <li><a href="https://t.me/BTX_COMMUNITY_ENTRY" rel="noopener noreferrer">BTX Community (Telegram) <span aria-hidden="true">↗</span></a></li>
+          
+          <li><a href="https://t.me/btx_ecosystem" rel="noopener noreferrer">BTX main chat (Telegram gate) <span aria-hidden="true">↗</span></a></li>
+          
+          <li><a href="https://t.me/easyBTX" rel="noopener noreferrer">easyBTX chat (Telegram) <span aria-hidden="true">↗</span></a></li>
+          
+          <li><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Network status <span aria-hidden="true">↗</span></a></li>
+          
+          <li><a href="https://btxscan.io/" rel="noopener noreferrer">Explorer: BTXScan <span aria-hidden="true">↗</span></a></li>
+          
+        </ol>
+        <p class="c-muted">Checked on 2026-11-16. Not financial advice.</p>
+      </section>
+
+    </main>
+
+    <footer class="c-footer">
+      <p>Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+      
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a>
+      </p>
+      <p class="c-muted">3a9d1c47e44b</p>
+    </footer>
+  </div>
+</body>
+</html>

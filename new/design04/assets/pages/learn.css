@@ -1,0 +1,80 @@
+/* Learn page (/learn/): page-only layout. Tokens only; shared components stay in site.css. */
+
+/* Headings other sites link to (#next-title, #onward-title) land with their eyebrow and rule in view. */
+.section__head h2[id] { scroll-margin-top: 4rem; }
+
+/* ---------------------------------------------------------------------------
+   Four facts (#about): shared line cards (site.css 6.19) with four parts each: top row, title,
+   body (text and "More detail"), source. Only the body and the source are page parts.
+   --------------------------------------------------------------------------- */
+.facts { --lcard-rows: 4; }
+.fact__body { margin-top: var(--s-3); font-size: 1.0625rem; line-height: 1.6; }
+.fact__body > p { max-width: 60ch; }
+.fact__more { margin-top: var(--s-2); }
+.fact__src {
+  display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--s-3);
+  margin-top: var(--s-4); padding-top: var(--s-2); border-top: 1px solid var(--rule);
+}
+.fact__src a { display: inline-block; min-height: 44px; padding-block: 11px; line-height: 1.45; font-size: var(--fs-small); font-weight: 600; }
+@media (min-width: 900px) { .fact__src { align-self: end; } }
+
+/* ---------------------------------------------------------------------------
+   Release v0.34.16 (#next): three short facts, then the changes as rows in two columns.
+   Each change: tag, title, one plain line, "More detail" (flags and commands), a labelled
+   note or a warning callout, source. From 960px the six parts line up across a pair.
+   --------------------------------------------------------------------------- */
+.relfacts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 var(--s-6); margin: 0 0 var(--s-6); }
+.relfacts__item { padding: var(--s-4) 0; border-top: 1px solid var(--rule); }
+.relfacts dd { margin: var(--s-2) 0 0; font-size: 1.0625rem; line-height: 1.55; color: var(--ink); max-width: 40ch; }
+@media (min-width: 768px) { .relfacts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.changes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 var(--s-7); }
+@media (min-width: 960px) {
+  /* Each change ends with its own link; the spare height falls under the shorter card. */
+  .changes { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+}
+.change { padding: var(--s-5) 0 var(--s-2); border-top: 1px solid var(--rule); }
+.change__title { margin-top: var(--s-2); }
+.change__text { margin-top: var(--s-2); font-size: 1.0625rem; line-height: 1.6; max-width: 60ch; }
+.change__more { margin-top: var(--s-2); }
+.change__good { margin-top: var(--s-3); }
+.change__callout { margin-top: var(--s-3); align-self: start; }
+.change__note {
+  margin-top: var(--s-2); padding-left: var(--s-3); border-left: 2px solid var(--rule-2);
+  color: var(--ink-2); font-size: var(--fs-small); line-height: 1.55; max-width: 60ch;
+}
+.change__src a { display: inline-block; min-height: 44px; padding-block: 11px; line-height: 1.45; font-size: var(--fs-small); font-weight: 600; }
+/* Settings such as -swapnet=1 never break at their hyphen; the two long command names may wrap. */
+.change code { white-space: nowrap; overflow-wrap: normal; }
+.change code.code-long { white-space: normal; overflow-wrap: anywhere; }
+.relfacts__stamp { margin-top: var(--s-4); }
+.relfacts__stamp a, .sign__stamp a { display: inline-block; min-height: 44px; padding-block: 11px; line-height: 1.45; }
+/* The read date also closes the "Before you switch" sign, so the checks carry their date and source. */
+.sign__stamp { margin-top: var(--s-4); }
+/* Phones: the two links of the stamp stand on their own lines, so the dot is never left at a line end. */
+@media (max-width: 599px) {
+  .relfacts__stamp .sep { display: none; }
+  .relfacts__stamp a { display: block; width: fit-content; }
+}
+
+/* ---------------------------------------------------------------------------
+   Glossary (#words): a static <dl>, A to Z, in two columns from 900px (top to bottom, so the
+   order stays alphabetical). The definitions are the same text the term popovers show.
+   --------------------------------------------------------------------------- */
+.words__az ul { list-style: none; margin: 0 0 var(--s-5); padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.words__az a {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px;
+  border: 1px solid var(--rule-2); border-radius: var(--r-1);
+  font-family: var(--mono); font-weight: 700; text-decoration: none; color: var(--ink);
+}
+.words__az a:hover { border-color: var(--rule-hover); }
+/* A word reached from a popover or a letter gets a recessed band, so the eye finds it. */
+.words__item:has(> dt:target) { background: var(--surface-2); box-shadow: -12px 0 0 var(--surface-2), 12px 0 0 var(--surface-2); }
+.words { margin: 0; border-bottom: 1px solid var(--rule); }
+.words__item { break-inside: avoid; padding: var(--s-4) 0; border-top: 1px solid var(--rule); }
+.words dt { font-weight: 700; font-size: var(--fs-body); line-height: 1.35; color: var(--ink); scroll-margin-top: var(--s-5); }
+.words dd { margin: var(--s-1) 0 0; color: var(--ink-2); font-size: 1.0625rem; line-height: 1.55; max-width: 60ch; }
+@media (min-width: 900px) {
+  .words { columns: 2; column-gap: var(--s-7); border-bottom: 0; border-top: 1px solid var(--rule); }
+  .words__item { border-top: 0; border-bottom: 1px solid var(--rule); }
+}

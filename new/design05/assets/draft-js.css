@@ -1,0 +1,2 @@
+/* Rules a script used to add as a <style> element at run time (CSP: no inline CSS). */
+canvas.btx-bg{position:fixed;left:0;top:0;width:100%;height:100vh;height:100lvh;z-index:-1;pointer-events:none;display:block}@media print{canvas.btx-bg{display:none!important}}@media (forced-colors:active){canvas.btx-bg{display:none!important}}

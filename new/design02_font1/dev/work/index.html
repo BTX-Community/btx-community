@@ -1,0 +1,1569 @@
+<!doctype html>
+<html lang="en" class="d02-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://btx-community.com/dev/work/">
+  <title>[Draft] Ongoing work · Design 02 · Matrix, live-site fonts</title>
+  <meta name="description" content="Where the BTX node software stands and who works on what: the nightly CI-0 run, test coverage, bug classes, lanes and gates.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[Draft] Ongoing work – Design draft, not the official layout">
+  <meta property="og:description" content="Draft 02 &#34;Matrix&#34; with the fonts of today&#39;s site instead of Unbounded: JetBrains Mono for headings, menu and data, Inter for text. Layout, colours and the matrix animation are the same as draft 02.">
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/new/design02-font1.css?v=4bc9fcc9f86f">
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/static/js/new/design02-theme.js?v=34fa485317ef"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+  <script src="/static/js/new/design02.js?v=2656de8eb999" defer></script>
+  <script src="/static/js/ci.js?v=3f72df6135c5" defer></script>
+</head>
+<body class="d02">
+  <a class="d02-skip" href="#main">Skip to content</a>
+  <div class="draft-banner" role="note">
+    <p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind.
+      <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a>
+      <a class="draft-banner__link" href="/new/">All drafts →</a>
+      <a class="draft-banner__link" href="https://btx-community.com/dev/work/">This page on the live site ↗</a>
+    </p>
+  </div>
+  <header class="d02-top">
+    <div class="d02-wrap d02-top__in">
+      <a class="d02-logo" href="/new/design02_font1/">
+        <svg class="d02-logo__mark" viewBox="0 0 25 25" width="25" height="25" aria-hidden="true" focusable="false">
+          <rect class="d02-logo__cell" x="0" y="0" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="9" y="0" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="18" y="0" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="0" y="9" width="7" height="7"/>
+          <rect class="d02-logo__cell d02-logo__cell--on" x="9" y="9" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="18" y="9" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="0" y="18" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="9" y="18" width="7" height="7"/>
+          <rect class="d02-logo__cell" x="18" y="18" width="7" height="7"/>
+        </svg>
+        <span class="d02-logo__name">BTX</span><span class="d02-logo__sub">/community</span><span class="d02-sr">, start page</span>
+      </a>
+      <nav class="d02-nav" aria-label="Pages">
+        <a class="d02-nav__a" href="/new/design02_font1/">Start here</a>
+        <a class="d02-nav__a" href="/new/design02_font1/infra/">Take part</a>
+        <a class="d02-nav__a" href="/new/design02_font1/network/">Network</a>
+        <a class="d02-nav__a" href="/new/design02_font1/links/">Directory</a>
+        <a class="d02-nav__a" href="/new/design02_font1/dev/" aria-current="page">Build</a>
+      </nav>
+      <div class="d02-tools">
+        <a class="d02-pill" id="status-badge" href="/new/design02_font1/network/" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en">
+          <span class="d02-dot" aria-hidden="true"></span><span class="d02-sr">Status: </span><span data-live="overall" data-label-normal="All systems normal" data-label-degraded="Degraded" data-label-incident="Incident">No data</span><span class="d02-pill__h"><span class="d02-sr">, Block height </span><span data-live="height"></span></span>
+        </a>
+        <a class="d02-tool d02-tool--search" href="/new/design02_font1/links/#filter" data-search-link>
+          <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="d02-tool__t">Search</span><span class="d02-sr"> the directory</span><kbd class="d02-kbd" aria-hidden="true">/</kbd>
+        </a>
+        <span class="d02-tool d02-tool--lang" title="This draft is in English only"><span aria-hidden="true">EN</span><span class="d02-sr">This draft is in English only</span></span>
+        <button class="d02-tool d02-tool--theme" type="button" data-theme-switch data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to light theme" hidden>
+          <svg class="d02-theme__sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="d02-theme__moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </button>
+        <details class="d02-menu">
+          <summary class="d02-tool d02-menu__btn"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="d02-sr">Menu</span></summary>
+          <nav class="d02-sheet" aria-label="Pages">
+            <ul class="d02-sheet__list">
+              <li><a class="d02-sheet__a" href="/new/design02_font1/"><span class="d02-sheet__n" aria-hidden="true">01</span>Start here</a>
+                <ul class="d02-sheet__sub">
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="/new/design02_font1/">Overview</a></li>
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="/new/design02_font1/learn/">Learn BTX</a></li>
+                </ul>
+              </li>
+              <li><a class="d02-sheet__a" href="/new/design02_font1/infra/"><span class="d02-sheet__n" aria-hidden="true">02</span>Take part</a>
+              </li>
+              <li><a class="d02-sheet__a" href="/new/design02_font1/network/"><span class="d02-sheet__n" aria-hidden="true">03</span>Network</a>
+              </li>
+              <li><a class="d02-sheet__a" href="/new/design02_font1/links/"><span class="d02-sheet__n" aria-hidden="true">04</span>Directory</a>
+              </li>
+              <li><a class="d02-sheet__a" href="/new/design02_font1/dev/" aria-current="page"><span class="d02-sheet__n" aria-hidden="true">05</span>Build</a>
+                <ul class="d02-sheet__sub">
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="/new/design02_font1/dev/">Start here</a></li>
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="/new/design02_font1/dev/work/" aria-current="page">Ongoing work</a></li>
+                  <li><a class="d02-sheet__a d02-sheet__a--sub" href="/new/design02_font1/projects/">Projects</a></li>
+                </ul>
+              </li>
+            </ul>
+            <p class="d02-sheet__note">This draft is in English only.</p>
+          </nav>
+        </details>
+      </div>
+    </div>
+    <nav class="d02-subnav" aria-label="Build">
+      <div class="d02-wrap d02-subnav__in">
+        <a class="d02-subnav__a" href="/new/design02_font1/dev/">Start here</a>
+        <a class="d02-subnav__a" href="/new/design02_font1/dev/work/" aria-current="page">Ongoing work</a>
+        <a class="d02-subnav__a" href="/new/design02_font1/projects/">Projects</a>
+      </div>
+    </nav>
+  </header>
+  <div class="d02-wrap d02-read">
+    <nav class="d02-rail" aria-label="On this page" data-rail>
+      <p class="d02-rail__k">On this page</p>
+      <ol class="d02-rail__list">
+        <li><a class="d02-rail__a" href="#ci"><span class="d02-rail__n" aria-hidden="true">01</span><span class="d02-rail__t">Nightly CI-0</span></a></li>
+        <li><a class="d02-rail__a" href="#coverage"><span class="d02-rail__n" aria-hidden="true">02</span><span class="d02-rail__t">Coverage</span></a></li>
+        <li><a class="d02-rail__a" href="#lanes"><span class="d02-rail__n" aria-hidden="true">03</span><span class="d02-rail__t">Lanes</span><span class="d02-rail__c">16 · 13 open</span></a></li>
+        <li><a class="d02-rail__a" href="#classes"><span class="d02-rail__n" aria-hidden="true">04</span><span class="d02-rail__t">Classes</span><span class="d02-rail__c">20</span></a></li>
+        <li><a class="d02-rail__a" href="#gates"><span class="d02-rail__n" aria-hidden="true">05</span><span class="d02-rail__t">Gates</span><span class="d02-rail__c">20</span></a></li>
+        <li><a class="d02-rail__a" href="#handbook"><span class="d02-rail__n" aria-hidden="true">06</span><span class="d02-rail__t">Handbook</span><span class="d02-rail__c">3</span></a></li>
+      </ol>
+    </nav>
+    <main id="main" class="d02-main">
+      <header class="d02-head">
+        <p class="d02-mark">// build / ongoing work</p>
+        <h1 class="d02-h1">Ongoing work</h1>
+        <p class="d02-lead">Where the node software stands and who works on what: test coverage, the nightly CI-0 run, bug classes, lanes, gates and the weekly rhythm.</p>
+      </header>
+      <details class="d02-otp">
+        <summary class="d02-otp__sum">On this page <span class="d02-otp__c">6</span><span class="d02-chev" aria-hidden="true"></span></summary>
+        <ol class="d02-otp__list">
+          <li><a class="d02-otp__a" href="#ci"><span class="d02-rail__n" aria-hidden="true">01</span>Nightly CI-0</a></li>
+          <li><a class="d02-otp__a" href="#coverage"><span class="d02-rail__n" aria-hidden="true">02</span>Coverage</a></li>
+          <li><a class="d02-otp__a" href="#lanes"><span class="d02-rail__n" aria-hidden="true">03</span>Lanes <span class="d02-rail__c">16 · 13 open</span></a></li>
+          <li><a class="d02-otp__a" href="#classes"><span class="d02-rail__n" aria-hidden="true">04</span>Classes <span class="d02-rail__c">20</span></a></li>
+          <li><a class="d02-otp__a" href="#gates"><span class="d02-rail__n" aria-hidden="true">05</span>Gates <span class="d02-rail__c">20</span></a></li>
+          <li><a class="d02-otp__a" href="#handbook"><span class="d02-rail__n" aria-hidden="true">06</span>Handbook <span class="d02-rail__c">3</span></a></li>
+        </ol>
+      </details>
+
+      <p class="d02-meta">Coverage measured at a5d1637f on 2026-11-14; the other counts at c6f9678d on 2026-11-12; site counts at 4c7840e9. Every number here is copied from the hub; the hub is right if they differ.</p>
+      
+            <section class="d02-step d02-ci d02-panel" id="ci" aria-labelledby="ci-title"
+        data-api="https://network.btx-monitoring.com/api/v1/ci.json" data-repo="btxchain/btx" data-job="CI-0" data-lang="en"
+        data-loading="Loading the last runs …" data-none="No current run." data-stale="Last run is older than 36 h; the figures below may be out of date."
+        data-error="CI data unavailable." data-ok="build passed" data-failed="build failed"
+        data-not-run="tests not run" data-count="{passed} of {run}" data-unit-sub="passed · {failed} failed"
+        data-functional-sub="passed · {failed} failed · {skipped} skipped" data-failed-unit="Failed unit suites ({count})"
+        data-failed-functional="Failed functional scripts ({count})" data-names-of="{listed} of {failed}"
+        data-more="… and {count} more" data-times="Started {measured} · finished {finished}" data-run-stale="This run is older than 36 h; its figures may be out of date."
+        data-split="{new} new · {known} known" data-new-failures="New failures, not on the branch&#39;s known-failing list ({count})"
+        data-known-passed="Known-failing tests that passed this time ({count})">
+        <div class="d02-ci__head">
+          <h2 class="d02-step__h" id="ci-title"><span class="d02-step__n" aria-hidden="true">01</span>Nightly CI-0 run</h2>
+          <div class="d02-tabs" role="tablist" aria-label="Branch" data-ci-tabs hidden></div>
+        </div>
+        <p class="d02-run__note">The results of the last nightly build and test runs that the status page&#39;s operator publishes as job CI-0, read live from its API: one run on Linux for each branch it builds, the newest release first. They are not the fork build matrix listed under Gates. The unit runs leave out the slow matmul_v4_rc_stage3_* suites.</p>
+        <noscript><p class="d02-run__note">This panel is filled in by JavaScript. The runs as raw data: <a href="https://network.btx-monitoring.com/api/v1/ci.json" rel="noopener noreferrer">ci.json ↗</a></p></noscript>
+        <p class="d02-run__note" data-ci="status" role="status"></p>
+        <div class="d02-run" data-ci="run" role="group" hidden>
+          <p class="d02-note d02-note--warn" data-ci="run-stale" hidden></p>
+          <dl class="d02-figs">
+            <div class="d02-fig d02-fig--ref"><dt>Branch @ commit</dt><dd class="d02-fig__ref" data-ci="ref">–</dd></div>
+            <div class="d02-fig d02-fig--build"><dt>Build result</dt><dd class="d02-fig__state" data-ci="build">–</dd></div>
+            <div class="d02-fig"><dt>Unit tests</dt><dd class="d02-fig__v d02-fig__n" data-ci="unit">–</dd><dd class="d02-fig__sub" data-ci="unit-sub"></dd><dd class="d02-fig__sub" data-ci="unit-split"></dd></div>
+            <div class="d02-fig"><dt>Functional tests</dt><dd class="d02-fig__v d02-fig__n" data-ci="functional">–</dd><dd class="d02-fig__sub" data-ci="functional-sub"></dd><dd class="d02-fig__sub" data-ci="functional-split"></dd></div>
+          </dl>
+          <div class="d02-run__lists">
+            <details class="d02-names" data-ci="new-failures" hidden><summary class="d02-names__sum"></summary><ul class="d02-names__list"></ul></details>
+            <details class="d02-names" data-ci="known-passed" hidden><summary class="d02-names__sum"></summary><ul class="d02-names__list"></ul></details>
+            <details class="d02-names" data-ci="failed-unit" hidden><summary class="d02-names__sum"></summary><ul class="d02-names__list"></ul></details>
+            <details class="d02-names" data-ci="failed-functional" hidden><summary class="d02-names__sum"></summary><ul class="d02-names__list"></ul></details>
+          </div>
+          <p class="d02-run__meta" data-ci="times"></p>
+        </div>
+        <p class="d02-ci__json"><a href="https://network.btx-monitoring.com/api/v1/ci.json" rel="noopener noreferrer">The runs as JSON ↗</a></p>
+      </section>
+
+      <section class="d02-step" id="coverage" aria-labelledby="coverage-title">
+        <h2 class="d02-step__h" id="coverage-title"><span class="d02-step__n" aria-hidden="true">02</span>Test coverage of the node software</h2>
+        <p class="d02-note"><span class="d02-note__k">Note</span><span class="d02-note__b">Product code of swapnet-v2 at commit a5d1637f, now part of v0.34.16; the coverage build needs btxchain/btx #578, which is in v0.34.16 but not in v0.34.15. In the coverage run 42 unit suites timed out and 14 of 220 functional scripts failed; a killed test writes no counts. The time budgets were shorter than on 12 November, so the figures are floors and the comparison is indicative.</span></p>
+        <div class="d02-cov2 d02-panel" role="list" aria-label="Test coverage of the node software">
+          <div class="d02-cov2__row" role="listitem" id="figure-lines-unit">
+            <span class="d02-cov2__label"><strong>Lines</strong> <span class="d02-muted">unit tests</span></span>
+            <span class="d02-cov2__fig">67.4 %</span>
+            <span class="d02-cov2__bar"><svg class="d02-bar" width="160" height="8" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="8"/><rect class="d02-bar__fill" x="0" y="0" width="67.4" height="8"/></svg></span>
+          </div>
+          <div class="d02-cov2__row" role="listitem" id="figure-lines-functional">
+            <span class="d02-cov2__label"><strong>Lines</strong> <span class="d02-muted">unit and functional tests</span></span>
+            <span class="d02-cov2__fig">72.3 %</span>
+            <span class="d02-cov2__bar"><svg class="d02-bar" width="160" height="8" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="8"/><rect class="d02-bar__fill" x="0" y="0" width="72.3" height="8"/></svg></span>
+          </div>
+          <div class="d02-cov2__row" role="listitem" id="figure-branches-unit">
+            <span class="d02-cov2__label"><strong>Branches</strong> <span class="d02-muted">unit tests</span></span>
+            <span class="d02-cov2__fig">38.9 %</span>
+            <span class="d02-cov2__bar"><svg class="d02-bar" width="160" height="8" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="8"/><rect class="d02-bar__fill" x="0" y="0" width="38.9" height="8"/></svg></span>
+          </div>
+          <div class="d02-cov2__row" role="listitem" id="figure-branches-functional">
+            <span class="d02-cov2__label"><strong>Branches</strong> <span class="d02-muted">unit and functional tests</span></span>
+            <span class="d02-cov2__fig">42.6 %</span>
+            <span class="d02-cov2__bar"><svg class="d02-bar" width="160" height="8" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="8"/><rect class="d02-bar__fill" x="0" y="0" width="42.6" height="8"/></svg></span>
+          </div>
+        </div>
+        <p class="d02-meta" id="coverage-weekly">From Sunday 22 Nov the status page&#39;s operator plans to publish these figures weekly as coverage.json; this section will then read them from there. Until then it shows the hub&#39;s figures.</p>
+
+        <div class="d02-disc">
+          <details class="d02-disc__d">
+            <summary class="d02-disc__sum"><h3 class="d02-disc__title" id="runs-title">How the test runs ended</h3><span class="d02-disc__meta">2 runs</span></summary>
+            <div class="d02-disc__body">
+              <div class="d02-scroll" tabindex="0" role="region" aria-labelledby="runs-title">
+                <table class="d02-tbl">
+                  <thead><tr><th scope="col">Run</th><th scope="col" class="d02-num">Total</th><th scope="col" class="d02-num">Passed</th><th scope="col" class="d02-num">Timed out</th><th scope="col" class="d02-num">Failed</th><th scope="col" class="d02-num">Skipped</th></tr></thead>
+                  <tbody>
+                    <tr id="run-unit"><th scope="row">Unit (ctest)</th><td class="d02-num">2,629</td><td class="d02-num">2,583</td><td class="d02-num">42</td><td class="d02-num">3</td><td class="d02-num">1</td></tr>
+                    <tr id="run-functional"><th scope="row">Functional scripts</th><td class="d02-num">220</td><td class="d02-num">204</td><td class="d02-num">0</td><td class="d02-num">14</td><td class="d02-num">2</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </details>
+          <details class="d02-disc__d">
+            <summary class="d02-disc__sum"><h3 class="d02-disc__title" id="areas-title">Coverage by area</h3><span class="d02-disc__meta">16 areas</span></summary>
+            <div class="d02-disc__body">
+              <p class="d02-small">Lines covered, unit → unit + functional; branches with both. Size and risk rank from the plan&#39;s risk map; a dash is no data, not zero.</p>
+              <div class="c-filter d02-sorter" data-filter="areas" role="group" aria-label="Sort" hidden>
+                <span class="d02-sorter__label" aria-hidden="true">Sort</span>
+                <button type="button" class="d02-chipbtn" data-sort="listed" aria-pressed="true">As listed</button>
+                <button type="button" class="d02-chipbtn" data-sort="lowest" aria-pressed="false">Lowest first</button>
+                <button type="button" class="d02-chipbtn" data-sort="risk" aria-pressed="false">Risk rank</button>
+                <button type="button" class="d02-chipbtn" data-sort="size" aria-pressed="false">Size</button>
+              </div>
+              <div class="d02-scroll" tabindex="0" role="region" aria-labelledby="areas-title">
+                <table class="d02-tbl d02-tbl--areas" id="areas">
+                  <thead>
+                    <tr>
+                      <th scope="col">Area</th>
+                      <th scope="col" class="d02-num" data-sort-column="lowest">Unit</th>
+                      <th scope="col" class="d02-num">+ functional</th>
+                      <th scope="col" class="d02-num">Branches</th>
+                      <th scope="col" class="d02-num" data-sort-column="size">Size (lines)</th>
+                      <th scope="col" class="d02-num" data-sort-column="risk">Risk rank</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr id="area-consensus" data-unit="95.7" data-rank="" data-loc="2452">
+                      <th scope="row"><span class="d02-code">consensus</span> <span class="d02-hint">src/consensus/</span></th>
+                      <td class="d02-num">95.7 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="95.7" height="6"/></svg></td>
+                      <td class="d02-num">97.7 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="97.7" height="6"/></svg></td>
+                      <td class="d02-num">53.7 %</td>
+                      <td class="d02-num">2,452</td>
+                      <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                    </tr>
+                    <tr id="area-validation" data-unit="77.0" data-rank="2" data-loc="23687">
+                      <th scope="row"><span class="d02-code">validation.cpp</span></th>
+                      <td class="d02-num">77.0 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="77.0" height="6"/></svg></td>
+                      <td class="d02-num">79.8 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="79.8" height="6"/></svg></td>
+                      <td class="d02-num">48.0 %</td>
+                      <td class="d02-num">23,687</td>
+                      <td class="d02-num">2</td>
+                    </tr>
+                    <tr id="area-pow" data-unit="69.3" data-rank="2" data-loc="9076">
+                      <th scope="row"><span class="d02-code">pow.cpp</span></th>
+                      <td class="d02-num">69.3 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="69.3" height="6"/></svg></td>
+                      <td class="d02-num">70.7 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="70.7" height="6"/></svg></td>
+                      <td class="d02-num">46.8 %</td>
+                      <td class="d02-num">9,076</td>
+                      <td class="d02-num">2</td>
+                    </tr>
+                    <tr id="area-script" data-unit="80.8" data-rank="11" data-loc="18019">
+                      <th scope="row"><span class="d02-code">script</span></th>
+                      <td class="d02-num">80.8 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="80.8" height="6"/></svg></td>
+                      <td class="d02-num">81.3 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="81.3" height="6"/></svg></td>
+                      <td class="d02-num">54.0 %</td>
+                      <td class="d02-num">18,019</td>
+                      <td class="d02-num">11</td>
+                    </tr>
+                    <tr id="area-wallet" data-unit="37.4" data-rank="4" data-loc="76263">
+                      <th scope="row"><span class="d02-code">wallet</span> <span class="d02-hint">src/wallet/</span></th>
+                      <td class="d02-num">37.4 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="37.4" height="6"/></svg></td>
+                      <td class="d02-num">63.0 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="63.0" height="6"/></svg></td>
+                      <td class="d02-num">36.6 %</td>
+                      <td class="d02-num">76,263</td>
+                      <td class="d02-num">4</td>
+                    </tr>
+                    <tr id="area-net-processing" data-unit="59.8" data-rank="1" data-loc="25300">
+                      <th scope="row"><span class="d02-code">net_processing.cpp</span></th>
+                      <td class="d02-num">59.8 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="59.8" height="6"/></svg></td>
+                      <td class="d02-num">72.1 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="72.1" height="6"/></svg></td>
+                      <td class="d02-num">44.6 %</td>
+                      <td class="d02-num">25,300</td>
+                      <td class="d02-num">1</td>
+                    </tr>
+                    <tr id="area-other-net" data-unit="52.7" data-rank="1" data-loc="">
+                      <th scope="row"><span class="d02-code">other net</span></th>
+                      <td class="d02-num">52.7 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="52.7" height="6"/></svg></td>
+                      <td class="d02-num">77.3 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="77.3" height="6"/></svg></td>
+                      <td class="d02-num">49.4 %</td>
+                      <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                      <td class="d02-num">1</td>
+                    </tr>
+                    <tr id="area-rpc" data-unit="52.0" data-rank="5" data-loc="33765">
+                      <th scope="row"><span class="d02-code">rpc</span> <span class="d02-hint">src/rpc/</span></th>
+                      <td class="d02-num">52.0 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="52.0" height="6"/></svg></td>
+                      <td class="d02-num">76.5 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="76.5" height="6"/></svg></td>
+                      <td class="d02-num">44.6 %</td>
+                      <td class="d02-num">33,765</td>
+                      <td class="d02-num">5</td>
+                    </tr>
+                    <tr id="area-node" data-unit="72.7" data-rank="7" data-loc="28129">
+                      <th scope="row"><span class="d02-code">node</span></th>
+                      <td class="d02-num">72.7 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="72.7" height="6"/></svg></td>
+                      <td class="d02-num">81.9 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="81.9" height="6"/></svg></td>
+                      <td class="d02-num">51.4 %</td>
+                      <td class="d02-num">28,129</td>
+                      <td class="d02-num">7</td>
+                    </tr>
+                    <tr id="area-matmul" data-unit="63.9" data-rank="9" data-loc="468217">
+                      <th scope="row"><span class="d02-code">matmul</span> <span class="d02-hint">src/matmul/</span><span class="d02-cellnote">41 suites timed out: not measured</span></th>
+                      <td class="d02-num">63.9 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="63.9" height="6"/></svg></td>
+                      <td class="d02-num">63.9 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="63.9" height="6"/></svg></td>
+                      <td class="d02-num">35.9 %</td>
+                      <td class="d02-num">468,217</td>
+                      <td class="d02-num">9</td>
+                    </tr>
+                    <tr id="area-shielded" data-unit="72.1" data-rank="" data-loc="50060">
+                      <th scope="row"><span class="d02-code">shielded</span> <span class="d02-hint">src/shielded/</span></th>
+                      <td class="d02-num">72.1 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="72.1" height="6"/></svg></td>
+                      <td class="d02-num">76.9 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="76.9" height="6"/></svg></td>
+                      <td class="d02-num">49.0 %</td>
+                      <td class="d02-num">50,060</td>
+                      <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                    </tr>
+                    <tr id="area-modelnet" data-unit="84.1" data-rank="3" data-loc="369251">
+                      <th scope="row"><span class="d02-code">modelnet</span></th>
+                      <td class="d02-num">84.1 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="84.1" height="6"/></svg></td>
+                      <td class="d02-num">86.2 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="86.2" height="6"/></svg></td>
+                      <td class="d02-num">48.5 %</td>
+                      <td class="d02-num">369,251</td>
+                      <td class="d02-num">3</td>
+                    </tr>
+                    <tr id="area-kernel" data-unit="88.8" data-rank="12" data-loc="5400">
+                      <th scope="row"><span class="d02-code">kernel</span></th>
+                      <td class="d02-num">88.8 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="88.8" height="6"/></svg></td>
+                      <td class="d02-num">90.9 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="90.9" height="6"/></svg></td>
+                      <td class="d02-num">53.8 %</td>
+                      <td class="d02-num">5,400</td>
+                      <td class="d02-num">12</td>
+                    </tr>
+                    <tr id="area-policy" data-unit="69.7" data-rank="" data-loc="4695">
+                      <th scope="row"><span class="d02-code">policy</span></th>
+                      <td class="d02-num">69.7 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="69.7" height="6"/></svg></td>
+                      <td class="d02-num">81.7 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="81.7" height="6"/></svg></td>
+                      <td class="d02-num">50.9 %</td>
+                      <td class="d02-num">4,695</td>
+                      <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                    </tr>
+                    <tr id="area-pq" data-unit="92.7" data-rank="" data-loc="">
+                      <th scope="row"><span class="d02-code">pq</span> <span class="d02-hint">src/pq/, src/pqkey.*</span></th>
+                      <td class="d02-num">92.7 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="92.7" height="6"/></svg></td>
+                      <td class="d02-num">92.7 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="92.7" height="6"/></svg></td>
+                      <td class="d02-num">62.4 %</td>
+                      <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                      <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                    </tr>
+                    <tr id="area-security-v2" data-unit="0.2" data-rank="" data-loc="5365">
+                      <th scope="row"><span class="d02-code">modelnet/security_v2</span> <span class="d02-hint">src/modelnet/security_v2/</span><span class="d02-cellnote">6 .cpp files at 0% with functional tests</span></th>
+                      <td class="d02-num">0.2 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="0.2" height="6"/></svg></td>
+                      <td class="d02-num">15.0 %<svg class="d02-bar" width="64" height="6" viewBox="0 0 100 6" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect class="d02-bar__track" x="0" y="0" width="100" height="6"/><rect class="d02-bar__fill" x="0" y="0" width="15.0" height="6"/></svg></td>
+                      <td class="d02-num">4.9 %</td>
+                      <td class="d02-num">5,365</td>
+                      <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="d02-small">The GUI (Qt) is not built in any run: unknown, not zero.</p>
+            </div>
+          </details>
+          <details class="d02-disc__d">
+            <summary class="d02-disc__sum"><h3 class="d02-disc__title" id="baselines-title">Static and dynamic baseline</h3><span class="d02-disc__meta">6 counts</span></summary>
+            <div class="d02-disc__body">
+              <p class="d02-small">One run of each tool at the measured commit. Every result is a lead until a person has read the code and reproduced it; nobody re-runs the tools for the baseline.</p>
+              <dl class="d02-figs">
+                <div class="d02-fig" id="baseline-codeql"><dt>CodeQL results outside the maintainability and documentation rules</dt><dd class="d02-fig__v">260</dd><dd class="d02-fig__sub">150 security-tagged; untriaged results, not confirmed defects</dd></div>
+                <div class="d02-fig" id="baseline-cppcheck"><dt>cppcheck errors</dt><dd class="d02-fig__v">26</dd></div>
+                <div class="d02-fig" id="baseline-tsan"><dt>TSan site pairs</dt><dd class="d02-fig__v">41</dd></div>
+                <div class="d02-fig" id="baseline-thread-safety"><dt>Thread-safety warnings</dt><dd class="d02-fig__v">266</dd></div>
+                <div class="d02-fig" id="baseline-lockorder"><dt>Lock-order inversions</dt><dd class="d02-fig__v">1</dd><dd class="d02-fig__sub">in wallet code; known, on the A-SHIELDED lane&#39;s done bar</dd></div>
+                <div class="d02-fig" id="baseline-tidy"><dt>clang-tidy warnings</dt><dd class="d02-fig__v">1,033</dd></div>
+              </dl>
+            </div>
+          </details>
+        </div>
+        <p class="d02-src">
+          <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/01-state.md" rel="noopener noreferrer">Figures per area, and how to reproduce them ↗</a>
+          <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/MASTER-PLAN.md" rel="noopener noreferrer">The plan with every table ↗</a>
+        </p>
+      </section>
+
+      <section class="d02-step" id="lanes" aria-labelledby="lanes-title">
+        <h2 class="d02-step__h" id="lanes-title"><span class="d02-step__n" aria-hidden="true">03</span>Lanes</h2>
+        <div class="d02-intro2 d02-intro2--wide">
+          <p class="d02-prose">16 lanes, each with a scope and a done bar that says when the work is finished. Owners are listed in the hub; a lane without one is open, and you claim it by pull request. The owner and the second reviewer of a lane are never the same person.</p>
+          <p class="d02-wl__sum">13 wait for an owner. 5 have a scope and a done bar but no brief yet; 4 of them get no work until someone takes them.</p>
+        </div>
+        <div class="c-filter d02-wfilter" data-filter="lanes" role="group" aria-label="Filter the lanes" hidden>
+          <div class="d02-seg" role="group" aria-label="Kind">
+            <button type="button" class="d02-seg__b" data-kind="all" aria-pressed="true">All <span class="d02-seg__n">16</span></button>
+            <button type="button" class="d02-seg__b" data-kind="area" aria-pressed="false">Area <span class="d02-seg__n">8</span></button>
+            <button type="button" class="d02-seg__b" data-kind="class" aria-pressed="false">Class <span class="d02-seg__n">4</span></button>
+            <button type="button" class="d02-seg__b" data-kind="infra" aria-pressed="false">Infra <span class="d02-seg__n">4</span></button>
+          </div>
+          <label class="d02-chkbox"><input type="checkbox" data-waiting-only> Only lanes waiting for an owner</label>
+          <p class="c-filter__shown d02-wfilter__shown" aria-live="polite" data-template="{shown} of {total} lanes">16 of 16 lanes</p>
+        </div>
+        <div class="d02-ltable d02-panel">
+          <div class="d02-ltable__head" aria-hidden="true">
+            <span>Lane</span><span>Title</span><span>Route</span><span>Owner</span><span class="d02-num">Lines now</span><span class="d02-num">Risk rank</span><span></span>
+          </div>
+          <section class="d02-lgroup c-lane-group" id="group-area" aria-labelledby="group-area-title">
+            <div class="d02-lgroup__head">
+              <h3 class="d02-lgroup__title" id="group-area-title">Area lanes <span class="d02-lgroup__n">8</span></h3>
+              <p class="d02-lgroup__desc">One area of the code each. E-CONSENSUS prepares evidence and files a pull request only when the maintainer asks for one. A-NET, A-HELPER, A-SHIELDED, A-PQ and A-GUI have a scope and a done bar but no brief yet.</p>
+            </div>
+            <div class="d02-wl c-lane" id="lane-A-WALLET" data-kind="area" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">A-WALLET</span>
+                  <span class="d02-wl__title" id="lane-A-WALLET-title">Wallet, RPC authorization, secrets</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines">37.4 % → 63.0 %</span>
+                    <span class="d02-wl__c d02-num d02-wl__risk">4</span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>37.4 % → 63.0 %</dd></div>
+                    <div><dt>Risk rank</dt><dd>4</dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>The wallet and its RPC calls (the shielded RPC belongs to A-SHIELDED) and wallet-facing RPC authorization; classes K05, K11/K12, K25 (wallet half) and K27; deep review 3.3 of the plan.</dd></div>
+                      <div><dt>Why</dt><dd>wallet risk rank 4; 927 wallet functions never executed under unit+functional (measured 12 Nov at c6f9678d); K05 chain of 4 PRs in 4 days</dd></div>
+                      <div><dt>Target</dt><dd>wallet lines &gt;= 70 (set here); K05/K11/K12 rules in ctest; restore-without-passphrase probe fails; no seed bytes after walletlock</dd></div>
+                      <div><dt>Cadence</dt><dd>one class per week from phase 2b; 3.3 review in phase 3</dd></div>
+                      <div><dt>Route</dt><dd>PR to release-0.34.17 (Thursday batch)</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (7 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>K05 test enumerating every wallet RPC against a locked wallet, registered in ctest</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>K11 allowlist test per restricted-user RPC</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>K12 RAII reservation type plus a two-sender test</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>K27 log-scan assertion in the functional runner</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>restore-without-passphrase probe fails; memory scan after walletlock shows no seed bytes</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>wallet lines from 63.0 to at least 70 (target set here)</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>each of the 927 unexecuted wallet functions (measured 12 Nov at c6f9678d) tested or listed as dead</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/A-WALLET.md" rel="noopener noreferrer">The brief for this lane: A-WALLET ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-A-STORES" data-kind="area" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">A-STORES</span>
+                  <span class="d02-wl__title" id="lane-A-STORES-title">ModelNet store, deposit and persistence logic</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines">84.1 % → 86.2 %</span>
+                    <span class="d02-wl__c d02-num d02-wl__risk">3</span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>84.1 % → 86.2 %</dd></div>
+                    <div><dt>Risk rank</dt><dd>3</dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>The ModelNet stores (helper, bounty, campaign, mandate, feed, catalog), the BCP/1 deposit code and its planners, and persistence outside MatMul; classes K20/K21/K02 (52 PRs); test generators, not instance fixes.</dd></div>
+                      <div><dt>Why</dt><dd>modelnet risk rank 3; helper.cpp touched by 42 fix PRs; more single fixes landed on 12 Nov; logic slips hide behind high line coverage</dd></div>
+                      <div><dt>Target</dt><dd>property tests per store and a BCP/1 lifecycle table in ctest; helper.cpp split proposed; 0 new single-site K20/K21 PRs</dd></div>
+                      <div><dt>Cadence</dt><dd>one store per week from phase 2b</dd></div>
+                      <div><dt>Route</dt><dd>PR to release-0.34.17 (Thursday batch)</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (5 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>property tests per store (idempotency keys, pagination completeness, monotonic counters, restart = no restart) in ctest</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>one table-driven BCP/1 lifecycle test (new, mempool, confirmed, replaced, spent, consolidated) through every reporting RPC</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>mutate -&gt; reopen -&gt; compare test per store</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>helper.cpp split proposed to the maintainer with the tests in hand</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>0 new single-site K20/K21 PRs after the generators land</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/A-STORES.md" rel="noopener noreferrer">The brief for this lane: A-STORES ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-E-CONSENSUS" data-kind="area" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">E-CONSENSUS</span>
+                  <span class="d02-wl__title" id="lane-E-CONSENSUS-title">Consensus, fork choice, attestation, MatMul frontier (evidence only)</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">Evidence</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines">59.8 % → 72.1 %</span>
+                    <span class="d02-wl__c d02-num d02-wl__risk">1</span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>59.8 % → 72.1 %</dd></div>
+                    <div><dt>Risk rank</dt><dd>1</dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>Validation, proof of work, the consensus rules, the script interpreter, fork choice and download scheduling, the MatMul attestation rules and the MatMul code; classes K13 and K14; deep reviews 3.1, 3.2b, 3.5b and the rules of 3.6; the #464 list.</dd></div>
+                      <div><dt>Why</dt><dd>net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63, matmul_trusted_attestations.h 50; 68 consensus functions never executed (measured 12 Nov at c6f9678d); frozen for 0.34.16 by #464, so only evidence lands; on 15 Nov the maintainer answered on #464 that its list is not replayed into the 0.34.17 work (#714)</dd></div>
+                      <div><dt>Target</dt><dd>a #464 evidence list: one measured result + one ready test + one paragraph per item; 0 re-filed PRs that were not taken</dd></div>
+                      <div><dt>Cadence</dt><dd>with the Thursday batch, only when a complete item exists; at most one short note</dd></div>
+                      <div><dt>Route</dt><dd>EVIDENCE on #464; a PR only if the maintainer asks</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (7 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>#464 evidence list with one measured result, one ready test and one paragraph per item</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>K13 attestation state machine as one model-based test (vote, withdraw, restart, reorg, missing index)</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>K14 download state machine as a deterministic simulation with an adversarial scheduler (&#39;every announced body is requested within N ticks&#39;)</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>68 unexecuted consensus functions (measured 12 Nov at c6f9678d) listed as tested or dead</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>byte-diff proof of block validity between main and the release line</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>net_processing and validation thread-safety warnings delivered as a measured result</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>0 re-filed PRs that were not taken</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/E-CONSENSUS.md" rel="noopener noreferrer">The brief for this lane: E-CONSENSUS ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-A-NET" data-kind="area" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">A-NET</span>
+                  <span class="d02-wl__title" id="lane-A-NET-title">Non-consensus P2P bounds and parsers</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines">52.7 % → 77.3 %</span>
+                    <span class="d02-wl__c d02-num d02-wl__risk">1</span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>52.7 % → 77.3 %</dd></div>
+                    <div><dt>Risk rank</dt><dd>1</dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>Peer-to-peer code outside fork choice and scheduling: networking, the address manager and the message parsers; fuzz targets for the five message types that have none and for the hybrid handshake; Dandelion stem limits; K09 (peer half) and, with A-WALLET, the K25 observing-peer test.</dd></div>
+                      <div><dt>Why</dt><dd>net/p2p risk rank 1; gate G3 at 1 of about 13 parser targets; no container inventory exists</dd></div>
+                      <div><dt>Target</dt><dd>bounds table complete; 6 targets run 24 h clean under ASan; net_processing.cpp &gt;= 75 lines with functional tests (set here)</dd></div>
+                      <div><dt>Cadence</dt><dd>none until owned; the phase-3 fuzz batch produces the targets only</dd></div>
+                      <div><dt>Route</dt><dd>PR for bounds and targets; scheduling or fork choice -&gt; E-CONSENSUS</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (4 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>every peer-fed container in doc/resource-bounds.md with a bound, an eviction and a unit test</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>DLTX, chunks, mmsketch, mdpeers, mmatrefute and hybrid-handshake targets link and run 24 h clean under ASan</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>K25 observing-peer test in the functional runner</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>net_processing.cpp at or above 75 lines with functional tests through non-consensus tests (target set here)</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">No brief yet; the first tasks are in the hub. ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-A-HELPER" data-kind="area" data-waiting="0">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">A-HELPER</span>
+                  <span class="d02-wl__title" id="lane-A-HELPER-title">ModelNet helper network surface and security_v2</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c">jarekpiot</span>
+                    <span class="d02-wl__c d02-num d02-wl__lines">0.2 % → 15.0 %</span>
+                    <span class="d02-wl__c d02-num d02-wl__risk">3</span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>jarekpiot</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>0.2 % → 15.0 %</dd></div>
+                    <div><dt>Risk rank</dt><dd>3</dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>The ModelNet helper&#39;s network surface: its request dispatcher, the fuzz targets that never ran and the gate that makes the modelnet fuzz build link, security_v2, the two-user layout under -modelrpcsocket and the jail escape suite; K09 (helper half) and the fs-trust results in the helper; deep review 3.7.</dd></div>
+                      <div><dt>Why</dt><dd>modelnet risk rank 3; security_v2 at 0.2/15.0 with 6 files at 0 even with functional tests; the dispatcher has no fuzz target</dd></div>
+                      <div><dt>Target</dt><dd>dispatcher target 24 h clean; every security_v2 file above 0; listener and user-separation tests in the functional runner</dd></div>
+                      <div><dt>Cadence</dt><dd>set by the owner; until then the phase-3 fuzz batch covers the dispatcher target and the native.cmake gate only</dd></div>
+                      <div><dt>Route</dt><dd>PR; the helper user default is the maintainer&#39;s decision (release-scope note)</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (6 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>modelnet_native_dispatch target runs 24 h clean under ASan</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>the never-run targets run 1 h clean</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>every security_v2 file above 0 lines covered</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>functional test: no non-loopback listener on 29447 without -modelbind; no NAT-PMP mapping requested by default</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>under -modelrpcsocket the helper runs as a different user and cannot open .cookie or wallets/</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>a malformed reply fails the request, not the helper</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">No brief yet; the first tasks are in the hub. ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-A-SHIELDED" data-kind="area" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">A-SHIELDED</span>
+                  <span class="d02-wl__title" id="lane-A-SHIELDED-title">Shielded pool integration</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines">72.1 % → 76.9 %</span>
+                    <span class="d02-wl__c d02-num d02-wl__risk">4</span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>72.1 % → 76.9 %</dd></div>
+                    <div><dt>Risk rank</dt><dd>4</dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>Shielded pool integration, the shielded wallet RPC, note reservation (K12, with A-WALLET) and verification cost limits; deep review 3.5a. Proof soundness is for external review, not this lane.</dd></div>
+                      <div><dt>Why</dt><dd>wallet/shielded_rpc.cpp is file risk rank 4 at 15.8/52.7 with no test file; the one lock-order inversion is on the wallet side</dd></div>
+                      <div><dt>Target</dt><dd>a test file for shielded_rpc.cpp with the file above 50 lines (set here); the lock-order inversion fixed; verification fuzz targets</dd></div>
+                      <div><dt>Cadence</dt><dd>none until owned</dd></div>
+                      <div><dt>Route</dt><dd>PR; anchor window -&gt; E-CONSENSUS</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (5 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>shielded_rpc_tests exists and wallet/shielded_rpc.cpp is above 50 lines covered (target set here)</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>verification fuzz targets with cost limits</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>a disconnect-reconnect functional test</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>the one lock-order inversion DEBUG_LOCKORDER reports fixed on the wallet side, with a DEBUG_LOCKORDER test</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>anchor-window item (#317/#461) filed as EVIDENCE</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">No brief yet; the first tasks are in the hub. ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-A-PQ" data-kind="area" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">A-PQ</span>
+                  <span class="d02-wl__title" id="lane-A-PQ-title">Post-quantum crypto use</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines">92.7 % → 92.7 %</span>
+                    <span class="d02-wl__c d02-num d02-wl__risk"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>92.7 % → 92.7 %</dd></div>
+                    <div><dt>Risk rank</dt><dd><span aria-hidden="true">–</span><span class="d02-sr">no data</span></dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>Every verify call site for ML-DSA-44, SLH-DSA and the P2MR evaluation, sigop accounting for post-quantum signatures, the ML-KEM transport and the build flags for constant-time code; deep review 3.4.</dd></div>
+                      <div><dt>Why</dt><dd>a verifier disagreement between implementations is a consensus split; only differential testing is an oracle; already checked: reference-only Dilithium with the z-norm check, no affected PQ crates in Atlas</dd></div>
+                      <div><dt>Target</dt><dd>differential target clean; ACVP/Wycheproof vectors in ctest; build-flag check</dd></div>
+                      <div><dt>Cadence</dt><dd>none until owned</dd></div>
+                      <div><dt>Route</dt><dd>PR for tests; any accept/reject disagreement -&gt; EVIDENCE immediately</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (4 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>libFuzzer differential target (BTX verify vs an independent ML-DSA-44/SLH-DSA library) runs clean</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>ACVP and Wycheproof vectors in ctest</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>build check that constant-time paths are never compiled at -Os/-O1</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>nightly cross-implementation checksums</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">No brief yet; the first tasks are in the hub. ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-A-GUI" data-kind="area" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">A-GUI</span>
+                  <span class="d02-wl__title" id="lane-A-GUI-title">Qt and Atlas</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__risk">7</span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>not a coverage lane</dd></div>
+                    <div><dt>Risk rank</dt><dd>7</dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>The Qt GUI (no coverage data in any run), the Atlas Rust and npm trees (OSV and cargo-audit listed, not run) and the Atlas RPC allowlists per screen.</dd></div>
+                      <div><dt>Why</dt><dd>qt/modelnetpage.cpp is file risk rank 7 with no data; nothing in the programme compiles the GUI</dd></div>
+                      <div><dt>Target</dt><dd>GUI build in the fork CI matrix; cargo audit and OSV on every push; per-screen allowlist test</dd></div>
+                      <div><dt>Cadence</dt><dd>none until owned</dd></div>
+                      <div><dt>Route</dt><dd>PR</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (3 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>a GUI build job in the fork CI matrix</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>cargo audit and OSV-Scanner over the Atlas lock files on every push</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>an Atlas per-screen RPC allowlist test</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">No brief yet; the first tasks are in the hub. ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </section>
+          <section class="d02-lgroup c-lane-group" id="group-class" aria-labelledby="group-class-title">
+            <div class="d02-lgroup__head">
+              <h3 class="d02-lgroup__title" id="group-class-title">Class sweeps <span class="d02-lgroup__n">4</span></h3>
+              <p class="d02-lgroup__desc">One bug class each: every place in the current code, plus the rule that keeps the class at zero.</p>
+            </div>
+            <div class="d02-wl c-lane" id="lane-C-K01" data-kind="class" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">C-K01</span>
+                  <span class="d02-wl__title" id="lane-C-K01-title">Non-atomic or short state-file writes</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__risk"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>not a coverage lane</dd></div>
+                    <div><dt>Risk rank</dt><dd><span aria-hidden="true">–</span><span class="d02-sr">no data</span></dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>Class K01 across the code: 9 worklist files at 1e2f8b5f in ModelNet, the wallet and the node, down from 12 at 4c7840e9. #606 (in v0.34.16) moved three files onto the shared atomic-write helper (#576), removed the two sites the file-level filter missed, made the helper sync file and directory, and added a lint that lists each raw write left as an exception.</dd></div>
+                      <div><dt>Why</dt><dd>22 PRs, the class turning up module after module; a loader that reads a damaged file as empty starts from zero</dd></div>
+                      <div><dt>Target</dt><dd>12 files to 0 (9 left at 1e2f8b5f); fsync in the helper (done: #606); lint in CI-4; truncated-file load test per store</dd></div>
+                      <div><dt>Cadence</dt><dd>phase 2a-2b, one PR</dd></div>
+                      <div><dt>Route</dt><dd>PR; node/blockstorage.cpp and attested_utxo_snapshot.cpp sites checked for consensus adjacency first (if adjacent -&gt; EVIDENCE)</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (5 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>12 worklist files to 0 (9 left at 1e2f8b5f; #606&#39;s lint lists each raw write left in them as an exception)</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>FileCommit of file and directory inside WriteBinaryFileAtomically (done: #606, in v0.34.16)</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>lint against raw ofstream/fopen(&#34;w&#34;) to datadir paths in CI-4 (#606 added test/lint/lint-k01-state-writes.py for the audited files)</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>a truncated-file load test per store</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>0 new K01 PRs after the sweep</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/C-K01.md" rel="noopener noreferrer">The brief for this lane: C-K01 ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-C-PORT" data-kind="class" data-waiting="0">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">C-PORT</span>
+                  <span class="d02-wl__title" id="lane-C-PORT-title">Windows, macOS, build and packaging, resource lifecycle</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c">sunnyriverr</span>
+                    <span class="d02-wl__c d02-num d02-wl__lines"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__risk"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>sunnyriverr</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>not a coverage lane</dd></div>
+                    <div><dt>Risk rank</dt><dd><span aria-hidden="true">–</span><span class="d02-sr">no data</span></dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>Portability and packaging: K06 Windows, MinGW and MSVC (33 PRs), K07 macOS, libc++ and Qt packaging, K22 build, packaging and release-gate drift, K16 pipe, pid and socket lifecycle; the compatibility layer, the release packaging script and the installer path.</dd></div>
+                      <div><dt>Why</dt><dd>K06 (33 PRs), K19/K22 (40), K10 (14) and K07 (6) are classes a CI matrix catches before filing; K06 kept finding new files</dd></div>
+                      <div><dt>Target</dt><dd>POSIX grep lint; first green Windows and sharded macOS runs; otool step in the release gate; RAII wrappers with pidfd check</dd></div>
+                      <div><dt>Cadence</dt><dd>follows the first green Windows and macOS fork runs (I-CI), then one PR per class</dd></div>
+                      <div><dt>Route</dt><dd>PR</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (6 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>POSIX-outside-#ifndef WIN32 grep as a lint in CI-4</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>first green Windows and sharded macOS runs on the release line</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>otool -L on every packaged binary in CI-10</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>RAII wrappers for fork/socket/pipe with a pidfd identity check before every kill</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>0 new-site K06 after the lint</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>release-gate job green (GLIBC ceiling, RUNPATH, elfcheck.py)</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/C-PORT.md" rel="noopener noreferrer">The brief for this lane: C-PORT ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-C-STATIC" data-kind="class" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">C-STATIC</span>
+                  <span class="d02-wl__title" id="lane-C-STATIC-title">Machine-rule sweeps from the static and dynamic baselines</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines">67.4 % → 72.3 %</span>
+                    <span class="d02-wl__c d02-num d02-wl__risk"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>67.4 % → 72.3 %</dd></div>
+                    <div><dt>Risk rank</dt><dd><span aria-hidden="true">–</span><span class="d02-sr">no data</span></dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>Machine-rule sweeps from the static and dynamic baselines: K10 and K04 (rule only), K15 (28 casts), K03 with TSan and thread-safety in ModelNet, node and wallet code, fs-trust (133), lifetime and initialisation (120), cppcheck errors (26), the K19 lints and the K09 container inventory; nothing under sweep rule (c).</dd></div>
+                      <div><dt>Why</dt><dd>the baselines exist and are untriaged; each rule costs an afternoon and closes a class for good</dd></div>
+                      <div><dt>Target</dt><dd>K10 test and K04 lint in CI; 28 casts to 0; TSan product classes to 0; cppcheck errors 26 to 0; fs-trust policy with a shrinking baseline</dd></div>
+                      <div><dt>Cadence</dt><dd>K10 + K04 + K15 in phase 2a; K03, fs-trust, lifetime in phase 2b</dd></div>
+                      <div><dt>Route</dt><dd>PR; anything under rule (c) -&gt; EVIDENCE</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (9 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>K10 unit test over the RPCHelpMan table in ctest</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>K04 UniValue lint in CI-4</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>28 casts on ParseUint32Index or proved range-checked</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>TSan baseline 41 pairs only shrinks; the 5 product classes at 0</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>-Werror=thread-safety on every clean file</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>one fs-trust policy (0600 for secrets and sockets, audited env-var allowlist, provenance check at each sink); CodeQL baseline 133 only shrinks</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>120 lifetime results initialised or documented</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>cppcheck errors 26 to 0</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>doc/resource-bounds.md table started</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/C-STATIC.md" rel="noopener noreferrer">The brief for this lane: C-STATIC ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-C-PATHS" data-kind="class" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">C-PATHS</span>
+                  <span class="d02-wl__title" id="lane-C-PATHS-title">Paths, symlinks, jail, options honoured</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">PR</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__risk"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>not a coverage lane</dd></div>
+                    <div><dt>Risk rank</dt><dd><span aria-hidden="true">–</span><span class="d02-sr">no data</span></dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>K08 paths, symlinks and the jail (8 PRs) and K17 options or modes not honoured (10 PRs): -listen=0, -proxy, -onlynet, -v2pqonly and -natpmp=0 on every network surface outside the core networking code.</dd></div>
+                      <div><dt>Why</dt><dd>a jail step that fails and carries on unjailed, or a second surface that ignores -proxy, undoes the operator&#39;s safe profile</dd></div>
+                      <div><dt>Target</dt><dd>SafePath helper; jail tests with 0 skips; option matrix test</dd></div>
+                      <div><dt>Cadence</dt><dd>phase 2b</dd></div>
+                      <div><dt>Route</dt><dd>PR</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (5 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>one SafePath helper</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>every pivot_root|chroot|unshare|mount( failure fatal</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>tests with a symlinked ancestor and a symlinked leaf</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>jail tests with 0 &#39;jail absent&#39; skips under BTX_TEST_REQUIRE_LINUX_JAIL=1 in CI</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>functional matrix {-listen=0, -proxy, -onlynet, -v2pqonly} x every listening surface</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/C-PATHS.md" rel="noopener noreferrer">The brief for this lane: C-PATHS ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </section>
+          <section class="d02-lgroup c-lane-group" id="group-infra" aria-labelledby="group-infra-title">
+            <div class="d02-lgroup__head">
+              <h3 class="d02-lgroup__title" id="group-infra-title">Infrastructure lanes <span class="d02-lgroup__n">4</span></h3>
+              <p class="d02-lgroup__desc">What the other lanes build on. I-RC also takes runners: people who run one script on their own hardware and report one result line.</p>
+            </div>
+            <div class="d02-wl c-lane" id="lane-I-CI" data-kind="infra" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">I-CI</span>
+                  <span class="d02-wl__title" id="lane-I-CI-title">Fork CI gates</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">Fork branch</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines">67.4 % → 72.3 %</span>
+                    <span class="d02-wl__c d02-num d02-wl__risk"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>67.4 % → 72.3 %</dd></div>
+                    <div><dt>Risk rank</dt><dd><span aria-hidden="true">–</span><span class="d02-sr">no data</span></dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>The fork CI workflow (it ran on the release line on 12 Nov at 4c7840e9 and on 13 Nov at 88c9b49c, red both times; keep the upstream Atlas workflows): jobs CI-0 to CI-10, the known-failing list, and a nightly job for the 41 stage3 suites that time out.</dd></div>
+                      <div><dt>Why</dt><dd>upstream runs no hosted CI by choice; baselines: coverage 72.3/42.6, TSan 41, cppcheck 372, CodeQL 260, tidy 1,033; macOS test job ran out of time on the last fork run, so it is sharded</dd></div>
+                      <div><dt>Target</dt><dd>CI-0 run once on the release-line head; known-failing written and only shrinking; every class PR links a run; ratchet fails any area dropping more than 0.2 points</dd></div>
+                      <div><dt>Cadence</dt><dd>CI-0, CI-4, CI-5, CI-6 in phase 2a; CI-2, CI-9 in phase 2b; the rest by phase 4</dd></div>
+                      <div><dt>Route</dt><dd>fork branch; a workflow file goes upstream only if the maintainer asks</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (6 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>CI-0 run once on the release-line head; shard counts set from it</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>ci/known-failing.txt written from that run (the unit failures; the functional failures, 14 in the coverage run [C3], none an ExactReplay stall; gcc-baseline failures after triage) and only shrinking</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>every class PR links a run with fails-before and passes-after</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>CI-9 fails any area that drops more than 0.2 points against the 72.3/42.6 baseline</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>the 42 timeouts have a job and a number</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>every baseline (TSan 41, cppcheck 372, CodeQL 260) only shrinks</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-CI.md" rel="noopener noreferrer">The brief for this lane: I-CI ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-I-RC" data-kind="infra" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">I-RC</span>
+                  <span class="d02-wl__title" id="lane-I-RC-title">Release-candidate qualification and basic verify</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">Run report</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__risk"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>not a coverage lane</dd></div>
+                    <div><dt>Risk rank</dt><dd><span aria-hidden="true">–</span><span class="d02-sr">no data</span></dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>Release candidates: one archive per OS with a fixed checklist (the four-check pass posted on #432, 11 Nov: compatibility, desktop first use, restart, model download and recovery), the installer on the real archive, and re-running a pull request&#39;s stated test on your own hardware.</dd></div>
+                      <div><dt>Why</dt><dd>7 fix PRs on one release script; the four-check pass ran once, on the Linux candidate at c6f9678d (#432, 11 Nov); v0.34.16 shipped on 15 Nov at 074dac16 with Linux and Linux CUDA archives only, and the hub has no four-check run of them; the first Windows build report on release-0.34.17 (1e2f8b5f, #714, 16 Nov) found the MSVC build failing</dd></div>
+                      <div><dt>Target</dt><dd>a Linux, Windows and macOS line with SHA and pass/fail for every candidate; installer starts a node; one-line verify script</dd></div>
+                      <div><dt>Cadence</dt><dd>every candidate; verify requests tagged on the board, answered within the week</dd></div>
+                      <div><dt>Route</dt><dd>RUN report on the board; a failure becomes a registry entry, then a PR by the class owner</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (4 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>Linux, Windows and macOS lines with SHA and pass/fail for every candidate before anyone writes &#39;ready&#39;</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>install_prebuilt_release_tree on the real archive starts a node</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>the verify script prints one line (commit, test, result) that the runner pastes unchanged</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>no runner box holds keys, tokens or wallets</li>
+                      </ul>
+                      <p class="d02-wl__h">Runner slots</p>
+                      <ul class="d02-list d02-list--tight">
+                        <li>runner: native Windows with an NVIDIA GPU</li>
+                        <li>runner: Windows 11 + WSL2</li>
+                        <li>runner: Linux (IBD from genesis, upgrade from a saved datadir)</li>
+                        <li>runner: macOS</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-RC.md" rel="noopener noreferrer">The brief for this lane: I-RC ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-I-OPS" data-kind="infra" data-waiting="0">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">I-OPS</span>
+                  <span class="d02-wl__title" id="lane-I-OPS-title">Operators and whole-system runs</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">Run report</span>
+                    <span class="d02-wl__c">dr-chambre</span>
+                    <span class="d02-wl__c d02-num d02-wl__lines"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__risk"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>dr-chambre</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>not a coverage lane</dd></div>
+                    <div><dt>Risk rank</dt><dd><span aria-hidden="true">–</span><span class="d02-sr">no data</span></dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>Archive mirrors and signed snapshots, monitoring as the health signal, IBD from genesis on a stock binary, staged upgrades, mixed-version interop (v0.34.15 and v0.34.16 against the release line), the operator safe profile in the guides, and which fixes a v0.34.15 node lacks (gate G1).</dd></div>
+                      <div><dt>Why</dt><dd>gate G1 is &#39;partly&#39;; most nodes run v0.34.15 and the release line is far ahead; operator data has found real bugs before</dd></div>
+                      <div><dt>Target</dt><dd>safe profile published; genesis sync on a stock binary reaches the tip; upgrade and interop run per candidate</dd></div>
+                      <div><dt>Cadence</dt><dd>one run line per candidate; the safe-profile text once, then kept current</dd></div>
+                      <div><dt>Route</dt><dd>RUN report; findings to the registry, then to the class owner or E-CONSENSUS</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (5 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>the safe profile in the community guide and the status page</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>a genesis sync with assumevalid=0 on a stock binary that reaches the tip, reported with the height</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>an upgrade from a saved datadir on every candidate</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>one interop run per candidate</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>UTC timelines on every report</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-OPS.md" rel="noopener noreferrer">The brief for this lane: I-OPS ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+            <div class="d02-wl c-lane" id="lane-I-XDEV" data-kind="infra" data-waiting="1">
+              <details class="c-lane__done d02-wl__d">
+                <summary class="d02-wl__row">
+                  <span class="d02-wl__id">I-XDEV</span>
+                  <span class="d02-wl__title" id="lane-I-XDEV-title">MatMul cross-backend corpus</span>
+                  <span class="d02-wl__meta">
+                    <span class="d02-wl__c">Run report</span>
+                    <span class="d02-wl__c"><span class="d02-muted">open</span></span>
+                    <span class="d02-wl__c d02-num d02-wl__lines">63.9 % → 63.9 %</span>
+                    <span class="d02-wl__c d02-num d02-wl__risk">9</span>
+                  </span>
+                  <span class="d02-wl__more"><span class="d02-wl__more-t">Scope, why, target and done bar</span></span>
+                </summary>
+                <div class="d02-wl__body">
+                  <dl class="d02-strip">
+                    <div><dt>Owner</dt><dd>open</dd></div>
+                    <div><dt>Second pass</dt><dd>open</dd></div>
+                    <div><dt>Lines now</dt><dd>63.9 % → 63.9 %</dd></div>
+                    <div><dt>Risk rank</dt><dd>9</dd></div>
+                  </dl>
+                  <div class="d02-wl__cols">
+                    <dl class="d02-wl__dl">
+                      <div><dt>Scope</dt><dd>One mutated-block corpus replayed on CPU, CUDA and Metal, one script and one verdict table; the test half of deep review 3.6.</dd></div>
+                      <div><dt>Why</dt><dd>matmul 63.9/63.9 with 41 suites unmeasured; a CPU/CUDA corpus run exists; Metal never run; a backend disagreement is a consensus split</dd></div>
+                      <div><dt>Target</dt><dd>a verdict table with one row per (block, backend), no disagreement, a Metal row</dd></div>
+                      <div><dt>Cadence</dt><dd>once per candidate, and once after any matmul change lands</dd></div>
+                      <div><dt>Route</dt><dd>RUN report; disagreements -&gt; EVIDENCE</dd></div>
+                    </dl>
+                    <div>
+                      <p class="d02-wl__h">Done bar (4 items)</p>
+                      <ul class="d02-donebar">
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>corpus and script in the repo</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>one row per (block, backend) with no disagreement</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>a Metal row exists</li>
+                        <li><span class="d02-donebar__box" aria-hidden="true"></span>every disagreement filed as EVIDENCE within the week</li>
+                      </ul>
+                      <p class="d02-wl__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-XDEV.md" rel="noopener noreferrer">The brief for this lane: I-XDEV ↗</a></p>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          </section>
+        </div>
+        <p class="d02-src">
+          <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">Scope and done bar of each lane ↗</a>
+          <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/lanes.json" rel="noopener noreferrer">The lanes as JSON ↗</a>
+        </p>
+      </section>
+
+      <section class="d02-step" id="classes" aria-labelledby="classes-title">
+        <h2 class="d02-step__h" id="classes-title"><span class="d02-step__n" aria-hidden="true">04</span>Recurring bug classes</h2>
+        <div class="d02-intro2">
+          <p class="d02-prose">A bug class is a mistake that keeps coming back in a new place. Before you file anything, find its class here and answer the eight questions of the gate.</p>
+          <p class="d02-prose">A taxonomy of every fix pull request to btxchain/btx since 1 August: 317 fix PRs in 26 named classes, plus &#34;other&#34;. Class assignments are 10-15% noisy. Site counts were taken at 4c7840e9, the release-0.34.16 head of 12 November, unless a count names another commit; static and dynamic counts were measured at c6f9678d and are untriaged.</p>
+        </div>
+        <div class="c-filter d02-wfilter d02-wfilter--chips" data-filter="registry" role="group" aria-label="Filter the classes by status" hidden>
+          <button type="button" class="d02-chipbtn" data-status="all" aria-pressed="true">All <span class="c-filter__count d02-chipbtn__n">20</span></button>
+          <button type="button" class="d02-chipbtn" data-status="worklist" aria-pressed="false">Worklist ready <span class="c-filter__count d02-chipbtn__n">2</span></button>
+          <button type="button" class="d02-chipbtn" data-status="baseline" aria-pressed="false">Baseline measured <span class="c-filter__count d02-chipbtn__n">3</span></button>
+          <button type="button" class="d02-chipbtn" data-status="count-first" aria-pressed="false">Count first <span class="c-filter__count d02-chipbtn__n">7</span></button>
+          <button type="button" class="d02-chipbtn" data-status="rule-only" aria-pressed="false">Rule only <span class="c-filter__count d02-chipbtn__n">3</span></button>
+          <button type="button" class="d02-chipbtn" data-status="needs-ci" aria-pressed="false">Needs fork CI <span class="c-filter__count d02-chipbtn__n">2</span></button>
+          <button type="button" class="d02-chipbtn" data-status="generators" aria-pressed="false">Generators <span class="c-filter__count d02-chipbtn__n">1</span></button>
+          <button type="button" class="d02-chipbtn" data-status="evidence" aria-pressed="false">Evidence <span class="c-filter__count d02-chipbtn__n">2</span></button>
+          <p class="c-filter__shown d02-wfilter__shown" aria-live="polite" data-template="{shown} of {total} classes">20 of 20 classes</p>
+        </div>
+        <div class="d02-scroll" tabindex="0" role="region" aria-labelledby="classes-title">
+          <table class="d02-tbl d02-tbl--classes" id="registry">
+            <thead>
+              <tr>
+                <th scope="col">Class</th>
+                <th scope="col">Name and rule</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="d02-num">Fix PRs</th>
+                <th scope="col" class="d02-num">Open sites</th>
+                <th scope="col">Lane</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="class-K09" data-status="count-first">
+                <th scope="row" class="d02-nw"><span class="d02-code">K09</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>unbounded input from peers and model peers</strong><span class="d02-cellnote">container -&gt; bound -&gt; eviction test table; fuzz target per message type</span></td>
+                <td><span class="d02-stchip">Count first</span><span class="d02-cellnote">not counted; no inventory yet</span></td>
+                <td class="d02-num">18</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-A-NET">A-NET</a><a class="d02-wl__link c-table__lane" href="#lane-A-HELPER">A-HELPER</a></td>
+              </tr>
+              <tr id="class-K01" data-status="worklist">
+                <th scope="row" class="d02-nw"><span class="d02-code">K01</span></th>
+                <td><strong>non-atomic or short state-file write</strong><span class="d02-cellnote">lint against raw ofstream to datadir paths; truncated-file load tests</span></td>
+                <td><span class="d02-stchip">Worklist ready</span><span class="d02-cellnote">worklist ready (9 files at 1e2f8b5f, down from 12 at 4c7840e9; #606&#39;s lint lists each raw write left in them as an exception); shared helper exists (#576) and syncs file and directory since #606</span></td>
+                <td class="d02-num">22</td>
+                <td class="d02-num">9</td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-K01">C-K01</a></td>
+              </tr>
+              <tr id="class-K03" data-status="baseline">
+                <th scope="row" class="d02-nw"><span class="d02-code">K03</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>lock order / self-deadlock / race</strong><span class="d02-cellnote">-Wthread-safety, TSan + DEBUG_LOCKORDER nightly</span></td>
+                <td><span class="d02-stchip">Baseline measured</span><span class="d02-cellnote">baseline measured</span></td>
+                <td class="d02-num">9</td>
+                <td class="d02-num">41 <span class="d02-cellnote">TSan site pairs</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-STATIC">C-STATIC</a><a class="d02-wl__link c-table__lane" href="#lane-E-CONSENSUS">E-CONSENSUS</a></td>
+              </tr>
+              <tr id="class-C1-1" data-status="baseline">
+                <th scope="row" class="d02-nw"><span class="d02-code">C1-1</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>file-system and environment trust</strong><span class="d02-cellnote">CodeQL path/permission/process queries with a shrinking baseline</span></td>
+                <td><span class="d02-stchip">Baseline measured</span><span class="d02-cellnote">baseline measured, untriaged</span></td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td class="d02-num">133 <span class="d02-cellnote">CodeQL results</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-STATIC">C-STATIC</a></td>
+              </tr>
+              <tr id="class-K05" data-status="count-first">
+                <th scope="row" class="d02-nw"><span class="d02-code">K05</span></th>
+                <td><strong>wallet-locked / passphrase ordering</strong><span class="d02-cellnote">every wallet RPC tested against a locked wallet</span></td>
+                <td><span class="d02-stchip">Count first</span><span class="d02-cellnote">not counted (4 files call funding primitives)</span></td>
+                <td class="d02-num">10</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-A-WALLET">A-WALLET</a></td>
+              </tr>
+              <tr id="class-K08" data-status="count-first">
+                <th scope="row" class="d02-nw"><span class="d02-code">K08</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>path / symlink / jail handling</strong><span class="d02-cellnote">SafePath helper; jail tests with 0 skips</span></td>
+                <td><span class="d02-stchip">Count first</span><span class="d02-cellnote">not counted (44 files reference symlink APIs)</span></td>
+                <td class="d02-num">8</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-PATHS">C-PATHS</a></td>
+              </tr>
+              <tr id="class-K06" data-status="needs-ci">
+                <th scope="row" class="d02-nw"><span class="d02-code">K06</span></th>
+                <td><strong>Windows / MinGW / MSVC portability</strong><span class="d02-cellnote">fork CI Windows jobs + POSIX grep lint</span></td>
+                <td><span class="d02-stchip">Needs fork CI</span><span class="d02-cellnote">waits for the first Windows CI run</span></td>
+                <td class="d02-num">33</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-PORT">C-PORT</a></td>
+              </tr>
+              <tr id="class-K10" data-status="rule-only">
+                <th scope="row" class="d02-nw"><span class="d02-code">K10</span></th>
+                <td><strong>CLI/RPC parameter conversion drift</strong><span class="d02-cellnote">unit test over the RPCHelpMan table vs vRPCConvertParams</span></td>
+                <td><span class="d02-stchip">Rule only</span><span class="d02-cellnote">rule-only PR; Atlas half closed by #574</span></td>
+                <td class="d02-num">14</td>
+                <td class="d02-num">1</td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-STATIC">C-STATIC</a></td>
+              </tr>
+              <tr id="class-K04" data-status="rule-only">
+                <th scope="row" class="d02-nw"><span class="d02-code">K04</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>dangling reference / copy from freed memory</strong><span class="d02-cellnote">UniValue self-member-assignment lint</span></td>
+                <td><span class="d02-stchip">Rule only</span><span class="d02-cellnote">rule-only PR</span></td>
+                <td class="d02-num">2</td>
+                <td class="d02-num">0</td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-STATIC">C-STATIC</a></td>
+              </tr>
+              <tr id="class-K15" data-status="worklist">
+                <th scope="row" class="d02-nw"><span class="d02-code">K15</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>integer width / truncation</strong><span class="d02-cellnote">ParseUint32Index at every JSON-number cast</span></td>
+                <td><span class="d02-stchip">Worklist ready</span><span class="d02-cellnote">worklist ready (consensus and matmul sites excluded)</span></td>
+                <td class="d02-num">2</td>
+                <td class="d02-num">28</td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-STATIC">C-STATIC</a></td>
+              </tr>
+              <tr id="class-K16-K17" data-status="count-first">
+                <th scope="row" class="d02-nw"><span class="d02-code">K16/K17</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>helper lifecycle and options not honoured</strong><span class="d02-cellnote">RAII wrappers; -listen/-proxy/-onlynet matrix over every surface</span></td>
+                <td><span class="d02-stchip">Count first</span><span class="d02-cellnote">not counted</span></td>
+                <td class="d02-num">15</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-PORT">C-PORT</a><a class="d02-wl__link c-table__lane" href="#lane-C-PATHS">C-PATHS</a></td>
+              </tr>
+              <tr id="class-K19-K22" data-status="needs-ci">
+                <th scope="row" class="d02-nw"><span class="d02-code">K19/K22</span></th>
+                <td><strong>test registration, fuzz smoke, packaging drift</strong><span class="d02-cellnote">registration diff, 10 s fuzz smoke, exec-bit lint, release gate</span></td>
+                <td><span class="d02-stchip">Needs fork CI</span><span class="d02-cellnote">in the CI branch</span></td>
+                <td class="d02-num">40</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-I-CI">I-CI</a><a class="d02-wl__link c-table__lane" href="#lane-C-STATIC">C-STATIC</a><a class="d02-wl__link c-table__lane" href="#lane-C-PORT">C-PORT</a></td>
+              </tr>
+              <tr id="class-K11-K12" data-status="count-first">
+                <th scope="row" class="d02-nw"><span class="d02-code">K11/K12</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>wallet RPC authorization and coin reservation</strong><span class="d02-cellnote">restricted-user allowlist test; RAII reservation + two-sender test</span></td>
+                <td><span class="d02-stchip">Count first</span><span class="d02-cellnote">not counted</span></td>
+                <td class="d02-num">8</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-A-WALLET">A-WALLET</a></td>
+              </tr>
+              <tr id="class-C1-3" data-status="baseline">
+                <th scope="row" class="d02-nw"><span class="d02-code">C1-3</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>lifetime and initialisation</strong><span class="d02-cellnote">ci/cppcheck.sh with fixed flags; shrinking baseline</span></td>
+                <td><span class="d02-stchip">Baseline measured</span><span class="d02-cellnote">baseline measured, untriaged</span></td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td class="d02-num">120 <span class="d02-cellnote">cppcheck + CodeQL results</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-STATIC">C-STATIC</a></td>
+              </tr>
+              <tr id="class-K20-K21-K02" data-status="generators">
+                <th scope="row" class="d02-nw"><span class="d02-code">K20/K21/K02</span></th>
+                <td><strong>store, deposit and persistence logic</strong><span class="d02-cellnote">property tests per store; BCP/1 lifecycle table; mutate-reopen-compare</span></td>
+                <td><span class="d02-stchip">Generators</span><span class="d02-cellnote">generators, not instance fixes</span></td>
+                <td class="d02-num">52</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-A-STORES">A-STORES</a></td>
+              </tr>
+              <tr id="class-K07" data-status="count-first">
+                <th scope="row" class="d02-nw"><span class="d02-code">K07</span></th>
+                <td><strong>macOS / libc++ / Qt packaging</strong><span class="d02-cellnote">otool check in the release gate; macOS CI</span></td>
+                <td><span class="d02-stchip">Count first</span><span class="d02-cellnote">not counted</span></td>
+                <td class="d02-num">6</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-C-PORT">C-PORT</a></td>
+              </tr>
+              <tr id="class-K25" data-status="rule-only">
+                <th scope="row" class="d02-nw"><span class="d02-code">K25</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>privacy leak to peers or restricted views</strong><span class="d02-cellnote">observing-peer functional test</span></td>
+                <td><span class="d02-stchip">Rule only</span><span class="d02-cellnote">5 of 5 PRs landed; rule missing</span></td>
+                <td class="d02-num">5</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-A-WALLET">A-WALLET</a><a class="d02-wl__link c-table__lane" href="#lane-A-NET">A-NET</a></td>
+              </tr>
+              <tr id="class-K27" data-status="count-first">
+                <th scope="row" class="d02-nw"><span class="d02-code">K27</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>secret or seed material exposed</strong><span class="d02-cellnote">log-scan assertion; SecureString audit test</span></td>
+                <td><span class="d02-stchip">Count first</span><span class="d02-cellnote">not counted</span></td>
+                <td class="d02-num">3</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-A-WALLET">A-WALLET</a></td>
+              </tr>
+              <tr id="class-K13" data-status="evidence">
+                <th scope="row" class="d02-nw"><span class="d02-code">K13</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>MatMul attestation / frontier state</strong><span class="d02-cellnote">model-based state-machine test</span></td>
+                <td><span class="d02-stchip">Evidence</span><span class="d02-cellnote">evidence for #464, not a sweep</span></td>
+                <td class="d02-num">15</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-E-CONSENSUS">E-CONSENSUS</a></td>
+              </tr>
+              <tr id="class-K14" data-status="evidence">
+                <th scope="row" class="d02-nw"><span class="d02-code">K14</span><abbr class="d02-smark" title="Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx." aria-hidden="true">S</abbr><span class="d02-sr">security-relevant</span></th>
+                <td><strong>block download scheduling</strong><span class="d02-cellnote">deterministic download simulation with an adversarial scheduler</span></td>
+                <td><span class="d02-stchip">Evidence</span><span class="d02-cellnote">evidence for #464, not a sweep</span></td>
+                <td class="d02-num">19</td>
+                <td class="d02-num"><span aria-hidden="true">–</span><span class="d02-sr">no data</span></td>
+                <td><a class="d02-wl__link c-table__lane" href="#lane-E-CONSENSUS">E-CONSENSUS</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="d02-meta"><span class="d02-smark" aria-hidden="true">S</span> Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx.</p>
+        <p class="d02-src"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/05-bug-classes.md" rel="noopener noreferrer">The registry, with example pull requests ↗</a></p>
+      </section>
+
+      <section class="d02-step" id="gates" aria-labelledby="gates-title">
+        <h2 class="d02-step__h" id="gates-title"><span class="d02-step__n" aria-hidden="true">05</span>Gates</h2>
+        <p class="d02-prose">Upstream runs no hosted CI for the node software, by choice. The gates run on a contributor fork, every class pull request links its run, and baselines only shrink. CI stays on the fork and is offered upstream only on request.</p>
+                <div class="d02-disc">
+        <details class="d02-disc__d">
+        <summary class="d02-disc__sum"><h3 class="d02-disc__title" id="gates-ci-title">Fork CI jobs (lane I-CI)</h3><span class="d02-disc__meta">11 jobs</span></summary>
+        <div class="d02-disc__body">
+        <div class="d02-scroll" tabindex="0" role="region" aria-labelledby="gates-ci-title">
+          <table class="d02-tbl">
+            <thead><tr><th scope="col">Job</th><th scope="col">Name</th><th scope="col">State</th><th scope="col">Phase</th></tr></thead>
+            <tbody>
+              <tr id="gate-CI-0"><th scope="row"><span class="d02-code">CI-0</span></th><td>fork build matrix (Linux, userns, mingw, Windows, macOS)</td><td>ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page&#39;s operator publishes the results of nightly build and test runs on release-0.34.16 and release-0.34.17, one per branch</td><td class="d02-nw">phase 2a</td></tr>
+              <tr id="gate-CI-1"><th scope="row"><span class="d02-code">CI-1</span></th><td>linux-unit-functional (sharded)</td><td>planned</td><td class="d02-nw">phase 4</td></tr>
+              <tr id="gate-CI-2"><th scope="row"><span class="d02-code">CI-2</span></th><td>linux-asan-ubsan</td><td>planned</td><td class="d02-nw">phase 2b</td></tr>
+              <tr id="gate-CI-3"><th scope="row"><span class="d02-code">CI-3</span></th><td>tsan-lockorder nightly</td><td>planned; baseline 41 pairs</td><td class="d02-nw">phase 4</td></tr>
+              <tr id="gate-CI-4"><th scope="row"><span class="d02-code">CI-4</span></th><td>lint (registration diff, UniValue, K01/K08/K17 greps, K10 test, exec bits)</td><td>planned</td><td class="d02-nw">phase 2a</td></tr>
+              <tr id="gate-CI-5"><th scope="row"><span class="d02-code">CI-5</span></th><td>clang-tidy-diff + -Werror=thread-safety on clean files</td><td>planned</td><td class="d02-nw">phase 2a</td></tr>
+              <tr id="gate-CI-6"><th scope="row"><span class="d02-code">CI-6</span></th><td>cppcheck with fixed flags</td><td>planned; baseline 372</td><td class="d02-nw">phase 2a</td></tr>
+              <tr id="gate-CI-7"><th scope="row"><span class="d02-code">CI-7</span></th><td>fuzz-smoke (ClusterFuzzLite)</td><td>planned</td><td class="d02-nw">phase 4</td></tr>
+              <tr id="gate-CI-8"><th scope="row"><span class="d02-code">CI-8</span></th><td>codeql weekly on a dedicated box</td><td>planned; baseline 260</td><td class="d02-nw">phase 4</td></tr>
+              <tr id="gate-CI-9"><th scope="row"><span class="d02-code">CI-9</span></th><td>coverage-ratchet on a dedicated box</td><td>planned; baseline 72.3% lines; configure fix landed (#578)</td><td class="d02-nw">phase 2b</td></tr>
+              <tr id="gate-CI-10"><th scope="row"><span class="d02-code">CI-10</span></th><td>release-gate</td><td>planned</td><td class="d02-nw">phase 4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+        </details>
+        <details class="d02-disc__d">
+        <summary class="d02-disc__sum"><h3 class="d02-disc__title" id="gates-release-title">The contributors&#39; checklist for a final release</h3><span class="d02-disc__meta">9 gates</span></summary>
+        <div class="d02-disc__body">
+        <p class="d02-small">What contributors keep ready. Rows that depend on the maintainer are listed so the evidence is there when the decision is made, not as requests; the maintainer decides what lands.</p>
+        <div class="d02-scroll" tabindex="0" role="region" aria-labelledby="gates-release-title">
+          <table class="d02-tbl">
+            <thead><tr><th scope="col">Gate</th><th scope="col">Name</th><th scope="col">State</th></tr></thead>
+            <tbody>
+              <tr id="gate-G1"><th scope="row" class="d02-nw"><span class="d02-code">G1</span></th><td>Operators safe now</td><td>partly</td></tr>
+              <tr id="gate-G2"><th scope="row" class="d02-nw"><span class="d02-code">G2</span> <span class="d02-stchip">done bar</span></th><td>Machines on</td><td>open</td></tr>
+              <tr id="gate-G3"><th scope="row" class="d02-nw"><span class="d02-code">G3</span> <span class="d02-stchip">done bar</span></th><td>Parsers covered</td><td>1 of about 13 targets exists</td></tr>
+              <tr id="gate-G4"><th scope="row" class="d02-nw"><span class="d02-code">G4</span> <span class="d02-stchip">done bar</span></th><td>Classes swept</td><td>open; worklists ready</td></tr>
+              <tr id="gate-G5"><th scope="row" class="d02-nw"><span class="d02-code">G5</span></th><td>Money separated from the AI layer</td><td>open</td></tr>
+              <tr id="gate-G6"><th scope="row" class="d02-nw"><span class="d02-code">G6</span></th><td>Peer input charged and bounded</td><td>open; #478 and #313 are in v0.34.16 (on main since 15 Nov)</td></tr>
+              <tr id="gate-G7"><th scope="row" class="d02-nw"><span class="d02-code">G7</span></th><td>What runs is what was reviewed</td><td>open</td></tr>
+              <tr id="gate-G8"><th scope="row" class="d02-nw"><span class="d02-code">G8</span></th><td>Chain verifiable from genesis</td><td>open</td></tr>
+              <tr id="gate-G9"><th scope="row" class="d02-nw"><span class="d02-code">G9</span></th><td>Process (branch matrix per fix, the v0.34.15 gap list, a reporting route)</td><td>open</td></tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+        </details>
+        </div>
+        <p class="d02-src">
+          <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/MASTER-PLAN.md" rel="noopener noreferrer">The gates in the plan ↗</a>
+          <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-CI.md" rel="noopener noreferrer">The brief for lane I-CI ↗</a>
+        </p>
+      </section>
+
+      <section class="d02-step" id="handbook" aria-labelledby="handbook-title">
+        <h2 class="d02-step__h" id="handbook-title"><span class="d02-step__n" aria-hidden="true">06</span>Handbook</h2>
+        <div class="d02-disc d02-disc--hb">
+          <section id="owner-rules" aria-labelledby="owner-rules-title">
+            <details class="c-fold d02-disc__d">
+              <summary class="d02-disc__sum d02-disc__sum--hb"><h3 class="d02-disc__title" id="owner-rules-title">Rules for lane owners</h3><span class="d02-disc__lead">What applies once you own a lane: what your AI never does, and how a sweep works.</span></summary>
+              <div class="d02-disc__body d02-hb__body">
+                <h4 class="d02-h3" id="never">What each person&#39;s AI never does</h4>
+                <p class="d02-small">The person who owns the lane signs every post; the AI drafts.</p>
+                <ol class="d02-olist">
+                  <li>Never post, comment, push or open a PR on its own. The owner reads the full text and the diff first.</li>
+                  <li>Never open a PR into the release branch (release-0.34.17 since 15 Nov) that touches validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, fork choice or download scheduling in net_processing.cpp, node/matmul_trusted_attestations.* rules, or src/matmul/. Those go to E-CONSENSUS.</li>
+                  <li>Never file a single-site fix for a class in the registry. Count the class on the live head; sweep it; add the rule.</li>
+                  <li>Never put a fix in a commit linked from a comment. Follow-ups are PRs.</li>
+                  <li>Never claim a test ran without the run link or log, the commit SHA and the platform. &#34;Fails before, passes after&#34; or nothing.</li>
+                  <li>Never add a stub, a fail-closed workaround, a skipped test or a widened timeout to make a job green.</li>
+                  <li>Never stop a node with kill -9. Stop any keeper or watchdog first, back up the datadir, then stop the node cleanly.</li>
+                  <li>Never re-run a baseline tool that already ran; reuse the C1-C3 results (the numbers in plan/plan-data.json) and re-grep only the live head.</li>
+                  <li>Never hold keys, wallet files, RPC cookies or tokens on a test or runner box; never test on the machine that holds a wallet.</li>
+                  <li>Never quote private chats, name people other than by handle, or state a figure without its source.</li>
+                </ol>
+                <h4 class="d02-h3" id="sweeps-title">Sweep rules and hot files</h4>
+                <ul class="d02-list" aria-labelledby="sweeps-title">
+                  <li>Sweep rule (a): a &#39;not counted&#39; class is counted on the live head first; under 3 real sites, the rule alone</li>
+                  <li>Sweep rule (b): a sweep PR changes nothing beyond its class; anything else it finds goes to the lane worklist or its own PR</li>
+                  <li>Sweep rule (c): no sweep touches validation.cpp, pow.cpp, src/consensus/, script/interpreter.cpp, fork choice or src/matmul/; hits go to E-CONSENSUS</li>
+                  <li>Hot files (net_processing.cpp, modelnet/helper.cpp, node/matmul_trusted_attestations.*): no per-event PR without a model-based test or a split proposal first</li>
+                </ul>
+                <p class="d02-src">
+                  <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/02-method.md" rel="noopener noreferrer">The working method ↗</a>
+                  <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/03-guardrails.md" rel="noopener noreferrer">The guardrails ↗</a>
+                </p>
+              </div>
+            </details>
+          </section>
+          <section id="flow" aria-labelledby="flow-title">
+            <details class="c-fold d02-disc__d">
+              <summary class="d02-disc__sum d02-disc__sum--hb"><h3 class="d02-disc__title" id="flow-title">How a finding moves</h3><span class="d02-disc__lead">From the moment someone finds something to the moment a baseline shrinks. Two exits leave the path early.</span></summary>
+              <div class="d02-disc__body d02-hb__body">
+                <ol class="d02-olist d02-olist--flow">
+                  <li>found</li>
+                  <li>class check against doc/bug-classes.md (add a class if new)</li>
+                  <li class="d02-is-exit">if the class touches validation, fork choice, attestation or the MatMul frontier -&gt; E-CONSENSUS evidence; stop here <span class="d02-sr">(an exit: the path can end here)</span></li>
+                  <li class="d02-is-exit">count sites on the live head (under 3 real sites: file the rule alone) <span class="d02-sr">(an exit: the path can end here)</span></li>
+                  <li>sweep every site + write the rule (test, lint or CI job)</li>
+                  <li>PR with the fork CI link: fails before, passes after</li>
+                  <li>second pass by the lane&#39;s reviewer (Wednesday)</li>
+                  <li>Thursday batch to the maintainer</li>
+                  <li>merged -&gt; board card moved -&gt; baseline shrinks</li>
+                </ol>
+                <h4 class="d02-h3" id="routes-title">Where it ends up</h4>
+                <div class="d02-cards" role="group" aria-labelledby="routes-title">
+                  <article class="d02-card" id="route-pr"><h5 class="d02-card__t">Pull request</h5><p>A normal pull request to release-0.34.17, sent in the Thursday batch with its fork CI run: fails before, passes after.</p></article>
+                  <article class="d02-card" id="route-evidence"><h5 class="d02-card__t">Evidence</h5><p>For validation, fork choice, attestation and the MatMul frontier: one measured result, one ready test and one paragraph on #464. A pull request only if the maintainer asks for one.</p></article>
+                  <article class="d02-card" id="route-run"><h5 class="d02-card__t">Run report</h5><p>One script on one machine prints one result line, which the runner pastes unchanged, plus one line that says what was not tested.</p></article>
+                </div>
+                <h4 class="d02-h3" id="escalation-title">When something goes wrong</h4>
+                <ul class="d02-list" aria-labelledby="escalation-title">
+                  <li>Gate red (a baseline grew, a known-failing list grew): the lane stops new work and fixes the gate first.</li>
+                  <li>A pull request the maintainer closed without taking it is never re-filed; it becomes an evidence item or is dropped.</li>
+                  <li>Owner and second pass disagree: the batch coordinator decides what goes into the batch, and the question goes into the Thursday batch as one line if the maintainer&#39;s view is needed.</li>
+                  <li>A security-relevant finding goes through GitHub private vulnerability reporting on btxchain/btx, never into a public issue or a chat; the class goes on the registry without the detail.</li>
+                  <li>A runner cannot reproduce a stated test: the pull request waits, and the owner, not the runner, investigates.</li>
+                </ul>
+                <p class="d02-src">
+                  <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">The flow in the hub ↗</a>
+                  <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/06-pr-gate.md" rel="noopener noreferrer">The eight questions before a pull request ↗</a>
+                </p>
+              </div>
+            </details>
+          </section>
+          <section id="rhythm" aria-labelledby="rhythm-title">
+            <details class="c-fold d02-disc__d">
+              <summary class="d02-disc__sum d02-disc__sum--hb"><h3 class="d02-disc__title" id="rhythm-title">Phases and the week</h3><span class="d02-disc__lead">Phases overlap. Batches go out on Thursdays; dates live on the board, set by lane owners once lanes are claimed. No single-site pull requests between batches unless a gate is red.</span></summary>
+              <div class="d02-disc__body d02-hb__body">
+                <div class="d02-cards">
+                  <article class="d02-card" id="phase-2a">
+                    <p class="d02-card__k">Phase 2a</p>
+                    <h4 class="d02-card__t">First value</h4>
+                    <p class="d02-card__d">12-14 Nov</p>
+                    <ul class="d02-list d02-list--tight">
+                      <li>fork CI branch on 4c7840e9 with lint, clang-tidy-diff, cppcheck</li>
+                      <li>rule-only PRs: K10 test, K04 lint</li>
+                      <li>K15: 28 casts + 5 single results</li>
+                      <li>K01 worklist and lint to the portability lane</li>
+                      <li>functional-failure triage</li>
+                    </ul>
+                  </article>
+                  <article class="d02-card" id="phase-2b">
+                    <p class="d02-card__k">Phase 2b</p>
+                    <h4 class="d02-card__t">The sweeps</h4>
+                    <p class="d02-card__d">15-21 Nov</p>
+                    <ul class="d02-list d02-list--tight">
+                      <li>K05, K08, K03 + annotations</li>
+                      <li>fs-trust policy</li>
+                      <li>K16, K17, K19 lints</li>
+                      <li>K22 release gate</li>
+                      <li>K11, K12, K07, K25, K27 (counted first)</li>
+                      <li>coverage ratchet and ASan job</li>
+                    </ul>
+                  </article>
+                  <article class="d02-card" id="phase-3">
+                    <p class="d02-card__k">Phase 3</p>
+                    <h4 class="d02-card__t">Deep reviews</h4>
+                    <p class="d02-card__d">18-28 Nov</p>
+                    <ul class="d02-list d02-list--tight">
+                      <li>3.3, 3.4, 3.7, 3.8</li>
+                      <li>3.2 and 3.6 test artefacts</li>
+                      <li>3.1 and 3.5 as #464 evidence</li>
+                      <li>fuzz batch: dispatcher, DLTX, chunks, hybrid handshake, model files</li>
+                    </ul>
+                  </article>
+                  <article class="d02-card" id="phase-4">
+                    <p class="d02-card__k">Phase 4</p>
+                    <h4 class="d02-card__t">Ratchet</h4>
+                    <p class="d02-card__d">weekly from 24 Nov</p>
+                    <ul class="d02-list d02-list--tight">
+                      <li>baselines only shrink</li>
+                      <li>weekly CodeQL</li>
+                      <li>Thursday batch</li>
+                      <li>#464 evidence list</li>
+                      <li>external-review scope</li>
+                    </ul>
+                  </article>
+                </div>
+                <h4 class="d02-h3" id="week-title">The week</h4>
+                <div class="d02-scroll" tabindex="0" role="region" aria-labelledby="week-title">
+                  <table class="d02-tbl">
+                    <thead><tr><th scope="col">Day</th><th scope="col">What</th><th scope="col">Who</th></tr></thead>
+                    <tbody>
+                      <tr id="day-monday"><th scope="row">Monday</th><td>each lane picks one class or item from the board; owners post the plan line on their card</td><td>owners</td></tr>
+                      <tr id="day-tuesday_wednesday"><th scope="row">Tuesday to Wednesday</th><td>sweep, rule, fork CI run; second passes on Wednesday</td><td>owners, second pass</td></tr>
+                      <tr id="day-thursday"><th scope="row">Thursday</th><td>one batch to the maintainer (PRs with run links); an evidence note on #464 only when a complete item exists; one operator line (batch coordinator)</td><td>batch coordinator</td></tr>
+                      <tr id="day-friday"><th scope="row">Friday</th><td>board updated; baselines rechecked; I-RC verify lines in (batch coordinator, runners)</td><td>batch coordinator, runners</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p class="d02-src">
+                  <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">The rhythm in the hub ↗</a>
+                  <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/MASTER-PLAN.md" rel="noopener noreferrer">The dated plan ↗</a>
+                </p>
+              </div>
+            </details>
+          </section>
+        </div>
+      </section>
+
+      <nav class="d02-next" aria-label="Next">
+        <a class="d02-next__card" href="/new/design02_font1/projects/">
+          <span class="d02-next__k">next · Projects</span>
+          <span class="d02-next__arrow" aria-hidden="true">→</span>
+        </a>
+        <ul class="d02-next__more">
+          <li><a href="/new/design02_font1/infra/">Run a node or other infrastructure <span aria-hidden="true">→</span></a></li>
+        </ul>
+      </nav>
+      <p class="d02-edit">Outdated or wrong? <a href="https://github.com/BTX-Community/btx-community/tree/main/site/content" rel="noopener noreferrer">Suggest an edit on GitHub ↗</a></p>
+    </main>
+  </div>
+  <footer class="d02-foot">
+    <div class="d02-wrap d02-foot__in">
+      <nav class="d02-foot__nav" aria-label="Pages, again">
+        <a href="/new/design02_font1/">Start here</a>
+        <a href="/new/design02_font1/infra/">Take part</a>
+        <a href="/new/design02_font1/network/">Network</a>
+        <a href="/new/design02_font1/links/">Directory</a>
+        <a href="/new/design02_font1/dev/">Build</a>
+        <a href="/new/design02_font1/projects/">Projects</a>
+      </nav>
+      <p class="d02-foot__t">Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+      <p class="draft-arrows">→ goes to a page of this site · ↗ opens another site</p>
+      <p class="d02-foot__t">Layout draft for feedback. The live site at <a href="https://btx-community.com/dev/work/">btx-community.com ↗</a> is the official one. English only.</p>
+      <p class="d02-foot__t"><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a> · <span class="d02-mono">3a9d1c47e44b</span></p>
+    </div>
+  </footer>
+</body>
+</html>

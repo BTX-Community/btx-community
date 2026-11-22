@@ -1,0 +1,81 @@
+/* Developers (/dev/): page-only layout and components. Tokens only; shared components are not redefined. */
+
+/* Small headings inside a section (h3 labels for a block) */
+.dev-h3 { margin-bottom: var(--s-4); }
+.dev-text { color: var(--ink-2); max-width: 62ch; margin-bottom: var(--s-5); }
+
+/* Right-hand column: a callout and a link or two, stacked */
+.dev-side > * + * { margin-top: var(--s-5); }
+/* From 960px the side column stays beside the long column as it scrolls, so there is no empty column. */
+@media (min-width: 960px) { .dev-side { padding-top: var(--s-1); position: sticky; top: var(--s-5); align-self: start; } }
+
+/* How we work: four parallel principles, ruled (not boxed), 2x2 from 768px */
+.dev-principles { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 var(--s-6); border-top: 1px solid var(--rule); }
+.dev-principle { padding: var(--s-5) 0; border-bottom: 1px solid var(--rule); }
+.dev-principle h3 { margin-top: var(--s-2); }
+.dev-principle h3 + p { margin-top: var(--s-2); color: var(--ink-2); max-width: 58ch; }
+@media (min-width: 768px) {
+  .dev-principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.dev-stamp { margin-top: var(--s-4); max-width: 80ch; }
+.dev-stamp--end { margin-top: var(--s-7); }
+
+/* The AI prompt is a shared wrapping code block (.code--wrap); the no-JS hint uses [data-nojs-only]. */
+.dev-prompt { margin-top: var(--s-6); }
+.dev-nojs { margin-top: var(--s-2); }
+.dev-rows { margin-top: var(--s-5); }
+
+.dev-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.dev-list > li { padding: var(--s-3) 0; border-bottom: 1px solid var(--rule); color: var(--ink-2); font-size: 1.0625rem; line-height: 1.55; }
+.dev-list strong { color: var(--ink); }
+
+/* The rows above already end on a rule, so this block adds space, not a second line. */
+.dev-aifiles { margin-top: var(--s-7); }
+
+/* Three levels: the stop title is a heading; what you do and what you need sit under it. */
+.dev-levels .stop { padding-bottom: var(--s-6); }
+.dev-levels .stop:last-child { padding-bottom: 0; }
+.dev-kv { margin: var(--s-3) 0 0; display: grid; gap: var(--s-3); max-width: 62ch; }
+.dev-kv dt { margin-bottom: 2px; }
+.dev-kv dd { margin: 0; color: var(--ink-2); }
+.dev-more { display: inline-block; min-height: 44px; padding-block: 11px 0; font-size: var(--fs-small); font-weight: 600; }
+
+/* Rules of the road: a numbered list, the rule in bold, the reason after it. */
+.dev-rules { list-style: none; margin: 0; padding: 0; counter-reset: rule; border-top: 1px solid var(--rule); }
+.dev-rules > li {
+  counter-increment: rule; position: relative; padding: var(--s-4) 0 var(--s-4) 2.5rem;
+  border-bottom: 1px solid var(--rule); color: var(--ink-2);
+}
+.dev-rules > li::before {
+  content: counter(rule); position: absolute; left: 0; top: calc(var(--s-4) + 3px);
+  font: 700 var(--fs-small)/1.6 var(--mono); color: var(--ink-3);
+}
+.dev-rules strong { color: var(--ink); }
+.dev-rules .more { margin-top: var(--s-1); }
+
+.dev-links { display: flex; flex-wrap: wrap; gap: 0 var(--s-5); list-style: none; margin: 0; padding: 0; }
+.dev-links a { display: inline-flex; align-items: center; column-gap: .3em; min-height: 44px; font-size: var(--fs-small); font-weight: 600; }
+
+/* Contribute back: three loops, each a short route; three columns from 960px. */
+.dev-loops { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-7) var(--s-6); }
+@media (min-width: 960px) { .dev-loops { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.dev-loop { display: flex; flex-direction: column; }
+.dev-loop > h3 { margin-top: var(--s-2); }
+.dev-loop__intro { margin: var(--s-2) 0 var(--s-5); color: var(--ink-2); max-width: 58ch; }
+.dev-loop .route { margin-bottom: var(--s-4); align-self: start; }
+.dev-loop .dev-links { margin-top: auto; flex-direction: column; }
+.dev-step { color: var(--ink); font-size: 1.0625rem; line-height: 1.55; max-width: 58ch; }
+.dev-step code { font-size: .85em; }
+
+/* Rules: the security callout comes first, full width, above the rules. */
+/* Callout and rules share one reading width, so the list's top rule and its item rules line up. */
+.dev-danger, #rules-short { max-width: 48rem; }
+.dev-danger { margin-bottom: var(--s-6); }
+#rules-short .dev-links { margin-top: var(--s-4); }
+
+/* Loop parts line up across the three columns (label, title, intro, steps, links). */
+@media (min-width: 960px) {
+  .dev-loop { display: grid; grid-template-rows: subgrid; grid-row: span 5; row-gap: 0; align-content: start; }
+  .dev-loop .dev-links { margin-top: 0; align-self: start; }
+}
+.dev-list code { white-space: nowrap; overflow-wrap: normal; }

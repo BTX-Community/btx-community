@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en" class="d03-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://btx-community.com/network/">
+  <title>[Draft] Network · Design 03 · Reader&#39;s Guide</title>
+  <meta name="description" content="The BTX network&#39;s live state, such as block height and the next halving, and the development of the node software on GitHub.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[Draft] Network – Design draft, not the official layout">
+  <meta property="og:description" content="Direction A from Jpp&#39;s design audit (19 Nov 2026): a light, editorial handbook with a serif display face, one cobalt accent, numbered chapters and a contents rail on long pages, plus the eight ideas from directions B and C his panel recommended.">
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/new/design03.css?v=ee5a5c1ab387">
+  <link rel="preload" href="/static/fonts/new/InstrumentSerif-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+  <script src="/static/js/new/design03.js?v=e68be2105d19" defer></script>
+</head>
+<body class="d03">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="draft-banner" role="note">
+    <p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind.
+      <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a>
+      <a class="draft-banner__link" href="/new/">All drafts →</a>
+      <a class="draft-banner__link" href="https://btx-community.com/network/">This page on the live site ↗</a>
+    </p>
+  </div>
+  <header class="top">
+    <div class="top__in">
+      <a class="logo" href="/new/design03/">BTX Community</a>
+      <nav class="nav" aria-label="Pages">
+        <a class="nav__link" href="/new/design03/">Start</a>
+        <a class="nav__link" href="/new/design03/learn/">About BTX</a>
+        <a class="nav__link" href="/new/design03/network/" aria-current="page">Network</a>
+        <a class="nav__link" href="/new/design03/links/">Directory</a>
+        <a class="nav__link" href="/new/design03/infra/">Run infra</a>
+        <a class="nav__link" href="/new/design03/dev/">Developers</a>
+      </nav>
+      <button class="theme" type="button" data-theme-switch data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to dark theme" hidden><span class="theme__icon" aria-hidden="true"></span></button>
+      <details class="menu">
+        <summary class="menu__btn">Menu</summary>
+        <div class="sheet">
+          <nav aria-label="Pages">
+            <ul class="sheet__list">
+              <li><a class="sheet__link" href="/new/design03/">Start</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/learn/">About BTX</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/network/" aria-current="page">Network</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/links/">Directory</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/links/">Links</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/projects/">Projects</a></li>
+                </ul>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/infra/">Run infra</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/dev/">Developers</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/dev/">Start here</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/dev/work/">Ongoing work</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          <p class="sheet__label">This draft is in English only.</p>
+        </div>
+      </details>
+    </div>
+  </header>
+  <div class="otp">
+    <details class="otp__d" data-otp>
+      <summary class="otp__sum"><span class="otp__k">On this page:</span> <span class="otp__cur" data-otp-current>Network right now</span><span class="chev" aria-hidden="true"></span></summary>
+      <nav class="otp__list" aria-label="On this page">
+        <a class="otp__sec" href="#live">Network right now</a>
+        <a class="otp__sec" href="#numbers">BTX in numbers</a>
+        <a class="otp__sec" href="#release">New in v0.34.16</a>
+        <a class="otp__sec" href="#dev-activity">Development of the node software</a>
+      </nav>
+    </details>
+  </div>
+  <div class="layout">
+    <nav class="rail" aria-label="On this page" data-rail>
+      <p class="rail__k">On this page</p>
+      <ul class="rail__list rail__secs">
+        <li><a class="rail__sec" href="#live">Network right now</a></li>
+        <li><a class="rail__sec" href="#numbers">BTX in numbers</a></li>
+        <li><a class="rail__sec" href="#release">New in v0.34.16</a></li>
+        <li><a class="rail__sec" href="#dev-activity">Development of the node software</a></li>
+      </ul>
+    </nav>
+    <main id="main" class="content">
+
+<header class="pagehead">
+        <h1 class="h1">Network and development</h1>
+        <p class="pagehead__lead">The network&#39;s live state from the public status API, and the development of the node software as measured on GitHub.</p>
+      </header>
+      <section class="sec panel netpanel" id="live" aria-labelledby="live-title" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="en"
+               data-level-green="OK" data-level-yellow="Warning"
+               data-level-red="Critical" data-level-unknown="Unknown">
+        <div class="ci__head">
+          <h2 class="sec__title sec__title--plain" id="live-title">Network right now</h2>
+          <a class="src__a" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Full status page ↗</a>
+        </div>
+        <p class="note note--warn" role="alert" data-live="stale" hidden><span class="note__label">Note</span><span class="note__body">The data is out of date; the values may be wrong.</span></p>
+        <div class="netpanel__fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+          <h3 class="fact__t">Network upgrade ahead</h3>
+          <p>The rules change at the block below. Every node and miner needs a release that knows this change before then, or it stops following the network.</p>
+          <ul class="blist" data-live="fork-rows"></ul>
+          <a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes ↗</a>
+        </div>
+        <p class="status__state"><span class="dot" aria-hidden="true"></span><span class="sr">Status: </span><span data-live="overall" data-label-normal="All systems normal" data-label-degraded="Degraded" data-label-incident="Incident">No data</span></p>
+        <ul class="verdicts">
+          <li class="verdict c-verdict--unknown" data-verdict="stable"><span class="dot" aria-hidden="true"></span>Stable: <span data-verdict-label>Unknown</span></li>
+          <li class="verdict c-verdict--unknown" data-verdict="performant"><span class="dot" aria-hidden="true"></span>Performant: <span data-verdict-label>Unknown</span></li>
+          <li class="verdict c-verdict--unknown" data-verdict="secure"><span class="dot" aria-hidden="true"></span>Secure: <span data-verdict-label>Unknown</span></li>
+        </ul>
+        <dl class="figs figs--net">
+          <div class="fig"><dt>Block height</dt><dd class="fig__v fig__n" data-live="height">No data</dd></div>
+          <div class="fig"><dt>Latest node release</dt><dd class="fig__v fig__n" data-live="release">No data</dd></div>
+          <div class="fig"><dt>Nodes on it</dt><dd class="fig__v fig__n" data-live="on-release" data-template="{count} of {total} nodes">No data</dd></div>
+          <div class="fig"><dt>Average block time (24 h)</dt><dd class="fig__v fig__n" data-live="interval">No data</dd></div>
+          <div class="fig"><dt>Active signers</dt><dd class="fig__v fig__n" data-live="signers">No data</dd></div>
+        </dl>
+
+        <h3 class="disc__title netpanel__sub" id="numbers">BTX in numbers</h3>
+        <dl class="tiles">
+          <div class="tile"><dt>Mined so far</dt><dd class="tile__v" data-live="supply">No data</dd><dd class="tile__sub" data-live="supply-share" data-template="{pct} % of 21 million"></dd></div>
+          <div class="tile"><dt>Block reward</dt><dd class="tile__v" data-live="reward">No data</dd></div>
+          <div class="tile"><dt>Next halving</dt><dd class="tile__v" data-live="halving" data-template="{count} blocks">No data</dd><dd class="tile__sub" data-live="halving-time" data-template="about {time}"></dd></div>
+          <div class="tile"><dt>Transactions (24 h)</dt><dd class="tile__v" data-live="tx">No data</dd></div>
+          <div class="tile"><dt>Size of the chain</dt><dd class="tile__v" data-live="size">No data</dd></div>
+        </dl>
+        <p class="run__meta" data-live="updated" data-template="Data from {time}">Loading live data …</p>
+        <p class="src"><a href="https://explorer.btxbyronbay.com/observatory" rel="noopener noreferrer">Live view and node map from the Byron Bay archive node ↗</a></p>
+      </section>
+      <section class="sec" id="release" aria-labelledby="release-title">
+        <h2 class="sec__title" id="release-title">New in v0.34.16</h2>
+        <p class="badges"><span class="badge">Checked 2026-11-16</span> <span class="badge">Applies to v0.34.16</span></p>
+        <p class="prose">A full release since 15 November 2026, first published on 7 November as a pre-release. Archives for Linux x86_64, with and without CUDA 13; none for macOS or Windows. It packages the 0.35 review branches; the 0.35 line stays open.</p>
+        <div class="facts">
+          <article class="fact">
+            <h3 class="fact__t">Presigned swap claims from the wallet</h3>
+            <p>Since 0.34.13 a swap claim can be signed at funding and completed later by anyone who has the secret. htlc_presign and p2mr_leaf turn the hand-built transactions into a wallet step. The fee is fixed when you presign, and the claim must confirm before the refund height.</p>
+            <p class="src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-htlc-presign.md" rel="noopener noreferrer">Source: Presigned swap claims from the wallet ↗</a></p>
+          </article>
+          <article class="fact">
+            <h3 class="fact__t">Cross-chain swaps, off by default</h3>
+            <p>SwapNet is built into btxd and starts only with -swapnet=1. Its keys for the other chains sit in the data directory: back them up with exportswaprecovery, not by copying files. Turning it off does not cancel a funded swap; refund deadlines keep running.</p>
+            <p class="src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Source: Cross-chain swaps, off by default ↗</a></p>
+          </article>
+          <article class="fact">
+            <h3 class="fact__t">Model network with fewer open ports</h3>
+            <p>The network for AI models is on by default and listens on TCP 29447. v0.34.16 no longer opens that port with -listen=0 or a proxy, finds model peers on the local network over UDP 29448, and adds a local security guard. -modelnet=0 turns all of it off; it does not spend coins.</p>
+            <p class="src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Source: Model network with fewer open ports ↗</a></p>
+          </article>
+          <article class="fact">
+            <h3 class="fact__t">Auto-update off behind a proxy</h3>
+            <p>A node behind a proxy, or with -onlynet excluding IPv4 and IPv6, no longer checks for updates by default. Every other mainnet node still polls btx.dev and installs a newer signed release by itself unless autoupdateseamless=0.</p>
+            <p class="src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Source: Auto-update off behind a proxy ↗</a></p>
+          </article>
+          <article class="fact">
+            <h3 class="fact__t">Signing keeps your timelocks</h3>
+            <p>For a csv, cltv or refund leaf, v0.34.15 rewrote nLockTime, nSequence and version while signing. signrawtransactionwithwallet and walletprocesspsbt now refuse and name the value they need, unless adjust_timelocks is true.</p>
+            <p class="src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Source: Signing keeps your timelocks ↗</a></p>
+          </article>
+          <article class="fact">
+            <h3 class="fact__t">Clearer backup warning</h3>
+            <p>Wallet bundle backups now say that the descriptor file inside spends without the wallet passphrase, and warn for an encrypted wallet. Backups made with earlier versions hold the same file.</p>
+            <p class="src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Source: Clearer backup warning ↗</a></p>
+          </article>
+        </div>
+        <h3 class="hb__h">Before you switch</h3>
+        <ul class="blist">
+          <li>No macOS or Windows archive: a Mac node stays on v0.34.15. The CUDA archive is built for NVIDIA Blackwell (sm_120) and does not include the NVIDIA driver.</li>
+          <li>No desktop app: both archives leave out btx-qt and btx-atlas, which need a newer glibc than 2.38. Use btxd and btx-cli.</li>
+          <li>The archives were replaced several times under the same tag, last on 15 November 2026. The current ones bundle libevent, SQLite, ZeroMQ and libgomp; only libc, libstdc++ and the NVIDIA driver come from your system. Check your download against the release&#39;s SHA256SUMS.</li>
+          <li>Unpack the whole archive and run bin/btxd from it. A bin/btxd copied on its own exits.</li>
+          <li>A sync from genesis still stops at block 126,978 (#272). Start from a snapshot.</li>
+        </ul>
+        <p class="src"><a href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer">Release notes v0.34.16 ↗</a></p>
+      </section>
+      <div id="dev-activity"></div>
+      <section class="sec panel netpanel" aria-labelledby="dev-title" id="development" hidden
+        data-api="https://network.btx-monitoring.com/api/v1/development.json" data-repo="btxchain/btx" data-lang="en"
+        data-default="default branch" data-today="today"
+        data-day="1 day ago" data-days="{count} days ago">
+        <div class="ci__head">
+          <h2 class="sec__title sec__title--plain" id="dev-title">Development of the node software</h2>
+          <a class="src__a" href="https://github.com/btxchain/btx" rel="noopener noreferrer">btxchain/btx on GitHub ↗</a>
+        </div>
+        <p class="prose">Commits and pull requests in btxchain/btx, the reference implementation of the BTX node. GitHub opens the repository on main, the default branch; the other rows are the branches with the most recent commits. main holds the last full release; current work happens on the release and review branches.</p>
+        <p class="note note--warn" role="alert" data-dev="stale" hidden><span class="note__label">Note</span><span class="note__body">This measurement is more than three hours old; the figures may be out of date.</span></p>
+        <div class="branches" role="table" aria-labelledby="dev-title">
+          <div class="c-branch c-branch--head" role="row">
+            <span role="columnheader">Branch</span>
+            <span role="columnheader">Last commit</span>
+            <span role="columnheader">Commits, 30 days</span>
+          </div>
+          <div role="rowgroup" data-dev="branches"></div>
+        </div>
+        <p class="footnote">Commits are counted per branch by commit date, at most 100 per branch (shown as 100+). A commit that is on several branches counts on each of them.</p>
+        <dl class="tiles">
+          <div class="tile"><dt>Pull requests updated, 7 days</dt><dd class="tile__v" data-dev="pulls">No data</dd></div>
+          <div class="tile"><dt>Latest release</dt><dd class="tile__v" data-dev="release">No data</dd><dd class="tile__sub" data-dev="release-date"></dd></div>
+          <div class="tile" data-dev="prerelease-tile" hidden><dt>Newer pre-release</dt><dd class="tile__v" data-dev="prerelease">No data</dd><dd class="tile__sub" data-dev="prerelease-date"></dd></div>
+        </dl>
+        <p class="run__meta" data-dev="measured" data-template="Measured on GitHub at {time}, every hour."></p>
+      </section>
+
+
+      <nav class="sec onward" aria-labelledby="onward-title">
+        <h2 class="sec__title" id="onward-title">Where next</h2>
+        <ul class="onward__list">
+          <li><a class="row-link" href="/new/design03/infra/"><span class="row-link__t">Run a node or other infrastructure</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+          <li><a class="row-link" href="/new/design03/dev/work/"><span class="row-link__t">Ongoing work of the developers</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+          <li><a class="row-link" href="/new/design03/learn/"><span class="row-link__t">What BTX is</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+        </ul>
+      </nav>
+
+    </main>
+  </div>
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <nav class="foot__nav" aria-label="Pages, again">
+        <a href="/new/design03/">Start</a>
+        <a href="/new/design03/learn/">About BTX</a>
+        <a href="/new/design03/network/">Network</a>
+        <a href="/new/design03/links/">Directory</a>
+        <a href="/new/design03/infra/">Run infra</a>
+        <a href="/new/design03/dev/">Developers</a>
+      </nav>
+      <p class="foot__text">Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+      <p class="draft-arrows">→ goes to a page of this site · ↗ opens another site</p>
+      <p class="foot__text">Direction A from Jpp&#39;s design audit (19 Nov 2026). Layout draft for feedback; the live site at <a href="https://btx-community.com/network/">btx-community.com ↗</a> is the official one. English only.</p>
+      <p class="foot__text"><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a> · <span class="muted">3a9d1c47e44b</span></p>
+    </div>
+  </footer>
+</body>
+</html>

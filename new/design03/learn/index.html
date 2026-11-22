@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" class="d03-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://btx-community.com/learn/">
+  <title>[Draft] About BTX · Design 03 · Reader&#39;s Guide</title>
+  <meta name="description" content="What BTX is, each fact with a source you can open, and what the newest node release brings.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[Draft] About BTX – Design draft, not the official layout">
+  <meta property="og:description" content="Direction A from Jpp&#39;s design audit (19 Nov 2026): a light, editorial handbook with a serif display face, one cobalt accent, numbered chapters and a contents rail on long pages, plus the eight ideas from directions B and C his panel recommended.">
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/new/design03.css?v=ee5a5c1ab387">
+  <link rel="preload" href="/static/fonts/new/InstrumentSerif-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+  <script src="/static/js/new/design03.js?v=e68be2105d19" defer></script>
+</head>
+<body class="d03">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="draft-banner" role="note">
+    <p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind.
+      <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a>
+      <a class="draft-banner__link" href="/new/">All drafts →</a>
+      <a class="draft-banner__link" href="https://btx-community.com/learn/">This page on the live site ↗</a>
+    </p>
+  </div>
+  <header class="top">
+    <div class="top__in">
+      <a class="logo" href="/new/design03/">BTX Community</a>
+      <nav class="nav" aria-label="Pages">
+        <a class="nav__link" href="/new/design03/">Start</a>
+        <a class="nav__link" href="/new/design03/learn/" aria-current="page">About BTX</a>
+        <a class="nav__link" href="/new/design03/network/">Network</a>
+        <a class="nav__link" href="/new/design03/links/">Directory</a>
+        <a class="nav__link" href="/new/design03/infra/">Run infra</a>
+        <a class="nav__link" href="/new/design03/dev/">Developers</a>
+      </nav>
+      <button class="theme" type="button" data-theme-switch data-to-light="Switch to light theme" data-to-dark="Switch to dark theme" aria-label="Switch to dark theme" hidden><span class="theme__icon" aria-hidden="true"></span></button>
+      <details class="menu">
+        <summary class="menu__btn">Menu</summary>
+        <div class="sheet">
+          <nav aria-label="Pages">
+            <ul class="sheet__list">
+              <li><a class="sheet__link" href="/new/design03/">Start</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/learn/" aria-current="page">About BTX</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/network/">Network</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/links/">Directory</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/links/">Links</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/projects/">Projects</a></li>
+                </ul>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/infra/">Run infra</a>
+              </li>
+              <li><a class="sheet__link" href="/new/design03/dev/">Developers</a>
+                <ul class="sheet__sub">
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/dev/">Start here</a></li>
+                  <li><a class="sheet__link sheet__link--sub" href="/new/design03/dev/work/">Ongoing work</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          <p class="sheet__label">This draft is in English only.</p>
+        </div>
+      </details>
+    </div>
+  </header>
+  <main id="main">
+    <div class="wrap">
+
+<header class="pagehead">
+        <h1 class="h1">About BTX</h1>
+        <p class="pagehead__lead">What BTX is, and what the next release brings.</p>
+      </header>
+      <section class="sec" id="about" aria-labelledby="about-title">
+        <h2 class="sec__title" id="about-title">What is BTX?</h2>
+        <div class="facts facts--4">
+          <article class="fact fact--read" id="fact-supply">
+            <p class="chapter__num" aria-hidden="true">01</p>
+            <h3 class="fact__t">Fixed supply</h3>
+            <p>At most 21 million BTX, as with Bitcoin. A block comes about every 90 seconds; its reward of 20 BTX halves every 525,000 blocks, roughly every 18 months.</p>
+            <p class="src"><a href="https://github.com/btxchain/btx/blob/main/src/kernel/chainparams.cpp" rel="noopener noreferrer">Source: Fixed supply ↗</a></p>
+          </article>
+          <article class="fact fact--read" id="fact-matmul">
+            <p class="chapter__num" aria-hidden="true">02</p>
+            <h3 class="fact__t">Mining by matrix multiplication</h3>
+            <p>Instead of hashing, miners multiply large matrices, the work AI accelerators are built for. Since block 185,000 a node that checks blocks itself replays each one exactly on a qualified NVIDIA (CUDA) or Apple (Metal) GPU; nodes without one follow signed checks from others. There is no CPU mining.</p>
+            <p class="src"><a href="https://github.com/btxchain/btx/blob/main/doc/btx-gpu-verified-network-transition.md" rel="noopener noreferrer">Source: Mining by matrix multiplication ↗</a></p>
+          </article>
+          <article class="fact fact--read" id="fact-post-quantum">
+            <p class="chapter__num" aria-hidden="true">03</p>
+            <h3 class="fact__t">Post-quantum signatures</h3>
+            <p>Coins are locked with signatures meant to withstand quantum computers: ML-DSA-44 (NIST FIPS 204) for everyday spending, SLH-DSA (FIPS 205) as a hash-based fallback. These P2MR addresses start with btx1z.</p>
+            <p class="src"><a href="https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md" rel="noopener noreferrer">Source: Post-quantum signatures ↗</a></p>
+          </article>
+          <article class="fact fact--read" id="fact-bitcoin-core">
+            <p class="chapter__num" aria-hidden="true">04</p>
+            <h3 class="fact__t">Built on Bitcoin Knots</h3>
+            <p>The node derives from Bitcoin Knots v29.2, a variant of Bitcoin Core. btxd, btx-cli, the RPC interface and PSBTs work the way Bitcoin users know them; what differs is the proof-of-work, the signatures and some network rules.</p>
+            <p class="src"><a href="https://github.com/btxchain/btx" rel="noopener noreferrer">Source: Built on Bitcoin Knots ↗</a></p>
+          </article>
+        </div>
+        <p class="note"><span class="note__label">Note</span><span class="note__body">What is new in v0.34.16 is on the Network page. <a href="/new/design03/network/#release">New in v0.34.16 →</a></span></p>
+      </section>
+      <section class="sec" id="documents" aria-labelledby="documents-title">
+        <h2 class="sec__title" id="documents-title">Roadmap and papers</h2>
+        <p class="prose">What this community has written down. Every one of them lives in the repository, so each change is visible as a commit and anyone can correct a figure.</p>
+        <ul class="doclist">
+          <li class="doclist__item" id="doc-roadmap">
+            <a class="doclist__link" href="https://github.com/BTX-Community/btx-community/blob/main/ROADMAP.md" rel="noopener noreferrer">
+              <span class="doclist__title">Roadmap <span aria-hidden="true">↗</span></span>
+              <span class="doclist__text">What the community can do by itself and what depends on the core team, in two columns, with a place to put your name against a lane.</span><span class="doclist__status">Open for edits</span>
+            </a>
+          </li>
+          <li class="doclist__item" id="doc-deployment-reward">
+            <a class="doclist__link" href="https://github.com/BTX-Community/btx-community/blob/main/research/deployment-reward.md" rel="noopener noreferrer">
+              <span class="doclist__title">The bootstrap window and the 1,000,000 BTX deployment reward <span aria-hidden="true">↗</span></span>
+              <span class="doclist__text">The first question most newcomers ask, answered from chain data: what the first 50,000 blocks produced, under which consensus rules, and what public data can and cannot show.</span><span class="doclist__status">Draft - under review</span>
+            </a>
+          </li>
+          <li class="doclist__item" id="doc-network-fund">
+            <a class="doclist__link" href="https://github.com/BTX-Community/btx-community/blob/main/research/network-fund.md" rel="noopener noreferrer">
+              <span class="doclist__title">Network fund <span aria-hidden="true">↗</span></span>
+              <span class="doclist__text">How the network could pay for its own infrastructure: contributions, multisig custody, published rules and payouts against verified uptime.</span><span class="doclist__status">Discussion paper</span>
+            </a>
+          </li>
+          <li class="doclist__item" id="doc-venue-structure">
+            <a class="doclist__link" href="https://github.com/BTX-Community/btx-community/blob/main/research/venue-structure.md" rel="noopener noreferrer">
+              <span class="doclist__title">Venue structure and the licensing boundary <span aria-hidden="true">↗</span></span>
+              <span class="doclist__text">What a decentralised exchange can be on a chain without a virtual machine, where the regulatory line runs, and the models that remain open. Not legal advice.</span><span class="doclist__status">Draft for discussion</span>
+            </a>
+          </li>
+          <li class="doclist__item" id="doc-contributing">
+            <a class="doclist__link" href="https://github.com/BTX-Community/btx-community/blob/main/CONTRIBUTING.md" rel="noopener noreferrer">
+              <span class="doclist__title">How to change something here <span aria-hidden="true">↗</span></span>
+              <span class="doclist__text">What you can edit freely, what needs a second pair of eyes, and how to report a wrong figure if git is not your thing.</span>
+            </a>
+          </li>
+          <li class="doclist__item" id="doc-review-programme">
+            <a class="doclist__link" href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/MASTER-PLAN.md" rel="noopener noreferrer">
+              <span class="doclist__title">Review and test programme - one pull request per bug class <span aria-hidden="true">↗</span></span>
+              <span class="doclist__text">Test coverage measured on swapnet-v2 at a5d1637f (now part of the release line), the recurring bug classes behind 317 fix pull requests since August, one sweep per class that closes it with a rule, and checks before a final release. A proposal by contributors; the maintainer decides what lands.</span><span class="doclist__status">Measured 12 November 2026 at commit c6f9678d; coverage 14 November at a5d1637f</span>
+            </a>
+          </li>
+        </ul>
+        <p class="src"><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">All of it, including the source of this page ↗</a></p>
+      </section>
+
+
+      <nav class="sec onward" aria-labelledby="onward-title">
+        <h2 class="sec__title" id="onward-title">Where next</h2>
+        <ul class="onward__list">
+          <li><a class="row-link" href="/new/design03/#before-buying"><span class="row-link__t">Before you buy or receive BTX</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+          <li><a class="row-link" href="/new/design03/links/#cat-wallets"><span class="row-link__t">Choose a wallet</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+          <li><a class="row-link" href="/new/design03/network/"><span class="row-link__t">How the network is doing</span><span class="row-link__a" aria-hidden="true">→</span></a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </main>
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <nav class="foot__nav" aria-label="Pages, again">
+        <a href="/new/design03/">Start</a>
+        <a href="/new/design03/learn/">About BTX</a>
+        <a href="/new/design03/network/">Network</a>
+        <a href="/new/design03/links/">Directory</a>
+        <a href="/new/design03/infra/">Run infra</a>
+        <a href="/new/design03/dev/">Developers</a>
+      </nav>
+      <p class="foot__text">Independent community project. Links lead to third parties; we are not responsible for their content. Nothing here is financial advice.</p>
+      <p class="draft-arrows">→ goes to a page of this site · ↗ opens another site</p>
+      <p class="foot__text">Direction A from Jpp&#39;s design audit (19 Nov 2026). Layout draft for feedback; the live site at <a href="https://btx-community.com/learn/">btx-community.com ↗</a> is the official one. English only.</p>
+      <p class="foot__text"><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code ↗</a> · <span class="muted">3a9d1c47e44b</span></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/new/design05/assets/fonts.css">
+  <link rel="stylesheet" href="/new/design05/assets/draft-banner.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0A0A0A">
+  <title>[Draft] Learn · BTX Community</title>
+  <meta name="description" content="What BTX is, each fact with a source you can open, and what the newest node release brings.">
+  <link rel="canonical" href="https://btx-community.com/learn/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://btx-community.com/learn/">
+  <meta property="og:title" content="[Draft] Learn · BTX Community">
+  <meta property="og:description" content="What BTX is, each fact with a source you can open, and what the newest node release brings.">
+  <link rel="alternate" hreflang="en" href="https://btx-community.com/learn/">
+  <link rel="alternate" hreflang="de" href="https://btx-community.com/de/learn/">
+  <link rel="alternate" hreflang="es" href="https://btx-community.com/es/learn/">
+  <link rel="alternate" hreflang="fr" href="https://btx-community.com/fr/learn/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://btx-community.com/zh/learn/">
+  <link rel="icon" href="/new/design05/assets/favicon-btxdev.svg" type="image/svg+xml">
+  <script src="/new/design05/assets/draft-inline.js"></script>
+  <link rel="stylesheet" href="/new/design05/assets/site.css">
+  <link rel="stylesheet" href="/new/design05/assets/pages/learn.css">
+  <link rel="stylesheet" href="/new/design05/assets/theme-btxdev.css">
+  <script src="/new/design05/assets/site.js" defer></script>
+  <script src="/new/design05/assets/matrix-bg.js" defer></script>
+  <link rel="stylesheet" href="/new/design05/assets/draft-js.css">
+</head>
+<body>
+  <div class="draft-banner" role="note"><p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind. <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a> <a class="draft-banner__link" href="/new/">All drafts →</a> <a class="draft-banner__link" href="https://btx-community.com/learn/">This page on the live site ↗</a></p></div>
+<!-- HEADER:START -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__brand" href="/new/design05/"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>BTX <span class="hdr__brand-sub">Community</span></span></a>
+    <a class="pill pill--unknown" href="/new/design05/network/" data-status-pill><span class="sr-only">Network </span><span class="pill__shape" aria-hidden="true">○</span><span class="pill__word">Status</span></a>
+    <button class="hdr__btn hdr__menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu">Menu</button>
+    <div class="hdr__panel" id="site-menu">
+      <nav aria-label="Main">
+        <ul class="hdr__nav">
+          <li><a class="l-s" href="/new/design05/">Start</a></li>
+          <li><a class="l-s" href="/new/design05/learn/" aria-current="page">Learn</a></li>
+          <li><a class="l-board" href="/new/design05/network/">Network</a></li>
+          <li><a class="l-s" href="/new/design05/links/">Links</a></li>
+          <li><a class="l-n" href="/new/design05/infra/">Run a node</a></li>
+          <li><a class="l-b" href="/new/design05/projects/">Projects</a></li>
+          <li><a class="l-b" href="/new/design05/dev/">Developers</a></li>
+        </ul>
+      </nav>
+      <div class="hdr__tools">
+        <details class="lang">
+          <summary class="hdr__btn"><span class="sr-only">Language: </span>EN <span class="caret" aria-hidden="true"></span></summary>
+          <div class="lang__list">
+            <ul>
+              <li><a href="/new/design05/learn/" hreflang="en" lang="en" aria-current="true"><span class="lang__code">EN</span> English</a></li>
+              <li><a href="https://btx-community.com/de/learn/" hreflang="de" lang="de"><span class="lang__code">DE</span> Deutsch</a></li>
+              <li><a href="https://btx-community.com/es/learn/" hreflang="es" lang="es"><span class="lang__code">ES</span> Español</a></li>
+              <li><a href="https://btx-community.com/fr/learn/" hreflang="fr" lang="fr"><span class="lang__code">FR</span> Français</a></li>
+              <li><a href="https://btx-community.com/zh/learn/" hreflang="zh-Hans" lang="zh-Hans"><span class="lang__code">ZH</span> 中文</a></li>
+            </ul>
+            <p class="lang__note">Other languages use the previous design.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- HEADER:END -->
+
+<main id="main">
+
+  <header class="station station--s">
+    <div class="wrap station__in">
+      <nav class="crumbs" aria-label="Breadcrumb" data-copy-skip><a href="/new/design05/">BTX Community</a> <span aria-hidden="true">/</span> <span aria-current="page">Learn</span></nav>
+      <div class="station__badges" data-copy-skip>
+        <span class="badge badge--s" role="img" aria-label="Start here line">S</span>
+      </div>
+      <h1>Learn about BTX</h1>
+      <p class="lede">What BTX is, each fact with a source you can open, and what the newest node release brings.</p>
+      <div class="station__aside" data-copy-ai-only data-copy-skip>
+        <button class="btn btn--line" type="button" data-copy-ai aria-describedby="copy-promise">Copy for your AI</button>
+        <p class="station__promise" id="copy-promise">Copies this page's text only. Never paste your seed phrase or private keys into any AI tool.</p>
+      </div>
+      <ul class="chips" aria-label="On this page" data-copy-skip>
+        <li><a class="chip" href="#about">What is BTX? <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#next">New in v0.34.16 <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#before-switching">Before you switch <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#onward">Where next <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#words">Glossary <span class="arr" aria-hidden="true">→</span></a></li>
+      </ul>
+    </div>
+    <span class="station__stripe" aria-hidden="true"></span>
+  </header>
+
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <div class="sheet">
+        <div class="section__head">
+          <p class="label eyebrow">The basics</p>
+          <h2 id="about-title">What is BTX?</h2>
+          <p class="lede">BTX is its own coin, built from Bitcoin's code. These four facts cover its supply, mining, signatures and code, each with a source you can check.</p>
+        </div>
+        <div class="lcards facts">
+          <article class="lcard lcard--s" id="fact-supply" aria-labelledby="fact-supply-title">
+            <div class="lcard__top">
+              <p class="label">01 · Supply</p>
+              <a class="lcard__line" href="/new/design05/#newcomers"><span class="badge badge--sm badge--s" aria-hidden="true">S</span>Start here</a>
+            </div>
+            <h3 class="lcard__title" id="fact-supply-title">Fixed supply</h3>
+            <div class="fact__body">
+              <p>There will never be more than 21 million BTX, the same limit as Bitcoin.</p>
+              <p>A new <span class="term" data-term="block">block</span> comes about every 90 seconds. Each block pays a reward of 20 BTX, and that reward <span class="term" data-term="halving">halves</span> every 525,000 blocks, roughly every 18 months.</p>
+            </div>
+            <p class="fact__src"><span class="label">Source</span> <a href="https://github.com/btxchain/btx/blob/main/src/kernel/chainparams.cpp" rel="noopener noreferrer">BTX code: chain parameters&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">, for the supply and block reward (opens another site)</span></a></p>
+          </article>
+
+          <article class="lcard lcard--m" id="fact-matmul" aria-labelledby="fact-matmul-title">
+            <div class="lcard__top">
+              <p class="label">02 · Mining</p>
+              <a class="lcard__line" href="/new/design05/#miners"><span class="badge badge--sm badge--m" aria-hidden="true">M</span>Mine BTX</a>
+            </div>
+            <h3 class="lcard__title" id="fact-matmul-title">Mining by matrix multiplication</h3>
+            <div class="fact__body">
+              <p>Bitcoin miners compete by hashing. BTX miners multiply large grids of numbers (matrices) instead, the work that AI accelerators are built for. This is called <span class="term" data-term="matmul">MatMul</span>.</p>
+              <p>You need a <span class="term" data-term="gpu">GPU</span>. There is no CPU mining.</p>
+              <details class="more fact__more">
+                <summary><span>More detail<span class="sr-only"> on how nodes check mining work</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <div class="more__body"><p>Since block 185,000, a node that checks blocks itself replays each one exactly on a qualified NVIDIA (<span class="term" data-term="cuda">CUDA</span>) or Apple (Metal) GPU. Nodes without one follow signed checks from others (<span class="term" data-term="signer">signers</span>).</p></div>
+              </details>
+            </div>
+            <p class="fact__src"><span class="label">Source</span> <a href="https://github.com/btxchain/btx/blob/main/doc/btx-gpu-verified-network-transition.md" rel="noopener noreferrer">GPU-verified network transition&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+          </article>
+
+          <article class="lcard lcard--s" id="fact-post-quantum" aria-labelledby="fact-post-quantum-title">
+            <div class="lcard__top">
+              <p class="label">03 · Signatures</p>
+              <a class="lcard__line" href="/new/design05/#newcomers"><span class="badge badge--sm badge--s" aria-hidden="true">S</span>Start here</a>
+            </div>
+            <h3 class="lcard__title" id="fact-post-quantum-title">Post-quantum signatures</h3>
+            <div class="fact__body">
+              <p>Coins are locked with signatures meant to withstand future quantum computers. That is what <span class="term" data-term="post-quantum">post-quantum</span> means.</p>
+              <p>BTX addresses that use these signatures start with <span class="term" data-term="btx1z">btx1z</span>.</p>
+              <details class="more fact__more">
+                <summary><span>More detail<span class="sr-only"> on the signature schemes</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <div class="more__body"><p><span class="term" data-term="ml-dsa">ML-DSA-44</span> (NIST FIPS 204) is used for everyday spending. SLH-DSA (FIPS 205) is a hash-based fallback. The address type is called P2MR.</p></div>
+              </details>
+            </div>
+            <p class="fact__src"><span class="label">Source</span> <a href="https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md" rel="noopener noreferrer">BTX post-quantum spec&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+          </article>
+
+          <article class="lcard lcard--b" id="fact-bitcoin-core" aria-labelledby="fact-bitcoin-core-title">
+            <div class="lcard__top">
+              <p class="label">04 · Code</p>
+              <a class="lcard__line" href="/new/design05/#developers"><span class="badge badge--sm badge--b" aria-hidden="true">B</span>Build</a>
+            </div>
+            <h3 class="lcard__title" id="fact-bitcoin-core-title">Built on Bitcoin Knots</h3>
+            <div class="fact__body">
+              <p>The <span class="term" data-term="node">node</span> software derives from Bitcoin Knots v29.2, a variant of Bitcoin Core. Its tools work the way Bitcoin users know them.</p>
+              <p>What differs is the <span class="term" data-term="proof-of-work">proof of work</span>, the signatures and some network rules.</p>
+              <details class="more fact__more">
+                <summary><span>More detail<span class="sr-only"> on the familiar tools</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <div class="more__body"><p>The node program <span class="term" data-term="btxd">btxd</span>, the command-line tool <span class="term" data-term="btx-cli">btx-cli</span>, the RPC interface and <span class="term" data-term="psbt">PSBTs</span> work as they do in Bitcoin.</p></div>
+              </details>
+            </div>
+            <p class="fact__src"><span class="label">Source</span> <a href="https://github.com/btxchain/btx" rel="noopener noreferrer">BTX code on GitHub&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="next" aria-labelledby="next-title">
+    <div class="wrap">
+      <div class="sheet">
+        <span class="sec-rule sec-rule--s" aria-hidden="true"></span>
+        <div class="section__head">
+          <p class="label eyebrow">Node software</p>
+          <h2 id="next-title">New in <span class="nocase">v0.34.16</span></h2>
+          <p class="lede">For people who run the node software (btxd). What changed in the newest release, each with a link to its release note.</p>
+        </div>
+        <dl class="relfacts">
+          <div class="relfacts__item">
+            <dt class="label">Status</dt>
+            <dd>A full release since 15 November 2026. First published on 7 November as a <span class="nowrap">pre-release</span>.</dd>
+          </div>
+          <div class="relfacts__item">
+            <dt class="label">Downloads</dt>
+            <dd>Linux x86_64, with and without <span class="nowrap">CUDA 13</span>. None for macOS or Windows.</dd>
+          </div>
+          <div class="relfacts__item">
+            <dt class="label">What it packages</dt>
+            <dd>The 0.35 review branches. The 0.35 line stays open.</dd>
+          </div>
+        </dl>
+
+        <ol class="changes" role="list" aria-label="Changes in this release">
+          <li class="change">
+            <p class="label change__tag">Swaps</p>
+            <h3 class="change__title">Presigned swap claims from the wallet</h3>
+            <p class="change__text">Since 0.34.13, the claim side of a swap (an <span class="term" data-term="htlc">HTLC</span>) can be signed when the swap is funded and finished later by anyone who has the secret. The wallet now has a step for this, so you no longer build the transactions by hand.</p>
+            <details class="more change__more">
+              <summary><span>More detail<span class="sr-only"> on presigned swap claims</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+              <div class="more__body"><p><code>htlc_presign</code> and <code>p2mr_leaf</code> turn the hand-built transactions into a wallet step.</p></div>
+            </details>
+            <div class="change__good">
+              <p class="label">Good to know</p>
+              <p class="change__note">The fee is fixed when you presign. The claim must confirm before the refund height.</p>
+            </div>
+            <p class="change__src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-htlc-presign.md" rel="noopener noreferrer">Release note: presigned swap claims&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+          </li>
+          <li class="change">
+            <p class="label change__tag">Swaps</p>
+            <h3 class="change__title">Cross-chain swaps, off by default</h3>
+            <p class="change__text"><span class="term" data-term="swapnet">SwapNet</span>, for swaps between BTX and other coins, is built into btxd. It stays off unless you turn it on.</p>
+            <details class="more change__more">
+              <summary><span>More detail<span class="sr-only"> on cross-chain swaps</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+              <div class="more__body"><p>It starts only with <code>-swapnet=1</code>.</p></div>
+            </details>
+            <div class="callout callout--warn change__callout">
+              <span class="callout__label">Check</span>
+              <p>Its keys for the other chains sit in the data directory. Back them up with <code>exportswaprecovery</code>, not by copying files. Turning SwapNet off does not cancel a funded swap: refund deadlines keep running.</p>
+            </div>
+            <p class="change__src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Release notes <span class="nocase">v0.34.16</span>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">, for cross-chain swaps (opens another site)</span></a></p>
+          </li>
+          <li class="change">
+            <p class="label change__tag">Model network</p>
+            <h3 class="change__title">Model network with fewer open ports</h3>
+            <p class="change__text">The network for AI models is on by default. In v0.34.16 it opens fewer ports and adds a local security guard.</p>
+            <details class="more change__more">
+              <summary><span>More detail<span class="sr-only"> on the model network ports</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+              <div class="more__body"><p>It listens on TCP 29447. v0.34.16 no longer opens that port with <code>-listen=0</code> or a proxy. It finds model peers on the local network over UDP 29448.</p></div>
+            </details>
+            <div class="change__good">
+              <p class="label">Good to know</p>
+              <p class="change__note"><code>-modelnet=0</code> turns all of it off. The model network does not spend coins.</p>
+            </div>
+            <p class="change__src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Release notes <span class="nocase">v0.34.16</span>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">, for the model network (opens another site)</span></a></p>
+          </li>
+          <li class="change">
+            <p class="label change__tag">Updates</p>
+            <h3 class="change__title">Auto-update off behind a proxy</h3>
+            <p class="change__text">A node behind a proxy no longer checks for updates by default.</p>
+            <details class="more change__more">
+              <summary><span>More detail<span class="sr-only"> on auto-update</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+              <div class="more__body"><p>The same goes for a node whose <code>-onlynet</code> setting excludes IPv4 and IPv6.</p></div>
+            </details>
+            <div class="change__good">
+              <p class="label">Good to know</p>
+              <p class="change__note">Every other <span class="term" data-term="mainnet">mainnet</span> node still polls btx.dev and installs a newer signed release by itself, unless you set <code>autoupdateseamless=0</code>.</p>
+            </div>
+            <p class="change__src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Release notes <span class="nocase">v0.34.16</span>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">, for auto-update (opens another site)</span></a></p>
+          </li>
+          <li class="change">
+            <p class="label change__tag">Signing</p>
+            <h3 class="change__title">Signing keeps your timelocks</h3>
+            <p class="change__text">When the wallet signs a transaction with a time lock, it no longer changes the lock values itself. It stops and names the value it needs.</p>
+            <details class="more change__more">
+              <summary><span>More detail<span class="sr-only"> on signing and timelocks</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+              <div class="more__body"><p>For a csv, cltv or refund leaf, v0.34.15 rewrote nLockTime, nSequence and version while signing. <code class="code-long">signrawtransactionwithwallet</code> and <code>walletprocesspsbt</code> now refuse instead.</p></div>
+            </details>
+            <div class="change__good">
+              <p class="label">Good to know</p>
+              <p class="change__note">The wallet still adjusts them if you set <code>adjust_timelocks</code> to true.</p>
+            </div>
+            <p class="change__src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Release notes <span class="nocase">v0.34.16</span>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">, for signing and timelocks (opens another site)</span></a></p>
+          </li>
+          <li class="change">
+            <p class="label change__tag">Backups</p>
+            <h3 class="change__title">Clearer backup warning</h3>
+            <p class="change__text">Wallet backups now warn you that they hold a file that can spend your coins without the wallet passphrase.</p>
+            <details class="more change__more">
+              <summary><span>More detail<span class="sr-only"> on the backup warning</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+              <div class="more__body"><p>The file is the descriptor file inside a wallet bundle backup. The backup also warns when the wallet is encrypted.</p></div>
+            </details>
+            <div class="callout callout--warn change__callout">
+              <span class="callout__label">Check</span>
+              <p>Backups made with earlier versions hold the same file.</p>
+            </div>
+            <p class="change__src"><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Release notes <span class="nocase">v0.34.16</span>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">, for the backup warning (opens another site)</span></a></p>
+          </li>
+        </ol>
+        <p class="meta relfacts__stamp">Read from the release notes on 2026-11-16. <a href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer">Release <span class="nocase">v0.34.16</span> on GitHub&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a> <span class="sep" aria-hidden="true"></span> <a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">All releases and release notes&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="switch" aria-labelledby="switch-title">
+    <div class="wrap">
+      <span class="sec-rule sec-rule--rose" aria-hidden="true"></span>
+      <details class="sign sign--warn sign--fold" id="before-switching">
+        <summary class="sign__head">
+          <svg class="sign__icon" viewBox="0 0 36 32" aria-hidden="true" focusable="false"><path d="M18 1.5 35 30.5H1z"/><path d="M16.2 11h3.6l-.7 10.5h-2.2zM18 23.3a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2z"/></svg>
+          <span class="sign__titles">
+            <span class="label">Check first</span>
+            <h2 id="switch-title">Before you switch to <span class="nocase">v0.34.16</span></h2>
+          </span>
+          <span class="sign__count" data-checklist-summary="before-switching">6 checks</span>
+          <span class="pm pm--sign" aria-hidden="true"></span>
+        </summary>
+        <div class="sign__body">
+          <ol role="list" class="checklist checklist--2col" data-checklist-id="before-switching">
+            <li><label><input type="checkbox" id="bs-system"><span><strong>Check that there is an archive for your system.</strong> v0.34.16 comes for Linux x86_64 only, with no macOS or Windows archive. A Mac node stays on v0.34.15.</span></label></li>
+            <li><label><input type="checkbox" id="bs-cuda"><span><strong>Check your GPU before you pick the CUDA archive.</strong> It is built for NVIDIA Blackwell (<code>sm_120</code>) and does not include the NVIDIA driver.</span></label></li>
+            <li><label><input type="checkbox" id="bs-app"><span><strong>Plan to use <code>btxd</code> and <code>btx-cli</code>.</strong> There is no desktop app: both archives leave out <code>btx-qt</code> and <code>btx-atlas</code>, which need a newer glibc than 2.38.</span></label></li>
+            <li><label><input type="checkbox" id="bs-sums"><span><strong>Check your download against the release's <code>SHA256SUMS</code>.</strong> The archives were replaced several times under the same tag, last on 15 November 2026. The current ones bundle libevent, SQLite, ZeroMQ and libgomp; only libc, libstdc++ and the NVIDIA driver come from your system.</span></label></li>
+            <li><label><input type="checkbox" id="bs-unpack"><span><strong>Unpack the whole archive and run <code>bin/btxd</code> from it.</strong> A <code>bin/btxd</code> copied on its own exits.</span></label></li>
+            <li><label><input type="checkbox" id="bs-snapshot"><span><strong>Start from a snapshot.</strong> A sync from genesis still stops at block 126,978 (issue #272).</span></label></li>
+          </ol>
+          <div class="sign__terms"><span class="label" id="switch-terms-label">Terms in this list</span>
+            <ul class="cluster sign__terms-list" aria-labelledby="switch-terms-label">
+              <li><span class="term" data-term="gpu">GPU</span></li>
+              <li><span class="term" data-term="btxd">btxd</span></li>
+              <li><span class="term" data-term="btx-cli">btx-cli</span></li>
+              <li><span class="term" data-term="checksum">SHA256SUMS</span></li>
+              <li><span class="term" data-term="snapshot">snapshot</span></li>
+              <li><span class="term" data-term="genesis">genesis</span></li>
+            </ul>
+          </div>
+          <p class="meta sign__stamp">Read from the release notes on 2026-11-16. <a href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer">Release <span class="nocase">v0.34.16</span> on GitHub&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+        </div>
+        <div class="checklist__bar" data-checklist-bar="before-switching" hidden>
+          <p class="checklist__count" data-checklist-count="before-switching" aria-live="polite">0 of 6 checked</p>
+          <button class="btn btn--quiet" type="button" data-checklist-clear="before-switching">Clear ticks</button>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <nav class="section" id="onward" aria-labelledby="onward-title">
+    <div class="wrap">
+      <div class="sheet">
+        <span class="sec-rule sec-rule--s" aria-hidden="true"></span>
+        <div class="section__head">
+          <p class="label eyebrow">On this site</p>
+          <h2 id="onward-title">Where next</h2>
+          <p class="lede">Go on to the safety checks, a wallet or the live network.</p>
+        </div>
+        <ul class="rows">
+          <li><a class="row" href="/new/design05/#before-buying"><span class="row__name">Before you buy or receive BTX</span> <span class="row__desc">The checks to go through before money arrives.</span> <span class="row__arr" aria-hidden="true">→</span></a></li>
+          <li><a class="row" href="/new/design05/links/#cat-wallets"><span class="row__name">Choose a wallet</span> <span class="row__desc">Wallets that hold BTX, on the links page.</span> <span class="row__arr" aria-hidden="true">→</span></a></li>
+          <li><a class="row" href="/new/design05/network/"><span class="row__name">How the network is doing</span> <span class="row__desc">The network's live status.</span> <span class="row__arr" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section" id="words" aria-labelledby="words-title">
+    <div class="wrap">
+      <div class="sheet">
+        <span class="sec-rule sec-rule--s" aria-hidden="true"></span>
+        <div class="section__head">
+          <p class="label eyebrow">Glossary</p>
+          <h2 id="words-title">Words you will meet</h2>
+          <p class="lede">Plain explanations of the terms used on this site, from A to Z. A word with a dotted underline on any page opens the same text.</p>
+        </div>
+        <nav class="words__az" aria-label="Glossary letters" data-copy-skip>
+          <ul role="list"><li><a href="#word-address">A</a></li><li><a href="#word-block">B</a></li><li><a href="#word-checksum">C</a></li><li><a href="#word-done-bar">D</a></li><li><a href="#word-exchange">E</a></li><li><a href="#word-fork">F</a></li><li><a href="#word-genesis">G</a></li><li><a href="#word-halving">H</a></li><li><a href="#word-lane">L</a></li><li><a href="#word-mainnet">M</a></li><li><a href="#word-node">N</a></li><li><a href="#word-otc">O</a></li><li><a href="#word-post-quantum">P</a></li><li><a href="#word-regtest">R</a></li><li><a href="#word-second-pass">S</a></li><li><a href="#word-test-coverage">T</a></li><li><a href="#word-wallet">W</a></li></ul>
+        </nav>
+        <dl class="words">
+          <div class="words__item"><dt id="word-address">Address</dt><dd>What you give someone so they can send you BTX. A BTX address starts with btx1z; check it in full before you use it.</dd></div>
+          <div class="words__item"><dt id="word-archive-node">Archive node</dt><dd>A node that keeps every block (prune=0) and serves the whole chain to its peers.</dd></div>
+          <div class="words__item"><dt id="word-block">Block</dt><dd>A batch of transactions added to the chain. A new BTX block comes about every 90 seconds.</dd></div>
+          <div class="words__item"><dt id="word-block-height">Block height</dt><dd>The number of a block, counted from the first one. The current height says how long the chain is right now.</dd></div>
+          <div class="words__item"><dt id="word-block-reward">Block reward</dt><dd>New coins paid to whoever mines a block. It is 20 BTX now and halves every 525,000 blocks.</dd></div>
+          <div class="words__item"><dt id="word-bridge">Bridge</dt><dd>A service that represents BTX on another chain, for example as wrapped BTX on Ethereum. The ones in the link list are designs or testnet only; bridges can lose funds.</dd></div>
+          <div class="words__item"><dt id="word-btx">BTX</dt><dd>A post-quantum fork of Bitcoin with a fixed maximum supply of 21 million coins and its own proof of work, MatMul. Its code is open source, and anyone can propose a change.</dd></div>
+          <div class="words__item"><dt id="word-btx-cli">btx-cli</dt><dd>The command-line tool that sends commands to a running btxd, for example btx-cli stop.</dd></div>
+          <div class="words__item"><dt id="word-btx1z">btx1z</dt><dd>The start of every BTX payment address (P2MR, with post-quantum signatures). If a market's deposit addresses do not start with btx1z, it is not for this chain.</dd></div>
+          <div class="words__item"><dt id="word-btxd">btxd</dt><dd>The BTX node program. It runs the node, and its built-in wallet, in the background.</dd></div>
+          <div class="words__item"><dt id="word-checksum">Checksum (SHA-256)</dt><dd>A fingerprint of a file. Compare it with the one on the release page to make sure your download is the file that was published.</dd></div>
+          <div class="words__item"><dt id="word-ci">CI</dt><dd>Continuous integration: builds and tests that run automatically, for example every night or for every proposed change, so mistakes show up early.</dd></div>
+          <div class="words__item"><dt id="word-commit">Commit</dt><dd>One saved change in a code repository, named by a short code such as a5d1637f. A figure measured at a commit describes the code exactly as it was at that change.</dd></div>
+          <div class="words__item"><dt id="word-confirmation">Confirmation</dt><dd>Each block added on top of the block that holds your transaction counts as one confirmation. Wait for at least 10 before you treat a BTX payment as final.</dd></div>
+          <div class="words__item"><dt id="word-cuda">CUDA</dt><dd>NVIDIA's software for running calculations on its graphics cards. BTX uses it to mine and to check MatMul work on NVIDIA GPUs; Apple GPUs use Metal.</dd></div>
+          <div class="words__item"><dt id="word-done-bar">Done bar</dt><dd>The measurable target that says when a lane's work is finished.</dd></div>
+          <div class="words__item"><dt id="word-exchange">Exchange</dt><dd>A website or company where you trade BTX against other coins or money. Check that withdrawals really work before you rely on one.</dd></div>
+          <div class="words__item"><dt id="word-fork">Fork (of Bitcoin)</dt><dd>A coin built from another coin's code. BTX runs its own chain from its own first block, using code from Bitcoin Knots v29.2, a variant of Bitcoin Core. The proof of work, the signatures and some network rules differ.</dd></div>
+          <div class="words__item"><dt id="word-full-node">Full node</dt><dd>A node that keeps the whole chain and relays blocks and transactions. With a GPU that passes btxd's self-test it checks the MatMul work itself; without one it runs as a trusted mirror.</dd></div>
+          <div class="words__item"><dt id="word-fuzz-box">Fuzz box</dt><dd>A machine that runs BTX's fuzz targets day and night and keeps every input that reaches new code. Keep nothing else on it: no node, wallet, miner or keys.</dd></div>
+          <div class="words__item"><dt id="word-fuzz-target">Fuzz target</dt><dd>A small test program that feeds random or malformed input into one part of the code, often for hours, to find crashes. BTX has more than 270 of them.</dd></div>
+          <div class="words__item"><dt id="word-genesis">Genesis</dt><dd>The first block of the chain. Syncing from genesis means downloading and checking every block from the start.</dd></div>
+          <div class="words__item"><dt id="word-gpu">GPU</dt><dd>A graphics processor: an NVIDIA card, or the one built into an Apple Silicon Mac. BTX mining needs one, and a node needs a qualified one to check blocks itself. There is no CPU mining.</dd></div>
+          <div class="words__item"><dt id="word-guix">Guix</dt><dd>A tool that builds software in a fixed, repeatable environment. Independent builders who rebuild the same tagged release with it can compare hashes, so nobody has to trust a single build machine.</dd></div>
+          <div class="words__item"><dt id="word-halving">Halving</dt><dd>The block reward halves every 525,000 blocks, roughly every 18 months. It is 20 BTX per block now.</dd></div>
+          <div class="words__item"><dt id="word-htlc">HTLC</dt><dd>Hash time-locked contract: a payment that can be claimed with a secret before a deadline, or refunded after it. Cross-chain swaps are built from them.</dd></div>
+          <div class="words__item"><dt id="word-lane">Lane</dt><dd>One piece of work in the BTX developer hub, such as a code area or a bug class, with one owner and one second-pass reviewer. The lanes are listed on Ongoing work.</dd></div>
+          <div class="words__item"><dt id="word-mainnet">Mainnet</dt><dd>The real BTX network, where coins have value. Testnet and regtest are for testing.</dd></div>
+          <div class="words__item"><dt id="word-matmul">MatMul</dt><dd>Short for matrix multiplication. Instead of hashing, BTX miners multiply large matrices, the work AI accelerators are built for.</dd></div>
+          <div class="words__item"><dt id="word-miner">Miner</dt><dd>A person who mines, or the program that does the work on a GPU, such as easyBTX or matador.</dd></div>
+          <div class="words__item"><dt id="word-mining">Mining</dt><dd>Doing the proof-of-work that adds new blocks. Whoever finds a block gets the block reward, now 20 BTX.</dd></div>
+          <div class="words__item"><dt id="word-pool">Mining pool</dt><dd>A service where many miners combine their work and share the rewards, for steadier payouts. When one pool finds most blocks, the network depends on it.</dd></div>
+          <div class="words__item"><dt id="word-ml-dsa">ML-DSA</dt><dd>The signature scheme BTX uses for everyday spending: ML-DSA-44, standardised by NIST as FIPS 204. SLH-DSA (FIPS 205) is the hash-based fallback.</dd></div>
+          <div class="words__item"><dt id="word-model-price">Model price</dt><dd>A price a website labels as a “model” or “reference” price. It is an estimate, not an offer that anyone has to honour, and not a market you can sell into.</dd></div>
+          <div class="words__item"><dt id="word-node">Node</dt><dd>A computer running the BTX node software. It keeps a copy of the chain, relays blocks and transactions, and keeps the network reachable.</dd></div>
+          <div class="words__item"><dt id="word-otc">OTC</dt><dd>Over the counter: a trade arranged directly with a seller instead of on an exchange's order book. Check that the seller really delivers and withdrawals work before you pay.</dd></div>
+          <div class="words__item"><dt id="word-post-quantum">Post-quantum</dt><dd>Meant to withstand attacks from future quantum computers. BTX locks coins with post-quantum signatures instead of Bitcoin's.</dd></div>
+          <div class="words__item"><dt id="word-private-key">Private key</dt><dd>The secret that signs your transactions. Whoever has it can spend the coins, so nobody legitimate will ever ask for it.</dd></div>
+          <div class="words__item"><dt id="word-proof-of-work">Proof of work</dt><dd>A miner must do costly computing work to add a block, which makes rewriting the chain expensive. BTX uses MatMul as its proof of work.</dd></div>
+          <div class="words__item"><dt id="word-psbt">PSBT</dt><dd>Partially signed Bitcoin transaction: a standard format for passing an unfinished transaction between wallets or signers. The BTX node supports PSBTs the way Bitcoin does.</dd></div>
+          <div class="words__item"><dt id="word-pull-request">Pull request</dt><dd>A proposed change to files on GitHub. Anyone can send one; the project's maintainers review it before it is merged.</dd></div>
+          <div class="words__item"><dt id="word-regtest">Regtest</dt><dd>A private test chain that runs only on your own computer. Its coins have no value, so you can try things without risk. Anything that moves other people's coins starts on regtest or testnet.</dd></div>
+          <div class="words__item"><dt id="word-release">Release</dt><dd>A published version of the node software, such as v0.34.16. Download releases only from github.com/btxchain/btx/releases and read the release notes first.</dd></div>
+          <div class="words__item"><dt id="word-reorganisation">Reorganisation</dt><dd>The network switches to a different version of its newest blocks, and those blocks are replaced. Short reorganisations happen on BTX several times a day, which is why you wait for confirmations.</dd></div>
+          <div class="words__item"><dt id="word-rpc">RPC</dt><dd>Remote procedure call: a command that a program or btx-cli sends to a running btxd. SwapNet has no graphical trading panel: its 33 swap RPC methods, used from the RPC console, are the interface.</dd></div>
+          <div class="words__item"><dt id="word-second-pass">Second pass</dt><dd>The second person on a lane, who reviews the owner's work before it goes upstream. It is never the owner. For a run lane, the second pass is an independent run on different hardware.</dd></div>
+          <div class="words__item"><dt id="word-seed-phrase">Seed phrase</dt><dd>The secret that restores your wallet and can spend all its coins. Some wallets show it as a list of words. In the BTX browser wallet it is inside the .btxwallet backup file, in plain text. Never share it, and never type or upload it into a website or an AI tool.</dd></div>
+          <div class="words__item"><dt id="word-signer">Signer</dt><dd>A machine with a qualified GPU that replays the MatMul work of new blocks and signs the result. Trusted mirrors follow these signatures; the developers also call it a GPU attestor.</dd></div>
+          <div class="words__item"><dt id="word-snapshot">Snapshot</dt><dd>A file with the chain's state at one block, so a new node does not have to sync from the start. Use a signed one: a sync from genesis currently stops at block 126,978.</dd></div>
+          <div class="words__item"><dt id="word-solo-mining">Solo mining</dt><dd>Mining alone against your own node. You keep every block you find, but payouts come irregularly.</dd></div>
+          <div class="words__item"><dt id="word-swapnet">SwapNet</dt><dd>A system built into btxd that swaps BTX with BTC or ETH directly between two parties. In v0.34.16 it starts only with -swapnet=1; the install checklist notes it starts by default from 0.34.17.</dd></div>
+          <div class="words__item"><dt id="word-test-coverage">Test coverage</dt><dd>The share of the code that the automatic tests actually run. Lines count the code lines reached; branches count the paths through each decision. Code that no test reaches can hide mistakes.</dd></div>
+          <div class="words__item"><dt id="word-testnet">Testnet</dt><dd>A separate network for testing, where coins have no value and the chain can be reset. Anything that moves other people's coins should start there.</dd></div>
+          <div class="words__item"><dt id="word-trusted-mirror">Trusted mirror</dt><dd>A node without a qualified GPU. It still checks transactions itself, but for the MatMul work it follows signed checks from signers. It needs at least two signers it trusts, or it stops syncing.</dd></div>
+          <div class="words__item"><dt id="word-wallet">Wallet</dt><dd>Software that holds your keys and lets you receive and send BTX. The node software has one built in; others are in the link list.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<!-- FOOTER:START -->
+<footer class="ftr">
+  <div class="wrap">
+    <div class="sheet ftr__sheet">
+    <h2 class="label ftr__title">Every page on this site</h2>
+    <div class="ftr__map">
+      <div class="ftr__line ftr__line--s">
+        <h3 id="ftr-s"><span class="badge badge--sm badge--s" aria-hidden="true">S</span>Start here</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design05/">Home</a></li>
+          <li><a href="/new/design05/learn/">Learn</a></li>
+          <li><a href="/new/design05/links/">Links</a></li>
+          <li><a href="/new/design05/#before-buying">Before you buy</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--m">
+        <h3 id="ftr-m"><span class="badge badge--sm badge--m" aria-hidden="true">M</span>Mine BTX</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design05/#miners">Mining steps</a></li>
+          <li><a href="/new/design05/links/#cat-miners">Miners</a></li>
+          <li><a href="/new/design05/links/#cat-pools">Pools</a></li>
+          <li><a href="/new/design05/network/">Network</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--n">
+        <h3 id="ftr-n"><span class="badge badge--sm badge--n" aria-hidden="true">N</span>Run a node</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design05/infra/">Run a node</a></li>
+          <li><a href="/new/design05/infra/#before-installing">Install checklist</a></li>
+          <li><a href="/new/design05/links/#cat-node-tools">Node tools</a></li>
+          <li><a href="/new/design05/network/">Network</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--b">
+        <h3 id="ftr-b"><span class="badge badge--sm badge--b" aria-hidden="true">B</span>Build</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design05/dev/">Developers</a></li>
+          <li><a href="/new/design05/dev/work/">Ongoing work</a></li>
+          <li><a href="/new/design05/projects/">Projects</a></li>
+          <li><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr__base">
+      <p><strong>Run by community members, not by a company.</strong> Nothing on this site is financial advice. Links lead to third parties; we are not responsible for their content.</p>
+      <ul class="ftr__links">
+        <li><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code on GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        <li><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Status page <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        <li><button class="ftr__bg" type="button" data-bg-toggle aria-pressed="false" hidden>Pause background animation</button></li>
+      </ul>
+      <p class="meta">Live data comes from the public status API of network.btx-monitoring.com (<a href="https://network.btx-monitoring.com/api/v1/status.json" rel="noopener noreferrer">api/v1/status.json&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>), checked every 60 seconds.</p>
+    </div>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END -->
+</body>
+</html>

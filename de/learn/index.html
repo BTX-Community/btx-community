@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Was BTX ist, jede Angabe mit einer Quelle zum Nachprüfen, und was das neueste Node-Release bringt.">
+  <meta name="color-scheme" content="light">
+  
+  <title>BTX verstehen · BTX Community</title>
+  
+  <link rel="alternate" hreflang="en" href="/learn/">
+  
+  <link rel="alternate" hreflang="de" href="/de/learn/">
+  
+  <link rel="alternate" hreflang="es" href="/es/learn/">
+  
+  <link rel="alternate" hreflang="fr" href="/fr/learn/">
+  
+  <link rel="alternate" hreflang="zh-Hans" href="/zh/learn/">
+  
+  <link rel="preload" href="/static/fonts/JetBrainsMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="/static/icons/favicon.svg?v=7832bbe30cf7" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png?v=3e64acf24246">
+  <link rel="stylesheet" href="/static/css/community.css?v=7186087629f4">
+  <script src="/static/js/theme.js?v=308caabeccac"></script>
+  <script src="/static/js/community.js?v=ad7d480ad1fc" defer></script>
+</head>
+<body class="c">
+  <a class="c-skip" href="#main">Zum Inhalt springen</a>
+  <div class="c-shell">
+    <header class="c-top">
+      <a class="c-logo" href="/de/"><span class="c-logo__mark" aria-hidden="true"></span>BTX <span class="c-logo__slash">//</span> COMMUNITY</a>
+      <nav class="c-menu" aria-label="Seiten">
+        
+        <a class="c-menu__link" href="/de/">Start</a>
+        
+        <a class="c-menu__link c-menu__link--active" href="/de/learn/" aria-current="page">Lernen</a>
+        
+        <a class="c-menu__link" href="/de/network/">Netz</a>
+        
+        <a class="c-menu__link" href="/de/links/">Links</a>
+        
+        <a class="c-menu__link" href="/de/projects/">Projekte</a>
+        
+        <a class="c-menu__link" href="/de/infra/">Infra betreiben</a>
+        
+        <a class="c-menu__link" href="/de/dev/">Entwickeln</a>
+        
+      </nav>
+      <button class="c-theme" type="button" data-theme-switch data-to-light="Zum hellen Design wechseln" data-to-dark="Zum dunklen Design wechseln" aria-label="Zum hellen Design wechseln" hidden></button>
+      <details class="c-lang">
+        <summary class="c-chip c-chip--active" aria-label="Sprache: Deutsch">DE <span aria-hidden="true">▾</span></summary>
+        <nav class="c-lang__list" aria-label="Sprache">
+          
+          <a class="c-lang__item" href="/learn/" hreflang="en" lang="en"><span class="c-lang__code">EN</span> English</a>
+          
+          <a class="c-lang__item c-lang__item--active" href="/de/learn/" hreflang="de" lang="de" aria-current="true"><span class="c-lang__code">DE</span> Deutsch</a>
+          
+          <a class="c-lang__item" href="/es/learn/" hreflang="es" lang="es"><span class="c-lang__code">ES</span> Español</a>
+          
+          <a class="c-lang__item" href="/fr/learn/" hreflang="fr" lang="fr"><span class="c-lang__code">FR</span> Français</a>
+          
+          <a class="c-lang__item" href="/zh/learn/" hreflang="zh-Hans" lang="zh-Hans"><span class="c-lang__code">ZH</span> 中文</a>
+          
+        </nav>
+      </details>
+    </header>
+
+    <aside class="c-badge c-live--unknown" id="status-badge" data-api="https://network.btx-monitoring.com/api/v1/status.json" data-lang="de" aria-label="Das Netz gerade">
+      <a class="c-badge__head" href="/de/network/"><span class="c-pulse" aria-hidden="true"></span><span data-live="overall" data-label-normal="Alles normal" data-label-degraded="Eingeschränkt" data-label-incident="Störung">Das Netz gerade</span></a>
+      <span class="c-badge__row"><span>Block</span> <b data-live="height">–</b></span>
+      <span class="c-badge__row"><span>Version</span> <b data-live="release">–</b></span>
+      <span class="c-badge__row"><span>Nodes damit</span> <b data-live="on-release" data-template="{count} von {total}">–</b></span>
+      <a class="c-link c-badge__link" href="https://network.btx-monitoring.com/de/" rel="noopener noreferrer">Ganze Statusseite ↗</a>
+      <span class="c-badge__time" data-live="updated" data-template="Daten von {time}"></span>
+      <div class="c-badge__fork" data-live="fork" data-template="{name}: Block {height}, noch {remaining} Blöcke (etwa {time})" hidden>
+        <strong>Netz-Upgrade steht an</strong>
+        <ul data-live="fork-rows"></ul>
+        <a class="c-link" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases und Release-Notes ↗</a>
+      </div>
+    </aside>
+    <main id="main">
+
+      <section class="c-intro">
+        <h1 class="c-page-title">BTX verstehen</h1>
+        <p class="c-hero__lead">Was BTX ist und was das nächste Release bringt.</p>
+      </section>
+
+      <section class="c-facts" id="about" aria-labelledby="about-title">
+        <h2 class="c-section-title" id="about-title">Was ist BTX?</h2>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact" id="fact-supply">
+            <h3 class="c-fact__title">Feste Menge</h3>
+            <p>Höchstens 21 Millionen BTX, wie bei Bitcoin. Etwa alle 90 Sekunden kommt ein Block; seine Belohnung von 20 BTX halbiert sich alle 525.000 Blöcke, also ungefähr alle 18 Monate.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/src/kernel/chainparams.cpp" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-matmul">
+            <h3 class="c-fact__title">Mining mit Matrixmultiplikation</h3>
+            <p>Statt zu hashen multiplizieren Miner große Matrizen, also genau die Arbeit, für die KI-Beschleuniger gebaut sind. Seit Block 185.000 rechnet ein Node, der Blöcke selbst prüft, jeden exakt auf einer zugelassenen NVIDIA- (CUDA) oder Apple-GPU (Metal) nach; Nodes ohne eine solche GPU folgen signierten Prüfungen anderer. Mit der CPU kann man nicht minen.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-gpu-verified-network-transition.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-post-quantum">
+            <h3 class="c-fact__title">Post-Quanten-Signaturen</h3>
+            <p>Coins werden mit Signaturen gesichert, die auch Quantencomputern standhalten sollen: ML-DSA-44 (NIST FIPS 204) für den Alltag, SLH-DSA (FIPS 205) als hashbasierte Reserve. Diese P2MR-Adressen beginnen mit btx1z.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/main/doc/btx-pqc-spec.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact" id="fact-bitcoin-core">
+            <h3 class="c-fact__title">Gebaut auf Bitcoin Knots</h3>
+            <p>Der Node stammt von Bitcoin Knots v29.2 ab, einer Variante von Bitcoin Core. btxd, btx-cli, die RPC-Schnittstelle und PSBTs funktionieren so, wie Bitcoin-Nutzer es kennen; anders sind Proof-of-Work, Signaturen und einige Netzregeln.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+        </div>
+      </section>
+
+      
+      <section class="c-upcoming" id="next" aria-labelledby="next-title">
+        <h2 class="c-section-title" id="next-title">Neu in v0.34.16</h2>
+        <p class="c-warning">Volles Release seit 15. November 2026, zuerst am 7. November als Pre-Release erschienen. Archive für Linux x86_64, mit und ohne CUDA 13; keine für macOS oder Windows. Es bündelt die Review-Zweige von 0.35; die 0.35-Reihe bleibt offen.</p>
+        <div class="c-fact-grid">
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Vorsignierte Swap-Claims aus der Wallet</h3>
+            <p>Seit 0.34.13 lässt sich ein Swap-Claim beim Funding signieren und später von jedem mit dem Geheimnis vervollständigen. htlc_presign und p2mr_leaf machen aus handgebauten Transaktionen einen Wallet-Schritt. Die Gebühr steht beim Vorsignieren fest, und der Claim muss vor der Refund-Höhe bestätigt sein.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-htlc-presign.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Swaps mit anderen Ketten, standardmäßig aus</h3>
+            <p>SwapNet ist in btxd eingebaut und startet nur mit -swapnet=1. Die Schlüssel für die anderen Ketten liegen im Datenverzeichnis: mit exportswaprecovery sichern, nicht durch Kopieren der Dateien. Abschalten bricht einen finanzierten Swap nicht ab; die Refund-Fristen laufen weiter.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Modell-Netz mit weniger offenen Ports</h3>
+            <p>Das Netz für KI-Modelle ist standardmäßig an und lauscht auf TCP 29447. v0.34.16 öffnet den Port mit -listen=0 oder Proxy nicht mehr, sucht Modell-Peers im lokalen Netz über UDP 29448 und bringt einen lokalen Sicherheitswächter mit. -modelnet=0 schaltet alles ab; es gibt keine Coins aus.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Auto-Update hinter Proxy aus</h3>
+            <p>Ein Node hinter einem Proxy oder mit -onlynet ohne IPv4 und IPv6 sucht standardmäßig nicht mehr nach Updates. Jeder andere Mainnet-Node fragt weiter btx.dev ab und installiert ein neueres signiertes Release selbst, außer mit autoupdateseamless=0.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Signieren lässt Zeitsperren in Ruhe</h3>
+            <p>Bei einem csv-, cltv- oder Refund-Leaf hat v0.34.15 beim Signieren nLockTime, nSequence und Version umgeschrieben. signrawtransactionwithwallet und walletprocesspsbt lehnen jetzt ab und nennen den nötigen Wert, außer mit adjust_timelocks=true.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+          <article class="c-fact c-fact--next">
+            <h3 class="c-fact__title">Klarere Backup-Warnung</h3>
+            <p>Wallet-Bundle-Backups sagen jetzt, dass die Deskriptor-Datei darin ohne Wallet-Passphrase ausgeben kann, und warnen bei verschlüsselter Wallet. Backups älterer Versionen enthalten dieselbe Datei.</p>
+            <a class="c-link c-fact__source" href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer">Quelle ↗</a>
+          </article>
+          
+        </div>
+        
+        <h3 class="c-subtitle">Bevor du wechselst</h3>
+        <ul class="c-caveats">
+          
+          <li>Kein Archiv für macOS oder Windows: Ein Mac-Node bleibt auf v0.34.15. Das CUDA-Archiv ist für NVIDIA Blackwell (sm_120) gebaut und bringt den NVIDIA-Treiber nicht mit.</li>
+          
+          <li>Keine Desktop-App: Beide Archive lassen btx-qt und btx-atlas weg, weil sie ein neueres glibc als 2.38 bräuchten. btxd und btx-cli benutzen.</li>
+          
+          <li>Die Archive wurden unter demselben Tag mehrmals ersetzt, zuletzt am 15. November 2026. Die aktuellen bringen libevent, SQLite, ZeroMQ und libgomp mit; nur libc, libstdc++ und der NVIDIA-Treiber kommen vom System. Den Download gegen die SHA256SUMS des Releases prüfen.</li>
+          
+          <li>Das ganze Archiv entpacken und bin/btxd daraus starten. Ein einzeln kopiertes bin/btxd beendet sich.</li>
+          
+          <li>Ein Sync ab Genesis bleibt weiter bei Block 126.978 stehen (#272). Mit einem Snapshot starten.</li>
+          
+        </ul>
+        
+        <p class="c-muted">
+          Aus den Release-Notes gelesen am 2026-11-16.
+          <a class="c-link" href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer">Release-Notes ↗</a>
+        </p>
+      </section>
+      
+
+      
+      <nav class="c-next" aria-labelledby="onward-title">
+        <h2 class="c-section-title" id="onward-title">Wie geht es weiter</h2>
+        <ul class="c-next__list">
+          
+          <li><a class="c-link" href="/de/#before-buying">Bevor du BTX kaufst oder empfängst →</a></li>
+          
+          <li><a class="c-link" href="/de/links/#cat-wallets">Eine Wallet wählen →</a></li>
+          
+          <li><a class="c-link" href="/de/network/">Wie es dem Netz geht →</a></li>
+          
+        </ul>
+      </nav>
+
+
+
+    </main>
+
+    <footer class="c-footer">
+      <p>Unabhängiges Community-Projekt. Links führen zu Dritten; für deren Inhalte sind wir nicht verantwortlich. Nichts hier ist eine Finanzberatung.</p>
+      
+      <p>
+        <a class="c-link" href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Quellcode ↗</a>
+      </p>
+      <p class="c-muted">3a9d1c47e44b</p>
+    </footer>
+  </div>
+</body>
+</html>
