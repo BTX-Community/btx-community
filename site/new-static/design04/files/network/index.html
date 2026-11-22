@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/new/design04/assets/fonts.css">
+  <link rel="stylesheet" href="/new/design04/assets/draft-banner.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0E0E10">
+  <title>[Draft] Network · BTX Community</title>
+  <meta name="description" content="The BTX network's live state, such as block height and the next halving, and the development of the node software on GitHub.">
+  <link rel="canonical" href="https://btx-community.com/network/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://btx-community.com/network/">
+  <meta property="og:title" content="[Draft] Network · BTX Community">
+  <meta property="og:description" content="The BTX network's live state, such as block height and the next halving, and the development of the node software on GitHub.">
+  <link rel="alternate" hreflang="en" href="https://btx-community.com/network/">
+  <link rel="alternate" hreflang="de" href="https://btx-community.com/de/network/">
+  <link rel="alternate" hreflang="es" href="https://btx-community.com/es/network/">
+  <link rel="alternate" hreflang="fr" href="https://btx-community.com/fr/network/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://btx-community.com/zh/network/">
+  <link rel="icon" href="/new/design04/assets/favicon.svg" type="image/svg+xml">
+  <script src="/new/design04/assets/draft-inline.js"></script>
+  <link rel="stylesheet" href="/new/design04/assets/site.css">
+  <link rel="stylesheet" href="/new/design04/assets/pages/network.css">
+  <script src="/new/design04/assets/site.js" defer></script>
+  <script src="/new/design04/assets/matrix-bg.js" defer></script>
+  <script src="/new/design04/assets/pages/network.js" defer></script>
+  <link rel="stylesheet" href="/new/design04/assets/draft-inline/network.css">
+  <link rel="stylesheet" href="/new/design04/assets/draft-js.css">
+</head>
+<body>
+  <div class="draft-banner" role="note"><p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind. <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a> <a class="draft-banner__link" href="/new/">All drafts →</a> <a class="draft-banner__link" href="https://btx-community.com/network/">This page on the live site ↗</a></p></div>
+<!-- HEADER:START -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__brand" href="/new/design04/"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>BTX <span class="hdr__brand-sub">Community</span></span></a>
+    <a class="pill pill--unknown" href="/new/design04/network/" data-status-pill><span class="sr-only">Network </span><span class="pill__shape" aria-hidden="true">○</span><span class="pill__word">Status</span></a>
+    <button class="hdr__btn hdr__menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu">Menu</button>
+    <div class="hdr__panel" id="site-menu">
+      <nav aria-label="Main">
+        <ul class="hdr__nav">
+          <li><a class="l-s" href="/new/design04/">Start</a></li>
+          <li><a class="l-s" href="/new/design04/learn/">Learn</a></li>
+          <li><a class="l-board" href="/new/design04/network/" aria-current="page">Network</a></li>
+          <li><a class="l-s" href="/new/design04/links/">Links</a></li>
+          <li><a class="l-n" href="/new/design04/infra/">Run a node</a></li>
+          <li><a class="l-b" href="/new/design04/projects/">Projects</a></li>
+          <li><a class="l-b" href="/new/design04/dev/">Developers</a></li>
+        </ul>
+      </nav>
+      <div class="hdr__tools">
+        <details class="lang">
+          <summary class="hdr__btn"><span class="sr-only">Language: </span>EN <span class="caret" aria-hidden="true"></span></summary>
+          <div class="lang__list">
+            <ul>
+              <li><a href="/new/design04/network/" hreflang="en" lang="en" aria-current="true"><span class="lang__code">EN</span> English</a></li>
+              <li><a href="https://btx-community.com/de/network/" hreflang="de" lang="de"><span class="lang__code">DE</span> Deutsch</a></li>
+              <li><a href="https://btx-community.com/es/network/" hreflang="es" lang="es"><span class="lang__code">ES</span> Español</a></li>
+              <li><a href="https://btx-community.com/fr/network/" hreflang="fr" lang="fr"><span class="lang__code">FR</span> Français</a></li>
+              <li><a href="https://btx-community.com/zh/network/" hreflang="zh-Hans" lang="zh-Hans"><span class="lang__code">ZH</span> 中文</a></li>
+            </ul>
+            <p class="lang__note">Other languages use the previous design.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- HEADER:END -->
+
+<main id="main">
+
+  <header class="station station--board">
+    <div class="wrap station__in">
+      <nav class="crumbs" aria-label="Breadcrumb" data-copy-skip><a href="/new/design04/">BTX Community</a> <span aria-hidden="true">/</span> <span aria-current="page">Network</span></nav>
+      <div class="station__badges" data-copy-skip>
+        <span class="badge badge--m" role="img" aria-label="Mine BTX line">M</span>
+        <span class="badge badge--n" role="img" aria-label="Run a node line">N</span>
+      </div>
+      <h1>Network and development</h1>
+      <p class="lede">The network's live state from the public status API, and the development of the node software as measured on GitHub.</p>
+      <div class="station__aside" data-copy-ai-only data-copy-skip>
+        <button class="btn btn--line" type="button" data-copy-ai aria-describedby="copy-promise">Copy for your AI</button>
+        <p class="station__promise" id="copy-promise">Copies this page's text only. Never paste your seed phrase or private keys into any AI tool.</p>
+      </div>
+      <ul class="chips" aria-label="On this page" data-copy-skip>
+        <li><a class="chip" href="#live">Network right now <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#key">What the values mean <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#development">Development <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#onward">Where next <span class="arr" aria-hidden="true">→</span></a></li>
+      </ul>
+    </div>
+    <span class="station__stripe" aria-hidden="true"></span>
+  </header>
+
+  <section class="section" id="live" aria-labelledby="live-title">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="label eyebrow">Status API <span aria-hidden="true">·</span> every 60 seconds</p>
+        <h2 id="live-title">Network right now</h2>
+        <p class="lede">Each value is explained in <a href="#key">What the values mean</a>.</p>
+      </div>
+
+      <section class="board board--long nw-board" data-board aria-labelledby="board-title">
+        <span class="board__frame" aria-hidden="true"></span>
+        <div class="board__head">
+          <h3 class="board__label" id="board-title">Network now</h3>
+          <p class="board__status is-unknown" data-live="overall"><span class="shape" aria-hidden="true">○</span>Loading</p>
+        </div>
+        <div class="board__body">
+          <p class="board__msg" data-live="stale" hidden>Live data could not be loaded or is out of date, so the values may be wrong. <a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Check on the status page&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+          <div class="board__fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+            <h4 class="nw-fork__title"><strong>Network upgrade ahead</strong></h4>
+            <p>The rules change at the block below. Every node and miner needs a release that knows this change before then, or it stops following the network.</p>
+            <ul data-live="fork-rows"></ul>
+            <a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+          </div>
+          <div class="nw-cols">
+            <div class="nw-group">
+              <h4 class="label nw-group__title">The chain</h4>
+              <dl class="board__rows">
+                <div class="board__row"><dt><span class="term" data-term="block-height">Block height</span></dt><dd data-live="height">—</dd></div>
+                <div class="board__row board__row--tip"><dt>Last block</dt><dd data-live="tip-age">—</dd>
+                  <dd class="burn" data-burn>
+                    <div class="burn__track" aria-hidden="true"><span class="burn__fill" data-draft-style="5f57241621"></span><span class="burn__rail" data-draft-style="e305b0f3c2"><span class="burn__tip"></span></span></div>
+                    <p class="burn__note"><span>Blocks come about every 90 seconds</span> <span data-burn-left>—</span></p>
+                  </dd></div>
+                <div class="board__row"><dt>Average block time, 24 h</dt><dd data-live="interval">—</dd></div>
+                <div class="board__row"><dt><span class="term" data-term="release">Latest node release</span></dt><dd data-live="release">—</dd></div>
+                <div class="board__row"><dt>Nodes on it</dt><dd data-live="on-release" data-template="{count} of {total}">—</dd></div>
+                <div class="board__row"><dt><span class="term" data-term="signer">Active signers</span></dt><dd data-live="signers">—</dd></div>
+                <div class="board__row"><dt>Stable</dt><dd class="board__val" data-verdict="stable">—</dd></div>
+                <div class="board__row"><dt>Performant</dt><dd class="board__val" data-verdict="performant">—</dd></div>
+                <div class="board__row"><dt>Secure</dt><dd class="board__val" data-verdict="secure">—</dd></div>
+              </dl>
+            </div>
+            <div class="nw-group">
+              <h4 class="label nw-group__title" id="numbers-title">BTX in numbers</h4>
+              <dl class="board__rows" aria-labelledby="numbers-title">
+                <div class="board__row"><dt>Mined so far</dt><dd data-live="supply">—</dd></div>
+                <div class="board__row"><dt>Share of the 21 million maximum</dt><dd data-live="supply-share">—</dd></div>
+                <div class="board__row"><dt><span class="term" data-term="block-reward">Block reward</span></dt><dd data-live="reward">—</dd></div>
+                <div class="board__row"><dt><span class="term" data-term="halving">Next halving</span></dt><dd data-live="halving" data-template="{count} blocks">—</dd></div>
+                <div class="board__row"><dt>Time to the halving</dt><dd data-live="halving-time" data-template="about {time}">—</dd></div>
+                <div class="board__row"><dt>Transactions, 24 h</dt><dd data-live="tx">—</dd></div>
+                <div class="board__row"><dt>Size of the chain</dt><dd data-live="size">—</dd></div>
+              </dl>
+              <ul class="board__links">
+                <li><a class="board__link" href="https://btxscan.io/" rel="noopener noreferrer">Check on btxscan.io <span aria-hidden="true">↗</span><span class="sr-only">, the block explorer (opens another site)</span></a></li>
+                <li><a class="board__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Check on the status page <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="board__src">
+          <p class="board__src-text"><span class="board__src-line">Read-only public data <span class="sep" aria-hidden="true"></span> <a class="board__link" href="https://network.btx-monitoring.com/api/v1/status.json" rel="noopener noreferrer">status API <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></span>
+            <span class="board__src-line">Data from <span data-live="time">—</span></span></p>
+          <button class="board__pause" type="button" data-board-pause aria-pressed="false"><span class="board__pause-icon" aria-hidden="true"></span><span class="sr-only">Pause live updates</span></button>
+        </div>
+      </section>
+      <p class="meta nw-nojs" data-copy-skip data-nojs-only>The board fills in with JavaScript. Without it, every value shows a dash: <a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">check on the status page&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>.</p>
+    </div>
+  </section>
+
+  <section class="section" id="key" aria-labelledby="key-title">
+    <div class="wrap">
+      <div class="sheet">
+        <span class="sec-rule sec-rule--m" aria-hidden="true"></span>
+        <div class="section__head">
+          <p class="label eyebrow">Key to the board</p>
+          <h2 id="key-title">What the values mean</h2>
+          <p class="lede">What each value on the board shows, in the order the board lists them.</p>
+        </div>
+
+        <div class="nw-key">
+          <div class="nw-key__group">
+            <h3 class="nw-key__title">The chain</h3>
+            <dl class="nw-key__list">
+              <div class="nw-key__row"><dt>Status</dt><dd>The status page's overall reading of the network, top right of the board: Normal, Degraded or Incident. It reads Loading until the first answer arrives, and No data if the board could not load the data or the data is out of date. The status page lists the checks behind it.</dd></div>
+              <div class="nw-key__row"><dt>Block height</dt><dd>The number of the newest <span class="term" data-term="block">block</span>, counted from the first one. It goes up by one with every new block.</dd></div>
+              <div class="nw-key__row"><dt>Last block</dt><dd>How long ago the newest block was found. The bar under it empties over 90 seconds, the average time between blocks; some blocks take longer.</dd></div>
+              <div class="nw-key__row"><dt>Average block time, 24 h</dt><dd>The average gap between blocks over the last 24 hours. The chain aims for 90 seconds.</dd></div>
+              <div class="nw-key__row"><dt>Latest node release</dt><dd>The newest published version of the <span class="term" data-term="node">node</span> software (on the home page: Latest release). Download it only from <a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">the releases page on GitHub&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>.</dd></div>
+              <div class="nw-key__row"><dt>Nodes on it</dt><dd>How many reachable nodes run that release, out of all reachable nodes the status page counted (on the home page: Nodes running it).</dd></div>
+              <div class="nw-key__row"><dt>Active signers</dt><dd>Machines with a qualified <span class="term" data-term="gpu">GPU</span> that check the <span class="term" data-term="matmul">MatMul</span> work of new blocks and sign the result. Nodes without such a GPU <span class="nw-nowrap">(<span class="term" data-term="trusted-mirror">trusted mirrors</span>)</span> rely on them.</dd></div>
+              <div class="nw-key__row"><dt>Stable, Performant, Secure</dt><dd>The status page's three summary verdicts: does the chain hold steady, do blocks come on time, is mining spread widely enough. Each reads OK, Watch, Problem or Unknown.</dd></div>
+            </dl>
+          </div>
+
+          <div class="nw-key__group">
+            <h3 class="nw-key__title">BTX in numbers</h3>
+            <dl class="nw-key__list">
+              <div class="nw-key__row"><dt>Mined so far</dt><dd>All BTX created by block rewards up to now.</dd></div>
+              <div class="nw-key__row"><dt>Share of the 21 million maximum</dt><dd>What has been mined, as a share of the 21 million BTX that can ever exist.</dd></div>
+              <div class="nw-key__row"><dt>Block reward</dt><dd>New BTX paid to whoever <span class="term" data-term="mining">mines</span> a block. It halves every 525,000 blocks.</dd></div>
+              <div class="nw-key__row"><dt>Next halving</dt><dd>Blocks left until the reward halves.</dd></div>
+              <div class="nw-key__row"><dt>Time to the halving</dt><dd>Roughly how long those blocks take, at 90 seconds each.</dd></div>
+              <div class="nw-key__row"><dt>Transactions, 24 h</dt><dd>Transactions in the blocks of the last 24 hours.</dd></div>
+              <div class="nw-key__row"><dt>Size of the chain</dt><dd>The disk space the whole chain takes on a node.</dd></div>
+            </dl>
+          </div>
+
+          <div class="nw-key__group">
+            <h3 class="nw-key__title">The rest of the board</h3>
+            <dl class="nw-key__list">
+              <div class="nw-key__row"><dt>Data from</dt><dd>When the status page last read the network. If the data is out of date, the values may be wrong, and the board says so.</dd></div>
+              <div class="nw-key__row"><dt>Network upgrade ahead</dt><dd>Shown only when a rule change is scheduled, with its block and the blocks to go. Every node and miner needs a release that knows the change before then, or it stops following the network. <a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></dd></div>
+              <div class="nw-key__row"><dt>Pause</dt><dd>The button at the bottom right stops the board from changing while you read. Press it again to see the newest data.</dd></div>
+            </dl>
+          </div>
+
+          <div class="nw-key__group">
+            <h3 class="nw-key__title">Check it yourself</h3>
+            <ul class="rows">
+              <li><a class="row" href="https://btxscan.io/" rel="noopener noreferrer">
+                <span class="row__name">btxscan.io&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></span>
+                <span class="row__desc">Block explorer of the easyBTX team for blocks, transactions and addresses, with a public API (api.btxscan.io).</span>
+                <span class="row__arr" aria-hidden="true">→</span></a></li>
+              <li><a class="row" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">
+                <span class="row__name">Status page&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></span>
+                <span class="row__desc">The community status page: is the network healthy, with history, node help and a public JSON API.</span>
+                <span class="row__arr" aria-hidden="true">→</span></a></li>
+              <li><a class="row" href="https://explorer.btxbyronbay.com/observatory" rel="noopener noreferrer">
+                <span class="row__name">Live view and node map from the Byron Bay archive node&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></span>
+                <span class="row__desc">The node's chain progress, the heights of the nodes connected to it, and a map of those connections (preview).</span>
+                <span class="row__arr" aria-hidden="true">→</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="development" aria-labelledby="dev-title" data-dev-api="https://network.btx-monitoring.com/api/v1/development.json" data-repo="btxchain/btx">
+    <div class="wrap">
+      <div class="sheet">
+        <span class="sec-rule sec-rule--b" aria-hidden="true"></span>
+        <div class="section__head">
+          <p class="label eyebrow">GitHub <span class="nocase">· btxchain/btx</span></p>
+          <h2 id="dev-title">Development of the node software</h2>
+          <p class="lede">Commits and pull requests in btxchain/btx, the reference implementation of the BTX node.</p>
+        </div>
+
+        <div class="nw-dev">
+          <div class="nw-dev__intro">
+            <p>GitHub opens the repository on <code>main</code>, the default branch. The other rows are the branches with the most recent commits.</p>
+            <p>The <code>main</code> branch holds the last full release. Current work happens on the release and review branches.</p>
+            <p><a href="https://github.com/btxchain/btx" rel="noopener noreferrer">btxchain/btx on GitHub&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+          </div>
+
+          <div class="callout callout--warn" data-dev="stale" hidden><span class="callout__label">Check</span><p>This measurement is more than three hours old; the figures may be out of date.</p></div>
+          <div class="callout callout--note nw-dev__msg" data-dev="msg"><span class="callout__label">Note</span><p><span data-dev="msg-text">These figures load from the development API with JavaScript. Without it, see the branches, pull requests and releases on GitHub.</span> <a href="https://github.com/btxchain/btx" rel="noopener noreferrer">btxchain/btx on GitHub&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p></div>
+
+          <div class="table-wrap">
+            <table class="table nw-branches">
+              <caption class="sr-only">Branches of btxchain/btx: last commit and commits in the last 30 days</caption>
+              <thead><tr><th scope="col">Branch</th><th scope="col">Last commit</th><th scope="col" class="num">Commits, 30 days</th></tr></thead>
+              <tbody data-dev="branches">
+                <tr><td data-label="Branch">—</td><td data-label="Last commit">—</td><td data-label="Commits, 30 days" class="num">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="meta nw-dev__note">Commits are counted per branch by commit date, at most 100 per branch (shown as 100+). A commit that is on several branches counts on each of them.</p>
+
+          <dl class="spec nw-dev__spec">
+            <div class="spec__row">
+              <dt class="label spec__label">Pull requests updated, 7 days</dt>
+              <dd class="spec__val" data-dev="pulls">—</dd>
+              <dd class="spec__text"><span class="term" data-term="pull-request">Pull requests</span> (proposed changes) on GitHub that were updated in the last seven days. Counted up to 100 (shown as 100+).</dd>
+              <dd class="spec__src"><a href="https://github.com/btxchain/btx/pulls" rel="noopener noreferrer">Pull requests on GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></dd>
+            </div>
+            <div class="spec__row">
+              <dt class="label spec__label">Latest release</dt>
+              <dd class="spec__val spec__val--mono" data-dev="release">—</dd>
+              <dd class="spec__text">The newest full release of the node software<span data-dev="release-when" hidden>, first published on GitHub <span class="nw-date" data-dev="release-date"></span></span>.</dd>
+              <dd class="spec__src"><a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases on GitHub <span aria-hidden="true">↗</span><span class="sr-only">, for the latest release (opens another site)</span></a></dd>
+            </div>
+            <div class="spec__row" data-dev="prerelease-tile" hidden>
+              <dt class="label spec__label">Newer pre-release</dt>
+              <dd class="spec__val spec__val--mono" data-dev="prerelease">—</dd>
+              <dd class="spec__text">A test version published after the latest release<span data-dev="prerelease-when" hidden>, published <span class="nw-date" data-dev="prerelease-date"></span></span>.</dd>
+              <dd class="spec__src"><a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases on GitHub <span aria-hidden="true">↗</span><span class="sr-only">, for the pre-release (opens another site)</span></a></dd>
+            </div>
+          </dl>
+          <p class="meta spec__stamp"><span data-dev="measured">network.btx-monitoring.com measures btxchain/btx on GitHub every hour.</span> Source: <a href="https://network.btx-monitoring.com/api/v1/development.json" rel="noopener noreferrer">development API&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="section" id="onward" aria-labelledby="onward-title">
+    <div class="wrap">
+      <div class="sheet">
+        <span class="sec-rule sec-rule--s" aria-hidden="true"></span>
+        <div class="section__head">
+          <p class="label eyebrow">On this site</p>
+          <h2 id="onward-title">Where next</h2>
+          <p class="lede">Three pages that go further than the numbers.</p>
+        </div>
+        <ul class="rows">
+          <li><a class="row" href="/new/design04/infra/">
+            <span class="row__name">Run a node or other infrastructure</span>
+            <span class="row__desc">Machines you can give the network, from a node at home to a fuzz box, each with its guide.</span>
+            <span class="row__arr" aria-hidden="true">→</span></a></li>
+          <li><a class="row" href="/new/design04/dev/work/">
+            <span class="row__name">Ongoing work of the developers</span>
+            <span class="row__desc">Where the node software stands and who works on what: tests, the nightly CI run, lanes and gates.</span>
+            <span class="row__arr" aria-hidden="true">→</span></a></li>
+          <li><a class="row" href="/new/design04/learn/">
+            <span class="row__name">What BTX is</span>
+            <span class="row__desc">A few facts about BTX, each with its source.</span>
+            <span class="row__arr" aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</main>
+
+<!-- FOOTER:START -->
+<footer class="ftr">
+  <div class="wrap">
+    <div class="sheet ftr__sheet">
+    <h2 class="label ftr__title">Every page on this site</h2>
+    <div class="ftr__map">
+      <div class="ftr__line ftr__line--s">
+        <h3 id="ftr-s"><span class="badge badge--sm badge--s" aria-hidden="true">S</span>Start here</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design04/">Home</a></li>
+          <li><a href="/new/design04/learn/">Learn</a></li>
+          <li><a href="/new/design04/links/">Links</a></li>
+          <li><a href="/new/design04/#before-buying">Before you buy</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--m">
+        <h3 id="ftr-m"><span class="badge badge--sm badge--m" aria-hidden="true">M</span>Mine BTX</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design04/#miners">Mining steps</a></li>
+          <li><a href="/new/design04/links/#cat-miners">Miners</a></li>
+          <li><a href="/new/design04/links/#cat-pools">Pools</a></li>
+          <li><a href="/new/design04/network/">Network</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--n">
+        <h3 id="ftr-n"><span class="badge badge--sm badge--n" aria-hidden="true">N</span>Run a node</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design04/infra/">Run a node</a></li>
+          <li><a href="/new/design04/infra/#before-installing">Install checklist</a></li>
+          <li><a href="/new/design04/links/#cat-node-tools">Node tools</a></li>
+          <li><a href="/new/design04/network/">Network</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--b">
+        <h3 id="ftr-b"><span class="badge badge--sm badge--b" aria-hidden="true">B</span>Build</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design04/dev/">Developers</a></li>
+          <li><a href="/new/design04/dev/work/">Ongoing work</a></li>
+          <li><a href="/new/design04/projects/">Projects</a></li>
+          <li><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr__base">
+      <p><strong>Run by community members, not by a company.</strong> Nothing on this site is financial advice. Links lead to third parties; we are not responsible for their content.</p>
+      <ul class="ftr__links">
+        <li><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code on GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        <li><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Status page <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        <li><button class="ftr__bg" type="button" data-bg-toggle aria-pressed="false" hidden>Pause background animation</button></li>
+      </ul>
+      <p class="meta">Live data comes from the public status API of network.btx-monitoring.com (<a href="https://network.btx-monitoring.com/api/v1/status.json" rel="noopener noreferrer">api/v1/status.json&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>), checked every 60 seconds.</p>
+    </div>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END -->
+</body>
+</html>

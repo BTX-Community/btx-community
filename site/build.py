@@ -2918,8 +2918,41 @@ def draft_href(href: str, live_to_draft: dict[str, str]) -> str:
     return href if target is None else target + mark + anchor
 
 
+# A draft that arrives as a finished static site (not built from our content) sits in
+# new-static/<name>/: draft.yaml says what it is and who made it, files/ holds the pages exactly as
+# they are served under /new/<name>/. site/tools/import_draft.py brings such a site in line with the
+# rules of the drafts (banner, noindex, "[Draft]", no inline code, no third-party requests) first.
+STATIC_DIR = "new-static"
+
+
+class StaticDraft(_Model):
+    """draft.yaml of a draft that is a finished static site."""
+
+    title: Annotated[StrictStr, Field(min_length=1, max_length=60)]
+    summary: Annotated[StrictStr, Field(min_length=1, max_length=MAX_TEXT)]
+    source: Annotated[StrictStr, Field(min_length=1, max_length=MAX_TEXT)]
+
+
+def load_static_drafts(folder: Path) -> dict[str, StaticDraft]:
+    """The static drafts in new-static/, by folder name; each needs draft.yaml and files/index.html."""
+    drafts = {}
+    for child in sorted(folder.iterdir()) if folder.is_dir() else ():
+        if not (child / "draft.yaml").is_file():
+            continue
+        if not re.fullmatch(NEW_NAME, child.name):
+            raise ContentError(f"static draft folder {child.name!r} must be named like designNN")
+        if not (child / "files" / "index.html").is_file():
+            raise ContentError(f"{child.name}: no files/index.html")
+        try:
+            drafts[child.name] = StaticDraft.model_validate(load_yaml(child / "draft.yaml"))
+        except ValidationError as exc:
+            raise ContentError(f"{child.name}/draft.yaml: {exc}") from exc
+    return drafts
+
+
 def render_new(
-    designs: dict[str, NewDesign], base_context: Callable[[str], dict[str, object]], version: str
+    designs: dict[str, NewDesign], base_context: Callable[[str], dict[str, object]], version: str,
+    static: dict[str, StaticDraft] | None = None,
 ) -> dict[str, str]:
     """Every page of every draft and the overview /new/, by URL path."""
     env = Environment(
@@ -2946,7 +2979,7 @@ def render_new(
             rendered[pages[page_id]] = env.get_template(f"{name}/{p.template}").render(ctx)
     overview = base_context("home")
     overview.update(
-        designs=[(name, d, f"/{NEW_DIR}/{name}/") for name, d in designs.items()],
+        designs=[(name, d, f"/{NEW_DIR}/{name}/") for name, d in sorted({**designs, **(static or {})}.items())],
         feedback=NEW_FEEDBACK, overview_css=asset_url("css/new/overview.css"), version=version,
     )
     rendered[f"/{NEW_DIR}/"] = env.get_template("index.html.j2").render(overview)
@@ -3002,10 +3035,15 @@ def build(out: Path, version: str) -> None:
             old_path = ("/" if lang == "en" else f"/{lang}/") + f"{old}/"
             rendered[old_path] = env.get_template("_moved.html.j2").render(moved)
 
+    designs = load_new_designs(ROOT / "templates" / NEW_DIR)
+    static_drafts = load_static_drafts(ROOT / STATIC_DIR)
+    if clash := set(designs) & set(static_drafts):
+        raise ContentError(f"draft name used twice: {sorted(clash)}")
     rendered.update(render_new(
-        load_new_designs(ROOT / "templates" / NEW_DIR),
+        designs,
         lambda live: context(page, guide, hub, texts, "en", version, live, sayers["en"], infra, projects),
         version,
+        static_drafts,
     ))
 
     if out.exists():
@@ -3013,6 +3051,8 @@ def build(out: Path, version: str) -> None:
     shutil.copytree(ROOT / "static", out / "static")
     # Browsers that ignore the icon links of the page ask for /favicon.ico.
     shutil.copy(ROOT / "static" / "icons" / "favicon.ico", out / "favicon.ico")
+    for name in static_drafts:
+        shutil.copytree(ROOT / STATIC_DIR / name / "files", out / NEW_DIR / name)
     for path, html in rendered.items():
         target = out / path.strip("/") / "index.html"
         target.parent.mkdir(parents=True, exist_ok=True)

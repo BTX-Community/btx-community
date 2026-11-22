@@ -1,0 +1,137 @@
+/* Projects page (/projects/). Page-only layout and components; tokens only, no shared component
+   is redefined. Loaded after /assets/site.css.
+   - .proj__intro: the "Note" signpost and the regtest/testnet "Check", under the section header
+     (side by side from 960px, so neither sets body text in a narrow column).
+   - .proj__side: the side column, holding only the index.
+   - .proj__layout: the side column (left from 1100px; the index sticks in tall windows) beside the five sheets.
+   - .pindex: the index, drawn as a rose line with hollow stops (like the footer route map).
+   - .proj: one sheet per project. ● There today and ○ Missing sit on a short rose line (solid dot,
+     dashed segment, hollow dot: the roadmap's Done → Next language), beside "Start from" / "Who to ask" rows.
+   - .proj__open: the list of open blockers under "Missing". .proj__also: a plain link under a row list.
+   - .docs: the six documents as shared rows whose title is a heading; its link is stretched over the row. */
+
+/* Signpost and check, under the section header */
+.proj__intro { display: grid; gap: var(--s-3); margin-bottom: var(--s-6); }
+@media (min-width: 960px) {
+  .proj__intro { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+}
+
+/* Side column beside the sheets */
+.proj__layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-6); }
+@media (min-width: 1100px) {
+  .proj__layout { grid-template-columns: 15rem minmax(0, 1fr); column-gap: var(--s-7); align-items: start; }
+  /* The side column runs the full height so the index can stick. */
+  .proj__side { align-self: stretch; }
+}
+@media (min-width: 1100px) and (min-height: 640px) {
+  .pindex { position: sticky; top: var(--s-5); }
+}
+
+.pindex__title { margin-bottom: var(--s-2); }
+.pindex ol { list-style: none; margin: 0; padding: 0; }
+.pindex li { position: relative; }
+/* The line runs from each stop's dot to the next one. */
+.pindex li:not(:last-child)::after {
+  content: ""; position: absolute; left: 12px; top: 22px; height: 100%; width: 4px;
+  background: var(--line-b); border-radius: 2px;
+}
+.pindex a {
+  position: relative; display: grid; grid-template-columns: 2.25em minmax(0, 1fr); align-items: baseline;
+  min-height: 44px; padding: 10px 0 10px 40px; text-decoration: none; color: var(--ink);
+}
+.pindex a::before {
+  content: ""; position: absolute; z-index: 1; left: 4px; top: 12px; width: 20px; height: 20px;
+  border-radius: 50%; border: 4px solid var(--line-b); background: var(--bg);
+}
+.pindex a:hover::before { background: var(--line-b); }
+.pindex__n { font: 500 var(--fs-label)/1.3 var(--mono); letter-spacing: .12em; color: var(--ink-2); }
+.pindex__name { font-weight: 700; font-size: 1rem; line-height: 1.35; }
+.pindex__gap { grid-column: 2; margin-top: 2px; font-size: var(--fs-small); line-height: 1.4; color: var(--ink-2); }
+.pindex a:hover .pindex__name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+@media (min-width: 600px) and (max-width: 1099px) {
+  /* Two columns of stops would break the line, so the index stays one column but shorter lines. */
+  .pindex { max-width: 36rem; }
+}
+
+/* Project sheets */
+.proj__list { display: grid; gap: var(--s-5); }
+.proj { container-type: inline-size; scroll-margin-top: var(--s-5); }
+.proj__title {
+  margin-top: var(--s-2); font-size: var(--fs-h3-lg); line-height: 1.15;
+  letter-spacing: -0.015em; text-wrap: balance;
+}
+.proj__sum { margin-top: var(--s-3); color: var(--ink-2); font-size: 1.0625rem; line-height: 1.55; max-width: 62ch; }
+.proj__grid {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-6);
+  margin-top: var(--s-5); padding-top: var(--s-5); border-top: 1px solid var(--rule);
+}
+@container (min-width: 720px) {
+  .proj__grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); column-gap: var(--s-7); }
+}
+
+/* ● There today → ○ Missing on a short rose line */
+.proj__facts { margin: 0; }
+.proj__fact { position: relative; padding: 0 0 var(--s-5) 40px; }
+.proj__fact:last-child { padding-bottom: 0; }
+.proj__fact::before {
+  content: ""; position: absolute; z-index: 1; left: 4px; top: 0; width: 20px; height: 20px;
+  border-radius: 50%; border: 4px solid var(--line-b); background: var(--bg);
+}
+.proj__fact--have::before { background: var(--line-b); }
+.proj__fact:not(:last-child)::after {
+  content: ""; position: absolute; left: 12px; top: 10px; height: 100%; width: 0;
+  border-left: 4px dashed var(--line-b);
+}
+.proj__fact dt { padding-top: 3px; }
+.proj__fact dd { margin: var(--s-2) 0 0; font-size: 1.0625rem; line-height: 1.6; }
+.proj__fact dd p { max-width: 60ch; }
+.proj__fact dd p + p { margin-top: var(--s-2); }
+.proj__open { max-width: 60ch; margin: var(--s-2) 0 0; padding-left: 1.1em; }
+.proj__open li + li { margin-top: var(--s-1); }
+.proj__fact .more { margin-top: var(--s-1); }
+.proj__fact .more__body p + p { margin-top: var(--s-2); }
+.proj__fact code, .proj__fact .more__body code { white-space: nowrap; overflow-wrap: normal; }
+.proj__careful { margin-top: var(--s-5); }
+
+/* Start from / Who to ask */
+.proj__help > .label { margin: 0; }
+.proj__help > .label + .rows { margin-top: var(--s-2); }
+.proj__help > .rows + .label { margin-top: var(--s-5); }
+.proj__help > .label:first-child { padding-top: 3px; } /* shares a baseline with "There today" beside it */
+.proj__help > .rows:last-child > li:last-child { border-bottom: 0; } /* Sources draws the rule below */
+.proj__also { margin-top: var(--s-1); }
+.proj__also a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; font-size: var(--fs-small); }
+
+/* Sources: the code locations behind every claim, folded */
+.proj__src { margin-top: var(--s-5); padding-top: var(--s-1); border-top: 1px solid var(--rule); }
+.proj__cites { list-style: none; margin: 0; padding: 0; }
+.proj__cites a { display: block; min-height: 44px; padding-block: 11px; line-height: 1.45; }
+/* File paths in these links break anywhere (site.css: .more__body a code); the link itself does not use
+   break-word, so the arrow after its no-break space never wraps alone. */
+.proj__cites a { overflow-wrap: normal; }
+.proj__stamp { margin-top: var(--s-2); }
+/* Versions and branch names ("release-0.34.17") never break at their hyphen. */
+.proj__stamp .mono, .docs .mono { white-space: nowrap; }
+
+/* Documents: shared rows; the heading's link covers the whole row */
+.docs .row { position: relative; }
+.docs .row__name a { text-decoration: none; color: inherit; }
+.docs .row__name a::after { content: ""; position: absolute; inset: 0; }
+.docs .row:hover .row__name a { text-decoration: underline; text-underline-offset: 4px; }
+.docs .row:hover .row__arr { transform: translateX(4px); }
+/* Keyboard focus rings the whole row, as on the "Start from" and "Who to ask" rows (a.row). */
+.docs .row:has(.row__name a:focus-visible) { outline: 3px solid var(--ink); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus); border-radius: var(--r-1); }
+.docs .row:has(.row__name a:focus-visible) .row__name a { outline: none; box-shadow: none; }
+.docs .row__desc { margin-top: var(--s-1); }
+.docs .docs__when { font-size: var(--fs-small); color: var(--ink-3); }
+/* Links and terms inside a row stay clickable above the stretched link. */
+.docs .docs__inline, .docs .row .term { position: relative; z-index: 1; }
+.docs__all { margin-top: var(--s-6); }
+.docs__all .btn { white-space: normal; padding-block: 10px 8px; line-height: 1.3; justify-content: flex-start; }
+
+/* Windows High Contrast: keep the index line and the solid "There today" dot. */
+@media (forced-colors: active) {
+  .pindex li:not(:last-child)::after, .pindex a:hover::before, .proj__fact--have::before {
+    forced-color-adjust: none; background: CanvasText;
+  }
+}

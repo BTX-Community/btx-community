@@ -948,7 +948,10 @@ class PageTest(unittest.TestCase):
 
     def test_every_page_has_an_icon_that_exists(self) -> None:
         self.assertTrue((self.out / "favicon.ico").is_file())
-        for page in sorted(self.out.rglob("index.html")):
+        # Static drafts (new-static/) are other people's finished sites with their own icon.
+        static = {Path(build.NEW_DIR) / name for name in build.load_static_drafts(build.ROOT / build.STATIC_DIR)}
+        for page in sorted(p for p in self.out.rglob("index.html")
+                           if Path(*p.relative_to(self.out).parts[:2]) not in static):
             html = page.read_text(encoding="utf-8")
             hrefs = re.findall(r'<link rel="(?:icon|apple-touch-icon)" href="([^"?]+)', html)
             with self.subTest(page=str(page.relative_to(self.out))):
@@ -1460,6 +1463,43 @@ class DraftsTest(unittest.TestCase):
         self.assertIn('<meta name="robots" content="noindex, nofollow">', overview)
         for name in self.designs:
             self.assertIn(f'href="/{build.NEW_DIR}/{name}/"', overview)
+
+    def test_every_page_of_every_static_draft_says_it_is_a_draft_and_obeys_the_csp(self) -> None:
+        drafts = build.load_static_drafts(build.ROOT / build.STATIC_DIR)
+        overview = (self.out / build.NEW_DIR / "index.html").read_text(encoding="utf-8")
+        for name in drafts:
+            self.assertIn(f'href="/{build.NEW_DIR}/{name}/"', overview)
+            root = self.out / build.NEW_DIR / name
+            pages = sorted(root.rglob("index.html"))
+            self.assertTrue(pages, name)
+            own = {"/" + p.parent.relative_to(root).as_posix().replace(".", "") for p in pages}
+            for page in pages:
+                with self.subTest(draft=name, page=str(page.relative_to(root))):
+                    html = page.read_text(encoding="utf-8")
+                    self.assertIn('<meta name="robots" content="noindex, nofollow">', html)
+                    self.assertRegex(html, r'<link rel="canonical" href="https://btx-community\.com/[^"]*">')
+                    self.assertRegex(html, r"<title>\[Draft\] ")
+                    self.assertIn('class="draft-banner"', html)
+                    self.assertIn(build.NEW_FEEDBACK, html)
+                    self.assertNotIn("<style", html)
+                    self.assertNotIn("javascript:", html)
+                    for tag, attrs in tags(html):
+                        self.assertNotIn(tag, ("img", "iframe", "object", "embed", "base", "form"))
+                        self.assertNotIn("style", attrs, tag)
+                        self.assertEqual([n for n in attrs if n.startswith("on")], [], tag)
+                        if tag == "script":
+                            self.assertTrue((attrs.get("src") or "").startswith(f"/{build.NEW_DIR}/{name}/"), attrs)
+                        if tag == "link" and attrs.get("rel") == "stylesheet":
+                            self.assertTrue((attrs.get("href") or "").startswith(f"/{build.NEW_DIR}/{name}/"), attrs)
+                        # A root-absolute link to one of the draft's own pages must stay in the draft.
+                        href = attrs.get("href") or ""
+                        if href.startswith("/") and not href.startswith("//"):
+                            bare = href.split("#")[0].split("?")[0].rstrip("/")
+                            self.assertFalse(bare in own and not bare.startswith(f"/{build.NEW_DIR}/"), href)
+            for script in root.rglob("*.js"):
+                self.assertNotRegex(script.read_text(encoding="utf-8"), r"createElement\(\s*[\"']style", script.name)
+            for sheet in root.rglob("*.css"):
+                self.assertNotIn("fonts.googleapis.com", sheet.read_text(encoding="utf-8"), sheet.name)
 
     def test_links_inside_a_draft_stay_in_the_draft(self) -> None:
         for name, design in self.designs.items():

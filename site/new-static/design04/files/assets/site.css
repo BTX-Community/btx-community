@@ -1,0 +1,1334 @@
+/* BTX Community · "Route" design system. Every value comes from DESIGN.md.
+   Components use tokens only; raw colour values live in the token blocks below. */
+
+/* ==========================================================================
+   2. Colour tokens · 3. Type · 4. Spacing · 5. Shape
+   ========================================================================== */
+:root {
+  /* "Graphite and cobalt". Dark only. Graphite sheets on one fixed blue-to-pink page gradient (the only
+     gradient allowed), and four accents: ivory white, sky blue, cobalt and rose. No yellow, green, amber,
+     orange, red or glow.
+     Restraint: colour only on lines, badges, route maps, live status and the focus halo. */
+  color-scheme: dark;
+  --bg: #0E0E10;          /* graphite canvas: html fallback, solid dot fills */
+  /* The only gradient on the site: the page background, on a fixed layer (body::before). */
+  --bg-gradient: linear-gradient(135deg, #0C1D4A 0%, #111637 38%, #1D1235 62%, #3A1031 100%);
+  --sheet: rgb(23 23 26 / .86);   /* graphite sheet over the gradient: sheets and panels */
+  --surface: var(--sheet);        /* panels, rows, inputs */
+  --surface-2: rgb(31 31 35 / .9); /* recessed areas, code, note callouts */
+  --panel: #17171A;       /* solid fill for floating things: popovers, language list */
+  --ink: #EDEDE8;         /* ivory text (13.8:1 on the lightest gradient stop) */
+  --ink-2: #B4B4AE;       /* secondary text (7.8:1 on the gradient) */
+  --ink-3: #8A8A84;       /* meta text (4.7:1 on the gradient); never below 15px */
+  --rule: rgb(237 237 232 / .12);   /* hairlines take a faint tint from the gradient */
+  --rule-2: rgb(237 237 232 / .22); /* hover and control borders */
+  --rule-strong: #EDEDE8; /* 2px sign borders */
+  --tick: rgb(237 237 232 / .6);    /* board corner ticks */
+  --rule-hover: rgb(237 237 232 / .4); /* route card hover border */
+
+  /* The four lines. --line-n (cobalt, 3.7:1) is for lines, dots, badges and fills, never small text. */
+  --line-s: #EDEDE8;      /* Start here: ivory white */
+  --line-m: #4FB3F6;      /* Mine BTX: sky blue */
+  --line-n: #3D63DD;      /* Run a node: cobalt */
+  --line-b: #E4579A;      /* Build: rose */
+  --on-line-s: #0E0E10;   /* text on each line colour, all 4.5:1 or more */
+  --on-line-m: #0E0E10;
+  --on-line-n: #FFFFFF;
+  --on-line-b: #0E0E10;
+
+  /* Roles built from the same four colours */
+  --sky: var(--line-m);           /* Normal, OK, focus halo, link underline, board label, burn bar */
+  --rose: var(--line-b);          /* Degraded, Watch, Problem, Incident, warning edges and labels */
+  --on-rose: #0E0E10;
+  --tint-sky: rgb(79 179 246 / .16); /* new-block row highlight */
+  --chip-sky: rgb(79 179 246 / .12); /* board status chip: Normal */
+  --chip-rose: rgb(228 87 154 / .12); /* board status chip: Degraded */
+  --focus: var(--sky);
+
+  --hdr-bg: rgb(9 9 10 / .82);
+  --hdr-solid: #09090A;   /* the open mobile menu panel stays solid */
+  --hdr-ink: var(--ink);
+  --hdr-rule: var(--rule);
+
+  /* Departures board: a shade darker than the page */
+  --board: #09090A;
+  --board-ink: var(--ink);
+  --board-dim: var(--ink-2);
+  --board-label: var(--sky);
+  --board-rule: var(--rule);
+  --board-track: var(--rule);
+
+  --font: "Overpass", "Overpass Fallback", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "Overpass Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --fs-display: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
+  --fs-h1: clamp(2.125rem, 1.6rem + 2.2vw, 3.25rem);
+  --fs-h2: clamp(1.5rem, 1.25rem + 1.1vw, 2.125rem);
+  --fs-h3: 1.25rem;
+  --fs-h3-lg: clamp(1.5rem, 1.2rem + 1vw, 2rem); /* large card titles: line cards, project, path and role cards */
+  --fs-lede: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --fs-body: 1.125rem;
+  --fs-small: 0.9375rem;
+  --fs-label: 0.8125rem;
+  --fs-data: 1.75rem;
+  --fs-board: 2rem;
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --wrap: 1160px;
+  --gutter: 16px;
+  --section: clamp(48px, 2rem + 2.5vw, 64px); /* space between major sections */
+  --sheet-pad: clamp(24px, 3vw, 48px);
+
+  /* One radius for every large shape (sheets, board, buttons, cards, signs); --r-1 only for
+     chips, code, inputs and tags. Badges and pills stay round. */
+  --r-1: 4px; --r-2: 8px; --r-pill: 999px;
+  --shadow: 0 8px 24px rgb(0 0 0 / .5);
+  --ease-draw: cubic-bezier(.65, 0, .35, 1);
+  --hdr-h: 64px;
+  --route: var(--ink); /* line colour; .route--s/m/n/b and friends override it */
+  --on-route: var(--bg);
+}
+
+@media (min-width: 768px) { :root { --gutter: 24px; } }
+@media (min-width: 1100px) { :root { --gutter: 32px; } }
+@media (max-width: 599px) { :root { --fs-body: 1.0625rem; --fs-data: 1.25rem; --fs-board: 1.625rem; } }
+
+/* 3. A metric-matched local fallback, so text does not shift when Overpass arrives.
+   Measured in Chrome against Overpass (ascent .883, descent .383, widths within 0.1% of Arial). */
+@font-face {
+  font-family: "Overpass Fallback"; src: local("Arial"), local("ArialMT"); font-weight: 100 600;
+  size-adjust: 100.1%; ascent-override: 88.2%; descent-override: 38.3%; line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Overpass Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"); font-weight: 700 900;
+  size-adjust: 99.9%; ascent-override: 88.4%; descent-override: 38.3%; line-gap-override: 0%;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: var(--s-5); background: var(--bg); }
+/* The page background: the gradient on a fixed layer, so it stays put while the page scrolls
+   (background-attachment: fixed does not work on iOS). html keeps graphite as the fallback. */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--bg-gradient);
+}
+body {
+  margin: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { max-width: 100%; }
+img { height: auto; }
+h1, h2, h3, h4 { margin: 0; font-weight: 800; color: var(--ink); }
+h1 { font-size: var(--fs-h1); line-height: 1.05; letter-spacing: -0.015em; }
+h2 { font-size: var(--fs-h2); line-height: 1.15; letter-spacing: -0.015em; font-weight: 700; }
+h1, h2 { text-wrap: balance; }
+p, .lede { text-wrap: pretty; }
+h3 { font-size: var(--fs-h3); line-height: 1.25; font-weight: 700; }
+h4 { font-size: var(--fs-body); line-height: 1.3; font-weight: 700; }
+p, ul, ol, dl, figure, blockquote { margin: 0; }
+p + p { margin-top: var(--s-3); }
+strong, b { font-weight: 700; }
+code, kbd, samp { font-family: var(--mono); font-weight: 500; font-size: .9em; }
+:not(pre) > code { background: var(--surface-2); padding: .05em .2em; border-radius: var(--r-1); overflow-wrap: anywhere; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: var(--s-6) 0; }
+abbr[title] { text-decoration: underline dotted; }
+[hidden] { display: none !important; }
+
+/* 6.10 Links in prose */
+a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--sky); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 3px; }
+
+.prose { max-width: 66ch; }
+.prose > * + * { margin-top: var(--s-4); }
+.prose ul, .prose ol { padding-left: 1.25em; }
+.prose li + li { margin-top: var(--s-2); }
+.lede { font-size: var(--fs-lede); line-height: 1.45; color: var(--ink-2); max-width: 58ch; }
+.small, small { font-size: var(--fs-small); line-height: 1.5; }
+.meta { font-size: var(--fs-small); color: var(--ink-3); }
+/* 3. The label style ("mono for labels, sans for content"): eyebrows, board and sign labels,
+   stop counts, breadcrumbs, table heads, tags, footer heading, roadmap dates. Overpass Mono 500,
+   13px, .12em, uppercase, --ink-2. Never lighter than --ink-2 at this size. */
+.label, .crumbs, .callout__label, .tag, .table thead th, .table td[data-label]::before,
+.hero__label, .board__label, .sign__count, .checklist__count {
+  font-family: var(--mono); font-size: var(--fs-label); font-weight: 500; line-height: 1.3;
+  letter-spacing: .12em; text-transform: uppercase;
+}
+.label { color: var(--ink-2); }
+.mono { font-family: var(--mono); font-weight: 500; }
+/* Versions and addresses keep their case inside a label: "Release v0.34.16", not "V0.34.16". */
+.nocase { text-transform: none; }
+.nowrap { white-space: nowrap; }
+
+/* 6.10 Focus (every focusable element) */
+:focus { outline: none; }
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px var(--focus);
+}
+a:focus-visible, .term:focus-visible { border-radius: var(--r-1); }
+
+/* Screen-reader only and skip link */
+.sr-only {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.skip {
+  position: absolute; left: var(--s-4); top: var(--s-2); z-index: 100;
+  padding: var(--s-3) var(--s-4); background: var(--ink); color: var(--bg);
+  font-weight: 700; border-radius: var(--r-2); transform: translateY(-200%);
+}
+.skip:focus { transform: none; }
+
+/* ==========================================================================
+   4. Layout utilities
+   ========================================================================== */
+.wrap { width: 100%; max-width: calc(var(--wrap) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section) 0; }
+
+/* 6.16 Section header kit: [.sec-rule] → .eyebrow (mono label) → h2 → .lede, then the content.
+   <span class="sec-rule sec-rule--s" aria-hidden="true"></span>
+   <div class="section__head"><p class="label eyebrow">Facts</p><h2 id="x-title">…</h2><p class="lede">…</p></div> */
+.section__head { margin-bottom: var(--s-6); }
+.section__head > * + * { margin-top: var(--s-3); }
+.section__head > .eyebrow + * { margin-top: var(--s-2); }
+.section__head .lede { max-width: 58ch; }
+.eyebrow { display: block; margin: 0; }
+/* A 2px rule in the colour of the line the section serves; it draws in once from the left
+   (site.js adds .is-drawn on first view). Without JS and under reduced motion it is simply there.
+   --all is the route chooser's bundle: the four line colours as four parallel 2px lines. */
+.sec-rule {
+  --rule-c: var(--line-s);
+  display: block; height: 2px; margin-bottom: var(--s-5); border-radius: 1px;
+  background: var(--rule-c); transform-origin: 0 50%;
+  transition: transform 700ms var(--ease-draw);
+}
+.sec-rule--s { --rule-c: var(--line-s); }
+.sec-rule--m, .sec-rule--sky { --rule-c: var(--line-m); }
+.sec-rule--n { --rule-c: var(--line-n); }
+.sec-rule--b, .sec-rule--rose { --rule-c: var(--line-b); }
+.sec-rule--all {
+  --rule-c: var(--line-s); margin-bottom: calc(var(--s-5) + 12px);
+  box-shadow: 0 4px 0 var(--line-m), 0 8px 0 var(--line-n), 0 12px 0 var(--line-b);
+}
+.js:not([data-motion="off"]) .sec-rule:not(.is-drawn) { transform: scaleX(0); }
+
+/* 6.17 Sheet: a graphite sheet on the gradient. Sections that are reading matter sit on one
+   (checklist, facts, "Why", the AI section, the footer); the hero + board, the route chooser
+   and the roadmap sit straight on the gradient. */
+.sheet {
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r-2);
+  padding: var(--sheet-pad);
+}
+.sheet > .sec-rule:first-child { margin-top: 0; }
+.stack > * + * { margin-top: var(--s-4); }
+.stack-lg > * + * { margin-top: var(--s-6); }
+.cluster { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+
+.grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-6); }
+@media (min-width: 960px) {
+  .grid { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s-6) var(--s-5); }
+  .grid > * { grid-column: 1 / -1; }
+  .span-4 { grid-column: span 4; } .span-5 { grid-column: span 5; }
+  .span-6 { grid-column: span 6; } .span-7 { grid-column: span 7; }
+  .span-8 { grid-column: span 8; } .span-12 { grid-column: 1 / -1; }
+  .grid > .span-4, .grid > .span-5, .grid > .span-6, .grid > .span-7, .grid > .span-8 { grid-column-end: auto; }
+}
+
+/* 1. Line badges */
+.badge {
+  display: inline-grid; place-items: center; flex: none;
+  width: 28px; height: 28px; border-radius: var(--r-pill);
+  background: var(--route); color: var(--on-route);
+  font: 800 .9375rem/1 var(--font); letter-spacing: 0;
+  padding-top: 2px; /* Overpass sits high; optical centre */
+}
+.badge--sm { width: 22px; height: 22px; font-size: .75rem; }
+.badge--lg { width: 36px; height: 36px; font-size: 1.125rem; }
+.badge--s, .route--s, .station--s, .routes__item--s, .ftr__line--s { --route: var(--line-s); --on-route: var(--on-line-s); }
+.badge--m, .route--m, .station--m, .routes__item--m, .ftr__line--m { --route: var(--line-m); --on-route: var(--on-line-m); }
+.badge--n, .route--n, .station--n, .routes__item--n, .ftr__line--n { --route: var(--line-n); --on-route: var(--on-line-n); }
+.badge--b, .route--b, .station--b, .routes__item--b, .ftr__line--b { --route: var(--line-b); --on-route: var(--on-line-b); }
+.station--board { --route: var(--sky); }
+
+/* Brand mark: four dots in the four line colours */
+.mark { display: inline-grid; grid-template-columns: 6px 6px; gap: 3px; flex: none; }
+.mark i { width: 6px; height: 6px; border-radius: 50%; }
+.mark i:nth-child(1) { background: var(--line-s); }
+.mark i:nth-child(2) { background: var(--line-m); }
+.mark i:nth-child(3) { background: var(--line-n); }
+.mark i:nth-child(4) { background: var(--line-b); }
+
+/* ==========================================================================
+   6.1 Header (.hdr) and mobile menu
+   ========================================================================== */
+.hdr { background: var(--hdr-bg); color: var(--hdr-ink); border-bottom: 1px solid var(--hdr-rule); position: relative; z-index: 50; }
+.hdr a { color: var(--hdr-ink); text-decoration: none; }
+.hdr__in { display: flex; align-items: center; gap: var(--s-3); min-height: var(--hdr-h); }
+.hdr__brand {
+  display: inline-flex; align-items: center; gap: var(--s-2); min-height: 44px;
+  font-weight: 800; font-size: 1.125rem; letter-spacing: -0.01em; white-space: nowrap; margin-right: auto;
+}
+.hdr__brand:hover { text-decoration: none; }
+.hdr__brand .mark { transform: translateY(-1px); }
+.hdr__panel { display: block; }
+
+.hdr__nav { list-style: none; padding: 0; margin: 0; }
+.hdr__nav a {
+  --cur: var(--hdr-ink);
+  position: relative; display: flex; align-items: center; min-height: 44px;
+  font-weight: 600; font-size: 1rem; white-space: nowrap;
+}
+@media (max-width: 959px) { .hdr__nav a:hover { text-decoration: underline; text-underline-offset: 6px; } }
+.hdr__nav a[aria-current] { font-weight: 800; } /* "page", or "true" on a sub-page such as /dev/work/ */
+.hdr__nav .l-s { --cur: var(--line-s); } .hdr__nav .l-m { --cur: var(--line-m); }
+.hdr__nav .l-n { --cur: var(--line-n); } .hdr__nav .l-b { --cur: var(--line-b); }
+.hdr__nav .l-board { --cur: var(--sky); }
+
+.hdr__tools { display: flex; align-items: center; gap: var(--s-2); }
+.hdr__btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  min-width: 44px; min-height: 44px; padding: 0 var(--s-3);
+  background: transparent; color: var(--hdr-ink); border: 1px solid var(--hdr-rule); border-radius: var(--r-2);
+  font: 600 var(--fs-small)/1 var(--font); cursor: pointer; list-style: none;
+}
+.hdr__btn:hover { border-color: var(--rule-2); background: var(--hdr-solid); }
+.hdr__btn::-webkit-details-marker { display: none; }
+
+/* Language menu */
+.lang { position: relative; }
+.lang summary .caret {
+  display: inline-block; width: 7px; height: 7px; flex: none;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+.lang__list {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; width: 260px;
+  background: var(--panel); color: var(--ink); border: 2px solid var(--rule-strong);
+  border-radius: var(--r-2); box-shadow: var(--shadow); padding: var(--s-2);
+}
+.lang__list ul { list-style: none; margin: 0; padding: 0; }
+.hdr .lang__list a { color: var(--ink); display: flex; gap: var(--s-3); align-items: center; min-height: 44px; padding: 0 var(--s-3); border-radius: var(--r-1); }
+.hdr .lang__list a:hover { background: var(--hdr-solid); }
+.lang__list a[aria-current] { font-weight: 800; }
+.lang__code { font-family: var(--mono); font-weight: 700; font-size: var(--fs-label); width: 2.2em; color: var(--ink-2); }
+.lang__note { font-size: var(--fs-small); color: var(--ink-3); padding: var(--s-2) var(--s-3) var(--s-1); border-top: 1px solid var(--rule); margin-top: var(--s-2); }
+
+/* Live status pill (header) */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 2px 12px 0;
+  border: 1px solid var(--hdr-rule); border-radius: var(--r-pill);
+  font: 700 var(--fs-small)/1 var(--font); white-space: nowrap; color: var(--hdr-ink);
+  position: relative;
+}
+.pill::after { content: ""; position: absolute; inset: -4px; } /* 44px tap target */
+.hdr .pill:hover { border-color: var(--hdr-ink); text-decoration: none; }
+/* Status shapes come from Overpass Mono: Overpass draws ● and ■ at about a third of the size of ▲,
+   Overpass Mono draws ●, ▲, ■ and ○ all the same size. */
+.pill__shape, .shape { font-family: var(--mono); }
+.pill__shape { font-size: .8em; line-height: 1; transform: translateY(-1px); }
+.pill--normal .pill__shape { color: var(--sky); }
+.pill--degraded .pill__shape { color: var(--rose); }
+.hdr .pill--incident { background: var(--rose); border-color: var(--rose); color: var(--on-rose); }
+.hdr .pill--incident:hover { border-color: var(--ink); }
+.pill--unknown .pill__shape { color: var(--ink-3); }
+
+.hdr__menu-btn { display: none; }
+
+/* Desktop: nav inline */
+@media (min-width: 960px) {
+  .hdr__panel { display: contents; }
+  /* .hdr__panel is display: contents, so the flex item is the <nav>: it takes the auto margin and
+     pushes the status pill and the language menu to the right edge. */
+  .hdr__nav { display: flex; gap: 2px; }
+  .hdr__panel > nav { order: 1; margin-right: auto; }
+  .hdr__nav a { padding: 0 8px; }
+  /* P12: on hover or keyboard focus a 2px underline in the link's line colour grows from the left.
+     The current page keeps its 4px underline. Reduced motion: it appears without the grow. */
+  .hdr__nav a::after {
+    content: ""; position: absolute; left: 8px; right: 8px; bottom: -10px; height: 2px;
+    background: var(--cur); border-radius: 1px;
+    transform: scaleX(0); transform-origin: 0 50%; transition: transform 250ms var(--ease-draw);
+  }
+  .hdr__nav a:hover::after, .hdr__nav a:focus-visible::after { transform: scaleX(1); }
+  .hdr__nav a[aria-current]::after { height: 4px; border-radius: 2px; transform: none; transition: none; }
+  .hdr__brand { margin-right: var(--s-4); }
+  .pill { order: 2; }
+  .hdr__tools { order: 3; }
+}
+@media (min-width: 960px) and (max-width: 1099px) {
+  .hdr__nav a { padding: 0 6px; font-size: .9375rem; }
+  .hdr__nav a::after { left: 6px; right: 6px; }
+  .hdr__brand { margin-right: var(--s-2); }
+}
+
+/* Under 960px: Menu button and a full-width panel that lists pages as stops */
+@media (max-width: 959px) {
+  .js .hdr__menu-btn { display: inline-flex; }
+  .hdr__in { flex-wrap: wrap; }
+  .hdr__panel { width: 100%; padding: 0 0 var(--s-5); }
+  .js .hdr__panel {
+    position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--hdr-solid); border-bottom: 1px solid var(--hdr-rule); box-shadow: var(--shadow);
+    padding: var(--s-3) var(--gutter) var(--s-5);
+  }
+  .js .hdr__panel:not(.is-open) { display: none; }
+  .hdr__nav { position: relative; padding-left: 0; }
+  .hdr__nav::before { content: ""; position: absolute; left: 13px; top: 22px; bottom: 22px; width: 4px; background: var(--hdr-rule); border-radius: 2px; }
+  .hdr__nav li { position: relative; }
+  .hdr__nav a { padding-left: 44px; min-height: 48px; font-size: 1.0625rem; }
+  .hdr__nav a::before {
+    content: ""; position: absolute; left: 6px; top: 50%; width: 18px; height: 18px; margin-top: -9px;
+    border-radius: 50%; border: 4px solid var(--cur); background: var(--hdr-solid);
+  }
+  .hdr__nav a[aria-current]::before { background: var(--cur); }
+  .hdr__tools { margin-top: var(--s-4); padding-top: var(--s-4); border-top: 1px solid var(--hdr-rule); flex-wrap: wrap; }
+  .lang__list { left: 0; right: auto; width: min(260px, calc(100vw - 2 * var(--gutter))); }
+  .hdr__tools .lang__list { position: static; margin-top: var(--s-2); box-shadow: none; }
+  .hdr__tools .lang[open] { flex-basis: 100%; }
+}
+/* Phones: brand, status pill (shape + word) and Menu stay on one row from 320px up. */
+@media (max-width: 479px) {
+  .hdr__in { gap: var(--s-2); }
+  .hdr__brand { font-size: 1rem; gap: 6px; }
+  .pill { padding: 2px 10px 0; gap: 4px; }
+  .hdr__menu-btn { padding: 0 10px; }
+}
+@media (max-width: 359px) {
+  .hdr__brand-sub { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+
+/* ==========================================================================
+   6.2 Station header (.station) + stripe
+   ========================================================================== */
+.station { position: relative; padding: var(--s-7) 0 var(--s-6); }
+.station__in { display: grid; gap: var(--s-4); }
+.crumbs { color: var(--ink-2); }
+/* The breadcrumb link keeps the prose underline: colour alone would not set it apart (WCAG 1.4.1). */
+.crumbs a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--sky); text-underline-offset: 3px; }
+/* A 44px hit area (6.10) without moving the layout. */
+.crumbs a { display: inline-block; padding-block: 14px; margin-block: -14px; }
+.crumbs span[aria-hidden] { margin: 0 .2em; }
+.crumbs a, .crumbs [aria-current] { white-space: nowrap; } /* a crumb wraps as a whole, never mid-label */
+.station__badges { display: flex; gap: var(--s-2); }
+.station h1 { max-width: 22ch; }
+.station .lede { margin-top: calc(var(--s-3) - var(--s-4)); }
+.station__aside { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-2); }
+/* The safety promise sits directly under every "Copy for your AI" button. */
+.station__promise { font-size: var(--fs-small); line-height: 1.45; color: var(--ink-2); max-width: 34ch; }
+.station__stripe {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: var(--route, var(--ink));
+  transform-origin: 0 50%; animation: stripe-in 700ms var(--ease-draw) both;
+}
+@keyframes stripe-in { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (min-width: 960px) {
+  .station__in { grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s-7); }
+  .station__in > * { grid-column: 1; }
+  .station__aside { grid-column: 2; grid-row: 1 / span 4; padding-top: var(--s-6); }
+}
+/* DOM order = visual order = focus order (WCAG 2.4.3): crumbs, badges, H1, lede, [sub-navigation],
+   the Copy for your AI block, then the "On this page" chips. From 960px the aside moves to column 2. */
+/* The stripe already separates the station from the first section, so that section starts closer. */
+.station + .section { padding-top: var(--s-7); }
+
+/* Sub-navigation between sibling pages (the developer pages: Start here / Ongoing work), in the
+   station header after the lede. The current page has aria-current="page" and a 4px underline in the
+   page's line colour, as in the main nav. */
+.subnav ul { display: flex; flex-wrap: wrap; gap: 0 var(--s-5); list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--rule); }
+.subnav a {
+  position: relative; display: inline-flex; align-items: center; min-height: 44px; padding-top: 2px;
+  font-weight: 600; font-size: var(--fs-small); text-decoration: none; color: var(--ink);
+}
+.subnav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.subnav a[aria-current="page"] { font-weight: 800; }
+.subnav a[aria-current="page"]::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 4px; border-radius: 2px; background: var(--route);
+}
+.subnav .arr { position: relative; left: 0; transition: left 150ms ease-out; }
+.subnav a:hover .arr { left: 4px; }
+
+/* 6.10 Chips ("On this page") */
+.chips { display: flex; flex-wrap: wrap; gap: var(--s-2); list-style: none; padding: 0; margin: 0; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 2px var(--s-4) 0;
+  border: 1px solid var(--rule-strong); border-radius: var(--r-1); background: var(--surface);
+  font-weight: 600; font-size: var(--fs-small); text-decoration: none; color: var(--ink);
+}
+.chip:hover { background: var(--surface-2); text-decoration: none; }
+.chip .arr { transition: transform 150ms ease-out; }
+.chip:hover .arr { transform: translateX(4px); }
+
+/* Toggle buttons (filters and sort orders): aria-pressed, shown only with JS. Pressed = ivory fill,
+   graphite text (the primary-button colours), never a line or status colour. */
+.toggles { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.toggle {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 2px var(--s-3) 0;
+  background: transparent; color: var(--ink); border: 1px solid var(--rule-2); border-radius: var(--r-1);
+  font: 600 var(--fs-small)/1.2 var(--font); text-align: left; text-decoration: none; cursor: pointer;
+  transition: border-color 150ms ease-out;
+}
+.toggle:hover { border-color: var(--rule-hover); text-decoration: none; }
+.toggle[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.toggle__n { font: 500 var(--fs-label)/1 var(--mono); color: inherit; font-variant-numeric: tabular-nums; }
+.toggle[aria-pressed="true"] .badge { box-shadow: 0 0 0 2px var(--bg); }
+@media (forced-colors: active) {
+  .toggle[aria-pressed="true"] { forced-color-adjust: none; background: Highlight; color: HighlightText; border-color: Highlight; }
+}
+
+/* ==========================================================================
+   6.10 Buttons
+   ========================================================================== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  min-height: 48px; padding: 2px 20px 0; border-radius: var(--r-2);
+  background: var(--ink); color: var(--bg); border: 2px solid var(--ink);
+  font: 700 1rem/1.2 var(--font); text-decoration: none; cursor: pointer; text-align: left;
+}
+.btn:hover { text-decoration: none; }
+.btn .arr { display: inline-block; transition: transform 150ms ease-out; }
+.btn:hover .arr { transform: translateX(4px); }
+.btn--line { background: transparent; color: var(--ink); border-color: var(--rule-strong); }
+.btn--line:hover { background: var(--surface); }
+.btn--quiet {
+  background: none; border: 0; color: var(--ink); padding: 0 var(--s-1); min-height: 44px;
+  font-weight: 600; text-decoration: underline; text-underline-offset: 3px;
+}
+.btn--quiet:hover { text-decoration-thickness: 2px; background: none; }
+.btn--sm { min-height: 44px; padding: 2px var(--s-4) 0; font-size: var(--fs-small); }
+.btn[disabled], .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+.btn__icon { width: 18px; height: 18px; flex: none; }
+
+/* ==========================================================================
+   6.3 Route (.route, .stop) with progress line
+   ========================================================================== */
+.route {
+  --progress: 0;
+  position: relative; list-style: none; margin: 0; padding: 0;
+}
+.route::before, .route::after {
+  content: ""; position: absolute; left: 12px; top: 14px; width: 4px; border-radius: 2px;
+  height: var(--line-len, calc(100% - 3.5em)); background: var(--route, var(--ink));
+}
+.route::before { opacity: .25; }
+.route::after { transform-origin: 50% 0; transform: scaleY(var(--progress)); }
+/* Without JS the line length (--line-len) is never measured and the fallback overshoots a tall last stop,
+   so the line is drawn per stop instead, from each dot to the next. */
+html:not(.js) .route::before, html:not(.js) .route::after { display: none; }
+html:not(.js) .route .stop:not(:last-child)::after {
+  content: ""; position: absolute; left: 12px; top: 14px; bottom: -14px; width: 4px; border-radius: 2px;
+  background: var(--route); opacity: .25;
+}
+.stop { position: relative; padding: 0 0 var(--s-5) 48px; }
+.stop:last-child { padding-bottom: 0; }
+.stop::before {
+  content: ""; position: absolute; left: 4px; top: 4px; z-index: 1; width: 20px; height: 20px;
+  border-radius: 50%; border: 4px solid var(--route); background: var(--bg);
+  transition: background-color 200ms ease-out;
+}
+.route--on-surface .stop::before { background: var(--bg); } /* hollow dots stay solid graphite */
+.stop.is-reached::before { background: var(--route); }
+.stop__n {
+  display: inline-block; min-width: 1.6em; font: 700 var(--fs-small)/1 var(--mono); color: var(--ink-3);
+  vertical-align: 2px;
+}
+.stop__title { font-size: var(--fs-h3); line-height: 1.3; font-weight: 700; color: var(--ink); }
+/* A heading or span title stays on the line of its number ("1 Found"), like the link titles. */
+h3.stop__title, span.stop__title { display: inline; }
+a.stop__title { text-decoration: none; padding-block: 9px; } /* 44px hit area, same line layout */
+a.stop__title:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+/* Inline, not inline-block: Chrome may break before an inline-block even after a no-break space,
+   leaving the arrow alone on a line. The hover nudge uses position, which works on inline boxes. */
+.stop__title .arr { position: relative; left: 0; transition: left 150ms ease-out; }
+a.stop__title:hover .arr { left: 4px; }
+.stop__text { color: var(--ink-2); margin-top: var(--s-1); max-width: 62ch; }
+.stop .callout { margin-top: var(--s-3); }
+
+/* ==========================================================================
+   6.4 Route chooser (.routes) and route map (.routemap), home only
+   ========================================================================== */
+.routes { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-3); }
+/* P8: closed cards are light (1px --rule-2, 6px line edge, badge); the open card keeps the 2px ivory
+   sign border, so the selected line is clear. Hover takes the border to ivory at 40% over 150ms. */
+.routes__card {
+  background: var(--sheet); border: 1px solid var(--rule-2); border-left: 6px solid var(--route);
+  border-radius: var(--r-2); overflow: hidden; transition: border-color 150ms ease-out;
+}
+.routes__card:hover { border-color: var(--rule-hover); border-left-color: var(--route); }
+.routes__card[open] { border: 2px solid var(--rule-strong); border-left: 6px solid var(--route); }
+.routes__card > summary {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px var(--s-4); align-items: center;
+  padding: var(--s-4); cursor: pointer; list-style: none; min-height: 72px;
+}
+.routes__card > summary::-webkit-details-marker { display: none; }
+.routes__card > summary:hover .routes__name { text-decoration: underline; text-underline-offset: 4px; }
+.routes__card > summary:focus-visible { outline: none; box-shadow: none; }
+.routes__card:has(> summary:focus-visible) { outline: 3px solid var(--ink); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus); }
+.routes__name { font-size: var(--fs-h3); line-height: 1.2; }
+.routes__desc { grid-column: 2; font-size: var(--fs-small); color: var(--ink-2); line-height: 1.4; }
+/* "6 stops · Needs: a wallet": what the line asks of you, before you open it. */
+.routes__spec { grid-column: 2; margin-top: 4px; color: var(--ink-2); }
+.routes__spec > span:not(.routes__dot) { display: inline-block; }
+/* Narrow cards: the two parts go on two lines instead of leaving the dot at a line end. */
+@media (max-width: 479px) { .routes__spec > span:not(.routes__dot) { display: block; } .routes__dot { display: none; } }
+.routes__card > summary .badge { grid-row: 1 / span 3; align-self: start; margin-top: 2px; }
+.routes__card > summary > .pm { grid-column: 3; grid-row: 1 / span 3; }
+.routes__body { padding: var(--s-2) var(--s-5) var(--s-5) var(--s-4); border-top: 1px solid var(--rule); }
+.routes__intro { color: var(--ink-2); padding: var(--s-4) 0 var(--s-5); max-width: 62ch; }
+@media (max-width: 479px) {
+  .routes__card > summary { gap: 2px var(--s-3); }
+  .routes__body { padding-right: var(--s-4); }
+}
+
+/* Plus that becomes a minus (every disclosure: route cards, the warning sign, "More detail").
+   The vertical bar fades out over 150ms when open. */
+.pm {
+  position: relative; display: inline-block; flex: none; width: 32px; height: 32px;
+  border: 1px solid var(--rule-2); border-radius: 50%; color: var(--ink);
+}
+.pm::before, .pm::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; margin: -1px 0 0 -6px;
+  background: currentColor; border-radius: 1px;
+}
+.pm::after { transform: rotate(90deg); transition: opacity 150ms ease-out; }
+details[open] > summary .pm::after { opacity: 0; }
+.pm--sm { width: 20px; height: 20px; }
+.pm--sm::before, .pm--sm::after { width: 10px; margin-left: -5px; }
+
+.routemap { color: var(--ink); max-width: 400px; }
+.routemap svg { display: block; width: 100%; height: auto; }
+.rm-line { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.rm-line--s { stroke: var(--line-s); } .rm-line--m { stroke: var(--line-m); }
+.rm-line--n { stroke: var(--line-n); } .rm-line--b { stroke: var(--line-b); }
+.rm-stop { fill: var(--bg); stroke-width: 3; transform-box: fill-box; transform-origin: center; }
+.rm-stop--s { stroke: var(--line-s); } .rm-stop--m { stroke: var(--line-m); }
+.rm-stop--n { stroke: var(--line-n); } .rm-stop--b { stroke: var(--line-b); }
+.rm-end { transform-box: fill-box; transform-origin: center; }
+.rm-end circle { stroke: var(--bg); stroke-width: 3; }
+.rm-end--s circle { fill: var(--line-s); } .rm-end--m circle { fill: var(--line-m); }
+.rm-end--n circle { fill: var(--line-n); } .rm-end--b circle { fill: var(--line-b); }
+.rm-end text { font: 800 16px var(--font); }
+.rm-end--s text { fill: var(--on-line-s); } .rm-end--m text { fill: var(--on-line-m); }
+.rm-end--n text { fill: var(--on-line-n); } .rm-end--b text { fill: var(--on-line-b); }
+/* "You are here": a head-and-shoulders bust (the standard "user" pictogram) just left of the interchange,
+   vertically centred on it. The same shapes are reused for the roadmap's "Now" stop (.here-icon). */
+.rm-person { fill: var(--ink); }
+.rm-hub { fill: var(--bg); stroke: var(--ink); stroke-width: 3; }
+.rm-label { fill: var(--ink); font: 700 17px var(--font); }
+.rm-here { fill: var(--ink); font: 700 17px var(--font); }
+.rm-dot { fill: var(--bg); stroke-width: 3; opacity: 0; }
+.rm-dot--s { stroke: var(--line-s); } .rm-dot--m { stroke: var(--line-m); }
+.rm-dot--n { stroke: var(--line-n); } .rm-dot--b { stroke: var(--line-b); }
+
+.js:not([data-motion="off"]) .routemap:not(.is-drawn) .rm-line { stroke-dashoffset: 1; }
+.js:not([data-motion="off"]) .routemap:not(.is-drawn) .rm-stop,
+.js:not([data-motion="off"]) .routemap:not(.is-drawn) .rm-end { opacity: 0; transform: scale(.4); }
+.routemap.is-drawn .rm-line { transition: stroke-dashoffset 1200ms var(--ease-draw); }
+.routemap.is-drawn .rm-line:nth-of-type(2) { transition-delay: 150ms; }
+.routemap.is-drawn .rm-line:nth-of-type(3) { transition-delay: 300ms; }
+.routemap.is-drawn .rm-line:nth-of-type(4) { transition-delay: 450ms; }
+.routemap.is-drawn .rm-stop, .routemap.is-drawn .rm-end { transition: opacity 250ms ease-out, transform 250ms ease-out; transition-delay: var(--d, 1200ms); }
+.routemap.is-done .rm-line, .routemap.is-done .rm-stop, .routemap.is-done .rm-end { transition: none; }
+
+/* ==========================================================================
+   6.5 Departures board (.board): bold tabular numbers, block count-up, 90 s burn bar
+   ========================================================================== */
+.board {
+  --board-pad: var(--s-5);
+  position: relative;
+  background: var(--board); color: var(--board-ink);
+  border: 1px solid var(--board-rule); border-radius: var(--r-2);
+  container: board / inline-size;
+}
+.board a { color: var(--board-ink); }
+.board .term { text-decoration-color: var(--board-dim); }
+.board .term:hover, .board .term[aria-expanded="true"] { text-decoration-color: var(--board-ink); background: var(--surface-2); }
+/* P1 instrument panel: four 16px corner ticks that trace the corners a little brighter than the
+   border. Two on .board, two on the inner .board__frame (aria-hidden, no content). */
+.board::before, .board::after, .board__frame::before, .board__frame::after {
+  content: ""; position: absolute; width: 16px; height: 16px; pointer-events: none;
+  border: 0 solid var(--tick);
+}
+.board::before { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; border-top-left-radius: var(--r-2); }
+.board::after { top: -1px; right: -1px; border-top-width: 2px; border-right-width: 2px; border-top-right-radius: var(--r-2); }
+.board__frame { position: absolute; inset: 0; pointer-events: none; }
+.board__frame::before { bottom: -1px; left: -1px; border-bottom-width: 2px; border-left-width: 2px; border-bottom-left-radius: var(--r-2); }
+.board__frame::after { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; border-bottom-right-radius: var(--r-2); }
+
+/* Header band: label left, status chip right, one hairline under it. */
+.board__head {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-4);
+  padding: var(--s-4) var(--board-pad); border-bottom: 1px solid var(--board-rule);
+}
+.board__label { color: var(--board-label); margin: 0; }
+.board__status {
+  display: inline-flex; align-items: center; margin: 0; padding: 3px 8px 1px; border-radius: var(--r-1);
+  font-weight: 800; font-size: 1rem; line-height: 1.3;
+}
+.board__status .shape { margin-right: 6px; font-size: .85em; }
+.board__status.is-normal { background: var(--chip-sky); }
+.board__status.is-degraded { background: var(--chip-rose); }
+.board .is-normal .shape, .board .lvl-green .shape { color: var(--sky); }
+.board .is-degraded .shape, .board .lvl-yellow .shape { color: var(--rose); }
+.board .is-unknown .shape, .board .lvl-unknown .shape { color: var(--ink-3); }
+/* Incident and Problem: a filled rose pill with graphite text */
+.board .is-incident, .board .lvl-red { display: inline-block; background: var(--rose); color: var(--on-rose); border-radius: var(--r-pill); padding: 3px 10px 1px; }
+.board .is-incident .shape, .board .lvl-red .shape { color: var(--on-rose); }
+
+.board__body { padding: 0 var(--board-pad) var(--s-2); }
+.board__rows { margin: 0; }
+.board__row {
+  position: relative; isolation: isolate;
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-1) var(--s-4);
+  padding: var(--s-3) 0; border-bottom: 1px solid var(--board-rule);
+}
+/* Each row is its own stacking context (for the highlight), so the row with an open term popover is lifted
+   above the rows after it. */
+.board__row:has(.term[aria-expanded="true"]) { z-index: 2; }
+.board__row dt { font-weight: 600; color: var(--board-dim); font-size: var(--fs-small); line-height: 1.3; }
+/* A term that is a row label is a standalone target: a 44px-tall hit area that stays inside its row
+   (12px row padding above and below). */
+.board__row dt .term { position: relative; }
+.board__row dt .term::after { content: ""; position: absolute; inset: -12.5px -4px; }
+.board__row dd {
+  margin: 0; margin-left: auto; text-align: right;
+  font: 800 var(--fs-board)/1.1 var(--font); font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+  color: var(--board-ink); white-space: nowrap;
+}
+.board__num { display: inline-block; }
+.board__val { font-size: 1.25rem !important; }
+/* A new block: a short sky-blue tint behind the row that fades out (opacity only). */
+.board__row::before {
+  content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(-1 * var(--board-pad)); right: calc(-1 * var(--board-pad));
+  background: var(--tint-sky); opacity: 0; pointer-events: none;
+}
+.board__row.is-new::before { animation: row-new 1600ms ease-out; }
+@keyframes row-new { from { opacity: 1; } to { opacity: 0; } }
+
+/* 90 s burn bar under "Last block": full when a block was just found, empty at 90 s.
+   It is always in place (empty, with "—", when there is no data), so the board never changes height. */
+.board__row dd.burn { flex-basis: 100%; margin: var(--s-2) 0 0; text-align: left; font: 400 var(--fs-small)/1.4 var(--font); color: var(--board-dim); white-space: normal; letter-spacing: 0; }
+.burn__track { position: relative; height: 6px; border-radius: 3px; background: var(--board-track); overflow: hidden; }
+.burn__fill, .burn__rail { position: absolute; inset: 0; transition: transform 1000ms linear; will-change: transform; }
+.burn__fill { background: var(--sky); transform-origin: 0 50%; }
+.burn__tip { position: absolute; top: 0; right: 0; width: 3px; height: 100%; background: var(--ink); }
+.burn.is-refill .burn__fill, .burn.is-refill .burn__rail { transition-duration: 300ms; transition-timing-function: ease-out; }
+.burn__note { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 var(--s-3); margin-top: var(--s-2); }
+.burn__note > :last-child { margin-left: auto; white-space: nowrap; }
+/* Where the two halves could wrap, stack them, so the note keeps one height whatever the right text says
+   and the hero never jumps when a block arrives or the wait passes 90 s. */
+@container board (max-width: 520px) {
+  .burn__note { flex-direction: column; align-items: flex-start; }
+  .burn__note > :last-child { margin-left: 0; align-self: flex-start; }
+}
+
+/* "Check on …" links: name where to check, so nobody has to take our word for it. */
+.board__links { display: flex; flex-wrap: wrap; gap: 0 var(--s-5); list-style: none; margin: 0; padding: var(--s-1) 0 0; }
+.board__link { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; font-size: var(--fs-small); }
+/* Flex links drop the space before a trailing arrow span; the gap puts it back. */
+.board__link, .board__fork a, .ftr__links a, .ftr__stops a, .term-pop__more { column-gap: .3em; }
+.board__msg { margin-top: var(--s-3); padding: var(--s-3); border-left: 4px solid var(--rose); background: var(--surface); font-size: var(--fs-small); line-height: 1.5; }
+.board__fork { margin-top: var(--s-3); padding: var(--s-3) var(--s-4); border: 2px solid var(--rose); border-radius: var(--r-1); font-size: var(--fs-small); }
+.board__fork strong { color: var(--rose); display: block; }
+.board__fork ul { margin: var(--s-2) 0; padding-left: 1.1em; }
+.board__fork p { margin: var(--s-1) 0 0; max-width: 66ch; }
+.board__fork a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Source row: where the data comes from and when it was read, with the pause control on the right. */
+.board__src {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-3);
+  padding: var(--s-1) var(--board-pad) var(--s-3); border-top: 1px solid var(--board-rule);
+  font-size: var(--fs-small); line-height: 1.4; color: var(--board-dim);
+}
+.board__src-text { margin: 0; min-width: 0; }
+.board__src-line { display: block; }
+.board__src-line + .board__src-line { margin-top: 2px; }
+.board__src .board__link { font-weight: 600; }
+/* A narrow board puts the link on its own line instead of leaving the dot at a line end. */
+@container board (max-width: 400px) {
+  .board__src .sep { display: none; }
+  .board__src-line > .board__link { display: flex; width: max-content; }
+}
+.board__src [data-live="time"] {
+  display: inline-block; min-width: 20ch; /* room for "2026-11-21 01:31 UTC": no shift when it arrives */
+  white-space: nowrap; font-family: var(--mono); font-weight: 500; color: var(--board-ink);
+}
+/* Pause live updates: a 44px toggle (aria-pressed). It shows a pause glyph while live and a play
+   glyph while paused, drawn in CSS so no emoji font ever replaces it. */
+.board__pause {
+  display: inline-grid; place-items: center; width: 44px; height: 44px; flex: none; padding: 0;
+  background: transparent; color: var(--board-ink); border: 1px solid var(--rule-2); border-radius: var(--r-2); cursor: pointer;
+}
+.board__pause:hover { border-color: var(--board-ink); }
+.board__pause-icon { position: relative; width: 12px; height: 14px; }
+.board__pause-icon::before, .board__pause-icon::after { content: ""; position: absolute; top: 0; width: 4px; height: 14px; background: currentColor; border-radius: 1px; }
+.board__pause-icon::before { left: 0; }
+.board__pause-icon::after { right: 0; }
+.board__pause[aria-pressed="true"] .board__pause-icon::before { left: 1px; width: 12px; border-radius: 0; clip-path: polygon(0 0, 100% 50%, 0 100%); }
+.board__pause[aria-pressed="true"] .board__pause-icon::after { display: none; }
+html:not(.js) .board__pause { display: none; }
+/* Without JS nothing will load, so the chip would say 'Loading' for good: the band shows only its label. */
+html:not(.js) .board__status { display: none; }
+
+@media (max-width: 359px) { .board { --board-pad: var(--s-4); } }
+/* All rows of one board stack together when the board itself is narrow (not the viewport). */
+@container board (max-width: 300px) {
+  .board__row { flex-direction: column; align-items: flex-start; }
+  .board__row dd { margin-left: 0; text-align: left; }
+  .board__row dd.burn { align-self: stretch; }
+}
+/* .board--long: a board with longer labels or values than the home board (Network) stacks all its rows
+   together below a 460px board, so no row is left half inline. */
+@container board (max-width: 460px) {
+  .board--long .board__row { flex-direction: column; align-items: flex-start; }
+  .board--long .board__row dd { margin-left: 0; text-align: left; }
+  .board--long .board__row dd.burn { align-self: stretch; }
+}
+
+/* Live value colours outside the board (Network page lists) */
+.lvl { font-weight: 700; }
+.lvl .shape { margin-right: 4px; }
+.lvl-green, .is-normal { --lvl: var(--sky); }
+.lvl-yellow, .is-degraded { --lvl: var(--rose); }
+.lvl-red, .is-incident { --lvl: var(--rose); }
+.lvl .shape { color: var(--lvl, var(--ink-3)); }
+.lvl.lvl-red { display: inline-block; background: var(--rose); color: var(--on-rose); border-radius: var(--r-pill); padding: 2px 10px 0; }
+.lvl.lvl-red .shape { color: var(--on-rose); }
+
+/* ==========================================================================
+   6.6 Warning sign (.sign--warn) and checklist (.checklist)
+   ========================================================================== */
+.sign { background: var(--sheet); border: 2px solid var(--rule-strong); border-radius: var(--r-2); overflow: hidden; }
+.sign__head {
+  display: flex; align-items: center; gap: var(--s-3); padding: var(--s-4) var(--s-5);
+  border-bottom: 2px solid var(--rule-strong);
+}
+/* A formal notice: ivory band with graphite text and a graphite triangle, a 6px rose left edge. */
+.sign--warn { border-left: 6px solid var(--rose); }
+.sign--warn .sign__head { background: var(--ink); color: var(--bg); }
+.sign--warn .sign__head h2, .sign--warn .sign__head h3, .sign--warn .sign__head .label { color: var(--bg); }
+.sign__icon { width: 36px; height: 32px; flex: none; }
+.sign__icon path:first-child { fill: var(--bg); }
+.sign__icon path + path { fill: var(--ink); }
+.sign__body { padding: var(--s-5); }
+.sign__count { margin-left: auto; white-space: nowrap; }
+/* Warning-sign checklists are a closed <details> by default: the summary is the ivory header band
+   (triangle, "Check first", the H2, the count, a plus/minus). The count shows ticks when there are some. */
+.sign--fold > summary { cursor: pointer; list-style: none; }
+.sign--fold > summary::-webkit-details-marker { display: none; }
+.sign--fold > summary > .sign__titles { display: block; flex: 1 1 auto; min-width: 0; }
+.sign__titles > .label { display: block; }
+.sign--fold:not([open]) > summary { border-bottom: 0; }
+.sign--fold > summary:hover h2 { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.sign--fold > summary:focus-visible { outline: none; box-shadow: none; }
+.sign--fold:has(> summary:focus-visible) { outline: 3px solid var(--ink); outline-offset: 2px; box-shadow: 0 0 0 6px var(--focus); }
+.pm--sign { color: var(--bg); border-color: currentColor; }
+.sign--fold[open] > .sign__body, .sign--fold[open] > .checklist__bar { animation: fold-in 200ms ease-out; }
+@keyframes fold-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 var(--s-6); counter-reset: chk; }
+.checklist > li { counter-increment: chk; border-bottom: 1px solid var(--rule); }
+.checklist > li:last-child { border-bottom: 0; }
+.checklist label {
+  display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--s-3);
+  padding: var(--s-4) 0; cursor: pointer; color: var(--ink-2); line-height: 1.55;
+}
+.checklist label strong { color: var(--ink); display: block; margin-bottom: 2px; }
+.checklist input[type="checkbox"] {
+  width: 24px; height: 24px; margin: 2px 0 0; accent-color: var(--ink); cursor: pointer;
+}
+.checklist input:checked + span strong { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: var(--ink-3); }
+.checklist__bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-4);
+  border-top: 1px solid var(--rule); padding: var(--s-2) var(--s-5); background: var(--surface-2);
+}
+.checklist__count { color: var(--ink-2); }
+@media (min-width: 1000px) {
+  .checklist--2col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .checklist--2col > li:nth-last-child(2):nth-child(odd) { border-bottom: 0; }
+}
+@media (max-width: 599px) {
+  .sign__head { padding: var(--s-3) var(--s-4); }
+  /* The count moves under the heading so the H2 keeps its width. */
+  .sign--fold > summary { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: var(--s-3); row-gap: var(--s-1); }
+  .sign--fold > summary > .sign__count { grid-column: 2; grid-row: 2; margin-left: 0; }
+  .sign--fold > summary > .pm { grid-column: 3; grid-row: 1 / span 2; }
+  .sign__body { padding: var(--s-2) var(--s-4) var(--s-4); }
+  .checklist__bar { padding: var(--s-2) var(--s-4); }
+  .sign__icon { width: 30px; height: 27px; }
+}
+
+/* ==========================================================================
+   6.7 Callouts (.callout)
+   ========================================================================== */
+.callout { padding: var(--s-4) var(--s-5); border-left: 4px solid var(--ink); border-radius: 0 var(--r-2) var(--r-2) 0; background: var(--surface-2); max-width: 72ch; }
+.callout > * + * { margin-top: var(--s-2); }
+.callout__label { display: block; margin-bottom: var(--s-2); }
+.callout--note { background: var(--surface-2); border-left-color: var(--ink); }
+.callout--warn { background: var(--surface-2); border-left-color: var(--rose); }
+.callout--danger { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--rose); }
+.callout--danger .callout__label { color: var(--rose); }
+.callout p { color: var(--ink); }
+/* A callout is already recessed (--surface-2, the inline-code fill), so its code takes the raised surface. */
+.callout code { background: var(--surface); }
+
+/* ==========================================================================
+   6.8 Rows (.rows, .row, .tag)
+   ========================================================================== */
+.rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.rows > li { border-bottom: 1px solid var(--rule); }
+.row {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px var(--s-4); align-items: center;
+  padding: var(--s-4) var(--s-2) var(--s-4) 0; text-decoration: none; color: var(--ink);
+}
+a.row:hover { text-decoration: none; }
+a.row:hover .row__name { text-decoration: underline; text-underline-offset: 4px; }
+.row__name { font-weight: 700; font-size: var(--fs-body); line-height: 1.35; }
+.row__desc { grid-column: 1; color: var(--ink-2); font-size: var(--fs-small); line-height: 1.5; max-width: 70ch; }
+.row__tags { grid-column: 1; display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-2); }
+.row__arr { grid-column: 2; grid-row: 1 / span 3; font-weight: 800; transition: transform 150ms ease-out; }
+a.row:hover .row__arr { transform: translateX(4px); }
+.tag {
+  display: inline-flex; align-items: center; min-height: 22px; padding: 2px 6px 0;
+  border: 1px solid var(--rule); border-radius: var(--r-1);
+  color: var(--ink-2);
+}
+
+/* ==========================================================================
+   6.9 Spec sheet (.spec): fixed facts as a quiet datasheet. Live data is big (the board);
+   fixed facts read like a spec: value | label + one sentence | named source.
+   ========================================================================== */
+.spec { margin: 0; border-top: 1px solid var(--rule); }
+.spec__row {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-1);
+  padding: var(--s-5) 0; border-bottom: 1px solid var(--rule);
+}
+.spec dd { margin: 0; }
+.spec__val { order: -1; font: 800 var(--fs-data)/1.1 var(--font); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; color: var(--ink); }
+.spec__val small { font-size: .62em; font-weight: 700; letter-spacing: 0; }
+.spec__val--mono { font-family: var(--mono); font-weight: 700; letter-spacing: 0; }
+.spec__label { margin-top: var(--s-1); }
+.spec__text { color: var(--ink-2); font-size: 1.0625rem; line-height: 1.55; max-width: 60ch; }
+.spec__src a { display: inline-flex; align-items: center; column-gap: .3em; min-height: 44px; font-size: var(--fs-small); font-weight: 600; }
+.spec__more { margin-top: var(--s-1); }
+.spec__stamp { margin-top: var(--s-4); }
+@media (min-width: 700px) {
+  .spec__row { grid-template-columns: minmax(10rem, 14rem) minmax(0, 1fr) auto; column-gap: var(--s-6); row-gap: var(--s-1); align-items: start; }
+  .spec__val { grid-column: 1; grid-row: 1 / span 2; }
+  .spec__label { grid-column: 2; grid-row: 1; margin-top: 2px; }
+  .spec__text { grid-column: 2; grid-row: 2; }
+  .spec__src { grid-column: 3; grid-row: 1 / span 2; margin-top: -10px; text-align: right; }
+}
+/* 700-959px: two columns, so the sentence keeps a readable measure; the source drops under it. */
+@media (min-width: 700px) and (max-width: 959px) {
+  .spec__row { grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr); }
+  .spec__src { grid-column: 2; grid-row: 3; margin-top: 0; text-align: left; }
+}
+
+/* "More detail" disclosures inside rows and stops: small summary with a plus/minus. */
+.more > summary {
+  display: inline-flex; align-items: center; gap: var(--s-2); min-height: 44px; cursor: pointer; list-style: none;
+  font-weight: 600; font-size: var(--fs-small); color: var(--ink);
+}
+.more > summary::-webkit-details-marker { display: none; }
+.more > summary:hover > span:first-child { text-decoration: underline; text-underline-offset: 3px; }
+.more > summary:focus-visible { border-radius: var(--r-1); }
+.more__body { font-size: var(--fs-small); line-height: 1.55; color: var(--ink-2); padding-bottom: var(--s-2); }
+.more__body p { max-width: 62ch; }
+.more__src { display: inline-block; min-height: 44px; padding-block: 11px; line-height: 1.45; font-weight: 600; color: var(--ink); }
+
+/* ==========================================================================
+   6.11 Term popovers (.term)
+   ========================================================================== */
+.term {
+  font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; cursor: help;
+  text-decoration: underline dotted; text-decoration-thickness: 2px; text-underline-offset: 4px;
+  text-decoration-color: var(--ink-3); border-radius: 2px; text-align: inherit; letter-spacing: inherit;
+}
+.term:hover, .term[aria-expanded="true"] { text-decoration-color: var(--ink); background: var(--surface-2); }
+/* site.js marks a term whose key has no glossary entry yet: it stays a plain word, not a dead control. */
+.term.term--plain, .term.term--plain:hover { cursor: text; text-decoration: none; background: none; }
+.term-pop {
+  position: fixed; z-index: 80; width: min(320px, calc(100vw - 16px)); left: 8px; top: 0;
+  background: var(--panel); color: var(--ink); border: 2px solid var(--rule-strong); border-radius: var(--r-2);
+  box-shadow: var(--shadow); padding: var(--s-3) var(--s-4) var(--s-2);
+  font-size: var(--fs-small); line-height: 1.5; text-align: left; font-weight: 400; letter-spacing: 0; text-transform: none;
+}
+.term-pop__name { display: block; font-weight: 800; font-size: 1rem; margin-bottom: 2px; }
+/* site.js wraps a term and the punctuation right after it ("snapshot.", "btxd's"), so a line never
+   starts with that punctuation. */
+.term-keep { white-space: nowrap; }
+.term-keep .term-pop { white-space: normal; }
+.term-pop__more { display: flex; align-items: center; min-height: 44px; width: max-content; font-weight: 700; }
+
+/* ==========================================================================
+   6.13 Code and copy blocks (.code)
+   ========================================================================== */
+.code { position: relative; background: var(--surface-2); border-radius: var(--r-1); border: 1px solid var(--rule); }
+.code pre {
+  margin: 0; padding: var(--s-4) var(--s-4) var(--s-4); padding-right: 96px; overflow-x: auto;
+  font: 500 .9375rem/1.6 var(--mono); color: var(--ink); tab-size: 2;
+}
+.code pre code { background: none; padding: 0; font-size: inherit; }
+.code__copy {
+  position: absolute; top: 6px; right: 6px; min-height: 36px; min-width: 76px; padding: 2px 12px 0;
+  background: var(--panel); color: var(--ink); border: 1px solid var(--rule-2); border-radius: var(--r-1);
+  font: 700 var(--fs-small)/1 var(--font); cursor: pointer;
+}
+.code__copy::after { content: ""; position: absolute; inset: -4px; }
+/* Phones: the Copy button gets its own row above the code, so it never covers the end of a line.
+   Without JS there is no button, so no extra space. */
+@media (max-width: 599px) { .js .code pre { padding-top: 52px; padding-right: var(--s-4); } }
+/* .code--wrap: long prose (an AI prompt) wraps instead of scrolling; the button sits above the first line. */
+.code--wrap pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow-x: visible; padding-right: var(--s-4); }
+.js .code--wrap pre { padding-top: 52px; }
+
+/* ==========================================================================
+   6.15 Toast (.toast)
+   ========================================================================== */
+.toast {
+  position: fixed; left: var(--s-4); bottom: var(--s-4); z-index: 90; max-width: min(460px, calc(100vw - 32px));
+  background: var(--ink); color: var(--bg); box-shadow: var(--shadow); border-radius: var(--r-2);
+  padding: var(--s-3) var(--s-4); font-size: var(--fs-small); line-height: 1.5; font-weight: 600;
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+.toast:not(.is-on) { opacity: 0; transform: translateY(8px); pointer-events: none; }
+
+/* ==========================================================================
+   Tables that stack under 700px (.table)
+   ========================================================================== */
+.table-wrap { width: 100%; }
+.table { width: 100%; border-collapse: collapse; font-size: var(--fs-small); line-height: 1.5; }
+.table th, .table td { text-align: left; vertical-align: top; padding: var(--s-3) var(--s-4) var(--s-3) 0; border-bottom: 1px solid var(--rule); }
+.table thead th { color: var(--ink-2); border-bottom: 1px solid var(--rule-2); }
+.table td.num, .table th.num { text-align: right; font-family: var(--mono); font-weight: 500; }
+@media (max-width: 699px) {
+  .table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .table, .table tbody, .table tr, .table td, .table th { display: block; width: 100%; }
+  .table tr { padding: var(--s-3) 0; border-bottom: 1px solid var(--rule); }
+  .table td, .table tbody th { border: 0; padding: 2px 0; }
+  .table td[data-label]::before { content: attr(data-label); display: block; color: var(--ink-2); }
+  .table td.num { text-align: left; }
+}
+
+/* ==========================================================================
+   6.14 Footer (.ftr)
+   ========================================================================== */
+/* The footer is an inset sheet inside --wrap, not a full-bleed band. */
+.ftr { margin-top: var(--section); padding-bottom: var(--s-5); }
+.ftr__sheet { padding-block: var(--sheet-pad) var(--s-6); }
+.ftr__title { margin-bottom: var(--s-5); }
+.ftr__map { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-6) var(--s-5); }
+@media (min-width: 360px) { .ftr__map { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .ftr__map { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.ftr__line h3 { display: flex; align-items: center; gap: var(--s-2); font-size: var(--fs-body); line-height: 1.2; margin-bottom: var(--s-2); }
+.ftr__stops { list-style: none; margin: 0; padding: 0; position: relative; }
+.ftr__stops::before { content: ""; position: absolute; left: 12px; top: 22px; bottom: 22px; width: 4px; background: var(--route); border-radius: 2px; }
+.ftr__stops li { position: relative; }
+.ftr__stops a { display: flex; align-items: center; min-height: 44px; padding-left: 36px; text-decoration: none; font-weight: 600; font-size: var(--fs-small); }
+.ftr__stops a:hover { text-decoration: underline; }
+.ftr__stops a::before {
+  content: ""; position: absolute; left: 7px; top: 50%; margin-top: -7px; width: 14px; height: 14px;
+  border-radius: 50%; border: 3px solid var(--route); background: var(--bg);
+}
+.ftr__base { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--rule); display: grid; gap: var(--s-3); font-size: var(--fs-small); color: var(--ink-2); }
+.ftr__base p { max-width: 80ch; }
+.ftr__links { display: flex; flex-wrap: wrap; gap: 0 var(--s-5); list-style: none; margin: 0; padding: 0; }
+.ftr__links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+.ftr__bg { display: inline-flex; align-items: center; min-height: 44px; padding: 0; border: 0; background: none; color: var(--ink-2); font: inherit; font-weight: 600; text-decoration: underline; text-decoration-color: var(--rule-2); text-underline-offset: 3px; cursor: pointer; }
+.ftr__bg:hover { color: var(--ink); }
+.ftr__bg[hidden] { display: none; }
+
+/* ==========================================================================
+   Home page blocks (hero, start, check, ai panel)
+   ========================================================================== */
+.hero { padding: var(--s-6) 0 0; }
+.hero__grid { display: grid; gap: var(--s-6); align-items: start; }
+.hero__label { display: block; color: var(--ink-2); text-wrap: balance; }
+/* The one display moment: Overpass 900 (Black), only here. */
+.hero__title { font-size: var(--fs-display); font-weight: 900; line-height: 1; letter-spacing: -0.025em; margin-top: var(--s-4); max-width: 12ch; }
+.hero .lede { margin-top: var(--s-5); }
+.hero__lines { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); margin-top: var(--s-5); list-style: none; padding: 0; }
+.hero__lines a { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 44px; font-weight: 700; text-decoration: none; font-size: var(--fs-small); }
+.hero__lines a:hover { text-decoration: underline; text-underline-offset: 4px; }
+/* Phones: the four lines as a 2x2 block, never three and one. */
+@media (max-width: 479px) {
+  .hero__lines { display: grid; grid-template-columns: repeat(2, max-content); column-gap: var(--s-5); }
+}
+@media (min-width: 960px) {
+  .hero { padding-top: var(--s-7); }
+  .hero__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-7); }
+  /* The text column runs the board's full height: the four line links sit at its foot, level with
+     the board's source row, so no empty band is left under them. */
+  .hero__text { align-self: stretch; display: flex; flex-direction: column; }
+  .hero__lines { margin-top: auto; padding-top: var(--s-5); }
+}
+@media (min-width: 960px) and (max-width: 1099px) { .hero__grid { grid-template-columns: minmax(0, 1fr) 420px; } }
+@media (min-width: 1100px) { .hero__grid { grid-template-columns: minmax(0, 1fr) 440px; } }
+
+.start__grid { display: grid; gap: var(--s-5); }
+@media (min-width: 960px) {
+  .start__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-7); align-items: start; }
+  .start__map { position: sticky; top: var(--s-5); }
+}
+.start__map .routemap { margin-top: var(--s-5); }
+
+/* 6.12 The home AI section: heading left, a small tool panel right that shows what gets copied. */
+.ai { display: grid; gap: var(--s-6); }
+@media (min-width: 960px) { .ai { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: var(--s-7); align-items: start; } }
+.tool { border: 1px solid var(--rule); border-radius: var(--r-2); overflow: hidden; }
+.tool__bar { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4); background: var(--surface-2); border-bottom: 1px solid var(--rule); }
+.tool__dots { display: inline-flex; gap: 6px; }
+.tool__dots i { width: 6px; height: 6px; border-radius: 50%; }
+.tool__dots i:nth-child(1) { background: var(--line-s); } .tool__dots i:nth-child(2) { background: var(--line-m); }
+.tool__dots i:nth-child(3) { background: var(--line-n); } .tool__dots i:nth-child(4) { background: var(--line-b); }
+.tool__title { margin: 0; }
+.tool__pre {
+  margin: 0; padding: var(--s-4); font: 500 .9375rem/1.6 var(--mono); color: var(--ink-2);
+  white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.tool__rest { color: var(--ink-3); }
+.tool__act { padding: 0 var(--s-4) var(--s-4); }
+.tool__btn { width: 100%; justify-content: center; }
+.tool__act .station__promise { margin-top: var(--s-3); max-width: none; }
+.ai__qs { margin-top: var(--s-5); }
+.ai__chips { margin-top: var(--s-2); }
+.chip--q { font-family: var(--mono); font-weight: 500; background: transparent; border-color: var(--rule-2); text-align: left; cursor: pointer; color: var(--ink); line-height: 1.35; padding-block: 8px 6px; }
+.chip--q:hover { border-color: var(--rule-hover); background: transparent; }
+html:not(.js) [data-copy-ai-only] { display: none; }
+/* The mirror image: a hint that only makes sense without JS ("Without JavaScript: select the block and copy it."). */
+html.js [data-nojs-only] { display: none; }
+
+/* ==========================================================================
+   6.18 Roadmap line (.rmap): one ivory line with dated stops. Done = filled dot + "Done";
+   Now = the larger stop with the head-and-shoulders icon + "Now"; Next = hollow dot, dashed line + "Next".
+   Phones: the vertical route pattern. From 900px: a horizontal line in rows, every stop visible.
+   ========================================================================== */
+.rmap { --rm-line: var(--line-s); --rm-gap: var(--s-5); list-style: none; margin: 0; padding: 0; }
+.rmap__stop { position: relative; padding: 0 0 var(--s-6) 48px; }
+.rmap__stop:last-child { padding-bottom: 0; }
+/* The segment from this stop to the next: solid once passed, dashed from "Now" on. */
+.rmap__stop::before { content: ""; position: absolute; left: 12px; top: 14px; bottom: -14px; border-left: 4px solid var(--rm-line); }
+.rmap__stop:last-child::before { display: none; }
+.rmap__stop--now::before, .rmap__stop--next::before { border-left-style: dashed; }
+.rmap__track { position: absolute; left: 0; top: 0; width: 28px; height: 28px; }
+.rmap__dot {
+  position: absolute; left: 4px; top: 4px; z-index: 1; width: 20px; height: 20px; border-radius: 50%;
+  border: 4px solid var(--rm-line); background: var(--rm-line);
+}
+.rmap__stop--next .rmap__dot { background: var(--bg); }
+.rmap__stop--now .rmap__dot { left: 0; top: 0; width: 28px; height: 28px; box-shadow: inset 0 0 0 4px var(--bg); }
+.rmap__here { display: none; }
+.here-icon { fill: var(--ink); }
+.here-icon--inline { width: 15px; height: 18px; flex: none; transform: translateY(-2px); }
+.rmap__state { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-1) var(--s-3); margin: 0; min-height: 22px; }
+.rmap__word { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); }
+.rmap__shape { font-family: var(--font); font-size: .9em; }
+.rmap__tag {
+  display: inline-flex; align-items: center; min-height: 20px; padding: 2px 6px 0; border-radius: var(--r-1);
+  font: 500 var(--fs-label)/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase;
+  background: var(--route); color: var(--on-route);
+}
+.rmap__tag--s { --route: var(--line-s); --on-route: var(--on-line-s); }
+.rmap__tag--m { --route: var(--line-m); --on-route: var(--on-line-m); }
+.rmap__tag--n { --route: var(--line-n); --on-route: var(--on-line-n); }
+.rmap__tag--b { --route: var(--line-b); --on-route: var(--on-line-b); }
+/* The date leads ("19 Mar 2026 · Block 0"), then the state and tag. Stops without a date start with the state. */
+.rmap__date { margin: 0; padding-top: 3px; }
+.rmap__date + .rmap__state { margin-top: var(--s-2); }
+.rmap__title { margin-top: var(--s-2); font-size: var(--fs-h3); line-height: 1.25; }
+.rmap__short { margin-top: var(--s-2); color: var(--ink-2); font-size: var(--fs-small); line-height: 1.55; max-width: 62ch; }
+.rmap__more { margin-top: var(--s-1); }
+.rmap__stop--bare .rmap__title { margin-top: 0; padding-top: 1px; }
+.rmap__src { margin-top: var(--s-6); max-width: 80ch; }
+@media (min-width: 900px) {
+  .rmap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--rm-gap); row-gap: 0; }
+  /* Each stop spans five rows of a subgrid (date, state, title, text, More detail), so the parts line up
+     across a row of stops even when a date or title wraps. A stop without a date leaves row 1 empty. */
+  .rmap__stop, .rmap__stop:last-child {
+    display: grid; grid-template-rows: subgrid; grid-row: span 5; align-content: start;
+    padding: 68px 0 var(--s-7);
+  }
+  .rmap__date { grid-row: 1; padding-top: 0; } .rmap__state { grid-row: 2; margin-top: var(--s-2); }
+  .rmap__title { grid-row: 3; } .rmap__short { grid-row: 4; } .rmap__more { grid-row: 5; align-self: start; }
+  /* The date on two short lines ("19 Mar 2026" / "Block 0"), never a dot left at a line end. */
+  .rmap__when, .rmap__where { display: block; }
+  .rmap__dsep { display: none; }
+  .rmap__stop--bare .rmap__title { grid-row: 1 / span 2; }
+  .rmap__src { margin-top: 0; }
+  /* The line runs at y = 46px across each row, from this dot to the next dot. */
+  .rmap__stop::before { left: 14px; right: calc(-1 * (var(--rm-gap) + 14px)); top: 44px; bottom: auto; border-left: 0; border-top: 4px solid var(--rm-line); }
+  .rmap__stop--now::before, .rmap__stop--next::before { border-top-style: dashed; }
+  /* The last stop of a row runs the line on to the row's edge and ends in an arrowhead; the first stop of
+     the next row picks it up with a short lead-in from the gutter, so the two rows read as one line. */
+  .rmap__stop:nth-child(4n)::before { right: 0; }
+  .rmap__stop:nth-child(4n):not(:last-child)::after {
+    content: ""; position: absolute; top: 40px; right: -2px; width: 0; height: 0;
+    border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 8px solid var(--rm-line);
+  }
+  .rmap__stop:nth-child(4n+1):not(:first-child)::after {
+    content: ""; position: absolute; top: 44px; left: calc(-1 * var(--gutter)); width: calc(var(--gutter) + 4px);
+    border-top: 4px solid var(--rm-line);
+  }
+  .rmap__stop--next:nth-child(4n+1)::after { border-top-style: dashed; }
+  .rmap__track { top: 32px; }
+  .rmap__stop--now .rmap__track { top: 32px; }
+  .rmap__here { display: block; position: absolute; left: 3px; top: -30px; width: 22px; height: 26px; }
+  .here-icon--inline { display: none; }
+  .rmap__stop--bare .rmap__title { font-size: var(--fs-h2); line-height: 1; padding-top: 0; }
+  /* "More detail" opens as a solid floating panel two columns wide, so the row never grows. Stops in the
+     last two columns of a row open it to the left. One is open at a time (name="rmap-more"); Esc closes it. */
+  .rmap__more { position: relative; }
+  .rmap__more[open] > .more__body {
+    position: absolute; z-index: 5; top: 100%; left: 0; width: min(28rem, calc(200% + var(--rm-gap)));
+    padding: var(--s-4); background: var(--panel); border: 1px solid var(--rule-2); border-radius: var(--r-2);
+    box-shadow: var(--shadow);
+  }
+  .rmap__stop:nth-child(4n) .rmap__more[open] > .more__body,
+  .rmap__stop:nth-child(4n-1) .rmap__more[open] > .more__body { left: auto; right: 0; }
+}
+@media (min-width: 1100px) {
+  .rmap { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .rmap__stop:nth-child(4n)::before { right: calc(-1 * (var(--rm-gap) + 14px)); }
+  .rmap__stop:nth-child(6n)::before { right: 0; }
+  .rmap .rmap__stop:nth-child(n)::after { content: none; } /* drop the 4-column wrap marks */
+  .rmap__stop:nth-child(6n):not(:last-child)::after {
+    content: ""; position: absolute; top: 40px; right: -2px; width: 0; height: 0; left: auto;
+    border: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 8px solid var(--rm-line);
+  }
+  .rmap__stop:nth-child(6n+1):not(:first-child)::after {
+    content: ""; position: absolute; top: 44px; right: auto; left: calc(-1 * var(--gutter)); width: calc(var(--gutter) + 4px); height: 0;
+    border: 0; border-top: 4px solid var(--rm-line);
+  }
+  .rmap__stop--next:nth-child(6n+1)::after { border-top-style: dashed; }
+  .rmap__stop:nth-child(n) .rmap__more[open] > .more__body { left: 0; right: auto; }
+  .rmap__stop:nth-child(6n) .rmap__more[open] > .more__body,
+  .rmap__stop:nth-child(6n-1) .rmap__more[open] > .more__body { left: auto; right: 0; }
+}
+
+/* ==========================================================================
+   6.19 Line cards (.lcards, .lcard): a few genuinely parallel items on a sheet, each with a 4px top rule
+   in its line colour and its line named and linked. Home #why (8 parts) and /learn/ #about (4 parts:
+   --lcard-rows: 4 on the grid). From 900px the parts line up across a row (subgrid).
+   ========================================================================== */
+.lcards { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-4); }
+@media (min-width: 900px) { .lcards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); } }
+.lcard {
+  display: flex; flex-direction: column; min-height: var(--lcard-min, 0);
+  border: 1px solid var(--rule); border-top: 4px solid var(--route); border-radius: var(--r-2);
+  padding: var(--s-4); scroll-margin-top: var(--s-4); transition: border-color 150ms ease-out;
+}
+.lcard--s { --route: var(--line-s); } .lcard--m { --route: var(--line-m); }
+.lcard--n { --route: var(--line-n); } .lcard--b { --route: var(--line-b); }
+/* Arriving from a link (/learn/#fact-matmul): the card's frame brightens so the eye finds it. */
+.lcard:target { border-color: var(--rule-hover); border-top-color: var(--route); }
+@media (min-width: 600px) { .lcard { padding: var(--s-6); } }
+/* Phones: no box inside the sheet, so the text keeps its measure. The 4px line rule and the line link
+   still separate the cards; a card reached by its link gets a recessed band instead of a frame. */
+@media (max-width: 599px) {
+  .lcard { min-height: 0; border-width: 4px 0 0; border-radius: 0; padding: var(--s-4) 0 var(--s-5); }
+  .lcard:target { background: var(--surface-2); box-shadow: -12px 0 0 var(--surface-2), 12px 0 0 var(--surface-2); }
+}
+@media (min-width: 900px) {
+  .lcard { display: grid; grid-template-rows: subgrid; grid-row: span var(--lcard-rows, 8); row-gap: 0; align-content: start; }
+}
+.lcard__top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-2) var(--s-3); margin-bottom: var(--s-6); }
+/* The line an item belongs to, named and linked to its route, as in the hero. */
+.lcard__line { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 44px; font-weight: 700; text-decoration: none; font-size: var(--fs-small); }
+.lcard__line:hover { text-decoration: underline; text-underline-offset: 4px; }
+.lcard__title { font-size: var(--fs-h3-lg); line-height: 1.12; letter-spacing: -0.015em; text-wrap: balance; }
+
+/* Settings such as -modelnet=0 never break at their hyphen (in sentences). File paths in links and lists
+   ("doc/swapnet/OPERATIONS.md:5") may break anywhere on narrow screens; the no-break space before the
+   arrow keeps the arrow with the last character. */
+.why__text code, .more__body p code { white-space: nowrap; overflow-wrap: normal; }
+.more__body a code, .more__body li code { white-space: normal; overflow-wrap: normal; word-break: break-all; }
+
+/* Home "Why" (#why): four reasons as line cards (min-height 300px from 600px; 8 parts). */
+.why__grid { --lcard-min: 300px; }
+@media (min-width: 900px) { .why__main { display: contents; } }
+.why__main { margin-top: auto; }
+.why__sub { margin-top: var(--s-2); color: var(--ink-2); font-size: 1.0625rem; line-height: 1.4; }
+.why__label { margin-top: var(--s-5); }
+.why__text { margin-top: var(--s-2); color: var(--ink); font-size: 1.0625rem; line-height: 1.6; }
+.why__note { margin-top: var(--s-2); padding-left: var(--s-3); border-left: 2px solid var(--rule-2); color: var(--ink-2); font-size: var(--fs-small); line-height: 1.55; }
+.why__links { list-style: none; margin: var(--s-5) 0 0; padding: var(--s-2) 0 0; border-top: 1px solid var(--rule); display: grid; gap: 0; }
+.why__links li { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--s-3); }
+.why__links a { display: inline-block; min-height: 44px; padding-block: 11px; line-height: 1.45; font-size: var(--fs-small); font-weight: 600; }
+.why__links .arr { position: relative; left: 0; transition: left 150ms ease-out; }
+.why__links a:hover .arr { left: 4px; }
+.why__disclaimer { margin-top: var(--s-5); }
+
+/* ==========================================================================
+   7. Motion: the final state for motion off. There is no generic section reveal:
+   content is visible from the first paint; only the section rules draw in.
+   ========================================================================== */
+
+[data-motion="off"] *, [data-motion="off"] *::before, [data-motion="off"] *::after {
+  animation: none !important; transition: none !important;
+}
+[data-motion="off"] .route { --progress: 1; }
+[data-motion="off"] .stop::before { background: var(--route); }
+[data-motion="off"] .route--on-surface .stop::before { background: var(--route); }
+[data-motion="off"] .rm-dot { display: none; }
+[data-motion="off"] .board__row::before { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .route { --progress: 1 !important; }
+  .stop::before { background: var(--route) !important; }
+  .sec-rule { transform: none !important; }
+  .routemap .rm-line { stroke-dashoffset: 0 !important; }
+  .routemap .rm-stop, .routemap .rm-end { opacity: 1 !important; transform: none !important; }
+  .rm-dot { display: none; }
+  .board__row::before { display: none; }
+}
+
+/* Windows High Contrast (forced colours) repaints backgrounds, which would erase every glyph drawn with
+   background: currentColor. Keep the plus/minus, the pause/play glyph, the route lines and the burn bar. */
+@media (forced-colors: active) {
+  .pm, .board__pause-icon { forced-color-adjust: none; color: ButtonText; }
+  .pm { border-color: ButtonText; }
+  .route::before, .route::after, .burn__fill { forced-color-adjust: none; background: CanvasText; }
+}
+
+/* QA report (only in ?qa=1 mode) */
+#qa-report { position: relative; z-index: 999; margin: 0; padding: var(--s-4); white-space: pre-wrap; background: var(--panel); color: var(--ink); font: 500 13px/1.5 var(--mono); border-top: 2px solid var(--rule-strong); }
+
+@media print {
+  .hdr__tools, .hdr__menu-btn, .pill, .board__pause, .checklist__bar, [data-copy-ai] { display: none !important; }
+  body::before { display: none; }
+  .routes__card:not([open]) > .routes__body { display: block; }
+  .sign--fold:not([open]) > .sign__body { display: block; }
+  .sec-rule { transform: none !important; }
+}
+
+/* Without JavaScript: hide buttons that would do nothing, and terms stop promising a popover. */
+html:not(.js) [data-copy-ai], html:not(.js) .code__copy { display: none; }
+html:not(.js) .term { cursor: text; text-decoration: none; }
+
+/* Home page helpers (home only; kept here because the template shows them) */
+.start__map .section__head, .ai .section__head { margin-bottom: 0; }
+.numbers__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s-3) var(--s-5); }
+.numbers__head > * + * { margin-top: 0; }
+/* The eyebrow, H2 and lede sit in an extra <div> here: give them the kit's spacing (6.16). */
+.numbers__head > div > * + * { margin-top: var(--s-3); }
+.numbers__head > div > .eyebrow + * { margin-top: var(--s-2); }
+.sign__terms {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-4);
+  margin-top: var(--s-4); padding-top: var(--s-2); border-top: 1px solid var(--rule); color: var(--ink-2); font-size: var(--fs-small);
+}
+.sign__terms-list { list-style: none; margin: 0; padding: 0; gap: 0 var(--s-4); }
+.sign__terms .term { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* A drawn dot: Overpass sets its middle dot off-centre. Keep spaces around the span. */
+.sep { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: currentColor; vertical-align: middle; margin: 0 .2em; }
+.tpl-gap { margin-top: var(--s-5); }

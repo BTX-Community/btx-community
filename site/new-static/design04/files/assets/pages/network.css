@@ -1,0 +1,64 @@
+/* Network page (/network/): page-only layout. Tokens only; shared components stay as site.css draws them. */
+
+/* The full board: two groups of rows side by side from 960px ("The chain" and "BTX in numbers"). */
+.nw-cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 var(--s-7); }
+@media (min-width: 960px) { .nw-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.nw-group__title { padding: var(--s-5) 0 var(--s-1); border-bottom: 1px solid var(--board-rule); color: var(--board-dim); }
+/* The upgrade warning is a heading for screen readers; it keeps the size of the box text. */
+.nw-fork__title { margin: 0; font-size: inherit; line-height: inherit; font-weight: inherit; }
+/* The "Check on" links fill the foot of the shorter right-hand group. */
+.nw-group .board__links { padding-top: var(--s-2); }
+/* Said only when nothing will load ([data-nojs-only] hides it with JS). */
+.nw-nojs { margin-top: var(--s-3); }
+
+/* Key to the board: name on the left, one sentence on the right, hairlines between rows. */
+.nw-key__group + .nw-key__group { margin-top: var(--s-7); }
+.nw-key__title { margin-bottom: var(--s-3); }
+.nw-key__list { margin: 0; border-top: 1px solid var(--rule); }
+.nw-key__row { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-1); padding: var(--s-4) 0; border-bottom: 1px solid var(--rule); }
+.nw-key__row dt { font-weight: 700; line-height: 1.35; }
+/* Keeps a bracket with the term inside it. */
+.nw-nowrap { white-space: nowrap; }
+.nw-key__row dd { margin: 0; color: var(--ink-2); font-size: 1.0625rem; line-height: 1.55; max-width: 66ch; }
+/* Phones: the name runs into its sentence, so the key stays a quick reference. */
+@media (max-width: 699px) {
+  .nw-key__row { display: block; padding: var(--s-3) 0; }
+  .nw-key__row dt { display: inline; }
+  .nw-key__row dt::after { content: " "; }
+  .nw-key__row dd { display: inline; }
+}
+@media (min-width: 700px) {
+  .nw-key__row { grid-template-columns: minmax(10rem, 16rem) minmax(0, 1fr); column-gap: var(--s-6); }
+}
+
+/* Development of the node software */
+.nw-dev > * + * { margin-top: var(--s-5); }
+.nw-dev__intro { max-width: 66ch; }
+.nw-dev .nw-dev__note { margin-top: var(--s-3); max-width: 80ch; }
+.nw-dev .nw-dev__spec { margin-top: var(--s-6); }
+/* Guard until network.js runs; after that the hidden attribute decides. */
+html.js .nw-dev__msg:not(.is-on) { display: none; }
+.nw-branches td:first-child a { font-family: var(--mono); font-weight: 500; overflow-wrap: anywhere; }
+.nw-branches .tag { margin-left: var(--s-2); vertical-align: 1px; }
+.nw-branches .nw-age { color: var(--ink-2); }
+.nw-branches tbody td { font-size: 1rem; }
+.nw-dev__spec .spec__val a { text-decoration-thickness: 2px; text-underline-offset: 5px; }
+/* Branch and release links are standalone targets: 44px-tall hit areas inside their rows. */
+.nw-branches td:first-child a, .nw-dev__spec .spec__val a { position: relative; }
+.nw-branches td:first-child a::after { content: ""; position: absolute; inset: -12px -4px; }
+.nw-dev__spec .spec__val a::after { content: ""; position: absolute; inset: -9px -4px; }
+.nw-date { font-family: var(--mono); font-weight: 500; color: var(--ink); }
+/* Phones: the branch name on its own line, last commit and commit count side by side under it. */
+@media (max-width: 699px) {
+  .nw-branches tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px var(--s-4); }
+  .nw-branches tbody td:first-child { grid-column: 1 / -1; padding-bottom: var(--s-1); }
+  .nw-branches.table tbody td:first-child::before { display: none; }
+  .nw-branches.table tbody td.num { text-align: right; }
+  /* The age goes on its own line under the date, never split across two. */
+  .nw-branches .sep { display: none; }
+  .nw-branches .nw-age { display: block; }
+}
+.nw-branches .nw-age { white-space: nowrap; }
+
+/* The ↗ in mono links comes from Overpass at the size of the other links' arrows. */
+.nw-branches .arr, .nw-dev__spec .arr { font-family: var(--font); font-weight: 700; font-size: .75em; }

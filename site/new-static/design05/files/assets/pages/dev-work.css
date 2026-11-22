@@ -1,0 +1,323 @@
+/* Ongoing work (/dev/work/): page-only layout and components. Tokens only, no raw colours.
+   Shared components (.sheet, .board, .table, .route, .tag, .callout, .pm, .btn) are used as they are. */
+
+/* ---- Text helpers -------------------------------------------------------------------------- */
+.dw-intro { margin-bottom: var(--s-6); }
+.dw-onbg { color: var(--ink-2); }
+.dw-onbg a { color: var(--ink); }
+.dw-note { font-size: var(--fs-small); line-height: 1.55; color: var(--ink-2); max-width: 72ch; }
+.dw-note--lead { margin-bottom: var(--s-4); }
+.dw-h3 { margin: var(--s-7) 0 var(--s-4); }
+.dw-h3--top { margin-top: 0; }
+.dw-count { font: 500 var(--fs-label)/1 var(--mono); color: var(--ink-2); margin-left: var(--s-2); vertical-align: middle; }
+.dw-dash { color: var(--ink-3); }
+.dw-nowrap { white-space: nowrap; }
+
+/* Intro text beside a note or a set of figures. */
+.dw-cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 var(--s-6); }
+.dw-cols > .callout { margin-bottom: var(--s-6); align-self: start; }
+@media (min-width: 960px) {
+  .dw-cols { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--s-7); }
+}
+
+/* Links under a section: named sources, 44px tall, wrapping. */
+.dw-links { display: flex; flex-wrap: wrap; gap: 0 var(--s-5); list-style: none; margin: 0; padding: 0; }
+.dw-links a { display: inline-block; min-height: 44px; padding-block: 11px; line-height: 1.45; font-weight: 600; font-size: var(--fs-small); }
+.dw-stamp { margin-top: var(--s-6); padding-top: var(--s-4); border-top: 1px solid var(--rule); }
+.dw-stamp .meta { max-width: 90ch; margin-bottom: var(--s-1); }
+
+/* ---- Figures: big numbers on a sheet (Overpass 800, tabular), separated by hairlines ---------- */
+.dw-figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0 0 var(--s-2); border-top: 1px solid var(--rule); }
+.dw-fig { padding: var(--s-4) var(--s-4) var(--s-4) 0; border-bottom: 1px solid var(--rule); display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.dw-fig dd { margin: 0; }
+.dw-fig__val { order: 2; font: 800 var(--fs-data)/1.1 var(--font); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; color: var(--ink); margin-top: var(--s-1) !important; }
+.dw-fig__val small { font-size: .62em; font-weight: 700; letter-spacing: 0; }
+.dw-fig__sub { order: 3; font-size: var(--fs-small); line-height: 1.45; color: var(--ink-2); }
+.dw-fig__long { text-transform: none; letter-spacing: 0; font-family: var(--font); font-weight: 600; font-size: var(--fs-small); line-height: 1.35; }
+@media (min-width: 700px) {
+  .dw-figs--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .dw-figs--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .dw-figs--4 .dw-fig + .dw-fig, .dw-figs--3 .dw-fig:not(:nth-child(3n+1)) { padding-left: var(--s-4); border-left: 1px solid var(--rule); }
+}
+@media (max-width: 699px) {
+  .dw-fig:nth-child(even) { padding-left: var(--s-4); border-left: 1px solid var(--rule); }
+}
+/* Baselines: the value comes first, so every value in a row shares one top line however long its label is. */
+.dw-figs--base .dw-fig__val { order: 0; margin-top: 0 !important; }
+.dw-figs--base .dw-fig__long { order: 1; margin-top: var(--s-1); }
+.dw-figs--base .dw-fig__sub { order: 2; }
+@media (max-width: 699px) {
+  /* Phones: one baseline per row, value on the left, label and note beside it (as the lane counts). */
+  .dw-figs--base { grid-template-columns: minmax(0, 1fr); }
+  .dw-figs--base .dw-fig, .dw-figs--base .dw-fig:nth-child(even) { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); column-gap: var(--s-3); align-items: baseline; padding-left: 0; border-left: 0; }
+  .dw-figs--base .dw-fig__val { grid-column: 1; grid-row: 1 / span 2; }
+  .dw-figs--base .dw-fig__long { grid-column: 2; grid-row: 1; margin-top: 0; }
+  .dw-figs--base .dw-fig__sub { grid-column: 2; grid-row: 2; }
+}
+/* Lanes: the three counts sit under the intro. */
+.dw-figs--lanes { margin-bottom: var(--s-6); }
+@media (max-width: 699px) {
+  .dw-figs--lanes { grid-template-columns: minmax(0, 1fr); }
+  .dw-figs--lanes .dw-fig { padding-left: 0; border-left: 0; display: grid; grid-template-columns: 4rem minmax(0, 1fr); column-gap: var(--s-3); }
+  .dw-figs--lanes .dw-fig__val { order: 0; grid-column: 1; grid-row: 1 / span 2; margin-top: 0 !important; }
+  .dw-figs--lanes dt, .dw-figs--lanes .dw-fig__sub { grid-column: 2; }
+}
+
+/* ---- Tables: shared .table, with a scroll box only for the table itself -------------------- */
+.dw-scroll { position: relative; overflow-x: auto; }
+.dw-scroll:focus-visible { border-radius: var(--r-1); }
+.dw-table tbody th { font-weight: 700; color: var(--ink); }
+.dw-table td.num, .dw-table th.num { white-space: nowrap; }
+.dw-table .num { padding-right: var(--s-4); }
+.dw-table th:last-child, .dw-table td:last-child { padding-right: 0; }
+.dw-state { color: var(--ink-2); }
+.dw-class { font: 700 var(--fs-small)/1.3 var(--mono); color: var(--ink); white-space: nowrap; }
+.dw-table tbody th .tag { margin-left: var(--s-2); vertical-align: 1px; }
+.dw-table--areas th[scope="row"] { min-width: 10rem; }
+.dw-area__name { display: block; font-family: var(--mono); font-weight: 700; }
+.dw-area__hint { display: block; font: 500 .875rem/1.4 var(--mono); color: var(--ink-2); }
+.dw-area__note { display: block; font-weight: 400; color: var(--ink-2); }
+/* A neutral two-part bar: unit (solid ivory) inside unit + functional (light). Width from --u and --f. */
+.dw-bar { position: relative; display: block; width: 100%; max-width: 12rem; height: 6px; margin-top: var(--s-2); border-radius: 3px; background: var(--rule); overflow: hidden; }
+.dw-bar__f, .dw-bar__u { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; }
+.dw-bar__f { width: calc(var(--f) * 1%); background: var(--rule-hover); }
+.dw-bar__u { width: calc(var(--u) * 1%); background: var(--ink); }
+@media (forced-colors: active) { .dw-bar__u { forced-color-adjust: none; background: CanvasText; } }
+
+.dw-class__name { display: block; font-weight: 700; color: var(--ink); }
+.dw-class__rule { display: block; color: var(--ink-2); }
+.dw-class__lanes a { display: inline-flex; align-items: center; min-height: 44px; margin-right: var(--s-2); font-family: var(--mono); font-weight: 500; white-space: nowrap; }
+.dw-s { min-height: 20px; padding: 1px 5px 0; }
+.dw-legend { margin-top: var(--s-4); }
+.dw-legend .tag { margin-right: var(--s-2); }
+.dw-table--gates td:nth-child(2) { min-width: 12rem; }
+/* The wide areas table stacks below 960px, not only below 700px as the shared table does, so it never
+   needs a sideways scroll on a tablet. Same pattern as the shared stacked table. */
+@media (min-width: 700px) and (max-width: 959px) {
+  .dw-table--areas thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .dw-table--areas, .dw-table--areas tbody, .dw-table--areas td, .dw-table--areas th { display: block; width: 100%; }
+  .dw-table--areas tr { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: var(--s-3); padding: var(--s-3) 0; border-bottom: 1px solid var(--rule); }
+  .dw-table--areas td, .dw-table--areas tbody th { border: 0; padding: 2px 0; }
+  .dw-table--areas tbody th { grid-column: 1 / -1; padding-bottom: var(--s-1); min-width: 0; }
+  .dw-table--areas td, .dw-table--areas td.num { width: auto; text-align: left; }
+  .dw-table--areas td[data-label]::before { content: attr(data-label); display: block; color: var(--ink-2); }
+}
+@media (min-width: 700px) {
+  .dw-table--week th[scope="row"] { width: 9rem; }
+}
+@media (max-width: 699px) {
+  .dw-scroll { overflow: visible; }
+  .dw-table td.num, .dw-table th.num { white-space: normal; }
+  .dw-table tbody th { padding-bottom: var(--s-1); }
+  .dw-table--areas th[scope="row"], .dw-table--gates td:nth-child(2) { min-width: 0; }
+  /* Numbers sit side by side in stacked rows: label above value, in a wrapping grid. */
+  .dw-table--areas tr, .dw-table--runs tr { display: grid; grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); column-gap: var(--s-3); }
+  .dw-table--areas tbody th, .dw-table--runs tbody th { grid-column: 1 / -1; }
+  .dw-table--areas td, .dw-table--runs td { width: auto; }
+}
+
+/* ---- Folded block (Coverage by area): an h3 inside a summary with the plus/minus ------------- */
+.dw-fold { margin-top: var(--s-7); border-top: 1px solid var(--rule-2); border-bottom: 1px solid var(--rule-2); }
+.dw-fold > summary { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-4) 0; cursor: pointer; list-style: none; }
+.dw-fold > summary::-webkit-details-marker { display: none; }
+.dw-fold__titles { display: block; flex: 1 1 auto; min-width: 0; }
+.dw-fold__titles .dw-h3 { margin: 0; }
+.dw-fold__sub { display: block; margin-top: 2px; font-size: var(--fs-small); color: var(--ink-2); }
+.dw-fold > summary:hover h3 { text-decoration: underline; text-underline-offset: 4px; }
+.dw-fold > summary:focus-visible { border-radius: var(--r-1); }
+.dw-fold__body { padding-bottom: var(--s-5); }
+.dw-fold__body > .dw-note:first-child { margin-bottom: var(--s-4); }
+.dw-fold__body > .dw-note:last-child { margin-top: var(--s-4); }
+.dw-fold[open] > .dw-fold__body { animation: dw-in 200ms ease-out; }
+@keyframes dw-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+/* ---- Filter and sort controls (shown only with JavaScript; the buttons are the shared .toggle) -- */
+.dw-tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-4); margin: 0 0 var(--s-5); padding: var(--s-3) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.dw-check { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 44px; font-size: var(--fs-small); font-weight: 600; cursor: pointer; }
+.dw-check input { width: 20px; height: 20px; margin: 0; accent-color: var(--ink); }
+.dw-tools__end { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-3); margin-left: auto; }
+.dw-shown { font-size: var(--fs-small); color: var(--ink-2); white-space: nowrap; }
+.dw-tools .dw-shown:last-child { margin-left: auto; }
+.dw-empty { padding: var(--s-5) 0; color: var(--ink-2); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); }
+@media (max-width: 699px) { .dw-tools__end { margin-left: 0; width: 100%; } }
+
+/* ---- Lanes: a list of collapsed rows, separated by hairlines (rows, not cards) -------------- */
+.dw-group + .dw-group { margin-top: var(--s-2); }
+.dw-group .dw-h3 { margin-top: var(--s-7); margin-bottom: var(--s-2); }
+.dw-lanes { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-2); }
+.dw-lanes > li { border-bottom: 1px solid var(--rule); }
+.dw-lane > summary {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-1) var(--s-4); align-items: center;
+  padding: var(--s-4) var(--s-2) var(--s-4) 0; cursor: pointer; list-style: none; min-height: 64px;
+}
+.dw-lane > summary::-webkit-details-marker { display: none; }
+.dw-lane > summary > .pm { grid-column: 2; grid-row: 1 / span 3; }
+.dw-lane__tags { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.dw-lane__code { color: var(--ink); border-color: var(--rule-2); font-weight: 700; }
+.dw-lane__name { font-size: var(--fs-body); line-height: 1.3; }
+.dw-lane__who { font-size: var(--fs-small); color: var(--ink-2); }
+.dw-lane > summary:hover .dw-lane__name { text-decoration: underline; text-underline-offset: 4px; }
+.dw-lane > summary:focus-visible { border-radius: var(--r-1); }
+.dw-lane[open] > summary { padding-bottom: var(--s-3); }
+@media (min-width: 900px) {
+  .dw-lane > summary { grid-template-columns: 15rem minmax(0, 1fr) 15rem auto; }
+  .dw-lane > summary > .pm { grid-column: 4; grid-row: 1; }
+  .dw-lane__name { grid-column: 2; grid-row: 1; }
+  .dw-lane__who { grid-column: 3; grid-row: 1; }
+  .dw-lane__tags { grid-row: 1; }
+}
+.dw-lane__body { padding: var(--s-2) 0 var(--s-6); }
+.dw-lane[open] > .dw-lane__body { animation: dw-in 200ms ease-out; }
+@media (min-width: 900px) { .dw-lane__body { padding-left: calc(15rem + var(--s-4)); padding-right: var(--s-7); } }
+.dw-lane__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-3) var(--s-4); margin: 0 0 var(--s-5); padding: var(--s-3) var(--s-4); background: var(--surface-2); border-radius: var(--r-1); }
+@media (min-width: 600px) { .dw-lane__facts { grid-template-columns: repeat(4, minmax(0, auto)); justify-content: start; column-gap: var(--s-6); } }
+.dw-lane__facts dd { margin: 2px 0 0; }
+.dw-lane__fact { font: 800 1.125rem/1.3 var(--font); font-variant-numeric: tabular-nums; color: var(--ink); }
+.dw-lane__fact--plain { font-weight: 600; font-size: 1rem; color: var(--ink-2); }
+.dw-lane__spec { margin: 0; border-top: 1px solid var(--rule); }
+.dw-lane__spec > div { display: grid; gap: 2px var(--s-5); padding: var(--s-3) 0; border-bottom: 1px solid var(--rule); }
+.dw-lane__spec dd { margin: 0; font-size: 1.0625rem; line-height: 1.55; max-width: 70ch; }
+@media (min-width: 700px) { .dw-lane__spec > div { grid-template-columns: 7rem minmax(0, 1fr); } .dw-lane__spec dt { padding-top: 4px; } }
+.dw-lane__label { margin: var(--s-5) 0 var(--s-2); }
+.dw-lane__runners { list-style-type: disc; }
+.dw-lane__done, .dw-lane__runners { margin: 0; padding-left: 1.6em; font-size: 1.0625rem; line-height: 1.55; max-width: 70ch; }
+.dw-lane__done li + li, .dw-lane__runners li + li { margin-top: var(--s-2); }
+.dw-lane__done li::marker { font-family: var(--mono); font-weight: 500; color: var(--ink-2); }
+.dw-lane__brief { margin-top: var(--s-4); }
+.dw-lane__brief a { display: inline-block; min-height: 44px; padding-block: 11px; line-height: 1.45; font-weight: 700; font-size: var(--fs-small); }
+
+/* ---- Lists of rules: the lead clause bold, the reason in ink-2 ------------------------------ */
+.dw-list { margin: 0; padding: 0 0 0 1.25em; max-width: 70ch; color: var(--ink-2); line-height: 1.55; }
+.dw-list li + li { margin-top: var(--s-3); }
+.dw-list strong { color: var(--ink); font-weight: 700; }
+/* Owner rules: the /dev/ "rules in short" pattern (dev.css .dev-rules): mono numbers in their own
+   column, a hairline between rules. */
+.dw-rules { list-style: none; margin: 0; padding: 0; counter-reset: rule; border-top: 1px solid var(--rule); max-width: 70ch; }
+.dw-rules > li {
+  counter-increment: rule; position: relative; padding: var(--s-4) 0 var(--s-4) 2.5rem;
+  border-bottom: 1px solid var(--rule); color: var(--ink-2); line-height: 1.55;
+}
+.dw-rules > li::before {
+  content: counter(rule); position: absolute; left: 0; top: calc(var(--s-4) + 3px);
+  font: 700 var(--fs-small)/1.6 var(--mono); color: var(--ink-3);
+}
+.dw-rules strong { color: var(--ink); font-weight: 700; }
+.dw-split { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-7); }
+@media (min-width: 960px) { .dw-split { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } }
+/* A short side column stays in view beside a long one (as the home page's side column beside a route). */
+@media (min-width: 960px) {
+  #rhythm .dw-flow__side, .dw-split > div:last-child { position: sticky; top: var(--s-5); align-self: start; }
+}
+
+/* ---- Flow: the route with exits; where it ends up ------------------------------------------ */
+.dw-exit { margin-left: var(--s-2); vertical-align: 2px; }
+.dw-flow__side { align-self: start; }
+.dw-ends { border-top: 1px solid var(--rule); }
+.dw-end { padding: var(--s-4) 0; border-bottom: 1px solid var(--rule); display: grid; gap: var(--s-1) var(--s-5); }
+.dw-end p { color: var(--ink-2); font-size: 1.0625rem; line-height: 1.55; max-width: 62ch; }
+@media (min-width: 700px) { .dw-end { grid-template-columns: 9rem minmax(0, 1fr); } .dw-end h4 { padding-top: 2px; } }
+.dw-flow__side .dw-stamp { margin-top: var(--s-5); }
+
+/* ---- Rhythm: phases as route stops ---------------------------------------------------------- */
+.dw-phase .stop__n { font-weight: 700; color: var(--ink); }
+.dw-phase__when { color: var(--ink-2); font-weight: 500; }
+/* A phase title sits under its "Phase 2a · 12–14 Nov" label, not beside it like a numbered stop. */
+.dw-phase .dw-phase__title { display: block; margin-top: var(--s-1); }
+.dw-phase__list { list-style-type: disc; margin: var(--s-2) 0 0; padding-left: 1.2em; color: var(--ink-2); font-size: 1.0625rem; line-height: 1.5; }
+.dw-phase__list li + li { margin-top: var(--s-1); }
+
+/* ---- Nightly CI-0: one board per branch ----------------------------------------------------- */
+.dw-ci__nojs { margin-bottom: var(--s-5); max-width: 72ch; }
+/* The live line stays in the accessibility tree while empty, so later text is announced. */
+.dw-ci__status:empty { margin: 0; }
+.dw-ci__loading { margin-bottom: var(--s-5); color: var(--ink-2); font-size: var(--fs-small); }
+.dw-ci__status { margin-bottom: var(--s-5); color: var(--ink-2); font-size: var(--fs-small); }
+.dw-ci__status.board__msg { color: var(--ink); max-width: 72ch; }
+.dw-ci__runs { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5); }
+.dw-ci__runs:empty { display: none; }
+@media (min-width: 900px) { .dw-ci__runs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.dw-ci .dw-links { margin-top: var(--s-4); }
+.dw-run { display: flex; flex-direction: column; }
+.dw-run .board__body { flex: 1 1 auto; }
+.dw-run .board__msg { margin-bottom: var(--s-2); }
+.dw-run__ref { font-family: var(--mono) !important; font-weight: 700 !important; white-space: normal !important; overflow-wrap: anywhere; }
+.dw-run__ref a { position: relative; display: inline-flex; align-items: center; column-gap: .3em; min-height: 32px; }
+.dw-run__ref a::after { content: ""; position: absolute; inset: -6px -4px; } /* 44px hit area, same row height */
+.dw-run .board__row dd small { font-size: .56em; font-weight: 700; letter-spacing: 0; color: var(--board-dim); }
+.board__row dd.dw-run__sub {
+  flex-basis: 100%; margin: 0; text-align: left; white-space: normal;
+  font: 400 var(--fs-small)/1.45 var(--font); letter-spacing: 0; color: var(--board-dim);
+}
+.dw-run__sub span { white-space: nowrap; }
+.dw-run__lists { padding: var(--s-2) 0 0; }
+.dw-run__lists .more + .more { margin-top: 0; }
+.dw-run__lists .more__body ul { margin: 0; padding-left: 1.1em; }
+.dw-run__lists .more__body li + li { margin-top: 2px; }
+.dw-run__lists .dw-run__more { list-style: none; margin-left: -1.1em; color: var(--ink-3); }
+.dw-run .board__src-line { font-family: var(--font); }
+.dw-run__time { font-family: var(--mono); font-weight: 500; color: var(--board-ink); white-space: nowrap; }
+
+/* Phones: the gates and the week read as short blocks: code and phase on one line, then the name and the
+   state, without a label on every cell. */
+@media (max-width: 699px) {
+  .dw-table--gates tr, .dw-table--release tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s-3); }
+  .dw-table--gates tbody th, .dw-table--release tbody th { grid-column: 1; }
+  .dw-table--gates td:nth-child(4) { grid-column: 2; grid-row: 1; text-align: right; color: var(--ink-2); font-size: var(--fs-small); }
+  .dw-table--gates td:nth-child(2), .dw-table--gates td:nth-child(3),
+  .dw-table--release td { grid-column: 1 / -1; }
+  .dw-table--gates td::before, .dw-table--release td::before { content: none !important; }
+  .dw-table--gates td:nth-child(2), .dw-table--release td:nth-child(2) { color: var(--ink); font-weight: 600; }
+}
+
+/* ---- Bug class registry: collapsed rows; the summary carries the table's columns ------------ */
+.dw-reg { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-2); }
+.dw-reg > li { border-bottom: 1px solid var(--rule); }
+.dw-reg__head { display: none; }
+.dw-cls > summary {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: var(--s-1) var(--s-4); align-items: start;
+  padding: var(--s-4) var(--s-1) var(--s-4) 0; cursor: pointer; list-style: none; font-size: var(--fs-small); line-height: 1.5;
+}
+.dw-cls > summary::-webkit-details-marker { display: none; }
+.dw-cls > summary:focus-visible { border-radius: var(--r-1); }
+.dw-cls > summary:hover .dw-class__name { text-decoration: underline; text-underline-offset: 4px; }
+.dw-cls__code { grid-column: 1; grid-row: 1; display: flex; align-items: center; gap: var(--s-2); }
+.dw-cls__code .tag { margin: 0; }
+.dw-cls__status { grid-column: 2; grid-row: 1; font-weight: 700; color: var(--ink); }
+.dw-cls__name { grid-column: 1 / 3; grid-row: 2; }
+.dw-class__name { font-size: 1rem; }
+.dw-cls__prs { grid-column: 1; grid-row: 3; }
+.dw-cls__sites { grid-column: 2; grid-row: 3; }
+.dw-cls > summary > .pm { grid-column: 3; grid-row: 1 / span 3; align-self: center; }
+.dw-cls__k { display: inline; margin-right: var(--s-2); font: 500 var(--fs-label)/1.3 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+.dw-cls__status .dw-cls__k { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.dw-cls__v { font-weight: 700; color: var(--ink); }
+.dw-cls__body { margin: 0 0 var(--s-4); padding: var(--s-3) var(--s-4); background: var(--surface-2); border-radius: var(--r-1); display: grid; gap: var(--s-2) var(--s-6); font-size: var(--fs-small); line-height: 1.55; }
+.dw-cls__body dd { margin: 2px 0 0; max-width: 70ch; }
+.dw-cls[open] > .dw-cls__body { animation: dw-in 200ms ease-out; }
+@media (min-width: 1100px) {
+  .dw-reg__head, .dw-cls > summary { grid-template-columns: 8.5rem minmax(0, 1fr) 5rem 10rem 9.5rem 20px; column-gap: var(--s-4); }
+  .dw-reg__head { display: grid; padding: 0 var(--s-1) var(--s-2) 0; color: var(--ink-2); font: 500 var(--fs-label)/1.3 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+  .dw-reg__head > :nth-child(3) { text-align: right; padding-right: var(--s-3); }
+  .dw-cls__code, .dw-cls__name, .dw-cls__prs, .dw-cls__sites, .dw-cls__status { grid-row: 1; }
+  .dw-cls__code { grid-column: 1; padding-top: 1px; }
+  .dw-cls__name { grid-column: 2; }
+  .dw-cls__prs { grid-column: 3; text-align: right; padding-right: var(--s-3); }
+  .dw-cls__sites { grid-column: 4; }
+  .dw-cls__status { grid-column: 5; }
+  .dw-cls > summary > .pm { grid-column: 6; grid-row: 1; align-self: start; margin-top: 2px; }
+  .dw-cls__k { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .dw-cls__v { font-variant-numeric: tabular-nums; }
+  .dw-cls__body { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); margin-left: calc(8.5rem + var(--s-4)); }
+}
+
+/* A narrow board puts "branch @ commit" under its label, left-aligned, so it never breaks mid-name. */
+@container board (max-width: 460px) {
+  .board__row dd.dw-run__ref { flex-basis: 100%; margin-left: 0; text-align: left; }
+}
+
+/* The ↗ after a commit hash comes from Overpass, as on every other link. */
+.dw-run .arr { font-family: var(--font); font-weight: 700; font-size: .75em; }
+
+/* Filtered-out lanes and classes: hidden with a class, not the hidden attribute, so Copy for your AI
+   still copies the whole page whatever filters are on. */
+.dw-lanes > li.is-out, .dw-group.is-out, .dw-reg > li.is-out { display: none; }

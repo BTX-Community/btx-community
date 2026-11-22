@@ -1,0 +1,165 @@
+/* Run a node (/infra/): page-only layout and components. Tokens only; shared components are not redefined. */
+
+/* #paths: two choices side by side on one sheet, split by a hairline. */
+.paths { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-7); }
+.paths__col > .label { display: block; }
+.paths__title { margin-top: var(--s-2); font-size: var(--fs-h3-lg); line-height: 1.15; letter-spacing: -0.015em; }
+.paths__text { margin-top: var(--s-3); max-width: 58ch; }
+.paths__rows { margin-top: var(--s-5); }
+.paths__note { margin-top: var(--s-5); }
+.paths__meta { margin-top: var(--s-4); }
+.paths__start { margin-top: var(--s-4); }
+/* The seven-role directory sits full width under both choices, so the two choices stay level. */
+.paths__dir { margin-top: var(--s-7); padding-top: var(--s-5); border-top: 1px solid var(--rule); }
+.paths__dir-label { display: block; }
+.paths__dir .paths__rows { margin-top: var(--s-3); }
+@media (min-width: 900px) {
+  .paths__rows--grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-6); }
+}
+@media (min-width: 900px) {
+  .paths { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
+  .paths__col + .paths__col { border-left: 1px solid var(--rule); padding-left: var(--s-6); margin-left: var(--s-6); }
+}
+
+/* #home-node: Privacy and Reachability as two columns of short points. */
+.homepts { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-6); }
+@media (min-width: 900px) { .homepts { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-7); } }
+.homepts__title { margin-bottom: var(--s-3); }
+.points { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.points > li { padding: var(--s-4) 0; border-bottom: 1px solid var(--rule); color: var(--ink-2); line-height: 1.55; max-width: 66ch; }
+.points > li > strong { color: var(--ink); }
+.points__code { margin-top: var(--s-3); }
+.linkrow { list-style: none; margin: var(--s-5) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 var(--s-6); }
+.linkrow a, .role__links a, .edge__src a, .role__report, .upgrade__text a {
+  display: inline-block; min-height: 44px; padding-block: 10px; line-height: 1.45; font-weight: 600;
+  font-size: var(--fs-small);
+}
+/* An inline link inside a sentence: a 44px hit area from padding, so a wrapped line keeps its height. */
+.roles__more a { padding-block: 10px; font-weight: 600; }
+.linkrow .arr, .role__links .arr, .role__report .arr, .roles__more .arr { position: relative; left: 0; transition: left 150ms ease-out; }
+.linkrow a:hover .arr, .role__links a:hover .arr, .role__report:hover .arr, .roles__more a:hover .arr { left: 4px; }
+
+/* #check: the board and a short note under the folded sign. */
+.upgrade { margin-top: var(--s-6); align-items: start; }
+.upgrade__text { max-width: 46ch; padding-top: var(--s-4); }
+.upgrade__text > .label { display: block; margin-bottom: var(--s-3); }
+.upgrade__text p:not(.label) { color: var(--ink-2); }
+.upgrade__text p + p { margin-top: var(--s-3); }
+
+/* #roles: two labelled groups, one article per role, separated by hairlines. From 960px: name, what the
+   network gets and the report link left (they stay in view while the facts scroll past), facts right. */
+.roles__group { margin: 0 0 var(--s-4); }
+.roles__group--next { margin-top: var(--s-4); padding-top: var(--s-5); border-top: 2px solid var(--rule-2); }
+.role { padding: var(--s-5) 0 var(--s-6); border-top: 1px solid var(--rule-2); }
+.roles__group + .role { border-top: 0; padding-top: 0; }
+.role__head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-2); }
+.role__spec { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-3); }
+.role__gets { margin-top: var(--s-2); }
+.role__gets > .label { display: block; }
+.role__gets-text { margin-top: var(--s-1); max-width: 62ch; }
+.role__gets-text > p + p { margin-top: var(--s-2); }
+.role__title { font-size: var(--fs-h3-lg); line-height: 1.15; letter-spacing: -0.015em; text-wrap: balance; }
+.role__report { margin-top: var(--s-2); font-size: var(--fs-small); max-width: 34ch; }
+.facts { margin: var(--s-4) 0 0; }
+.facts__row { padding: var(--s-3) 0; }
+.facts__row + .facts__row { border-top: 1px solid var(--rule); }
+.facts dt { display: block; }
+.facts dd { margin: var(--s-1) 0 0; max-width: 66ch; }
+.facts dd > p + p { margin-top: var(--s-2); }
+.facts__code, .facts__note { margin-top: var(--s-3); }
+.facts__plain { margin-top: var(--s-2); color: var(--ink-2); }
+.facts__plain:first-child { margin-top: 0; }
+.facts .more { margin-top: var(--s-1); }
+.role__links { list-style: none; margin: 0; padding: 0; }
+.roles__more { margin-top: var(--s-5); }
+@media (min-width: 960px) {
+  .role { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: var(--s-7); padding-top: var(--s-6); }
+  .role__head { grid-column: 1; align-self: start; position: sticky; top: var(--s-6); }
+  .facts { grid-column: 2; }
+  .roles__group + .role { padding-top: 0; }
+  .role__gets-text { font-size: 1.0625rem; line-height: 1.55; }
+  .facts { margin-top: 0; }
+  .facts__row:first-child { padding-top: 0; }
+}
+
+/* #map: the wide diagram from 1000px; a station list below that. Both work without JS. */
+.map { margin: 0; }
+.map__wide { display: none; }
+@media (min-width: 1000px) {
+  .map__wide { display: block; }
+  .map__narrow { display: none; }
+}
+.mp { display: block; width: 100%; height: auto; overflow: visible; }
+.mp-line { fill: none; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+.mp-n { stroke: var(--line-n); } .mp-m { stroke: var(--line-m); }
+.mp-b { stroke: var(--line-b); } .mp-s { stroke: var(--line-s); }
+.mp-st { fill: var(--bg); stroke-width: 5; }
+.mp-ix { fill: var(--bg); stroke: var(--ink); stroke-width: 4; }
+.mp-arr { fill: var(--ink); stroke: var(--bg); stroke-width: 2; stroke-linejoin: round; }
+.mp-badge { fill: var(--ink); stroke: var(--bg); stroke-width: 3; }
+.mp-bt { font: 800 14px var(--font); fill: var(--bg); text-anchor: middle; dominant-baseline: central; }
+.mp-lab { font: 400 15px var(--font); fill: var(--ink-2); }
+.mp-name { font: 700 17px var(--font); fill: var(--ink); }
+.mp-code { font: 500 14px var(--mono); fill: var(--ink-2); }
+.mp-net { font: 500 14px var(--mono); letter-spacing: .12em; fill: var(--ink-2); }
+.mp-hit { fill: transparent; stroke: none; }
+.mp-a { cursor: pointer; }
+.mp-a:hover .mp-name { text-decoration: underline; }
+.mp-a:focus-visible { outline: none; box-shadow: none; }
+/* The site's focus look in SVG: an ivory ring with a sky halo. */
+.mp-a:focus-visible .mp-hit { stroke: var(--ink); stroke-width: 3; filter: drop-shadow(0 0 4px var(--focus)) drop-shadow(0 0 2px var(--focus)); }
+.mp-a:focus-visible .mp-name { text-decoration: underline; }
+
+.map__narrow-title { display: block; }
+.map__narrow-desc { margin-top: var(--s-2); color: var(--ink-2); max-width: 58ch; }
+.stations__group { margin: var(--s-5) 0 var(--s-2); }
+.stations { --st: var(--line-n); list-style: none; margin: 0; padding: 0; position: relative; }
+.st { position: relative; padding: 0 0 var(--s-4) 44px; }
+.st:last-child { padding-bottom: 0; }
+.st::before {
+  content: ""; position: absolute; left: 4px; top: 12px; z-index: 1; width: 20px; height: 20px;
+  border-radius: 50%; border: 4px solid var(--st); background: var(--bg);
+}
+/* The three stations on the network share one cobalt line; each other station has its own line stub. */
+.stations--net::before {
+  content: ""; position: absolute; left: 12px; top: 22px; bottom: 30px; width: 4px; border-radius: 2px; background: var(--line-n);
+}
+.stations:not(.stations--net) .st::after {
+  content: ""; position: absolute; left: 12px; top: 22px; bottom: 6px; width: 4px; border-radius: 2px; background: var(--st);
+}
+.stations:not(.stations--net) .st:last-child::after { bottom: 0; }
+.st--ix::before { border-color: var(--ink); }
+.st--m { --st: var(--line-m); } .st--n { --st: var(--line-n); }
+.st--b { --st: var(--line-b); } .st--s { --st: var(--line-s); }
+.st__name { display: inline-block; min-height: 44px; padding-block: 10px; font-weight: 700; line-height: 1.35; text-decoration: none; }
+.st__name:hover { text-decoration: underline; text-underline-offset: 4px; }
+.st__code { display: block; font: 500 var(--fs-small)/1.4 var(--mono); color: var(--ink-2); overflow-wrap: anywhere; }
+.st__edges { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-4); margin-top: var(--s-2); }
+.st__edge { display: inline-flex; align-items: center; gap: var(--s-2); font-size: var(--fs-small); color: var(--ink-2); line-height: 1.4; }
+.st__n, .edge__n {
+  display: inline-grid; place-items: center; flex: none; width: 22px; height: 22px; border-radius: var(--r-pill);
+  background: var(--ink); color: var(--bg); font: 800 .8125rem/1 var(--font); padding-top: 2px;
+}
+.map__stamp { margin-top: var(--s-4); }
+
+.map__words { margin-top: var(--s-6); }
+.map__list-title { margin-bottom: var(--s-4); }
+.edges { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--s-7); }
+@media (min-width: 900px) { .edges { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.edge { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--s-3); padding: var(--s-4) 0 var(--s-2); border-top: 1px solid var(--rule); }
+.edge__n { width: 28px; height: 28px; font-size: .875rem; margin-top: 1px; }
+.edge__pair { font-weight: 700; color: var(--ink); line-height: 1.4; }
+.edge__body > p:not(.edge__pair) { margin-top: var(--s-2); color: var(--ink-2); font-size: 1.0625rem; line-height: 1.55; }
+.edge__body .more { margin-top: var(--s-1); }
+.edge__src { list-style: none; margin: 0; padding: 0 0 var(--s-2); }
+.edge__src a { display: block; max-width: 100%; font-weight: 500; }
+/* Long file paths and settings may wrap here (the shared .more__body code rule keeps them on one line). */
+.edge__src code, .facts .more__body code { white-space: normal; overflow-wrap: anywhere; }
+
+/* Settings and commands in running text never break at their hyphen (DESIGN 6.19 does the same). */
+/* Inline code only: a <code> inside a <pre> block keeps its line breaks. */
+.points :not(pre) > code, .facts :not(pre) > code, .edge__body > p code, .checklist code, .paths code { white-space: nowrap; overflow-wrap: normal; }
+
+/* #report */
+.report__dont { margin-bottom: var(--s-5); }
+.report__acts { gap: var(--s-3); }

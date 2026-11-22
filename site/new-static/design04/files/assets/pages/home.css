@@ -1,0 +1,318 @@
+/* Home page (/): page-only styles. Tokens only; shared components come from site.css.
+   6.18 Roadmap from 900px: all stops in ONE row on one continuous line.
+   - Default (CSS alone, JS off, reduced motion, ?motion=off, short windows): .rmap-view is a native
+     sideways scroller (scroll-snap to stops, visible scrollbar, focusable region).
+   - .is-pinned (home.js, motion allowed, window tall enough): the section becomes a tall wrapper,
+     .rmap-pin (header kit, row, source note) sticks for the extra scroll distance and home.js moves
+     .rmap-track with translate3d.
+   Phones (< 900px) keep the approved vertical route from site.css: nothing here applies to them,
+   except that the controls bar is hidden. */
+
+.rmap-bar { display: none; }
+
+/* ---- Line colours and glow (user decision, queue item 8; the single exception to "no gradients" and
+   "no glow", for the roadmap line and its dots only). In time order: ivory at Genesis, sky blue in the
+   middle of the past, cobalt arriving at "Now", rose for the whole (dashed) future. Only the four line
+   tokens; in-between colours are color-mix() blends of neighbouring line colours.
+   Each stop carries --rm-c (its dot, where its segment starts) and --rm-cn (where its segment ends).
+   The defaults below assume equal spacing (exact in the single row from 900px); home.js replaces them
+   with values from the stops' real positions (the phone line has stops of different heights). */
+.roadmap .rmap {
+  --rmc-1: var(--line-s);
+  --rmc-2: color-mix(in srgb, var(--line-s) 71.4%, var(--line-m));
+  --rmc-3: color-mix(in srgb, var(--line-s) 42.9%, var(--line-m));
+  --rmc-4: color-mix(in srgb, var(--line-s) 14.3%, var(--line-m));
+  --rmc-5: color-mix(in srgb, var(--line-m) 85.7%, var(--line-n));
+  --rmc-6: color-mix(in srgb, var(--line-m) 57.1%, var(--line-n));
+  --rmc-7: color-mix(in srgb, var(--line-m) 28.6%, var(--line-n));
+  /* Dashes for the future part: 10px dash, 8px gap. Masks read alpha only. */
+  --rm-dash-y: linear-gradient(180deg, var(--ink) 10px, transparent 10px) 0 0 / 100% 18px repeat-y;
+  --rm-dash-x: linear-gradient(90deg, var(--ink) 10px, transparent 10px) 0 0 / 18px 100% repeat-x;
+}
+.roadmap .rmap__stop { --rm-c: var(--line-s); --rm-cn: var(--rm-c); }
+.roadmap .rmap__stop--done:nth-child(1) { --rm-c: var(--rmc-1); --rm-cn: var(--rmc-2); }
+.roadmap .rmap__stop--done:nth-child(2) { --rm-c: var(--rmc-2); --rm-cn: var(--rmc-3); }
+.roadmap .rmap__stop--done:nth-child(3) { --rm-c: var(--rmc-3); --rm-cn: var(--rmc-4); }
+.roadmap .rmap__stop--done:nth-child(4) { --rm-c: var(--rmc-4); --rm-cn: var(--rmc-5); }
+.roadmap .rmap__stop--done:nth-child(5) { --rm-c: var(--rmc-5); --rm-cn: var(--rmc-6); }
+.roadmap .rmap__stop--done:nth-child(6) { --rm-c: var(--rmc-6); --rm-cn: var(--rmc-7); }
+.roadmap .rmap__stop--done:nth-child(7) { --rm-c: var(--rmc-7); --rm-cn: var(--line-n); }
+.roadmap .rmap__stop--now { --rm-c: var(--line-n); --rm-cn: var(--line-b); }
+.roadmap .rmap__stop--next { --rm-c: var(--line-b); --rm-cn: var(--line-b); }
+
+/* Segments (phones: vertical; from 900px the same rules turn sideways below). A coloured 4px strip
+   instead of a border, so it can blend; the future is cut into dashes by a mask. */
+.roadmap .rmap__stop::before {
+  border: 0; width: 4px; background: linear-gradient(180deg, var(--rm-c), var(--rm-cn));
+}
+.roadmap .rmap__stop--now::before {
+  /* A short blend from cobalt into rose just past the Now dot (its radius is 14px). */
+  background: linear-gradient(180deg, var(--line-n) 14px, var(--line-b) 56px);
+}
+.roadmap .rmap__stop--now::before, .roadmap .rmap__stop--next::before { -webkit-mask: var(--rm-dash-y); mask: var(--rm-dash-y); }
+/* Glow on the past part only (fallbacks and phones): a soft blur in the segment's own colours. Static. */
+.roadmap .rmap__stop--done::before {
+  filter: drop-shadow(0 0 4px color-mix(in srgb, color-mix(in srgb, var(--rm-c), var(--rm-cn)) 60%, transparent));
+}
+/* Dots take the line's colour at their place: filled (Done), the ringed cobalt Now dot, hollow rose
+   rings (Next). A lit dot glows in its own colour (an outer box-shadow on a ring around it; static). */
+.roadmap .rmap__dot { border-color: var(--rm-c); background: var(--rm-c); }
+.roadmap .rmap__stop--next .rmap__dot { background: var(--bg); }
+.roadmap .rmap__dot::before {
+  content: ""; position: absolute; inset: -4px; border-radius: 50%; pointer-events: none;
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--rm-c) 60%, transparent);
+}
+.roadmap .rmap__stop--next .rmap__dot::before { content: none; }
+
+@media (min-width: 900px) {
+  /* Where the content column starts: the same left edge as .wrap, measured inside a full-width box. */
+  .rmap-view { --rm-edge: max(var(--gutter), calc((100% - var(--wrap)) / 2)); }
+
+  /* Header kit + controls (the rail and the buttons on one centre line, the hint under the rail). From
+     1100px the controls sit to the right of the lede, on its last line. */
+  .rmap-head { margin-bottom: var(--s-6); }
+  .rmap-head .section__head { margin-bottom: 0; }
+  .js .rmap-bar {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "rail btns" "hint .";
+    align-items: center; column-gap: var(--s-5); row-gap: var(--s-1); margin-top: var(--s-5);
+  }
+  @media (min-width: 1100px) {
+    .js .rmap-head {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(24rem, 32rem); column-gap: var(--s-6); align-items: end;
+    }
+    .js .rmap-head > .sec-rule { grid-column: 1 / -1; }
+    .js .rmap-bar { margin-top: 0; }
+  }
+  .rmap-rail { grid-area: rail; display: flex; align-items: center; gap: var(--s-3); min-width: 0; }
+  /* In the scroller its own scrollbar shows the position: the rail keeps its place but is hidden. */
+  .roadmap:not(.is-pinned) .rmap-rail { visibility: hidden; }
+  .rmap-rail__end { flex: none; white-space: nowrap; padding-top: 2px; }
+  .rmap-rail__track {
+    position: relative; flex: 1; min-width: 4rem; height: 4px; border-radius: var(--r-pill);
+    background: var(--rule-2); overflow: hidden;
+  }
+  .rmap-rail__fill {
+    position: absolute; inset: 0; border-radius: inherit; background: var(--ink);
+    transform-origin: 0 50%; transform: scaleX(0);
+  }
+  /* Where "Now" lies on the rail: a short graphite notch through the track and fill. */
+  .rmap-rail__now { position: absolute; top: 0; bottom: 0; left: var(--rm-now, 50%); width: 2px; margin-left: -1px; background: var(--bg); }
+  .rmap-bar__hint { grid-area: hint; display: none; margin: 0; transition: opacity 200ms ease-out; }
+  .is-pinned .rmap-bar__hint { display: block; }
+  .is-pinned.has-moved .rmap-bar__hint { opacity: 0; }
+  .rmap-bar__btns { grid-area: btns; display: flex; gap: var(--s-2); }
+  .rmap-btn {
+    display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; margin: 0;
+    background: transparent; color: var(--ink); border: 1px solid var(--rule-2); border-radius: var(--r-2);
+    cursor: pointer; transition: border-color 150ms ease-out;
+  }
+  .rmap-btn:hover { border-color: var(--rule-hover); }
+  .rmap-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+  .rmap-btn[aria-disabled="true"] { color: var(--ink-3); border-color: var(--rule); cursor: default; }
+
+  /* The row: full-bleed box, the track starts on the content's left edge. */
+  .rmap-view.wrap { max-width: none; margin: 0; padding-inline: 0; }
+  .rmap-track { position: relative; width: max-content; padding-inline: var(--rm-edge); }
+  .rmap-track .rmap {
+    --rm-gap: var(--s-6); --rm-col: 16rem;
+    /* The terminus column is only as wide as "2027", so the row ends on it (--rm-cols = stops − 1, set by
+       home.js; the default 11 matches the content, so this holds with CSS alone). */
+    position: relative; grid-template-columns: repeat(var(--rm-cols, 11), var(--rm-col)) max-content;
+    grid-auto-flow: column; grid-auto-columns: var(--rm-col);
+    grid-template-rows: repeat(5, auto); column-gap: var(--rm-gap);
+  }
+  .rmap-track .rmap__stop, .rmap-track .rmap__stop:last-child { padding-bottom: var(--s-5); }
+  .roadmap .rmap__src { margin-top: var(--s-5); }
+  /* EVX, the terminus: a larger hollow dot and the year set big. Its box is only as wide as "2027", so
+     the line ends with it on the content's right edge. */
+  .rmap-track .rmap__stop--bare { justify-self: start; }
+  .rmap-track .rmap__stop--bare .rmap__dot { left: 0; top: 0; width: 28px; height: 28px; }
+  .rmap-track .rmap__stop--bare .rmap__title { font-size: var(--fs-h1); font-weight: 800; line-height: 1; letter-spacing: -0.015em; }
+
+  /* One continuous line: each stop draws the segment to the next dot (solid in the past, dashed from
+     "Now"); the first stop's lead-in runs to the window's left edge. No row-end arrowheads. */
+  .roadmap .rmap-track .rmap__stop:nth-child(n)::before {
+    right: calc(-1 * (var(--rm-gap) + 14px)); width: auto; height: 4px;
+    background: linear-gradient(90deg, var(--rm-c), var(--rm-cn));
+  }
+  .roadmap .rmap-track .rmap__stop--now:nth-child(n)::before { background: linear-gradient(90deg, var(--line-n) 14px, var(--line-b) 56px); }
+  .roadmap .rmap-track .rmap__stop--now::before,
+  .roadmap .rmap-track .rmap__stop--next::before { -webkit-mask: var(--rm-dash-x); mask: var(--rm-dash-x); }
+  .roadmap .rmap-track .rmap__stop:nth-child(n)::after { content: none; }
+  .roadmap .rmap-track .rmap__stop:first-child::after {
+    content: ""; position: absolute; top: 44px; left: -100vw; width: calc(100vw + 14px); height: 4px;
+    border: 0; background: var(--rmc-1); filter: drop-shadow(0 0 4px color-mix(in srgb, var(--rmc-1) 60%, transparent));
+  }
+
+  /* "More detail" in the scroller opens in place (the row may grow; the scroller would clip a floating
+     panel). Pinned, it floats (below). */
+  .rmap-track .rmap__more[open] > .more__body {
+    position: static; width: auto; padding: 0 0 var(--s-2); background: none; border: 0; border-radius: 0; box-shadow: none;
+  }
+
+  /* ---- Fallback: native sideways scroller -------------------------------------------------------- */
+  .rmap-view {
+    overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--rm-edge);
+    padding-bottom: var(--s-3);
+  }
+  .rmap-track .rmap__stop { scroll-snap-align: start; }
+  /* The terminus snaps by its end, so a link to #roadmap-evx shows "2027" whole on the right edge. */
+  .rmap-track .rmap__stop--bare { scroll-snap-align: end; }
+  .rmap-view:focus-visible { outline-offset: -3px; box-shadow: inset 0 0 0 6px var(--focus); }
+  .rmap-view::-webkit-scrollbar { height: 10px; }
+  .rmap-view::-webkit-scrollbar-track {
+    background: var(--rule); border-radius: var(--r-pill);
+    margin-inline: max(var(--gutter), calc((100vw - var(--wrap)) / 2));
+  }
+  .rmap-view::-webkit-scrollbar-thumb { background: var(--ink-3); border-radius: var(--r-pill); border: 2px solid transparent; background-clip: padding-box; }
+  .rmap-view::-webkit-scrollbar-thumb:hover { background-color: var(--ink-2); }
+  @supports not selector(::-webkit-scrollbar) {
+    .rmap-view { scrollbar-width: thin; scrollbar-color: var(--ink-3) var(--rule); }
+  }
+
+  /* ---- Pinned: scroll-driven line (home.js) ------------------------------------------------------- */
+  /* The section grows by the row's overflow width (--rm-h = its top padding + the block + that distance,
+     set by home.js), so the block stays stuck, centred in the window, for exactly that much scroll. The
+     header is not sticky, so nothing covers the top of the window. */
+  .roadmap.is-pinned { height: var(--rm-h, auto); }
+  .is-pinned .rmap-pin { position: sticky; top: var(--rm-pin-top, 0px); }
+  /* overflow-x: clip, not hidden: the browser never scrolls this box itself, so the transform stays true,
+     and the "More detail" panel may still rise above it. */
+  .is-pinned .rmap-view { overflow-x: clip; overflow-y: visible; scroll-snap-type: none; padding-bottom: 0; }
+  .is-pinned .rmap-track { transform: translate3d(0, 0, 0); }
+  .is-pinned.is-near .rmap-track { will-change: transform; }
+  .is-pinned .rmap-track .rmap__stop, .is-pinned .rmap-track .rmap__stop:last-child { padding-bottom: 0; }
+  /* The line is drawn once for the whole row by home.js (.rmap-line), from the window's left edge to the
+     terminus. Every layer is one static coloured copy of the line (gradient stops at the real dot
+     positions, --rm-g0/gm/gn/gr set by home.js; solid to "Now", dashed after it by a mask):
+     - __dim: the whole line at 35%, no glow, so the colours ahead are visible;
+     - __lit: a window (overflow hidden) that grows to the reading point by translate3d, with a counter-
+       translated inner (__in) holding the full-colour line and its glow (a blurred copy at 60%), its
+       leading 16px feathered by a mask so the glow has no hard end;
+     - __tip: a 96px window that rides on the reading point, holding a brighter blurred copy, faded in
+       from the left by a mask: the leading tip glows a little more.
+     Blur is never animated: the blurred layers are rasterised once and only moved. The per-stop
+     segments step aside. */
+  .roadmap.is-pinned .rmap-track .rmap__stop::before,
+  .roadmap.is-pinned .rmap-track .rmap__stop:nth-child(n)::after { display: none; }
+  .rmap-line { display: none; }
+  .is-pinned .rmap-line {
+    --rm-pad: 20px;
+    --rm-grad: linear-gradient(90deg, var(--line-s) var(--rm-g0, 0px), var(--line-m) var(--rm-gm, 0px), var(--line-n) var(--rm-gn, 0px), var(--line-b) var(--rm-gr, 0px));
+    --rm-mask: linear-gradient(90deg, var(--ink) var(--rm-gn, 0px), transparent var(--rm-gn, 0px)) 0 0 / 100% 100% no-repeat,
+      linear-gradient(90deg, var(--ink) 10px, transparent 10px) var(--rm-gn, 0px) 0 / 18px 100% repeat-x;
+    display: block; position: absolute; z-index: 1; left: 0; top: 44px; height: 4px; width: var(--rm-total, 0px);
+    pointer-events: none;
+  }
+  .rmap-line__c {
+    position: absolute; left: 0; top: 0; width: var(--rm-total, 0px); height: 4px;
+    background: var(--rm-grad); -webkit-mask: var(--rm-mask); mask: var(--rm-mask);
+  }
+  .rmap-line__dim { opacity: .35; }
+  .rmap-line__lit, .rmap-line__tip { position: absolute; left: 0; top: calc(-1 * var(--rm-pad)); bottom: calc(-1 * var(--rm-pad)); overflow: hidden; }
+  .rmap-line__lit { width: 100%; transform: translate3d(-100%, 0, 0); }
+  /* Its leading 16px fade out (a static mask that moves with it), so the glow has no hard end. */
+  .is-pinned .rmap-line__lit {
+    -webkit-mask-image: linear-gradient(90deg, var(--ink) calc(100% - 16px), transparent);
+    mask-image: linear-gradient(90deg, var(--ink) calc(100% - 16px), transparent);
+  }
+  .rmap-line__in, .rmap-line__tipin { position: absolute; left: 0; top: 0; bottom: 0; width: var(--rm-total, 0px); }
+  .rmap-line__in { transform: translate3d(100%, 0, 0); }
+  .rmap-line__in > .rmap-line__c, .rmap-line__glow { top: var(--rm-pad); }
+  /* The glow copy is 8px tall (2px above and below the line) before the blur, so it reads as a soft halo. */
+  .rmap-line__glow { position: absolute; left: 0; width: var(--rm-total, 0px); height: 8px; margin-top: -2px; filter: blur(4px); opacity: .6; }
+  .rmap-line__glow > .rmap-line__c { top: 0; height: 8px; }
+  .rmap-line__tip {
+    width: 96px; transform: translate3d(-200px, 0, 0);
+    -webkit-mask-image: linear-gradient(90deg, transparent, var(--ink) 80%, transparent);
+    mask-image: linear-gradient(90deg, transparent, var(--ink) 80%, transparent);
+  }
+  .rmap-line__glow--tip { height: 10px; margin-top: -3px; filter: blur(6px); opacity: .7; }
+  .rmap-line__glow--tip > .rmap-line__c { height: 10px; }
+  .is-pinned.is-near .rmap-line__lit, .is-pinned.is-near .rmap-line__in,
+  .is-pinned.is-near .rmap-line__tip, .is-pinned.is-near .rmap-line__tipin { will-change: transform; }
+  .is-pinned .rmap__dot { z-index: 2; }
+  /* A dot not reached yet keeps its shape and colour under a graphite veil (about 35% strength) and has
+     no glow; it lights up, with its glow, when the reading point passes it (opacity only). */
+  .is-pinned .rmap__dot::after {
+    content: ""; position: absolute; inset: -4px; border-radius: 50%; background: var(--bg);
+    opacity: .65; transition: opacity 200ms ease-out;
+  }
+  .is-pinned .rmap__stop.is-lit .rmap__dot::after { opacity: 0; }
+  .roadmap.is-pinned .rmap__dot::before { content: ""; opacity: 0; transition: opacity 200ms ease-out; }
+  .roadmap.is-pinned .rmap__stop.is-lit .rmap__dot::before { opacity: 1; }
+  /* Short windows (under 800px tall): tighter spacing so the header kit and the row still fit from about
+     620px. The line, dots and "Now" icon move up 12px with the stop's top padding. */
+  @media (max-height: 799px) {
+    .is-pinned .rmap-head { margin-bottom: var(--s-4); }
+    .is-pinned .rmap-head > .sec-rule { margin-bottom: var(--s-4); }
+    .roadmap.is-pinned .rmap-track .rmap__stop { padding-top: 56px; }
+    .is-pinned .rmap-track .rmap-line { top: 32px; }
+    .is-pinned .rmap-track .rmap__track { top: 20px; }
+    .is-pinned .rmap__src { margin-top: var(--s-4); }
+  }
+  /* "More detail" while pinned: a solid floating panel that never changes the row's height. home.js
+     opens it upward when there is no room below, caps its height to the window (it then scrolls on its
+     own and is focusable) and aligns it to the stop's right edge when it would leave the window. */
+  .roadmap.is-pinned .rmap-track .rmap__more[open] > .more__body {
+    position: absolute; z-index: 5; top: 100%; bottom: auto; left: 0; right: auto;
+    width: min(28rem, calc(100vw - 2 * var(--gutter))); max-height: var(--more-max, none); overflow-y: auto; overscroll-behavior: contain;
+    padding: var(--s-4); background: var(--panel); border: 1px solid var(--rule-2); border-radius: var(--r-2);
+    box-shadow: var(--shadow);
+  }
+  .roadmap.is-pinned .rmap-track .rmap__more--up[open] > .more__body { top: auto; bottom: 100%; margin-bottom: var(--s-1); }
+  .roadmap.is-pinned .rmap-track .rmap__more--end[open] > .more__body { left: auto; right: 0; }
+  .roadmap.is-pinned .rmap-track .more__body:focus-visible { outline-offset: -3px; }
+}
+
+/* Browsers without color-mix(): plain line tokens for the in-between colours (no blends). */
+@supports not (color: color-mix(in srgb, red, red)) {
+  .roadmap .rmap {
+    --rmc-2: var(--line-s); --rmc-3: var(--line-m); --rmc-4: var(--line-m);
+    --rmc-5: var(--line-m); --rmc-6: var(--line-n); --rmc-7: var(--line-n);
+  }
+}
+
+/* Forced colours (Windows High Contrast) drop background images: draw the line with borders again,
+   solid for the past and dashed from "Now", in every layout. */
+@media (forced-colors: active) {
+  .roadmap .rmap__stop::before {
+    background: none; filter: none; -webkit-mask: none; mask: none; width: 0; border-left: 4px solid CanvasText;
+  }
+  .roadmap .rmap__stop--now::before, .roadmap .rmap__stop--next::before { border-left-style: dashed; }
+  .roadmap .rmap__dot::before { content: none; }
+  @media (min-width: 900px) {
+    .roadmap .rmap-track .rmap__stop:nth-child(n)::before {
+      background: none; filter: none; -webkit-mask: none; mask: none;
+      width: auto; height: 0; border-left: 0; border-top: 4px solid CanvasText;
+    }
+    .roadmap .rmap-track .rmap__stop--now:nth-child(n)::before,
+    .roadmap .rmap-track .rmap__stop--next:nth-child(n)::before { border-top-style: dashed; }
+    .roadmap .rmap-track .rmap__stop:first-child::after {
+      background: none; filter: none; height: 0; border-top: 4px solid CanvasText;
+    }
+    .roadmap.is-pinned .rmap-track .rmap__stop:nth-child(n)::before { display: block; }
+    .roadmap.is-pinned .rmap-track .rmap__stop:first-child:nth-child(n)::after { display: block; }
+    .is-pinned .rmap-line { display: none; }
+    .rmap-rail__track { border: 1px solid CanvasText; }
+    .rmap-rail__fill { forced-color-adjust: none; background: CanvasText; }
+  }
+  @media (min-width: 900px) and (max-height: 799px) {
+    .roadmap.is-pinned .rmap-track .rmap__stop:nth-child(n)::before,
+    .roadmap.is-pinned .rmap-track .rmap__stop:first-child:nth-child(n)::after { top: 32px; }
+  }
+}
+
+@media print {
+  .rmap-bar { display: none !important; }
+  .rmap-view { overflow: visible !important; }
+  /* Printed while pinned: an ordinary block, the row at its start, the line fully lit. */
+  .roadmap.is-pinned { height: auto !important; }
+  .is-pinned .rmap-pin { position: static !important; }
+  .rmap-track, .rmap-line__lit, .rmap-line__in { transform: none !important; }
+  .rmap-line__tip, .is-pinned .rmap__dot::after { display: none !important; }
+}
+
+/* #ai without JavaScript: the copy button is hidden, so the panel says how to copy instead. */
+.tool__nojs { padding: 0 var(--s-4) var(--s-4); }
