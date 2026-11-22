@@ -1,0 +1,102 @@
+/* Links page (/links/): the link directory. Tokens only; shared components come from site.css.
+   Page-only parts: .ldir (rail + list), .lidx (category index: links without JS, filter toggles with JS),
+   .lfilter (the filter, shown by links.js), .lcat (a category sheet), .lrow__note (a row's note). */
+
+/* Directory: on phones the index sits above the list; from 960px it is a sticky rail on the left. */
+.ldir { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5); }
+.ldir__list { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5); align-content: start; }
+@media (min-width: 960px) {
+  .ldir { grid-template-columns: 16rem minmax(0, 1fr); gap: var(--s-6); align-items: start; }
+  .ldir__rail {
+    position: sticky; top: var(--s-5);
+    max-height: calc(100vh - 2 * var(--s-5)); overflow-y: auto; overscroll-behavior: contain;
+    padding: 8px 10px 8px 8px; margin: -8px -10px -8px -8px; /* room for the 6px focus halo inside the scroll box */
+  }
+}
+
+/* Filtered out: rows and whole categories with no match (classes, not [hidden], so "Copy for your AI"
+   still copies every link). */
+.ldir .is-out { display: none; }
+
+/* Category index: compact chips on phones, a vertical list with counts in the rail. */
+.ljump__title, .lfilter__label { display: block; margin-bottom: var(--s-2); }
+.lidx { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.lidx__item {
+  display: inline-flex; align-items: center; gap: var(--s-2); min-height: 44px; padding: 2px var(--s-3) 0 var(--s-2);
+  border: 1px solid var(--rule-2); border-radius: var(--r-1); background: var(--surface); color: var(--ink);
+  font: 600 var(--fs-small)/1.2 var(--font); text-decoration: none; text-align: left; cursor: pointer;
+  transition: border-color 150ms ease-out;
+}
+.lidx__item:hover { border-color: var(--rule-hover); text-decoration: none; }
+.lidx__icon { display: inline-grid; place-items: center; width: 22px; flex: none; margin-top: -2px; }
+.lidx__n { font: 500 var(--fs-small)/1 var(--mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+/* The filter buttons are shared toggles (.toggle: pressed = ivory fill, badge ring). Page-only: the count
+   and the brand mark's ivory dot keep their contrast on the ivory fill. */
+.lidx__item[aria-pressed="true"] .lidx__n { color: var(--bg); }
+.lidx__item[aria-pressed="true"] .mark i:nth-child(1) { box-shadow: 0 0 0 1.5px var(--bg); }
+@media (min-width: 960px) {
+  .lidx { flex-direction: column; flex-wrap: nowrap; gap: 0; border-top: 1px solid var(--rule); }
+  .lidx > li { border-bottom: 1px solid var(--rule); }
+  .lidx__item { display: flex; width: 100%; padding: 2px var(--s-2) 0; border: 0; border-radius: var(--r-1); background: none; }
+  .lidx__item:hover { background: var(--surface-2); }
+  .lidx__item[aria-pressed="true"]:hover { background: var(--ink); }
+  .lidx__n { margin-left: auto; padding-left: var(--s-3); }
+}
+
+/* Filter (links.js removes [hidden]; without JS the "Jump to" index shows instead). */
+.lfilter { display: grid; gap: var(--s-4); }
+.lfilter__input {
+  display: block; width: 100%; min-height: 48px; padding: 2px var(--s-3) 0;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--rule-hover); border-radius: var(--r-1);
+  font: 400 var(--fs-body)/1.2 var(--font);
+  -webkit-appearance: none; appearance: none;
+}
+.lfilter__input:hover { border-color: var(--rule-strong); }
+.lfilter__input::placeholder { color: var(--ink-3); opacity: 1; }
+.lfilter__input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+/* The count can grow to two lines ("6 of 53 links in Community"): its space is reserved, so the toggles
+   below never move under the pointer. */
+.lfilter__status { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 0 var(--s-4); margin-top: calc(-1 * var(--s-2)); }
+.lfilter__count { min-height: 3em; padding-top: calc((44px - 1.5em) / 2); font-size: var(--fs-small); line-height: 1.5; color: var(--ink-2); } /* first line level with the 44px Clear filter button text */
+.lfilter__clear { font-size: var(--fs-small); }
+
+/* A category: its own sheet, with the badge of the line it serves and its count. */
+.lcat__head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-3); margin-bottom: var(--s-5); }
+.lcat__head h3 { padding-top: 3px; }
+.lcat__count { margin-left: auto; }
+.lcat__callout { margin-bottom: var(--s-5); }
+
+/* A row's note sits under its link, outside it, so the link name stays short and terms can be buttons. */
+.lrow__note {
+  margin: calc(-1 * var(--s-2)) 0 var(--s-4); padding-left: var(--s-3); border-left: 2px solid var(--rule-2);
+  font-size: var(--fs-small); line-height: 1.55; color: var(--ink-2); max-width: 70ch;
+}
+.lrow__label { margin-right: var(--s-1); }
+.lrow__note code { color: var(--ink); }
+
+/* Categories: a disclosure on phones and tablets (links.js closes it there), always open in the rail. */
+.lfilter__more > summary { margin-top: calc(-1 * var(--s-2)); }
+.lfilter__more > .lfilter__cats { padding-top: var(--s-2); }
+.lfilter__more .lfilter__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (min-width: 960px) {
+  .lfilter__more > summary { display: none; }
+  .lfilter__more > .lfilter__cats { padding-top: 0; }
+  .lfilter__more .lfilter__label { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; }
+}
+
+/* Back to the filter and the category list, under each category (phones and tablets). */
+.lcat__top { margin-top: var(--s-4); }
+.lcat__top a { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--fs-small); font-weight: 600; }
+@media (min-width: 960px) { .lcat__top { display: none; } }
+
+/* Forced colours: the shared toggle paints Highlight; the count follows it. */
+@media (forced-colors: active) {
+  .lidx__item[aria-pressed="true"] .lidx__n { color: HighlightText; }
+}
+
+.lempty__text { font-weight: 700; margin-bottom: var(--s-3); }
+.ladd { max-width: none; }
+
+@media (max-width: 599px) {
+  .lcat__count { margin-left: 0; flex-basis: 100%; }
+}

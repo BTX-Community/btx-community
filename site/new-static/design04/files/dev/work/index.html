@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/new/design04/assets/fonts.css">
+  <link rel="stylesheet" href="/new/design04/assets/draft-banner.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0E0E10">
+  <title>[Draft] Ongoing work · BTX Community</title>
+  <meta name="description" content="Where the BTX node software stands and who works on what: the nightly CI-0 run, test coverage, bug classes, lanes and gates.">
+  <link rel="canonical" href="https://btx-community.com/dev/work/">
+  <link rel="alternate" hreflang="en" href="https://btx-community.com/dev/work/">
+  <link rel="alternate" hreflang="de" href="https://btx-community.com/de/dev/work/">
+  <link rel="alternate" hreflang="es" href="https://btx-community.com/es/dev/work/">
+  <link rel="alternate" hreflang="fr" href="https://btx-community.com/fr/dev/work/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://btx-community.com/zh/dev/work/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://btx-community.com/dev/work/">
+  <meta property="og:title" content="[Draft] Ongoing work · BTX Community">
+  <meta property="og:description" content="Where the BTX node software stands and who works on what: the nightly CI-0 run, test coverage, bug classes, lanes and gates.">
+  <link rel="icon" href="/new/design04/assets/favicon.svg" type="image/svg+xml">
+  <script src="/new/design04/assets/draft-inline.js"></script>
+  <link rel="stylesheet" href="/new/design04/assets/site.css">
+  <link rel="stylesheet" href="/new/design04/assets/pages/dev-work.css">
+  <script src="/new/design04/assets/site.js" defer></script>
+  <script src="/new/design04/assets/matrix-bg.js" defer></script>
+  <script src="/new/design04/assets/pages/dev-work.js" defer></script>
+  <link rel="stylesheet" href="/new/design04/assets/draft-inline/dev-work.css">
+  <link rel="stylesheet" href="/new/design04/assets/draft-js.css">
+</head>
+<body>
+  <div class="draft-banner" role="note"><p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind. <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a> <a class="draft-banner__link" href="/new/">All drafts →</a> <a class="draft-banner__link" href="https://btx-community.com/dev/work/">This page on the live site ↗</a></p></div>
+<!-- HEADER:START -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__brand" href="/new/design04/"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>BTX <span class="hdr__brand-sub">Community</span></span></a>
+    <a class="pill pill--unknown" href="/new/design04/network/" data-status-pill><span class="sr-only">Network </span><span class="pill__shape" aria-hidden="true">○</span><span class="pill__word">Status</span></a>
+    <button class="hdr__btn hdr__menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu">Menu</button>
+    <div class="hdr__panel" id="site-menu">
+      <nav aria-label="Main">
+        <ul class="hdr__nav">
+          <li><a class="l-s" href="/new/design04/">Start</a></li>
+          <li><a class="l-s" href="/new/design04/learn/">Learn</a></li>
+          <li><a class="l-board" href="/new/design04/network/">Network</a></li>
+          <li><a class="l-s" href="/new/design04/links/">Links</a></li>
+          <li><a class="l-n" href="/new/design04/infra/">Run a node</a></li>
+          <li><a class="l-b" href="/new/design04/projects/">Projects</a></li>
+          <li><a class="l-b" href="/new/design04/dev/" aria-current="true">Developers</a></li>
+        </ul>
+      </nav>
+      <div class="hdr__tools">
+        <details class="lang">
+          <summary class="hdr__btn"><span class="sr-only">Language: </span>EN <span class="caret" aria-hidden="true"></span></summary>
+          <div class="lang__list">
+            <ul>
+              <li><a href="/new/design04/dev/work/" hreflang="en" lang="en" aria-current="true"><span class="lang__code">EN</span> English</a></li>
+              <li><a href="https://btx-community.com/de/dev/work/" hreflang="de" lang="de"><span class="lang__code">DE</span> Deutsch</a></li>
+              <li><a href="https://btx-community.com/es/dev/work/" hreflang="es" lang="es"><span class="lang__code">ES</span> Español</a></li>
+              <li><a href="https://btx-community.com/fr/dev/work/" hreflang="fr" lang="fr"><span class="lang__code">FR</span> Français</a></li>
+              <li><a href="https://btx-community.com/zh/dev/work/" hreflang="zh-Hans" lang="zh-Hans"><span class="lang__code">ZH</span> 中文</a></li>
+            </ul>
+            <p class="lang__note">Other languages use the previous design.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- HEADER:END -->
+
+<main id="main">
+
+  <header class="station station--b">
+    <div class="wrap station__in">
+      <nav class="crumbs" aria-label="Breadcrumb" data-copy-skip><a href="/new/design04/">BTX Community</a> <span aria-hidden="true">/</span> <a href="/new/design04/dev/">Developers</a> <span aria-hidden="true">/</span> <span aria-current="page">Ongoing work</span></nav>
+      <div class="station__badges" data-copy-skip>
+        <span class="badge badge--b" role="img" aria-label="Build line">B</span>
+      </div>
+      <h1>Ongoing work</h1>
+      <p class="lede">Where the node software stands and who works on what: test coverage, the nightly <span class="dw-nowrap">CI-0</span> run, bug classes, lanes, gates and the weekly rhythm.</p>
+      <nav class="subnav" aria-label="Developer pages" data-copy-skip>
+        <ul>
+          <li><a href="/new/design04/dev/">Start here</a></li>
+          <li><a href="/new/design04/dev/work/" aria-current="page">Ongoing work</a></li>
+        </ul>
+      </nav>
+      <div class="station__aside" data-copy-ai-only data-copy-skip>
+        <button class="btn btn--line" type="button" data-copy-ai data-copy-max="48000" aria-describedby="copy-promise">Copy for your AI</button>
+        <p class="station__promise" id="copy-promise">Copies this page's text only. Never paste your seed phrase or private keys into any AI tool.</p>
+      </div>
+      <ul class="chips" aria-label="On this page" data-copy-skip>
+        <li><a class="chip" href="#ci">Nightly <span class="dw-nowrap">CI-0</span> <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#coverage">Coverage <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#lanes">Lanes <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#owner-rules">Owner rules <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#classes">Bug classes <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#flow">Flow <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#gates">Gates <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#rhythm">Rhythm <span class="arr" aria-hidden="true">→</span></a></li>
+      </ul>
+    </div>
+    <span class="station__stripe" aria-hidden="true"></span>
+  </header>
+
+  <section class="section dw-ci" id="ci" aria-labelledby="ci-title" data-ci-root data-api="https://network.btx-monitoring.com/api/v1/ci.json" data-repo="btxchain/btx" data-job="CI-0">
+    <div class="wrap">
+<div class="section__head">
+  <p class="label eyebrow">Live data</p>
+  <h2 id="ci-title">Nightly <span class="dw-nowrap">CI-0</span> run</h2>
+  <p class="lede">The last nightly build and test run of each branch the status page builds, read live from its API.</p>
+</div>
+
+      <div class="prose dw-intro dw-onbg">
+        <p>The status page's operator publishes these runs as job <span class="term dw-nowrap" data-term="ci">CI-0</span>: one run on Linux for each branch it builds, the newest release first. They are not the fork build matrix listed under <a href="#gates">Gates</a>. The unit runs leave out the slow matmul_v4_rc_stage3_* suites.</p>
+      </div>
+      <p class="meta dw-ci__nojs" data-copy-skip data-nojs-only>The panel fills in with JavaScript. Without it, see the runs as raw data: <a href="https://network.btx-monitoring.com/api/v1/ci.json" rel="noopener noreferrer">ci.json&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>.</p>
+      <p class="dw-ci__loading" data-ci="loading" hidden>Loading the last runs …</p>
+      <p class="dw-ci__status" data-ci="status" role="status"></p>
+      <div class="dw-ci__runs" data-ci="runs"></div>
+      <ul class="dw-links dw-onbg">
+        <li><a href="https://network.btx-monitoring.com/api/v1/ci.json" rel="noopener noreferrer">The runs as JSON&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        <li><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Check on the status page&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        <li><a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+      </ul>
+      <template data-ci="tpl">
+        <section class="board dw-run">
+          <span class="board__frame" aria-hidden="true"></span>
+          <div class="board__head">
+            <h3 class="board__label" data-r="title">Nightly <span class="dw-nowrap">CI-0</span> · <span class="nocase" data-r="branch"></span></h3>
+            <p class="board__status" data-r="build"><span class="shape" aria-hidden="true"></span><span data-r="build-word"></span></p>
+          </div>
+          <div class="board__body">
+            <p class="board__msg" data-r="stale" hidden></p>
+            <dl class="board__rows">
+              <div class="board__row"><dt>Branch @ commit</dt><dd class="board__val dw-run__ref" data-r="ref"></dd></div>
+              <div class="board__row"><dt>Unit tests</dt><dd data-r="unit"></dd><dd class="dw-run__sub" data-r="unit-sub"></dd></div>
+              <div class="board__row"><dt>Functional tests</dt><dd data-r="functional"></dd><dd class="dw-run__sub" data-r="functional-sub"></dd></div>
+            </dl>
+            <div class="dw-run__lists" data-r="lists"></div>
+          </div>
+          <div class="board__src">
+            <p class="board__src-text"><span class="board__src-line" data-r="started"></span><span class="board__src-line" data-r="finished"></span></p>
+          </div>
+        </section>
+      </template>
+    </div>
+  </section>
+
+  <section class="section" id="coverage" aria-labelledby="coverage-title">
+    <div class="wrap">
+      <div class="sheet">
+<span class="sec-rule sec-rule--b" aria-hidden="true"></span>
+<div class="section__head">
+  <p class="label eyebrow">Measured figures</p>
+  <h2 id="coverage-title">Test coverage of the node software</h2>
+  <p class="lede">How much of the node software the tests reach, measured at <span class="term" data-term="commit">commit</span> a5d1637f on 14 November.</p>
+</div>
+
+        <div class="dw-cols">
+          <div class="prose dw-intro">
+            <p>The figures are for the product code of swapnet-v2 at commit a5d1637f, now part of v0.34.16. The <span class="term" data-term="test-coverage">coverage</span> build needs btxchain/btx #578, which is in v0.34.16 but not in v0.34.15.</p>
+            <p>In the coverage run 42 unit suites timed out and 14 of 220 functional scripts failed. A killed test writes no counts. The time budgets were shorter than on 12 November, so the figures are floors and the comparison is indicative.</p>
+          </div>
+          <div class="callout callout--note" id="coverage-weekly"><span class="callout__label">Note</span><p>From Sunday 22 Nov the status page's operator plans to publish these figures weekly as coverage.json. This section will then read them from there. Until then it shows the figures from <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/01-state.md" rel="noopener noreferrer">the hub&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>: the contributors' notes in the BTX-Community repository on GitHub.</p></div>
+        </div>
+        <dl class="dw-figs dw-figs--4"><div class="dw-fig" id="figure-lines-unit"><dt class="label">Lines</dt><dd class="dw-fig__val">67.4<small> %</small></dd><dd class="dw-fig__sub">unit tests</dd></div><div class="dw-fig" id="figure-lines-functional"><dt class="label">Lines</dt><dd class="dw-fig__val">72.3<small> %</small></dd><dd class="dw-fig__sub">unit and functional tests</dd></div><div class="dw-fig" id="figure-branches-unit"><dt class="label">Branches</dt><dd class="dw-fig__val">38.9<small> %</small></dd><dd class="dw-fig__sub">unit tests</dd></div><div class="dw-fig" id="figure-branches-functional"><dt class="label">Branches</dt><dd class="dw-fig__val">42.6<small> %</small></dd><dd class="dw-fig__sub">unit and functional tests</dd></div></dl>
+
+        <h3 class="dw-h3" id="runs-title">How the test runs ended</h3>
+        <div class="dw-scroll" data-scroll-label="runs-title">
+          <table class="table dw-table dw-table--runs">
+            <thead><tr><th scope="col">Run</th><th scope="col" class="num">Total</th><th scope="col" class="num">Passed</th><th scope="col" class="num">Timed out</th><th scope="col" class="num">Failed</th><th scope="col" class="num">Skipped</th></tr></thead>
+            <tbody>
+              <tr id="run-unit"><th scope="row">Unit (ctest)</th><td class="num" data-label="Total">2,629</td><td class="num" data-label="Passed">2,583</td><td class="num" data-label="Timed out">42</td><td class="num" data-label="Failed">3</td><td class="num" data-label="Skipped">1</td></tr>
+              <tr id="run-functional"><th scope="row">Functional scripts</th><td class="num" data-label="Total">220</td><td class="num" data-label="Passed">204</td><td class="num" data-label="Timed out">0</td><td class="num" data-label="Failed">14</td><td class="num" data-label="Skipped">2</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <details class="dw-fold">
+          <summary><span class="dw-fold__titles"><h3 class="dw-h3" id="areas-title">Coverage by area</h3><span class="dw-fold__sub">16 areas of the code, from consensus to modelnet/security_v2</span></span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="dw-fold__body">
+            <p class="dw-note">Lines covered, unit → unit + functional; branches with both. Size and risk rank come from the plan's risk map. A dash is no data, not zero. The bar shows unit (solid) and unit + functional (light).</p>
+            <div class="dw-tools" data-sort-group data-copy-skip hidden>
+              <span class="label" id="sort-label">Sort</span>
+              <div class="toggles" role="group" aria-labelledby="sort-label">
+                <button type="button" class="toggle" data-sort="listed" aria-pressed="true">As listed</button>
+                <button type="button" class="toggle" data-sort="lowest" aria-pressed="false">Lowest first</button>
+                <button type="button" class="toggle" data-sort="risk" aria-pressed="false">Risk rank</button>
+                <button type="button" class="toggle" data-sort="size" aria-pressed="false">Size</button>
+              </div>
+            </div>
+            <div class="dw-scroll" data-scroll-label="areas-title">
+              <table class="table dw-table dw-table--areas" id="areas">
+                <thead><tr><th scope="col">Area</th><th scope="col" class="num">Unit</th><th scope="col" class="num">+ functional</th><th scope="col" class="num">Branches</th><th scope="col" class="num">Size (lines)</th><th scope="col" class="num">Risk rank</th></tr></thead>
+                <tbody>
+<tr id="area-consensus" data-i="0" data-unit="95.7" data-rank="" data-loc="2452"><th scope="row"><span class="dw-area__name">consensus</span><span class="dw-area__hint">src/consensus/</span><span class="dw-bar" aria-hidden="true" data-draft-style="4dcb1ab2cf"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">95.7 %</td><td class="num" data-label="+ functional">97.7 %</td><td class="num" data-label="Branches">53.7 %</td><td class="num" data-label="Size (lines)">2,452</td><td class="num" data-label="Risk rank"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></td></tr>
+<tr id="area-validation" data-i="1" data-unit="77.0" data-rank="2" data-loc="23687"><th scope="row"><span class="dw-area__name">validation.cpp</span><span class="dw-bar" aria-hidden="true" data-draft-style="fdec6f7a2f"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">77.0 %</td><td class="num" data-label="+ functional">79.8 %</td><td class="num" data-label="Branches">48.0 %</td><td class="num" data-label="Size (lines)">23,687</td><td class="num" data-label="Risk rank">2</td></tr>
+<tr id="area-pow" data-i="2" data-unit="69.3" data-rank="2" data-loc="9076"><th scope="row"><span class="dw-area__name">pow.cpp</span><span class="dw-bar" aria-hidden="true" data-draft-style="11ceb10e25"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">69.3 %</td><td class="num" data-label="+ functional">70.7 %</td><td class="num" data-label="Branches">46.8 %</td><td class="num" data-label="Size (lines)">9,076</td><td class="num" data-label="Risk rank">2</td></tr>
+<tr id="area-script" data-i="3" data-unit="80.8" data-rank="11" data-loc="18019"><th scope="row"><span class="dw-area__name">script</span><span class="dw-bar" aria-hidden="true" data-draft-style="f8a3752528"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">80.8 %</td><td class="num" data-label="+ functional">81.3 %</td><td class="num" data-label="Branches">54.0 %</td><td class="num" data-label="Size (lines)">18,019</td><td class="num" data-label="Risk rank">11</td></tr>
+<tr id="area-wallet" data-i="4" data-unit="37.4" data-rank="4" data-loc="76263"><th scope="row"><span class="dw-area__name">wallet</span><span class="dw-area__hint">src/wallet/</span><span class="dw-bar" aria-hidden="true" data-draft-style="dd33875fa4"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">37.4 %</td><td class="num" data-label="+ functional">63.0 %</td><td class="num" data-label="Branches">36.6 %</td><td class="num" data-label="Size (lines)">76,263</td><td class="num" data-label="Risk rank">4</td></tr>
+<tr id="area-net-processing" data-i="5" data-unit="59.8" data-rank="1" data-loc="25300"><th scope="row"><span class="dw-area__name">net_processing.cpp</span><span class="dw-bar" aria-hidden="true" data-draft-style="1b5c17f6a7"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">59.8 %</td><td class="num" data-label="+ functional">72.1 %</td><td class="num" data-label="Branches">44.6 %</td><td class="num" data-label="Size (lines)">25,300</td><td class="num" data-label="Risk rank">1</td></tr>
+<tr id="area-other-net" data-i="6" data-unit="52.7" data-rank="1" data-loc=""><th scope="row"><span class="dw-area__name">other net</span><span class="dw-bar" aria-hidden="true" data-draft-style="30dae0a38e"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">52.7 %</td><td class="num" data-label="+ functional">77.3 %</td><td class="num" data-label="Branches">49.4 %</td><td class="num" data-label="Size (lines)"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></td><td class="num" data-label="Risk rank">1</td></tr>
+<tr id="area-rpc" data-i="7" data-unit="52.0" data-rank="5" data-loc="33765"><th scope="row"><span class="dw-area__name">rpc</span><span class="dw-area__hint">src/rpc/</span><span class="dw-bar" aria-hidden="true" data-draft-style="4d99ab94f7"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">52.0 %</td><td class="num" data-label="+ functional">76.5 %</td><td class="num" data-label="Branches">44.6 %</td><td class="num" data-label="Size (lines)">33,765</td><td class="num" data-label="Risk rank">5</td></tr>
+<tr id="area-node" data-i="8" data-unit="72.7" data-rank="7" data-loc="28129"><th scope="row"><span class="dw-area__name">node</span><span class="dw-bar" aria-hidden="true" data-draft-style="fef6c28d86"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">72.7 %</td><td class="num" data-label="+ functional">81.9 %</td><td class="num" data-label="Branches">51.4 %</td><td class="num" data-label="Size (lines)">28,129</td><td class="num" data-label="Risk rank">7</td></tr>
+<tr id="area-matmul" data-i="9" data-unit="63.9" data-rank="9" data-loc="468217"><th scope="row"><span class="dw-area__name">matmul</span><span class="dw-area__hint">src/matmul/</span><span class="dw-area__note">41 suites timed out: not measured</span><span class="dw-bar" aria-hidden="true" data-draft-style="d4ac312fd7"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">63.9 %</td><td class="num" data-label="+ functional">63.9 %</td><td class="num" data-label="Branches">35.9 %</td><td class="num" data-label="Size (lines)">468,217</td><td class="num" data-label="Risk rank">9</td></tr>
+<tr id="area-shielded" data-i="10" data-unit="72.1" data-rank="" data-loc="50060"><th scope="row"><span class="dw-area__name">shielded</span><span class="dw-area__hint">src/shielded/</span><span class="dw-bar" aria-hidden="true" data-draft-style="6ba5816996"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">72.1 %</td><td class="num" data-label="+ functional">76.9 %</td><td class="num" data-label="Branches">49.0 %</td><td class="num" data-label="Size (lines)">50,060</td><td class="num" data-label="Risk rank"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></td></tr>
+<tr id="area-modelnet" data-i="11" data-unit="84.1" data-rank="3" data-loc="369251"><th scope="row"><span class="dw-area__name">modelnet</span><span class="dw-bar" aria-hidden="true" data-draft-style="48f6edd0a9"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">84.1 %</td><td class="num" data-label="+ functional">86.2 %</td><td class="num" data-label="Branches">48.5 %</td><td class="num" data-label="Size (lines)">369,251</td><td class="num" data-label="Risk rank">3</td></tr>
+<tr id="area-kernel" data-i="12" data-unit="88.8" data-rank="12" data-loc="5400"><th scope="row"><span class="dw-area__name">kernel</span><span class="dw-bar" aria-hidden="true" data-draft-style="84a9294ea6"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">88.8 %</td><td class="num" data-label="+ functional">90.9 %</td><td class="num" data-label="Branches">53.8 %</td><td class="num" data-label="Size (lines)">5,400</td><td class="num" data-label="Risk rank">12</td></tr>
+<tr id="area-policy" data-i="13" data-unit="69.7" data-rank="" data-loc="4695"><th scope="row"><span class="dw-area__name">policy</span><span class="dw-bar" aria-hidden="true" data-draft-style="678812871a"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">69.7 %</td><td class="num" data-label="+ functional">81.7 %</td><td class="num" data-label="Branches">50.9 %</td><td class="num" data-label="Size (lines)">4,695</td><td class="num" data-label="Risk rank"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></td></tr>
+<tr id="area-pq" data-i="14" data-unit="92.7" data-rank="" data-loc=""><th scope="row"><span class="dw-area__name">pq</span><span class="dw-area__hint">src/pq/, src/pqkey.*</span><span class="dw-bar" aria-hidden="true" data-draft-style="ea0425f973"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">92.7 %</td><td class="num" data-label="+ functional">92.7 %</td><td class="num" data-label="Branches">62.4 %</td><td class="num" data-label="Size (lines)"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></td><td class="num" data-label="Risk rank"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></td></tr>
+<tr id="area-security-v2" data-i="15" data-unit="0.2" data-rank="" data-loc="5365"><th scope="row"><span class="dw-area__name">modelnet/security_v2</span><span class="dw-area__hint">src/modelnet/security_v2/</span><span class="dw-area__note">6 .cpp files at 0% with functional tests</span><span class="dw-bar" aria-hidden="true" data-draft-style="d31c76e77a"><span class="dw-bar__f"></span><span class="dw-bar__u"></span></span></th><td class="num" data-label="Unit">0.2 %</td><td class="num" data-label="+ functional">15.0 %</td><td class="num" data-label="Branches">4.9 %</td><td class="num" data-label="Size (lines)">5,365</td><td class="num" data-label="Risk rank"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="dw-note">The GUI (Qt) is not built in any run: unknown, not zero.</p>
+          </div>
+        </details>
+
+        <h3 class="dw-h3" id="baselines-title">Static and dynamic baseline</h3>
+        <p class="dw-note dw-note--lead">One run of each tool at the measured commit. Every result is a lead until a person has read the code and reproduced it. Nobody re-runs the tools for the baseline.</p>
+        <dl class="dw-figs dw-figs--3 dw-figs--base"><div class="dw-fig" id="baseline-codeql"><dt class="label dw-fig__long">CodeQL results outside the maintainability and documentation rules</dt><dd class="dw-fig__val">260</dd><dd class="dw-fig__sub">150 security-tagged; untriaged results, not confirmed defects</dd></div><div class="dw-fig" id="baseline-cppcheck"><dt class="label dw-fig__long">cppcheck errors</dt><dd class="dw-fig__val">26</dd></div><div class="dw-fig" id="baseline-tsan"><dt class="label dw-fig__long">TSan site pairs</dt><dd class="dw-fig__val">41</dd></div><div class="dw-fig" id="baseline-thread-safety"><dt class="label dw-fig__long">Thread-safety warnings</dt><dd class="dw-fig__val">266</dd></div><div class="dw-fig" id="baseline-lockorder"><dt class="label dw-fig__long">Lock-order inversions</dt><dd class="dw-fig__val">1</dd><dd class="dw-fig__sub">In wallet code; known, on the <span class="dw-nowrap">A-SHIELDED</span> lane's done bar</dd></div><div class="dw-fig" id="baseline-tidy"><dt class="label dw-fig__long">clang-tidy warnings</dt><dd class="dw-fig__val">1,033</dd></div></dl>
+
+        <div class="dw-stamp">
+          <p class="meta">Coverage measured at a5d1637f on <span class="nowrap">2026-11-14</span>; the other counts at c6f9678d on <span class="nowrap">2026-11-12</span>; site counts at 4c7840e9. Every number here is copied from the hub; the hub is right if they differ.</p>
+          <ul class="dw-links"><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/01-state.md" rel="noopener noreferrer">Figures per area, and how to reproduce them&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/MASTER-PLAN.md" rel="noopener noreferrer">The plan with every table&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="lanes" aria-labelledby="lanes-title">
+    <div class="wrap">
+      <div class="sheet">
+<span class="sec-rule sec-rule--b" aria-hidden="true"></span>
+<div class="section__head">
+  <p class="label eyebrow">Open work</p>
+  <h2 id="lanes-title">Lanes</h2>
+  <p class="lede">16 <span class="term" data-term="lane">lanes</span>, each with a scope and a <span class="term" data-term="done-bar">done bar</span> that says when the work is finished.</p>
+</div>
+
+          <div class="prose dw-intro">
+            <p>Owners are listed in <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">the hub&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a> (the contributors' notes in the BTX-Community repository on GitHub). A lane without one is open, and you claim it by <span class="term" data-term="pull-request">pull request</span>. The owner and the second reviewer of a lane are never the same person.</p>
+            <p>Open a lane to see its scope, why it matters, its target, its cadence, its route and its done bar. “Lines now” is line coverage with unit tests → with unit and functional tests.</p>
+            <p>The second tag on each lane is its route: where its work ends up (see <a href="#flow">How a finding moves</a>).</p>
+          </div>
+          <dl class="dw-figs dw-figs--3 dw-figs--lanes">
+            <div class="dw-fig"><dt class="label">Lanes</dt><dd class="dw-fig__val">16</dd><dd class="dw-fig__sub">8 area, 4 class, 4 infrastructure</dd></div>
+            <div class="dw-fig"><dt class="label">Waiting for an owner</dt><dd class="dw-fig__val">13</dd><dd class="dw-fig__sub">You claim one by pull request</dd></div>
+            <div class="dw-fig"><dt class="label">No brief yet</dt><dd class="dw-fig__val">5</dd><dd class="dw-fig__sub">4 of them get no work until someone takes them</dd></div>
+          </dl>
+
+        <div class="dw-tools" data-lane-tools data-copy-skip hidden>
+          <span class="label" id="lane-filter-label">Show</span>
+          <div class="toggles" role="group" aria-labelledby="lane-filter-label">
+            <button type="button" class="toggle" data-kind="all" aria-pressed="true">All <span class="toggle__n">16</span></button>
+            <button type="button" class="toggle" data-kind="area" aria-pressed="false">Area <span class="toggle__n">8</span></button>
+            <button type="button" class="toggle" data-kind="class" aria-pressed="false">Class <span class="toggle__n">4</span></button>
+            <button type="button" class="toggle" data-kind="infra" aria-pressed="false">Infra <span class="toggle__n">4</span></button>
+          </div>
+          <label class="dw-check"><input type="checkbox" data-waiting-only> Only lanes waiting for an owner</label>
+          <div class="dw-tools__end">
+            <button type="button" class="btn btn--line btn--sm" data-expand aria-expanded="false">Expand all lanes</button>
+            <button type="button" class="btn btn--quiet btn--sm" data-reset>Reset</button>
+            <p class="dw-shown" aria-live="polite" data-lane-shown>16 of 16 lanes</p>
+          </div>
+        </div>
+
+        <div class="dw-group" id="group-area">
+          <h3 class="dw-h3" id="group-area-title">Area lanes<span class="sr-only">, 8 lanes</span> <span class="dw-count" aria-hidden="true">8</span></h3>
+          <p class="dw-note dw-note--lead">One area of the code each. <span class="dw-nowrap">E-CONSENSUS</span> prepares evidence and files a pull request only when the maintainer asks for one. <span class="dw-nowrap">A-NET</span>, <span class="dw-nowrap">A-HELPER</span>, <span class="dw-nowrap">A-SHIELDED</span>, <span class="dw-nowrap">A-PQ</span> and <span class="dw-nowrap">A-GUI</span> have a scope and a done bar but no brief yet.</p>
+          <ul class="dw-lanes" role="list">
+          <li><details class="dw-lane" id="lane-A-WALLET" data-kind="area" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">A-WALLET</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-A-WALLET-title">Wallet, RPC authorization, secrets</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact">37.4 % → 63.0 %</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact">4</dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>The wallet and its RPC calls (the shielded RPC belongs to <span class="dw-nowrap">A-SHIELDED</span>) and wallet-facing RPC authorization; classes K05, K11/K12, K25 (wallet half) and K27; deep review 3.3 of the plan.</dd></div><div><dt class="label">Why</dt><dd>wallet risk rank 4; 927 wallet functions never executed under unit+functional (measured 12 Nov at c6f9678d); K05 chain of 4 PRs in 4 days</dd></div><div><dt class="label">Target</dt><dd>wallet lines ≥ 70 (set here); K05/K11/K12 rules in ctest; restore-without-passphrase probe fails; no seed bytes after walletlock</dd></div><div><dt class="label">Cadence</dt><dd>One class per week from phase 2b; 3.3 review in phase 3</dd></div><div><dt class="label">Route</dt><dd>PR to release-0.34.17 (Thursday batch)</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (7 items)</p>
+              <ol class="dw-lane__done"><li>K05 test enumerating every wallet RPC against a locked wallet, registered in ctest</li><li>K11 allowlist test per restricted-user RPC</li><li>K12 RAII reservation type plus a two-sender test</li><li>K27 log-scan assertion in the functional runner</li><li>Restore-without-passphrase probe fails; memory scan after walletlock shows no seed bytes</li><li>wallet lines from 63.0 to at least 70 (target set here)</li><li>Each of the 927 unexecuted wallet functions (measured 12 Nov at c6f9678d) tested or listed as dead</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/A-WALLET.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">A-WALLET</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-A-STORES" data-kind="area" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">A-STORES</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-A-STORES-title">ModelNet store, deposit and persistence logic</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact">84.1 % → 86.2 %</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact">3</dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>The ModelNet stores (helper, bounty, campaign, mandate, feed, catalog), the BCP/1 deposit code and its planners, and persistence outside MatMul; classes K20/K21/K02 (52 PRs); test generators, not instance fixes.</dd></div><div><dt class="label">Why</dt><dd>modelnet risk rank 3; helper.cpp touched by 42 fix PRs; more single fixes landed on 12 Nov; logic slips hide behind high line coverage</dd></div><div><dt class="label">Target</dt><dd>Property tests per store and a BCP/1 lifecycle table in ctest; helper.cpp split proposed; 0 new single-site K20/K21 PRs</dd></div><div><dt class="label">Cadence</dt><dd>One store per week from phase 2b</dd></div><div><dt class="label">Route</dt><dd>PR to release-0.34.17 (Thursday batch)</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (5 items)</p>
+              <ol class="dw-lane__done"><li>Property tests per store (idempotency keys, pagination completeness, monotonic counters, restart = no restart) in ctest</li><li>One table-driven BCP/1 lifecycle test (new, mempool, confirmed, replaced, spent, consolidated) through every reporting RPC</li><li>Mutate → reopen → compare test per store</li><li>helper.cpp split proposed to the maintainer with the tests in hand</li><li>0 new single-site K20/K21 PRs after the generators land</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/A-STORES.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">A-STORES</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-E-CONSENSUS" data-kind="area" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">E-CONSENSUS</span><span class="tag"><span class="sr-only">Route: </span>Evidence</span></span>
+              <h4 class="dw-lane__name" id="lane-E-CONSENSUS-title">Consensus, fork choice, attestation, MatMul frontier (evidence only)</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact">59.8 % → 72.1 %</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact">1</dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>Validation, proof of work, the consensus rules, the script interpreter, fork choice and download scheduling, the MatMul attestation rules and the MatMul code; classes K13 and K14; deep reviews 3.1, 3.2b, 3.5b and the rules of 3.6; the #464 list.</dd></div><div><dt class="label">Why</dt><dd>net/p2p risk rank 1, validation rank 2; net_processing.cpp 113 fix commits, validation.cpp 63, matmul_trusted_attestations.h 50; 68 consensus functions never executed (measured 12 Nov at c6f9678d); frozen for 0.34.16 by #464, so only evidence lands; on 15 Nov the maintainer answered on #464 that its list is not replayed into the 0.34.17 work (#714)</dd></div><div><dt class="label">Target</dt><dd>A #464 evidence list: one measured result + one ready test + one paragraph per item; 0 re-filed PRs that were not taken</dd></div><div><dt class="label">Cadence</dt><dd>With the Thursday batch, only when a complete item exists; at most one short note</dd></div><div><dt class="label">Route</dt><dd>EVIDENCE on #464; a PR only if the maintainer asks</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (7 items)</p>
+              <ol class="dw-lane__done"><li>#464 evidence list with one measured result, one ready test and one paragraph per item</li><li>K13 attestation state machine as one model-based test (vote, withdraw, restart, reorg, missing index)</li><li>K14 download state machine as a deterministic simulation with an adversarial scheduler (‘every announced body is requested within N ticks’)</li><li>68 unexecuted consensus functions (measured 12 Nov at c6f9678d) listed as tested or dead</li><li>Byte-diff proof of block validity between main and the release line</li><li>net_processing and validation thread-safety warnings delivered as a measured result</li><li>0 re-filed PRs that were not taken</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/E-CONSENSUS.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">E-CONSENSUS</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-A-NET" data-kind="area" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">A-NET</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-A-NET-title">Non-consensus P2P bounds and parsers</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact">52.7 % → 77.3 %</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact">1</dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>Peer-to-peer code outside fork choice and scheduling: networking, the address manager and the message parsers; fuzz targets for the five message types that have none and for the hybrid handshake; Dandelion stem limits; K09 (peer half) and, with <span class="dw-nowrap">A-WALLET</span>, the K25 observing-peer test.</dd></div><div><dt class="label">Why</dt><dd>net/p2p risk rank 1; gate G3 at 1 of about 13 parser targets; no container inventory exists</dd></div><div><dt class="label">Target</dt><dd>Bounds table complete; 6 targets run 24 h clean under ASan; net_processing.cpp ≥ 75 lines with functional tests (set here)</dd></div><div><dt class="label">Cadence</dt><dd>None until owned; the phase-3 fuzz batch produces the targets only</dd></div><div><dt class="label">Route</dt><dd>PR for bounds and targets; scheduling or fork choice → <span class="dw-nowrap">E-CONSENSUS</span></dd></div></dl>
+              <p class="label dw-lane__label">Done bar (4 items)</p>
+              <ol class="dw-lane__done"><li>Every peer-fed container in doc/resource-bounds.md with a bound, an eviction and a unit test</li><li>DLTX, chunks, mmsketch, mdpeers, mmatrefute and hybrid-handshake targets link and run 24 h clean under ASan</li><li>K25 observing-peer test in the functional runner</li><li>net_processing.cpp at or above 75 lines with functional tests through non-consensus tests (target set here)</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">No brief yet; the first tasks are in the hub.&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (<span class="dw-nowrap">A-NET</span>) (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-A-HELPER" data-kind="area" data-waiting="0">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">A-HELPER</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-A-HELPER-title">ModelNet helper network surface and security_v2</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">●</span> Owner: <span class="nocase">jarekpiot</span></span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact">jarekpiot</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact">0.2 % → 15.0 %</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact">3</dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>The ModelNet helper's network surface: its request dispatcher, the fuzz targets that never ran and the gate that makes the modelnet fuzz build link, security_v2, the two-user layout under -modelrpcsocket and the jail escape suite; K09 (helper half) and the fs-trust results in the helper; deep review 3.7.</dd></div><div><dt class="label">Why</dt><dd>modelnet risk rank 3; security_v2 at 0.2/15.0 with 6 files at 0 even with functional tests; the dispatcher has no fuzz target</dd></div><div><dt class="label">Target</dt><dd>Dispatcher target 24 h clean; every security_v2 file above 0; listener and user-separation tests in the functional runner</dd></div><div><dt class="label">Cadence</dt><dd>Set by the owner; until then the phase-3 fuzz batch covers the dispatcher target and the native.cmake gate only</dd></div><div><dt class="label">Route</dt><dd>PR; the helper user default is the maintainer's decision (release-scope note)</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (6 items)</p>
+              <ol class="dw-lane__done"><li>modelnet_native_dispatch target runs 24 h clean under ASan</li><li>The never-run targets run 1 h clean</li><li>Every security_v2 file above 0 lines covered</li><li>Functional test: no non-loopback listener on 29447 without -modelbind; no NAT-PMP mapping requested by default</li><li>Under -modelrpcsocket the helper runs as a different user and cannot open .cookie or wallets/</li><li>A malformed reply fails the request, not the helper</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">No brief yet; the first tasks are in the hub.&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (<span class="dw-nowrap">A-HELPER</span>) (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-A-SHIELDED" data-kind="area" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">A-SHIELDED</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-A-SHIELDED-title">Shielded pool integration</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact">72.1 % → 76.9 %</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact">4</dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>Shielded pool integration, the shielded wallet RPC, note reservation (K12, with <span class="dw-nowrap">A-WALLET</span>) and verification cost limits; deep review 3.5a. Proof soundness is for external review, not this lane.</dd></div><div><dt class="label">Why</dt><dd>wallet/shielded_rpc.cpp is file risk rank 4 at 15.8/52.7 with no test file; the one lock-order inversion is on the wallet side</dd></div><div><dt class="label">Target</dt><dd>A test file for shielded_rpc.cpp with the file above 50 lines (set here); the lock-order inversion fixed; verification fuzz targets</dd></div><div><dt class="label">Cadence</dt><dd>None until owned</dd></div><div><dt class="label">Route</dt><dd>PR; anchor window → <span class="dw-nowrap">E-CONSENSUS</span></dd></div></dl>
+              <p class="label dw-lane__label">Done bar (5 items)</p>
+              <ol class="dw-lane__done"><li>shielded_rpc_tests exists and wallet/shielded_rpc.cpp is above 50 lines covered (target set here)</li><li>Verification fuzz targets with cost limits</li><li>A disconnect-reconnect functional test</li><li>The one lock-order inversion DEBUG_LOCKORDER reports fixed on the wallet side, with a DEBUG_LOCKORDER test</li><li>Anchor-window item (#317/#461) filed as EVIDENCE</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">No brief yet; the first tasks are in the hub.&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (<span class="dw-nowrap">A-SHIELDED</span>) (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-A-PQ" data-kind="area" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">A-PQ</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-A-PQ-title">Post-quantum crypto use</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact">92.7 % → 92.7 %</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>Every verify call site for ML-DSA-44, SLH-DSA and the P2MR evaluation, sigop accounting for post-quantum signatures, the ML-KEM transport and the build flags for constant-time code; deep review 3.4.</dd></div><div><dt class="label">Why</dt><dd>A verifier disagreement between implementations is a consensus split; only differential testing is an oracle; already checked: reference-only Dilithium with the z-norm check, no affected PQ crates in Atlas</dd></div><div><dt class="label">Target</dt><dd>Differential target clean; ACVP/Wycheproof vectors in ctest; build-flag check</dd></div><div><dt class="label">Cadence</dt><dd>None until owned</dd></div><div><dt class="label">Route</dt><dd>PR for tests; any accept/reject disagreement → EVIDENCE immediately</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (4 items)</p>
+              <ol class="dw-lane__done"><li>libFuzzer differential target (BTX verify vs an independent ML-DSA-44/SLH-DSA library) runs clean</li><li>ACVP and Wycheproof vectors in ctest</li><li>Build check that constant-time paths are never compiled at -Os/-O1</li><li>Nightly cross-implementation checksums</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">No brief yet; the first tasks are in the hub.&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (<span class="dw-nowrap">A-PQ</span>) (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-A-GUI" data-kind="area" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">A-GUI</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-A-GUI-title">Qt and Atlas</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact dw-lane__fact--plain">not a coverage lane</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact">7</dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>The Qt GUI (no coverage data in any run), the Atlas Rust and npm trees (OSV and cargo-audit listed, not run) and the Atlas RPC allowlists per screen.</dd></div><div><dt class="label">Why</dt><dd>qt/modelnetpage.cpp is file risk rank 7 with no data; nothing in the programme compiles the GUI</dd></div><div><dt class="label">Target</dt><dd>GUI build in the fork CI matrix; cargo audit and OSV on every push; per-screen allowlist test</dd></div><div><dt class="label">Cadence</dt><dd>None until owned</dd></div><div><dt class="label">Route</dt><dd>PR</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (3 items)</p>
+              <ol class="dw-lane__done"><li>A GUI build job in the fork CI matrix</li><li>cargo audit and OSV-Scanner over the Atlas lock files on every push</li><li>An Atlas per-screen RPC allowlist test</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">No brief yet; the first tasks are in the hub.&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (<span class="dw-nowrap">A-GUI</span>) (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          </ul>
+        </div>
+        <div class="dw-group" id="group-class">
+          <h3 class="dw-h3" id="group-class-title">Class sweeps<span class="sr-only">, 4 lanes</span> <span class="dw-count" aria-hidden="true">4</span></h3>
+          <p class="dw-note dw-note--lead">One bug class each: every place in the current code, plus the rule that keeps the class at zero.</p>
+          <ul class="dw-lanes" role="list">
+          <li><details class="dw-lane" id="lane-C-K01" data-kind="class" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">C-K01</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-C-K01-title">Non-atomic or short state-file writes</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact dw-lane__fact--plain">not a coverage lane</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>Class K01 across the code: 9 worklist files at 1e2f8b5f in ModelNet, the wallet and the node, down from 12 at 4c7840e9. #606 (in v0.34.16) moved three files onto the shared atomic-write helper (#576), removed the two sites the file-level filter missed, made the helper sync file and directory, and added a lint that lists each raw write left as an exception.</dd></div><div><dt class="label">Why</dt><dd>22 PRs, the class turning up module after module; a loader that reads a damaged file as empty starts from zero</dd></div><div><dt class="label">Target</dt><dd>12 files to 0 (9 left at 1e2f8b5f); fsync in the helper (done: #606); lint in <span class="dw-nowrap">CI-4</span>; truncated-file load test per store</dd></div><div><dt class="label">Cadence</dt><dd>Phase 2a–2b, one PR</dd></div><div><dt class="label">Route</dt><dd>PR; node/blockstorage.cpp and attested_utxo_snapshot.cpp sites checked for consensus adjacency first (if adjacent → EVIDENCE)</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (5 items)</p>
+              <ol class="dw-lane__done"><li>12 worklist files to 0 (9 left at 1e2f8b5f; #606's lint lists each raw write left in them as an exception)</li><li>FileCommit of file and directory inside WriteBinaryFileAtomically (done: #606, in v0.34.16)</li><li>Lint against raw ofstream/fopen("w") to datadir paths in <span class="dw-nowrap">CI-4</span> (#606 added test/lint/lint-k01-state-writes.py for the audited files)</li><li>A truncated-file load test per store</li><li>0 new K01 PRs after the sweep</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/C-K01.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">C-K01</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-C-PORT" data-kind="class" data-waiting="0">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">C-PORT</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-C-PORT-title">Windows, macOS, build and packaging, resource lifecycle</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">●</span> Owner: <span class="nocase">sunnyriverr</span></span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact">sunnyriverr</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact dw-lane__fact--plain">not a coverage lane</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>Portability and packaging: K06 Windows, MinGW and MSVC (33 PRs), K07 macOS, libc++ and Qt packaging, K22 build, packaging and release-gate drift, K16 pipe, pid and socket lifecycle; the compatibility layer, the release packaging script and the installer path.</dd></div><div><dt class="label">Why</dt><dd>K06 (33 PRs), K19/K22 (40), K10 (14) and K07 (6) are classes a CI matrix catches before filing; K06 kept finding new files</dd></div><div><dt class="label">Target</dt><dd>POSIX grep lint; first green Windows and sharded macOS runs; otool step in the release gate; RAII wrappers with pidfd check</dd></div><div><dt class="label">Cadence</dt><dd>Follows the first green Windows and macOS fork runs (<span class="dw-nowrap">I-CI</span>), then one PR per class</dd></div><div><dt class="label">Route</dt><dd>PR</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (6 items)</p>
+              <ol class="dw-lane__done"><li>POSIX-outside-#ifndef WIN32 grep as a lint in <span class="dw-nowrap">CI-4</span></li><li>First green Windows and sharded macOS runs on the release line</li><li>otool -L on every packaged binary in <span class="dw-nowrap">CI-10</span></li><li>RAII wrappers for fork/socket/pipe with a pidfd identity check before every kill</li><li>0 new-site K06 after the lint</li><li>release-gate job green (GLIBC ceiling, RUNPATH, elfcheck.py)</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/C-PORT.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">C-PORT</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-C-STATIC" data-kind="class" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">C-STATIC</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-C-STATIC-title">Machine-rule sweeps from the static and dynamic baselines</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact">67.4 % → 72.3 %</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>Machine-rule sweeps from the static and dynamic baselines: K10 and K04 (rule only), K15 (28 casts), K03 with TSan and thread-safety in ModelNet, node and wallet code, fs-trust (133), lifetime and initialisation (120), cppcheck errors (26), the K19 lints and the K09 container inventory; nothing under sweep rule (c).</dd></div><div><dt class="label">Why</dt><dd>The baselines exist and are untriaged; each rule costs an afternoon and closes a class for good</dd></div><div><dt class="label">Target</dt><dd>K10 test and K04 lint in CI; 28 casts to 0; TSan product classes to 0; cppcheck errors 26 to 0; fs-trust policy with a shrinking baseline</dd></div><div><dt class="label">Cadence</dt><dd>K10 + K04 + K15 in phase 2a; K03, fs-trust, lifetime in phase 2b</dd></div><div><dt class="label">Route</dt><dd>PR; anything under rule (c) → EVIDENCE</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (9 items)</p>
+              <ol class="dw-lane__done"><li>K10 unit test over the RPCHelpMan table in ctest</li><li>K04 UniValue lint in <span class="dw-nowrap">CI-4</span></li><li>28 casts on ParseUint32Index or proved range-checked</li><li>TSan baseline 41 pairs only shrinks; the 5 product classes at 0</li><li>-Werror=thread-safety on every clean file</li><li>One fs-trust policy (0600 for secrets and sockets, audited env-var allowlist, provenance check at each sink); CodeQL baseline 133 only shrinks</li><li>120 lifetime results initialised or documented</li><li>cppcheck errors 26 to 0</li><li>doc/resource-bounds.md table started</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/C-STATIC.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">C-STATIC</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-C-PATHS" data-kind="class" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">C-PATHS</span><span class="tag"><span class="sr-only">Route: </span>PR</span></span>
+              <h4 class="dw-lane__name" id="lane-C-PATHS-title">Paths, symlinks, jail, options honoured</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact dw-lane__fact--plain">not a coverage lane</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>K08 paths, symlinks and the jail (8 PRs) and K17 options or modes not honoured (10 PRs): -listen=0, -proxy, -onlynet, -v2pqonly and -natpmp=0 on every network surface outside the core networking code.</dd></div><div><dt class="label">Why</dt><dd>A jail step that fails and carries on unjailed, or a second surface that ignores -proxy, undoes the operator's safe profile</dd></div><div><dt class="label">Target</dt><dd>SafePath helper; jail tests with 0 skips; option matrix test</dd></div><div><dt class="label">Cadence</dt><dd>Phase 2b</dd></div><div><dt class="label">Route</dt><dd>PR</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (5 items)</p>
+              <ol class="dw-lane__done"><li>One SafePath helper</li><li>Every pivot_root|chroot|unshare|mount( failure fatal</li><li>Tests with a symlinked ancestor and a symlinked leaf</li><li>Jail tests with 0 ‘jail absent’ skips under BTX_TEST_REQUIRE_LINUX_JAIL=1 in CI</li><li>Functional matrix {-listen=0, -proxy, -onlynet, -v2pqonly} x every listening surface</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/C-PATHS.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">C-PATHS</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          </ul>
+        </div>
+        <div class="dw-group" id="group-infra">
+          <h3 class="dw-h3" id="group-infra-title">Infrastructure lanes<span class="sr-only">, 4 lanes</span> <span class="dw-count" aria-hidden="true">4</span></h3>
+          <p class="dw-note dw-note--lead">What the other lanes build on. <span class="dw-nowrap">I-RC</span> also takes runners: people who run one script on their own hardware and report one result line.</p>
+          <ul class="dw-lanes" role="list">
+          <li><details class="dw-lane" id="lane-I-CI" data-kind="infra" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">I-CI</span><span class="tag"><span class="sr-only">Route: </span>Fork branch</span></span>
+              <h4 class="dw-lane__name" id="lane-I-CI-title">Fork CI gates</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact">67.4 % → 72.3 %</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>The fork CI workflow (it ran on the release line on 12 Nov at 4c7840e9 and on 13 Nov at 88c9b49c, red both times; keep the upstream Atlas workflows): jobs <span class="dw-nowrap">CI-0</span> to <span class="dw-nowrap">CI-10</span>, the known-failing list, and a nightly job for the 41 stage3 suites that time out.</dd></div><div><dt class="label">Why</dt><dd>Upstream runs no hosted CI by choice; baselines: coverage 72.3/42.6, TSan 41, cppcheck 372, CodeQL 260, tidy 1,033; macOS test job ran out of time on the last fork run, so it is sharded</dd></div><div><dt class="label">Target</dt><dd><span class="dw-nowrap">CI-0</span> run once on the release-line head; known-failing written and only shrinking; every class PR links a run; ratchet fails any area dropping more than 0.2 points</dd></div><div><dt class="label">Cadence</dt><dd><span class="dw-nowrap">CI-0</span>, <span class="dw-nowrap">CI-4</span>, <span class="dw-nowrap">CI-5</span>, <span class="dw-nowrap">CI-6</span> in phase 2a; <span class="dw-nowrap">CI-2</span>, <span class="dw-nowrap">CI-9</span> in phase 2b; the rest by phase 4</dd></div><div><dt class="label">Route</dt><dd>Fork branch; a workflow file goes upstream only if the maintainer asks</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (6 items)</p>
+              <ol class="dw-lane__done"><li><span class="dw-nowrap">CI-0</span> run once on the release-line head; shard counts set from it</li><li>ci/known-failing.txt written from that run (the unit failures; the functional failures, 14 in the coverage run [C3], none an ExactReplay stall; gcc-baseline failures after triage) and only shrinking</li><li>Every class PR links a run with fails-before and passes-after</li><li><span class="dw-nowrap">CI-9</span> fails any area that drops more than 0.2 points against the 72.3/42.6 baseline</li><li>The 42 timeouts have a job and a number</li><li>Every baseline (TSan 41, cppcheck 372, CodeQL 260) only shrinks</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-CI.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">I-CI</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-I-RC" data-kind="infra" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">I-RC</span><span class="tag"><span class="sr-only">Route: </span>Run report</span></span>
+              <h4 class="dw-lane__name" id="lane-I-RC-title">Release-candidate qualification and basic verify</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact dw-lane__fact--plain">not a coverage lane</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>Release candidates: one archive per OS with a fixed checklist (the four-check pass posted on #432, 11 Nov: compatibility, desktop first use, restart, model download and recovery), the installer on the real archive, and re-running a pull request's stated test on your own hardware.</dd></div><div><dt class="label">Why</dt><dd>7 fix PRs on one release script; the four-check pass ran once, on the Linux candidate at c6f9678d (#432, 11 Nov); v0.34.16 shipped on 15 Nov at 074dac16 with Linux and Linux CUDA archives only, and the hub has no four-check run of them; the first Windows build report on release-0.34.17 (1e2f8b5f, #714, 16 Nov) found the MSVC build failing</dd></div><div><dt class="label">Target</dt><dd>A Linux, Windows and macOS line with SHA and pass/fail for every candidate; installer starts a node; one-line verify script</dd></div><div><dt class="label">Cadence</dt><dd>Every candidate; verify requests tagged on the board, answered within the week</dd></div><div><dt class="label">Route</dt><dd>RUN report on the board; a failure becomes a registry entry, then a PR by the class owner</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (4 items)</p>
+              <ol class="dw-lane__done"><li>Linux, Windows and macOS lines with SHA and pass/fail for every candidate before anyone writes ‘ready’</li><li>install_prebuilt_release_tree on the real archive starts a node</li><li>The verify script prints one line (commit, test, result) that the runner pastes unchanged</li><li>No runner box holds keys, tokens or wallets</li></ol>
+              <p class="label dw-lane__label">Runner slots</p><ul class="dw-lane__runners"><li>Runner: native Windows with an NVIDIA GPU</li><li>Runner: Windows 11 + WSL2</li><li>Runner: Linux (IBD from genesis, upgrade from a saved datadir)</li><li>Runner: macOS</li></ul>
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-RC.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">I-RC</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-I-OPS" data-kind="infra" data-waiting="0">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">I-OPS</span><span class="tag"><span class="sr-only">Route: </span>Run report</span></span>
+              <h4 class="dw-lane__name" id="lane-I-OPS-title">Operators and whole-system runs</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">●</span> Owner: <span class="nocase">dr-chambre</span></span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact">dr-chambre</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact dw-lane__fact--plain">not a coverage lane</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>Archive mirrors and signed snapshots, monitoring as the health signal, IBD from genesis on a stock binary, staged upgrades, mixed-version interop (v0.34.15 and v0.34.16 against the release line), the operator safe profile in the guides, and which fixes a v0.34.15 node lacks (gate G1).</dd></div><div><dt class="label">Why</dt><dd>Gate G1 is ‘partly’; most nodes run v0.34.15 and the release line is far ahead; operator data has found real bugs before</dd></div><div><dt class="label">Target</dt><dd>Safe profile published; genesis sync on a stock binary reaches the tip; upgrade and interop run per candidate</dd></div><div><dt class="label">Cadence</dt><dd>One run line per candidate; the safe-profile text once, then kept current</dd></div><div><dt class="label">Route</dt><dd>RUN report; findings to the registry, then to the class owner or <span class="dw-nowrap">E-CONSENSUS</span></dd></div></dl>
+              <p class="label dw-lane__label">Done bar (5 items)</p>
+              <ol class="dw-lane__done"><li>The safe profile in the community guide and the status page</li><li>A genesis sync with assumevalid=0 on a stock binary that reaches the tip, reported with the height</li><li>An upgrade from a saved datadir on every candidate</li><li>One interop run per candidate</li><li>UTC timelines on every report</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-OPS.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">I-OPS</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          <li><details class="dw-lane" id="lane-I-XDEV" data-kind="infra" data-waiting="1">
+            <summary>
+              <span class="dw-lane__tags"><span class="tag dw-lane__code">I-XDEV</span><span class="tag"><span class="sr-only">Route: </span>Run report</span></span>
+              <h4 class="dw-lane__name" id="lane-I-XDEV-title">MatMul cross-backend corpus</h4>
+              <span class="dw-lane__who"><span aria-hidden="true">○</span> Waiting for an owner</span>
+              <span class="pm" aria-hidden="true"></span>
+            </summary>
+            <div class="dw-lane__body">
+              <dl class="dw-lane__facts">
+                <div><dt class="label">Owner</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Second pass</dt><dd class="dw-lane__fact dw-lane__fact--plain">open</dd></div>
+                <div><dt class="label">Lines now</dt><dd class="dw-lane__fact">63.9 % → 63.9 %</dd></div>
+                <div><dt class="label">Risk rank</dt><dd class="dw-lane__fact">9</dd></div>
+              </dl>
+              <dl class="dw-lane__spec"><div><dt class="label">Scope</dt><dd>One mutated-block corpus replayed on CPU, CUDA and Metal, one script and one verdict table; the test half of deep review 3.6.</dd></div><div><dt class="label">Why</dt><dd>matmul 63.9/63.9 with 41 suites unmeasured; a CPU/CUDA corpus run exists; Metal never run; a backend disagreement is a consensus split</dd></div><div><dt class="label">Target</dt><dd>A verdict table with one row per (block, backend), no disagreement, a Metal row</dd></div><div><dt class="label">Cadence</dt><dd>Once per candidate, and once after any matmul change lands</dd></div><div><dt class="label">Route</dt><dd>RUN report; disagreements → EVIDENCE</dd></div></dl>
+              <p class="label dw-lane__label">Done bar (4 items)</p>
+              <ol class="dw-lane__done"><li>Corpus and script in the repo</li><li>One row per (block, backend) with no disagreement</li><li>A Metal row exists</li><li>Every disagreement filed as EVIDENCE within the week</li></ol>
+              
+              <p class="dw-lane__brief"><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-XDEV.md" rel="noopener noreferrer">The brief for this lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only">: <span class="dw-nowrap">I-XDEV</span> (opens another site)</span></a></p>
+            </div>
+          </details></li>
+          </ul>
+        </div>
+        <p class="dw-empty" data-lane-empty hidden>No lane matches these filters. <button type="button" class="btn btn--quiet btn--sm" data-reset>Reset</button></p>
+
+        <div class="dw-stamp">
+          <p class="meta">Coverage measured at a5d1637f on <span class="nowrap">2026-11-14</span>; the other counts at c6f9678d on <span class="nowrap">2026-11-12</span>; site counts at 4c7840e9. Every number here is copied from the hub; the hub is right if they differ.</p>
+          <ul class="dw-links"><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">Scope and done bar of each lane&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/lanes.json" rel="noopener noreferrer">The lanes as JSON&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="owner-rules" aria-labelledby="owner-rules-title">
+    <div class="wrap">
+      <div class="sheet">
+<span class="sec-rule sec-rule--b" aria-hidden="true"></span>
+<div class="section__head">
+  <p class="label eyebrow">Guardrails</p>
+  <h2 id="owner-rules-title">Rules for lane owners</h2>
+  <p class="lede">What applies once you own a lane: what your AI never does, and how a sweep works.</p>
+</div>
+
+        <div class="dw-split">
+          <div id="never">
+            <h3 class="dw-h3 dw-h3--top">What each person's AI never does</h3>
+            <p class="dw-note dw-note--lead">The person who owns the lane signs every post; the AI drafts.</p>
+            <ol class="dw-rules"><li><strong>Never post, comment, push or open a PR on its own.</strong> The owner reads the full text and the diff first.</li><li><strong>Never open a PR into the release branch (release-0.34.17 since 15 Nov) that touches consensus code.</strong> That means <code>validation.cpp</code>, <code>pow.cpp</code>, <code>src/consensus/</code>, <code>script/interpreter.cpp</code>, fork choice or download scheduling in <code>net_processing.cpp</code>, <code>node/matmul_trusted_attestations.*</code> rules, or <code>src/matmul/</code>. Those go to <span class="dw-nowrap">E-CONSENSUS</span>.</li><li><strong>Never file a single-site fix for a class in the registry.</strong> Count the class on the live head; sweep it; add the rule.</li><li><strong>Never put a fix in a commit linked from a comment.</strong> Follow-ups are PRs.</li><li><strong>Never claim a test ran without the run link or log, the commit SHA and the platform.</strong> “Fails before, passes after” or nothing.</li><li><strong>Never add a stub, a fail-closed workaround, a skipped test or a widened timeout to make a job green.</strong></li><li><strong>Never stop a node with <code>kill -9</code>.</strong> Stop any keeper or watchdog first, back up the datadir, then stop the node cleanly.</li><li><strong>Never re-run a baseline tool that already ran.</strong> Reuse the C1–C3 results (the numbers in <code>plan/plan-data.json</code>) and re-grep only the live head.</li><li><strong>Never hold keys, wallet files, RPC cookies or tokens on a test or runner box.</strong> Never test on the machine that holds a wallet.</li><li><strong>Never quote private chats, name people other than by handle, or state a figure without its source.</strong></li></ol>
+          </div>
+          <div>
+            <h3 class="dw-h3 dw-h3--top" id="sweeps-title">Sweep rules and hot files</h3>
+            <ul class="dw-list" aria-labelledby="sweeps-title"><li><strong>Sweep rule (a):</strong> a ‘not counted’ class is counted on the live head first; under 3 real sites, the rule alone.</li><li><strong>Sweep rule (b):</strong> a sweep PR changes nothing beyond its class; anything else it finds goes to the lane worklist or its own PR.</li><li><strong>Sweep rule (c):</strong> no sweep touches <code>validation.cpp</code>, <code>pow.cpp</code>, <code>src/consensus/</code>, <code>script/interpreter.cpp</code>, fork choice or <code>src/matmul/</code>; hits go to <span class="dw-nowrap">E-CONSENSUS</span>.</li><li><strong>Hot files (<code>net_processing.cpp</code>, <code>modelnet/helper.cpp</code>, <code>node/matmul_trusted_attestations.*</code>):</strong> no per-event PR without a model-based test or a split proposal first.</li></ul>
+          </div>
+        </div>
+        <div class="dw-stamp">
+          <ul class="dw-links"><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/02-method.md" rel="noopener noreferrer">The working method&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/03-guardrails.md" rel="noopener noreferrer">The guardrails&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="classes" aria-labelledby="classes-title">
+    <div class="wrap">
+      <div class="sheet">
+<span class="sec-rule sec-rule--b" aria-hidden="true"></span>
+<div class="section__head">
+  <p class="label eyebrow">Registry</p>
+  <h2 id="classes-title">Recurring bug classes</h2>
+  <p class="lede">A bug class is a mistake that keeps coming back in a new place. Before you file anything, find its class here and answer <a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/06-pr-gate.md" rel="noopener noreferrer">the eight questions of the gate&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>.</p>
+</div>
+
+        <div class="prose dw-intro">
+          <p>This is a taxonomy of every fix pull request to btxchain/btx since 1 August: 317 fix PRs in 26 named classes, plus “other”. Class assignments are <span class="nowrap">10–15%</span> noisy.</p>
+          <p>Site counts were taken at 4c7840e9, the release-0.34.16 head of 12 November, unless a count names another commit. Static and dynamic counts were measured at c6f9678d and are untriaged.</p>
+        </div>
+        <div class="dw-tools" data-class-tools data-copy-skip hidden>
+          <span class="label" id="class-filter-label">Status</span>
+          <div class="toggles" role="group" aria-labelledby="class-filter-label"><button type="button" class="toggle" data-status="all" aria-pressed="true">All <span class="toggle__n">20</span></button><button type="button" class="toggle" data-status="worklist" aria-pressed="false">Worklist ready <span class="toggle__n">2</span></button><button type="button" class="toggle" data-status="baseline" aria-pressed="false">Baseline measured <span class="toggle__n">3</span></button><button type="button" class="toggle" data-status="count-first" aria-pressed="false">Count first <span class="toggle__n">7</span></button><button type="button" class="toggle" data-status="rule-only" aria-pressed="false">Rule only <span class="toggle__n">3</span></button><button type="button" class="toggle" data-status="needs-ci" aria-pressed="false">Needs fork CI <span class="toggle__n">2</span></button><button type="button" class="toggle" data-status="generators" aria-pressed="false">Generators <span class="toggle__n">1</span></button><button type="button" class="toggle" data-status="evidence" aria-pressed="false">Evidence <span class="toggle__n">2</span></button></div>
+          <p class="dw-shown" aria-live="polite" data-class-shown>20 of 20 classes</p>
+        </div>
+        <p class="dw-note dw-note--lead">Open a class to see its status note and the lanes that work on it. <span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only">S</span> marks a security-relevant class.</p>
+        <div class="dw-reg__head" aria-hidden="true"><span>Class</span><span>Name and rule</span><span>Fix PRs</span><span>Open sites</span><span>Status</span></div>
+        <ul class="dw-reg" id="registry" role="list" aria-labelledby="classes-title">
+          <li><details class="dw-cls" id="class-K09" data-status="count-first">
+            <summary><span class="dw-cls__code"><span class="dw-class">K09</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">Unbounded input from peers and model peers</span><span class="dw-class__rule">Container → bound → eviction test table; fuzz target per message type</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">18</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Count first</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Not counted; no inventory yet</dd></div><div><dt class="label">Lanes</dt><dd class="dw-class__lanes"><a href="#lane-A-NET">A-NET</a> <a href="#lane-A-HELPER">A-HELPER</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K01" data-status="worklist">
+            <summary><span class="dw-cls__code"><span class="dw-class">K01</span></span><span class="dw-cls__name"><span class="dw-class__name">Non-atomic or short state-file write</span><span class="dw-class__rule">Lint against raw ofstream to datadir paths; truncated-file load tests</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">22</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v">9</span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Worklist ready</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Worklist ready (9 files at 1e2f8b5f, down from 12 at 4c7840e9; #606's lint lists each raw write left in them as an exception); shared helper exists (#576) and syncs file and directory since #606</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-C-K01">C-K01</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K03" data-status="baseline">
+            <summary><span class="dw-cls__code"><span class="dw-class">K03</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">Lock order / self-deadlock / race</span><span class="dw-class__rule">-Wthread-safety, TSan + DEBUG_LOCKORDER nightly</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">9</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v">41 TSan site pairs</span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Baseline measured</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Baseline measured</dd></div><div><dt class="label">Lanes</dt><dd class="dw-class__lanes"><a href="#lane-C-STATIC">C-STATIC</a> <a href="#lane-E-CONSENSUS">E-CONSENSUS</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-C1-1" data-status="baseline">
+            <summary><span class="dw-cls__code"><span class="dw-class">C1-1</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">File-system and environment trust</span><span class="dw-class__rule">CodeQL path/permission/process queries with a shrinking baseline</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v">133 CodeQL results</span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Baseline measured</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Baseline measured, untriaged</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-C-STATIC">C-STATIC</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K05" data-status="count-first">
+            <summary><span class="dw-cls__code"><span class="dw-class">K05</span></span><span class="dw-cls__name"><span class="dw-class__name">Wallet-locked / passphrase ordering</span><span class="dw-class__rule">Every wallet RPC tested against a locked wallet</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">10</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Count first</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Not counted (4 files call funding primitives)</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-A-WALLET">A-WALLET</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K08" data-status="count-first">
+            <summary><span class="dw-cls__code"><span class="dw-class">K08</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">Path / symlink / jail handling</span><span class="dw-class__rule">SafePath helper; jail tests with 0 skips</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">8</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Count first</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Not counted (44 files reference symlink APIs)</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-C-PATHS">C-PATHS</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K06" data-status="needs-ci">
+            <summary><span class="dw-cls__code"><span class="dw-class">K06</span></span><span class="dw-cls__name"><span class="dw-class__name">Windows / MinGW / MSVC portability</span><span class="dw-class__rule">Fork CI Windows jobs + POSIX grep lint</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">33</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Needs fork CI</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Waits for the first Windows CI run</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-C-PORT">C-PORT</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K10" data-status="rule-only">
+            <summary><span class="dw-cls__code"><span class="dw-class">K10</span></span><span class="dw-cls__name"><span class="dw-class__name">CLI/RPC parameter conversion drift</span><span class="dw-class__rule">Unit test over the RPCHelpMan table vs vRPCConvertParams</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">14</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v">1</span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Rule only</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Rule-only PR; Atlas half closed by #574</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-C-STATIC">C-STATIC</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K04" data-status="rule-only">
+            <summary><span class="dw-cls__code"><span class="dw-class">K04</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">Dangling reference / copy from freed memory</span><span class="dw-class__rule">UniValue self-member-assignment lint</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">2</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v">0</span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Rule only</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Rule-only PR</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-C-STATIC">C-STATIC</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K15" data-status="worklist">
+            <summary><span class="dw-cls__code"><span class="dw-class">K15</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">Integer width / truncation</span><span class="dw-class__rule">ParseUint32Index at every JSON-number cast</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">2</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v">28</span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Worklist ready</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Worklist ready (consensus and matmul sites excluded)</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-C-STATIC">C-STATIC</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K16-K17" data-status="count-first">
+            <summary><span class="dw-cls__code"><span class="dw-class">K16/K17</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">Helper lifecycle and options not honoured</span><span class="dw-class__rule">RAII wrappers; -listen/-proxy/-onlynet matrix over every surface</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">15</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Count first</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Not counted</dd></div><div><dt class="label">Lanes</dt><dd class="dw-class__lanes"><a href="#lane-C-PORT">C-PORT</a> <a href="#lane-C-PATHS">C-PATHS</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K19-K22" data-status="needs-ci">
+            <summary><span class="dw-cls__code"><span class="dw-class">K19/K22</span></span><span class="dw-cls__name"><span class="dw-class__name">Test registration, fuzz smoke, packaging drift</span><span class="dw-class__rule">Registration diff, 10 s fuzz smoke, exec-bit lint, release gate</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">40</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Needs fork CI</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>In the CI branch</dd></div><div><dt class="label">Lanes</dt><dd class="dw-class__lanes"><a href="#lane-I-CI">I-CI</a> <a href="#lane-C-STATIC">C-STATIC</a> <a href="#lane-C-PORT">C-PORT</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K11-K12" data-status="count-first">
+            <summary><span class="dw-cls__code"><span class="dw-class">K11/K12</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">wallet RPC authorization and coin reservation</span><span class="dw-class__rule">Restricted-user allowlist test; RAII reservation + two-sender test</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">8</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Count first</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Not counted</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-A-WALLET">A-WALLET</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-C1-3" data-status="baseline">
+            <summary><span class="dw-cls__code"><span class="dw-class">C1-3</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">Lifetime and initialisation</span><span class="dw-class__rule">ci/cppcheck.sh with fixed flags; shrinking baseline</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v">120 cppcheck + CodeQL results</span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Baseline measured</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Baseline measured, untriaged</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-C-STATIC">C-STATIC</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K20-K21-K02" data-status="generators">
+            <summary><span class="dw-cls__code"><span class="dw-class">K20/K21/K02</span></span><span class="dw-cls__name"><span class="dw-class__name">Store, deposit and persistence logic</span><span class="dw-class__rule">Property tests per store; BCP/1 lifecycle table; mutate-reopen-compare</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">52</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Generators</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Generators, not instance fixes</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-A-STORES">A-STORES</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K07" data-status="count-first">
+            <summary><span class="dw-cls__code"><span class="dw-class">K07</span></span><span class="dw-cls__name"><span class="dw-class__name">macOS / libc++ / Qt packaging</span><span class="dw-class__rule">otool check in the release gate; macOS CI</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">6</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Count first</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Not counted</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-C-PORT">C-PORT</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K25" data-status="rule-only">
+            <summary><span class="dw-cls__code"><span class="dw-class">K25</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">Privacy leak to peers or restricted views</span><span class="dw-class__rule">Observing-peer functional test</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">5</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Rule only</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>5 of 5 PRs landed; rule missing</dd></div><div><dt class="label">Lanes</dt><dd class="dw-class__lanes"><a href="#lane-A-WALLET">A-WALLET</a> <a href="#lane-A-NET">A-NET</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K27" data-status="count-first">
+            <summary><span class="dw-cls__code"><span class="dw-class">K27</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">Secret or seed material exposed</span><span class="dw-class__rule">Log-scan assertion; SecureString audit test</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">3</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Count first</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Not counted</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-A-WALLET">A-WALLET</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K13" data-status="evidence">
+            <summary><span class="dw-cls__code"><span class="dw-class">K13</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">MatMul attestation / frontier state</span><span class="dw-class__rule">Model-based state-machine test</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">15</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Evidence</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Evidence for #464, not a sweep</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-E-CONSENSUS">E-CONSENSUS</a></dd></div></dl>
+          </details></li>
+          <li><details class="dw-cls" id="class-K14" data-status="evidence">
+            <summary><span class="dw-cls__code"><span class="dw-class">K14</span><span class="tag dw-s" aria-hidden="true">S</span><span class="sr-only"> security-relevant</span></span><span class="dw-cls__name"><span class="dw-class__name">Block download scheduling</span><span class="dw-class__rule">Deterministic download simulation with an adversarial scheduler</span></span><span class="dw-cls__n dw-cls__prs"><span class="dw-cls__k">Fix PRs </span><span class="dw-cls__v">19</span></span><span class="dw-cls__n dw-cls__sites"><span class="dw-cls__k">Open sites </span><span class="dw-cls__v"><span class="dw-dash" aria-hidden="true">–</span><span class="sr-only"> no data</span></span></span><span class="dw-cls__status"><span class="dw-cls__k">Status </span>Evidence</span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+            <dl class="dw-cls__body"><div><dt class="label">Status note</dt><dd>Evidence for #464, not a sweep</dd></div><div><dt class="label">Lane</dt><dd class="dw-class__lanes"><a href="#lane-E-CONSENSUS">E-CONSENSUS</a></dd></div></dl>
+          </details></li>
+        </ul>
+        <p class="dw-note dw-legend"><span class="tag dw-s" aria-hidden="true">S</span> Security-relevant: counts only. Findings go through GitHub private vulnerability reporting on btxchain/btx.</p>
+        <div class="dw-stamp">
+          <p class="meta">Coverage measured at a5d1637f on <span class="nowrap">2026-11-14</span>; the other counts at c6f9678d on <span class="nowrap">2026-11-12</span>; site counts at 4c7840e9. Every number here is copied from the hub; the hub is right if they differ.</p>
+          <ul class="dw-links"><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/05-bug-classes.md" rel="noopener noreferrer">The registry, with example pull requests&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/06-pr-gate.md" rel="noopener noreferrer">The eight questions before a pull request&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="flow" aria-labelledby="flow-title">
+    <div class="wrap">
+<span class="sec-rule sec-rule--b" aria-hidden="true"></span>
+<div class="section__head">
+  <p class="label eyebrow">Process</p>
+  <h2 id="flow-title">How a finding moves</h2>
+  <p class="lede">From the moment someone finds something to the moment a baseline shrinks. Two exits leave the path early.</p>
+</div>
+
+      <div class="grid">
+        <ol role="list" class="route route--b span-5">
+          <li class="stop"><span class="stop__n">1</span> <h3 class="stop__title">Found</h3></li>
+          <li class="stop"><span class="stop__n">2</span> <h3 class="stop__title">Class check</h3>
+            <p class="stop__text">Check it against doc/bug-classes.md. Add a class if it is new.</p></li>
+          <li class="stop"><span class="stop__n">3</span> <h3 class="stop__title">Consensus check</h3> <span class="tag dw-exit">Exit<span class="sr-only">: the path can end here</span></span>
+            <p class="stop__text">If the class touches validation, fork choice, attestation or the <span class="term" data-term="matmul">MatMul</span> frontier, it goes to <span class="dw-nowrap">E-CONSENSUS</span> as evidence and stops here.</p></li>
+          <li class="stop"><span class="stop__n">4</span> <h3 class="stop__title">Count sites</h3> <span class="tag dw-exit">Exit<span class="sr-only">: the path can end here</span></span>
+            <p class="stop__text">Count sites on the live head. Under 3 real sites: file the rule alone.</p></li>
+          <li class="stop"><span class="stop__n">5</span> <h3 class="stop__title">Sweep and write the rule</h3>
+            <p class="stop__text">Sweep every site and write the rule: a test, a lint or a CI job.</p></li>
+          <li class="stop"><span class="stop__n">6</span> <h3 class="stop__title">Pull request</h3>
+            <p class="stop__text">A PR with the fork CI link: fails before, passes after.</p></li>
+          <li class="stop"><span class="stop__n">7</span> <h3 class="stop__title">Second pass</h3>
+            <p class="stop__text">The lane's reviewer checks it (Wednesday).</p></li>
+          <li class="stop"><span class="stop__n">8</span> <h3 class="stop__title">Thursday batch</h3>
+            <p class="stop__text">It goes to the maintainer in the Thursday batch.</p></li>
+          <li class="stop"><span class="stop__n">9</span> <h3 class="stop__title">Merged</h3>
+            <p class="stop__text">Merged → board card moved → baseline shrinks.</p></li>
+        </ol>
+        <div class="sheet span-7 dw-flow__side">
+          <h3 class="dw-h3 dw-h3--top" id="routes-title">Where it ends up</h3>
+          <div class="dw-ends" role="group" aria-labelledby="routes-title">
+            <div class="dw-end" id="route-pr"><h4>Pull request</h4><p>A normal pull request to release-0.34.17, sent in the Thursday batch with its fork CI run: fails before, passes after.</p></div>
+            <div class="dw-end" id="route-evidence"><h4>Evidence</h4><p>For validation, fork choice, attestation and the MatMul frontier: one measured result, one ready test and one paragraph on #464. A pull request only if the maintainer asks for one.</p></div>
+            <div class="dw-end" id="route-run"><h4>Run report</h4><p>One script on one machine prints one result line, which the runner pastes unchanged, plus one line that says what was not tested.</p></div>
+          </div>
+          <h3 class="dw-h3" id="escalation-title">When something goes wrong</h3>
+          <ul class="dw-list" aria-labelledby="escalation-title"><li><strong>Gate red (a baseline grew, a known-failing list grew):</strong> the lane stops new work and fixes the gate first.</li><li><strong>A pull request the maintainer closed without taking it is never re-filed.</strong> It becomes an evidence item or is dropped.</li><li><strong>Owner and second pass disagree:</strong> the batch coordinator decides what goes into the batch, and the question goes into the Thursday batch as one line if the maintainer's view is needed.</li><li><strong>A security-relevant finding goes through GitHub private vulnerability reporting on btxchain/btx,</strong> never into a public issue or a chat. The class goes on the registry without the detail.</li><li><strong>A runner cannot reproduce a stated test:</strong> the pull request waits, and the owner, not the runner, investigates.</li></ul>
+          <div class="dw-stamp">
+            <ul class="dw-links"><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">The flow in the hub&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/06-pr-gate.md" rel="noopener noreferrer">The eight questions before a pull request&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gates" aria-labelledby="gates-title">
+    <div class="wrap">
+      <div class="sheet">
+<span class="sec-rule sec-rule--b" aria-hidden="true"></span>
+<div class="section__head">
+  <p class="label eyebrow">Checks</p>
+  <h2 id="gates-title">Gates</h2>
+  <p class="lede">Upstream runs no hosted CI for the node software, by choice. The gates run on a contributor fork instead.</p>
+</div>
+
+        <div class="prose dw-intro">
+          <p>Every class pull request links its run, and baselines only shrink. CI stays on the fork and is offered upstream only on request.</p>
+        </div>
+        <h3 class="dw-h3" id="gates-ci-title">Fork CI jobs (lane <span class="dw-nowrap">I-CI</span>)</h3>
+        <div class="dw-scroll" data-scroll-label="gates-ci-title">
+          <table class="table dw-table dw-table--gates">
+            <thead><tr><th scope="col">Job</th><th scope="col">Name</th><th scope="col">State</th><th scope="col">Phase</th></tr></thead>
+            <tbody>
+<tr id="gate-CI-0"><th scope="row"><span class="dw-class">CI-0</span></th><td data-label="Name">fork build matrix (Linux, userns, mingw, Windows, macOS)</td><td data-label="State" class="dw-state">Ran 12 Nov at 4c7840e9 and 13 Nov at 88c9b49c, red both times; the status page's operator publishes the results of nightly build and test runs on release-0.34.16 and release-0.34.17, one per branch</td><td data-label="Phase" class="dw-nowrap">Phase 2a</td></tr>
+<tr id="gate-CI-1"><th scope="row"><span class="dw-class">CI-1</span></th><td data-label="Name">linux-unit-functional (sharded)</td><td data-label="State" class="dw-state">Planned</td><td data-label="Phase" class="dw-nowrap">Phase 4</td></tr>
+<tr id="gate-CI-2"><th scope="row"><span class="dw-class">CI-2</span></th><td data-label="Name">linux-asan-ubsan</td><td data-label="State" class="dw-state">Planned</td><td data-label="Phase" class="dw-nowrap">Phase 2b</td></tr>
+<tr id="gate-CI-3"><th scope="row"><span class="dw-class">CI-3</span></th><td data-label="Name">tsan-lockorder nightly</td><td data-label="State" class="dw-state">Planned; baseline 41 pairs</td><td data-label="Phase" class="dw-nowrap">Phase 4</td></tr>
+<tr id="gate-CI-4"><th scope="row"><span class="dw-class">CI-4</span></th><td data-label="Name">lint (registration diff, UniValue, K01/K08/K17 greps, K10 test, exec bits)</td><td data-label="State" class="dw-state">Planned</td><td data-label="Phase" class="dw-nowrap">Phase 2a</td></tr>
+<tr id="gate-CI-5"><th scope="row"><span class="dw-class">CI-5</span></th><td data-label="Name">clang-tidy-diff + -Werror=thread-safety on clean files</td><td data-label="State" class="dw-state">Planned</td><td data-label="Phase" class="dw-nowrap">Phase 2a</td></tr>
+<tr id="gate-CI-6"><th scope="row"><span class="dw-class">CI-6</span></th><td data-label="Name">cppcheck with fixed flags</td><td data-label="State" class="dw-state">Planned; baseline 372</td><td data-label="Phase" class="dw-nowrap">Phase 2a</td></tr>
+<tr id="gate-CI-7"><th scope="row"><span class="dw-class">CI-7</span></th><td data-label="Name">fuzz-smoke (ClusterFuzzLite)</td><td data-label="State" class="dw-state">Planned</td><td data-label="Phase" class="dw-nowrap">Phase 4</td></tr>
+<tr id="gate-CI-8"><th scope="row"><span class="dw-class">CI-8</span></th><td data-label="Name">codeql weekly on a dedicated box</td><td data-label="State" class="dw-state">Planned; baseline 260</td><td data-label="Phase" class="dw-nowrap">Phase 4</td></tr>
+<tr id="gate-CI-9"><th scope="row"><span class="dw-class">CI-9</span></th><td data-label="Name">coverage-ratchet on a dedicated box</td><td data-label="State" class="dw-state">Planned; baseline 72.3% lines; configure fix landed (#578)</td><td data-label="Phase" class="dw-nowrap">Phase 2b</td></tr>
+<tr id="gate-CI-10"><th scope="row"><span class="dw-class">CI-10</span></th><td data-label="Name">release-gate</td><td data-label="State" class="dw-state">Planned</td><td data-label="Phase" class="dw-nowrap">Phase 4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 class="dw-h3" id="gates-release-title">The contributors' checklist for a final release</h3>
+        <p class="dw-note dw-note--lead">What contributors keep ready. Rows that depend on the maintainer are listed so the evidence is there when the decision is made, not as requests. The maintainer decides what lands.</p>
+        <div class="dw-scroll" data-scroll-label="gates-release-title">
+          <table class="table dw-table dw-table--release">
+            <thead><tr><th scope="col">Gate</th><th scope="col">Name</th><th scope="col">State</th></tr></thead>
+            <tbody>
+<tr id="gate-G1"><th scope="row"><span class="dw-class">G1</span></th><td data-label="Name">Operators safe now</td><td data-label="State" class="dw-state">Partly</td></tr>
+<tr id="gate-G2"><th scope="row"><span class="dw-class">G2</span><span class="tag">Done bar</span></th><td data-label="Name">Machines on</td><td data-label="State" class="dw-state">Open</td></tr>
+<tr id="gate-G3"><th scope="row"><span class="dw-class">G3</span><span class="tag">Done bar</span></th><td data-label="Name">Parsers covered</td><td data-label="State" class="dw-state">1 of about 13 targets exists</td></tr>
+<tr id="gate-G4"><th scope="row"><span class="dw-class">G4</span><span class="tag">Done bar</span></th><td data-label="Name">Classes swept</td><td data-label="State" class="dw-state">Open; worklists ready</td></tr>
+<tr id="gate-G5"><th scope="row"><span class="dw-class">G5</span></th><td data-label="Name">Money separated from the AI layer</td><td data-label="State" class="dw-state">Open</td></tr>
+<tr id="gate-G6"><th scope="row"><span class="dw-class">G6</span></th><td data-label="Name">Peer input charged and bounded</td><td data-label="State" class="dw-state">Open; #478 and #313 are in v0.34.16 (on main since 15 Nov)</td></tr>
+<tr id="gate-G7"><th scope="row"><span class="dw-class">G7</span></th><td data-label="Name">What runs is what was reviewed</td><td data-label="State" class="dw-state">Open</td></tr>
+<tr id="gate-G8"><th scope="row"><span class="dw-class">G8</span></th><td data-label="Name">Chain verifiable from genesis</td><td data-label="State" class="dw-state">Open</td></tr>
+<tr id="gate-G9"><th scope="row"><span class="dw-class">G9</span></th><td data-label="Name">Process (branch matrix per fix, the v0.34.15 gap list, a reporting route)</td><td data-label="State" class="dw-state">Open</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dw-stamp">
+          <p class="meta">Coverage measured at a5d1637f on <span class="nowrap">2026-11-14</span>; the other counts at c6f9678d on <span class="nowrap">2026-11-12</span>; site counts at 4c7840e9. Every number here is copied from the hub; the hub is right if they differ.</p>
+          <ul class="dw-links"><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/MASTER-PLAN.md" rel="noopener noreferrer">The gates in the plan&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-CI.md" rel="noopener noreferrer">The brief for lane <span class="dw-nowrap">I-CI</span>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="rhythm" aria-labelledby="rhythm-title">
+    <div class="wrap">
+<span class="sec-rule sec-rule--b" aria-hidden="true"></span>
+<div class="section__head">
+  <p class="label eyebrow">Schedule</p>
+  <h2 id="rhythm-title">Phases and the week</h2>
+  <p class="lede">Phases overlap. Batches go out on Thursdays.</p>
+</div>
+
+      <div class="grid">
+        <div class="span-5">
+          <p class="dw-note dw-note--lead dw-onbg">Dates live on the board, set by lane owners once lanes are claimed. No single-site pull requests between batches unless a gate is red.</p>
+          <ol role="list" class="route route--b">
+          <li class="stop dw-phase" id="phase-2a"><span class="stop__n" aria-hidden="true">Phase 2a <span class="dw-phase__when">· 12–14 Nov</span></span>
+            <h3 class="stop__title dw-phase__title"><span class="sr-only">Phase 2a, 12–14 Nov: </span>First value</h3>
+            <ul class="dw-phase__list"><li>Fork CI branch on 4c7840e9 with lint, clang-tidy-diff, cppcheck</li><li>Rule-only PRs: K10 test, K04 lint</li><li>K15: 28 casts + 5 single results</li><li>K01 worklist and lint to the portability lane</li><li>Functional-failure triage</li></ul></li>
+          <li class="stop dw-phase" id="phase-2b"><span class="stop__n" aria-hidden="true">Phase 2b <span class="dw-phase__when">· 15–21 Nov</span></span>
+            <h3 class="stop__title dw-phase__title"><span class="sr-only">Phase 2b, 15–21 Nov: </span>The sweeps</h3>
+            <ul class="dw-phase__list"><li>K05, K08, K03 + annotations</li><li>fs-trust policy</li><li>K16, K17, K19 lints</li><li>K22 release gate</li><li>K11, K12, K07, K25, K27 (counted first)</li><li>Coverage ratchet and ASan job</li></ul></li>
+          <li class="stop dw-phase" id="phase-3"><span class="stop__n" aria-hidden="true">Phase 3 <span class="dw-phase__when">· 18–28 Nov</span></span>
+            <h3 class="stop__title dw-phase__title"><span class="sr-only">Phase 3, 18–28 Nov: </span>Deep reviews</h3>
+            <ul class="dw-phase__list"><li>3.3, 3.4, 3.7, 3.8</li><li>3.2 and 3.6 test artefacts</li><li>3.1 and 3.5 as #464 evidence</li><li><span class="term" data-term="fuzz-target">Fuzz</span> batch: dispatcher, DLTX, chunks, hybrid handshake, model files</li></ul></li>
+          <li class="stop dw-phase" id="phase-4"><span class="stop__n" aria-hidden="true">Phase 4 <span class="dw-phase__when">· Weekly from 24 Nov</span></span>
+            <h3 class="stop__title dw-phase__title"><span class="sr-only">Phase 4, weekly from 24 Nov: </span>Ratchet</h3>
+            <ul class="dw-phase__list"><li>Baselines only shrink</li><li>Weekly CodeQL</li><li>Thursday batch</li><li>#464 evidence list</li><li>External-review scope</li></ul></li>
+          </ol>
+        </div>
+        <div class="sheet span-7 dw-flow__side">
+          <h3 class="dw-h3 dw-h3--top" id="week-title">The week</h3>
+          <div class="dw-scroll" data-scroll-label="week-title">
+            <table class="table dw-table dw-table--week">
+              <thead><tr><th scope="col">Day</th><th scope="col">What</th><th scope="col">Who</th></tr></thead>
+              <tbody>
+<tr id="day-monday"><th scope="row">Monday</th><td data-label="What">Each lane picks one class or item from the board; owners post the plan line on their card</td><td data-label="Who" class="dw-state">Owners</td></tr>
+<tr id="day-tuesday_wednesday"><th scope="row">Tuesday to Wednesday</th><td data-label="What">Sweep, rule, fork CI run; second passes on Wednesday</td><td data-label="Who" class="dw-state">Owners, second pass</td></tr>
+<tr id="day-thursday"><th scope="row">Thursday</th><td data-label="What">One batch to the maintainer (PRs with run links); an evidence note on #464 only when a complete item exists; one operator line (batch coordinator)</td><td data-label="Who" class="dw-state">Batch coordinator</td></tr>
+<tr id="day-friday"><th scope="row">Friday</th><td data-label="What">Board updated; baselines rechecked; <span class="dw-nowrap">I-RC</span> verify lines in (batch coordinator, runners)</td><td data-label="Who" class="dw-state">Batch coordinator, runners</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="dw-stamp">
+            <ul class="dw-links"><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">The rhythm in the hub&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/plan/MASTER-PLAN.md" rel="noopener noreferrer">The dated plan&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER:START -->
+<footer class="ftr">
+  <div class="wrap">
+    <div class="sheet ftr__sheet">
+    <h2 class="label ftr__title">Every page on this site</h2>
+    <div class="ftr__map">
+      <div class="ftr__line ftr__line--s">
+        <h3 id="ftr-s"><span class="badge badge--sm badge--s" aria-hidden="true">S</span>Start here</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design04/">Home</a></li>
+          <li><a href="/new/design04/learn/">Learn</a></li>
+          <li><a href="/new/design04/links/">Links</a></li>
+          <li><a href="/new/design04/#before-buying">Before you buy</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--m">
+        <h3 id="ftr-m"><span class="badge badge--sm badge--m" aria-hidden="true">M</span>Mine BTX</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design04/#miners">Mining steps</a></li>
+          <li><a href="/new/design04/links/#cat-miners">Miners</a></li>
+          <li><a href="/new/design04/links/#cat-pools">Pools</a></li>
+          <li><a href="/new/design04/network/">Network</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--n">
+        <h3 id="ftr-n"><span class="badge badge--sm badge--n" aria-hidden="true">N</span>Run a node</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design04/infra/">Run a node</a></li>
+          <li><a href="/new/design04/infra/#before-installing">Install checklist</a></li>
+          <li><a href="/new/design04/links/#cat-node-tools">Node tools</a></li>
+          <li><a href="/new/design04/network/">Network</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--b">
+        <h3 id="ftr-b"><span class="badge badge--sm badge--b" aria-hidden="true">B</span>Build</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design04/dev/">Developers</a></li>
+          <li><a href="/new/design04/dev/work/">Ongoing work</a></li>
+          <li><a href="/new/design04/projects/">Projects</a></li>
+          <li><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr__base">
+      <p><strong>Run by community members, not by a company.</strong> Nothing on this site is financial advice. Links lead to third parties; we are not responsible for their content.</p>
+      <ul class="ftr__links">
+        <li><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code on GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        <li><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Status page <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        <li><button class="ftr__bg" type="button" data-bg-toggle aria-pressed="false" hidden>Pause background animation</button></li>
+      </ul>
+      <p class="meta">Live data comes from the public status API of network.btx-monitoring.com (<a href="https://network.btx-monitoring.com/api/v1/status.json" rel="noopener noreferrer">api/v1/status.json&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>), checked every 60 seconds.</p>
+    </div>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END -->
+</body>
+</html>

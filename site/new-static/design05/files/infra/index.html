@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/new/design05/assets/fonts.css">
+  <link rel="stylesheet" href="/new/design05/assets/draft-banner.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0A0A0A">
+  <title>[Draft] Run a node · BTX Community</title>
+  <meta name="description" content="Machines you can give the BTX network: what each role does and needs, its guide and who to ask, and a map of how they fit together.">
+  <link rel="canonical" href="https://btx-community.com/infra/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://btx-community.com/infra/">
+  <meta property="og:title" content="[Draft] Run a node · BTX Community">
+  <meta property="og:description" content="Machines you can give the BTX network: what each role does and needs, its guide and who to ask, and a map of how they fit together.">
+  <link rel="alternate" hreflang="en" href="https://btx-community.com/infra/">
+  <link rel="alternate" hreflang="de" href="https://btx-community.com/de/infra/">
+  <link rel="alternate" hreflang="es" href="https://btx-community.com/es/infra/">
+  <link rel="alternate" hreflang="fr" href="https://btx-community.com/fr/infra/">
+  <link rel="alternate" hreflang="zh-Hans" href="https://btx-community.com/zh/infra/">
+  <link rel="icon" href="/new/design05/assets/favicon-btxdev.svg" type="image/svg+xml">
+  <script src="/new/design05/assets/draft-inline.js"></script>
+  <link rel="stylesheet" href="/new/design05/assets/site.css">
+  <link rel="stylesheet" href="/new/design05/assets/pages/infra.css">
+  <link rel="stylesheet" href="/new/design05/assets/theme-btxdev.css">
+  <script src="/new/design05/assets/site.js" defer></script>
+  <script src="/new/design05/assets/matrix-bg.js" defer></script>
+  <link rel="stylesheet" href="/new/design05/assets/draft-inline/infra.css">
+  <link rel="stylesheet" href="/new/design05/assets/draft-js.css">
+</head>
+<body>
+  <div class="draft-banner" role="note"><p class="draft-banner__text"><strong>Design draft</strong> – not the official layout. Content may lag behind. <a class="draft-banner__link" href="https://github.com/BTX-Community/btx-community/issues/75" rel="noopener noreferrer">Feedback ↗</a> <a class="draft-banner__link" href="/new/">All drafts →</a> <a class="draft-banner__link" href="https://btx-community.com/infra/">This page on the live site ↗</a></p></div>
+<!-- HEADER:START -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__brand" href="/new/design05/"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>BTX <span class="hdr__brand-sub">Community</span></span></a>
+    <a class="pill pill--unknown" href="/new/design05/network/" data-status-pill><span class="sr-only">Network </span><span class="pill__shape" aria-hidden="true">○</span><span class="pill__word">Status</span></a>
+    <button class="hdr__btn hdr__menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-menu">Menu</button>
+    <div class="hdr__panel" id="site-menu">
+      <nav aria-label="Main">
+        <ul class="hdr__nav">
+          <li><a class="l-s" href="/new/design05/">Start</a></li>
+          <li><a class="l-s" href="/new/design05/learn/">Learn</a></li>
+          <li><a class="l-board" href="/new/design05/network/">Network</a></li>
+          <li><a class="l-s" href="/new/design05/links/">Links</a></li>
+          <li><a class="l-n" href="/new/design05/infra/" aria-current="page">Run a node</a></li>
+          <li><a class="l-b" href="/new/design05/projects/">Projects</a></li>
+          <li><a class="l-b" href="/new/design05/dev/">Developers</a></li>
+        </ul>
+      </nav>
+      <div class="hdr__tools">
+        <details class="lang">
+          <summary class="hdr__btn"><span class="sr-only">Language: </span>EN <span class="caret" aria-hidden="true"></span></summary>
+          <div class="lang__list">
+            <ul>
+              <li><a href="/new/design05/infra/" hreflang="en" lang="en" aria-current="true"><span class="lang__code">EN</span> English</a></li>
+              <li><a href="https://btx-community.com/de/infra/" hreflang="de" lang="de"><span class="lang__code">DE</span> Deutsch</a></li>
+              <li><a href="https://btx-community.com/es/infra/" hreflang="es" lang="es"><span class="lang__code">ES</span> Español</a></li>
+              <li><a href="https://btx-community.com/fr/infra/" hreflang="fr" lang="fr"><span class="lang__code">FR</span> Français</a></li>
+              <li><a href="https://btx-community.com/zh/infra/" hreflang="zh-Hans" lang="zh-Hans"><span class="lang__code">ZH</span> 中文</a></li>
+            </ul>
+            <p class="lang__note">Other languages use the previous design.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- HEADER:END -->
+<main id="main">
+
+  <header class="station station--n">
+    <div class="wrap station__in">
+      <nav class="crumbs" aria-label="Breadcrumb" data-copy-skip><a href="/new/design05/">BTX Community</a> <span aria-hidden="true">/</span> <span aria-current="page">Run a node</span></nav>
+      <div class="station__badges" data-copy-skip>
+        <span class="badge badge--n" role="img" aria-label="Run a node line">N</span>
+      </div>
+      <h1>Run a node</h1>
+      <p class="lede">A node and six other machines you can give the BTX network: what each one does and needs, its guide and who to ask, and a map of how they fit together.</p>
+      <div class="station__aside" data-copy-ai-only data-copy-skip>
+        <button class="btn btn--line" type="button" data-copy-ai aria-describedby="copy-promise">Copy for your AI</button>
+        <p class="station__promise" id="copy-promise">Copies this page's text only. Never paste your seed phrase or private keys into any AI tool.</p>
+      </div>
+      <ul class="chips" aria-label="On this page" data-copy-skip>
+        <li><a class="chip" href="#paths">Two ways to run it <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#home-node">A node at home <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#check">Before you install <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#roles">The seven roles <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#map">How it fits together <span class="arr" aria-hidden="true">→</span></a></li>
+        <li><a class="chip" href="#report">Report a problem <span class="arr" aria-hidden="true">→</span></a></li>
+      </ul>
+    </div>
+    <span class="station__stripe" aria-hidden="true"></span>
+  </header>
+
+  <!-- Two choices. First section after the station header: no rule (the stripe is its rule). -->
+  <section class="section" id="paths" aria-labelledby="paths-title">
+    <div class="wrap">
+      <div class="sheet">
+        <div class="section__head">
+          <p class="label eyebrow">Two ways</p>
+          <h2 id="paths-title">How do you want to run it?</h2>
+          <p class="lede">Run the machine and its software yourself, or let an app install and look after the node software for you.</p>
+        </div>
+        <div class="paths">
+          <div class="paths__col" id="yourself">
+            <p class="label">Choice 1</p>
+            <h3 class="paths__title">Run it yourself</h3>
+            <p class="paths__text">You keep a machine running and follow its guide. There are seven roles, from a <span class="term" data-term="node">node</span> at home to a <span class="term" data-term="fuzz-box">fuzz box</span> in a rack. Each card below says what the network gets, what the machine needs and who to ask.</p>
+            <p class="paths__start"><a class="btn btn--line btn--sm" href="/new/design05/#nodes">Running a node, step by step&nbsp;<span class="arr" aria-hidden="true">→</span></a></p>
+          </div>
+          <div class="paths__col" id="managed">
+            <p class="label">Choice 2</p>
+            <h3 class="paths__title">Use a managed setup</h3>
+            <p class="paths__text">An app installs and supervises the node software for you, on a machine you own. The machine and its uptime stay yours.</p>
+            <ul class="rows paths__rows">
+              <li><a class="row" href="https://github.com/MendeMatthias/easynode" rel="noopener noreferrer">
+                <span class="row__name">easynode&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></span>
+                <span class="row__desc">Open-source (MIT) desktop app of the easyBTX team. It installs and supervises btxd on the machine you already own.</span>
+                <span class="row__tags"><span class="tag">Community</span><span class="tag">Open source</span></span>
+                <span class="row__arr" aria-hidden="true">→</span></a></li>
+            </ul>
+            <div class="callout callout--note paths__note"><span class="callout__label">Note</span><p>easynode runs <span class="mono">v0.34.15</span> without the model network. Without a qualified <span class="term" data-term="gpu">GPU</span>, the node follows signers' checks instead of checking the <span class="term" data-term="matmul">MatMul</span> work itself.</p></div>
+            <p class="meta paths__meta">This site lists no hosted service that runs BTX infrastructure for you.</p>
+          </div>
+        </div>
+        <div class="paths__dir" data-copy-skip>
+          <p class="label paths__dir-label" id="paths-dir-label">Run it yourself: the seven roles</p>
+          <ul class="rows paths__rows paths__rows--grid" aria-labelledby="paths-dir-label">
+            <li><a class="row" href="#role-full-node"><span class="row__name">Full node</span><span class="row__desc">Relays blocks and keeps the network reachable.</span><span class="row__tags"><span class="tag">Network</span></span><span class="row__arr" aria-hidden="true">→</span></a></li>
+            <li><a class="row" href="#role-archive"><span class="row__name">Archive node and snapshot publisher</span><span class="row__desc">Serves the whole chain and signed snapshots.</span><span class="row__tags"><span class="tag">Network</span></span><span class="row__arr" aria-hidden="true">→</span></a></li>
+            <li><a class="row" href="#role-signer"><span class="row__name">Attestation signer</span><span class="row__desc">Replays new blocks on a GPU and signs the result.</span><span class="row__tags"><span class="tag">Network</span></span><span class="row__arr" aria-hidden="true">→</span></a></li>
+            <li><a class="row" href="#role-fuzz-box"><span class="row__name">Always-on fuzz box</span><span class="row__desc">Runs automatic tests day and night to find bugs.</span><span class="row__tags"><span class="tag">Testing</span></span><span class="row__arr" aria-hidden="true">→</span></a></li>
+            <li><a class="row" href="#role-ci-runner"><span class="row__name">CI runner</span><span class="row__desc">Builds and tests the newest code every night.</span><span class="row__tags"><span class="tag">Testing</span></span><span class="row__arr" aria-hidden="true">→</span></a></li>
+            <li><a class="row" href="#role-sanitizers"><span class="row__name">Sanitizer runs</span><span class="row__desc">Turns hidden memory and threading bugs into reports.</span><span class="row__tags"><span class="tag">Testing</span></span><span class="row__arr" aria-hidden="true">→</span></a></li>
+            <li><a class="row" href="#role-guix"><span class="row__name">Guix rebuilder</span><span class="row__desc">Rebuilds a release from source to compare hashes.</span><span class="row__tags"><span class="tag">Testing</span></span><span class="row__arr" aria-hidden="true">→</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="home-node" aria-labelledby="home-node-title">
+    <div class="wrap">
+      <div class="sheet">
+        <span class="sec-rule sec-rule--n" aria-hidden="true"></span>
+        <div class="section__head">
+          <p class="label eyebrow">Privacy and ports</p>
+          <h2 id="home-node-title">Before you run a node at home</h2>
+          <p class="lede">A node talks to strangers on the internet. Know what it shows them and how to make it reachable.</p>
+        </div>
+        <div class="homepts">
+          <div class="homepts__col" id="home-privacy">
+            <h3 class="homepts__title">Privacy</h3>
+            <ul class="points">
+              <li><strong>Peers see your IP address.</strong> Your node shows it to every peer it connects to. A node that accepts inbound connections also announces its own address, and peers pass it on.</li>
+              <li><strong>By default, <span class="term" data-term="btxd">btxd</span> asks your router to open two ports.</strong> It uses NAT-PMP or PCP to ask for TCP 19335 for peers and TCP 29447 for the model network, which btxd starts by itself. The model network also looks for peers on your local network over UDP 29448.</li>
+              <li><strong>btxd checks btx.dev for updates every 30 minutes.</strong> It does this directly, not through <code>-proxy</code>, and sends its version, platform, architecture and rollout group. It installs newer signed releases by itself. <code>autoupdateseamless=0</code> only reports them, <code>autoupdatetelemetry=0</code> leaves out those details, and <code>autoupdate=0</code> stops the checks.</li>
+              <li><strong>If your address matters, use Tor or a rented server.</strong> Run the node behind Tor (<code>-proxy</code>, <code>-onlynet=onion</code>) or on a rented server instead. The Tor guide advises <code>onlynet=onion</code> only once Tor runs stably. With <code>-proxy</code>, or an <code>-onlynet</code> without ipv4 and ipv6, btxd keeps port 29447 closed and skips the update checks unless you turn them on.</li>
+              <li><strong>On a machine with coins, mining or a signer key, turn three things off.</strong> Set these, as the install checklist says:
+                <div class="code points__code"><pre tabindex="0" role="region" aria-label="Settings for a machine with coins, mining or a signer key"><code>modelnet=0
+natpmp=0
+swapnet=0</code></pre><button class="code__copy" type="button" data-copy><span>Copy</span></button></div></li>
+            </ul>
+          </div>
+          <div class="homepts__col" id="home-reach">
+            <h3 class="homepts__title">Reachability</h3>
+            <ul class="points">
+              <li><strong>Outbound connections work by default.</strong> To accept inbound ones, TCP port 19335 must be reachable: mapped by NAT-PMP, forwarded on the router by hand, or offered as a Tor onion service (<code>-listenonion</code>). With <code>-proxy</code>, the node only listens if you also set <code>-listen=1</code>. Port 29447 is only for the model network; <code>modelnet=0</code> closes it.</li>
+              <li><strong>A node that only connects out helps less.</strong> It stays in sync and relays to the peers it connects to. But new nodes cannot reach it, so it does not help them sync.</li>
+              <li><strong>Check whether peers reach you.</strong> <code>btx-cli getpeerinfo</code> shows <code>"inbound": true</code> for peers that connected to you. <code>btx-cli getnetworkinfo</code> lists your node's localaddresses.
+                <div class="code points__code" data-copy-skip><pre tabindex="0" role="region" aria-label="Commands to check reachability"><code>btx-cli getpeerinfo
+btx-cli getnetworkinfo</code></pre><button class="code__copy" type="button" data-copy><span>Copy</span></button></div></li>
+            </ul>
+          </div>
+        </div>
+        <ul class="linkrow">
+          <li><a href="/new/design05/infra/#before-installing">Full node: the install checklist below&nbsp;<span class="arr" aria-hidden="true">→</span></a></li>
+          <li><a href="https://github.com/btxchain/btx/blob/main/doc/tor.md" rel="noopener noreferrer">Running the node with Tor (developers)&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="check" aria-labelledby="check-title">
+    <div class="wrap">
+      <span class="sec-rule sec-rule--rose" aria-hidden="true"></span>
+      <details class="sign sign--warn sign--fold" id="before-installing">
+        <summary class="sign__head">
+          <svg class="sign__icon" viewBox="0 0 36 32" aria-hidden="true" focusable="false"><path d="M18 1.5 35 30.5H1z"/><path d="M16.2 11h3.6l-.7 10.5h-2.2zM18 23.3a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2z"/></svg>
+          <span class="sign__titles">
+            <span class="label">Check first</span>
+            <h2 id="check-title">Before you install a node release</h2>
+          </span>
+          <span class="sign__count" data-checklist-summary="before-installing">10 checks</span>
+          <span class="pm pm--sign" aria-hidden="true"></span>
+        </summary>
+        <div class="sign__body">
+          <ol role="list" class="checklist checklist--2col" data-checklist-id="before-installing">
+            <li><label><input type="checkbox" id="bi-source"><span><strong>Download node releases only from github.com/<wbr>btxchain/<wbr>btx/<wbr>releases.</strong> Community tools such as easynode or snapshots are your own choice to trust; check their signatures.</span></label></li>
+            <li><label><input type="checkbox" id="bi-sha"><span><strong>Compare each file's SHA-256 with the one GitHub shows.</strong> Recent releases have no signed checksum file: the last <code>SHA256SUMS.asc</code> was for <span class="mono">v0.34.6</span>, and <span class="mono">v0.34.16</span> has an unsigned <code>SHA256SUMS</code>. Use <code>shasum -a 256 &lt;file&gt;</code> (<code>sha256sum</code> on Linux).</span></label></li>
+            <li><label><input type="checkbox" id="bi-proof"><span><strong>Know what that proves.</strong> It proves the file is the one on GitHub, not who built it. If that matters to you, build the tagged source yourself.</span></label></li>
+            <li><label><input type="checkbox" id="bi-role"><span><strong>Decide the node's role first.</strong> Checking blocks yourself needs a qualified NVIDIA or Apple GPU. Without one, run a trusted mirror with at least two signers, or the node stops.</span></label></li>
+            <li><label><input type="checkbox" id="bi-snapshot"><span><strong>Start a new node from a signed snapshot.</strong> A new node cannot sync from genesis: <span class="mono">v0.34.15</span> and <span class="mono">v0.34.16</span> stop at block 126,978. Do not run <code>-reindex</code> until a release fixes it.</span></label></li>
+            <li><label><input type="checkbox" id="bi-defaults"><span><strong>Know the four defaults.</strong> btxd installs newer signed releases from btx.dev itself (<code>autoupdateseamless=0</code> only reports them, <code>autoupdate=0</code> stops checking). The model network listens on port 29447 (<code>modelnet=0</code>). natpmp opens ports 19335 and 29447 on your router (<code>natpmp=0</code>). SwapNet starts by default from 0.34.17, and a failed start stops btxd (<code>swapnet=0</code>). With coins, mining or a signer, set the last three to 0.</span></label></li>
+            <li><label><input type="checkbox" id="bi-stop"><span><strong>Stop the node cleanly before an upgrade.</strong> Run <code>btx-cli stop</code> and wait until btxd has exited; never kill it. Then back up the data directory and wallets.</span></label></li>
+            <li><label><input type="checkbox" id="bi-notes"><span><strong>Read the release notes before upgrading.</strong> Some releases change the rules at a fixed block height; this page shows a countdown when one is coming. Each release also stops working about two years after it was built; current ones in November 2028.</span></label></li>
+            <li><label><input type="checkbox" id="bi-system"><span><strong>Check that your system can run it.</strong> Linux binaries need glibc 2.38 or newer (Ubuntu 24.04, Debian 13). <span class="mono">v0.34.16</span> has archives for Linux and Linux with CUDA; for Apple Silicon Macs the newest is <span class="mono">v0.34.15</span>. There is no official Windows build.</span></label></li>
+            <li><label><input type="checkbox" id="bi-rc"><span><strong>Use release candidates (rc) for testing only.</strong> A node that holds coins, mines or signs belongs on the newest full release.</span></label></li>
+          </ol>
+          <div class="sign__terms" data-copy-skip><span class="label" id="bi-terms-label">Terms in this list</span>
+            <ul class="cluster sign__terms-list" aria-labelledby="bi-terms-label">
+              <li><span class="term" data-term="release">release</span></li>
+              <li><span class="term" data-term="checksum">SHA-256</span></li>
+              <li><span class="term" data-term="trusted-mirror">trusted mirror</span></li>
+              <li><span class="term" data-term="signer">signer</span></li>
+              <li><span class="term" data-term="snapshot">snapshot</span></li>
+              <li><span class="term" data-term="genesis">genesis</span></li>
+              <li><span class="term" data-term="swapnet">SwapNet</span></li>
+              <li><span class="term" data-term="btx-cli">btx-cli</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="checklist__bar" data-checklist-bar="before-installing" hidden>
+          <p class="checklist__count" data-checklist-count="before-installing" aria-live="polite">0 of 10 checked</p>
+          <button class="btn btn--quiet" type="button" data-checklist-clear="before-installing">Clear ticks</button>
+        </div>
+      </details>
+
+      <div class="grid upgrade">
+        <section class="board span-6" data-board aria-labelledby="infra-board-title">
+          <span class="board__frame" aria-hidden="true"></span>
+          <div class="board__head">
+            <h3 class="board__label" id="infra-board-title">Network now</h3>
+            <p class="board__status is-unknown" data-live="overall"><span class="shape" aria-hidden="true">○</span>Loading</p>
+          </div>
+          <div class="board__body">
+            <dl class="board__rows">
+              <div class="board__row"><dt><span class="term" data-term="block-height">Block height</span></dt><dd data-live="height">—</dd></div>
+              <div class="board__row board__row--tip"><dt>Last block</dt><dd data-live="tip-age">—</dd>
+                <dd class="burn" data-burn>
+                  <div class="burn__track" aria-hidden="true"><span class="burn__fill" data-draft-style="5f57241621"></span><span class="burn__rail" data-draft-style="e305b0f3c2"><span class="burn__tip"></span></span></div>
+                  <p class="burn__note"><span>Blocks come about every 90 seconds</span> <span data-burn-left>—</span></p>
+                </dd></div>
+              <div class="board__row"><dt>Latest release</dt><dd data-live="release">—</dd></div>
+              <div class="board__row"><dt>Nodes running it</dt><dd data-live="on-release" data-template="{count} of {total}">—</dd></div>
+            </dl>
+            <p class="board__msg" data-live="stale" hidden>Live data could not be loaded or is out of date. <a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Check on the status page&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+            <div class="board__fork" data-live="fork" data-template="{name}: block {height}, {remaining} blocks to go (about {time})" hidden>
+              <strong>Network upgrade ahead</strong>
+              <ul data-live="fork-rows"></ul>
+              <a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+            </div>
+            <ul class="board__links">
+              <li><a class="board__link" href="https://btxscan.io/" rel="noopener noreferrer">Check on btxscan.io <span aria-hidden="true">↗</span><span class="sr-only">, the block explorer (opens another site)</span></a></li>
+              <li><a class="board__link" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Check on the status page <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              <li><a class="board__link" href="/new/design05/network/">What these mean <span aria-hidden="true">→</span></a></li>
+            </ul>
+          </div>
+          <div class="board__src">
+            <p class="board__src-text"><span class="board__src-line">Read-only public data <span class="sep" aria-hidden="true"></span> <a class="board__link" href="https://network.btx-monitoring.com/api/v1/status.json" rel="noopener noreferrer">status API <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></span>
+              <span class="board__src-line">Data from <span data-live="time">—</span></span></p>
+            <button class="board__pause" type="button" data-board-pause aria-pressed="false"><span class="board__pause-icon" aria-hidden="true"></span><span class="sr-only">Pause live updates</span></button>
+          </div>
+        </section>
+        <div class="span-6 upgrade__text" data-copy-skip>
+          <p class="label">Before an upgrade</p>
+          <p>This board shows the newest release and how many nodes run it. When a release changes the rules at a fixed block height, a countdown appears here.</p>
+          <p>Read the release notes before you upgrade.</p>
+          <p><a href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases and release notes&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="roles" aria-labelledby="roles-title">
+    <div class="wrap">
+      <div class="sheet">
+        <span class="sec-rule sec-rule--n" aria-hidden="true"></span>
+        <div class="section__head">
+          <p class="label eyebrow">Seven roles</p>
+          <h2 id="roles-title">The roles</h2>
+          <p class="lede">Three roles serve the network directly. Four test the node software. Each card says what the network gets, what the machine needs, its guide and who to ask.</p>
+        </div>
+
+        <p class="label roles__group">Serve the network · 3 roles</p>
+        <article class="role" id="role-full-node" aria-labelledby="role-full-node-title">
+          <div class="role__head">
+            <p class="label role__spec"><span class="tag">Network</span> <span>Needs: an always-on computer</span></p>
+            <h3 class="role__title" id="role-full-node-title">Full node</h3>
+            <div class="role__gets"><p class="label">What the network gets</p>
+              <div class="role__gets-text"><p>Relays blocks and transactions and keeps the network reachable. With a qualified GPU it checks the MatMul work itself. Without one, run it as a <span class="term" data-term="trusted-mirror">trusted mirror</span>, or it stops syncing.</p></div></div>
+            <a class="role__report" href="#report">Crashes and security problems go privately to the maintainers, never in public&nbsp;<span class="arr" aria-hidden="true">→</span></a>
+          </div>
+          <dl class="facts">
+            <div class="facts__row"><dt class="label">What the machine needs</dt>
+              <dd>An always-on computer or small server with an SSD and a steady connection. A GPU is optional.</dd></div>
+            <div class="facts__row"><dt class="label">Setting for a trusted mirror</dt>
+              <dd><p>btxd ships no signer keys. Pin at least two <span class="term" data-term="signer">signers</span> you trust and set the threshold to 2 (the default is 1). On <span class="term" data-term="mainnet">mainnet</span> it will not start with fewer unless you explicitly override that.</p>
+                <div class="code facts__code"><pre tabindex="0" role="region" aria-label="Trusted mirror setting"><code>matmultrustedthreshold=2</code></pre><button class="code__copy" type="button" data-copy><span>Copy</span></button></div>
+                <details class="more">
+                  <summary><span>More detail<span class="sr-only"> on the full node's validation modes</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                  <div class="more__body"><p>The map below names the modes. A node that checks blocks itself runs with <code>-matmulvalidation=consensus</code>, a trusted mirror with <code>-matmulvalidation=trusted</code>, and a discovery relay with <code>-matmulvalidation=relay</code>.</p></div>
+                </details></dd></div>
+            <div class="facts__row"><dt class="label">Guide</dt>
+              <dd><ul class="role__links">
+                <li><a href="/new/design05/infra/#before-installing">Before you install a node release: the checklist on this page&nbsp;<span class="arr" aria-hidden="true">→</span></a></li>
+                <li><a href="/new/design05/#nodes">Running a node: the steps on the start page&nbsp;<span class="arr" aria-hidden="true">→</span></a></li>
+                <li><a href="https://network.btx-monitoring.com/help/" rel="noopener noreferrer">Node help for stuck heights&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                <li><a href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer">How a trusted mirror works (developers)&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              </ul></dd></div>
+            <div class="facts__row"><dt class="label">Who to ask</dt>
+              <dd><ul class="role__links"><li><a href="/new/design05/links/">The node help first; for the rest, the community chats on the links page&nbsp;<span class="arr" aria-hidden="true">→</span></a></li></ul></dd></div>
+          </dl>
+        </article>
+
+        <article class="role" id="role-archive" aria-labelledby="role-archive-title">
+          <div class="role__head">
+            <p class="label role__spec"><span class="tag">Network</span> <span>Needs: a large disk</span></p>
+            <h3 class="role__title" id="role-archive-title">Archive node and snapshot publisher</h3>
+            <div class="role__gets"><p class="label">What the network gets</p>
+              <div class="role__gets-text"><p>An <span class="term" data-term="archive-node">archive node</span> keeps every block and serves the whole chain to its peers. The status page measures the chain from archive nodes.</p>
+                <p>A snapshot publisher turns a node's data into a signed file that saves a new node most of the sync. A sync from <span class="term" data-term="genesis">genesis</span> currently stops at block 126,978 (#272), so new nodes start from a <span class="term" data-term="snapshot">snapshot</span>.</p></div></div>
+            <a class="role__report" href="#report" data-copy-skip>Crashes and security problems go privately to the maintainers, never in public&nbsp;<span class="arr" aria-hidden="true">→</span></a>
+          </div>
+          <dl class="facts">
+            <div class="facts__row"><dt class="label">What the machine needs</dt>
+              <dd>A server with a large disk (the whole chain, never pruned, plus room for snapshot files) and an upload link that can serve them.</dd></div>
+            <div class="facts__row"><dt class="label">Setting</dt>
+              <dd><p>Keep every block:</p>
+                <div class="code facts__code"><pre tabindex="0" role="region" aria-label="Archive node setting"><code>prune=0</code></pre><button class="code__copy" type="button" data-copy><span>Copy</span></button></div></dd></div>
+            <div class="facts__row"><dt class="label">Guide</dt>
+              <dd><ul class="role__links">
+                <li><a href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer">Archival node runbook (developers)&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              </ul>
+                <div class="callout callout--note facts__note"><span class="callout__label">Note</span><p>The runbook's opening note still calls Epoch A a release candidate. The developers' docs index says it has been live on mainnet since block 185,000.</p></div>
+                <p class="facts__plain">No community guide yet for publishing a signed snapshot.</p>
+                <ul class="role__links">
+                <li><a href="/new/design05/links/#cat-node-tools">Signed snapshots in the link list&nbsp;<span class="arr" aria-hidden="true">→</span></a></li>
+                <li><a href="https://github.com/btxchain/btx/blob/main/contrib/devtools/README.md" rel="noopener noreferrer">The developers' UTXO snapshot recipe&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              </ul></dd></div>
+            <div class="facts__row"><dt class="label">Who to ask</dt>
+              <dd><ul class="role__links"><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-OPS.md" rel="noopener noreferrer">The I-OPS lane owner, whose lane covers archive mirrors and signed snapshots&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul></dd></div>
+          </dl>
+        </article>
+
+        <article class="role" id="role-signer" aria-labelledby="role-signer-title">
+          <div class="role__head">
+            <p class="label role__spec"><span class="tag">Network</span> <span>Needs: a qualified GPU</span></p>
+            <h3 class="role__title" id="role-signer-title">Attestation signer</h3>
+            <div class="role__gets"><p class="label">What the network gets</p>
+              <div class="role__gets-text"><p>Replays the MatMul work of new blocks on a qualified GPU (ExactReplay) and signs the result. Trusted mirrors that pinned its key follow those signatures. A node that checks blocks itself never uses them in place of its own check.</p>
+                <p>The developers' docs call this role a GPU archive or attestor.</p></div></div>
+            <a class="role__report" href="#report" data-copy-skip>Crashes and security problems go privately to the maintainers, never in public&nbsp;<span class="arr" aria-hidden="true">→</span></a>
+          </div>
+          <dl class="facts">
+            <div class="facts__row"><dt class="label">What the machine needs</dt>
+              <dd><p>A GPU that passes btxd's self-qualification in strict-device mode and the whole chain. The machine stays online around the clock. One signing key per machine; never on a miner.</p>
+                <details class="more">
+                  <summary><span>More detail<span class="sr-only"> on GPUs that pass</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                  <div class="more__body"><p>The runbook reports RTX 5090 and RTX PRO 6000 passing on CUDA 13.2 with cuBLASLt 13.4. Other cards must pass the same self-test.</p></div>
+                </details></dd></div>
+            <div class="facts__row"><dt class="label">Setting</dt>
+              <dd><p>Keep the whole chain:</p>
+                <div class="code facts__code"><pre tabindex="0" role="region" aria-label="Signer setting"><code>prune=0</code></pre><button class="code__copy" type="button" data-copy><span>Copy</span></button></div></dd></div>
+            <div class="facts__row"><dt class="label">Guide</dt>
+              <dd><ul class="role__links">
+                <li><a href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer">GPU operator runbook (developers)&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              </ul>
+                <div class="callout callout--note facts__note"><span class="callout__label">Note</span><p>The runbook's status lines still call Epoch A a release candidate. The developers' docs index says it has been live on mainnet since block 185,000.</p></div>
+                <ul class="role__links">
+                <li><a href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer">Signers and trusted mirrors (developers)&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              </ul></dd></div>
+            <div class="facts__row"><dt class="label">Who to ask</dt>
+              <dd><ul class="role__links"><li><a href="https://github.com/btxchain/btx/issues" rel="noopener noreferrer">Questions about the runbook as an issue on btxchain/btx&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul>
+                <p class="facts__plain">No lane of this hub covers signers yet.</p></dd></div>
+          </dl>
+        </article>
+
+        <p class="label roles__group roles__group--next">Test the node software · 4 roles</p>
+        <article class="role" id="role-fuzz-box" aria-labelledby="role-fuzz-box-title">
+          <div class="role__head">
+            <p class="label role__spec"><span class="tag">Testing</span> <span>Needs: a dedicated Linux machine</span></p>
+            <h3 class="role__title" id="role-fuzz-box-title">Always-on fuzz box</h3>
+            <div class="role__gets"><p class="label">What the network gets</p>
+              <div class="role__gets-text"><p>A machine that runs automatic tests. It runs BTX's more than 270 fuzz targets day and night and keeps every input that reaches new code, so it finds bugs that need hours of mutation. A short CI run starts from nothing every time.</p></div></div>
+            <a class="role__report" href="#report" data-copy-skip>Crashes and security problems go privately to the maintainers, never in public&nbsp;<span class="arr" aria-hidden="true">→</span></a>
+          </div>
+          <dl class="facts">
+            <div class="facts__row"><dt class="label">What the machine needs</dt>
+              <dd><p>A dedicated Linux machine or VM (Ubuntu 24.04): many CPU threads, about 2 GB of RAM per fuzzing process, 80 GB of free disk, no GPU.</p>
+                <div class="callout callout--warn facts__note"><span class="callout__label">Check</span><p>Nothing else on it: no node, wallet, miner or keys.</p></div></dd></div>
+            <div class="facts__row"><dt class="label">Guide</dt>
+              <dd><ul class="role__links">
+                <li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/fuzz-box/README.md" rel="noopener noreferrer">Running a continuous BTX fuzz box&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              </ul></dd></div>
+            <div class="facts__row"><dt class="label">Who to ask</dt>
+              <dd><ul class="role__links"><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-OPS.md" rel="noopener noreferrer">The I-OPS lane owner, who keeps the fuzz-box guide&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul></dd></div>
+          </dl>
+        </article>
+
+        <article class="role" id="role-ci-runner" aria-labelledby="role-ci-runner-title">
+          <div class="role__head">
+            <p class="label role__spec"><span class="tag">Testing</span> <span>Needs: a dedicated Linux server</span></p>
+            <h3 class="role__title" id="role-ci-runner-title">CI runner</h3>
+            <div class="role__gets"><p class="label">What the network gets</p>
+              <div class="role__gets-text"><p>Builds and tests the newest commit of a branch every night and publishes the result, so a break shows up within a day. The status page's operator publishes one such run as job CI-0; it is on the developers' <a href="/new/design05/dev/work/#ci">Ongoing work</a> page.</p></div></div>
+            <a class="role__report" href="#report" data-copy-skip>Crashes and security problems go privately to the maintainers, never in public&nbsp;<span class="arr" aria-hidden="true">→</span></a>
+          </div>
+          <dl class="facts">
+            <div class="facts__row"><dt class="label">What the machine needs</dt>
+              <dd>A dedicated Linux server with many threads and tens of GB of free disk. The CI-0 run of 15 Nov took about 70 minutes on 30 threads; a coverage build tree alone takes 27 GB.</dd></div>
+            <div class="facts__row"><dt class="label">Guide</dt>
+              <dd><p class="facts__plain"><strong>Guide coming.</strong> Until then: the I-CI pack lists the jobs, the build-and-test page has the recipes, and <code>ci/README.md</code> in the btx tree runs a CI stage locally.</p>
+                <ul class="role__links">
+                <li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/packs/I-CI.md" rel="noopener noreferrer">I-CI pack: the fork CI jobs&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                <li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/04-build-and-test.md" rel="noopener noreferrer">Build and test recipes&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                <li><a href="https://github.com/btxchain/btx/blob/main/ci/README.md" rel="noopener noreferrer">The CI scripts in the btx tree&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              </ul></dd></div>
+            <div class="facts__row"><dt class="label">Who to ask</dt>
+              <dd><p class="facts__plain">The status page's operator, who runs the nightly CI-0. The I-CI lane has no owner yet.</p>
+                <ul class="role__links"><li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/07-lanes.md" rel="noopener noreferrer">Claim the I-CI lane in the lanes file&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul></dd></div>
+          </dl>
+        </article>
+
+        <article class="role" id="role-sanitizers" aria-labelledby="role-sanitizers-title">
+          <div class="role__head">
+            <p class="label role__spec"><span class="tag">Testing</span> <span>Needs: Linux with clang</span></p>
+            <h3 class="role__title" id="role-sanitizers-title">Sanitizer runs</h3>
+            <div class="role__gets"><p class="label">What the network gets</p>
+              <div class="role__gets-text"><p>Builds the node with AddressSanitizer and UndefinedBehaviorSanitizer, or with ThreadSanitizer, and runs the tests. Memory and threading bugs that pass silently in a normal build turn into reports.</p></div></div>
+            <a class="role__report" href="#report" data-copy-skip>Crashes and security problems go privately to the maintainers, never in public&nbsp;<span class="arr" aria-hidden="true">→</span></a>
+          </div>
+          <dl class="facts">
+            <div class="facts__row"><dt class="label">What the machine needs</dt>
+              <dd>A Linux machine with clang (clang 20 or newer for ThreadSanitizer), plenty of RAM and threads.</dd></div>
+            <div class="facts__row"><dt class="label">Setting</dt>
+              <dd><p>Runs are several times slower, so functional tests get a longer timeout:</p>
+                <div class="code facts__code"><pre tabindex="0" role="region" aria-label="Functional test option"><code>--timeout-factor=4</code></pre><button class="code__copy" type="button" data-copy><span>Copy</span></button></div></dd></div>
+            <div class="facts__row"><dt class="label">Guide</dt>
+              <dd><ul class="role__links">
+                <li><a href="https://github.com/BTX-Community/btx-community/blob/hub-v1/dev/04-build-and-test.md" rel="noopener noreferrer">Build and test, section 6: Sanitizers&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              </ul></dd></div>
+            <div class="facts__row"><dt class="label">Who to ask</dt>
+              <dd><p class="facts__plain">The I-CI lane holds the ASan/UBSan and TSan jobs (CI-2, CI-3). It has no owner yet.</p>
+                <ul class="role__links"><li><a href="https://github.com/BTX-Community/btx-community/issues" rel="noopener noreferrer">Until someone claims it, open an issue in this site's repository&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul></dd></div>
+          </dl>
+        </article>
+
+        <article class="role" id="role-guix" aria-labelledby="role-guix-title">
+          <div class="role__head">
+            <p class="label role__spec"><span class="tag">Testing</span> <span>Needs: Linux with Guix</span></p>
+            <h3 class="role__title" id="role-guix-title">Guix rebuilder</h3>
+            <div class="role__gets"><p class="label">What the network gets</p>
+              <div class="role__gets-text"><p>Rebuilds a release from its tagged source in a fixed <span class="term" data-term="guix">Guix</span> environment, so independent builders can compare hashes and nobody has to trust a single build machine.</p>
+                <p>Today rebuilders can only compare with each other, not with the published release.</p>
+                <details class="more">
+                  <summary><span>More detail<span class="sr-only"> on why the hashes differ</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                  <div class="more__body"><p>The <span class="mono">v0.34.16</span> release notes say its Linux binaries need glibc 2.38 or newer, while these scripts build against glibc 2.31. The release binaries were not made with them.</p></div>
+                </details></div></div>
+            <a class="role__report" href="#report" data-copy-skip>Crashes and security problems go privately to the maintainers, never in public&nbsp;<span class="arr" aria-hidden="true">→</span></a>
+          </div>
+          <dl class="facts">
+            <div class="facts__row"><dt class="label">What the machine needs</dt>
+              <dd>A Linux machine with Guix: 16 GB free for the Guix store plus 8 GB per platform you build. More cores build faster.</dd></div>
+            <div class="facts__row"><dt class="label">Guide</dt>
+              <dd><p class="facts__plain"><strong>Guide coming.</strong> The scripts are in the btx tree (<code>contrib/guix</code>). Their README is Bitcoin Core's and points at Bitcoin Core's signature repository; this site knows of no BTX one yet.</p>
+                <ul class="role__links">
+                <li><a href="https://github.com/btxchain/btx/tree/main/contrib/guix" rel="noopener noreferrer">The Guix scripts in the btx tree&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+              </ul></dd></div>
+            <div class="facts__row"><dt class="label">Who to ask</dt>
+              <dd><p class="facts__plain">No lane covers reproducible builds yet.</p>
+                <ul class="role__links"><li><a href="https://github.com/BTX-Community/btx-community/issues" rel="noopener noreferrer">Open an issue in this site's repository&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li></ul></dd></div>
+          </dl>
+        </article>
+
+        <p class="roles__more">Rather build something than run a machine? <a href="/new/design05/projects/#projects">Community projects&nbsp;<span class="arr" aria-hidden="true">→</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="map" aria-labelledby="map-title">
+    <div class="wrap">
+      <span class="sec-rule sec-rule--n" aria-hidden="true"></span>
+      <div class="section__head">
+        <p class="label eyebrow">Map</p>
+        <h2 id="map-title">How it fits together</h2>
+        <p class="lede">Who sends what to whom. Each station opens its guide or its card. The numbers on the lines match the list of connections, and each connection names its source in the node software.</p>
+      </div>
+
+      <figure class="map" aria-labelledby="map-title">
+        <div class="map__wide" data-copy-skip>
+          <svg class="mp" viewBox="0 54 1000 502" role="group" aria-labelledby="map-wide-title" aria-describedby="map-wide-desc" focusable="false">
+            <title id="map-wide-title">Map of BTX infrastructure</title>
+            <desc id="map-wide-desc">The roles as stations on lines, joined by what they send each other. The BTX peer-to-peer network is the cobalt line across the middle. The same connections are listed in words below the map.</desc>
+            <g aria-hidden="true">
+              <!-- lines -->
+              <path class="mp-line mp-n" d="M40 270 H978"/>
+              <path class="mp-line mp-n" d="M950 270 V480"/>
+              <path class="mp-line mp-n" d="M100 112 V270"/>
+              <path class="mp-line mp-m" d="M320 112 V270"/>
+              <path class="mp-line mp-n" d="M590 112 V270"/>
+              <path class="mp-line mp-s" d="M820 112 V270"/>
+              <path class="mp-line mp-b" d="M180 270 V480"/>
+              <path class="mp-line mp-b" d="M715 270 V480 H440"/>
+              <!-- direction marks -->
+              <polygon class="mp-arr" points="320,126 327,138 313,138"/>
+              <polygon class="mp-arr" points="320,256 327,244 313,244"/>
+              <polygon class="mp-arr" points="590,256 597,244 583,244"/>
+              <polygon class="mp-arr" points="100,256 107,244 93,244"/>
+              <polygon class="mp-arr" points="820,126 827,138 813,138"/>
+              <polygon class="mp-arr" points="180,284 187,296 173,296"/>
+              <polygon class="mp-arr" points="180,466 187,454 173,454"/>
+              <polygon class="mp-arr" points="950,444 957,456 943,456"/>
+              <polygon class="mp-arr" points="715,286 722,298 708,298"/>
+              <polygon class="mp-arr" points="456,480 468,473 468,487"/>
+              <!-- network label -->
+              <text class="mp-net" x="120" y="234">BTX PEER-TO-PEER</text>
+              <text class="mp-net" x="120" y="252">NETWORK</text>
+              <!-- numbered connections -->
+              <circle class="mp-badge" cx="320" cy="191" r="12"/><text class="mp-bt" x="320" y="192">1</text>
+              <text class="mp-lab" x="340" y="196">templates out, blocks back</text>
+              <circle class="mp-badge" cx="455" cy="270" r="12"/><text class="mp-bt" x="455" y="271">2</text>
+              <text class="mp-lab" x="455" y="250" text-anchor="middle">blocks and transactions</text>
+              <circle class="mp-badge" cx="180" cy="375" r="12"/><text class="mp-bt" x="180" y="376">3</text>
+              <text class="mp-lab" x="200" y="371">swap offers over</text><text class="mp-lab" x="200" y="390">the same peer links</text>
+              <circle class="mp-badge" cx="950" cy="390" r="12"/><text class="mp-bt" x="950" y="391">4</text>
+              <text class="mp-lab" x="930" y="395" text-anchor="end">peer addresses only</text>
+              <circle class="mp-badge" cx="590" cy="191" r="12"/><text class="mp-bt" x="590" y="192">5</text>
+              <text class="mp-lab" x="610" y="196">signed attestations</text>
+              <circle class="mp-badge" cx="100" cy="191" r="12"/><text class="mp-bt" x="100" y="192">6</text>
+              <text class="mp-lab" x="120" y="196">a signed starting point</text>
+              <circle class="mp-badge" cx="820" cy="191" r="12"/><text class="mp-bt" x="820" y="192">7</text>
+              <text class="mp-lab" x="840" y="186">chain data from</text><text class="mp-lab" x="840" y="205">an archive node</text>
+              <circle class="mp-badge" cx="715" cy="375" r="12"/><text class="mp-bt" x="715" y="376">8</text>
+              <text class="mp-lab" x="695" y="380" text-anchor="end">release archives</text>
+              <circle class="mp-badge" cx="578" cy="480" r="12"/><text class="mp-bt" x="578" y="481">9</text>
+              <text class="mp-lab" x="578" y="462" text-anchor="middle">tagged source to rebuild</text>
+            </g>
+            <!-- stations: each opens its guide or its card -->
+            <a class="mp-a" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="Snapshot publishers: open the guide (opens another site)">
+              <rect class="mp-hit" x="8" y="62" width="184" height="64" rx="6"/>
+              <circle class="mp-st mp-n" cx="100" cy="112" r="11"/>
+              <text class="mp-name" x="100" y="86" text-anchor="middle">Snapshot publishers</text></a>
+            <a class="mp-a" href="/new/design05/links/#cat-pools" aria-label="Miners and pools: open the guide">
+              <rect class="mp-hit" x="238" y="62" width="164" height="64" rx="6"/>
+              <circle class="mp-st mp-m" cx="320" cy="112" r="11"/>
+              <text class="mp-name" x="320" y="86" text-anchor="middle">Miners and pools</text></a>
+            <a class="mp-a" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer" aria-label="Attestation signers: open the guide (opens another site)">
+              <rect class="mp-hit" x="498" y="62" width="184" height="64" rx="6"/>
+              <circle class="mp-st mp-n" cx="590" cy="112" r="11"/>
+              <text class="mp-name" x="590" y="86" text-anchor="middle">Attestation signers</text></a>
+            <a class="mp-a" href="https://network.btx-monitoring.com/" rel="noopener noreferrer" aria-label="Status page: open it (opens another site)">
+              <rect class="mp-hit" x="760" y="62" width="120" height="64" rx="6"/>
+              <circle class="mp-st mp-s" cx="820" cy="112" r="11"/>
+              <text class="mp-name" x="820" y="86" text-anchor="middle">Status page</text></a>
+            <a class="mp-a" href="/new/design05/infra/#before-installing" aria-label="Full nodes: open the guide">
+              <rect class="mp-hit" x="188" y="252" width="254" height="88" rx="6"/>
+              <circle class="mp-ix" cx="320" cy="270" r="13"/>
+              <text class="mp-name" x="320" y="308" text-anchor="middle">Full nodes</text>
+              <text class="mp-code" x="320" y="330" text-anchor="middle">-matmulvalidation=consensus</text></a>
+            <a class="mp-a" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer" aria-label="Trusted mirrors: open the guide (opens another site)">
+              <rect class="mp-hit" x="470" y="252" width="240" height="88" rx="6"/>
+              <circle class="mp-ix" cx="590" cy="270" r="13"/>
+              <text class="mp-name" x="590" y="308" text-anchor="middle">Trusted mirrors</text>
+              <text class="mp-code" x="590" y="330" text-anchor="middle">-matmulvalidation=trusted</text></a>
+            <a class="mp-a" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="Archive nodes: open the guide (opens another site)">
+              <rect class="mp-hit" x="755" y="252" width="130" height="88" rx="6"/>
+              <circle class="mp-ix" cx="820" cy="270" r="13"/>
+              <text class="mp-name" x="820" y="308" text-anchor="middle">Archive nodes</text>
+              <text class="mp-code" x="820" y="330" text-anchor="middle">prune=0</text></a>
+            <a class="mp-a" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer" aria-label="SwapNet peers: open the guide (opens another site)">
+              <rect class="mp-hit" x="100" y="462" width="160" height="86" rx="6"/>
+              <circle class="mp-st mp-b" cx="180" cy="480" r="11"/>
+              <text class="mp-name" x="180" y="516" text-anchor="middle">SwapNet peers</text>
+              <text class="mp-code" x="180" y="538" text-anchor="middle">-swapnet=1</text></a>
+            <a class="mp-a" href="#role-guix" aria-label="Guix rebuilders: go to its card">
+              <rect class="mp-hit" x="365" y="462" width="150" height="64" rx="6"/>
+              <circle class="mp-st mp-b" cx="440" cy="480" r="11"/>
+              <text class="mp-name" x="440" y="516" text-anchor="middle">Guix rebuilders</text></a>
+            <a class="mp-a" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer" aria-label="Releases: open the releases page (opens another site)">
+              <rect class="mp-hit" x="665" y="462" width="100" height="64" rx="6"/>
+              <circle class="mp-st mp-b" cx="715" cy="480" r="11"/>
+              <text class="mp-name" x="715" y="516" text-anchor="middle">Releases</text></a>
+            <a class="mp-a" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer" aria-label="Discovery relays: open the guide (opens another site)">
+              <rect class="mp-hit" x="785" y="462" width="210" height="86" rx="6"/>
+              <circle class="mp-st mp-n" cx="950" cy="480" r="11"/>
+              <text class="mp-name" x="985" y="516" text-anchor="end">Discovery relays</text>
+              <text class="mp-code" x="985" y="538" text-anchor="end">-matmulvalidation=relay</text></a>
+          </svg>
+        </div>
+
+        <div class="map__narrow" role="group" aria-labelledby="map-narrow-title" aria-describedby="map-narrow-desc" data-copy-skip>
+          <h3 class="label map__narrow-title" id="map-narrow-title">Map of BTX infrastructure</h3>
+          <p class="map__narrow-desc" id="map-narrow-desc">The stations, top to bottom. Three sit on the BTX peer-to-peer network itself; the rest connect to it. Each number is a connection in the list below.</p>
+          <p class="label stations__group">On the peer-to-peer network</p>
+          <ul class="stations stations--net">
+            <li class="st st--ix"><a class="st__name" href="/new/design05/infra/#before-installing">Full nodes&nbsp;<span class="arr" aria-hidden="true">→</span></a>
+              <span class="st__code">-matmulvalidation=consensus</span>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">1</span> templates out, blocks back</span> <span class="st__edge"><span class="st__n">2</span> blocks and transactions</span></span></li>
+            <li class="st st--ix"><a class="st__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer">Trusted mirrors&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+              <span class="st__code">-matmulvalidation=trusted</span>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">2</span> blocks and transactions</span> <span class="st__edge"><span class="st__n">5</span> signed attestations in</span></span></li>
+            <li class="st st--ix"><a class="st__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer">Archive nodes&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+              <span class="st__code">prune=0</span>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">2</span> blocks and transactions</span> <span class="st__edge"><span class="st__n">7</span> chain data to the status page</span></span></li>
+          </ul>
+          <p class="label stations__group">Connected to it</p>
+          <ul class="stations">
+            <li class="st st--m"><a class="st__name" href="/new/design05/links/#cat-pools">Miners and pools&nbsp;<span class="arr" aria-hidden="true">→</span></a>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">1</span> templates out, blocks back</span></span></li>
+            <li class="st st--b"><a class="st__name" href="https://github.com/btxchain/btx/blob/main/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer">SwapNet peers&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+              <span class="st__code">-swapnet=1</span>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">3</span> swap offers over the same peer links</span></span></li>
+            <li class="st st--n"><a class="st__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer">Discovery relays&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+              <span class="st__code">-matmulvalidation=relay</span>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">4</span> peer addresses only</span></span></li>
+            <li class="st st--n"><a class="st__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer">Attestation signers&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">5</span> signed attestations</span></span></li>
+            <li class="st st--n"><a class="st__name" href="https://github.com/btxchain/btx/blob/main/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer">Snapshot publishers&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">6</span> a signed starting point</span></span></li>
+            <li class="st st--s"><a class="st__name" href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Status page&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">7</span> chain data from an archive node</span></span></li>
+            <li class="st st--b"><a class="st__name" href="https://github.com/btxchain/btx/releases" rel="noopener noreferrer">Releases&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">8</span> release archives</span> <span class="st__edge"><span class="st__n">9</span> tagged source to rebuild</span></span></li>
+            <li class="st st--b"><a class="st__name" href="#role-guix">Guix rebuilders&nbsp;<span class="arr" aria-hidden="true">→</span></a>
+              <span class="st__edges"><span class="st__edge"><span class="st__n">9</span> tagged source to rebuild</span></span></li>
+          </ul>
+        </div>
+        <figcaption class="meta map__stamp">Checked 2026-11-15 against the node software at <span class="mono">v0.34.16</span> (074dac16) and the release-0.34.17 branch (8e7045b9).</figcaption>
+      </figure>
+
+      <div class="sheet map__words">
+        <h3 class="map__list-title" id="map-list-title">The connections in words</h3>
+        <ol role="list" class="edges" aria-labelledby="map-list-title">
+          <li class="edge" id="edge-1"><span class="edge__n" aria-hidden="true">1</span>
+            <div class="edge__body">
+              <p class="edge__pair"><span class="sr-only">Connection 1: </span>Miners and pools <span aria-hidden="true">⇄</span><span class="sr-only"> and </span> Full nodes</p>
+              <p>A full node hands out block templates; miners and pools send solved blocks back (<code>getblocktemplate</code>, then a stratum job, then <code>submitblock</code>).</p>
+              <details class="more" data-copy-skip>
+                <summary><span>Source<span class="sr-only"> for connection 1</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <ul class="more__body edge__src">
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-miner-pool-readiness.md" rel="noopener noreferrer"><code>doc/btx-miner-pool-readiness.md:4-5</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                </ul>
+              </details></div></li>
+          <li class="edge" id="edge-2"><span class="edge__n" aria-hidden="true">2</span>
+            <div class="edge__body">
+              <p class="edge__pair"><span class="sr-only">Connection 2: </span>Full nodes <span aria-hidden="true">⇄</span><span class="sr-only"> and </span> Trusted mirrors <span aria-hidden="true">⇄</span><span class="sr-only"> and </span> Archive nodes</p>
+              <p>Blocks and transactions travel between peers. A node that keeps every block serves the whole chain. A trusted mirror still checks bodies, transactions, scripts and state itself; for the MatMul work it relies on its signers.</p>
+              <details class="more" data-copy-skip>
+                <summary><span>Sources<span class="sr-only"> for connection 2</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <ul class="more__body edge__src">
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:504-506</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:22-32</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                </ul>
+              </details></div></li>
+          <li class="edge" id="edge-3"><span class="edge__n" aria-hidden="true">3</span>
+            <div class="edge__body">
+              <p class="edge__pair"><span class="sr-only">Connection 3: </span>SwapNet peers <span aria-hidden="true">⇄</span><span class="sr-only"> and </span> BTX peer-to-peer network</p>
+              <p>A node started with <code>-swapnet=1</code> finds other SwapNet nodes over the peer connections it already has: no new port, seed list or hosted service. In <span class="mono">v0.34.16</span> SwapNet is off by default; the install checklist notes it starts by default from 0.34.17.</p>
+              <details class="more" data-copy-skip>
+                <summary><span>Sources<span class="sr-only"> for connection 3</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <ul class="more__body edge__src">
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/swapnet/OPERATIONS.md" rel="noopener noreferrer"><code>doc/swapnet/OPERATIONS.md:5</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/src/swapnet/node.cpp" rel="noopener noreferrer"><code>src/swapnet/node.cpp:96</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:61-68</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                </ul>
+              </details></div></li>
+          <li class="edge" id="edge-4"><span class="edge__n" aria-hidden="true">4</span>
+            <div class="edge__body">
+              <p class="edge__pair"><span class="sr-only">Connection 4: </span>Discovery relays <span aria-hidden="true">→</span><span class="sr-only"> to </span> BTX peer-to-peer network</p>
+              <p>A discovery relay (<code>-matmulvalidation=relay</code>) is the mode meant for public DNS seeds and addnode hosts. It only hands out peer addresses: it serves no blocks, is no authority on the chain and never asks for or serves signatures.</p>
+              <details class="more" data-copy-skip>
+                <summary><span>Sources<span class="sr-only"> for connection 4</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <ul class="more__body edge__src">
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/src/init.cpp" rel="noopener noreferrer"><code>src/init.cpp:651</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/src/init.cpp" rel="noopener noreferrer"><code>src/init.cpp:2134-2136</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-public-node-bootstrap.md" rel="noopener noreferrer"><code>doc/btx-public-node-bootstrap.md:60-62</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                </ul>
+              </details></div></li>
+          <li class="edge" id="edge-5"><span class="edge__n" aria-hidden="true">5</span>
+            <div class="edge__body">
+              <p class="edge__pair"><span class="sr-only">Connection 5: </span>Attestation signers <span aria-hidden="true">→</span><span class="sr-only"> to </span> Trusted mirrors</p>
+              <p>A signer signs each block whose MatMul work it replayed (messages <code>getmmattest</code> and <code>mmattest</code>). On mainnet a trusted mirror by default accepts that work only with signatures from at least two keys it pinned itself; any peer may pass them on. A node that checks blocks itself never uses them in place of its own check.</p>
+              <details class="more" data-copy-skip>
+                <summary><span>Sources<span class="sr-only"> for connection 5</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <ul class="more__body edge__src">
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:320-327</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:34-38</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:94-95</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-trusted-rpc-mirrors.md" rel="noopener noreferrer"><code>doc/btx-matmul-trusted-rpc-mirrors.md:131-134</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-matmul-v4.7-gpu-operator-runbook.md" rel="noopener noreferrer"><code>doc/btx-matmul-v4.7-gpu-operator-runbook.md:121-125</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                </ul>
+              </details></div></li>
+          <li class="edge" id="edge-6"><span class="edge__n" aria-hidden="true">6</span>
+            <div class="edge__body">
+              <p class="edge__pair"><span class="sr-only">Connection 6: </span>Snapshot publishers <span aria-hidden="true">→</span><span class="sr-only"> to </span> BTX peer-to-peer network</p>
+              <p>A snapshot saves a new node most of the sync: a signed copy of a node's data, or a UTXO snapshot at a height compiled into btxd (<code>loadtxoutset</code>). Check its SHA-256 and signature before you load it. A node holding an attested UTXO snapshot can also offer it to peers over the P2P network.</p>
+              <details class="more" data-copy-skip>
+                <summary><span>Sources<span class="sr-only"> for connection 6</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <ul class="more__body edge__src">
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-mining-node-snapshot-runbook.md" rel="noopener noreferrer"><code>doc/btx-mining-node-snapshot-runbook.md:76-95</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/contrib/devtools/README.md" rel="noopener noreferrer"><code>contrib/devtools/README.md:179-182</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/src/protocol.h" rel="noopener noreferrer"><code>src/protocol.h:564-567</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/src/init.cpp" rel="noopener noreferrer"><code>src/init.cpp:765</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                </ul>
+              </details></div></li>
+          <li class="edge" id="edge-7"><span class="edge__n" aria-hidden="true">7</span>
+            <div class="edge__body">
+              <p class="edge__pair"><span class="sr-only">Connection 7: </span>Archive nodes <span aria-hidden="true">→</span><span class="sr-only"> to </span> Status page</p>
+              <p>The status page measures supply, chain height and network figures from an archive node.</p>
+              <details class="more" data-copy-skip>
+                <summary><span>Source<span class="sr-only"> for connection 7</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <ul class="more__body edge__src">
+                  <li><a href="https://github.com/BTX-Community/btx-community/blob/main/README.md" rel="noopener noreferrer"><code>btx-community/README.md:50</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                </ul>
+              </details></div></li>
+          <li class="edge" id="edge-8"><span class="edge__n" aria-hidden="true">8</span>
+            <div class="edge__body">
+              <p class="edge__pair"><span class="sr-only">Connection 8: </span>Releases <span aria-hidden="true">→</span><span class="sr-only"> to </span> BTX peer-to-peer network</p>
+              <p>Release archives are published on the releases page of btxchain/btx. For <span class="mono">v0.34.16</span> there are two, both for Linux x86_64 (one built with CUDA 13), and a <code>SHA256SUMS</code> file. On other platforms the node is built from source.</p>
+              <details class="more" data-copy-skip>
+                <summary><span>Sources<span class="sr-only"> for connection 8</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <ul class="more__body edge__src">
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/btx-github-release-automation.md" rel="noopener noreferrer"><code>doc/btx-github-release-automation.md:25-26</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code>release v0.34.16</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                </ul>
+              </details></div></li>
+          <li class="edge" id="edge-9"><span class="edge__n" aria-hidden="true">9</span>
+            <div class="edge__body">
+              <p class="edge__pair"><span class="sr-only">Connection 9: </span>Releases <span aria-hidden="true">→</span><span class="sr-only"> to </span> Guix rebuilders</p>
+              <p>A rebuilder builds a release's tagged source with <code>contrib/guix</code>, attests to the result and verifies other rebuilders' attestations. The <span class="mono">v0.34.16</span> release notes say its Linux binaries need glibc 2.38 or newer and these scripts build against glibc 2.31, so their hashes cannot match a rebuild yet.</p>
+              <details class="more" data-copy-skip>
+                <summary><span>Sources<span class="sr-only"> for connection 9</span></span><span class="pm pm--sm" aria-hidden="true"></span></summary>
+                <ul class="more__body edge__src">
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/contrib/guix/README.md" rel="noopener noreferrer"><code>contrib/guix/README.md:179-199</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/contrib/guix/manifest.scm" rel="noopener noreferrer"><code>contrib/guix/manifest.scm:123</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/blob/v0.34.16/doc/release-notes-0.34.16.md" rel="noopener noreferrer"><code>doc/release-notes-0.34.16.md:32-33</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                  <li><a href="https://github.com/btxchain/btx/releases/tag/v0.34.16" rel="noopener noreferrer"><code>release v0.34.16</code>&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+                </ul>
+              </details></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="report" aria-labelledby="report-title">
+    <div class="wrap">
+      <div class="sheet">
+        <span class="sec-rule sec-rule--rose" aria-hidden="true"></span>
+        <div class="section__head">
+          <p class="label eyebrow">Security</p>
+          <h2 id="report-title">Found a crash or a security problem?</h2>
+          <p class="lede">Report it privately through GitHub private vulnerability reporting on btxchain/btx, as its security policy asks.</p>
+        </div>
+        <div class="callout callout--danger report__dont">
+          <span class="callout__label">Do not</span>
+          <p>Never post a crash, a sanitizer report or a crashing input in a public issue, pull request or chat. It can show an attacker how to crash running nodes.</p>
+        </div>
+        <div class="cluster report__acts">
+          <a class="btn" href="https://github.com/btxchain/btx/security/advisories/new" rel="noopener noreferrer">Report a vulnerability privately <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+          <a class="btn btn--line" href="https://github.com/btxchain/btx/blob/main/SECURITY.md" rel="noopener noreferrer">The security policy (SECURITY.md) <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER:START -->
+<footer class="ftr">
+  <div class="wrap">
+    <div class="sheet ftr__sheet">
+    <h2 class="label ftr__title">Every page on this site</h2>
+    <div class="ftr__map">
+      <div class="ftr__line ftr__line--s">
+        <h3 id="ftr-s"><span class="badge badge--sm badge--s" aria-hidden="true">S</span>Start here</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design05/">Home</a></li>
+          <li><a href="/new/design05/learn/">Learn</a></li>
+          <li><a href="/new/design05/links/">Links</a></li>
+          <li><a href="/new/design05/#before-buying">Before you buy</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--m">
+        <h3 id="ftr-m"><span class="badge badge--sm badge--m" aria-hidden="true">M</span>Mine BTX</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design05/#miners">Mining steps</a></li>
+          <li><a href="/new/design05/links/#cat-miners">Miners</a></li>
+          <li><a href="/new/design05/links/#cat-pools">Pools</a></li>
+          <li><a href="/new/design05/network/">Network</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--n">
+        <h3 id="ftr-n"><span class="badge badge--sm badge--n" aria-hidden="true">N</span>Run a node</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design05/infra/">Run a node</a></li>
+          <li><a href="/new/design05/infra/#before-installing">Install checklist</a></li>
+          <li><a href="/new/design05/links/#cat-node-tools">Node tools</a></li>
+          <li><a href="/new/design05/network/">Network</a></li>
+        </ul>
+      </div>
+      <div class="ftr__line ftr__line--b">
+        <h3 id="ftr-b"><span class="badge badge--sm badge--b" aria-hidden="true">B</span>Build</h3>
+        <ul class="ftr__stops">
+          <li><a href="/new/design05/dev/">Developers</a></li>
+          <li><a href="/new/design05/dev/work/">Ongoing work</a></li>
+          <li><a href="/new/design05/projects/">Projects</a></li>
+          <li><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ftr__base">
+      <p><strong>Run by community members, not by a company.</strong> Nothing on this site is financial advice. Links lead to third parties; we are not responsible for their content.</p>
+      <ul class="ftr__links">
+        <li><a href="https://github.com/BTX-Community/btx-community" rel="noopener noreferrer">Source code on GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        <li><a href="https://network.btx-monitoring.com/" rel="noopener noreferrer">Status page <span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a></li>
+        <li><button class="ftr__bg" type="button" data-bg-toggle aria-pressed="false" hidden>Pause background animation</button></li>
+      </ul>
+      <p class="meta">Live data comes from the public status API of network.btx-monitoring.com (<a href="https://network.btx-monitoring.com/api/v1/status.json" rel="noopener noreferrer">api/v1/status.json&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (opens another site)</span></a>), checked every 60 seconds.</p>
+    </div>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END -->
+</body>
+</html>
