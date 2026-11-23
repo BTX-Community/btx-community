@@ -76,7 +76,7 @@ cmake --build build -j"$J" --target test_btx
 build/bin/test_btx --run_test=<new_suite> --log_level=test_suite
 ctest --test-dir build -N | grep <new_suite>          # registered in ctest (K19)
 python3 build/test/functional/test_runner.py --configfile=build/test/config.ini \
-  --jobs=4 --tmpdirprefix="$HOME/btx-work/func-tmp" 'wallet_encryption.py --descriptors' 'wallet_basic.py --descriptors'
+  --jobs=4 --tmpdirprefix=/tmp/f 'wallet_encryption.py --descriptors' 'wallet_basic.py --descriptors'
 ```
 
 ### Task 2: the K11 allowlist test

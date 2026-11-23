@@ -83,3 +83,6 @@ judgement mistake.>
 |---|---|---|---|---|
 | 2026-11-12 | [Never name a script variable after one the build tools read](2026-11-12-windows-tool-read-env-names.md) | Windows builds (C-PORT) | `04-build-and-test.md` §2.3; `packs/C-PORT.md`; `packs/I-RC-runner.md` | open |
 | 2026-11-12 | [After #578, start the coverage build in a fresh build directory](2026-11-12-coverage-fresh-build-dir.md) | coverage (I-CI) | `04-build-and-test.md` §5; `01-state.md` | open |
+| 2026-11-23 | [Run the default functional list the way the runner expects](2026-11-23-functional-runner-flags-and-paths.md) | functional tests (I-CI, I-RC) | `04-build-and-test.md` §4-§5; `packs/A-WALLET.md`; `packs/A-STORES.md`; `packs/I-RC-runner.md` | open |
+| 2026-11-23 | [Label every test result with its platform and commit, and check the reference platform before calling a failure platform-specific](2026-11-23-matmul-cases-fail-on-linux-too.md) | functional tests, MatMul (I-CI, I-XDEV) | `04-build-and-test.md` §4; exam | open |
+| 2026-11-23 | [Test an installer against the published archives, not only against one you packed](2026-11-23-faststart-installer-hard-link.md) | packaging and install (I-OPS, C-PORT) | `01-state.md` §7; `packs/I-OPS.md` | fixed on the release line (`b0edfbf4`) |

@@ -224,7 +224,11 @@ calls still return hashes; the tip stays at 99. The tree documents it in the cac
 of `test/functional/test_framework/test_framework.py` (lines 875-893 at `4c7840e9`) [read]. Tests
 that start from the framework's cache are past it (the cache miner runs
 `-matmulvalidation=economic -matmulrcexecution=cpu-diagnostic`); tests with
-`setup_clean_chain=True` that mine past 99 blocks hit it.
+`setup_clean_chain=True` that mine past 99 blocks hit it. Since `773da6e5` (14 Nov, in v0.34.16) the
+framework starts every regtest node with `-matmulvalidation=economic -matmulrcexecution=cpu-diagnostic`
+unless the script passes its own mode, so on `release-0.34.17` the trap hits the scripts that opt
+into consensus [read: `test/functional/test_framework/test_framework.py:564-579` at `d9a94804`]. The
+rule below stays: a PR does not change a script's mode to make it green.
 
 What to do:
 - A test that stops at tip 99 is the known trap, not your bug. Show the base commit fails the same
