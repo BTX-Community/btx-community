@@ -75,7 +75,7 @@ ls src/wallet/test | grep -i bcp1
 
 - One functional test: a table of deposit states (new, mempool, confirmed, replaced, spent, consolidated) by every RPC that reports a deposit (at least `getdepositstatus` and `listdepositutxos`). Each cell asserts the reported state.
 - Reuse the set-up code of the existing `wallet_bcp1_*.py` scripts; do not copy it.
-- Run: `python3 build/test/functional/test_runner.py --configfile=build/test/config.ini --jobs=4 --tmpdirprefix="$HOME/btx-work/func-tmp" <new_test>.py`.
+- Run: `python3 build/test/functional/test_runner.py --configfile=build/test/config.ini --jobs=4 --tmpdirprefix=/tmp/f <new_test>.py`.
 
 ### Task 3: the first property-test generator, on the bounty store
 

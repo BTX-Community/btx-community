@@ -1,6 +1,6 @@
 # Before you open an upstream pull request
 
-> Last verified: 2026-11-12 · against: btxchain/btx release-0.34.16 @ 4c7840e9 · owner role: hub editor
+> Last verified: 2026-11-23 · against: btxchain/btx release-0.34.17 @ d9a94804 · owner role: hub editor
 
 **Kurzfassung (DE).** Die Prüfliste vor jedem Pull Request an `btxchain/btx`. Die KI beantwortet acht
 Fragen schriftlich (Fehlerklasse, eingefrorener Bereich, gezählte Stellen, früher abgelehnt,
@@ -83,11 +83,16 @@ requests through #792 that do not change consensus or a spend" (#714). On 15 Nov
 list was taken against an older `release-0.34.16` and "the closed set from 2026-11-03 is not being
 replayed into this branch" (#464). This hub keeps the frozen set below out of `release-0.34.17`.
 
-In files, this hub reads that as [inferred, conservative]:
+From 20 Nov the maintainer names the cut in these words: "The items that can land without a
+signature-format change or a block-connection change are on `release-0.34.17`" (#714, 20 Nov).
+What stayed off, and why, is in [`01-state.md`](01-state.md) §2 [read].
+
+In files, this hub reads the frozen set as [inferred, conservative]:
 - `src/validation.cpp`, `src/pow.cpp`, `src/consensus/`, `src/script/interpreter.cpp`
 - fork choice and download scheduling in `src/net_processing.cpp`
 - the attestation rules in `src/node/matmul_trusted_attestations.*`, and `src/matmul/`
 - issuance and signer sets
+- signature formats: which fields a signed record covers (#714, 20 Nov)
 
 A fix near these files that changes none of those rules can land: the PQ attestation lock order
 (#478) and the attestation blocklist extension (#583) did [read: #464, 11 Nov; `git log` on
@@ -183,7 +188,7 @@ Ask before every post. The answer is **yes** until the PR shows why not.
 |---|---|---|
 | a stub, a placeholder, or an "unsupported" return where a real implementation is expected | rejected | #245, 22 Oct: a Linux-only guard (`#ifdef __linux__`, confinement reported as unsupported) or a Linux-only build of the confinement files was rejected; the maintainer (numair) asked for the macOS work. #246, the macOS implementation, was merged (#245, 24 Oct). |
 | a fail-closed workaround that skips the feature | rejected | the same #245 reply: a node left unbuilt or running without the confinement is not an acceptable result |
-| a skipped or disabled test, a widened timeout, a non-default flag to make a test green | reject it yourself | [`03-guardrails.md`](03-guardrails.md) §7 (the `-matmulvalidation=economic` trap) |
+| a skipped or disabled test, a widened timeout, a non-default flag to make a test green | reject it yourself | [`03-guardrails.md`](03-guardrails.md) §7 (the height-99 trap: changing a script's `-matmulvalidation`) |
 | a change in the frozen set | not a PR: an evidence item | #464, 11 Nov; closing notes on #461, #462, #463, #479, #484, #515 (11 Nov) |
 | a change that was closed without being taken, under a new title or number | not a PR, unless a maintainer comment asked for a new one | #464, 11 Nov: #314 and #317 came back as #463 and #461 and were not taken; the five non-consensus items it named came back as standalone PRs and landed (§2) |
 | a claim with no commit, platform or command | nothing to merge | the template in §3 [inferred] |

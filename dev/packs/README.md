@@ -58,7 +58,7 @@ Open a pull request to this repository that adds your GitHub handle to the lane'
 | Fact | Value | Source |
 |---|---|---|
 | Upstream repository | `github.com/btxchain/btx` | |
-| Work branch | `release-0.34.17` since 15 Nov, head `23ee567e` on 17 Nov; the maintainer cherry-picks PRs onto it (#714) | `git log -1 origin/release-0.34.17` |
+| Work branch | `release-0.34.17` since 15 Nov, head `932a0238` on 23 Nov ([`01-state.md`](../01-state.md) §1 has the live row); the maintainer takes PRs onto it in rounds (#714) | `git log -1 origin/release-0.34.17` |
 | `release-0.34.16` | equals `main` and the v0.34.16 tag, `074dac16` (15 Nov); head `4c7840e9` on 12 Nov, where the site counts in these packs were taken | `git rev-parse origin/release-0.34.16 'v0.34.16^{commit}'` |
 | `main` | v0.34.16 at `074dac16` since 15 Nov; most nodes still run v0.34.15 (`476f3f23`) | `git log -1 origin/main` |
 | Release line ahead of v0.34.15 | 1,194 commits at `4c7840e9` (12 Nov) | `git rev-list --count 476f3f23..4c7840e9` |

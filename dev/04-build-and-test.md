@@ -1,12 +1,12 @@
 # Build and test
 
-> Last verified: 2026-11-12 · against: btxchain/btx release-0.34.16 @ 4c7840e9 · owner role: build editor
+> Last verified: 2026-11-23 · against: btxchain/btx release-0.34.17 @ d9a94804 · owner role: build editor
 
 How to build `btxchain/btx` and run its unit, functional, coverage, sanitizer and fuzz tests, with the pitfalls already paid for. Give this page to your AI together with `AGENTS.md`. The AI drafts and runs commands; you read and sign everything that leaves your machine.
 
-Every command and flag below was checked against the tree at `4c7840e9` (`CMakeLists.txt`, `src/CMakeLists.txt`, `CMakePresets.json`, `cmake/script/`, `ci/test/`, `test/functional/test_runner.py`). Numbers live in [`01-state.md`](01-state.md).
+Every command and flag below was checked against the tree at `d9a94804` (`CMakeLists.txt`, `src/CMakeLists.txt`, `CMakePresets.json`, `cmake/script/`, `ci/test/`, `test/functional/test_runner.py`). Numbers live in [`01-state.md`](01-state.md).
 
-**Source tags.** `[C3]` = the unit + functional coverage runs (recipe in §5): figures from the 14 Nov run on `swapnet-v2` at `a5d1637f`; recipe, timings and pitfalls from the 12 Nov run at `c6f9678d`. `[C2]` = the 12 Nov clang-tidy, TSan and lock-order run at `c6f9678d`. `[C0]` = the 13 Nov unit + functional run at `88c9b49c` in rootless Podman (Ubuntu 24.04 container, 24 threads, 12 functional jobs). `[repo]` = a file in the tree at `4c7840e9`. `[plan]` = [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md). `[data]` = [`plan/plan-data.json`](plan/plan-data.json). `[read]` = taken from a source; `[tested]` = a command was run; `[inferred]` = judgement.
+**Source tags.** `[C3]` = the unit + functional coverage runs (recipe in §5): figures from the 14 Nov run on `swapnet-v2` at `a5d1637f`; recipe, timings and pitfalls from the 12 Nov run at `c6f9678d`. `[C2]` = the 12 Nov clang-tidy, TSan and lock-order run at `c6f9678d`. `[C0]` = the 13 Nov unit + functional run at `88c9b49c` in rootless Podman (Ubuntu 24.04 container, 24 threads, 12 functional jobs). `[repo]` = a file in the tree at `d9a94804`. `[plan]` = [`plan/MASTER-PLAN.md`](plan/MASTER-PLAN.md). `[data]` = [`plan/plan-data.json`](plan/plan-data.json). `[read]` = taken from a source; `[tested]` = a command was run; `[inferred]` = judgement.
 
 ## 1. Setup
 
@@ -51,7 +51,7 @@ sudo apt-get install -y build-essential cmake pkgconf python3 python3-dev python
 sudo apt-get install -y clang        # only for clang builds
 ```
 
-SwapNet is part of the tree since `074dac16` (v0.34.16, #630). Configure then needs Python 3.11 or newer with its development files, and that interpreter must import `cryptography` and `sqlite3` under `python -I`; otherwise it stops with "SwapNet requires the selected Python's cryptography and sqlite3 modules" [repo: `cmake/SwapNet.cmake`, `doc/release-notes-0.34.16.md` at `074dac16`]. On Ubuntu 24.04 that is `python3-dev` and `python3-cryptography` above [C0: configure on `swapnet-v2` @ `88aeaac9`, 13 Nov]. `btxd` links the Python library even when SwapNet is off (`-swapnet=0`, the default).
+SwapNet is part of the tree since `074dac16` (v0.34.16, #630). Configure then needs Python 3.11 or newer with its development files, and that interpreter must import `cryptography` and `sqlite3` under `python -I`; otherwise it stops with "SwapNet requires the selected Python's cryptography and sqlite3 modules" [repo: `cmake/SwapNet.cmake`, `doc/release-notes-0.34.16.md` at `074dac16`]. On Ubuntu 24.04 that is `python3-dev` and `python3-cryptography` above [C0: configure on `swapnet-v2` @ `88aeaac9`, 13 Nov]. `btxd` links the Python library even when SwapNet is off (`-swapnet=0`). On `release-0.34.17` SwapNet is on by default since `23ee567e` [repo: `src/swapnet/node.cpp:179`, `:190`]; in v0.34.16 it was off ([`01-state.md`](01-state.md) §7).
 
 The Native Model Network (`WITH_MODELNET=ON`, the default) needs OpenSSL 3.5 or newer. Ubuntu 22.04 and 24.04 ship 3.0, so build 3.5 into a prefix [repo: `doc/build-unix.md`; the configure check is `src/CMakeLists.txt:1905-1912`]:
 
@@ -109,7 +109,7 @@ cmake --build build -j"$(sysctl -n hw.ncpu)"
 ### 2.3 Windows [read: a contributor fork's CI workflow, `doc/btx-windows-11-compile-handbook.md`; not run natively for this page]
 
 - The reference Windows builds are the fork CI jobs: `win-native-build` / `win-native-tests` (clang-cl, the `windows-clangcl-static` preset, vcpkg `x64-windows-static`, OpenSSL 3.5 built from source with `VC-WIN64A no-shared no-asm`) and `mingw-cross` / `mingw-tests` (cross build from Linux). The C-PORT owner runs the Windows CI jobs; ask on the board (linked from [`README.md`](README.md)) for a run instead of rebuilding locally.
-- Local native build: `powershell -ExecutionPolicy Bypass -File .\contrib\devtools\build-btx-windows.ps1 -InstallDependencies -BuildTests` [repo]. Its vcpkg manifest (`vcpkg.json`) has no OpenSSL, while `WITH_MODELNET` defaults to ON and needs 3.5, so expect to supply an OpenSSL 3.5 prefix the way the CI job does [read: `vcpkg.json`, the CI job; inferred].
+- Local native build: `powershell -ExecutionPolicy Bypass -File .\contrib\devtools\build-btx-windows.ps1 -InstallDependencies -BuildTests` [repo]. Its vcpkg manifest (`vcpkg.json`) has no OpenSSL, while `WITH_MODELNET` defaults to ON and needs 3.5, so expect to supply an OpenSSL 3.5 prefix the way the CI job does [read: `vcpkg.json`, the CI job; inferred]. The script takes it as `-OpenSSLRoot <prefix>`, or builds without ModelNet with `-WithoutModelNet` [repo: `contrib/devtools/build-btx-windows.ps1:22-23`, `:450-454`].
 - Short paths without spaces (`C:\src\btx`); keep vcpkg on short paths [repo: the handbook].
 - In your own scripts never name variables `RC`, `CC`, `CXX`, `LIB`, `INCLUDE`, `CFLAGS` or `LDFLAGS`: CMake and the MSVC tools read them from the environment. See [`lessons/2026-11-12-windows-tool-read-env-names.md`](lessons/2026-11-12-windows-tool-read-env-names.md).
 
@@ -151,21 +151,26 @@ BTX_HWC=2 LD_PRELOAD="$HOME/btx-work/libhwc.so" ctest --test-dir build -j "$J" -
 ## 4. Functional tests
 
 ```bash
-mkdir -p ~/btx-work/func-tmp
+mkdir -p /tmp/f
 python3 build/test/functional/test_runner.py --configfile=build/test/config.ini \
-  --jobs=4 --tmpdirprefix="$HOME/btx-work/func-tmp" --combinedlogslen=60 wallet_basic.py
+  --jobs=4 --tmpdirprefix=/tmp/f --combinedlogslen=60 wallet_basic.py
 # whole default list (BTX_BASE_SCRIPTS: 208 scripts at c6f9678d, 211 at 4c7840e9): omit the script name; hours on a laptop
-# slow builds (coverage, sanitizers): add --timeout-factor=4 (passed on to every script)
+# slow builds (coverage, sanitizers): the framework already scales timeouts by 6 (test_framework.py:227);
+# an explicit --timeout-factor replaces that, so pass more than 6, e.g. --timeout-factor=24
 # --resultsfile=func-results.csv writes one CSV row per script
 ```
 
 - `--configfile` points at the build tree's `test/config.ini`; that file decides which components (wallet, modelnet, ZMQ) the runner thinks exist [repo: `test/config.ini.in`]. ZMQ tests need `python3-zmq`.
 - **Known state.** On the coverage build at `a5d1637f` (14 Nov), 14 of 220 scripts failed and none stalled with "ExactReplay required" in the node logs; at `c6f9678d` (12 Nov), 82 of 208 failed and 48 of them stalled [plan §1.1]. Under TSan, 55 of a 200-script subset (the `feature_`, `wallet_`, `p2p_` and `rpc_` scripts) failed, and 51 of those 55 also fail on a plain gcc build [C2; plan §1.3]. A red functional run is not news by itself: compare the script on the base commit.
+- **Known state at `d9a94804` (Linux x86_64).** `feature_matmul_trusted_mirror_convergence.py`, `p2p_matmul_encdr_pending_cap_retain.py` and `p2p_matmul_ibd_budget_enforcement.py` fail in every run on Linux x86_64 as well, not only on Mac ARM [read: #714, 22 Nov, a results comment on `d9a94804`]. The maintainer's comment the same day keeps "the three remaining Mac ARM MatMul cases" open (#714, 22 Nov), and the status page's CI-0 run of `release-0.34.17` at `2c4da891` (21 Nov) lists all three among its failures [read: `ci.json`; CI-0 runs on Linux, [`01-state.md`](01-state.md) §6]. A red result in one of them is the known state, not your change. Lesson: [`lessons/2026-11-23-matmul-cases-fail-on-linux-too.md`](lessons/2026-11-23-matmul-cases-fail-on-linux-too.md).
+- **Give `--descriptors` to a script, never to the runner.** `test_runner.py` passes every option it does not know to every script it starts [read at `d9a94804`: `test/functional/test_runner.py:985-996`, `:1138`]. A script that has not added the wallet options stops on the unknown option [read: `test/functional/test_framework/test_framework.py:218`; the options come from `add_wallet_options`, `:491-504`]. The default list (`BTX_BASE_SCRIPTS`) already names `--descriptors` on the scripts that need it, for example `wallet_send_psbt_preview.py --descriptors` [read: `test_runner.py:658-659`, `:1080-1082`]. To run one such script, name it to the runner: `test_runner.py wallet_send_psbt_preview.py` runs every registered variant, `--descriptors` included [read: `test_runner.py:1066-1071`]. The runner also sets `REQUIRE_WALLET_TYPE_SET=1`, which makes a script registered without its wallet option fail [read: `test_runner.py:33`; `test_framework.py:494-498`]; a direct call skips that check.
+- **Keep `--tmpdirprefix` short everywhere**, not only in a container, for example `/tmp/f`. Under the prefix the runner adds its own directory, `test_runner_₿_🏃_<date>_<time>_<random>`, then one per script [read: `test_runner.py:1013-1014`]. A Unix socket path has to fit in 108 bytes on Linux and 104 on macOS [read: `test/functional/test_framework/util.py:503-509`]. `unix_socket_path()` moves a socket that does not fit to a short temporary directory, but only for the scripts that call it [read: `util.py:515-531`], and the runner gives the model helper a short `XDG_RUNTIME_DIR` when none is set [read: `test_runner.py:1023-1031`]. Under the runner, `feature_modelnet_jit_remaining.py` still skips with "tmpdir too deep" [read: `:134-135`]; three more scripts skip the same way when run directly without `XDG_RUNTIME_DIR` [read: `feature_modelnet_listen.py:62-63`, `feature_modelnet_listen_sockets.py:205-206`, `feature_modelnet_proxy.py:123-124`]. Others fail at startup [read: #714, 22 Nov]. A skip caused by the prefix is not a pass.
+- **Many `--jobs`: rerun a startup failure alone before you count it.** Each runner picks its own port range unless `TEST_RUNNER_PORT_MIN` is set [read: `test_runner.py:1015-1021`], and each script's ports come from a seed folded into a 5,000-port range [read: `util.py:364-368`, `:401-403`; `test_runner.py:1317-1329`]. Two scripts, or a script and another program on the host, can still want the same port [inferred]. In a 24-job run of the default list on 22 Nov, six scripts failed at startup and passed alone, from ports in use and from a long prefix [read: #714, 22 Nov]. Lesson: [`lessons/2026-11-23-functional-runner-flags-and-paths.md`](lessons/2026-11-23-functional-runner-flags-and-paths.md).
 - **In a container (rootless Podman)** [C0]:
   - Rootless Podman caps a container at 2,048 processes and threads by default (`pids_limit` in `containers.conf`). With 12 functional jobs, nodes then fail to start threads (`std::system_error`, "Resource temporarily unavailable", EAGAIN). Start the container with `--pids-limit 65536` (or `-1` for none).
   - Keep `--tmpdirprefix` short, for example `/tmp/f`. `btx-modeld` puts a Unix socket under the node's datadir, and a long prefix pushes it past the 108-byte limit ("AF_UNIX path too long"). The runner only adds a short `XDG_RUNTIME_DIR` fallback when that variable is unset [repo: `test/functional/test_runner.py:970-977` at `88c9b49c`], and inside a container it often is set.
   - The OpenSSL 3.5 binary has to be found inside the container too: set `BTX_BCP1_OPENSSL` or `PATH` there (see §2.1).
-- **Stall check:** `grep -l 'ExactReplay required' ~/btx-work/func-tmp/test_runner_*/<script>_*/node*/regtest/debug.log`, where `<script>` is the name without `.py` [repo: `test/functional/test_runner.py`]. A stall is the known class, not your bug. Never "fix" it in a PR with `-matmulvalidation=economic`: that setting is a non-default diagnostic [plan §1.1]. Tests that do not need MatMul can follow the `MATMUL_OFF` argument pattern in `test/functional/rpc_bounty_secret_ref_wallet_restriction.py` [repo].
+- **Stall check:** `grep -l 'ExactReplay required' /tmp/f/test_runner_*/<script>_*/node*/regtest/debug.log`, where `<script>` is the name without `.py` [repo: `test/functional/test_runner.py`]. A stall is the known class, not your bug. Since `773da6e5` (14 Nov, in v0.34.16) the framework starts every regtest node with `-matmulvalidation=economic -matmulrcexecution=cpu-diagnostic` unless the script passes its own mode, so the stall shows up in scripts that opt into consensus [repo: `test/functional/test_framework/test_framework.py:564-579`]; `btxd` itself still defaults to consensus [repo: `src/init.cpp:651`]. Never change a script's mode in a PR to make it green [plan §1.1; [`03-guardrails.md`](03-guardrails.md) §7]. Tests that do not need MatMul can follow the `MATMUL_OFF` argument pattern in `test/functional/rpc_bounty_secret_ref_wallet_restriction.py` [repo].
 
 ## 5. Coverage (gcc, Linux)
 
@@ -186,7 +191,7 @@ find build-cov -name '*.gcda' -delete                       # clean counters bef
 # run what you measure (unit and/or functional), e.g.:
 ctest --test-dir build-cov -j "$J" --timeout 1800 -E 'matmul_v4_rc_stage3_'
 python3 build-cov/test/functional/test_runner.py --configfile=build-cov/test/config.ini \
-  --jobs="$J" --tmpdirprefix="$HOME/btx-work/func-tmp" --timeout-factor=4
+  --jobs="$J" --tmpdirprefix=/tmp/f --timeout-factor=24   # the [C3] runs used 4, below the default 6
 
 # capture
 mkdir -p ~/btx-work/cov-out
@@ -274,7 +279,7 @@ FUZZ=matmul_rc_admission_store build_fuzz/bin/fuzz -max_total_time=600 ~/btx-wor
 ```
 
 - The `libfuzzer` preset builds into `build_fuzz/` with `SANITIZERS=undefined,address,fuzzer`; `libfuzzer-nosan` builds into `build_fuzz_nosan/` without ASan and UBSan [repo: `CMakePresets.json`].
-- The modelnet fuzz build does not link at default options [plan §1.5]. If the link fails, `-DWITH_MODELNET=OFF` gets you the other targets. Fixing the link is A-HELPER's first task; do not patch the build files from another lane.
+- At `4c7840e9` the modelnet fuzz build did not link at default options [plan §1.5]: nine helper executables each define `main()`. `37919923` (on the release line since 20 Nov) leaves them out when `BUILD_FOR_FUZZING` is on [repo: `src/modelnet/CMakeLists.txt:2609-2611`]. Not rebuilt for this page. If the link still fails, `-DWITH_MODELNET=OFF` gets you the other targets; do not patch the build files from another lane.
 - A crash is a lead until it reproduces from the saved input (`build_fuzz/bin/fuzz <crash-file>` with the same `FUZZ=`) on the live head. A crash in a harness, not in product code, is a harness bug: say which.
 - A crash that reproduces in product code goes through GitHub private vulnerability reporting on `btxchain/btx`, never a public issue, PR or chat post. The class goes on the registry without the detail ([`05-bug-classes.md`](05-bug-classes.md)).
 - Apple clang ships no libFuzzer. Fuzz on Linux.
@@ -284,4 +289,4 @@ FUZZ=matmul_rc_admission_store build_fuzz/bin/fuzz -max_total_time=600 ~/btx-wor
 - A native Windows build and a Metal build: read from the handbooks and the fork CI job, not run for this page.
 - macOS coverage with AppleClang.
 - The CUDA build lines: read from `doc/btx-cuda-mining-troubleshooting.md` and `src/CMakeLists.txt`, not rebuilt for this page.
-- The `[C2]` numbers were measured at `c6f9678d` and the `[C3]` figures at `a5d1637f`; the commands were re-checked against the tree at `4c7840e9`, not re-run end to end.
+- The `[C2]` numbers were measured at `c6f9678d` and the `[C3]` figures at `a5d1637f`; the commands were re-checked against the tree at `d9a94804` (23 Nov), not re-run end to end.

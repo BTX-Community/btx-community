@@ -1,6 +1,6 @@
 # BTX developer hub: instructions for AI agents
 
-> Last verified: 2026-11-12 · against: btxchain/btx release-0.34.16 @ 4c7840e9 · owner role: hub editor
+> Last verified: 2026-11-23 · against: btxchain/btx release-0.34.17 @ d9a94804 · owner role: hub editor
 
 This file is for Claude Code, Cursor, Codex and any other coding agent. People start at
 [`README.md`](README.md).
@@ -26,6 +26,12 @@ every diff and every text, and does everything that leaves the machine.
 - Basic level (runners): `packs/I-RC-runner.md` is complete on its own. Follow it instead of the
   reading order in §3. The first-run questions (§2) and the stop conditions (§8) still apply.
 - Discovery index of every hub file with its raw URL: [`llms.txt`](llms.txt).
+- Live state (branch heads, the v0.34.17 prerelease and what is still open before it is final,
+  where PRs go): [`01-state.md`](01-state.md). Read it before you state a version, a head or a
+  release as current.
+- Helping someone build a tool that reads a node (a dashboard, a monitor, alerting, an explorer)?
+  Read [`09-node-signals.md`](09-node-signals.md) before you write code that interprets an RPC
+  field. Several fields do not mean what their names suggest.
 
 ## 2. First run: ask the operator
 
@@ -67,6 +73,7 @@ repository or into any file that could be committed.
 | 6 | `packs/<LANE>.md` | the lane: scope, done bar, first tasks, prompt block |
 | 7 | upstream `AGENTS.md` at the live head | the code invariants (§5) |
 | as needed | [`01-state.md`](01-state.md), [`05-bug-classes.md`](05-bug-classes.md), [`07-lanes.md`](07-lanes.md), [`plan/`](plan/) | live numbers, the class registry, lanes, the dated plan |
+| tool builders | [`09-node-signals.md`](09-node-signals.md) | what the node's tip-health fields, warnings and alert hook mean, with their traps |
 
 ## 4. The ten rules
 
@@ -112,10 +119,12 @@ git -C ~/btx-work/btx fetch origin release-0.34.17
 git -C ~/btx-work/btx show origin/release-0.34.17:AGENTS.md
 ```
 
-What it says that shapes every PR from this hub [read: `git show 4c7840e9:AGENTS.md`]:
+What it says that shapes every PR from this hub [read: `git show 4c7840e9:AGENTS.md`; the same at `d9a94804`]:
 
 - The default posture is read-only: no compiling, committing, pushing, spending or mutating
-  unless the operator asked. The lane pack the operator hands you is that ask, for the commands
+  unless the operator asked. Upstream also lets a finite `AgentMandate` cover an action (its
+  lines 11-12). In this hub only the operator's ask counts, and the exception below still needs
+  a fresh yes. The lane pack the operator hands you is that ask, for the commands
   it lists and nothing beyond them, with one exception: a line that needs `sudo` or administrator
   rights, installs a package or changes a system setting (`sysctl`, a keyring, a service) needs a
   fresh yes each time, even when the pack lists it. Anything the pack does not list needs one too.
@@ -130,10 +139,14 @@ What it says that shapes every PR from this hub [read: `git show 4c7840e9:AGENTS
 A PR body names the invariant it keeps, in upstream's words ([`06-pr-gate.md`](06-pr-gate.md)).
 
 One thing to know when you read it: at `4c7840e9` its version lines (and those of `HUMANS.md`)
-name 0.35.0rc1, while `CMakeLists.txt` at the same commit sets 0.34.16 (`CLIENT_VERSION_MINOR 34`,
-`CLIENT_VERSION_BUILD 16`, `CLIENT_VERSION_RC 0`) [read: `git show 4c7840e9:CMakeLists.txt`,
-lines 36-40]. For the version of the tree you build, use `CMakeLists.txt`. The invariants are not
-affected.
+named 0.35.0rc1, while `CMakeLists.txt` at the same commit set 0.34.16 [read: `git show
+4c7840e9:CMakeLists.txt`, lines 36-40]. At `d9a94804` the top lines of `AGENTS.md`, `README.md` and
+`HUMANS.md` say 0.34.17, as `CMakeLists.txt` does (`CLIENT_VERSION_MINOR 34`,
+`CLIENT_VERSION_BUILD 17`, `CLIENT_VERSION_RC 0`, lines 37-39). Older sections still name other
+versions: `HUMANS.md` line 186 says 0.35.0rc1, and `AGENTS.md` line 8 says "There is no `v0.34.17`
+tag yet" while its line 269 calls that tag a prerelease. The tag exists and is a prerelease
+([`01-state.md`](01-state.md) §1) [read]. For the version of the tree you build, use
+`CMakeLists.txt`. The invariants are not affected.
 
 This hub adds process: classes, the gate, the batch. It never relaxes an upstream rule.
 
